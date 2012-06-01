@@ -27,6 +27,8 @@
 		C52986C31578A43300656B50 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AD1578A43300656B50 /* unzip.c */; };
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
+		CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5A6F3015795D190037206B /* mainmenu.ccbi */; };
+		CE5A6F3915795D8F0037206B /* mainmenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.m */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
 		CE94AA5C15785F83009B35B4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5B15785F83009B35B4 /* OpenGLES.framework */; };
 		CE94AA5E15785F83009B35B4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5D15785F83009B35B4 /* OpenAL.framework */; };
@@ -239,6 +241,9 @@
 		C52986B01578A43300656B50 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		CE5A6F3015795D190037206B /* mainmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainmenu.ccbi; path = Resources/mainmenu.ccbi; sourceTree = "<group>"; };
+		CE5A6F3715795D8F0037206B /* mainmenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainmenu.h; sourceTree = "<group>"; };
+		CE5A6F3815795D8F0037206B /* mainmenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainmenu.m; sourceTree = "<group>"; };
 		CE94AA5515785F83009B35B4 /* ProjectOllie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOllie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE94AA5915785F83009B35B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE94AA5B15785F83009B35B4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -744,6 +749,8 @@
 			children = (
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
+				CE5A6F3715795D8F0037206B /* mainmenu.h */,
+				CE5A6F3815795D8F0037206B /* mainmenu.m */,
 				CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */,
 				CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
@@ -763,6 +770,7 @@
 			isa = PBXGroup;
 			children = (
 				CE94AA6D15785F83009B35B4 /* Default.png */,
+				CE5A6F3015795D190037206B /* mainmenu.ccbi */,
 				CE94AA6F15785F83009B35B4 /* fps_images.png */,
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
@@ -1345,6 +1353,7 @@
 				CE94AC7C15785F89009B35B4 /* blocks.png in Resources */,
 				C52986BE1578A43300656B50 /* README.md in Resources */,
 				C52986C01578A43300656B50 /* LICENSE in Resources */,
+				CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1521,6 +1530,7 @@
 				C52986C31578A43300656B50 /* unzip.c in Sources */,
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
+				CE5A6F3915795D8F0037206B /* mainmenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

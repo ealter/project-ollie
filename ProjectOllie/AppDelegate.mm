@@ -7,7 +7,7 @@
 //
 
 #import "cocos2d.h"
-
+#import "CCBReader.h"
 #import "AppDelegate.h"
 #import "HelloWorldLayer.h"
 
@@ -83,9 +83,12 @@
 	// Assume that PVR images have premultiplied alpha
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
+    //Load the CCBI file
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"mainmenu.ccbi"];
+    
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [HelloWorldLayer scene]]; 
-	
+	//[director_ pushScene:scene];
 	return YES;
 }
 
