@@ -186,7 +186,6 @@ enum {
 	b2EdgeShape groundBox;		
 	
 	// bottom
-	
 	groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
 	groundBody->CreateFixture(&groundBox,0);
 	
@@ -233,7 +232,8 @@ enum {
 	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
 	[parent addChild:sprite];
 	
-	sprite.position = ccp( p.x, p.y);
+    
+	sprite.position = ccp( p.x, p.y); //cocos2d point
 	
 	// Define the dynamic body.
 	//Set up a 1m squared box in the physics world
