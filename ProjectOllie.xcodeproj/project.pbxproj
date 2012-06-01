@@ -27,7 +27,7 @@
 		C52986C31578A43300656B50 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AD1578A43300656B50 /* unzip.c */; };
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
-		C5FE5FDB1579640F008F4298 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FD91579640F008F4298 /* gpc.c */; };
+		C5FE5FE015796583008F4298 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FDE15796583008F4298 /* gpc.c */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
 		CE94AA5C15785F83009B35B4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5B15785F83009B35B4 /* OpenGLES.framework */; };
 		CE94AA5E15785F83009B35B4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5D15785F83009B35B4 /* OpenAL.framework */; };
@@ -240,8 +240,8 @@
 		C52986B01578A43300656B50 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
-		C5FE5FD91579640F008F4298 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
-		C5FE5FDA1579640F008F4298 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
+		C5FE5FDE15796583008F4298 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
+		C5FE5FDF15796583008F4298 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		CE94AA5515785F83009B35B4 /* ProjectOllie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOllie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE94AA5915785F83009B35B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE94AA5B15785F83009B35B4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -709,14 +709,13 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
-		C5FE5FD81579640E008F4298 /* CSG */ = {
+		C5FE5FDD15796583008F4298 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
-				C5FE5FD91579640F008F4298 /* gpc.c */,
-				C5FE5FDA1579640F008F4298 /* gpc.h */,
+				C5FE5FDE15796583008F4298 /* gpc.c */,
+				C5FE5FDF15796583008F4298 /* gpc.h */,
 			);
-			name = CSG;
-			path = libs/CSG;
+			path = CSG;
 			sourceTree = "<group>";
 		};
 		CE94AA4A15785F83009B35B4 = {
@@ -799,7 +798,7 @@
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
 				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
 				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
-				C5FE5FD81579640E008F4298 /* CSG */,
+				C5FE5FDD15796583008F4298 /* CSG */,
 				C52986871578A43300656B50 /* CCControlExtension */,
 				C52986A21578A43300656B50 /* CCScrollView */,
 				C52986A51578A43300656B50 /* SSZipArchive */,
@@ -1535,7 +1534,7 @@
 				C52986C31578A43300656B50 /* unzip.c in Sources */,
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
-				C5FE5FDB1579640F008F4298 /* gpc.c in Sources */,
+				C5FE5FE015796583008F4298 /* gpc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
