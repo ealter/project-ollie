@@ -7,7 +7,6 @@
 //
 
 #import "cocos2d.h"
-#import "CCBReader.h"
 #import "AppDelegate.h"
 #import "HelloWorldLayer.h"
 
