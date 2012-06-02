@@ -23,6 +23,7 @@ enum {
 @interface SandboxLayer()
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
+-(void) addNewFixtureAtPosition:(CGPoint)p;
 @end
 
 @implementation SandboxLayer
@@ -69,7 +70,7 @@ enum {
         [self addChild:parent z:0 tag:kTagParentNode];
         
         
-        [self addNewSpriteAtPosition:ccp(s.width/2, s.height/2)];
+        [self addNewFixtureAtPosition:ccp(s.width/2, s.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
@@ -166,7 +167,7 @@ m_debugDraw = NULL;
     kmGLPopMatrix();
 }
 
--(void) addNewSpriteAtPosition:(CGPoint)p
+-(void) addNewFixtureAtPosition:(CGPoint)p
 {
     CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
     CCNode *parent = [self getChildByTag:kTagParentNode];
@@ -175,8 +176,15 @@ m_debugDraw = NULL;
     //just randomly picking one of the images
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
-    [parent addChild:sprite];
+    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];					
+	
+    /**
+     * With the debug drawing features we have, bodies draw themselves. As of now
+     * I'm unsure how to eliminate bodies from Box2D. In any case, I didn't add the
+     * sprite to the parent's children to see what would render.
+     */
+    
+    //[parent addChild:sprite];
 
 
     sprite.position = ccp( p.x, p.y); //cocos2d point
@@ -184,7 +192,7 @@ m_debugDraw = NULL;
     // Define the dynamic body.
     //Set up a 1m squared box in the physics world
     b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
+    bodyDef.type = b2_staticBody;
     bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
     b2Body *body = world->CreateBody(&bodyDef);
 
@@ -205,6 +213,42 @@ m_debugDraw = NULL;
     body->CreateFixture(&fixtureDef);
 
     [sprite setPhysicsBody:body];
+}
+
+-(void) addNewSpriteAtPosition:(CGPoint)p
+{
+    CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+    CCNode *parent = [self getChildByTag:kTagParentNode];
+    
+    //We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
+    //just randomly picking one of the images
+    int idx = (CCRANDOM_0_1() > .5 ? 0:1);
+    int idy = (CCRANDOM_0_1() > .5 ? 0:1);
+    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
+    
+    sprite.position = ccp( p.x, p.y); //cocos2d point
+    
+    // Define the dynamic body.
+    //Set up a 1m squared box in the physics world
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_dynamicBody;
+    bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
+    b2Body *body = world->CreateBody(&bodyDef);
+    
+    // Define another box shape for our dynamic body.
+    b2PolygonShape dynamicBox;
+    dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+   
+    // Define the dynamic body fixture.
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicBox;	
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.3f;
+    body->CreateFixture(&fixtureDef);
+    
+    [sprite setPhysicsBody:body];
+    [parent addChild:sprite];
+
 }
 
 -(void) update: (ccTime) dt

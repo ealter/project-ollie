@@ -84,7 +84,7 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
     //Load the CCBI file
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"mainmenu.ccbi"];
+    //CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"mainmenu.ccbi"];
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	[director_ pushScene: [SandboxLayer scene]]; 
