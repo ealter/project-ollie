@@ -497,8 +497,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>224.5458984375</real>
-							<real>34</real>
+							<real>320.79000854492188</real>
+							<real>42</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -564,7 +564,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>comic andy.ttf</string>
+						<string>MarkerFelt-Wide</string>
 					</dict>
 					<dict>
 						<key>name</key>

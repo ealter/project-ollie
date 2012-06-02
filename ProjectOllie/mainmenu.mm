@@ -21,8 +21,8 @@
 
 -(void)pressedDraw:(id)sender
 {
-    //CCScene* scene = [DrawEnvironment node];
-    //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    CCScene* scene = [DrawEnvironment node];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 @end

@@ -12,23 +12,5 @@
 @implementation DrawEnvironment
 
 
--(id) init
-{
-	if( (self=[super init])) {
-		
-		// enable events
-		CGSize s = [CCDirector sharedDirector].winSize;
-		
-		[self scheduleUpdate];
-	}
-	return self;
-}
-
-
-
-- (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    
-}
 
 @end
