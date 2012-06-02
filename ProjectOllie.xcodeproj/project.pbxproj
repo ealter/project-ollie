@@ -28,6 +28,7 @@
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
 		C5FE5FE015796583008F4298 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FDE15796583008F4298 /* gpc.c */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
+		C5FE6004157A14DB008F4298 /* TexturizedPolygon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5FE6003157A14DA008F4298 /* TexturizedPolygon.mm */; };
 		CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5A6F3015795D190037206B /* mainmenu.ccbi */; };
 		CE5A6F3915795D8F0037206B /* mainmenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.m */; };
 		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
@@ -245,6 +246,8 @@
 		C5FE5FDF15796583008F4298 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
+		C5FE6002157A14DA008F4298 /* TexturizedPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TexturizedPolygon.h; sourceTree = "<group>"; };
+		C5FE6003157A14DA008F4298 /* TexturizedPolygon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TexturizedPolygon.mm; sourceTree = "<group>"; };
 		CE5A6F3015795D190037206B /* mainmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainmenu.ccbi; path = Resources/mainmenu.ccbi; sourceTree = "<group>"; };
 		CE5A6F3715795D8F0037206B /* mainmenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainmenu.h; sourceTree = "<group>"; };
 		CE5A6F3815795D8F0037206B /* mainmenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mainmenu.m; sourceTree = "<group>"; };
@@ -776,6 +779,8 @@
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
 				CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */,
+				C5FE6002157A14DA008F4298 /* TexturizedPolygon.h */,
+				C5FE6003157A14DA008F4298 /* TexturizedPolygon.mm */,
 				CE94AA6C15785F83009B35B4 /* Resources */,
 				CE94AA8415785F84009B35B4 /* libs */,
 				CE94AC6B15785F89009B35B4 /* Supporting Files */,
@@ -1551,6 +1556,7 @@
 				C5FE5FE015796583008F4298 /* gpc.c in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
 				CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */,
+				C5FE6004157A14DB008F4298 /* TexturizedPolygon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

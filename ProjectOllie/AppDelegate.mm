@@ -6,6 +6,16 @@
 //  Copyright __MyCompanyName__ 2012. All rights reserved.
 //
 
+
+/**
+ * TODO
+ **
+ * Create TexturizedBody superclass (that land inherits from, maybe auxilliarry things too)
+ * Implement texturized body into sandbox
+ *
+ *
+ */
+
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "HelloWorldLayer.h"
