@@ -245,7 +245,7 @@ m_debugDraw = NULL;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
-    
+   
     [sprite setPhysicsBody:body];
     [parent addChild:sprite];
 
