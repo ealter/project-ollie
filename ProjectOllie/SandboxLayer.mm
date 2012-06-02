@@ -23,7 +23,7 @@ enum {
 @interface SandboxLayer()
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
--(void) addNewFixtureAtPosition:(CGPoint)p;
+-(void) addNewStaticBodyAtPosition:(CGPoint)p;
 @end
 
 @implementation SandboxLayer
@@ -70,7 +70,7 @@ enum {
         [self addChild:parent z:0 tag:kTagParentNode];
         
         
-        [self addNewFixtureAtPosition:ccp(s.width/2, s.height/2)];
+        [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
@@ -167,7 +167,7 @@ m_debugDraw = NULL;
     kmGLPopMatrix();
 }
 
--(void) addNewFixtureAtPosition:(CGPoint)p
+-(void) addNewStaticBodyAtPosition:(CGPoint)p
 {
     CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
     CCNode *parent = [self getChildByTag:kTagParentNode];
@@ -179,9 +179,8 @@ m_debugDraw = NULL;
     PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];					
 	
     /**
-     * With the debug drawing features we have, bodies draw themselves. As of now
-     * I'm unsure how to eliminate bodies from Box2D. In any case, I didn't add the
-     * sprite to the parent's children to see what would render.
+     * With the debug drawing features we have, bodies draw themselves. Not yet sure how we will texurize
+     * the polygons.
      */
     
     //[parent addChild:sprite];
@@ -211,6 +210,7 @@ m_debugDraw = NULL;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
+    
 
     [sprite setPhysicsBody:body];
 }
