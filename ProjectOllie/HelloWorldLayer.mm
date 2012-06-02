@@ -243,9 +243,16 @@ enum {
 	b2Body *body = world->CreateBody(&bodyDef);
 	
 	// Define another box shape for our dynamic body.
-	b2PolygonShape dynamicBox;
-	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+	//b2PolygonShape dynamicBox;
+//	dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
 	
+    b2ChainShape dynamicBox;
+    b2Vec2 vs[4];
+    vs[0].Set(1.7f,0);
+    vs[1].Set(0,1.7f);
+    vs[2].Set(0,0);
+    dynamicBox.CreateLoop(vs, 3);
+    
 	// Define the dynamic body fixture.
 	b2FixtureDef fixtureDef;
 	fixtureDef.shape = &dynamicBox;	
@@ -298,3 +305,4 @@ enum {
 }
 
 @end
+
