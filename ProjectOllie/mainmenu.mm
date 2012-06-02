@@ -7,13 +7,15 @@
 //
 
 #import "mainmenu.h"
-
+#import "CCBReader.h"
+#import "SandboxLayer.h"
 
 @implementation mainmenu
 
 -(void)pressedMe: (id)sender
 {
-    NSLog(@"heheh");
+    CCScene* scene = [SandboxLayer scene];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 @end
