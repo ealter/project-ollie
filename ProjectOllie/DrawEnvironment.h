@@ -7,7 +7,11 @@
 //
 
 #import "CCScene.h"
-
+#import "gpc.h"
+#import "polywrapper.h"
 @interface DrawEnvironment : CCScene
+
+@property (nonatomic, retain) NSMutableArray *gpc_polys;
+@property (nonatomic, retain) polywrapper *newpoly;
 
 @end
