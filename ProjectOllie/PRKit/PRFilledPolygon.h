@@ -40,9 +40,8 @@
 	CCTexture2D *texture;
 	ccBlendFunc blendFunc;
 	
-	CGPoint *areaTrianglePoints;
-	CGPoint *textureCoordinates;
-    ccColor4B *colorValues;
+	ccVertex2F *areaTrianglePoints;
+	ccVertex2F *textureCoordinates;
     
     id<PRTriangulator> triangulator;
 }

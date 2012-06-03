@@ -74,7 +74,7 @@
 
 -(id) initWithPoints:(NSArray *)polygonPoints andTexture:(CCTexture2D *)fillTexture usingTriangulator: (id<PRTriangulator>) polygonTriangulator {
     if( (self=[super init])) {
-		self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureColor];
+		self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
         self.triangulator = polygonTriangulator;
         
         [self setPoints:polygonPoints];
@@ -90,18 +90,17 @@
         free(areaTrianglePoints);
     if (textureCoordinates)
         free(textureCoordinates);
-    if (colorValues)
-        free(colorValues);
     
     NSArray *triangulatedPoints = [triangulator triangulateVertices:points];
     
     areaTrianglePointCount = [triangulatedPoints count];
-    areaTrianglePoints = (CGPoint *) malloc(sizeof(CGPoint) * areaTrianglePointCount);
-    textureCoordinates = (CGPoint *) malloc(sizeof(CGPoint) * areaTrianglePointCount);
-    colorValues = (ccColor4B *) malloc(sizeof(ccColor4B) * areaTrianglePointCount);
+    areaTrianglePoints = (ccVertex2F *) malloc(sizeof(ccVertex2F) * areaTrianglePointCount);
+    textureCoordinates = (ccVertex2F *) malloc(sizeof(ccVertex2F) * areaTrianglePointCount);
 
     for (int i = 0; i < areaTrianglePointCount; i++) {
-        areaTrianglePoints[i] = [[triangulatedPoints objectAtIndex:i] CGPointValue];
+        CGPoint p = [[triangulatedPoints objectAtIndex:i] CGPointValue];
+        areaTrianglePoints[i].x = p.x;
+        areaTrianglePoints[i].y = p.y;
     }
     
     [self calculateTextureCoordinates];
@@ -109,18 +108,16 @@
 }
 
 -(void) calculateTextureCoordinates {
-    ccColor4B c;
-    c.r = 255;
-    c.g = 0;
-    c.b = 0;
-    c.a = 255;
 	for (int j = 0; j < areaTrianglePointCount; j++) {
-		textureCoordinates[j] = ccpMult(areaTrianglePoints[j], 1.0f/texture.pixelsWide);
-        colorValues[j] = c;
+		textureCoordinates[j].x = areaTrianglePoints[j].x * 1.0f/texture.pixelsWide;
+		textureCoordinates[j].y = areaTrianglePoints[j].y * 1.0f/texture.pixelsHigh;
 	}
 }
 
 -(void) draw {
+    
+ //  NSString* toLog = [NSString stringWithFormat:@"%@%f%@%f",@"Drawing at X: ",areaTrianglePoints[0].x, @" and Y: ",areaTrianglePoints[0].y];
+ //  NSLog(toLog);    
     CC_PROFILER_START(@"PRFilledPolygon - draw");
     
     CC_NODE_DRAW_SETUP();
@@ -128,26 +125,17 @@
     ccGLBlendFunc( blendFunc.src, blendFunc.dst );
     
 	// we have a pointer to vertex points so enable client state
-	ccGLBindTexture2D( [texture name] );
+	ccGLBindTexture2D( [self.texture name] );
 	
-	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-    ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex );
-	
-	//glVertexPointer(2, GL_FLOAT, 0, areaTrianglePoints);
-    //glTexCoordPointer(2, GL_FLOAT, 0, textureCoordinates);
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
     
-#define kPointSize sizeof(CGPoint)
-#define kColorSize sizeof(ccColor4B)
+#define kPointSize sizeof(ccVertex2F)
     // vertex
-	glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, kPointSize, &areaTrianglePoints);
+	glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, kPointSize, areaTrianglePoints);
     
 	// texCoods
-	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kPointSize, &textureCoordinates);
+	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kPointSize, textureCoordinates);
     
-	// color
-	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kColorSize, &colorValues);
-    
-	
 	glDrawArrays(GL_TRIANGLES, 0, areaTrianglePointCount);
 	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
     

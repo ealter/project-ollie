@@ -40,6 +40,7 @@
 		CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5A6F3015795D190037206B /* mainmenu.ccbi */; };
 		CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.mm */; };
 		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
+		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
 		CE94AA5C15785F83009B35B4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5B15785F83009B35B4 /* OpenGLES.framework */; };
 		CE94AA5E15785F83009B35B4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5D15785F83009B35B4 /* OpenAL.framework */; };
@@ -273,6 +274,8 @@
 		CE5A6F3815795D8F0037206B /* mainmenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mainmenu.mm; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* SandboxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* SandboxLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxLayer.mm; sourceTree = "<group>"; };
+		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
+		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 		CE94AA5515785F83009B35B4 /* ProjectOllie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOllie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE94AA5915785F83009B35B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE94AA5B15785F83009B35B4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -815,6 +818,8 @@
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
 				CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */,
+				CE8429F5157BD0E50038C653 /* Terrain.h */,
+				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				CE94AA6C15785F83009B35B4 /* Resources */,
 				CE94AA8415785F84009B35B4 /* libs */,
 				CE94AC6B15785F89009B35B4 /* Supporting Files */,
@@ -1605,6 +1610,7 @@
 				C5C01EDC157AD819004CF358 /* PRRatcliffTriangulator.mm in Sources */,
 				C5C01EDD157AD819004CF358 /* triangulate.cpp in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
+				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

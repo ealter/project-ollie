@@ -160,7 +160,7 @@ m_debugDraw = NULL;
     // It is recommend to disable it
     //
     [super draw];
-
+    
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
 
     kmGLPushMatrix();
@@ -221,16 +221,13 @@ m_debugDraw = NULL;
     
     
     // Set up the polygon points
-    NSArray *polygonPoints = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(p.x,p.y)],
-                              [NSValue valueWithCGPoint:ccp(p.x+1.7f*PTM_RATIO,p.y)],
-                              [NSValue valueWithCGPoint:ccp(1.7f*PTM_RATIO+p.x,p.y)],nil];
-    
-    CGPoint pts [3];
-    pts[0]= ccp(p.x,p.y);
-    pts[1]= ccp(p.x+1.7f*PTM_RATIO,p.y);
-    pts[2]= ccp(1.7f*PTM_RATIO+p.x,p.y);
-    ccDrawPoly(pts, 3, YES);
-   
+    NSArray *polygonPoints = [NSArray arrayWithObjects:
+                              [NSValue valueWithCGPoint:ccp(60,40)],
+                              [NSValue valueWithCGPoint:ccp(60,90)],
+                              [NSValue valueWithCGPoint:ccp(100,90)],
+                              [NSValue valueWithCGPoint:ccp(170,70)],
+                              [NSValue valueWithCGPoint:ccp(100,10)],
+                              nil];
     
     CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
     PRFilledPolygon *filledPolygon = [[[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:texture] autorelease];
