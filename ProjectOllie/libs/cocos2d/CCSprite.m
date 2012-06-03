@@ -503,7 +503,7 @@
 
 	ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
 
-	ccGLBindTexture2D( [texture_ name] );
+	ccGLBindTexture2D([texture_ name]);
 
 	//
 	// Attributes

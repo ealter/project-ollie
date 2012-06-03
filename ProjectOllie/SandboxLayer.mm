@@ -10,11 +10,14 @@
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
 
+
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
 #define PTM_RATIO 32
+#define kTagPoly 10
+#define kTagBox 20
 
 enum {
 	kTagParentNode = 1,
@@ -203,7 +206,8 @@ m_debugDraw = NULL;
     vs[0].Set(1.7f,0);
     vs[1].Set(0,1.7f);
     vs[2].Set(0,0);
-    dynamicBox.CreateLoop(vs, 3);
+    vs[3].Set(.24f,.24f);
+    dynamicBox.CreateLoop(vs, 4);
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;	
@@ -213,6 +217,23 @@ m_debugDraw = NULL;
     
 
     [sprite setPhysicsBody:body];
+    
+    
+    
+    CGPoint* areaTrianglePoints = new CGPoint[4];
+    // Set up the polygon points
+    NSMutableArray *polygonPoints = [NSMutableArray arrayWithCapacity:10];
+    [polygonPoints addObject:[NSValue valueWithCGPoint:ccp(p.x,p.y)]];
+    [polygonPoints addObject:[NSValue valueWithCGPoint:ccp(p.x+1.7f*PTM_RATIO,p.y)]];
+    [polygonPoints addObject:[NSValue valueWithCGPoint:ccp(1.7f*PTM_RATIO+p.x,p.y)]];
+    
+
+    
+    CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
+    PRFilledPolygon *filledPolygon = [[[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:texture] autorelease];
+    
+    [self addChild:filledPolygon z:0 tag:kTagPoly];
+    
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
@@ -237,8 +258,13 @@ m_debugDraw = NULL;
     
     // Define another box shape for our dynamic body.
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-   
+    //dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+    b2Vec2 vs[4];
+    vs[0].Set(1.7f,0);
+    vs[1].Set(0,1.7f);
+    vs[2].Set(0,0);
+    //vs[3].Set(.24f,.24f);
+    dynamicBox.Set(vs,3);
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;	

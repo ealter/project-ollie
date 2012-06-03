@@ -89,6 +89,8 @@ void ccDrawPoly( const CGPoint *vertices, NSUInteger numOfVertices, BOOL closePo
  */
 void ccDrawSolidPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F color );
     
+void ccDrawSolidTexturedPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F color, int textureID );
+    
 /** draws a circle given the center, radius and number of segments measured in points */
 void ccDrawCircle( CGPoint center, float radius, float angle, NSUInteger segments, BOOL drawLineToCenter);
 
