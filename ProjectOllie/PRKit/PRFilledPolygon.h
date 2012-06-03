@@ -42,6 +42,7 @@
 	
 	CGPoint *areaTrianglePoints;
 	CGPoint *textureCoordinates;
+    ccColor4B *colorValues;
     
     id<PRTriangulator> triangulator;
 }

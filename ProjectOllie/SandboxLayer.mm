@@ -9,7 +9,7 @@
 #import "SandboxLayer.h"
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
-
+#import "PRFilledPolygon.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -220,14 +220,17 @@ m_debugDraw = NULL;
     
     
     
-    CGPoint* areaTrianglePoints = new CGPoint[4];
     // Set up the polygon points
-    NSMutableArray *polygonPoints = [NSMutableArray arrayWithCapacity:10];
-    [polygonPoints addObject:[NSValue valueWithCGPoint:ccp(p.x,p.y)]];
-    [polygonPoints addObject:[NSValue valueWithCGPoint:ccp(p.x+1.7f*PTM_RATIO,p.y)]];
-    [polygonPoints addObject:[NSValue valueWithCGPoint:ccp(1.7f*PTM_RATIO+p.x,p.y)]];
+    NSArray *polygonPoints = [NSArray arrayWithObjects:[NSValue valueWithCGPoint:ccp(p.x,p.y)],
+                              [NSValue valueWithCGPoint:ccp(p.x+1.7f*PTM_RATIO,p.y)],
+                              [NSValue valueWithCGPoint:ccp(1.7f*PTM_RATIO+p.x,p.y)],nil];
     
-
+    CGPoint pts [3];
+    pts[0]= ccp(p.x,p.y);
+    pts[1]= ccp(p.x+1.7f*PTM_RATIO,p.y);
+    pts[2]= ccp(1.7f*PTM_RATIO+p.x,p.y);
+    ccDrawPoly(pts, 3, YES);
+   
     
     CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
     PRFilledPolygon *filledPolygon = [[[PRFilledPolygon alloc] initWithPoints:polygonPoints andTexture:texture] autorelease];
