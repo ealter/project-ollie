@@ -32,6 +32,11 @@
 		C5C01EDD157AD819004CF358 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5C01ED9157AD819004CF358 /* triangulate.cpp */; };
 		C5FE5FE015796583008F4298 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FDE15796583008F4298 /* gpc.c */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
+		CE4BCDA5157AD080002FD1F3 /* btn-test-0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */; };
+		CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */; };
+		CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */; };
+		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
+		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
 		CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5A6F3015795D190037206B /* mainmenu.ccbi */; };
 		CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.mm */; };
 		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
@@ -257,6 +262,12 @@
 		C5FE5FDF15796583008F4298 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
+		CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-0.png"; path = "Resources/btn-test-0.png"; sourceTree = "<group>"; };
+		CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-1.png"; path = "Resources/btn-test-1.png"; sourceTree = "<group>"; };
+		CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-2.png"; path = "Resources/btn-test-2.png"; sourceTree = "<group>"; };
+		CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "comic andy.ttf"; path = "Resources/comic andy.ttf"; sourceTree = "<group>"; };
+		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
+		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
 		CE5A6F3015795D190037206B /* mainmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainmenu.ccbi; path = Resources/mainmenu.ccbi; sourceTree = "<group>"; };
 		CE5A6F3715795D8F0037206B /* mainmenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainmenu.h; sourceTree = "<group>"; };
 		CE5A6F3815795D8F0037206B /* mainmenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mainmenu.mm; sourceTree = "<group>"; };
@@ -796,6 +807,8 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE5A6F3715795D8F0037206B /* mainmenu.h */,
 				CE5A6F3815795D8F0037206B /* mainmenu.mm */,
+				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
+				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
 				CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */,
 				CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
@@ -819,6 +832,10 @@
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
 				CE94AA7515785F83009B35B4 /* Icon-72.png */,
+				CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */,
+				CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */,
+				CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */,
+				CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */,
 				CE94AA7715785F83009B35B4 /* Icon-Small-50.png */,
 				CE94AA7915785F83009B35B4 /* Icon-Small.png */,
 				CE94AA7B15785F83009B35B4 /* Icon-Small@2x.png */,
@@ -1401,6 +1418,10 @@
 				C52986C01578A43300656B50 /* LICENSE in Resources */,
 				CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */,
 				C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */,
+				CE4BCDA5157AD080002FD1F3 /* btn-test-0.png in Resources */,
+				CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */,
+				CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */,
+				CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1583,6 +1604,7 @@
 				C5C01EDB157AD819004CF358 /* PRFilledPolygon.m in Sources */,
 				C5C01EDC157AD819004CF358 /* PRRatcliffTriangulator.mm in Sources */,
 				C5C01EDD157AD819004CF358 /* triangulate.cpp in Sources */,
+				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
