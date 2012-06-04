@@ -11,4 +11,8 @@
 
 @implementation Terrain
 
+@synthesize texture = texture_;
+
+
+
 @end
