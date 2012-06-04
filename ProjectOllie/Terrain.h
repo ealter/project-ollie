@@ -11,6 +11,7 @@
 #import "gpc.h"
 #import "Box2D.h"
 
+//A physically independant piece of land with its own body and shape
 struct landBlock
 {
     gpc_polygon poly;           //Adding/subtracting (real model)
@@ -19,10 +20,12 @@ struct landBlock
     NSArray     *texCoords;     //Drawing (derived)
 };
 
+//Manages pieces of land: adds, removes, draws, generates
 @interface Terrain : CCNode {
     NSMutableArray *landBlocks;
-    CCTexture2D *texture;           
 }
+
+@property (nonatomic,strong) CCTexture2D *texture;
 
 //Building land
 - (void) addPolygon:(gpc_polygon)p;
@@ -31,7 +34,7 @@ struct landBlock
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
 - (void) removePolygon:(gpc_polygon)p;
 
-+ (id) generateRandomIsland;
++ (id) generateRandomOneIsland;
 + (id) generateRandomTwoIsland;
 + (id) generateRandomBlobs;
 + (id) generateRandomCavern;
