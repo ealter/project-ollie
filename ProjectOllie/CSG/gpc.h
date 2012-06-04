@@ -34,6 +34,7 @@ Copyright: (C) Advanced Interfaces Group,
 #define __gpc_h
 
 #include <stdio.h>
+#include "cocos2d.h"
 
 
 /*
@@ -63,16 +64,16 @@ typedef enum                        /* Set operation type                */
   GPC_UNION                         /* Union                             */
 } gpc_op;
 
-typedef struct                      /* Polygon vertex structure          */
-{
-  double              x;            /* Vertex x component                */
-  double              y;            /* vertex y component                */
-} gpc_vertex;
+//typedef struct                      /* Polygon vertex structure          */
+//{
+// double              x;            /* Vertex x component                */
+//  double              y;            /* vertex y component                */
+//} gpc_vertex;
 
 typedef struct                      /* Vertex list structure             */
 {
   int                 num_vertices; /* Number of vertices in list        */
-  gpc_vertex         *vertex;       /* Vertex array pointer              */
+  ccVertex2F         *vertex;       /* Vertex array pointer              */
 } gpc_vertex_list;
 
 typedef struct                      /* Polygon set structure             */
@@ -84,8 +85,9 @@ typedef struct                      /* Polygon set structure             */
 
 typedef struct                      /* Tristrip set structure            */
 {
-  int                 num_strips;   /* Number of tristrips               */
-  gpc_vertex_list    *strip;        /* Tristrip array pointer            */
+    int                 num_strips;   /* Number of tristrips               */
+    gpc_vertex_list    *strip;        /* Tristrip array pointer            */
+    gpc_vertex_list    *texCoords;    /* Strip texture coordinates         */
 } gpc_tristrip;
 
 
@@ -119,6 +121,11 @@ void gpc_tristrip_clip       (gpc_op           set_operation,
 
 void gpc_polygon_to_tristrip (gpc_polygon     *polygon,
                               gpc_tristrip    *tristrip);
+
+void gpc_polygon_to_textured_tristrip (gpc_polygon     *polygon,
+                                       gpc_tristrip    *tristrip,
+                                       int texWidth, 
+                                       int texHeight);
 
 void gpc_free_polygon        (gpc_polygon     *polygon);
 

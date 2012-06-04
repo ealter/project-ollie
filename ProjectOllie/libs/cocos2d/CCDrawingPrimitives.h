@@ -31,6 +31,7 @@
 
 #import "ccTypes.h"
 #import "ccMacros.h"
+#import "CCTexture2D.h"
 
 #ifdef __CC_PLATFORM_IOS
 #import <CoreGraphics/CGGeometry.h>	// for CGPoint
@@ -89,7 +90,7 @@ void ccDrawPoly( const CGPoint *vertices, NSUInteger numOfVertices, BOOL closePo
  */
 void ccDrawSolidPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F color );
     
-void ccDrawSolidTexturedPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F color, int textureID );
+void ccDrawTexturedTriStrip( const ccVertex2F *triStrip, const ccVertex2F *texCoords, int numberOfPoints, CCTexture2D *texture );
     
 /** draws a circle given the center, radius and number of segments measured in points */
 void ccDrawCircle( CGPoint center, float radius, float angle, NSUInteger segments, BOOL drawLineToCenter);

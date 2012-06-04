@@ -12,13 +12,16 @@
 #import "Box2D.h"
 
 //A physically independant piece of land with its own body and shape
-struct landBlock
-{
-    gpc_polygon poly;           //Adding/subtracting (real model)
-    b2Body      *body;          //Physics (derived)
-    ccVertex2F  *triangleVerts; //Drawing (derived)
-    NSArray     *texCoords;     //Drawing (derived)
-};
+@interface landBlock
+@property(nonatomic) gpc_polygon  poly;           //Adding/subtracting (real model)
+@property(nonatomic) b2Body       *body;          //Physics (derived)
+@property(nonatomic) gpc_tristrip triStrip;       //Drawing (derived)
+@end
+
+@implementation landBlock
+@synthesize poly, body, triStrip;
+@end
+
 
 //Manages pieces of land: adds, removes, draws, generates
 @interface Terrain : CCNode {
@@ -34,9 +37,9 @@ struct landBlock
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
 - (void) removePolygon:(gpc_polygon)p;
 
-+ (id) generateRandomOneIsland;
-+ (id) generateRandomTwoIsland;
-+ (id) generateRandomBlobs;
-+ (id) generateRandomCavern;
++ (Terrain*) generateRandomOneIsland;
++ (Terrain*) generateRandomTwoIsland;
++ (Terrain*) generateRandomBlobs;
++ (Terrain*) generateRandomCavern;
 
 @end
