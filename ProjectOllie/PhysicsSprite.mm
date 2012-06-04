@@ -55,8 +55,13 @@
 	transform_ = CGAffineTransformMake( c,  s,
 									   -s,	c,
 									   x,	y );	
+    
 	
 	return transform_;
+}
+-(CGPoint)position {
+    b2Vec2 pos = body_->GetPosition();
+    return CGPointMake(pos.x * PTM_RATIO, pos.y * PTM_RATIO);
 }
 
 -(void) dealloc

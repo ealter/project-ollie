@@ -319,21 +319,27 @@
 	return copy;
 }
 
--(void) step:(ccTime) dt
-{
-	if(boundarySet)
-	{
-		// whole map fits inside a single screen, no need to modify the position - unless map boundaries are increased
-		if(boundaryFullyCovered)
-			return;
-
-		CGPoint tempPos = ccpSub( halfScreenSize, followedNode_.position);
-		[target_ setPosition:ccp(clampf(tempPos.x,leftBoundary,rightBoundary), clampf(tempPos.y,bottomBoundary,topBoundary))];
-	}
-	else
-		[target_ setPosition:ccpSub( halfScreenSize, followedNode_.position )];
+- (void)step:(ccTime)dt {
+    
+    if (boundarySet) {
+        if (boundaryFullyCovered) {
+            return;
+        }
+        CCNode *n = (CCNode*)target_;
+        CGPoint p1 = ccpMult(halfScreenSize, n.scale);
+        CGPoint p2 = ccpMult(followedNode_.position, n.scale);
+        CGPoint offect = ccpMult(ccpSub(p1, halfScreenSize), 0.5f);
+        CGPoint tempPos = ccpAdd(ccpSub(p1, p2), offect);
+        [target_ setPosition:ccp(clampf(tempPos.x,leftBoundary,rightBoundary), clampf(tempPos.y,bottomBoundary,topBoundary))];
+        
+    } else {
+        CCNode *n = (CCNode*)target_;
+        CGPoint p1 = ccpMult(halfScreenSize, n.scale);
+        CGPoint p2 = ccpMult(followedNode_.position, n.scale);
+        [target_ setPosition:ccpSub(p1, p2)];
+    }
+    
 }
-
 
 -(BOOL) isDone
 {

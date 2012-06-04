@@ -8,9 +8,8 @@
 
 #import "SandboxLayer.h"
 #import "AppDelegate.h"
-#import "PhysicsSprite.h"
 #import "PRFilledPolygon.h"
-
+#import "CCAction.h"
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
@@ -31,6 +30,9 @@ enum {
 
 @implementation SandboxLayer
 
+
+
+
 +(CCScene *) scene
 {
     // 'scene' is an autorelease object.
@@ -49,9 +51,9 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
+
         
         // enable events
-        
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
         CGSize s = [CCDirector sharedDirector].winSize;
@@ -79,6 +81,10 @@ enum {
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
         label.position = ccp( s.width/2, s.height-50);
+        
+        //enable camera
+        //        
+        [self runAction:[CCScaleTo actionWithDuration:.63f scale:2.f]];
         
         [self scheduleUpdate];
     }
@@ -245,8 +251,9 @@ m_debugDraw = NULL;
     //just randomly picking one of the images
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
-    
+   
+    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];		
+
     sprite.position = ccp( p.x, p.y); //cocos2d point
     
     // Define the dynamic body.
@@ -258,13 +265,8 @@ m_debugDraw = NULL;
     
     // Define another box shape for our dynamic body.
     b2PolygonShape dynamicBox;
-    //dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-    b2Vec2 vs[4];
-    vs[0].Set(1.7f,0);
-    vs[1].Set(0,1.7f);
-    vs[2].Set(0,0);
-    //vs[3].Set(.24f,.24f);
-    dynamicBox.Set(vs,3);
+    dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;	
@@ -274,6 +276,11 @@ m_debugDraw = NULL;
    
     [sprite setPhysicsBody:body];
     [parent addChild:sprite];
+    
+    CGSize s = [CCDirector sharedDirector].winSize;
+    [self runAction:[CCFollow actionWithTarget:sprite]];// worldBoundary:CGRectMake(0, 0, s.width*3, s.height*3)]];
+    
+    
 
 }
 
@@ -284,11 +291,22 @@ m_debugDraw = NULL;
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
 
+    CCNode* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
+    if(lastChild != nil)
+    {
+        NSString* toLog = [NSString stringWithFormat:@"%@%f",@"Y: ",self.scale];
+        NSLog(toLog);
+    }
+
+    
+
+    
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
 
     // Instruct the world to perform a single step of simulation. It is
     // generally best to keep the time step and iterations fixed.
+
     world->Step(dt, velocityIterations, positionIterations);	
 }
 
