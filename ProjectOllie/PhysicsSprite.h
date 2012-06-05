@@ -14,5 +14,5 @@
     b2Body *body_;	// strong ref
 }
 -(void) setPhysicsBody:(b2Body*)body;
--(void) position;
+-(CGPoint) position;
 @end

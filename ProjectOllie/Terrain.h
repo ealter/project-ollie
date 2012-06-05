@@ -15,9 +15,9 @@
 // Manages pieces of land: adds, removes, draws, generates
 @interface Terrain : CCNode {
     gpc_polygon 	land;       //Model of all the land as contours
-    b2World*        world;      //Physical world this land is in
     gpc_tristrip    triStrips;  //Triangle strips used for drawing
-    NSMutableArray  *b2Bodies;  //Bodies of chain shapes currently in the world
+    NSMutableArray *b2Bodies;  //Bodies of chain shapes currently in the world
+    b2World        *world;      //Physical world this land is in
 }
 
 @property (nonatomic,strong) CCTexture2D *texture;
@@ -28,7 +28,6 @@
 - (void) addPolygon:(gpc_polygon*)p;
 
 //Removing land
-- (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
 - (void) removePolygon:(gpc_polygon*)p;
 
 //Call whenever shape is changed to rebuild the derived physical bodies and drawing 
