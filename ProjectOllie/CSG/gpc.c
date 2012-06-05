@@ -2503,6 +2503,16 @@ bool gpc_intersects (gpc_polygon *a, gpc_polygon *b)
     return intersects;
 }
 
+gpc_polygon gpc_clone_to (gpc_polygon* p, float x, float y)
+{
+    gpc_polygon out;
+    out.num_contours = p->num_contours;
+    // contours;
+    out.contour = ccVertex2F[p->num_contours];
+    //out.hole = 
+    
+}
+
 /*
 ===========================================================================
                            End of file: gpc.c

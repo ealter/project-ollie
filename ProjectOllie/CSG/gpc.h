@@ -127,6 +127,8 @@ void gpc_free_tristrip       (gpc_tristrip    *tristrip);
 
 bool gpc_intersects          (gpc_polygon *a, gpc_polygon *b);
 
+gpc_polygon* gpc_clone_to    (gpc_polygon* p, float x, float y);
+
 #endif
 
 /*
