@@ -212,6 +212,7 @@
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
+		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -634,6 +635,7 @@
 		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -838,6 +840,7 @@
 				C5C01E38157AAEB2004CF358 /* pattern1.png */,
 				CE94AA6D15785F83009B35B4 /* Default.png */,
 				CE5A6F3015795D190037206B /* mainmenu.ccbi */,
+				CEFB2C4F157D7655008A808D /* treez.png */,
 				CE94AA6F15785F83009B35B4 /* fps_images.png */,
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
@@ -1432,6 +1435,7 @@
 				CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */,
 				CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */,
 				CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */,
+				CEFB2C50157D7655008A808D /* treez.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

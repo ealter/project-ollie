@@ -13,5 +13,5 @@
 
 @property (nonatomic, retain) NSMutableArray *gpc_polys;
 @property (nonatomic, retain) polywrapper *newpoly;
-
+@property float radius;
 @end
