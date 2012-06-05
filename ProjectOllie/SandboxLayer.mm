@@ -58,11 +58,10 @@ enum {
         CGSize s = [CCDirector sharedDirector].winSize;
         
         self.windowSize = s;
-        self.camera = [[GWCamera alloc] initWithSubject:self];
+        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
-        self.camera.target = self.center;
-        [self.camera revertTo:self.center withWidth:s.width Height:s.height];
+        [self.camera revertTo:self.center];
         
 
         
@@ -283,16 +282,14 @@ m_debugDraw = NULL;
     //of the simulation, however, we are using a variable time step here.
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
-
+   
     PhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
     if(lastChild != nil)
     {
-        NSString* toLog = [NSString stringWithFormat:@"%@%f",@"Y: ",self.scale];
-        //NSLog(toLog);
         
-        if(![lastChild physicsBody]->IsAwake() && !self.camera.isChanging)
-        {
-            [self.camera revertTo:self.center withWidth:self.windowSize.width Height:self.windowSize.height];
+        if(![lastChild physicsBody]->IsAwake() && self.camera.target != self.center)
+        {   
+            [self.camera revertTo:self.center];
         }
     }
 
@@ -308,11 +305,7 @@ m_debugDraw = NULL;
     world->Step(dt, velocityIterations, positionIterations);	
 }
 
-- (void)followCenter{
 
-    [self runAction:[CCFollow actionWithTarget:self.center]];
-    
-}
                           
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {

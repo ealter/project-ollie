@@ -9,17 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "CCNode.h"
 
+
 @interface GWCamera : NSObject
 {
     CCNode* subject_;
+    CGSize worldDimensions;
+
 }
 
 @property (assign, nonatomic) bool isChanging;
 @property (strong, nonatomic) CCNode* target;
 
--(id)initWithSubject:(id)subject;
+-(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
 -(void)followNode:(CCNode*)focused;
 -(void)panTo:(CGPoint)location;
--(void)revertTo:(CCNode*)center withWidth:(float)width Height:(float)height;
+-(void)revertTo:(CCNode*)center;
 
 @end

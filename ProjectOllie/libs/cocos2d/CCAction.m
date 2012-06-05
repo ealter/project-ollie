@@ -339,15 +339,24 @@
         
     }
     else{
+        CGPoint moveVec;
         CCNode *n = (CCNode*)target_;
         CGPoint p1 = ccpMult(halfScreenSize, n.scale);
         CGPoint p2 = ccpMult(followedNode_.position, n.scale);
-        //CGPoint offect = ccpMult(ccpSub(p1, halfScreenSize), 0.5f);
-        //[target_ setPosition:ccpAdd(ccpSub(p1, p2), offect)];
         destination = ccpSub(p1,p2);
-        [target_ setPosition:destination];
-        //startLocation = destination;
-    }
+        
+        //using correctly calculated destination, normalize distance
+        //and move a given percentage of that distance per update
+        //until the distance is subpixel
+        moveVec = ccpSub(destination, n.position);
+        float distance = ccpLengthSQ(moveVec);
+        moveVec = ccpMult(moveVec,.05f);
+        if(distance < 1)
+            [target_ setPosition:destination];
+        else
+            [target_ setPosition:ccpAdd(n.position,moveVec)]; 
+        }
+    
 
     
 }
