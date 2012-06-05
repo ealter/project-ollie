@@ -10,12 +10,14 @@
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
 @implementation DrawEnvironment
-@synthesize newpoly, smallradius, smallcircle, numpoints;
-@synthesize mediumcircle, mediumradius, largecircle, largeradius;
+@synthesize newpoly, smallradius, smallcircle, numpoints, prevpoint;
+@synthesize mediumcircle, mediumradius, largecircle, largeradius, terrain;
 
 -(id) init
 {
 	if(self=[super init]) {
+        CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
+        terrain = [[Terrain alloc]initWithTexture:texture];
         smallradius = 3;
         mediumradius = 5;
         largeradius = 8;
@@ -69,13 +71,20 @@
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    //UITouch *touch = [[event allTouches] anyObject];
-    //CGPoint location = [touch locationInView:[touch view]];
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:[touch view]];
+    prevpoint = location;
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:[touch view]];
+    //makes sure the circles are far enough away to merit new circle
+    if (sqrt((location.x-prevpoint.x)*(location.x-prevpoint.x)+(location.y-prevpoint.y)*(location.y-prevpoint.y))>3)
+    {
+        
+    }
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

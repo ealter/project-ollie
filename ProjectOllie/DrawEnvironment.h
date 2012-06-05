@@ -8,6 +8,8 @@
 
 #import "CCScene.h"
 #import "gpc.h"
+#import "Terrain.h"
+
 @interface DrawEnvironment : CCScene
 
 @property gpc_polygon *newpoly;
@@ -18,4 +20,7 @@
 @property float largeradius;
 @property float mediumradius;
 @property int numpoints;
+@property CGPoint prevpoint;
+
+@property (nonatomic, strong)Terrain *terrain;
 @end
