@@ -10,79 +10,77 @@
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
 @implementation DrawEnvironment
-@synthesize gpc_polys, newpoly, radius;
+@synthesize newpoly, smallradius, smallcircle, numpoints;
+@synthesize mediumcircle, mediumradius, largecircle, largeradius;
 
 -(id) init
 {
 	if(self=[super init]) {
-        radius = 3;
+        smallradius = 3;
+        mediumradius = 5;
+        largeradius = 8;
+        numpoints = 20;
+        
+        //Code to make small circle
+        smallcircle->contour = new gpc_vertex_list;
+        smallcircle->contour->vertex = new ccVertex2F[numpoints];
+        smallcircle->num_contours +=1;
+        float anglecount = 0;
+        for (int i =0; i<numpoints; i++) {
+            ccVertex2F newvertex;
+            newvertex.x = (sinf(anglecount)*smallradius);
+            newvertex.y = (cosf(anglecount)*smallradius);
+            smallcircle->contour->num_vertices += 1;
+            smallcircle->contour->vertex[i] = newvertex;
+            anglecount += (360/numpoints);
+        }
+        
+        //Medium circle
+        mediumcircle->contour = new gpc_vertex_list;
+        mediumcircle->contour->vertex = new ccVertex2F[numpoints];
+        mediumcircle->num_contours +=1;
+        anglecount = 0;
+        for (int i =0; i<numpoints; i++) {
+            ccVertex2F newvertex;
+            newvertex.x = (sinf(anglecount)*mediumradius);
+            newvertex.y = (cosf(anglecount)*mediumradius);
+            mediumcircle->contour->num_vertices += 1;
+            mediumcircle->contour->vertex[i] = newvertex;
+            anglecount += (360/numpoints);
+        }
+        
+        //Large circle
+        largecircle->contour = new gpc_vertex_list;
+        largecircle->contour->vertex = new ccVertex2F[numpoints];
+        largecircle->num_contours +=1;
+        anglecount = 0;
+        for (int i =0; i<numpoints; i++) {
+            ccVertex2F newvertex;
+            newvertex.x = (sinf(anglecount)*largeradius);
+            newvertex.y = (cosf(anglecount)*largeradius);
+            largecircle->contour->num_vertices += 1;
+            largecircle->contour->vertex[i] = newvertex;
+            anglecount += (360/numpoints);
+        }
+        
 	}
 	return self;
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    newpoly = [[polywrapper alloc] init];
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:[touch view]];
-    float anglecount = 0;
-    //Malloc new gpc_polygon and a new contour
-    newpoly.gpc_polygon = new gpc_polygon;
-    newpoly.gpc_polygon->num_contours += 1;
-    newpoly.gpc_polygon->contour = new gpc_vertex_list;
-    //create the contour, a circle with predefined radius
-    for (int i =0; i<20; i++) {
-        ccVertex2F *newvertex;
-        newvertex->x = location.x+(sinf(anglecount)*radius);
-        newvertex->y = location.y+(cosf(anglecount)*radius);
-        newpoly.gpc_polygon->contour->num_vertices += 1;
-        newpoly.gpc_polygon->contour->vertex = newvertex;
-        anglecount += 18;
-    }
+    //UITouch *touch = [[event allTouches] anyObject];
+    //CGPoint location = [touch locationInView:[touch view]];
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:[touch view]];
-    float anglecount = 0;
-    
-    //Make new contour to hold the new circle
-    newpoly.gpc_polygon->num_contours += 1;
-    newpoly.gpc_polygon->contour = new gpc_vertex_list;
-    for (int i =0; i<20; i++) {
-        ccVertex2F *newvertex;
-        newvertex->x = location.x+(sinf(anglecount)*radius);
-        newvertex->y = location.y+(cosf(anglecount)*radius);
-        newpoly.gpc_polygon->contour->num_vertices += 1;
-        newpoly.gpc_polygon->contour->vertex = newvertex;
-        anglecount += 18;
-    }
-    
-    //Make a rectangle to connect the two circles
     
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:[touch view]];
-    float anglecount = 0;
     
-    //Make new contour to hold the new circle
-    newpoly.gpc_polygon->num_contours += 1;
-    newpoly.gpc_polygon->contour = new gpc_vertex_list;
-    for (int i =0; i<20; i++) {
-        ccVertex2F *newvertex;
-        newvertex->x = location.x+(sinf(anglecount)*radius);
-        newvertex->y = location.y+(cosf(anglecount)*radius);
-        newpoly.gpc_polygon->contour->num_vertices += 1;
-        newpoly.gpc_polygon->contour->vertex = newvertex;
-        anglecount += 18;
-    }
-    
-    //Add newpoly to the array of gpc_polys
-    [gpc_polys addObject:newpoly];
 }
 
 @end
