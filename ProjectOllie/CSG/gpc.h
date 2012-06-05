@@ -64,12 +64,6 @@ typedef enum                        /* Set operation type                */
   GPC_UNION                         /* Union                             */
 } gpc_op;
 
-//typedef struct                      /* Polygon vertex structure          */
-//{
-// double              x;            /* Vertex x component                */
-//  double              y;            /* vertex y component                */
-//} gpc_vertex;
-
 typedef struct                      /* Vertex list structure             */
 {
   int                 num_vertices; /* Number of vertices in list        */
@@ -130,6 +124,8 @@ void gpc_polygon_to_textured_tristrip (gpc_polygon     *polygon,
 void gpc_free_polygon        (gpc_polygon     *polygon);
 
 void gpc_free_tristrip       (gpc_tristrip    *tristrip);
+
+bool gpc_intersects          (gpc_polygon *a, gpc_polygon *b);
 
 #endif
 

@@ -11,7 +11,7 @@
 #import "gpc.h"
 #import "Box2D.h"
 
-// Terrain class
+/*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
 @interface Terrain : CCNode {
     NSMutableArray *landBlocks;
@@ -35,12 +35,15 @@
 
 @end
 
-// LandBlock helper class
+/* LandBlock helper class */
+
 // A physically independant piece of land with its own body and shape
-@interface LandBlock
-@property(nonatomic) gpc_polygon  *poly;       //Adding/subtracting (real model)
-@property(nonatomic) b2Body       *body;       //Physics (derived)
-@property(nonatomic) gpc_tristrip *triStrip;   //Drawing (derived)
+@interface LandBlock : NSObject
+@property(nonatomic)           gpc_polygon  *poly;       //Adding/subtracting (real model)
+@property(nonatomic, readonly) b2Body       *body;       //Physics (derived)
+@property(nonatomic, readonly) gpc_tristrip *triStrip;   //Drawing (derived)
+- (id) initWithPoly:(gpc_polygon*)p;    //Creates a new land block
+- (void) shapeChanged;                  //Polygon was changed, so the derived properies must be updated
 @end
 
 

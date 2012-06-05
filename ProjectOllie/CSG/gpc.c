@@ -2491,6 +2491,18 @@ void gpc_tristrip_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
   FREE(sbt);
 }
 
+
+bool gpc_intersects (gpc_polygon *a, gpc_polygon *b)
+{
+    //For now we'll just use the intersection clipping operation and see if it returns a shape
+    gpc_polygon* t = malloc(sizeof(*t));
+    gpc_polygon_clip(GPC_INT, a, b, t);
+    bool intersects = t->num_contours > 0;
+    gpc_free_polygon(t);
+    delete t;
+    return intersects;
+}
+
 /*
 ===========================================================================
                            End of file: gpc.c
