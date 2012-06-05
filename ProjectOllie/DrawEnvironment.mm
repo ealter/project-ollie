@@ -22,7 +22,7 @@
         numpoints = 20;
         
         //Code to make small circle
-        smallcircle->contour = new gpc_vertex_list;
+        smallcircle->contour = new vertex_list;
         smallcircle->contour->vertex = new ccVertex2F[numpoints];
         smallcircle->num_contours +=1;
         float anglecount = 0;
@@ -36,7 +36,7 @@
         }
         
         //Medium circle
-        mediumcircle->contour = new gpc_vertex_list;
+        mediumcircle->contour = new vertex_list;
         mediumcircle->contour->vertex = new ccVertex2F[numpoints];
         mediumcircle->num_contours +=1;
         anglecount = 0;
@@ -50,7 +50,7 @@
         }
         
         //Large circle
-        largecircle->contour = new gpc_vertex_list;
+        largecircle->contour = new vertex_list;
         largecircle->contour->vertex = new ccVertex2F[numpoints];
         largecircle->num_contours +=1;
         anglecount = 0;

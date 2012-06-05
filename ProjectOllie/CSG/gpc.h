@@ -34,7 +34,7 @@ Copyright: (C) Advanced Interfaces Group,
 #define __gpc_h
 
 #include <stdio.h>
-#include "cocos2d.h"
+#include "ccVertTypes.h"
 
 
 /*
@@ -68,20 +68,20 @@ typedef struct                      /* Vertex list structure             */
 {
   int                 num_vertices; /* Number of vertices in list        */
   ccVertex2F         *vertex;       /* Vertex array pointer              */
-} gpc_vertex_list;
+} vertex_list;
 
 typedef struct                      /* Polygon set structure             */
 {
-  int                 num_contours; /* Number of contours in polygon     */
-  int                *hole;         /* Hole / external contour flags     */
-  gpc_vertex_list    *contour;      /* Contour array pointer             */
+  int             num_contours; /* Number of contours in polygon     */
+  int            *hole;         /* Hole / external contour flags     */
+  vertex_list    *contour;      /* Contour array pointer             */
 } gpc_polygon;
 
 typedef struct                      /* Tristrip set structure            */
 {
-    int                 num_strips;   /* Number of tristrips               */
-    gpc_vertex_list    *strip;        /* Tristrip array pointer            */
-    gpc_vertex_list    *texCoords;    /* Strip texture coordinates         */
+    int             num_strips;   /* Number of tristrips               */
+    vertex_list    *strip;        /* Tristrip array pointer            */
+    vertex_list    *texCoords;    /* Strip texture coordinates         */
 } gpc_tristrip;
 
 
@@ -100,7 +100,7 @@ void gpc_write_polygon       (FILE            *outfile_ptr,
                               gpc_polygon     *polygon);
 
 void gpc_add_contour         (gpc_polygon     *polygon,
-                              gpc_vertex_list *contour,
+                              vertex_list *contour,
                               int              hole);
 
 void gpc_polygon_clip        (gpc_op           set_operation,
@@ -125,9 +125,7 @@ void gpc_free_polygon        (gpc_polygon     *polygon);
 
 void gpc_free_tristrip       (gpc_tristrip    *tristrip);
 
-bool gpc_intersects          (gpc_polygon *a, gpc_polygon *b);
-
-gpc_polygon* gpc_clone_to    (gpc_polygon* p, float x, float y);
+//gpc_polygon* gpc_clone_to    (gpc_polygon* p, float x, float y);
 
 #endif
 

@@ -66,7 +66,7 @@
 
 - (void) draw
 {
-    CC_NODE_DRAW_SETUP();
+    //CC_NODE_DRAW_SETUP();
     
     //Draw each of the land elements
     for (int i = 0; i < triStrips.num_strips; i++)
