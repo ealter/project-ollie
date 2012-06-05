@@ -270,8 +270,8 @@
 		CGSize s = [[CCDirector sharedDirector] winSize];
 		fullScreenSize = CGPointMake(s.width, s.height);
 		halfScreenSize = ccpMult(fullScreenSize, .5f);
+        startLocation = ccp(-1,-1);
 	}
-
 	return self;
 }
 
@@ -307,6 +307,8 @@
 
 		if( (topBoundary == bottomBoundary) && (leftBoundary == rightBoundary) )
 			boundaryFullyCovered = TRUE;
+        
+        startLocation = ccp(-1,-1);
 	}
 
 	return self;
@@ -321,6 +323,8 @@
 
 - (void)step:(ccTime)dt {
     
+    
+    CGPoint destination;
     if (boundarySet) {
         if (boundaryFullyCovered) {
             return;
@@ -330,14 +334,21 @@
         CGPoint p2 = ccpMult(followedNode_.position, n.scale);
         CGPoint offect = ccpMult(ccpSub(p1, halfScreenSize), 0.5f);
         CGPoint tempPos = ccpAdd(ccpSub(p1, p2), offect);
-        [target_ setPosition:ccp(clampf(tempPos.x,leftBoundary,rightBoundary), clampf(tempPos.y,bottomBoundary,topBoundary))];
+        destination = ccp(clampf(tempPos.x,leftBoundary,rightBoundary), clampf(tempPos.y,bottomBoundary,topBoundary));
+        [target_ setPosition:destination];
         
-    } else {
+    }
+    else{
         CCNode *n = (CCNode*)target_;
         CGPoint p1 = ccpMult(halfScreenSize, n.scale);
         CGPoint p2 = ccpMult(followedNode_.position, n.scale);
-        [target_ setPosition:ccpSub(p1, p2)];
+        //CGPoint offect = ccpMult(ccpSub(p1, halfScreenSize), 0.5f);
+        //[target_ setPosition:ccpAdd(ccpSub(p1, p2), offect)];
+        destination = ccpSub(p1,p2);
+        [target_ setPosition:destination];
+        //startLocation = destination;
     }
+
     
 }
 

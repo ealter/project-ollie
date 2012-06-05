@@ -174,6 +174,9 @@ enum {
 	float rightBoundary;
 	float topBoundary;
 	float bottomBoundary;
+    
+    /* initial location */
+    CGPoint startLocation;
 }
 
 /** alter behavior - turn on/off boundary */
@@ -185,11 +188,17 @@ enum {
 /** creates the action with a set boundary */
 +(id) actionWithTarget:(CCNode *)followedNode worldBoundary:(CGRect)rect;
 
+/** creates the action with a set initial location */
++(id) actionWithTarget:(CCNode *)followedNode atInitialLocation:(CGPoint)loc;
+
 /** initializes the action */
 -(id) initWithTarget:(CCNode *)followedNode;
 
 /** initializes the action with a set boundary */
 -(id) initWithTarget:(CCNode *)followedNode worldBoundary:(CGRect)rect;
+
+/** initalizes the action with an initial location to traverse from */
+-(id) initWithTarget:(CCNode *)followedNode atInitialLocation:(CGPoint)loc;
 
 @end
 

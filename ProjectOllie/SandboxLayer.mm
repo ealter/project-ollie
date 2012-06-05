@@ -26,12 +26,15 @@ enum {
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
+-(void) followCenter;
 @end
 
 @implementation SandboxLayer
 
 
-
+@synthesize center      = _center;
+@synthesize camera      = _camera;
+@synthesize windowSize  = _windowSize;
 
 +(CCScene *) scene
 {
@@ -51,12 +54,23 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
+        
+        //keep track of camera motion
+        CGSize s = [CCDirector sharedDirector].winSize;
+        
+        self.windowSize = s;
+        self.camera = [[GWCamera alloc] initWithSubject:self];
+        self.center = [CCNode node];
+        self.center.position = ccp(s.width/2, s.height/2);
+        self.camera.target = self.center;
+        [self.camera revertTo:self.center withWidth:s.width Height:s.height];
+        
 
         
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
-        CGSize s = [CCDirector sharedDirector].winSize;
+        
         
         // init physics
         [self initPhysics];
@@ -82,10 +96,7 @@ enum {
         [label setColor:ccc3(0,0,255)];
         label.position = ccp( s.width/2, s.height-50);
         
-        //enable camera
-        //        
-        [self runAction:[CCScaleTo actionWithDuration:.63f scale:2.f]];
-        
+        [self addChild:self.center];
         [self scheduleUpdate];
     }
     return self;
@@ -193,7 +204,7 @@ m_debugDraw = NULL;
      */
     
     //[parent addChild:sprite];
-
+    // will eventually make this a piece of terrain
 
     sprite.position = ccp( p.x, p.y); //cocos2d point
 
@@ -277,9 +288,8 @@ m_debugDraw = NULL;
     [sprite setPhysicsBody:body];
     [parent addChild:sprite];
     
-    CGSize s = [CCDirector sharedDirector].winSize;
-    [self runAction:[CCFollow actionWithTarget:sprite]];// worldBoundary:CGRectMake(0, 0, s.width*3, s.height*3)]];
-    
+   
+    [self.camera followNode:sprite];    
     
 
 }
@@ -291,11 +301,16 @@ m_debugDraw = NULL;
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
 
-    CCNode* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
+    PhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
     if(lastChild != nil)
     {
         NSString* toLog = [NSString stringWithFormat:@"%@%f",@"Y: ",self.scale];
-        NSLog(toLog);
+        //NSLog(toLog);
+        
+        if(![lastChild physicsBody]->IsAwake() && !self.camera.isChanging)
+        {
+            [self.camera revertTo:self.center withWidth:self.windowSize.width Height:self.windowSize.height];
+        }
     }
 
     
@@ -310,6 +325,12 @@ m_debugDraw = NULL;
     world->Step(dt, velocityIterations, positionIterations);	
 }
 
+- (void)followCenter{
+
+    [self runAction:[CCFollow actionWithTarget:self.center]];
+    
+}
+                          
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     //Add a new body/atlas sprite at the touched location

@@ -26,6 +26,7 @@
 		C52986C31578A43300656B50 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AD1578A43300656B50 /* unzip.c */; };
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
+		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
 		C5C01EDB157AD819004CF358 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C01ED5157AD819004CF358 /* PRFilledPolygon.m */; };
 		C5C01EDC157AD819004CF358 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5C01ED7157AD819004CF358 /* PRRatcliffTriangulator.mm */; };
@@ -252,6 +253,8 @@
 		C52986B01578A43300656B50 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
+		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5C01E38157AAEB2004CF358 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
 		C5C01ED4157AD819004CF358 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
 		C5C01ED5157AD819004CF358 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
@@ -825,6 +828,8 @@
 				CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */,
 				CE8429F5157BD0E50038C653 /* Terrain.h */,
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
+				C584A88C157D969500936109 /* GWCamera.h */,
+				C584A88D157D969500936109 /* GWCamera.mm */,
 				CE94AA6C15785F83009B35B4 /* Resources */,
 				CE94AA8415785F84009B35B4 /* libs */,
 				CE94AC6B15785F89009B35B4 /* Supporting Files */,
@@ -1617,6 +1622,7 @@
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				CE2914B0157C11A100C09121 /* polywrapper.mm in Sources */,
+				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
