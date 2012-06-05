@@ -31,6 +31,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ccMacros.h"
+#import "ccVertTypes.h"
 
 #ifdef __CC_PLATFORM_IOS
 #import <CoreGraphics/CGGeometry.h>	// CGPoint
@@ -133,25 +134,6 @@ static inline BOOL ccc4FEqual(ccColor4F a, ccColor4F b)
 {
 	return a.r == b.r && a.g == b.g && a.b == b.b && a.a == b.a;
 }
-
-/** A vertex composed of 2 GLfloats: x, y
- @since v0.8
- */
-typedef struct _ccVertex2F
-{
-	GLfloat x;
-	GLfloat y;
-} ccVertex2F;
-
-/** A vertex composed of 2 floats: x, y
- @since v0.8
- */
-typedef struct _ccVertex3F
-{
-	GLfloat x;
-	GLfloat y;
-	GLfloat z;
-} ccVertex3F;
 
 /** A texcoord composed of 2 floats: u, y
  @since v0.8

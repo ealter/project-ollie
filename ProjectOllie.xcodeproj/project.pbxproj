@@ -28,12 +28,8 @@
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
-		C5C01EDB157AD819004CF358 /* PRFilledPolygon.m in Sources */ = {isa = PBXBuildFile; fileRef = C5C01ED5157AD819004CF358 /* PRFilledPolygon.m */; };
-		C5C01EDC157AD819004CF358 /* PRRatcliffTriangulator.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5C01ED7157AD819004CF358 /* PRRatcliffTriangulator.mm */; };
-		C5C01EDD157AD819004CF358 /* triangulate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5C01ED9157AD819004CF358 /* triangulate.cpp */; };
-		C5FE5FE015796583008F4298 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FDE15796583008F4298 /* gpc.c */; };
+		C5FE5FE015796583008F4298 /* gpc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FDE15796583008F4298 /* gpc.cpp */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
-		CE2914B0157C11A100C09121 /* polywrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2914AF157C11A100C09121 /* polywrapper.mm */; };
 		CE4BCDA5157AD080002FD1F3 /* btn-test-0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */; };
 		CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */; };
 		CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */; };
@@ -213,6 +209,7 @@
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
+		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -256,19 +253,10 @@
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5C01E38157AAEB2004CF358 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
-		C5C01ED4157AD819004CF358 /* PRFilledPolygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRFilledPolygon.h; sourceTree = "<group>"; };
-		C5C01ED5157AD819004CF358 /* PRFilledPolygon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PRFilledPolygon.m; sourceTree = "<group>"; };
-		C5C01ED6157AD819004CF358 /* PRRatcliffTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRRatcliffTriangulator.h; sourceTree = "<group>"; };
-		C5C01ED7157AD819004CF358 /* PRRatcliffTriangulator.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PRRatcliffTriangulator.mm; sourceTree = "<group>"; };
-		C5C01ED8157AD819004CF358 /* PRTriangulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PRTriangulator.h; sourceTree = "<group>"; };
-		C5C01ED9157AD819004CF358 /* triangulate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = triangulate.cpp; sourceTree = "<group>"; };
-		C5C01EDA157AD819004CF358 /* triangulate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = triangulate.h; sourceTree = "<group>"; };
-		C5FE5FDE15796583008F4298 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
+		C5FE5FDE15796583008F4298 /* gpc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = gpc.cpp; sourceTree = "<group>"; };
 		C5FE5FDF15796583008F4298 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
-		CE2914AE157C11A100C09121 /* polywrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = polywrapper.h; path = ../../polywrapper.h; sourceTree = "<group>"; };
-		CE2914AF157C11A100C09121 /* polywrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = polywrapper.mm; path = ../../polywrapper.mm; sourceTree = "<group>"; };
 		CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-0.png"; path = "Resources/btn-test-0.png"; sourceTree = "<group>"; };
 		CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-1.png"; path = "Resources/btn-test-1.png"; sourceTree = "<group>"; };
 		CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-2.png"; path = "Resources/btn-test-2.png"; sourceTree = "<group>"; };
@@ -282,6 +270,7 @@
 		CE8429E5157981BB0038C653 /* SandboxLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
+		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
 		CE94AA5515785F83009B35B4 /* ProjectOllie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOllie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE94AA5915785F83009B35B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE94AA5B15785F83009B35B4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -637,6 +626,7 @@
 		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -749,26 +739,10 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
-		C5C01ED3157AD818004CF358 /* PRKit */ = {
-			isa = PBXGroup;
-			children = (
-				C5C01ED4157AD819004CF358 /* PRFilledPolygon.h */,
-				C5C01ED5157AD819004CF358 /* PRFilledPolygon.m */,
-				C5C01ED6157AD819004CF358 /* PRRatcliffTriangulator.h */,
-				C5C01ED7157AD819004CF358 /* PRRatcliffTriangulator.mm */,
-				C5C01ED8157AD819004CF358 /* PRTriangulator.h */,
-				C5C01ED9157AD819004CF358 /* triangulate.cpp */,
-				C5C01EDA157AD819004CF358 /* triangulate.h */,
-			);
-			path = PRKit;
-			sourceTree = "<group>";
-		};
 		C5FE5FDD15796583008F4298 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
-				CE2914AE157C11A100C09121 /* polywrapper.h */,
-				CE2914AF157C11A100C09121 /* polywrapper.mm */,
-				C5FE5FDE15796583008F4298 /* gpc.c */,
+				C5FE5FDE15796583008F4298 /* gpc.cpp */,
 				C5FE5FDF15796583008F4298 /* gpc.h */,
 			);
 			path = CSG;
@@ -843,6 +817,7 @@
 				C5C01E38157AAEB2004CF358 /* pattern1.png */,
 				CE94AA6D15785F83009B35B4 /* Default.png */,
 				CE5A6F3015795D190037206B /* mainmenu.ccbi */,
+				CEFB2C4F157D7655008A808D /* treez.png */,
 				CE94AA6F15785F83009B35B4 /* fps_images.png */,
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
@@ -870,7 +845,6 @@
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
 				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
 				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
-				C5C01ED3157AD818004CF358 /* PRKit */,
 				C5FE5FDD15796583008F4298 /* CSG */,
 				C52986871578A43300656B50 /* CCControlExtension */,
 				C52986A21578A43300656B50 /* CCScrollView */,
@@ -1027,6 +1001,7 @@
 				CE94AB4C15785F86009B35B4 /* cocos2d.m */,
 				CE94AB4E15785F86009B35B4 /* Platforms */,
 				CE94AB7015785F86009B35B4 /* Support */,
+				CE842A06157E03420038C653 /* ccVertTypes.h */,
 			);
 			name = cocos2d;
 			sourceTree = "<group>";
@@ -1437,6 +1412,7 @@
 				CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */,
 				CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */,
 				CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */,
+				CEFB2C50157D7655008A808D /* treez.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1613,12 +1589,9 @@
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
 				CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */,
-				C5FE5FE015796583008F4298 /* gpc.c in Sources */,
+				C5FE5FE015796583008F4298 /* gpc.cpp in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
 				CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */,
-				C5C01EDB157AD819004CF358 /* PRFilledPolygon.m in Sources */,
-				C5C01EDC157AD819004CF358 /* PRRatcliffTriangulator.mm in Sources */,
-				C5C01EDD157AD819004CF358 /* triangulate.cpp in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				CE2914B0157C11A100C09121 /* polywrapper.mm in Sources */,

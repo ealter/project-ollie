@@ -8,10 +8,19 @@
 
 #import "CCScene.h"
 #import "gpc.h"
-#import "polywrapper.h"
+#import "Terrain.h"
+
 @interface DrawEnvironment : CCScene
 
-@property (nonatomic, retain) NSMutableArray *gpc_polys;
-@property (nonatomic, retain) polywrapper *newpoly;
+@property gpc_polygon *newpoly;
+@property gpc_polygon *smallcircle;
+@property gpc_polygon *mediumcircle;
+@property gpc_polygon *largecircle;
+@property float smallradius;
+@property float largeradius;
+@property float mediumradius;
+@property int numpoints;
+@property CGPoint prevpoint;
 
+@property (nonatomic, strong)Terrain *terrain;
 @end
