@@ -18,8 +18,6 @@
     if(self = [super init])
     {
         self->texture_ = t;
-        self->b2Bodies = [NSMutableArray array];
-        //land and tristrips are structs that are already allocated
     }
     return self;
 }
@@ -52,22 +50,36 @@
     if (world)
     {
         //Remove all the old physical bodies and DESTROY THE FUCK OUT OF THEM
-        for (int i = 0; i < b2Bodies.count; i++)
-            world->DestroyBody((b2Body*)[b2Bodies objectAtIndex:i]);
-        [b2Bodies removeAllObjects];
+        for (int i = 0; i < b2Bodies.size(); i++)
+            world->DestroyBody((b2Body*)b2Bodies.at(i));
+        b2Bodies.clear();
         
-        //Create new bodies, one chain shape for each contour
+        //Create new bodies, one chain shape for each beautiful contour
         for (int i = 0; i < land.num_contours; i++)
         {
+            //Convert the array into b2Vec2 verticies
+            vertex_list gpcVerts = land.contour[i];
+            b2Vec2 *b2Verts = new b2Vec2[gpcVerts.num_vertices];
+            for (int j = 0; j < gpcVerts.num_vertices; j++)
+                b2Verts[j].Set(gpcVerts.vertex[j].x, gpcVerts.vertex[j].y);
+            //Make the chain shape loop
+            b2ChainShape landShape;
+            landShape.CreateLoop(b2Verts, gpcVerts.num_vertices);
+            
+            //Create a body from the definition
             b2BodyDef bdef;
             bdef.position.Set(0, 0);
-            b2ChainShape landShape;
-            //Convert the array into b2Vec2 verticies
-            landShape.CreateLoop(<#const b2Vec2 *vertices#>, <#int32 count#>)
+            b2Body* body = world->CreateBody(&bdef);
+            body->CreateFixture(&landShape, 0.0f);
+            b2Bodies.push_back(body);
+            
+            //Clean up
+            delete b2Verts;
         }
     }
     
     //Update the tristrips
+    gpc_free_tristrip(&triStrips);
     gpc_polygon_to_textured_tristrip(&land, &triStrips, self->texture_.pixelsHigh, self->texture_.pixelsWide);	
 }
 

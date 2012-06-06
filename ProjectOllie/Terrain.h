@@ -10,14 +10,15 @@
 #import "cocos2d.h"
 #import "gpc.h"
 #import "Box2D.h"
+#include <vector>
 
 /*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
 @interface Terrain : CCNode {
-    gpc_polygon 	land;       //Model of all the land as contours
-    gpc_tristrip    triStrips;  //Triangle strips used for drawing
-    NSMutableArray *b2Bodies;  //Bodies of chain shapes currently in the world
-    b2World        *world;      //Physical world this land is in
+    gpc_polygon          land;       //Model of all the land as contours
+    gpc_tristrip         triStrips;  //Triangle strips used for drawing
+    std::vector<b2Body*> b2Bodies;   //Bodies of chain shapes currently in the world
+    b2World             *world;      //Physical world this land is in
 }
 
 @property (nonatomic,strong) CCTexture2D *texture;
