@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/1/12.
-//  Copyright 2012 hi ku llc. All rights reserved.
+//  Copyright 2012 hi ku llc All rights reserved.
 //
 
 #import "mainmenu.h"

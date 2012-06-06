@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/1/12.
-//  Copyright (c) 2012 hi ku llc. All rights reserved.
+//  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
 #import "SandboxLayer.h"
