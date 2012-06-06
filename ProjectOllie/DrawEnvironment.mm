@@ -10,17 +10,32 @@
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
 @implementation DrawEnvironment
-@synthesize newpoly, smallradius, smallcircle, numpoints, prevpoint, brush, brushradius;
-@synthesize mediumcircle, mediumradius, largecircle, largeradius, terrain;
+@synthesize newpoly, smallcircle, numpoints, prevpoint, brush, brushradius;
+@synthesize mediumcircle, largecircle, terrain;
+
++(CCScene *) scene
+{
+    // 'scene' is an autorelease object.
+    CCScene *scene = [CCScene node];
+    
+    // 'layer' is an autorelease object.
+    DrawEnvironment *layer = [DrawEnvironment node];
+    
+    // add layer as a child to scene
+    [scene addChild: layer];
+    
+    // return the scene
+    return scene;
+}
 
 -(id) init
 {
 	if(self=[super init]) {
         CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
         terrain = [[Terrain alloc]initWithTexture:texture];
-        smallradius = 3;
-        mediumradius = 5;
-        largeradius = 8;
+        [self addChild:terrain];
+        self.isTouchEnabled = YES;
+        
         numpoints = 20;
         
         //Code to make small circle
@@ -158,10 +173,10 @@
     corner1.y = pointa.y+unitvector.y;
     corner2.x = pointa.x-unitvector.x;
     corner2.y = pointa.y-unitvector.y;
-    corner3.x = pointa.x+unitvector.x;
-    corner3.y = pointa.y+unitvector.y;
-    corner4.x = pointa.x-unitvector.x;
-    corner4.y = pointa.y-unitvector.y;
+    corner4.x = pointb.x+unitvector.x;
+    corner4.y = pointb.y+unitvector.y;
+    corner3.x = pointb.x-unitvector.x;
+    corner3.y = pointb.y-unitvector.y;
     
     rectangle->contour = new vertex_list;
     rectangle->contour->num_vertices=4;
