@@ -98,8 +98,10 @@
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:[touch view]];
-    location.y *= -1;
+    CGPoint location = [touch locationInView: [touch view]];
+    location = [[CCDirector sharedDirector] convertToGL: location];
+    location = [self convertToNodeSpace:location];
+    
     prevpoint = location;
     
     gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
@@ -111,8 +113,10 @@
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:[touch view]];
-    location.y *= -1;
+    CGPoint location = [touch locationInView: [touch view]];
+    location = [[CCDirector sharedDirector] convertToGL: location];
+    location = [self convertToNodeSpace:location];
+    
     //makes sure the circles are far enough away to merit new circle
     if (sqrt((location.x-prevpoint.x)*(location.x-prevpoint.x)+(location.y-prevpoint.y)*(location.y-prevpoint.y))>10)
     {
@@ -133,9 +137,10 @@
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView:[touch view]];
-    location.y *= -1;
-    
+    CGPoint location = [touch locationInView: [touch view]];
+    location = [[CCDirector sharedDirector] convertToGL: location];
+    location = [self convertToNodeSpace:location];
+
     gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
     [terrain addPolygon:newcircle];
     gpc_free_polygon(newcircle);
