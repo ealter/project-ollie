@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/1/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 hi ku inc. All rights reserved.
 //
 
 #import <GameKit/GameKit.h>
@@ -20,6 +20,7 @@
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
+    CGSize s;
 }
 
 
