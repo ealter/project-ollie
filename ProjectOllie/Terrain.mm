@@ -62,8 +62,8 @@
             b2BodyDef bdef;
             bdef.position.Set(0, 0);
             b2ChainShape landShape;
-            //Convert the array into b2Vec2 verticies
-            //landShape.CreateLoop(<#const b2Vec2 *vertices#>, <#int32 count#>)
+            //Convert the array into b2Vec2 verticies
+            landShape.CreateLoop(<#const b2Vec2 *vertices#>, <#int32 count#>)
         }
     }
     
