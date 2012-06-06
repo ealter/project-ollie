@@ -106,8 +106,7 @@
     
     gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
     [terrain addPolygon:newcircle];
-    //gpc_free_polygon(newcircle);
-    delete newcircle;
+    gpc_free_polygon(newcircle);
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
