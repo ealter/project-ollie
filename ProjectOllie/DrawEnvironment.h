@@ -21,8 +21,10 @@
 @property float mediumradius;
 @property int numpoints;
 @property CGPoint prevpoint;
+@property gpc_polygon *brush;
+@property float brushradius;
 
 @property (nonatomic, strong)Terrain *terrain;
 
--(gpc_polygon)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(int) width;
+-(gpc_polygon *)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(int) width;
 @end

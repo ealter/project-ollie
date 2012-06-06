@@ -10,7 +10,7 @@
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
 @implementation DrawEnvironment
-@synthesize newpoly, smallradius, smallcircle, numpoints, prevpoint;
+@synthesize newpoly, smallradius, smallcircle, numpoints, prevpoint, brush, brushradius;
 @synthesize mediumcircle, mediumradius, largecircle, largeradius, terrain;
 
 -(id) init
@@ -70,6 +70,8 @@
             largecircle->contour->vertex[i] = newvertex;
             anglecount += (360/numpoints);
         }
+        brush = smallcircle;
+        brushradius = smallradius;
         
 	}
 	return self;
@@ -80,6 +82,11 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:[touch view]];
     prevpoint = location;
+    
+    gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
+    [terrain addPolygon:newcircle];
+    gpc_free_polygon(newcircle);
+    delete newcircle;
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -87,21 +94,45 @@
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView:[touch view]];
     //makes sure the circles are far enough away to merit new circle
-    if (sqrt((location.x-prevpoint.x)*(location.x-prevpoint.x)+(location.y-prevpoint.y)*(location.y-prevpoint.y))>3)
+    if (sqrt((location.x-prevpoint.x)*(location.x-prevpoint.x)+(location.y-prevpoint.y)*(location.y-prevpoint.y))>4)
     {
+        gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
+        [terrain addPolygon:newcircle];
+        gpc_free_polygon(newcircle);
+        delete newcircle;
         
+        gpc_polygon *newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
+        [terrain addPolygon:newrectangle];
+        gpc_free_polygon(newrectangle);
+        delete newrectangle;
+        
+        prevpoint = location;
     }
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    UITouch *touch = [[event allTouches] anyObject];
+    CGPoint location = [touch locationInView:[touch view]];
     
+    gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
+    [terrain addPolygon:newcircle];
+    gpc_free_polygon(newcircle);
+    delete newcircle;
+    
+    gpc_polygon *newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
+    [terrain addPolygon:newrectangle];
+    gpc_free_polygon(newrectangle);
+    delete newrectangle;
 }
 
--(gpc_polygon)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(int)width
+
+//MAKE SURE YOU FREE THE RECTANGLE AFTER YOU MAKE IT
+-(gpc_polygon *)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(int)width
 {
     gpc_polygon *rectangle = new gpc_polygon;
     rectangle->hole=0;
+    rectangle->num_contours = 1;
     
     //Make unit vector between the two points
     CGPoint unitvector;
@@ -140,7 +171,7 @@
     rectangle->contour->vertex[2]=corner3;
     rectangle->contour->vertex[4]=corner4;
     
-    return *rectangle;
+    return rectangle;
 }
 
 @end
