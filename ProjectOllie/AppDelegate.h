@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 5/31/12.
-//  Copyright __MyCompanyName__ 2012. All rights reserved.
+//  Copyright hi ku llc. 2012. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

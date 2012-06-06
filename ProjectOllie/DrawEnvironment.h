@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/2/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 
 #import "CCScene.h"
@@ -23,4 +23,6 @@
 @property CGPoint prevpoint;
 
 @property (nonatomic, strong)Terrain *terrain;
+
+-(gpc_polygon)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(int) width;
 @end

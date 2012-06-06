@@ -1594,7 +1594,6 @@
 				CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
-				CE2914B0157C11A100C09121 /* polywrapper.mm in Sources */,
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
