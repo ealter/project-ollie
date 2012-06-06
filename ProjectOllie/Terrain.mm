@@ -56,8 +56,12 @@
             world->DestroyBody((b2Body*)[b2Bodies objectAtIndex:i]);
         [b2Bodies removeAllObjects];
         
-        //Create new bodies
-        
+        //Create new bodies, one chain shape for each contour
+        for (int i = 0; i < land.num_contours; i++)
+        {
+            b2BodyDef bdef;
+            
+        }
     }
     
     //Update the tristrips
