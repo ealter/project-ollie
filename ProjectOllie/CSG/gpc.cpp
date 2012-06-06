@@ -2504,6 +2504,28 @@ bool gpc_intersects (gpc_polygon *a, gpc_polygon *b)
 }
 */
 
+gpc_polygon* gpc_offset_clone    (gpc_polygon* p, float x, float y)
+{
+    gpc_polygon* clone;
+    MALLOC(clone, sizeof(*clone), "offset clone: gpc_poly", gpc_polygon);
+    clone->num_contours = p->num_contours;
+    MALLOC(clone->contour, sizeof(vertex_list) * clone->num_contours, "offset clone: contours", vertex_list);
+    MALLOC(clone->hole, sizeof(int) * clone->num_contours, "offset clone: holes", int);
+    for (int i = 0; i < clone->num_contours; i++)
+    {
+        clone->hole[i] = p->hole[i];
+        int numVerts = p->contour[i].num_vertices;
+        clone->contour[i].num_vertices = numVerts;
+        MALLOC(clone->contour[i].vertex, sizeof(ccVertex2F) * numVerts, "offset clone: verts", ccVertex2F);
+        for (int j = 0; j < numVerts; j++)
+        {
+            clone->contour[i].vertex[j].x = p->contour[i].vertex[j].x + x;
+            clone->contour[i].vertex[j].y = p->contour[i].vertex[j].y + y;
+        }
+    }
+    return clone;
+}
+
 /*
 ===========================================================================
                            End of file: gpc.c
