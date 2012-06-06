@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/4/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 hi ku llc All rights reserved.
 //
 
 #import "Terrain.h"
@@ -60,7 +60,10 @@
         for (int i = 0; i < land.num_contours; i++)
         {
             b2BodyDef bdef;
-            
+            bdef.position.Set(0, 0);
+            b2ChainShape landShape;
+            //Convert the array into b2Vec2 verticies
+            //landShape.CreateLoop(<#const b2Vec2 *vertices#>, <#int32 count#>)
         }
     }
     

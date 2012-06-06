@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/1/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
 #import "SandboxLayer.h"
@@ -55,7 +55,7 @@ enum {
     if( (self=[super init])) {
         
         //keep track of camera motion
-        CGSize s = [CCDirector sharedDirector].winSize;
+        s = [CCDirector sharedDirector].winSize;
         
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
@@ -113,8 +113,6 @@ m_debugDraw = NULL;
 
 -(void) initPhysics
 {
-
-    CGSize s = [[CCDirector sharedDirector] winSize];
 
     b2Vec2 gravity;
     gravity.Set(0.0f, -10.0f);
@@ -286,7 +284,6 @@ m_debugDraw = NULL;
     PhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
     if(lastChild != nil)
     {
-        
         if(![lastChild physicsBody]->IsAwake() && self.camera.target != self.center)
         {   
             [self.camera revertTo:self.center];
@@ -302,20 +299,31 @@ m_debugDraw = NULL;
     // Instruct the world to perform a single step of simulation. It is
     // generally best to keep the time step and iterations fixed.
 
-    world->Step(dt, velocityIterations, positionIterations);	
+    world->Step(dt, velocityIterations, positionIterations);
+    
+    /**
+     * User-made objects that also require updates
+     */
+	[self.camera update:dt];
 }
 
 
                           
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    
     //Add a new body/atlas sprite at the touched location
     for( UITouch *touch in touches ) {
         CGPoint location = [touch locationInView: [touch view]];
         
-        location = [[CCDirector sharedDirector] convertToGL: location];
         
-        [self addNewSpriteAtPosition: location];
+        location = [[CCDirector sharedDirector] convertToGL: location];
+        location = [self convertToNodeSpace:location];
+        
+        CGRect bounds = CGRectMake(0, 0, s.width, s.height);
+        if(CGRectContainsPoint(bounds, location))
+           [self addNewSpriteAtPosition: location];
+        [self.camera addIntensity:5.f];
     }
 }
 
