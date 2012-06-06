@@ -77,15 +77,13 @@
     [self->subject_ stopAllActions];
     
     self.target = center;
-    CGPoint moveLocation = 
-    ccp(center.position.x - worldDimensions.width/2, center.position.y - worldDimensions.height/2);
     
     id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
     id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
     id eMotion = [CCCallFunc actionWithTarget:self selector:@selector(endMotion)];
     
     id moveFollow = [CCSequence actions:bMotion,follow,eMotion,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.55f scale:1.f]];
+    [self->subject_ runAction:[CCScaleTo actionWithDuration:.22f scale:1.f]];
     [self->subject_ runAction:moveFollow];
     
 }
@@ -104,7 +102,7 @@
 -(void)createShakeEffect:(float)dt{
     
         //the shakeRate will determine the weight given to dt
-        float shakeRate = 100;
+        float shakeRate = 70;
         actionCount+=dt*shakeRate;
         
         //modulo the total action count around 360 degrees
@@ -141,7 +139,7 @@
         [self createShakeEffect:dt];
         
         //decrease intensity
-        self.actionIntensity = self.actionIntensity*.9f;
+        self.actionIntensity = self.actionIntensity*.87f;
     }
     
 }

@@ -323,7 +323,7 @@ m_debugDraw = NULL;
         CGRect bounds = CGRectMake(0, 0, s.width, s.height);
         if(CGRectContainsPoint(bounds, location))
            [self addNewSpriteAtPosition: location];
-        [self.camera addIntensity:5.f];
+        [self.camera addIntensity:6.f];
     }
 }
 
