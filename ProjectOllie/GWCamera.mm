@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Sam Zeckendorf on 6/4/12.
-//  Copyright (c) 2012 hi ku inc. All rights reserved.
+//  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 
 #import "GWCamera.h"
