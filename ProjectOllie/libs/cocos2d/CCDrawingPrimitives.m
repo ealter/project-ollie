@@ -230,14 +230,21 @@ void ccDrawTexturedTriStrip( const ccVertex2F *triStrip, const ccVertex2F *texCo
 	[tshader_ setUniformForModelViewProjectionMatrix];    
 	//[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color.r count:1];
     
-	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
-    
     CC_PROFILER_START(@"Drawing textured tristrip");
     
     //ccGLBlendFunc( blendFunc.src, blendFunc.dst );
     
 	// we have a pointer to vertex points so enable client state
 	ccGLBindTexture2D( [texture name] );
+    
+    // when texture area is small, bilinear filter the closest mipmap
+ //   glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
+    // when texture area is large, bilinear filter the original
+ //   glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+    
+    // Make the texture repeat
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
 	
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
     

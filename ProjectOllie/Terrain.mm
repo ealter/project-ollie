@@ -7,8 +7,32 @@
 //
 
 #import "Terrain.h"
+#import "ccMacros.h"
+/*
+//from ccsprite.h
+#import "CCNode.h"
+#import "CCProtocols.h"
+#import "CCTextureAtlas.h"
 
-
+//from ccsprite.m
+#import "ccConfig.h"
+#import "CCSpriteBatchNode.h"
+#import "CCSprite.h"
+#import "CCSpriteFrame.h"
+#import "CCSpriteFrameCache.h"
+#import "CCAnimation.h"
+#import "CCAnimationCache.h"
+#import "CCTextureCache.h"
+#import "CCDrawingPrimitives.h"
+#import "CCShaderCache.h"
+#import "ccGLStateCache.h"
+#import "CCGLProgram.h"
+#import "CCDirector.h"
+#import "CGPointExtension.h"
+#import "TransformUtils.h"
+#import "CCProfiling.h"
+#import "OpenGL_Internal.h"
+*/
 @implementation Terrain
 
 @synthesize texture = texture_;
@@ -18,6 +42,11 @@
     if(self = [super init])
     {
         self->texture_ = t;
+        self->triStrips.num_strips = 0;
+        self->triStrips.strip = nil;
+        self->triStrips.texCoords = nil;
+        self->land.num_contours = 0;
+        self->land.contour = nil;
     }
     return self;
 }
@@ -27,7 +56,7 @@
 {
     if (p->num_contours == 0) return;
     //Add to the current land
-    gpc_polygon* final = (gpc_polygon*) malloc(sizeof(*final));
+    gpc_polygon* final = new gpc_polygon;
     gpc_polygon_clip(GPC_UNION, &land, p, final);
     land = *final;
     delete final;
@@ -79,22 +108,27 @@
     }
     
     //Update the tristrips
-    gpc_free_tristrip(&triStrips);
-    gpc_polygon_to_textured_tristrip(&land, &triStrips, self->texture_.pixelsHigh, self->texture_.pixelsWide);	
+    //  gpc_free_tristrip(&triStrips);
+    gpc_polygon_to_textured_tristrip(&land, &triStrips, self->texture_.pixelsHigh, self->texture_.pixelsWide);
 }
 
 - (void) draw
 {
     //CC_NODE_DRAW_SETUP();
+    ccGLEnable( glServerState_ );																\
+ //   NSAssert(shaderProgram_, @"No shader program set for node: terrain");                       \
+//	[shaderProgram_ use];																		\//
+//	[shaderProgram_ setUniformForModelViewProjectionMatrix];	
     
     //Draw each of the land elements
     for (int i = 0; i < triStrips.num_strips; i++)
     {
         ccDrawTexturedTriStrip(triStrips.strip[i].vertex, 
                                triStrips.texCoords[i].vertex, 
-                               (int)triStrips.strip[i].num_vertices, 
+                               triStrips.strip[i].num_vertices, 
                                self.texture);
     }
+    
 }
 
 - (void) dealloc

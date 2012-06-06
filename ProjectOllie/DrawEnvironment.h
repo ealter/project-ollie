@@ -28,6 +28,6 @@
 
 @property (nonatomic, strong)Terrain *terrain;
 
--(gpc_polygon *)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(int) width;
+-(gpc_polygon *)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(float) width;
 +(CCScene *) scene;
 @end
