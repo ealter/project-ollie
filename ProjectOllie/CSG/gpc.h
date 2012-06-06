@@ -125,7 +125,7 @@ void gpc_free_polygon        (gpc_polygon     *polygon);
 
 void gpc_free_tristrip       (gpc_tristrip    *tristrip);
 
-//gpc_polygon* gpc_clone_to    (gpc_polygon* p, float x, float y);
+gpc_polygon* gpc_offset_clone    (gpc_polygon* p, float x, float y);
 
 #endif
 
