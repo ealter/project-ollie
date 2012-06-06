@@ -9,6 +9,9 @@
 #import "SandboxLayer.h"
 #import "AppDelegate.h"
 #import "CCAction.h"
+#import "GWCamera.h"
+#import "PhysicsSprite.h"
+
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
@@ -29,7 +32,6 @@ enum {
 @end
 
 @implementation SandboxLayer
-
 
 @synthesize center      = _center;
 @synthesize camera      = _camera;
@@ -227,10 +229,8 @@ m_debugDraw = NULL;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
-    
 
     [sprite setPhysicsBody:body];
-    
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
@@ -243,7 +243,7 @@ m_debugDraw = NULL;
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
    
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];		
+    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
 
     sprite.position = ccp( p.x, p.y); //cocos2d point
     
@@ -267,11 +267,8 @@ m_debugDraw = NULL;
    
     [sprite setPhysicsBody:body];
     [parent addChild:sprite];
-    
    
-    [self.camera followNode:sprite];    
-    
-
+    [self.camera followNode:sprite];
 }
 
 -(void) update: (ccTime) dt
@@ -289,9 +286,6 @@ m_debugDraw = NULL;
             [self.camera revertTo:self.center];
         }
     }
-
-    
-
     
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
