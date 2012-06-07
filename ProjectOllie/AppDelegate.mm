@@ -20,6 +20,7 @@
 #import "AppDelegate.h"
 #import "HelloWorldLayer.h"
 #import "SandBoxLayer.h"
+#import "CCBReader.h"
 
 
 @implementation AppController

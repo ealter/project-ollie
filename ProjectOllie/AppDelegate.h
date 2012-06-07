@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
-#import "CCBReader.h"
 
 @interface AppController : NSObject <UIApplicationDelegate, CCDirectorDelegate>
 {
