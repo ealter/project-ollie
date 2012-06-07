@@ -8,31 +8,7 @@
 
 #import "Terrain.h"
 #import "ccMacros.h"
-/*
-//from ccsprite.h
-#import "CCNode.h"
-#import "CCProtocols.h"
-#import "CCTextureAtlas.h"
 
-//from ccsprite.m
-#import "ccConfig.h"
-#import "CCSpriteBatchNode.h"
-#import "CCSprite.h"
-#import "CCSpriteFrame.h"
-#import "CCSpriteFrameCache.h"
-#import "CCAnimation.h"
-#import "CCAnimationCache.h"
-#import "CCTextureCache.h"
-#import "CCDrawingPrimitives.h"
-#import "CCShaderCache.h"
-#import "ccGLStateCache.h"
-#import "CCGLProgram.h"
-#import "CCDirector.h"
-#import "CGPointExtension.h"
-#import "TransformUtils.h"
-#import "CCProfiling.h"
-#import "OpenGL_Internal.h"
-*/
 @implementation Terrain
 
 @synthesize texture = texture_;

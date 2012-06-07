@@ -218,10 +218,10 @@
         CGPoint prevLocation = [touch previousLocationInView: [touch view]];
         
         touchLocation = [[CCDirector sharedDirector] convertToGL: touchLocation];
-        touchLocation = [self->subject_ convertToNodeSpace:touchLocation];
+
         
         prevLocation = [[CCDirector sharedDirector] convertToGL: prevLocation];
-        prevLocation = [self->subject_ convertToNodeSpace:prevLocation];
+
         
         CGPoint diff = ccpSub(touchLocation,prevLocation);
         [self panBy:diff];
@@ -234,33 +234,44 @@
      * Uses pinch to zoom and scrolling simultaneously
      */
     
+    /* PANNING */
     UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
     UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
     
     CGPoint touchLocation1 = [touch1 locationInView: [touch1 view]];   
     CGPoint prevLocation1 = [touch1 previousLocationInView: [touch1 view]];
     touchLocation1 = [[CCDirector sharedDirector] convertToGL: touchLocation1];
-    touchLocation1 = [self->subject_ convertToNodeSpace:touchLocation1];
     prevLocation1 = [[CCDirector sharedDirector] convertToGL: prevLocation1];
-    prevLocation1 = [self->subject_ convertToNodeSpace:prevLocation1];
     
     
     CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];   
     CGPoint prevLocation2 = [touch2 previousLocationInView: [touch2 view]];
     touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
-    touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
     prevLocation2 = [[CCDirector sharedDirector] convertToGL: prevLocation2];
-    prevLocation2 = [self->subject_ convertToNodeSpace:prevLocation2];
     
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
+    
+    [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
+    
+    
+    /* ZOOMING */
+    
+    touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
+    prevLocation2 = [self->subject_ convertToNodeSpace:prevLocation2];
+    touchLocation1 = [self->subject_ convertToNodeSpace:touchLocation1];
+    prevLocation1 = [self->subject_ convertToNodeSpace:prevLocation1];
+    
+    averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
+    averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
+
     
     float difScale = 
     ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
     
     CGPoint diffPos = ccpMult(averageCurrentPosition,self->subject_.scale);
     [self zoomBy:difScale atScaleCenter:diffPos];
-    [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
+
     
     
     

@@ -17,7 +17,7 @@
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
-#define PTM_RATIO 32
+#define PTM_RATIO (32)
 #define kTagPoly 10
 #define kTagBox 20
 
@@ -200,7 +200,7 @@ m_debugDraw = NULL;
     //just randomly picking one of the images
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];					
+   // PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(16 * idx,16 * idy,16,16)];					
 	
     /**
      * With the debug drawing features we have, bodies draw themselves. Not yet sure how we will texurize
@@ -210,7 +210,7 @@ m_debugDraw = NULL;
     //[parent addChild:sprite];
     // will eventually make this a piece of terrain
 
-    sprite.position = ccp( p.x, p.y); //cocos2d point
+   // sprite.position = ccp( p.x, p.y); //cocos2d point
 
     // Define the dynamic body.
     //Set up a 1m squared box in the physics world
@@ -236,7 +236,7 @@ m_debugDraw = NULL;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
 
-    [sprite setPhysicsBody:body];
+    //[sprite setPhysicsBody:body];
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
