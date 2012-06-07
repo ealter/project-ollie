@@ -10,7 +10,7 @@
 #import "CCBReader.h"
 #import "SandboxLayer.h"
 #import "DrawEnvironment.h"
-#import "ScrollingBackground.h"
+#import "Background.h"
 
 @implementation mainmenu
 

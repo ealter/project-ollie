@@ -6,10 +6,10 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "ScrollingBackground.h"
+#import "Background.h"
 
-@implementation ScrollingBackground
-@synthesize background, background2;
+@implementation Background
+@synthesize background, background2, scrollspeed;
 
 +(CCScene *) scene
 {
@@ -17,7 +17,7 @@
     CCScene *scene = [CCScene node];
     
     // 'layer' is an autorelease object.
-    ScrollingBackground *layer = [ScrollingBackground node];
+    Background *layer = [Background node];
     
     // add layer as a child to scene
     [scene addChild: layer];
@@ -26,14 +26,17 @@
     return scene;
 }
 
--(id)init
+-(id)initwithSpeed:(int) speed andImage: (NSString *) imagename
 {
     if (self = [super init]) {
+        scrollspeed = speed;
+        
+        
         //create both sprite to handle background
-        background = [CCSprite spriteWithFile:@"background.jpg"];
+        background = [CCSprite spriteWithFile:imagename];
         background.anchorPoint = ccp(0,0);
         background.position = ccp(0,0);
-        background2 = [CCSprite spriteWithFile:@"background.jpg"];
+        background2 = [CCSprite spriteWithFile:imagename];
         background2.anchorPoint = ccp(0,0);
         background2.position = ccp([background boundingBox].size.width-1, 0);
         
@@ -47,8 +50,8 @@
 }
 
 - (void) scroll:(ccTime)dt{
-    background.position = ccp( background.position.x -1, background.position.y);
-    background2.position = ccp( background2.position.x -1, background2.position.y);
+    background.position = ccp( background.position.x - scrollspeed, background.position.y);
+    background2.position = ccp( background2.position.x - scrollspeed, background2.position.y);
     
 	//reset position when they are off from view.
     if (background.position.x < -[background boundingBox].size.width ) {

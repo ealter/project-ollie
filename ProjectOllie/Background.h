@@ -9,11 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface ScrollingBackground : CCLayer 
+@interface Background : CCLayer 
 
 @property (nonatomic, retain) CCSprite *background;
 @property (nonatomic, strong) CCSprite *background2;
+@property int scrollspeed;
 
+-(id)initwithSpeed:(int) speed andImage: (NSString *) imagename;
 - (void) scroll:(ccTime)dt;
 +(CCScene *) scene;
 
