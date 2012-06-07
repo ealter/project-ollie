@@ -249,7 +249,9 @@ m_debugDraw = NULL;
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
    
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
+    float boxSize = 1.0/CC_CONTENT_SCALE_FACTOR(); //in meters
+    float pixelSize = boxSize * 32;
+    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(pixelSize * idx,pixelSize * idy,pixelSize,pixelSize)];
 
     sprite.position = ccp( p.x, p.y); //cocos2d point
     
@@ -262,7 +264,7 @@ m_debugDraw = NULL;
     
     // Define another box shape for our dynamic body.
     b2PolygonShape dynamicBox;
-    dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
+    dynamicBox.SetAsBox(.5f * boxSize, .5f * boxSize);//These are mid points for our 1m box
 
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
