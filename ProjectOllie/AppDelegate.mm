@@ -21,6 +21,7 @@
 #import "HelloWorldLayer.h"
 #import "SandBoxLayer.h"
 
+
 @implementation AppController
 
 @synthesize window=window_, navController=navController_, director=director_;
@@ -39,6 +40,8 @@
 									sharegroup:nil
 								 multiSampling:NO
 							   numberOfSamples:0];
+    
+    [glView setMultipleTouchEnabled:YES];
 	
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
@@ -99,6 +102,12 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [SandboxLayer scene]]; 
 	[director_ pushScene:scene];
+    
+    
+    
+    
+    
+    
 	return YES;
 }
 
@@ -107,6 +116,7 @@
 {
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
+
 
 
 // getting a call, pause the game

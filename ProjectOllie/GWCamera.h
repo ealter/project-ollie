@@ -8,13 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "CCNode.h"
-
+#import "cocos2d.h"
 
 @interface GWCamera : NSObject
 {
     CCNode* subject_; //The world we are observing
-
-
 }
 
 @property (assign, nonatomic) bool isChanging;          // Tells whether or not camera is transitioning
@@ -24,6 +22,8 @@
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
                                                         // used for shaking effects currently.
 
+@property (assign, nonatomic) CGPoint zoomOrigin;       // used as the origin for camera zooming. 
+
 /* Inits the camera with a world and its dimensions */
 -(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
 
@@ -31,7 +31,13 @@
 -(void)followNode:(CCNode*)focused;
 
 /* Moves the camera to a given location directly */
--(void)panTo:(CGPoint)location;
+-(void)panBy:(CGPoint)diff;
+
+/* Pans to a given destination */
+-(void)panTo:(CGPoint)dest;
+
+/* Changes zoom by given amount */
+-(void)zoomBy:(float)diff atScaleCenter:(CGPoint)scaleCenter;
 
 /* Reverts camera to default zoom settings at a given location */
 -(void)revertTo:(CCNode*)center;
@@ -41,5 +47,14 @@
 
 /* Updates camera values */
 -(void)update:(float)dt;
+
+/* Handles touches beginning */
+-(void)touchesBegan:(NSSet *)touches;
+
+/* Handles touches moving */
+-(void)touchesMoved:(NSSet *)touches;
+
+/* Handles touches beginning */
+-(void)touchesEnded:(NSSet *)touches;
 
 @end

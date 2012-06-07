@@ -8,7 +8,7 @@
 
 #import "SandboxLayer.h"
 #import "AppDelegate.h"
-#import "CCAction.h"
+
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
@@ -16,6 +16,7 @@
 #define PTM_RATIO 32
 #define kTagPoly 10
 #define kTagBox 20
+
 
 enum {
 	kTagParentNode = 1,
@@ -26,10 +27,11 @@ enum {
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
 -(void) followCenter;
+-(void) handleOneFingerMotion:(NSSet *)touches;
+-(void) handleTwoFingerMotion:(NSSet *)touches;
 @end
 
 @implementation SandboxLayer
-
 
 @synthesize center      = _center;
 @synthesize camera      = _camera;
@@ -54,8 +56,10 @@ enum {
 {
     if( (self=[super init])) {
         
+        self.anchorPoint = ccp(0,0);
+        
         //keep track of camera motion
-        s = [CCDirector sharedDirector].winSize;
+        s = CGSizeMake([CCDirector sharedDirector].winSize.width*2,[CCDirector sharedDirector].winSize.height*2);
         
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
@@ -96,9 +100,13 @@ enum {
         
         [self addChild:self.center];
         [self scheduleUpdate];
+        
+        
+        
     }
     return self;
 }
+
 
 -(void) dealloc
 {
@@ -144,25 +152,21 @@ m_debugDraw = NULL;
     // from a pool and creates the ground box shape (also from a pool).
     // The body is also added to the world.
     b2Body* groundBody = world->CreateBody(&groundBodyDef);
-
-    // Define the ground box shape.
-    b2EdgeShape groundBox;		
-
-    // bottom
-    groundBox.Set(b2Vec2(0,0), b2Vec2(s.width/PTM_RATIO,0));
-    groundBody->CreateFixture(&groundBox,0);
-
-    // top
-    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO));
-    groundBody->CreateFixture(&groundBox,0);
-
-    // left
-    groundBox.Set(b2Vec2(0,s.height/PTM_RATIO), b2Vec2(0,0));
-    groundBody->CreateFixture(&groundBox,0);
-
-    // right
-    groundBox.Set(b2Vec2(s.width/PTM_RATIO,s.height/PTM_RATIO), b2Vec2(s.width/PTM_RATIO,0));
-    groundBody->CreateFixture(&groundBox,0);
+    
+    // Define the shape for our static body.
+    b2ChainShape dynamicBox;
+    b2Vec2 vs[4];
+    vs[0].Set(0,0);
+    vs[1].Set(s.width/PTM_RATIO,0);
+    vs[2].Set(s.width/PTM_RATIO,s.height/PTM_RATIO);
+    vs[3].Set(0,s.height/PTM_RATIO);
+    dynamicBox.CreateLoop(vs, 4);
+    // Define the dynamic body fixture.
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &dynamicBox;	
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.3f;
+    groundBody->CreateFixture(&fixtureDef);
 }
 
 -(void) draw
@@ -307,12 +311,19 @@ m_debugDraw = NULL;
 	[self.camera update:dt];
 }
 
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
 
-                          
+    [self.camera touchesBegan:[event allTouches]];
+    
+        
+    
+}
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
+
     //Add a new body/atlas sprite at the touched location
+  
     for( UITouch *touch in touches ) {
         CGPoint location = [touch locationInView: [touch view]];
         
@@ -325,7 +336,32 @@ m_debugDraw = NULL;
            [self addNewSpriteAtPosition: location];
         [self.camera addIntensity:6.f];
     }
+    
 }
+
+
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.camera touchesMoved:[event allTouches]];
+
+}
+
+-(void)handleOneFingerMotion:(NSSet *)touches
+{
+
+    
+}
+-(void)handleTwoFingerMotion:(NSSet *)touches
+{
+
+        
+    
+}
+
+
+
+
 
 @end
 
