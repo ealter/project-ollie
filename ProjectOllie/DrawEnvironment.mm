@@ -118,7 +118,8 @@
     location = [self convertToNodeSpace:location];
     
     //makes sure the circles are far enough away to merit new circle
-    if (sqrt((location.x-prevpoint.x)*(location.x-prevpoint.x)+(location.y-prevpoint.y)*(location.y-prevpoint.y))>10)
+    
+    if (ccpDistanceSQ(location, prevpoint)>4)
     {
         gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
         [terrain addPolygon:newcircle];
