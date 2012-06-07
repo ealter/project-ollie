@@ -38,6 +38,7 @@ Copyright: (C) Advanced Interfaces Group,
 */
 
 #include "gpc.h"
+//#include <assert.h>
 #include <stdlib.h>
 #include <float.h>
 #include <math.h>
@@ -672,7 +673,7 @@ static void add_st_edge(st_node **st, it_node **it, edge_node *edge,
 
     /* If new edge and ST edge don't cross */
     if ((edge->xt >= (*st)->xt) || (edge->dx == (*st)->dx) || 
-        (fabs(den) <= DBL_EPSILON))
+        (fabs(den) <= FLT_EPSILON))
     {
       /* No intersection - insert edge here (before the ST edge) */
       existing_node= *st;
@@ -934,10 +935,10 @@ static bbox *create_contour_bboxes(gpc_polygon *p)
   for (c= 0; c < p->num_contours; c++)
   {
     /* Initialise bounding box extent */
-    box[c].xmin= DBL_MAX;
-    box[c].ymin= DBL_MAX;
-    box[c].xmax= -DBL_MAX;
-    box[c].ymax= -DBL_MAX;
+    box[c].xmin= FLT_MAX;
+    box[c].ymin= FLT_MAX;
+    box[c].xmax= -FLT_MAX;
+    box[c].ymax= -FLT_MAX;
 
     for (v= 0; v < p->contour[c].num_vertices; v++)
     {
@@ -1068,8 +1069,8 @@ void gpc_write_polygon(FILE *fp, int write_hole_flags, gpc_polygon *p)
     
     for (v= 0; v < p->contour[c].num_vertices; v++)
       fprintf(fp, "% .*lf % .*lf\n",
-              DBL_DIG, p->contour[c].vertex[v].x,
-              DBL_DIG, p->contour[c].vertex[v].y);
+              FLT_DIG, p->contour[c].vertex[v].x,
+              FLT_DIG, p->contour[c].vertex[v].y);
   }
 }
 
@@ -1209,7 +1210,7 @@ void gpc_polygon_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
     }
 
     /* Set dummy previous x value */
-    px= -DBL_MAX;
+    px= -FLT_MAX;
 
     /* Create bundles within AET */
     e0= aet;
@@ -1793,8 +1794,8 @@ void gpc_polygon_to_textured_tristrip (gpc_polygon     *s,
         MALLOC(t->texCoords[i].vertex, t->texCoords[i].num_vertices * sizeof(ccVertex2F), "texCoord creation", ccVertex2F);
         for (int j = 0; j < t->texCoords[i].num_vertices; j++)
         {
-            t->texCoords[i].vertex->x = t->strip[i].vertex[j].x / texWidth;
-            t->texCoords[i].vertex->y = t->strip[i].vertex[j].y / texHeight;
+            t->texCoords[i].vertex[j].x = t->strip[i].vertex[j].x / texWidth;
+            t->texCoords[i].vertex[j].y = t->strip[i].vertex[j].y / texHeight;
         }
     }
 }
@@ -1888,7 +1889,7 @@ void gpc_tristrip_clip(gpc_op op, gpc_polygon *subj, gpc_polygon *clip,
     }
 
     /* Set dummy previous x value */
-    px= -DBL_MAX;
+    px= -FLT_MAX;
 
     /* Create bundles within AET */
     e0= aet;
@@ -2507,7 +2508,7 @@ bool gpc_intersects (gpc_polygon *a, gpc_polygon *b)
 gpc_polygon* gpc_offset_clone    (gpc_polygon* p, float x, float y)
 {
     gpc_polygon* clone;
-    MALLOC(clone, sizeof(*clone), "offset clone: gpc_poly", gpc_polygon);
+    MALLOC(clone, sizeof(gpc_polygon), "offset clone: gpc_poly", gpc_polygon);
     clone->num_contours = p->num_contours;
     MALLOC(clone->contour, sizeof(vertex_list) * clone->num_contours, "offset clone: contours", vertex_list);
     MALLOC(clone->hole, sizeof(int) * clone->num_contours, "offset clone: holes", int);

@@ -9,11 +9,9 @@
 #import <GameKit/GameKit.h>
 
 // When you import this file, you import all the cocos2d classes
-#import "cocos2d.h"
-#import "Box2D.h"
 #import "GLES-Render.h"
-#import "PhysicsSprite.h"
-#import "GWCamera.h"
+
+@class GWCamera;
 
 @interface SandboxLayer : CCLayer <UIGestureRecognizerDelegate>
 {
@@ -23,12 +21,9 @@
     CGSize s;
 }
 
-
 @property (strong, nonatomic) CCNode* center;
 @property (strong, nonatomic) GWCamera* camera;
 @property (assign, nonatomic) CGSize windowSize;
-
-
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;

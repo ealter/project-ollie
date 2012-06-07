@@ -10,6 +10,7 @@
 #import "CCBReader.h"
 #import "SandboxLayer.h"
 #import "DrawEnvironment.h"
+#import "ScrollingBackground.h"
 
 @implementation mainmenu
 
@@ -21,7 +22,7 @@
 
 -(void)pressedDraw:(id)sender
 {
-    CCScene* scene = [DrawEnvironment node];
+    CCScene* scene = [DrawEnvironment scene];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
