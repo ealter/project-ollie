@@ -11,11 +11,10 @@
 
 @interface Background : CCLayer 
 
-@property (nonatomic, retain) CCSprite *background;
-@property (nonatomic, strong) CCSprite *background2;
-@property int scrollspeed;
+@property (nonatomic, copy) NSString *imageName;
+@property float scrollSpeed;
 
--(id)initwithSpeed:(int) speed andImage: (NSString *) imagename;
+-(id)initwithSpeed:(int)speed andImage:(NSString *)imagename;
 - (void) scroll:(ccTime)dt;
 +(CCScene *) scene;
 
