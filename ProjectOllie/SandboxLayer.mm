@@ -11,7 +11,7 @@
 #import "CCAction.h"
 #import "GWCamera.h"
 #import "PhysicsSprite.h"
-
+#import "Background.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -71,8 +71,6 @@ enum {
         self.center.position = ccp(s.width/2, s.height/2);
         [self.camera revertTo:self.center];
         
-
-        
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
@@ -94,6 +92,10 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
+        Background *blayer = [Background node];
+        [blayer initwithSpeed:3 andImage:@"background.jpg"];
+        [self addChild:blayer];
+        [self reorderChild:blayer z:-1];
         
         [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
         
