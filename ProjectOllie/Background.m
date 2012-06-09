@@ -28,6 +28,7 @@
 - (void)initBackgroundsWithNames:(NSArray *)imageNames
 {
     assert(imageNames.count > 0);
+    assert(self.boundingBox.size.width > 0 && self.boundingBox.size.height > 0);
     self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
     
     NSMutableArray *batchNodes = [[NSMutableArray alloc]initWithCapacity:imageNames.count];
