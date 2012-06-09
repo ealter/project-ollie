@@ -17,7 +17,6 @@
 @property (nonatomic, retain) NSMutableArray *backgrounds;
 
 - (void)initBackgroundsWithNames:(NSArray *)imageNames;
-- (NSMutableArray *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset;
 
 @end
 
@@ -29,33 +28,33 @@
 {
     self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
     
+    NSMutableArray *batchNodes = [[NSMutableArray alloc]initWithCapacity:imageNames.count];
+    for(NSString *imageName in imageNames) {
+        CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:imageName capacity:2];
+        [self addChild:parent];
+        [batchNodes addObject:parent];
+    }
     CGFloat offset = 0;
     int imageIndex = 0;
     CGFloat maxWidth = 0;
     while(offset <= self.boundingBox.size.width + maxWidth || imageIndex != 0) {
-        NSMutableArray *background = [self initBackground:[imageNames objectAtIndex:imageIndex] atOffset:offset];
-        float imageWidth = [(CCSprite *)background.lastObject boundingBox].size.width;
+        NSMutableArray *verticalTiling = [[NSMutableArray alloc]init];
+        float backgroundHeight;
+        for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
+            CCSprite *background = [CCSprite spriteWithFile:[imageNames objectAtIndex:imageIndex]];
+            backgroundHeight = background.boundingBox.size.height;
+            background.anchorPoint = ccp(0,0);
+            background.position = ccp(offset, y);
+            [verticalTiling addObject:background];
+            [[batchNodes objectAtIndex:imageIndex] addChild:background];
+        }
+        [self.backgrounds addObject:verticalTiling];
+        
+        float imageWidth = [(CCSprite *)verticalTiling.lastObject boundingBox].size.width;
         offset += imageWidth;
         if(imageWidth > maxWidth) maxWidth = imageWidth;
         imageIndex = (imageIndex + 1) % [imageNames count];
     }
-}
-
-- (NSMutableArray *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset
-{
-    NSMutableArray *verticalTiling = [[NSMutableArray alloc]init];
-    
-    float backgroundHeight;
-    for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
-        CCSprite *background = [CCSprite spriteWithFile:imageName];
-        backgroundHeight = background.boundingBox.size.height;
-        background.anchorPoint = ccp(0,0);
-        background.position = ccp(offset, y);
-        [verticalTiling addObject:background];
-        [self addChild:background];
-    }
-    [self.backgrounds addObject:verticalTiling];
-    return verticalTiling;
 }
 
 + (CCScene *)scene
