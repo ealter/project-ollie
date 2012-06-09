@@ -26,7 +26,6 @@
 		C52986C31578A43300656B50 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AD1578A43300656B50 /* unzip.c */; };
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
-		C54A05F01581518D00D7B369 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C54A05DC1581518D00D7B369 /* Info.plist */; };
 		C54A05F6158151A100D7B369 /* blocks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C54A05F5158151A100D7B369 /* blocks-hd.png */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
@@ -1477,7 +1476,6 @@
 				CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */,
 				CEFB2C50157D7655008A808D /* treez.png in Resources */,
 				CE41261C157FFB67001FA126 /* background.jpg in Resources */,
-				C54A05F01581518D00D7B369 /* Info.plist in Resources */,
 				C54A05F6158151A100D7B369 /* blocks-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
