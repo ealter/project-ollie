@@ -10,13 +10,14 @@
 
 @interface Background ()
 
-/* An array of CGSprite *'s with the same image
-   Invariant: The images are in order of left to right
+/* Each index in the array points to an NSMutableArray of identical CGSprite's.
+ * Each of those CGSprite's has the same x position and are tiled vertically.
+ * Invariant: The images in backgrounds are in order of left to right
  */
 @property (nonatomic, retain) NSMutableArray *backgrounds;
 
 - (void)initBackgroundsWithNames:(NSArray *)imageNames;
-- (CCSprite *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset;
+- (NSMutableArray *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset;
 
 @end
 
@@ -32,22 +33,29 @@
     int imageIndex = 0;
     CGFloat maxWidth = 0;
     while(offset <= self.boundingBox.size.width + maxWidth || imageIndex != 0) {
-        CCSprite *background = [self initBackground:[imageNames objectAtIndex:imageIndex] atOffset:offset];
-        float imageWidth = background.boundingBox.size.width;
+        NSMutableArray *background = [self initBackground:[imageNames objectAtIndex:imageIndex] atOffset:offset];
+        float imageWidth = [(CCSprite *)background.lastObject boundingBox].size.width;
         offset += imageWidth;
         if(imageWidth > maxWidth) maxWidth = imageWidth;
         imageIndex = (imageIndex + 1) % [imageNames count];
     }
 }
 
-- (CCSprite *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset
+- (NSMutableArray *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset
 {
-    CCSprite *background = [CCSprite spriteWithFile:imageName];
-    background.anchorPoint = ccp(0,0);
-    background.position = ccp(offset, 0);
-    [self.backgrounds addObject:background];
-    [self addChild:background];
-    return background;
+    NSMutableArray *verticalTiling = [[NSMutableArray alloc]init];
+    
+    float backgroundHeight;
+    for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
+        CCSprite *background = [CCSprite spriteWithFile:imageName];
+        backgroundHeight = background.boundingBox.size.height;
+        background.anchorPoint = ccp(0,0);
+        background.position = ccp(offset, y);
+        [verticalTiling addObject:background];
+        [self addChild:background];
+    }
+    [self.backgrounds addObject:verticalTiling];
+    return verticalTiling;
 }
 
 + (CCScene *)scene
@@ -72,13 +80,18 @@
 - (void) scroll:(ccTime)dt{
     int numBackgrounds = self.backgrounds.count;
     for(int i=0; i<numBackgrounds; i++) {
-        CCSprite *background = [self.backgrounds objectAtIndex:i];
-        background.position = ccp(background.position.x - self.scrollSpeed, background.position.y);
+        NSMutableArray *backgroundTiled = [self.backgrounds objectAtIndex:i];
+        CCSprite *background = [backgroundTiled lastObject];
+        for(CCSprite *background in backgroundTiled)
+            background.position = ccp(background.position.x - self.scrollSpeed, background.position.y);
         if(background.position.x + background.boundingBox.size.width < 0) {
             int index = i-1;
             if(index < 0) index += numBackgrounds;
-            CCSprite *leftBackground  = [self.backgrounds objectAtIndex:index];
-            background.position = ccp(leftBackground.position.x + leftBackground.boundingBox.size.width, background.position.y);
+            CCSprite *leftBackground  = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
+            background = nil;
+            for(CCSprite *background in backgroundTiled) {
+                background.position = ccp(leftBackground.position.x + leftBackground.boundingBox.size.width, background.position.y);
+            }
         }
     }
 }
