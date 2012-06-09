@@ -15,61 +15,54 @@
  */
 @property (nonatomic, retain) NSMutableArray *backgrounds;
 
-- (void)initBackgrounds;
-- (void)initBackground:(CCSprite *)background atOffset:(CGFloat)offset;
+- (void)initBackgroundsWithNames:(NSArray *)imageNames;
+- (CCSprite *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset;
 
 @end
 
 @implementation Background
 @synthesize scrollSpeed = _scrollSpeed;
-@synthesize imageName = _imageName;
 @synthesize backgrounds = _backgrounds;
 
-- (void)initBackgrounds {
-    //create both sprite to handle background
+- (void)initBackgroundsWithNames:(NSArray *)imageNames
+{
     self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
     
     CGFloat offset = 0;
-    while(offset < self.boundingBox.size.width) {
-        CCSprite *background = [CCSprite spriteWithFile:self.imageName];
-        [self initBackground:background atOffset:offset];
-        offset += background.boundingBox.size.width;
+    int imageIndex = 0;
+    CGFloat maxWidth = 0;
+    while(offset <= self.boundingBox.size.width + maxWidth || imageIndex != 0) {
+        CCSprite *background = [self initBackground:[imageNames objectAtIndex:imageIndex] atOffset:offset];
+        float imageWidth = background.boundingBox.size.width;
+        offset += imageWidth;
+        if(imageWidth > maxWidth) maxWidth = imageWidth;
+        imageIndex = (imageIndex + 1) % [imageNames count];
     }
-    //Repeat so that we have overflow
-    CCSprite *background = [CCSprite spriteWithFile:self.imageName];
-    [self initBackground:background atOffset:offset];
-    offset += background.boundingBox.size.width;
 }
 
-- (void)initBackground:(CCSprite *)background atOffset:(CGFloat)offset
+- (CCSprite *)initBackground:(NSString *)imageName atOffset:(CGFloat)offset
 {
+    CCSprite *background = [CCSprite spriteWithFile:imageName];
     background.anchorPoint = ccp(0,0);
     background.position = ccp(offset, 0);
     [self.backgrounds addObject:background];
     [self addChild:background];
+    return background;
 }
 
-- (NSMutableArray *)backgrounds {
-    if(!_backgrounds) {
-        [self initBackgrounds];
-    }
-    return _backgrounds;
-}
-
-+(CCScene *) scene
++ (CCScene *)scene
 {
     CCScene *scene = [CCScene node];
     [scene addChild: [self node]];
     return scene;
 }
 
--(id)initwithSpeed:(int) speed andImage: (NSString *) imageName
+- (id)initWithSpeed:(int)speed images:(NSArray *)imageNames
 {
     if (self = [super init]) {
         self.scrollSpeed = speed;
-        self.imageName = imageName;
         
-        [self initBackgrounds];
+        [self initBackgroundsWithNames:imageNames];
         //add schedule to move backgrounds
         [self schedule:@selector(scroll:) interval:0.005];
     }
@@ -81,7 +74,7 @@
     for(int i=0; i<numBackgrounds; i++) {
         CCSprite *background = [self.backgrounds objectAtIndex:i];
         background.position = ccp(background.position.x - self.scrollSpeed, background.position.y);
-        if(background.position.x < -background.boundingBox.size.width) {
+        if(background.position.x + background.boundingBox.size.width < 0) {
             int index = i-1;
             if(index < 0) index += numBackgrounds;
             CCSprite *leftBackground  = [self.backgrounds objectAtIndex:index];

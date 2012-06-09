@@ -63,7 +63,7 @@ enum {
         self.anchorPoint = ccp(0,0);
         
         //keep track of camera motion
-        s = CGSizeMake([CCDirector sharedDirector].winSize.width*2,[CCDirector sharedDirector].winSize.height*2);
+        s = CGSizeMake([CCDirector sharedDirector].winSize.width,[CCDirector sharedDirector].winSize.height);
         
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
@@ -93,7 +93,7 @@ enum {
         [self addChild:parent z:0 tag:kTagParentNode];
         
         Background *blayer = [Background node];
-        [blayer initwithSpeed:3 andImage:@"background.jpg"];
+        [blayer initWithSpeed:3 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
         [self addChild:blayer];
         [self reorderChild:blayer z:-1];
         
