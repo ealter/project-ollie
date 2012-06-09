@@ -8,48 +8,45 @@
 
 #import "Background.h"
 
+
 @implementation Background
-@synthesize background, background2, scrollspeed;
+@synthesize scrollspeed = _scrollspeed;
+@synthesize parallax    = _parallax;
 
-+(CCScene *) scene
-{
-    // 'scene' is an autorelease object.
-    CCScene *scene = [CCScene node];
-    
-    // 'layer' is an autorelease object.
-    Background *layer = [Background node];
-    
-    // add layer as a child to scene
-    [scene addChild: layer];
-    
-    // return the scene
-    return scene;
-}
 
--(id)initwithSpeed:(int) speed andImage: (NSString *) imagename
+-(id)initwithSpeed:(float) speed
 {
     if (self = [super init]) {
-        scrollspeed = speed;
+        self.scrollspeed = speed;
+        self.parallax    = [CCParallaxNode node];
+        CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
+        bglayer1.scale = 3.f;
         
         
+        
+        [self.parallax addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:CGPointZero];
         //create both sprite to handle background
+        /*
         background = [CCSprite spriteWithFile:imagename];
         background.anchorPoint = ccp(0,0);
         background.position = ccp(0,0);
         background2 = [CCSprite spriteWithFile:imagename];
         background2.anchorPoint = ccp(0,0);
         background2.position = ccp([background boundingBox].size.width-1, 0);
+        */
         
         //add them to main layer
-        [self addChild:background];
-        [self addChild:background2];
+        //[self addChild:background];
+        //[self addChild:background2];
         //add schedule to move backgrounds
-        [self schedule:@selector(scroll:) interval:0.005];
+        // [self schedule:@selector(scroll:) interval:0.005];
     }
     return self;
 }
 
+
 - (void) scroll:(ccTime)dt{
+    /*
     background.position = ccp( background.position.x - scrollspeed, background.position.y);
     background2.position = ccp( background2.position.x - scrollspeed, background2.position.y);
     
@@ -60,7 +57,7 @@
     
 	if (background2.position.x < -[background2 boundingBox].size.width ) {
         background2.position = ccp(background.position.x+[background boundingBox].size.width, background2.position.y);
-    }
+    }*/
     
 }
 

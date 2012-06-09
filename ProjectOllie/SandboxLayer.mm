@@ -11,6 +11,7 @@
 #import "CCAction.h"
 #import "GWCamera.h"
 #import "PhysicsSprite.h"
+#import "Background.h"
 
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
@@ -27,6 +28,7 @@ enum {
 };
 
 @interface SandboxLayer()
+
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
@@ -60,18 +62,23 @@ enum {
 {
     if( (self=[super init])) {
         
-        self.anchorPoint = ccp(0,0);
+        self.anchorPoint = ccp(.5f,.5f);
         
         //keep track of camera motion
-        s = CGSizeMake([CCDirector sharedDirector].winSize.width*2,[CCDirector sharedDirector].winSize.height*2);
-        
+        s = self.contentSize;
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
         [self.camera revertTo:self.center];
         
-
+        //set up parallax
+        parallax_ = [CCParallaxNode node];
+        CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
+        bglayer1.scale = 2.f;
+        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:self.center.position];
+        
+        [self addChild:parallax_ z:-1];
         
         // enable events
         self.isTouchEnabled = YES;
@@ -328,9 +335,9 @@ m_debugDraw = NULL;
         location = [self convertToNodeSpace:location];
         
         CGRect bounds = CGRectMake(0, 0, s.width, s.height);
-        if(CGRectContainsPoint(bounds, location))
-           [self addNewSpriteAtPosition: location];
-        [self.camera addIntensity:6.f];
+      //  if(CGRectContainsPoint(bounds, location))
+        //   [self addNewSpriteAtPosition: location];
+        //[self.camera addIntensity:6.f];
     }
     
 }
@@ -339,8 +346,8 @@ m_debugDraw = NULL;
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    [self.camera touchesMoved:[event allTouches]];
-
+   [self.camera touchesMoved:[event allTouches]];
+    
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches
