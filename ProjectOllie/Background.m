@@ -8,6 +8,7 @@
 
 #import "Background.h"
 
+
 @interface Background ()
 
 /* Each index in the array points to an NSMutableArray of identical CGSprite's.
@@ -26,6 +27,7 @@
 
 - (void)initBackgroundsWithNames:(NSArray *)imageNames
 {
+    assert(imageNames.count > 0);
     self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
     
     NSMutableArray *batchNodes = [[NSMutableArray alloc]initWithCapacity:imageNames.count];
@@ -51,17 +53,11 @@
         [self.backgrounds addObject:verticalTiling];
         
         float imageWidth = [(CCSprite *)verticalTiling.lastObject boundingBox].size.width;
+        assert(imageWidth > 0);
         offset += imageWidth;
         if(imageWidth > maxWidth) maxWidth = imageWidth;
         imageIndex = (imageIndex + 1) % [imageNames count];
     }
-}
-
-+ (CCScene *)scene
-{
-    CCScene *scene = [CCScene node];
-    [scene addChild: [self node]];
-    return scene;
 }
 
 - (id)initWithSpeed:(int)speed images:(NSArray *)imageNames
@@ -93,6 +89,7 @@
             }
         }
     }
+
 }
 
 @end

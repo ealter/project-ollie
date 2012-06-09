@@ -19,11 +19,13 @@
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
     CGSize s;
+    CCParallaxNode* parallax_;
 }
 
 @property (strong, nonatomic) CCNode* center;
 @property (strong, nonatomic) GWCamera* camera;
 @property (assign, nonatomic) CGSize windowSize;
+
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;

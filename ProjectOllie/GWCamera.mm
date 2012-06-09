@@ -39,6 +39,9 @@
 @synthesize target          = _target;
 @synthesize actionIntensity = _actionIntensity;
 @synthesize zoomOrigin      = _zoomOrigin;
+@synthesize maximumScale    = _maximumScale;
+@synthesize minimumScale    = _minimumScale;
+@synthesize defaultScale    = _defaultScale;
 
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
     
@@ -51,6 +54,9 @@
         self.actionIntensity = 0;
         self->actionCount = 0;
         self.zoomOrigin = ccp(0,0);
+        self.maximumScale = 3.f;
+        self.minimumScale = .85f;
+        self.defaultScale = 1.f;
 
     }
     return self;
@@ -71,7 +77,7 @@
     id eMotion = [CCCallFunc actionWithTarget:self selector:@selector(endMotion)];
 
     id moveFollow = [CCSequence actions:bMotion,follow,eMotion,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.44f scale:1.3f]];
+    [self->subject_ runAction:[CCScaleTo actionWithDuration:.44f scale:2.f]];
     [self->subject_ runAction:moveFollow];
 }
 
@@ -88,7 +94,7 @@
     id eMotion = [CCCallFunc actionWithTarget:self selector:@selector(endMotion)];
     
     id moveFollow = [CCSequence actions:bMotion,follow,eMotion,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.5f scale:1.f]];
+    [self->subject_ runAction:[CCScaleTo actionWithDuration:.44f scale:self.defaultScale]];
     [self->subject_ runAction:moveFollow];
     
 }
@@ -117,17 +123,20 @@
     float scale = self->subject_.scale;
     
     // Set the scale.
-    [self->subject_ setScale: scale*diff];
+    float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
+    [self->subject_ setScale: newScale];
     
     //translate by zoom amount
     CGPoint currentUpdatedOrigin = ccpMult(self.zoomOrigin, self->subject_.scale);
-    [self panBy:ccpSub(scaleCenter, currentUpdatedOrigin)];
+    //[self panBy:ccpSub(scaleCenter, currentUpdatedOrigin)];
+    //[subject_ setAnchorPoint:ccpSub(scaleCenter, currentUpdatedOrigin)];
+    
 }
 
 -(void)createShakeEffect:(float)dt{
     
         //the shakeRate will determine the weight given to dt
-        float shakeRate = 70;
+        float shakeRate = 60;
         actionCount+=dt*shakeRate;
         
         //modulo the total action count around 360 degrees
@@ -235,6 +244,7 @@
      */
     
     /* PANNING */
+    
     UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
     UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
     
@@ -252,8 +262,8 @@
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
     
-    [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
-    
+    //[self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
+
     
     /* ZOOMING */
     
@@ -265,6 +275,9 @@
     averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
 
+    CGPoint newAnchor = 
+    ccp(averageCurrentPosition.x/subject_.contentSize.width,averageCurrentPosition.y/subject_.contentSize.height);
+    [subject_ setAnchorPoint:newAnchor];
     
     float difScale = 
     ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
