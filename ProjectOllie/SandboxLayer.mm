@@ -30,7 +30,7 @@ enum {
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
--(void) followCenter;
+//-(void) followCenter;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 @end
@@ -196,12 +196,14 @@ m_debugDraw = NULL;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p
 {
     CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+#if 0
     CCNode *parent = [self getChildByTag:kTagParentNode];
 
     //We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
     //just randomly picking one of the images
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
+#endif
    // PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(16 * idx,16 * idy,16,16)];					
 	
     /**
