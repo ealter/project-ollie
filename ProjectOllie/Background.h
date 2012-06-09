@@ -11,8 +11,7 @@
 
 @interface Background : CCNode 
 
-@property (strong, nonatomic) CCParallaxNode* parallax;
-@property (assign, nonatomic) float scrollspeed;
+@property (assign, nonatomic) float scrollSpeed;
 
 -(id)initwithSpeed:(float) speed;
 - (void) scroll:(ccTime)dt;

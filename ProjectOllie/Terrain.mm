@@ -118,22 +118,22 @@
 
 + (Terrain*) generateRandomOneIsland
 {
-    
+    return nil;
 }
 
 + (Terrain*) generateRandomTwoIsland
 {
-    
+    return nil;
 }
 
 + (Terrain*) generateRandomBlobs
 {
-    
+    return nil;
 }
 
 + (Terrain*) generateRandomCavern
 {
-    
+    return nil;
 }
 
 @end

@@ -32,7 +32,7 @@ enum {
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
--(void) followCenter;
+//-(void) followCenter;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 @end
@@ -65,13 +65,16 @@ enum {
         self.anchorPoint = ccp(.5f,.5f);
         
         //keep track of camera motion
+
         s = self.contentSize;
+
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
         [self.camera revertTo:self.center];
         
+
         //set up parallax
         parallax_ = [CCParallaxNode node];
         CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
@@ -80,6 +83,7 @@ enum {
         
         [self addChild:parallax_ z:-1];
         
+
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
@@ -101,6 +105,10 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
+        Background *blayer = [Background node];
+        [blayer initWithSpeed:3 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
+        [self addChild:blayer];
+        [self reorderChild:blayer z:-1];
         
         [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
         
@@ -201,12 +209,14 @@ m_debugDraw = NULL;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p
 {
     CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+#if 0
     CCNode *parent = [self getChildByTag:kTagParentNode];
 
     //We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
     //just randomly picking one of the images
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
+#endif
    // PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(16 * idx,16 * idy,16,16)];					
 	
     /**
