@@ -77,9 +77,11 @@ enum {
 
         //set up parallax
         parallax_ = [CCParallaxNode node];
+#if 0
         CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
         bglayer1.scale = 2.f;
         [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:self.center.position];
+#endif
         
         [self addChild:parallax_ z:-1];
         

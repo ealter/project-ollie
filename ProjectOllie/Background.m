@@ -68,7 +68,7 @@
         
         [self initBackgroundsWithNames:imageNames];
         //add schedule to move backgrounds
-        [self schedule:@selector(scroll:) interval:0.005];
+        [self schedule:@selector(scroll:)];
     }
     return self;
 }
