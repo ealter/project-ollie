@@ -11,7 +11,7 @@
 
 @interface Background : CCLayer 
 
-@property (assign, nonatomic) float scrollSpeed; /* In pixels/second */
+@property (assign, nonatomic) float scrollSpeed; /* In pixels/second. Positive means left to right, negative means right to left. */
 
 - (id)initWithSpeed:(int)speed images:(NSArray *)imageNames;
 - (void)scroll:(ccTime)dt;

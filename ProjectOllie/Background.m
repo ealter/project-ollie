@@ -82,17 +82,28 @@
         CCSprite *background = [backgroundTiled lastObject];
         for(CCSprite *background in backgroundTiled)
             background.position = ccp(background.position.x - deltaX, background.position.y);
-        if(background.position.x + background.boundingBox.size.width < 0) {
-            int index = i-1;
-            if(index < 0) index += numBackgrounds;
-            CCSprite *leftBackground  = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
-            assert(leftBackground);
+        if((self.scrollSpeed > 0 && background.position.x + background.boundingBox.size.width < 0) ||
+           (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) {
+            CGFloat newX;
+            if(self.scrollSpeed > 0) {
+                int index = i-1;
+                if(index < 0) index += numBackgrounds;
+                CCSprite *leftBackground = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
+                assert(leftBackground);
+                newX = leftBackground.position.x + leftBackground.boundingBox.size.width;
+            }
+            else {
+                int index = i+1;
+                if(index >= numBackgrounds) index -= numBackgrounds;
+                CCSprite *rightBackground = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
+                assert(rightBackground);
+                newX = rightBackground.position.x - background.boundingBox.size.width;
+            }
             for(CCSprite *background in backgroundTiled) {
-                background.position = ccp(leftBackground.position.x + leftBackground.boundingBox.size.width, background.position.y);
+                background.position = ccp(newX, background.position.y);
             }
         }
     }
-
 }
 
 @end
