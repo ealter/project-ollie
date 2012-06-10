@@ -8,6 +8,7 @@
 
 #import "Background.h"
 
+#define BACKGROUND_IMAGE_TAG 37475912 /* Kinda random integer to avoid conflicts */
 
 @interface Background ()
 
@@ -17,24 +18,34 @@
  */
 @property (nonatomic, retain) NSMutableArray *backgrounds;
 
-- (void)initBackgroundsWithNames:(NSArray *)imageNames;
+- (void)initBackgrounds;
 
 @end
 
 @implementation Background
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
+@synthesize imageNames = _imageNames;
 
-- (void)initBackgroundsWithNames:(NSArray *)imageNames
+- (void)initBackgrounds;
 {
-    assert(imageNames.count > 0);
-    assert(self.boundingBox.size.width > 0 && self.boundingBox.size.height > 0);
+    if(self.children.count > 0)
+        [self removeChildByTag:BACKGROUND_IMAGE_TAG cleanup:YES];
+    NSArray *imageNames = self.imageNames;
+    if(imageNames.count <= 0) {
+        DebugLog(@"Warning: initBackgrounds was called and there weren't any images to use.");
+        return;
+    }
+    if(self.boundingBox.size.width <= 0 || self.boundingBox.size.height <= 0) {
+        DebugLog(@"Warning: initBackgrounds was called and the content size was 0");
+        return;
+    }
     self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
     
     NSMutableArray *batchNodes = [[NSMutableArray alloc]initWithCapacity:imageNames.count];
     for(NSString *imageName in imageNames) {
         CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:imageName capacity:2];
-        [self addChild:parent];
+        [self addChild:parent z:1 tag:BACKGROUND_IMAGE_TAG];
         [batchNodes addObject:parent];
     }
     CGFloat offset = 0;
@@ -65,12 +76,25 @@
 {
     if (self = [super init]) {
         self.scrollSpeed = speed;
+        self.imageNames = imageNames;
         
-        [self initBackgroundsWithNames:imageNames];
         //add schedule to move backgrounds
         [self schedule:@selector(scroll:)];
     }
     return self;
+}
+
+- (void)setImageNames:(NSArray *)imageNames
+{
+    _imageNames = imageNames;
+    [self initBackgrounds];
+}
+
+- (void)setContentSize:(CGSize)contentSize
+{
+    [super setContentSize:contentSize];
+    if(self.imageNames.count > 0)
+        [self initBackgrounds];
 }
 
 - (void) scroll:(ccTime)dt{
