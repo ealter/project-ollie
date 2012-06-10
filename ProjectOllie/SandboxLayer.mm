@@ -73,7 +73,6 @@ enum {
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
         [self.camera revertTo:self.center];
-        
 
         //set up parallax
         parallax_ = [CCParallaxNode node];
@@ -85,7 +84,6 @@ enum {
         
         [self addChild:parallax_ z:-1];
         
-
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
@@ -108,7 +106,7 @@ enum {
         [self addChild:parent z:0 tag:kTagParentNode];
         
         Background *blayer = [Background node];
-        [blayer initWithSpeed:3 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
+        [blayer initWithSpeed:180 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
         [self addChild:blayer];
         [self reorderChild:blayer z:-1];
         

@@ -40,7 +40,7 @@
     CGFloat offset = 0;
     int imageIndex = 0;
     CGFloat maxWidth = 0;
-    while(offset <= self.boundingBox.size.width + maxWidth || imageIndex != 0) {
+    while(offset <= self.boundingBox.size.width + maxWidth || imageIndex != 0 || self.backgrounds.count < 2) {
         NSMutableArray *verticalTiling = [[NSMutableArray alloc]init];
         float backgroundHeight;
         for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
@@ -74,17 +74,19 @@
 }
 
 - (void) scroll:(ccTime)dt{
+    if(self.scrollSpeed == 0) return;
+    float deltaX = self.scrollSpeed * dt;
     int numBackgrounds = self.backgrounds.count;
     for(int i=0; i<numBackgrounds; i++) {
         NSMutableArray *backgroundTiled = [self.backgrounds objectAtIndex:i];
         CCSprite *background = [backgroundTiled lastObject];
         for(CCSprite *background in backgroundTiled)
-            background.position = ccp(background.position.x - self.scrollSpeed, background.position.y);
+            background.position = ccp(background.position.x - deltaX, background.position.y);
         if(background.position.x + background.boundingBox.size.width < 0) {
             int index = i-1;
             if(index < 0) index += numBackgrounds;
             CCSprite *leftBackground  = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
-            background = nil;
+            assert(leftBackground);
             for(CCSprite *background in backgroundTiled) {
                 background.position = ccp(leftBackground.position.x + leftBackground.boundingBox.size.width, background.position.y);
             }

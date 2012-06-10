@@ -11,9 +11,9 @@
 
 @interface Background : CCLayer 
 
-@property (assign, nonatomic) float scrollSpeed;
+@property (assign, nonatomic) float scrollSpeed; /* In pixels/second */
 
 - (id)initWithSpeed:(int)speed images:(NSArray *)imageNames;
-- (void) scroll:(ccTime)dt;
+- (void)scroll:(ccTime)dt;
 
 @end
