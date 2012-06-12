@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface Background : CCLayer 
+@interface Background : CCLayer
 
 @property (nonatomic, retain) CCSprite *background;
 @property (nonatomic, strong) CCSprite *background2;

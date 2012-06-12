@@ -90,7 +90,6 @@
         }
         brush = smallcircle;
         brushradius = smallradius;
-        
 	}
 	return self;
 }
@@ -118,8 +117,7 @@
     
     //makes sure the circles are far enough away to merit new circle
     
-    if (ccpDistanceSQ(location, prevpoint)>4)
-    {
+    if (ccpDistanceSQ(location, prevpoint)>4) {
         gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
         [terrain addPolygon:newcircle];
         gpc_free_polygon(newcircle);

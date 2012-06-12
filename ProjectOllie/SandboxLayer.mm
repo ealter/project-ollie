@@ -77,7 +77,6 @@ enum {
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
         
-        
         // init physics
         [self initPhysics];
         
@@ -94,7 +93,6 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
-        
         [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
@@ -104,8 +102,6 @@ enum {
         
         [self addChild:self.center];
         [self scheduleUpdate];
-        
-        
         
     }
     return self;
@@ -285,10 +281,8 @@ m_debugDraw = NULL;
     //http://gafferongames.com/game-physics/fix-your-timestep/
    
     PhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
-    if(lastChild != nil)
-    {
-        if(![lastChild physicsBody]->IsAwake() && self.camera.target != self.center)
-        {   
+    if(lastChild != nil) {
+        if(![lastChild physicsBody]->IsAwake() && self.camera.target != self.center) {
             [self.camera revertTo:self.center];
         }
     }
@@ -309,11 +303,7 @@ m_debugDraw = NULL;
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-
     [self.camera touchesBegan:[event allTouches]];
-    
-        
-    
 }
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -323,7 +313,6 @@ m_debugDraw = NULL;
     for( UITouch *touch in touches ) {
         CGPoint location = [touch locationInView: [touch view]];
         
-        
         location = [[CCDirector sharedDirector] convertToGL: location];
         location = [self convertToNodeSpace:location];
         
@@ -332,32 +321,22 @@ m_debugDraw = NULL;
            [self addNewSpriteAtPosition: location];
         [self.camera addIntensity:6.f];
     }
-    
 }
 
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
     [self.camera touchesMoved:[event allTouches]];
-
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches
 {
-
     
 }
 -(void)handleTwoFingerMotion:(NSSet *)touches
 {
-
-        
     
 }
-
-
-
-
 
 @end
 
