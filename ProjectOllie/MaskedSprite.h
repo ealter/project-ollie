@@ -15,4 +15,7 @@
     GLuint _maskLocation;
 }
 
+- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
+- (BOOL)saveMaskToFile:(NSString *)fileName;
+
 @end

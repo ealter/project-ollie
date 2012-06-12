@@ -10,6 +10,12 @@
 #import "cocos2d.h"
 #import "CCGLProgram.h"
 
+#define INITIAL_ALPHA 0.0
+#define COVERED_ALPHA 1.0
+
+const GLchar * mask_frag =
+#import "TerrainShader.h"
+
 @implementation MaskedSprite
 
 - (id)initWithFile:(NSString *)file
@@ -18,12 +24,11 @@
     if (self) {
         // 1
         _maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGB5A1];
+        [_maskTexture clear:0 g:0 b:0 a:INITIAL_ALPHA];
         
         // 2
-        self.shaderProgram =
-        [[[GLProgram alloc]
-          initWithVertexShaderFilename:@"Shaders/PositionTextureColor.vert"
-          fragmentShaderFilename:@"Mask.frag"] autorelease];
+        self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
+                                                         fragmentShaderByteArray:mask_frag] autorelease];
         
         CHECK_GL_ERROR_DEBUG();
         
@@ -72,7 +77,7 @@
     
     // 3
 #define kQuadSize sizeof(quad_.bl)
-    long offset = (long)&quad_;
+    char *offset = (char*)&quad_;
     
     // vertex
     NSInteger diff = offsetof( ccV3F_C4B_T2F, vertices);
@@ -89,6 +94,20 @@
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
+}
+
+- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [_maskTexture begin];
+    ccColor4F color = {0, 0, 0, COVERED_ALPHA};
+    ccDrawSolidPoly(poly, numberOfPoints, color);
+    
+    [_maskTexture end];
+}
+
+- (BOOL)saveMaskToFile:(NSString *)fileName
+{
+    return [_maskTexture saveToFile:fileName format:kCCImageFormatPNG];
 }
 
 @end

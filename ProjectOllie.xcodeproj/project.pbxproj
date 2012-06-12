@@ -227,7 +227,7 @@
 		CEA14DB01587CA7E00735135 /* clear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAC1587CA7E00735135 /* clear-hd.png */; };
 		CEA14DB11587CA7E00735135 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAD1587CA7E00735135 /* clear.png */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
-		CEFAF06D1586B56400F6DDF9 /* TerrainShader.frag in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06C1586B56400F6DDF9 /* TerrainShader.frag */; };
+		CEFAF06D1586B56400F6DDF9 /* TerrainShader.h in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06C1586B56400F6DDF9 /* TerrainShader.h */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
@@ -667,7 +667,7 @@
 		CEA14DAC1587CA7E00735135 /* clear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clear-hd.png"; path = "Resources/clear-hd.png"; sourceTree = "<group>"; };
 		CEA14DAD1587CA7E00735135 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear.png; path = Resources/clear.png; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = Resources/DrawMenu.ccbi; sourceTree = "<group>"; };
-		CEFAF06C1586B56400F6DDF9 /* TerrainShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
+		CEFAF06C1586B56400F6DDF9 /* TerrainShader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TerrainShader.h; path = Shaders/TerrainShader.h; sourceTree = "<group>"; };
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
@@ -1412,7 +1412,7 @@
 		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				CEFAF06C1586B56400F6DDF9 /* TerrainShader.frag */,
+				CEFAF06C1586B56400F6DDF9 /* TerrainShader.h */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -1688,7 +1688,7 @@
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
 				CE412619157FF6B8001FA126 /* Background.m in Sources */,
 				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
-				CEFAF06D1586B56400F6DDF9 /* TerrainShader.frag in Sources */,
+				CEFAF06D1586B56400F6DDF9 /* TerrainShader.h in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
 				CE9B89AF1586A59E0009C13F /* DrawMenu.mm in Sources */,
 			);
