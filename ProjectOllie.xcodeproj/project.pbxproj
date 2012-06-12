@@ -213,6 +213,8 @@
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
+		CEFAF06D1586B56400F6DDF9 /* TerrainShader.frag in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06C1586B56400F6DDF9 /* TerrainShader.frag */; };
+		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
 
@@ -636,6 +638,9 @@
 		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		CEFAF06C1586B56400F6DDF9 /* TerrainShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
+		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
+		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -794,6 +799,8 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
+				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
+				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
 				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
 				CE8429E4157981BB0038C653 /* SandboxLayer.h */,
@@ -818,6 +825,7 @@
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
+				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
 				CE94AA6C15785F83009B35B4 /* Resources */,
 				CE94AA8415785F84009B35B4 /* libs */,
 				CE94AC6B15785F89009B35B4 /* Supporting Files */,
@@ -1357,6 +1365,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				CEFAF06C1586B56400F6DDF9 /* TerrainShader.frag */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1615,6 +1631,8 @@
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
 				CE412619157FF6B8001FA126 /* Background.m in Sources */,
 				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
+				CEFAF06D1586B56400F6DDF9 /* TerrainShader.frag in Sources */,
+				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -129,6 +129,10 @@
 	[super dealloc];
 }
 
+-(CCTexture2D*)texture{
+    return texture_;
+}
+
 -(void)begin
 {
 	CCDirector *director = [CCDirector sharedDirector];
