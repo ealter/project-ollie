@@ -23,7 +23,8 @@ const GLchar * mask_frag =
     self = [super initWithFile:file];
     if (self) {
         // 1
-        _maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGB5A1];
+        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
+        _maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         [_maskTexture clear:0 g:0 b:0 a:INITIAL_ALPHA];
         
         // 2

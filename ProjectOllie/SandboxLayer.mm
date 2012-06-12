@@ -12,7 +12,7 @@
 #import "GWCamera.h"
 #import "PhysicsSprite.h"
 #import "Background.h"
-
+#import "MaskedSprite.h"
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
@@ -35,6 +35,9 @@ enum {
 //-(void) followCenter;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
+
+- (void)testMaskedSprite;
+
 @end
 
 @implementation SandboxLayer
@@ -62,6 +65,7 @@ enum {
 {
     if( (self=[super init])) {
         
+        [self testMaskedSprite];
         self.anchorPoint = ccp(.5f,.5f);
         
         //keep track of camera motion
@@ -119,9 +123,6 @@ enum {
         
         [self addChild:self.center];
         [self scheduleUpdate];
-        
-        
-        
     }
     return self;
 }
@@ -372,9 +373,13 @@ m_debugDraw = NULL;
     
 }
 
-
-
-
+- (void)testMaskedSprite
+{
+    MaskedSprite *sprite = [[MaskedSprite alloc]initWithFile:@"background.jpg"];
+    CGPoint points[4] = {ccp(50,50),ccp(50,100),ccp(150,120),ccp(150,50)};
+    [sprite drawPolygon:points numPoints:4];
+    [sprite saveMaskToFile:@"testmask.png"];
+}
 
 @end
 
