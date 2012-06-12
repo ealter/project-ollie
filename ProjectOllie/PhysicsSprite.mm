@@ -59,6 +59,7 @@
 	transform_ = CGAffineTransformMake( c,  s,
 									   -s,	c,
 									   x,	y );	
+    
 	
 	return transform_;
 }
@@ -69,6 +70,7 @@
 
 -(void) dealloc
 {
+	// 
 	[super dealloc];
 }
 

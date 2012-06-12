@@ -219,6 +219,7 @@ enum {
 	
 	kmGLPopMatrix();
 }
+ 
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
 {
@@ -232,6 +233,7 @@ enum {
 	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
 	[parent addChild:sprite];
 	
+    
 	sprite.position = ccp( p.x, p.y); //cocos2d point
 	
 	// Define the dynamic body.

@@ -31,6 +31,7 @@
     if (self = [super init]) {
         scrollspeed = speed;
         
+        
         //create both sprite to handle background
         background = [CCSprite spriteWithFile:imagename];
         background.anchorPoint = ccp(0,0);

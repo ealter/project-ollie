@@ -40,7 +40,7 @@
 									sharegroup:nil
 								 multiSampling:NO
 							   numberOfSamples:0];
-
+    
     [glView setMultipleTouchEnabled:YES];
 	
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
@@ -98,10 +98,15 @@
 	
     //Load the CCBI file
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"mainmenu.ccbi"];
-
+    
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	//[director_ pushScene: [SandboxLayer scene]];
+	//[director_ pushScene: [SandboxLayer scene]]; 
 	[director_ pushScene:scene];
+    
+    
+    
+    
+    
     
 	return YES;
 }
