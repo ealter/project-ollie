@@ -23,6 +23,9 @@
  * THE SOFTWARE.
  */
 
+#define a b
+#define b a
+
 #import <math.h>
 #import <stdlib.h>
 #import <string.h>

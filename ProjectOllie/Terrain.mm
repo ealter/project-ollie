@@ -8,31 +8,7 @@
 
 #import "Terrain.h"
 #import "ccMacros.h"
-/*
-//from ccsprite.h
-#import "CCNode.h"
-#import "CCProtocols.h"
-#import "CCTextureAtlas.h"
 
-//from ccsprite.m
-#import "ccConfig.h"
-#import "CCSpriteBatchNode.h"
-#import "CCSprite.h"
-#import "CCSpriteFrame.h"
-#import "CCSpriteFrameCache.h"
-#import "CCAnimation.h"
-#import "CCAnimationCache.h"
-#import "CCTextureCache.h"
-#import "CCDrawingPrimitives.h"
-#import "CCShaderCache.h"
-#import "ccGLStateCache.h"
-#import "CCGLProgram.h"
-#import "CCDirector.h"
-#import "CGPointExtension.h"
-#import "TransformUtils.h"
-#import "CCProfiling.h"
-#import "OpenGL_Internal.h"
-*/
 @implementation Terrain
 
 @synthesize texture = texture_;
@@ -115,11 +91,8 @@
 - (void) draw
 {
     //CC_NODE_DRAW_SETUP();
-    ccGLEnable( glServerState_ );																\
- //   NSAssert(shaderProgram_, @"No shader program set for node: terrain");                       \
-//	[shaderProgram_ use];																		\//
-//	[shaderProgram_ setUniformForModelViewProjectionMatrix];	
-    
+    ccGLEnable( glServerState_ );
+    /*
     //Draw each of the land elements
     for (int i = 0; i < triStrips.num_strips; i++)
     {
@@ -127,7 +100,20 @@
                                triStrips.texCoords[i].vertex, 
                                triStrips.strip[i].num_vertices, 
                                self.texture);
+        //Debug draw triangle lines
+        int numVerts = triStrips.strip[i].num_vertices;
+        for (int j = 0; j < numVerts-1; j++){
+            ccDrawLine(ccp(triStrips.strip[i].vertex[j].x, triStrips.strip[i].vertex[j].y),
+                       ccp(triStrips.strip[i].vertex[j+1].x, triStrips.strip[i].vertex[j+1].y));
+        }
+        if (numVerts > 1)
+            ccDrawLine(ccp(triStrips.strip[i].vertex[numVerts-1].x, triStrips.strip[i].vertex[numVerts-1].y),
+                       ccp(triStrips.strip[i].vertex[0].x, triStrips.strip[i].vertex[0].y));
     }
+    */
+    for (int i = 0 ; i < shapeField.peSet.size(); i++)
+    ccDrawLine(ccp(shapeField.peSet[i]->x, shapeField.peSet[i]->y),
+               ccp(shapeField.peSet[i]->next->x, shapeField.peSet[i]->next->y));
     
 }
 

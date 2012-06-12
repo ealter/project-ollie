@@ -41,6 +41,7 @@
 		CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.mm */; };
 		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
+		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
 		CE94AA5C15785F83009B35B4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5B15785F83009B35B4 /* OpenGLES.framework */; };
 		CE94AA5E15785F83009B35B4 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5D15785F83009B35B4 /* OpenAL.framework */; };
@@ -259,7 +260,7 @@
 		C5FE5FDF15796583008F4298 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
-		CE412617157FF6B8001FA126 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Background.h; sourceTree = "<group>"; };
+		CE412617157FF6B8001FA126 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
 		CE412618157FF6B8001FA126 /* Background.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Background.m; sourceTree = "<group>"; };
 		CE41261B157FFB67001FA126 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = background.jpg; sourceTree = "<group>"; };
 		CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-0.png"; path = "Resources/btn-test-0.png"; sourceTree = "<group>"; };
@@ -276,6 +277,9 @@
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
+		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeField.h; sourceTree = "<group>"; };
+		CE894EFF15829C7F00E412E1 /* PointEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PointEdge.h; sourceTree = "<group>"; };
+		CE894F001582B30B00E412E1 /* ShapeField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeField.cpp; sourceTree = "<group>"; };
 		CE94AA5515785F83009B35B4 /* ProjectOllie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectOllie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE94AA5915785F83009B35B4 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CE94AA5B15785F83009B35B4 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -753,6 +757,16 @@
 			path = CSG;
 			sourceTree = "<group>";
 		};
+		CE894EFC158299CE00E412E1 /* CSG */ = {
+			isa = PBXGroup;
+			children = (
+				CE894EFE15829C5A00E412E1 /* ShapeField.h */,
+				CE894EFF15829C7F00E412E1 /* PointEdge.h */,
+				CE894F001582B30B00E412E1 /* ShapeField.cpp */,
+			);
+			name = CSG;
+			sourceTree = "<group>";
+		};
 		CE94AA4A15785F83009B35B4 = {
 			isa = PBXGroup;
 			children = (
@@ -789,6 +803,7 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
+				CE894EFC158299CE00E412E1 /* CSG */,
 				CE8429E4157981BB0038C653 /* SandboxLayer.h */,
 				CE8429E5157981BB0038C653 /* SandboxLayer.mm */,
 				C5FE5FED15796E6F008F4298 /* CCBReader.h */,
@@ -1605,6 +1620,7 @@
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
 				CE412619157FF6B8001FA126 /* Background.m in Sources */,
+				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1667,7 +1683,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "716D7361-9D81-4C44-82BD-FF1468EFB1EB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "452D8E3D-47DA-4A10-B5F0-5BBE3B1EB751";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -1688,7 +1704,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "716D7361-9D81-4C44-82BD-FF1468EFB1EB";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "452D8E3D-47DA-4A10-B5F0-5BBE3B1EB751";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;

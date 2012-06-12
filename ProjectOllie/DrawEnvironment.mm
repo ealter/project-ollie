@@ -36,7 +36,7 @@
         [self addChild:terrain];
         self.isTouchEnabled = YES;
         
-        numpoints = 20;
+        numpoints = 25;
         
         //Code to make small circle
         smallcircle = new gpc_polygon;
@@ -118,17 +118,16 @@
     
     //makes sure the circles are far enough away to merit new circle
     
-    if (ccpDistanceSQ(location, prevpoint)>4)
+    if (ccpDistanceSQ(location, prevpoint)>1)
     {
         gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
         [terrain addPolygon:newcircle];
         gpc_free_polygon(newcircle);
         delete newcircle;
         
-        gpc_polygon *newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
-        [terrain addPolygon:newrectangle];
-        gpc_free_polygon(newrectangle);
-        delete newrectangle;
+        gpc_polygon newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
+        [terrain addPolygon:&newrectangle];
+        gpc_free_polygon(&newrectangle);
         
         prevpoint = location;
     }
@@ -146,19 +145,18 @@
     gpc_free_polygon(newcircle);
     delete newcircle;
     
-    gpc_polygon *newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
-    [terrain addPolygon:newrectangle];
-    gpc_free_polygon(newrectangle);
-    delete newrectangle;
+    gpc_polygon newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
+    [terrain addPolygon:&newrectangle];
+    gpc_free_polygon(&newrectangle);
 }
 
 
 //MAKE SURE YOU FREE THE RECTANGLE AFTER YOU MAKE IT
--(gpc_polygon *)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(float)width
+-(gpc_polygon)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(float)width
 {
-    gpc_polygon *rectangle = new gpc_polygon;
-    rectangle->hole=new int(0);
-    rectangle->num_contours = 1;
+    gpc_polygon rectangle;
+    rectangle.hole=new int(0);
+    rectangle.num_contours = 1;
     
     //Make unit vector between the two points
     CGPoint unitvector;
@@ -177,26 +175,18 @@
     unitvector.x=unitvector.x*width;
     
     //Find the points, add them to the gpc_polygon
-    ccVertex2F corner1;
-    ccVertex2F corner2;
-    ccVertex2F corner3;
-    ccVertex2F corner4;
-    corner1.x = pointa.x+unitvector.x;
-    corner1.y = pointa.y+unitvector.y;
-    corner2.x = pointa.x-unitvector.x;
-    corner2.y = pointa.y-unitvector.y;
-    corner3.x = pointb.x-unitvector.x;
-    corner3.y = pointb.y-unitvector.y;
-    corner4.x = pointb.x+unitvector.x;
-    corner4.y = pointb.y+unitvector.y;
+    rectangle.contour = new vertex_list;
+    rectangle.contour->num_vertices=4;
+    rectangle.contour->vertex = new ccVertex2F[4];
+    rectangle.contour->vertex[0].x = pointa.x+unitvector.x;
+    rectangle.contour->vertex[0].y = pointa.y+unitvector.y;
+    rectangle.contour->vertex[1].x = pointa.x-unitvector.x;
+    rectangle.contour->vertex[1].y = pointa.y-unitvector.y;
+    rectangle.contour->vertex[2].x = pointb.x-unitvector.x;
+    rectangle.contour->vertex[2].y = pointb.y-unitvector.y;
+    rectangle.contour->vertex[3].x = pointb.x+unitvector.x;
+    rectangle.contour->vertex[3].y = pointb.y+unitvector.y;
     
-    rectangle->contour = new vertex_list;
-    rectangle->contour->num_vertices=4;
-    rectangle->contour->vertex = new ccVertex2F[4];
-    rectangle->contour->vertex[0]=corner1;
-    rectangle->contour->vertex[1]=corner2;
-    rectangle->contour->vertex[2]=corner3;
-    rectangle->contour->vertex[3]=corner4;
     
     return rectangle;
 }

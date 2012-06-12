@@ -11,6 +11,7 @@
 #import "gpc.h"
 #import "Box2D.h"
 #include <vector>
+#import "ShapeField.h"
 
 /*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
@@ -19,6 +20,7 @@
     gpc_tristrip         triStrips;  //Triangle strips used for drawing
     std::vector<b2Body*> b2Bodies;   //Bodies of chain shapes currently in the world
     b2World             *world;      //Physical world this land is in
+    ShapeField          shapeField;
 }
 
 @property (nonatomic,strong) CCTexture2D *texture;
