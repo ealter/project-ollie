@@ -11,9 +11,9 @@
 #import "Terrain.h"
 
 
-#define smallradius 30.0f
-#define mediumradius 50.0f
-#define largeradius 70.0f
+#define smallradius 10.0f
+#define mediumradius 20.0f
+#define largeradius 30.0f
 
 @interface DrawEnvironment : CCLayer
 
