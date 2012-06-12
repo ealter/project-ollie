@@ -350,10 +350,12 @@
         //until the distance is subpixel
         moveVec = ccpSub(destination, n.position);
         float distance = ccpLengthSQ(moveVec);
-        moveVec = ccpMult(moveVec,.05f);
+        moveVec = ccpMult(moveVec,.1f);
         if(distance < 1)
             [target_ setPosition:destination];
         else
+            
+            //[target_ setPosition:destination];
             [target_ setPosition:ccpAdd(n.position,moveVec)]; 
         }
     

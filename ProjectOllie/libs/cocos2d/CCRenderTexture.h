@@ -78,6 +78,9 @@ typedef enum
 /** initializes a RenderTexture object with width and height in Points and a pixel format, only RGB and RGBA formats are valid */
 -(id)initWithWidth:(int)w height:(int)h pixelFormat:(CCTexture2DPixelFormat) format;
 
+/** returns the Texture2D */
+-(CCTexture2D*)texture;
+
 /** starts grabbing */
 -(void)begin;
 

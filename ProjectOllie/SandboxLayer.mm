@@ -11,13 +11,14 @@
 #import "CCAction.h"
 #import "GWCamera.h"
 #import "PhysicsSprite.h"
+#import "Background.h"
 
 
 //Pixel to metres ratio. Box2D uses metres as the unit for measurement.
 //This ratio defines how many pixels correspond to 1 Box2D "metre"
 //Box2D is optimized for objects of 1x1 metre therefore it makes sense
 //to define the ratio so that your most common object type is 1x1 metre.
-#define PTM_RATIO 32
+#define PTM_RATIO (32)
 #define kTagPoly 10
 #define kTagBox 20
 
@@ -27,10 +28,11 @@ enum {
 };
 
 @interface SandboxLayer()
+
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
--(void) followCenter;
+//-(void) followCenter;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 @end
@@ -60,18 +62,27 @@ enum {
 {
     if( (self=[super init])) {
         
-        self.anchorPoint = ccp(0,0);
+        self.anchorPoint = ccp(.5f,.5f);
         
         //keep track of camera motion
-        s = CGSizeMake([CCDirector sharedDirector].winSize.width*2,[CCDirector sharedDirector].winSize.height*2);
-        
+
+        s = self.contentSize;
+
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
         [self.camera revertTo:self.center];
-        
 
+        //set up parallax
+        parallax_ = [CCParallaxNode node];
+#if 0
+        CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
+        bglayer1.scale = 2.f;
+        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:self.center.position];
+#endif
+        
+        [self addChild:parallax_ z:-1];
         
         // enable events
         self.isTouchEnabled = YES;
@@ -94,6 +105,10 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
+        Background *blayer = [Background node];
+        [blayer initWithSpeed:180 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
+        [self addChild:blayer];
+        [self reorderChild:blayer z:-1];
         
         [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
         
@@ -194,13 +209,15 @@ m_debugDraw = NULL;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p
 {
     CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
+#if 0
     CCNode *parent = [self getChildByTag:kTagParentNode];
 
     //We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
     //just randomly picking one of the images
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];					
+#endif
+   // PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(16 * idx,16 * idy,16,16)];					
 	
     /**
      * With the debug drawing features we have, bodies draw themselves. Not yet sure how we will texurize
@@ -210,7 +227,7 @@ m_debugDraw = NULL;
     //[parent addChild:sprite];
     // will eventually make this a piece of terrain
 
-    sprite.position = ccp( p.x, p.y); //cocos2d point
+   // sprite.position = ccp( p.x, p.y); //cocos2d point
 
     // Define the dynamic body.
     //Set up a 1m squared box in the physics world
@@ -236,7 +253,7 @@ m_debugDraw = NULL;
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
 
-    [sprite setPhysicsBody:body];
+    //[sprite setPhysicsBody:body];
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
@@ -328,9 +345,9 @@ m_debugDraw = NULL;
         location = [self convertToNodeSpace:location];
         
         CGRect bounds = CGRectMake(0, 0, s.width, s.height);
-        if(CGRectContainsPoint(bounds, location))
-           [self addNewSpriteAtPosition: location];
-        [self.camera addIntensity:6.f];
+      //  if(CGRectContainsPoint(bounds, location))
+        //   [self addNewSpriteAtPosition: location];
+        //[self.camera addIntensity:6.f];
     }
     
 }
@@ -339,8 +356,8 @@ m_debugDraw = NULL;
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    [self.camera touchesMoved:[event allTouches]];
-
+   [self.camera touchesMoved:[event allTouches]];
+    
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches

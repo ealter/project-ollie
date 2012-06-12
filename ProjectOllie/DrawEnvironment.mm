@@ -9,6 +9,8 @@
 #import "DrawEnvironment.h"
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
+#import "CCBReader.h"
+#import "DrawMenu.h"
 @implementation DrawEnvironment
 @synthesize newpoly, smallcircle, numpoints, prevpoint, brush, brushradius;
 @synthesize mediumcircle, largecircle, terrain;
@@ -91,6 +93,11 @@
         brush = smallcircle;
         brushradius = smallradius;
         
+        /*
+        /Load the menu for the drawing environment
+        */
+        CCNode *drawnode = [CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
+        [self addChild:drawnode];
 	}
 	return self;
 }

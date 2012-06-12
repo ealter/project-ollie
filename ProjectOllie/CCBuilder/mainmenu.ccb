@@ -235,8 +235,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>167</real>
-							<real>-125</real>
+							<real>93</real>
+							<real>-103</real>
 							<integer>1</integer>
 						</array>
 					</dict>
@@ -247,8 +247,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>81</real>
-							<real>17</real>
+							<real>109</real>
+							<real>23</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -298,7 +298,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<false/>
+						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -359,7 +359,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>10</real>
+							<real>15</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -381,9 +381,9 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>0.0</real>
-							<real>0.0</real>
-							<integer>0</integer>
+							<real>200</real>
+							<real>100</real>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -655,8 +655,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>332</real>
-							<real>124</real>
+							<real>292</real>
+							<real>103</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -667,8 +667,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>48</real>
-							<real>19</real>
+							<real>55</real>
+							<real>23</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -718,7 +718,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<false/>
+						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -779,7 +779,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>12</real>
+							<real>15</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -803,7 +803,7 @@
 						<array>
 							<real>0.0</real>
 							<real>0.0</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
