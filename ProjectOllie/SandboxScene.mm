@@ -20,18 +20,13 @@
         // add layer as a child to scene
         [self addChild: layer];
         
-
-        
-        
         /*
         Background *blayer = [Background node];
         [blayer initwithSpeed:3 andImage:@"background.jpg"];
         [self addChild:blayer];
         [self reorderChild:blayer z:-100];*/
-
     }
     return self;
 }
-
 
 @end

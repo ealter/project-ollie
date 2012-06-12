@@ -31,7 +31,7 @@
 //Removing land
 - (void) removePolygon:(gpc_polygon*)p;
 
-//Call whenever shape is changed to rebuild the derived physical bodies and drawing 
+//Call whenever shape is changed to rebuild the derived physical bodies and drawing
 - (void) shapeChanged;
 
 + (Terrain*) generateRandomOneIsland;

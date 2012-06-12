@@ -12,7 +12,7 @@
 
 @implementation MaskedSprite
 
-- (id)initWithFile:(NSString *)file 
+- (id)initWithFile:(NSString *)file
 {
     self = [super initWithFile:file];
     if (self) {
@@ -20,8 +20,8 @@
         _maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGB5A1];
         
         // 2
-        self.shaderProgram = 
-        [[[GLProgram alloc] 
+        self.shaderProgram =
+        [[[GLProgram alloc]
           initWithVertexShaderFilename:@"Shaders/PositionTextureColor.vert"
           fragmentShaderFilename:@"Mask.frag"] autorelease];
         
@@ -42,7 +42,7 @@
         // 5
         [shaderProgram_ updateUniforms];
         
-        CHECK_GL_ERROR_DEBUG();                
+        CHECK_GL_ERROR_DEBUG();
         
         // 6
         _textureLocation = glGetUniformLocation( shaderProgram_->program_, "u_texture");
@@ -50,15 +50,14 @@
         
         CHECK_GL_ERROR_DEBUG();
     }
-    
     return self;
 }
 
 -(void) draw {
     CCTexture2D *mask = [_maskTexture texture];
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
-    // 1 
-    ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );      
+    // 1
+    ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
     ccGLUseProgram( shaderProgram_->program_ );
     [shaderProgram_ setUniformForModelViewProjectionMatrix];
     
@@ -88,7 +87,7 @@
     glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
     
     // 4
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);    
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
 }
 

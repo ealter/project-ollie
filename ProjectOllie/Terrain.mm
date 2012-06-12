@@ -99,12 +99,11 @@
     //Draw each of the land elements
     for (int i = 0; i < triStrips.num_strips; i++)
     {
-        ccDrawTexturedTriStrip(triStrips.strip[i].vertex, 
-                               triStrips.texCoords[i].vertex, 
-                               triStrips.strip[i].num_vertices, 
+        ccDrawTexturedTriStrip(triStrips.strip[i].vertex,
+                               triStrips.texCoords[i].vertex,
+                               triStrips.strip[i].num_vertices,
                                self.texture);
     }
-    
 }
 
 - (void) dealloc
