@@ -17,14 +17,14 @@
 
 @interface DrawEnvironment : CCLayer
 
-@property gpc_polygon *newpoly;
-@property gpc_polygon *smallcircle;
-@property gpc_polygon *mediumcircle;
-@property gpc_polygon *largecircle;
-@property int numpoints;
-@property CGPoint prevpoint;
-@property gpc_polygon *brush;
-@property float brushradius;
+@property (assign, nonatomic)gpc_polygon *newpoly;
+@property (assign, nonatomic)gpc_polygon *smallcircle;
+@property (assign, nonatomic)gpc_polygon *mediumcircle;
+@property (assign, nonatomic)gpc_polygon *largecircle;
+@property (assign, nonatomic)int numpoints;
+@property (assign, nonatomic)CGPoint prevpoint;
+@property (assign, nonatomic)gpc_polygon *brush;
+@property (assign, nonatomic)float brushradius;
 
 @property (nonatomic, strong)Terrain *terrain;
 
