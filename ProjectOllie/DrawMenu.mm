@@ -37,4 +37,15 @@
 {
     
 }
+
+-(void)pressedCheck:(id)sender
+{
+    
+}
+
+-(void)pressedClear:(id)sender
+{
+    
+}
+
 @end
