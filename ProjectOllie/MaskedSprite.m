@@ -12,6 +12,7 @@
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
+#define PIXEL_FORMAT kCCTexture2DPixelFormat_RGB5A1
 
 @interface MaskedSprite ()
 
@@ -35,8 +36,7 @@
         self.flipY = YES;
         
         // 1
-        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
-        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
         [self.maskTexture clear:INITIAL_RED g:0 b:0 a:0];
         
         // 2
@@ -83,7 +83,8 @@
     CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
     // 1
-    ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
+    //ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
+    ccGLBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ccGLUseProgram( shaderProgram_->program_ );
     [shaderProgram_ setUniformForModelViewProjectionMatrix];
     
@@ -136,6 +137,8 @@
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
 {
+    if(PIXEL_FORMAT != kCCTexture2DPixelFormat_RGBA8888)
+        return NO;
     return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
 }
 
