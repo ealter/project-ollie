@@ -10,8 +10,8 @@
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
 @implementation DrawEnvironment
-@synthesize newpoly, smallcircle, numpoints, prevpoint, brush, brushradius;
-@synthesize mediumcircle, largecircle, terrain;
+@synthesize numpoints, prevpoint, brushradius;
+@synthesize terrain;
 
 +(CCScene *) scene
 {
@@ -35,60 +35,7 @@
         terrain = [[Terrain alloc]initWithTexture:texture];
         [self addChild:terrain];
         self.isTouchEnabled = YES;
-        
-        numpoints = 25;
-        
-        //Code to make small circle
-        smallcircle = new gpc_polygon;
-        smallcircle->hole=new int(0);
-        smallcircle->contour = new vertex_list;
-        smallcircle->contour[0].vertex = new ccVertex2F[numpoints];
-        smallcircle->contour[0].num_vertices = 0;
-        smallcircle->num_contours =1;
-        float anglecount = 0;
-        for (int i =0; i<numpoints; i++) {
-            ccVertex2F newvertex;
-            newvertex.x = (sinf(anglecount*M_PI/180)*smallradius);
-            newvertex.y = (cosf(anglecount*M_PI/180)*smallradius);
-            smallcircle->contour[0].num_vertices += 1;
-            smallcircle->contour[0].vertex[i] = newvertex;
-            anglecount += (360.0f/numpoints);
-        }
-        
-        //Medium circle
-        mediumcircle = new gpc_polygon;
-        mediumcircle->hole=new int(0);
-        mediumcircle->contour = new vertex_list;
-        mediumcircle->contour[0].vertex = new ccVertex2F[numpoints];
-        mediumcircle->contour[0].num_vertices = 0;
-        mediumcircle->num_contours =1;
-        anglecount = 0;
-        for (int i =0; i<numpoints; i++) {
-            ccVertex2F newvertex;
-            newvertex.x = (sinf(anglecount*M_PI/180)*mediumradius);
-            newvertex.y = (cosf(anglecount*M_PI/180)*mediumradius);
-            mediumcircle->contour[0].num_vertices += 1;
-            mediumcircle->contour[0].vertex[i] = newvertex;
-            anglecount += (360.0f/numpoints);
-        }
-        
-        //Large circle
-        largecircle = new gpc_polygon;
-        largecircle->hole=new int(0);
-        largecircle->contour = new vertex_list;
-        largecircle->num_contours =1;
-        largecircle->contour[0].vertex = new ccVertex2F[numpoints];
-        largecircle->contour[0].num_vertices = 0;
-        anglecount = 0;
-        for (int i =0; i<numpoints; i++) {
-            ccVertex2F newvertex;
-            newvertex.x = (sinf(anglecount*M_PI/180)*largeradius);
-            newvertex.y = (cosf(anglecount*M_PI/180)*largeradius);
-            largecircle->contour[0].num_vertices += 1;
-            largecircle->contour[0].vertex[i] = newvertex;
-            anglecount += (360.0f/numpoints);
-        }
-        brush = smallcircle;
+                
         brushradius = smallradius;
         
 	}
@@ -104,9 +51,7 @@
     
     prevpoint = location;
     
-    gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
-    [terrain addPolygon:newcircle];
-    gpc_free_polygon(newcircle);
+    [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -120,21 +65,14 @@
     
     if (ccpDistanceSQ(location, prevpoint)>1)
     {
-        gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
-        [terrain addPolygon:newcircle];
-        gpc_free_polygon(newcircle);
-        delete newcircle;
-        
-        gpc_polygon newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
-        [terrain addPolygon:&newrectangle];
-        gpc_free_polygon(&newrectangle);
+        [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
         
         prevpoint = location;
     }
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
+{/*
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView: [touch view]];
     location = [[CCDirector sharedDirector] convertToGL: location];
@@ -147,10 +85,10 @@
     
     gpc_polygon newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
     [terrain addPolygon:&newrectangle];
-    gpc_free_polygon(&newrectangle);
+    gpc_free_polygon(&newrectangle);*/
 }
 
-
+/*
 //MAKE SURE YOU FREE THE RECTANGLE AFTER YOU MAKE IT
 -(gpc_polygon)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(float)width
 {
@@ -190,5 +128,5 @@
     
     return rectangle;
 }
-
+*/
 @end

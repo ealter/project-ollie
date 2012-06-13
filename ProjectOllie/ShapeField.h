@@ -14,12 +14,12 @@
 
 using namespace std;
 
-// Divisions of the spatial grid
-#define spatialGridWidth 32
-#define spatialGridHeight 32
+// Size of each cell in the spatial grid
+#define cellWidth 32
+#define cellHeight 32
 
 //Maximum distance for a segment on a circle
-#define maxCircleSeg = 4
+#define maxCircleSeg 4
 
 // Represents a field of true and false values in a quickly clippable vector format
 class ShapeField
@@ -36,8 +36,8 @@ private:
     vector<PointEdge*> **spatialGrid;
     float width;
     float height;
-    float cellWidth;
-    float cellHeight;
+    int gridWidth;
+    int gridHeight;
     
     PointEdge* closestPointEdge(float x, float y);
     void removeFromSpatialGrid(PointEdge* pe);
