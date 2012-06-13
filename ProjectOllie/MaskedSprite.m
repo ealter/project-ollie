@@ -45,7 +45,6 @@
         if(error) {
             DebugLog(@"The error: %@", error);
         }
-        NSLog(@"The frag is %s", mask_frag);
         assert(mask_frag);
         self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
                                                          fragmentShaderByteArray:mask_frag] autorelease];
