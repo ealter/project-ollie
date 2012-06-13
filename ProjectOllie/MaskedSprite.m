@@ -13,18 +13,20 @@
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
 
-const GLchar * mask_frag =
-#import "TerrainShader.h"
-
 @interface MaskedSprite ()
 
 @property (nonatomic, strong) CCRenderTexture *maskTexture;
+@property (nonatomic) GLuint textureWidthLocation;
+@property (nonatomic) GLuint textureHeightLocation;
+@property (nonatomic) GLuint textureLocation;
+@property (nonatomic) GLuint maskLocation;
 
 @end
 
 @implementation MaskedSprite
 
 @synthesize maskTexture = _maskTexture;
+@synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_;
 
 - (id)initWithFile:(NSString *)file
 {
@@ -38,6 +40,13 @@ const GLchar * mask_frag =
         [self.maskTexture clear:INITIAL_RED g:0 b:0 a:0];
         
         // 2
+        NSError *error = nil;
+        GLchar *mask_frag = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TerrainShader" ofType:@"frag"] encoding:NSUTF8StringEncoding error:&error] UTF8String];
+        if(error) {
+            DebugLog(@"The error: %@", error);
+        }
+        NSLog(@"The frag is %s", mask_frag);
+        assert(mask_frag);
         self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
                                                          fragmentShaderByteArray:mask_frag] autorelease];
         
@@ -45,7 +54,7 @@ const GLchar * mask_frag =
         
         // 3
         [shaderProgram_ addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
-        [shaderProgram_ addAttribute:kCCAttributeNameColor index:kCCVertexAttrib_Color];
+        [shaderProgram_ addAttribute:kCCAttributeNameColor    index:kCCVertexAttrib_Color];
         [shaderProgram_ addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
         
         CHECK_GL_ERROR_DEBUG();
@@ -61,8 +70,10 @@ const GLchar * mask_frag =
         CHECK_GL_ERROR_DEBUG();
         
         // 6
-        _textureLocation = glGetUniformLocation( shaderProgram_->program_, "u_texture");
-        _maskLocation = glGetUniformLocation( shaderProgram_->program_, "u_mask");
+        self.textureLocation       = glGetUniformLocation( shaderProgram_->program_, "u_texture");
+        self.maskLocation          = glGetUniformLocation( shaderProgram_->program_, "u_mask");
+        self.textureWidthLocation  = glGetUniformLocation( shaderProgram_->program_, "textureWidth");
+        self.textureHeightLocation = glGetUniformLocation( shaderProgram_->program_, "textureHeight");
         
         CHECK_GL_ERROR_DEBUG();
     }
@@ -80,27 +91,26 @@ const GLchar * mask_frag =
     // 2
     glActiveTexture(GL_TEXTURE0);
     glBindTexture( GL_TEXTURE_2D,  [texture_ name] );
-    glUniform1i(_textureLocation, 0);
+    glUniform1i(self.textureLocation, 0);
     
     glActiveTexture(GL_TEXTURE1);
     glBindTexture( GL_TEXTURE_2D,  [mask name] );
-    glUniform1i(_maskLocation, 1);
+    glUniform1i(self.maskLocation, 1);
+    
+    glUniform1f(self.textureWidthLocation, self.textureRect.size.width);
+    glUniform1f(self.textureHeightLocation, self.textureRect.size.height);
     
     // 3
 #define kQuadSize sizeof(quad_.bl)
-    char *offset = (char*)&quad_;
     
     // vertex
-    NSInteger diff = offsetof( ccV3F_C4B_T2F, vertices);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, (void*) (offset + diff));
+    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, &quad_.tl.vertices);
     
     // texCoods
-    diff = offsetof( ccV3F_C4B_T2F, texCoords);
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, (void*)(offset + diff));
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, &quad_.tl.texCoords);
     
     // color
-    diff = offsetof( ccV3F_C4B_T2F, colors);
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, &quad_.tl.colors);
     
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);

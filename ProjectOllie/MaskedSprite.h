@@ -9,10 +9,7 @@
 #import "CCSprite.h"
 #import "CCRenderTexture.h"
 
-@interface MaskedSprite : CCSprite {
-    GLuint _textureLocation;
-    GLuint _maskLocation;
-}
+@interface MaskedSprite : CCSprite
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
