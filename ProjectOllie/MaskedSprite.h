@@ -10,12 +10,12 @@
 #import "CCRenderTexture.h"
 
 @interface MaskedSprite : CCSprite {
-    CCRenderTexture * _maskTexture;
     GLuint _textureLocation;
     GLuint _maskLocation;
 }
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
+- (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (BOOL)saveMaskToFile:(NSString *)fileName;
 
 @end

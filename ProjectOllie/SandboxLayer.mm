@@ -65,7 +65,7 @@ enum {
 {
     if( (self=[super init])) {
         
-        [self testMaskedSprite];
+        
         self.anchorPoint = ccp(.5f,.5f);
         
         //keep track of camera motion
@@ -109,10 +109,10 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
-        Background *blayer = [Background node];
+        /*Background *blayer = [Background node];
         [blayer initWithSpeed:180 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
         [self addChild:blayer];
-        [self reorderChild:blayer z:-1];
+        [self reorderChild:blayer z:-1];*/
         
         [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
         
@@ -123,6 +123,8 @@ enum {
         
         [self addChild:self.center];
         [self scheduleUpdate];
+        
+        [self testMaskedSprite];
     }
     return self;
 }
@@ -376,8 +378,16 @@ m_debugDraw = NULL;
 - (void)testMaskedSprite
 {
     MaskedSprite *sprite = [[MaskedSprite alloc]initWithFile:@"background.jpg"];
-    CGPoint points[4] = {ccp(50,50),ccp(50,100),ccp(150,120),ccp(150,50)};
-    [sprite drawPolygon:points numPoints:4];
+    CGPoint points[] = {ccp(50,50),ccp(50,100),ccp(150,120),ccp(150,50)};
+    CGPoint points2[] = {ccp(50,70),ccp(70,150),ccp(150,190),ccp(200,90)};
+    CGPoint points3[] = {ccp(0,0),ccp(600,30),ccp(630,450),ccp(0,450)};
+#define DRAW(name) [sprite drawPolygon:name numPoints:sizeof(name)/sizeof(*name)]
+#define SUB(name) [sprite subtractPolygon:name numPoints:sizeof(name)/sizeof(*name)]
+    DRAW(points);
+    SUB(points2);
+    DRAW(points3);
+    sprite.position = ccp(100,100);
+    [self addChild:sprite];
     [sprite saveMaskToFile:@"testmask.png"];
 }
 

@@ -10,22 +10,32 @@
 #import "cocos2d.h"
 #import "CCGLProgram.h"
 
-#define INITIAL_ALPHA 0.0
-#define COVERED_ALPHA 1.0
+#define INITIAL_RED 0.0
+#define COVERED_RED 1.0
 
 const GLchar * mask_frag =
 #import "TerrainShader.h"
 
+@interface MaskedSprite ()
+
+@property (nonatomic, strong) CCRenderTexture *maskTexture;
+
+@end
+
 @implementation MaskedSprite
+
+@synthesize maskTexture = _maskTexture;
 
 - (id)initWithFile:(NSString *)file
 {
     self = [super initWithFile:file];
     if (self) {
+        self.flipY = YES;
+        
         // 1
         //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
-        _maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        [_maskTexture clear:0 g:0 b:0 a:INITIAL_ALPHA];
+        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:0];
         
         // 2
         self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
@@ -60,7 +70,7 @@ const GLchar * mask_frag =
 }
 
 -(void) draw {
-    CCTexture2D *mask = [_maskTexture texture];
+    CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
     // 1
     ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
@@ -99,16 +109,25 @@ const GLchar * mask_frag =
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [_maskTexture begin];
-    ccColor4F color = {0, 0, 0, COVERED_ALPHA};
+    [self.maskTexture begin];
+    ccColor4F color = {COVERED_RED, 0, 0, 0};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
-    [_maskTexture end];
+    [self.maskTexture end];
+}
+
+- (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [self.maskTexture begin];
+    ccColor4F color = {INITIAL_RED, 0, 0, 0};
+    ccDrawSolidPoly(poly, numberOfPoints, color);
+    
+    [self.maskTexture end];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
 {
-    return [_maskTexture saveToFile:fileName format:kCCImageFormatPNG];
+    return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
 }
 
 @end
