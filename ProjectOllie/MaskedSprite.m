@@ -136,9 +136,9 @@
 
 }
 
--(void)drawCircleAt:(CGPoint)center withRadius:(float)radius{
+-(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add{
     
-    int numPoints = 60;
+    int numPoints = 360;
     CGPoint circle[numPoints];
     for(int i = 0; i < numPoints; i++)
     {
@@ -147,7 +147,10 @@
         circle[i] = ccp(center.x+radius*cos(radian),center.y+radius*sin(radian));
     }
     
-    [self drawPolygon:circle numPoints:numPoints];
+    if(add)
+        [self drawPolygon:circle numPoints:numPoints];
+    else
+        [self subtractPolygon:circle numPoints:numPoints];
     
 }
 
