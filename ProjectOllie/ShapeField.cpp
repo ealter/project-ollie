@@ -17,11 +17,16 @@
 #define cellHeight 32
 
 //Maximum distance for a segment on a circle
-#define maxCircleSeg 4
+#define maxCircleSeg 1
 
 // Define the smallest float difference that could matter
 #define plankFloat 0.1f
+
+//2 pi
 #define TAU (M_PI*2)
+
+//Finds if the winding of 3 points is counterclockwise
+#define ccw(x1, y1, x2, y2, x3, y3) ((x2 - x1)*(y3 - y1) - (y2 - y1)*(x3 - x1))
 
 using namespace std;
 
@@ -81,8 +86,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
     //Loop through and collect all potential PointEdges that we could be affecting
     vector<PointEdge*> nearPEs;
-    //for (int i = 0; i < peSet.size(); i++) nearPEs.push_back(peSet[i]);
-    for (int i = minCellX; i <= maxCellX; i++)
+    for (int i = 0; i < peSet.size(); i++) nearPEs.push_back(peSet[i]);
+    /*for (int i = minCellX; i <= maxCellX; i++)
         for (int j = minCellY; j <= maxCellY; j++)
             for (int k = 0; k < spatialGrid[i][j].size(); k++)
             {
@@ -95,7 +100,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     }
                 if (!cont) nearPEs.push_back(spatialGrid[i][j][k]);
             }
-    
+    */
     //Classify each of the points of every near PointEdge as inside, on edge, or outside
     float rsq = r*r;
     for (int i = 0; i < nearPEs.size(); i++)
@@ -148,7 +153,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     float dx = x - xClosest;
                     float dy = y - yClosest;
                     float lenToCenterSq = dx*dx + dy*dy;
-                    if (lenToCenterSq < rsq - plankFloat)
+                    if (lenToCenterSq < rsq)
                     {
                         printf("O-O intersection\n");
                         //Line crosses inside the circle, cut it and make intersections
@@ -171,7 +176,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                         
                         //Reroute pe to inP and npe after outP
                         pe->next = inP;
-                        outP->prev = outP;
+                        npe->prev = outP;
                         
                         //Add new pe and outP to spatial grid
                         addToSpatialGrid(pe);
@@ -310,6 +315,20 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         else assert(false);
     }
     
+    //Check that all of the points are real and in view, like we didn't delete anything or put it in a strange place
+    for(int i = 0; i < peSet.size(); i++)
+    {
+        PointEdge* pe = peSet[i];
+        //Check that it exists and isn't null somehow
+        assert(pe);
+        //See if the location is in a strange place
+        if (pe->x < 0 || pe->x > width || pe->y < 0 || pe->y > height)
+        {
+            printf("Strange point edge coordinates %f, %f", pe->x, pe->y);
+            assert(false);
+        }
+    }
+    
     //If this isn't true, something fucked up. Abort mission, refund investors, etc.
     printf("in: %lu, out: %lu\n", entrences.size(), exits.size());
     assert(entrences.size() == exits.size());
@@ -321,10 +340,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     if (entrences.empty())
     {
         //Figure out if the circle edge is outside
-        bool outside = isOutside(x, y + r - plankFloat*plankFloat);
+        bool outside = isOutside(x, y + r);
         //assert(outside);
         if (outside && add)
         {
+            printf("adding new loop\n");
             //The circle edge is outside and we are adding, so we must create a new loop
             int numSegs = (int)(TAU/maxTheta) + 1;
             float dtheta = TAU/numSegs;
@@ -351,6 +371,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         }
         else if (!outside && !add)
         {
+            printf("Adding new hole loop");
             //Inside and subtracting, add a new hole
             int numSegs = (int)(-TAU/maxTheta) + 1;
             float dtheta = -TAU/numSegs;
@@ -394,7 +415,6 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 //Get the +ccw change in the angle from the enterence to this exit
                 float tmpDtheta = tmpOut.angle - in.angle;
                 if (tmpDtheta < 0) tmpDtheta += TAU;
-                //assert(tmpDtheta != 0);
                 
                 //If it's smaller than the last one, it's closer
                 if (tmpDtheta < dTheta)
@@ -405,38 +425,53 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 }
             }
             
-            //Find the minimum number of segments we need to satisfy the maximum seg length requirement
-            int numSegs = (dTheta/maxTheta) + 1;   //Ceil of dtheta/maxTheta
-            //Find the angle that each of these segments needs
-            float segTheta = dTheta/numSegs;
-            
-            //Extend entrence to exit along the circle edge in +theta
-            PointEdge* prev = in.intersection;
-            float angle = in.angle + segTheta;
-            for (int j = 1; j < numSegs; j++)
+            //If the enterence and exit are at a really close theta, then we just want to merge these points,
+            if (dTheta < .01)
             {
-                //Make a new point at this theta
-                float px = x + r*cosf(angle);
-                float py = y + r*sinf(angle);
-                PointEdge* pe = new PointEdge(px, py, NULL, prev);
-                peSet.push_back(pe);
-                
-                //Make the prev point edge connect to this one
-                prev->next = pe;
-                
-                //Now that the last PE has its edge defined, add it to our collections
-                addToSpatialGrid(prev);
-                
-                //Set these for the next iteration
-                prev = pe;
-                angle += segTheta;
+                printf("Merging close enterence and exit\n");
+                //Bypass the "in" PointEdge
+                in.intersection->tmpMark = onEdge;
+                in.intersection->next = NULL;
+                removeFromSpatialGrid(in.intersection->prev);
+                in.intersection->prev->next = out.intersection;
+                out.intersection->prev = in.intersection->prev;
+                addToSpatialGrid(in.intersection->prev);
+                circumventedEdgePE.push_back(in.intersection);
             }
-            //Connect the last segment to the exit
-            prev->next = out.intersection;
-            out.intersection->prev = prev;
-            //Add the last point to the spatial grid
-            addToSpatialGrid(prev);
-            
+            else
+            {
+                //Find the minimum number of segments we need to satisfy the maximum seg length requirement
+                int numSegs = (dTheta/maxTheta) + 1;   //Ceil of dtheta/maxTheta
+                //Find the angle that each of these segments needs
+                float segTheta = dTheta/numSegs;
+                printf("building %d new edges with dtheta %f\n", numSegs, segTheta);
+                //Extend entrence to exit along the circle edge in +theta
+                PointEdge* prev = in.intersection;
+                float angle = in.angle + segTheta;
+                for (int j = 1; j < numSegs; j++)
+                {
+                    //Make a new point at this theta
+                    float px = x + r*cosf(angle);
+                    float py = y + r*sinf(angle);
+                    PointEdge* pe = new PointEdge(px, py, NULL, prev);
+                    peSet.push_back(pe);
+                    
+                    //Make the prev point edge connect to this one
+                    prev->next = pe;
+                    
+                    //Now that the last PE has its edge defined, add it to our collections
+                    addToSpatialGrid(prev);
+                    
+                    //Set these for the next iteration
+                    prev = pe;
+                    angle += segTheta;
+                }
+                //Connect the last segment to the exit
+                prev->next = out.intersection;
+                out.intersection->prev = prev;
+                //Add the last point to the spatial grid
+                addToSpatialGrid(prev);
+            }
             //Remove that exit because it is no longer needed
             exits[outI] = exits.back();
             exits.pop_back();
@@ -463,7 +498,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     circumvented = true;
                     break;
                 }
-            if (!circumvented) pe->tmpMark = outside;   //Reset this lol
+            if (!circumvented) pe->tmpMark = outside;   //Reset this
         }
     }
     //Delete inside points which are now only irrelevantly linked to themselves
@@ -476,25 +511,32 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             peSet[i] = peSet.back();
             peSet.pop_back();
             i--;
-            delete pe;
+            //delete pe;
         }
     }
-    /*
+    
+    fflush(stdout);
     //Check the consistancy of the linked list structures
     for(int i = 0; i < peSet.size(); i++)
     {
         PointEdge* pe = peSet[i];
         //Check that it exists and isn't null somehow
         assert(pe);
+        //See if the location is in a strange place
+        if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height)
+        {
+            printf("Strange point edge coordinates %f, %f", pe->x, pe->y);
+            assert(false);
+        }
         //Check that it has a next and previous
         assert(pe->next);
         assert(pe->prev);
         //Check that linked nodes link back correctly
         assert(pe->next->prev);
-        assert(pe->next->prev == pe);
+        assert(pe->next->prev == pe);	
         assert(pe->prev->next);
         assert(pe->prev->next == pe);
-    }*/
+    }
     
 }
 
@@ -517,7 +559,18 @@ void ShapeField::clipQuad(bool add, float* x, float* y)
 
 void ShapeField::clear()
 {
-    //TODO YO
+    //Free everything in the point set
+    for (int i = 0; i < peSet.size(); i++)
+        delete peSet[i];
+    
+    //Clear the point set
+    peSet.clear();
+    
+    //Clear the spatial grid vectors
+    for (int i = 0; i < gridWidth; i++)
+        for(int j = 0; j < gridHeight; j++)
+            spatialGrid[i][j].clear();
+    
 }
 
 
@@ -538,6 +591,21 @@ bool ShapeField::isOutside(float px, float py)
         {
             PointEdge* pe = cell->at(i);
             PointEdge* npe = pe->next;
+            if (pe->tmpMark == inside)
+                continue;   //Don't bother evaluating anything inside or on the edge ... no intersections implies these cannot interfere
+            else if (pe->tmpMark == onEdge)
+            {
+                //Check for simplified case where we have edge points helping us out
+                //Given no intersections, any edge must be connected to two inside or two edge or two outside
+                assert(pe->prev->tmpMark == npe->tmpMark);
+                if (npe->tmpMark == onEdge)
+                    continue;   //It's useless, there is a concentric circle but we need some perspective from an outside edge or lack of
+                else if (npe->tmpMark == inside)
+                {
+                    //This will have a negative intersection, we don't care about it
+                    continue;
+                }
+            }
             bool peLeft = pe->x < px;
             bool npeLeft = npe->x < px;
             if (peLeft && !npeLeft)
@@ -580,6 +648,8 @@ vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, fl
 
 void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 {
+    if (!pe->next) return;
+    
     //Create a slightly generous bounding box
     unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
     unsigned int minY = min(pe->y, pe->next->y) - plankFloat;
@@ -607,6 +677,8 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 
 void ShapeField::addToSpatialGrid(PointEdge* pe)
 {
+    assert(pe->next);
+    
     //Create a slightly generous bounding box
     unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
     unsigned int minY = min(pe->y, pe->next->y) - plankFloat;
