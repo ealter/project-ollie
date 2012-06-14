@@ -36,6 +36,7 @@ const GLchar * mask_frag =
         //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         [self.maskTexture clear:INITIAL_RED g:0 b:0 a:0];
+        self.maskTexture.sprite.flipY = YES;
         
         // 2
         self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
