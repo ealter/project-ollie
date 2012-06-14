@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CCNode.h"
 #import "cocos2d.h"
+
 
 @interface GWCamera : NSObject
 {
@@ -22,7 +22,13 @@
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
                                                         // used for shaking effects currently.
 
-@property (assign, nonatomic) CGPoint zoomOrigin;       // used as the origin for camera zooming. 
+@property (assign, nonatomic) CGPoint zoomOrigin;       // used as the origin for camera zooming.
+
+@property (assign, nonatomic) float maximumScale;       // maximum scale size
+
+@property (assign, nonatomic) float minimumScale;       // minimum scale size
+
+@property (assign, nonatomic) float defaultScale;       // default scale size
 
 /* Inits the camera with a world and its dimensions */
 -(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;

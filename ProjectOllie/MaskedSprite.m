@@ -1,0 +1,142 @@
+//
+//  MaskedSprite.m
+//  ProjectOllie
+//
+//  Created by Eliot Alter on 6/11/12.
+//  Copyright (c) 2012 hi ku LLC. All rights reserved.
+//
+
+#import "MaskedSprite.h"
+#import "cocos2d.h"
+#import "CCGLProgram.h"
+
+#define INITIAL_RED 0.0
+#define COVERED_RED 1.0
+
+@interface MaskedSprite ()
+
+@property (nonatomic, strong) CCRenderTexture *maskTexture;
+@property (nonatomic) GLuint textureWidthLocation;
+@property (nonatomic) GLuint textureHeightLocation;
+@property (nonatomic) GLuint textureLocation;
+@property (nonatomic) GLuint maskLocation;
+
+@end
+
+@implementation MaskedSprite
+
+@synthesize maskTexture = _maskTexture;
+@synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_;
+
+- (id)initWithFile:(NSString *)file
+{
+    self = [super initWithFile:file];
+    if (self) {
+        self.flipY = YES;
+        
+        // 1
+        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
+        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:0];
+        
+        // 2
+        NSError *error = nil;
+        GLchar *mask_frag = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"TerrainShader" ofType:@"frag"] encoding:NSUTF8StringEncoding error:&error] UTF8String];
+        if(error) {
+            DebugLog(@"The error: %@", error);
+        }
+        assert(mask_frag);
+        self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
+                                                         fragmentShaderByteArray:mask_frag] autorelease];
+        
+        CHECK_GL_ERROR_DEBUG();
+        
+        // 3
+        [shaderProgram_ addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
+        [shaderProgram_ addAttribute:kCCAttributeNameColor    index:kCCVertexAttrib_Color];
+        [shaderProgram_ addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
+        
+        CHECK_GL_ERROR_DEBUG();
+        
+        // 4
+        [shaderProgram_ link];
+        
+        CHECK_GL_ERROR_DEBUG();
+        
+        // 5
+        [shaderProgram_ updateUniforms];
+        
+        CHECK_GL_ERROR_DEBUG();
+        
+        // 6
+        self.textureLocation       = glGetUniformLocation( shaderProgram_->program_, "u_texture");
+        self.maskLocation          = glGetUniformLocation( shaderProgram_->program_, "u_mask");
+        self.textureWidthLocation  = glGetUniformLocation( shaderProgram_->program_, "textureWidth");
+        self.textureHeightLocation = glGetUniformLocation( shaderProgram_->program_, "textureHeight");
+        
+        CHECK_GL_ERROR_DEBUG();
+    }
+    return self;
+}
+
+-(void) draw {
+    CCTexture2D *mask = self.maskTexture.sprite.texture;
+    ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
+    // 1
+    ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
+    ccGLUseProgram( shaderProgram_->program_ );
+    [shaderProgram_ setUniformForModelViewProjectionMatrix];
+    
+    // 2
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture( GL_TEXTURE_2D,  [texture_ name] );
+    glUniform1i(self.textureLocation, 0);
+    
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture( GL_TEXTURE_2D,  [mask name] );
+    glUniform1i(self.maskLocation, 1);
+    
+    glUniform1f(self.textureWidthLocation, self.textureRect.size.width);
+    glUniform1f(self.textureHeightLocation, self.textureRect.size.height);
+    
+    // 3
+#define kQuadSize sizeof(quad_.bl)
+    
+    // vertex
+    glVertexAttribPointer(kCCVertexAttrib_Position, 3, GL_FLOAT, GL_FALSE, kQuadSize, &quad_.tl.vertices);
+    
+    // texCoods
+    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kQuadSize, &quad_.tl.texCoords);
+    
+    // color
+    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, &quad_.tl.colors);
+    
+    // 4
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glActiveTexture(GL_TEXTURE0);
+}
+
+- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [self.maskTexture begin];
+    ccColor4F color = {COVERED_RED, 0, 0, 0};
+    ccDrawSolidPoly(poly, numberOfPoints, color);
+    
+    [self.maskTexture end];
+}
+
+- (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [self.maskTexture begin];
+    ccColor4F color = {INITIAL_RED, 0, 0, 0};
+    ccDrawSolidPoly(poly, numberOfPoints, color);
+    
+    [self.maskTexture end];
+}
+
+- (BOOL)saveMaskToFile:(NSString *)fileName
+{
+    return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
+}
+
+@end

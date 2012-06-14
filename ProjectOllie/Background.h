@@ -11,12 +11,10 @@
 
 @interface Background : CCLayer 
 
-@property (nonatomic, retain) CCSprite *background;
-@property (nonatomic, strong) CCSprite *background2;
-@property int scrollspeed;
+@property (assign, nonatomic) float scrollSpeed; /* In pixels/second. Positive means left to right, negative means right to left. */
+@property (nonatomic, strong) NSArray *imageNames; //An array of NSStrings
 
--(id)initwithSpeed:(int) speed andImage: (NSString *) imagename;
-- (void) scroll:(ccTime)dt;
-+(CCScene *) scene;
+- (id)initWithSpeed:(int)speed images:(NSArray *)imageNames;
+- (void)scroll:(ccTime)dt;
 
 @end

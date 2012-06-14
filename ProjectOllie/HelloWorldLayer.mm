@@ -219,7 +219,6 @@ enum {
 	
 	kmGLPopMatrix();
 }
- 
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
 {
@@ -232,7 +231,6 @@ enum {
 	int idy = (CCRANDOM_0_1() > .5 ? 0:1);
 	PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];						
 	[parent addChild:sprite];
-	
     
 	sprite.position = ccp( p.x, p.y); //cocos2d point
 	

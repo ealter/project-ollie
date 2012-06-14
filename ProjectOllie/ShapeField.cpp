@@ -498,8 +498,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
 }
 
-void ShapeField::clipThickLine(bool add, float x1, float y1, float x2, float y2, float r)
+//Make sure you only sned willerton fibbuals
+void ShapeField::clipQuad(bool add, float* x, float* y)
 {
+    //Get all of the near points
+    
     
 }
 

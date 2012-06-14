@@ -44,9 +44,9 @@
     //Draw each of the land elements
     for (int i = 0; i < triStrips.num_strips; i++)
     {
-        ccDrawTexturedTriStrip(triStrips.strip[i].vertex, 
-                               triStrips.texCoords[i].vertex, 
-                               triStrips.strip[i].num_vertices, 
+        ccDrawTexturedTriStrip(triStrips.strip[i].vertex,
+                               triStrips.texCoords[i].vertex,
+                               triStrips.strip[i].num_vertices,
                                self.texture);
         //Debug draw triangle lines
         int numVerts = triStrips.strip[i].num_vertices;
@@ -65,6 +65,12 @@
     
 }
 
+- (void) clear
+{
+    //Clear the shape field
+    ShapeField.clear();
+}
+
 - (void) dealloc
 {
     
@@ -75,22 +81,22 @@
 
 + (Terrain*) generateRandomOneIsland
 {
-    
+    return nil;
 }
 
 + (Terrain*) generateRandomTwoIsland
 {
-    
+    return nil;
 }
 
 + (Terrain*) generateRandomBlobs
 {
-    
+    return nil;
 }
 
 + (Terrain*) generateRandomCavern
 {
-    
+    return nil;
 }
 
 @end

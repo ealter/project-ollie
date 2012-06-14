@@ -31,6 +31,11 @@ class ShapeField;
 //Removing land
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
 
+//Call whenever shape is changed to rebuild the derived physical bodies and drawing
+- (void) shapeChanged;
+
+//Reset to a blank terrain
+- (void) clear;
 
 + (Terrain*) generateRandomOneIsland;
 + (Terrain*) generateRandomTwoIsland;

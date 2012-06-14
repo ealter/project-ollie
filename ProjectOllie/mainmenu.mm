@@ -10,13 +10,14 @@
 #import "CCBReader.h"
 #import "SandboxLayer.h"
 #import "DrawEnvironment.h"
-#import "Background.h"
+#import "SandboxScene.h"
 
 @implementation mainmenu
 
 -(void)pressedMakeSquares: (id)sender
 {
-    CCScene* scene = [SandboxLayer scene];
+    SandboxScene *scene = [SandboxScene node];
+    //CCScene* scene = [SandboxLayer scene];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
