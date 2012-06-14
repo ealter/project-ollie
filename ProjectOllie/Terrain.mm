@@ -28,7 +28,7 @@
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(480,320)];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
         drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
     }
     return self;
@@ -38,12 +38,16 @@
 - (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(true, r, x, y);
+    
+    //part of drawing, unrelated to terrain
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
 }
 
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(false, r, x, y);
+    
+    //part of drawing, unrelated to terrain
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
 }
 

@@ -36,6 +36,8 @@
     
         ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
         [self.texture setTexParameters: &params];
+        [self.texture setAntiAliasTexParameters];
+        [self.maskTexture.sprite.texture setAntiAliasTexParameters];
         
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
@@ -138,7 +140,7 @@
 
 -(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add{
     
-    int numPoints = 360;
+    int numPoints = 1000;
     CGPoint circle[numPoints];
     for(int i = 0; i < numPoints; i++)
     {
@@ -157,6 +159,7 @@
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self.maskTexture begin];
+    
     ccColor4F color = {COVERED_RED, 0, 0, 1};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     

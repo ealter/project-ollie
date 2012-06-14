@@ -1,5 +1,5 @@
 //
-//  SandboxLayer.h
+//  ActionLayer.h
 //  ProjectOllie
 //
 //  Created by Lion User on 6/1/12.
@@ -13,7 +13,7 @@
 
 @class GWCamera;
 
-@interface SandboxLayer : CCLayer <UIGestureRecognizerDelegate>
+@interface ActionLayer : CCLayer <UIGestureRecognizerDelegate>
 {
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
@@ -29,5 +29,8 @@
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
+
+// adds terrain to build
+-(void) addTerrain:(CGPoint*)points;
 
 @end

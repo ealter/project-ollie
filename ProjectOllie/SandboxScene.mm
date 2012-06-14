@@ -7,18 +7,20 @@
 //
 
 #import "SandboxScene.h"
-#import "SandboxLayer.h"
+#import "ActionLayer.h"
 
 @implementation SandboxScene
+
+@synthesize actionLayer = _actionLayer;
 
 -(id) init
 {
     if (self = [super init]) {
         // 'layer' is an autorelease object.
-        SandboxLayer *layer = [SandboxLayer node];
+        self.actionLayer = [ActionLayer node];
         
         // add layer as a child to scene
-        [self addChild: layer];
+        [self addChild: self.actionLayer];
         
         /*
         Background *blayer = [Background node];

@@ -50,7 +50,7 @@
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
 		CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5A6F3015795D190037206B /* mainmenu.ccbi */; };
 		CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.mm */; };
-		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
+		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -300,8 +300,8 @@
 		CE5A6F3015795D190037206B /* mainmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainmenu.ccbi; path = Resources/mainmenu.ccbi; sourceTree = "<group>"; };
 		CE5A6F3715795D8F0037206B /* mainmenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainmenu.h; sourceTree = "<group>"; };
 		CE5A6F3815795D8F0037206B /* mainmenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mainmenu.mm; sourceTree = "<group>"; };
-		CE8429E4157981BB0038C653 /* SandboxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxLayer.h; sourceTree = "<group>"; };
-		CE8429E5157981BB0038C653 /* SandboxLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxLayer.mm; sourceTree = "<group>"; };
+		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ActionLayer.h; sourceTree = "<group>"; };
+		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
@@ -835,8 +835,8 @@
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
 				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
-				CE8429E4157981BB0038C653 /* SandboxLayer.h */,
-				CE8429E5157981BB0038C653 /* SandboxLayer.mm */,
+				CE8429E4157981BB0038C653 /* ActionLayer.h */,
+				CE8429E5157981BB0038C653 /* ActionLayer.mm */,
 				C5FE5FED15796E6F008F4298 /* CCBReader.h */,
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
@@ -1685,7 +1685,7 @@
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
 				CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
-				CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */,
+				CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,

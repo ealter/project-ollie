@@ -8,36 +8,42 @@
 
 #import "DrawMenu.h"
 #import "DrawEnvironment.h"
+#import "SandboxScene.h"
 
 @implementation DrawMenu
 
 -(void)pressedLarge:(id)sender
 {
-    DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brushradius = largeradius;
+    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
+    parent_node.brushradius = largeradius;
 }
 
 -(void)pressedMedium:(id)sender
 {
-    DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brushradius = mediumradius;
+    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
+    parent_node.brushradius = mediumradius;
 }
 
 -(void)pressedSmall:(id)sender
 {
-    DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brushradius = smallradius;
+    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
+    parent_node.brushradius = smallradius;
 }
 
 -(void)pressedEraser:(id)sender
 {
-    DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brushradius = -smallradius;
+    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
+    parent_node.brushradius = -smallradius;
 }
 
 -(void)pressedCheck:(id)sender
 {
+    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
+    SandboxScene* scene = [SandboxScene node];
+    [parent_node removeChild:parent_node.terrain cleanup:YES];
+    [scene.actionLayer addChild:parent_node.terrain];
     
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 -(void)pressedClear:(id)sender

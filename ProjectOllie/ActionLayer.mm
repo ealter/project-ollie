@@ -1,12 +1,12 @@
 //
-//  SandboxLayer.m
+//  ActionLayer.m
 //  ProjectOllie
 //
 //  Created by Lion User on 6/1/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
-#import "SandboxLayer.h"
+#import "ActionLayer.h"
 #import "AppDelegate.h"
 #import "CCAction.h"
 #import "GWCamera.h"
@@ -27,7 +27,7 @@ enum {
 	kTagParentNode = 1,
 };
 
-@interface SandboxLayer()
+@interface ActionLayer()
 
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -40,7 +40,7 @@ enum {
 
 @end
 
-@implementation SandboxLayer
+@implementation ActionLayer
 
 @synthesize center      = _center;
 @synthesize camera      = _camera;
@@ -52,7 +52,7 @@ enum {
     CCScene *scene = [CCScene node];
 
     // 'layer' is an autorelease object.
-    SandboxLayer *layer = [SandboxLayer node];
+    ActionLayer *layer = [ActionLayer node];
 
     // add layer as a child to scene
     [scene addChild: layer];
