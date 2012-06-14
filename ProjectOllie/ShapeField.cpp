@@ -8,12 +8,22 @@
 
 #include <iostream>
 #include "ShapeField.h"
+#include "PointEdge.h"
 #include <math.h>
 #include <assert.h>
 
+// Size of each cell in the spatial grid
+#define cellWidth 32
+#define cellHeight 32
+
+//Maximum distance for a segment on a circle
+#define maxCircleSeg 4
+
 // Define the smallest float difference that could matter
 #define plankFloat 0.1f
-#define TAU M_PI*2
+#define TAU (M_PI*2)
+
+using namespace std;
 
 struct circleIntersection
 {
@@ -51,12 +61,17 @@ ShapeField::~ShapeField()
 
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
+    //Bound by the world size
+    if (x <= r) x = r + 1;
+    if (y <= r) y = r + 1;
+    if (x >= width-r) x = width-r-1;
+    if (y >= height-r) y = height-r-1;
     
     //Create bounding box for affected area
-    unsigned int minX = (unsigned int)(x - r - plankFloat);
-    unsigned int minY = (unsigned int)(y - r - plankFloat);
-    unsigned int maxX = (unsigned int)(x + r + 1.0f + plankFloat);
-    unsigned int maxY = (unsigned int)(y + r + 1.0f + plankFloat);
+    unsigned int minX = x - r        - plankFloat;
+    unsigned int minY = y - r        - plankFloat;
+    unsigned int maxX = x + r + 1.0f + plankFloat;
+    unsigned int maxY = y + r + 1.0f + plankFloat;
     
     //Find the corrosponding grid spaces that we are affecting
     unsigned int minCellX = minX/cellWidth;
@@ -280,7 +295,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 //Make point
                 PointEdge* outP = new PointEdge(outX, outY, npe, NULL);
                 //Rerout pe to new point
-                pe->next = outP;
+                npe->prev = outP;
                 //Add this to the grid and PointEdge set
                 addToSpatialGrid(outP);
                 peSet.push_back(outP);
@@ -378,7 +393,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 
                 //Get the +ccw change in the angle from the enterence to this exit
                 float tmpDtheta = tmpOut.angle - in.angle;
-                if (tmpDtheta < 0) tmpDtheta = TAU + tmpDtheta;
+                if (tmpDtheta < 0) tmpDtheta += TAU;
                 //assert(tmpDtheta != 0);
                 
                 //If it's smaller than the last one, it's closer
@@ -391,7 +406,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             }
             
             //Find the minimum number of segments we need to satisfy the maximum seg length requirement
-            int numSegs = (int)(dTheta/maxTheta) + 1;   //Ceil of dtheta/maxTheta
+            int numSegs = (dTheta/maxTheta) + 1;   //Ceil of dtheta/maxTheta
             //Find the angle that each of these segments needs
             float segTheta = dTheta/numSegs;
             
@@ -441,7 +456,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             for (int j = 0; j < circumventedEdgePE.size(); j++)
                 if (pe == circumventedEdgePE[j])
                 {
-                    //Found it. We did cirucmvent it and therefore it should be removed
+                    //Found it. We did circumvent it and therefore it should be removed
                     removeFromSpatialGrid(pe);
                     //Lets also mark it as inside to delete it more quickly in the delete loop
                     pe->tmpMark = inside;
@@ -464,6 +479,22 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             delete pe;
         }
     }
+    /*
+    //Check the consistancy of the linked list structures
+    for(int i = 0; i < peSet.size(); i++)
+    {
+        PointEdge* pe = peSet[i];
+        //Check that it exists and isn't null somehow
+        assert(pe);
+        //Check that it has a next and previous
+        assert(pe->next);
+        assert(pe->prev);
+        //Check that linked nodes link back correctly
+        assert(pe->next->prev);
+        assert(pe->next->prev == pe);
+        assert(pe->prev->next);
+        assert(pe->prev->next == pe);
+    }*/
     
 }
 
@@ -477,8 +508,8 @@ void ShapeField::clipThickLine(bool add, float x1, float y1, float x2, float y2,
 bool ShapeField::isOutside(float px, float py)
 {
     //Hold the current cell that we are in
-    int cellX = (int)(px/cellWidth);
-    int cellY = (int)(py/cellHeight);
+    int cellX = px/cellWidth;
+    int cellY = py/cellHeight;
     
     float yDistance = -1.0f;    //Negative implies that no intersections have been found yet
     bool isOutside;
@@ -532,10 +563,10 @@ vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, fl
 void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 {
     //Create a slightly generous bounding box
-    unsigned int minX = (unsigned int)(min(pe->x, pe->next->x) - plankFloat);
-    unsigned int minY = (unsigned int)(min(pe->y, pe->next->y) - plankFloat);
-    unsigned int maxX = (unsigned int)(max(pe->x, pe->next->x) + plankFloat) + 1;
-    unsigned int maxY = (unsigned int)(max(pe->y, pe->next->y) + plankFloat) + 1;
+    unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
+    unsigned int minY = min(pe->y, pe->next->y) - plankFloat;
+    unsigned int maxX = max(pe->x, pe->next->x) + plankFloat + 1;
+    unsigned int maxY = max(pe->y, pe->next->y) + plankFloat + 1;
     
     unsigned int minCellX = minX/cellWidth;
     unsigned int minCellY = minY/cellHeight;
@@ -559,10 +590,10 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 void ShapeField::addToSpatialGrid(PointEdge* pe)
 {
     //Create a slightly generous bounding box
-    unsigned int minX = (unsigned int)(min(pe->x, pe->next->x) - plankFloat);
-    unsigned int minY = (unsigned int)(min(pe->y, pe->next->y) - plankFloat);
-    unsigned int maxX = (unsigned int)(max(pe->x, pe->next->x) + plankFloat) + 1;
-    unsigned int maxY = (unsigned int)(max(pe->y, pe->next->y) + plankFloat) + 1;
+    unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
+    unsigned int minY = min(pe->y, pe->next->y) - plankFloat;
+    unsigned int maxX = max(pe->x, pe->next->x) + plankFloat + 1;
+    unsigned int maxY = max(pe->y, pe->next->y) + plankFloat + 1;
     
     unsigned int minCellX = minX/cellWidth;
     unsigned int minCellY = minY/cellHeight;

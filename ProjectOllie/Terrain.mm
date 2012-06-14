@@ -7,6 +7,8 @@
 //
 
 #import "Terrain.h"
+#import "ShapeField.h"
+#import "PointEdge.h"
 #import "ccMacros.h"
 
 @implementation Terrain
@@ -17,7 +19,7 @@
 {
     if(self = [super init])
     {
-        self->shapeField = new ShapeField(480, 320);
+        self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
     }
     return self;

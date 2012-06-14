@@ -10,22 +10,14 @@
 #define ProjectOllie_ShapeField_h
 
 #include <vector>
-#include "PointEdge.h"
 
-using namespace std;
-
-// Size of each cell in the spatial grid
-#define cellWidth 32
-#define cellHeight 32
-
-//Maximum distance for a segment on a circle
-#define maxCircleSeg 4
+class PointEdge;
 
 // Represents a field of true and false values in a quickly clippable vector format
 class ShapeField
 {
 public:
-    vector<PointEdge*>  peSet;
+    std::vector<PointEdge*> peSet;
     
     ShapeField(float meterWidth, float meterHeight);
     ~ShapeField();
@@ -33,7 +25,7 @@ public:
     void clipCircle(bool add, float r, float x, float y);
     void clipThickLine(bool add, float x1, float y1, float x2, float y2, float r);
 private:
-    vector<PointEdge*> **spatialGrid;
+    std::vector<PointEdge*> **spatialGrid;
     float width;
     float height;
     int gridWidth;
@@ -42,7 +34,7 @@ private:
     PointEdge* closestPointEdge(float x, float y);
     void removeFromSpatialGrid(PointEdge* pe);
     void addToSpatialGrid(PointEdge* pe);
-    vector<PointEdge*> pointsNear(float minX, float minY, float maxX, float maxY);
+    std::vector<PointEdge*> pointsNear(float minX, float minY, float maxX, float maxY);
     void closestPointOnLine(float px, float py, float x1, float y1, float x2, float y2, float* cx, float *cy);
     bool isOutside(float px, float py);
 };

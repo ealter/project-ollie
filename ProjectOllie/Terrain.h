@@ -10,7 +10,8 @@
 #import "cocos2d.h"
 #import "Box2D.h"
 #include <vector>
-#import "ShapeField.h"
+
+class ShapeField;
 
 /*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
