@@ -159,7 +159,7 @@
 {
     [self.maskTexture begin];
 
-    ccColor4F color = {COVERED_RED, 0, 0, 1};
+    ccColor4F color = {red, 0, 0, 1};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
     [self.maskTexture end];
@@ -167,12 +167,12 @@
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self polygon:poly numPoints:numberOfPoints red:COVERED_RED];
+    [self constructPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
 }
 
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self polygon:poly numPoints:numberOfPoints red:INITIAL_RED];
+    [self constructPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
