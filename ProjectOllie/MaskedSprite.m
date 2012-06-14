@@ -22,6 +22,8 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
+- (void)polygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+
 @end
 
 @implementation MaskedSprite
@@ -51,6 +53,11 @@
 		quad_.tr.texCoords.u = 1;
 		quad_.tr.texCoords.v = 1;
         
+
+        // 1
+        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
+        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
         
         // 2
         NSError *error = nil;
@@ -126,27 +133,42 @@
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
-    
-    
+}
 
+-(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add{
+    int numPoints = 360;
+    CGPoint circle[numPoints];
+    for(int i = 0; i < numPoints; i++)
+    {
+        float degree = 360.f/numPoints * i;
+        float radian = M_PI * degree / 180.f;
+        circle[i] = ccp(center.x+radius*cos(radian),center.y+radius*sin(radian));
+    }
+    
+    if(add)
+        [self drawPolygon:circle numPoints:numPoints];
+    else
+        [self subtractPolygon:circle numPoints:numPoints];
+    
+}
+
+- (void)polygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
+{
+    [self.maskTexture begin];
+    ccColor4F color = {red, 0, 0, 1};
+    ccDrawSolidPoly(poly, numberOfPoints, color);
+    
+    [self.maskTexture end];
 }
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self.maskTexture begin];
-    ccColor4F color = {COVERED_RED, 0, 0, 1};
-    ccDrawSolidPoly(poly, numberOfPoints, color);
-    
-    [self.maskTexture end];
+    [self polygon:poly numPoints:numberOfPoints red:COVERED_RED];
 }
 
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self.maskTexture begin];
-    ccColor4F color = {INITIAL_RED, 0, 0, 1};
-    ccDrawSolidPoly(poly, numberOfPoints, color);
-    
-    [self.maskTexture end];
+    [self polygon:poly numPoints:numberOfPoints red:INITIAL_RED];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName

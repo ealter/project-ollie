@@ -227,8 +227,8 @@
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
     
-    //[self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
-
+    [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
+    
     
     /* ZOOMING */
     

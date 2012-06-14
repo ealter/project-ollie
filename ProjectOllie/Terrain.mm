@@ -10,6 +10,12 @@
 #import "ShapeField.h"
 #import "PointEdge.h"
 #import "ccMacros.h"
+#import "MaskedSprite.h"
+
+@interface Terrain(){
+    MaskedSprite *drawSprite;
+}
+@end
 
 @implementation Terrain
 
@@ -21,6 +27,9 @@
     {
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
+        
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(480,320)];
+        drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
     }
     return self;
 }
@@ -29,11 +38,13 @@
 - (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(true, r, x, y);
+    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
 }
 
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(false, r, x, y);
+    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
 }
 
 - (void) draw
@@ -59,9 +70,11 @@
                        ccp(triStrips.strip[i].vertex[0].x, triStrips.strip[i].vertex[0].y));
     }
     */
-    for (int i = 0 ; i < shapeField->peSet.size(); i++)
-    ccDrawLine(ccp(shapeField->peSet[i]->x, shapeField->peSet[i]->y),
-               ccp(shapeField->peSet[i]->next->x, shapeField->peSet[i]->next->y));
+    //for (int i = 0 ; i < shapeField->peSet.size(); i++)
+  //  ccDrawLine(ccp(shapeField->peSet[i]->x, shapeField->peSet[i]->y),
+    //           ccp(shapeField->peSet[i]->next->x, shapeField->peSet[i]->next->y));
+    
+    [drawSprite draw];
     
 }
 
@@ -69,6 +82,7 @@
 {
     //Clear the shape field
     shapeField->clear();
+
 }
 
 - (void) dealloc

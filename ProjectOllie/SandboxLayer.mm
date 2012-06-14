@@ -80,11 +80,10 @@ enum {
 
         //set up parallax
         parallax_ = [CCParallaxNode node];
-#if 0
+
         CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
         bglayer1.scale = 2.f;
         [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:self.center.position];
-#endif
         
         [self addChild:parallax_ z:-1];
         
@@ -376,6 +375,7 @@ m_debugDraw = NULL;
 
 - (void)testMaskedSprite
 {
+
     MaskedSprite *sprite = [[MaskedSprite alloc]initWithFile:@"blocks-hd.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     CGPoint points[] = {ccp(0,0),ccp(0,50),ccp(100,70),ccp(100,0)};
     CGPoint points2[] = {ccp(50,70),ccp(70,150),ccp(150,190),ccp(200,90)};
@@ -386,8 +386,8 @@ m_debugDraw = NULL;
     
     DRAW(points3);
     SUB(points2);
-    sprite.position = ccp(0,0);
-    sprite.anchorPoint = ccp(0,0);
+    //sprite.position = ccp(0,0);
+    //sprite.anchorPoint = ccp(0,0);
     [self addChild:sprite];
     [sprite saveMaskToFile:@"testmask.png"];
 }
