@@ -17,6 +17,7 @@
 
 @interface MaskedSprite (){
     
+    PolyRenderer* pr;
     
 }
 
@@ -40,10 +41,13 @@
     self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
     
+        
+        //set up rendering paramters
         ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
+        self->pr = [[PolyRenderer alloc] initWithProjection:nil];
         
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];

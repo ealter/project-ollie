@@ -19,19 +19,16 @@
  * SOFTWARE.
  */
 
-uniform mediump mat4 projection;
-
-attribute mediump vec4 position;
-attribute mediump vec2 texcoord;
-attribute mediump vec4 color;
+#extension GL_OES_standard_derivatives : enable
 
 varying mediump vec4 frag_color;
 varying mediump vec2 frag_texcoord;
 
 void main()
 {
-	frag_color = color;
-	frag_texcoord = texcoord;//*0.5 + 0.5;
-	
-	gl_Position = projection*position;
+#if defined GL_OES_standard_derivatives
+	gl_FragColor = frag_color*smoothstep(0.0, length(fwidth(frag_texcoord)), 1.0 - length(frag_texcoord));
+#else
+	gl_FragColor = frag_color*step(0.0, 1.0 - length(frag_texcoord));
+#endif
 }
