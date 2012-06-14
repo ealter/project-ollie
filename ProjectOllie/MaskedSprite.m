@@ -22,6 +22,8 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
+- (void)polygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+
 @end
 
 @implementation MaskedSprite
@@ -131,13 +133,9 @@
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
-    
-    
-
 }
 
 -(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add{
-    
     int numPoints = 360;
     CGPoint circle[numPoints];
     for(int i = 0; i < numPoints; i++)
@@ -154,22 +152,23 @@
     
 }
 
-- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+- (void)polygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     [self.maskTexture begin];
-    ccColor4F color = {COVERED_RED, 0, 0, 1};
+    ccColor4F color = {red, 0, 0, 1};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
     [self.maskTexture end];
 }
 
+- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [self polygon:poly numPoints:numberOfPoints red:COVERED_RED];
+}
+
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self.maskTexture begin];
-    ccColor4F color = {INITIAL_RED, 0, 0, 1};
-    ccDrawSolidPoly(poly, numberOfPoints, color);
-    
-    [self.maskTexture end];
+    [self polygon:poly numPoints:numberOfPoints red:INITIAL_RED];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
