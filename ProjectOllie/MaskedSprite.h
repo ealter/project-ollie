@@ -7,7 +7,6 @@
 //
 
 #import "CCSprite.h"
-#import "CCRenderTexture.h"
 
 @interface MaskedSprite : CCSprite
 

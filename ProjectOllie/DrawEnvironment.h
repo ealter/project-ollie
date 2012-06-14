@@ -7,12 +7,13 @@
 //
 
 #import "CCScene.h"
-#import "Terrain.h"
-
+#import "cocos2d.h"
 
 #define smallradius 10.0f
 #define mediumradius 20.0f
 #define largeradius 30.0f
+
+@class Terrain;
 
 @interface DrawEnvironment : CCLayer
 

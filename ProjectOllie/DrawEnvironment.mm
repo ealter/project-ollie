@@ -11,6 +11,8 @@
 #import "PhysicsSprite.h"
 #import "CCBReader.h"
 #import "DrawMenu.h"
+#import "Terrain.h"
+
 @implementation DrawEnvironment
 @synthesize numpoints, prevpoint, brushradius;
 @synthesize terrain;
