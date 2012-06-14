@@ -7,7 +7,6 @@
 //
 
 #import "CCScene.h"
-#import "gpc.h"
 #import "Terrain.h"
 
 
@@ -17,17 +16,11 @@
 
 @interface DrawEnvironment : CCLayer
 
-@property (assign, nonatomic)gpc_polygon *newpoly;
-@property (assign, nonatomic)gpc_polygon *smallcircle;
-@property (assign, nonatomic)gpc_polygon *mediumcircle;
-@property (assign, nonatomic)gpc_polygon *largecircle;
-@property (assign, nonatomic)int numpoints;
-@property (assign, nonatomic)CGPoint prevpoint;
-@property (assign, nonatomic)gpc_polygon *brush;
-@property (assign, nonatomic)float brushradius;
+@property int numpoints;
+@property CGPoint prevpoint;
+@property float brushradius;
 
 @property (nonatomic, strong)Terrain *terrain;
 
--(gpc_polygon *)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(float) width;
 +(CCScene *) scene;
 @end

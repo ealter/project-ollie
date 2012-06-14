@@ -9,33 +9,30 @@
 #import "DrawMenu.h"
 #import "DrawEnvironment.h"
 
-
 @implementation DrawMenu
 
 -(void)pressedLarge:(id)sender
 {
     DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brush = [lols largecircle];
     lols.brushradius = largeradius;
 }
 
 -(void)pressedMedium:(id)sender
 {
     DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brush = [lols mediumcircle];
     lols.brushradius = mediumradius;
 }
 
 -(void)pressedSmall:(id)sender
 {
     DrawEnvironment *lols = (DrawEnvironment *)[self parent];
-    lols.brush = [lols smallcircle];
     lols.brushradius = smallradius;
 }
 
 -(void)pressedEraser:(id)sender
 {
-    
+    DrawEnvironment *lols = (DrawEnvironment *)[self parent];
+    lols.brushradius = -smallradius;
 }
 
 -(void)pressedCheck:(id)sender

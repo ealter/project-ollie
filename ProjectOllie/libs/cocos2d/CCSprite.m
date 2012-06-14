@@ -336,6 +336,7 @@
 // override this method to generate "double scale" sprites
 -(void) setVertexRect:(CGRect)rect
 {
+
 	rect_ = rect;
 }
 

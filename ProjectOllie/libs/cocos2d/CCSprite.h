@@ -285,4 +285,5 @@
  */
 -(void) setDisplayFrameWithAnimationName:(NSString*)animationName index:(int) frameIndex;
 
+
 @end
