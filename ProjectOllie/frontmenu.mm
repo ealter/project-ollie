@@ -1,18 +1,18 @@
 //
-//  mainmenu.m
+//  frontmenu.m
 //  ProjectOllie
 //
-//  Created by Lion User on 6/1/12.
-//  Copyright 2012 hi ku llc All rights reserved.
+//  Created by Lion User on 6/14/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "mainmenu.h"
+#import "frontmenu.h"
 #import "CCBReader.h"
 #import "SandboxLayer.h"
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
 
-@implementation mainmenu
+@implementation frontmenu
 
 -(void)pressedMakeSquares: (id)sender
 {

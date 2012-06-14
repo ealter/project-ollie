@@ -48,8 +48,6 @@
 		CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */; };
 		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
-		CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5A6F3015795D190037206B /* mainmenu.ccbi */; };
-		CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE5A6F3815795D8F0037206B /* mainmenu.mm */; };
 		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -224,6 +222,8 @@
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
 		CE9B89AF1586A59E0009C13F /* DrawMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9B89AE1586A59E0009C13F /* DrawMenu.mm */; };
+		CE9E90B0158AAEC0006CC8C9 /* frontmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE9E90AF158AAEC0006CC8C9 /* frontmenu.ccbi */; };
+		CE9E90B4158AAF29006CC8C9 /* frontmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9E90B3158AAF29006CC8C9 /* frontmenu.mm */; };
 		CEA14DAE1587CA7E00735135 /* check-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAA1587CA7E00735135 /* check-hd.png */; };
 		CEA14DAF1587CA7E00735135 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAB1587CA7E00735135 /* check.png */; };
 		CEA14DB01587CA7E00735135 /* clear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAC1587CA7E00735135 /* clear-hd.png */; };
@@ -297,9 +297,6 @@
 		CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "comic andy.ttf"; path = "Resources/comic andy.ttf"; sourceTree = "<group>"; };
 		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
 		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
-		CE5A6F3015795D190037206B /* mainmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = mainmenu.ccbi; path = Resources/mainmenu.ccbi; sourceTree = "<group>"; };
-		CE5A6F3715795D8F0037206B /* mainmenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mainmenu.h; sourceTree = "<group>"; };
-		CE5A6F3815795D8F0037206B /* mainmenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = mainmenu.mm; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* SandboxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* SandboxLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
@@ -665,6 +662,9 @@
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
 		CE9B89AD1586A59E0009C13F /* DrawMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawMenu.h; sourceTree = "<group>"; };
 		CE9B89AE1586A59E0009C13F /* DrawMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawMenu.mm; sourceTree = "<group>"; };
+		CE9E90AF158AAEC0006CC8C9 /* frontmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = frontmenu.ccbi; path = Resources/frontmenu.ccbi; sourceTree = "<group>"; };
+		CE9E90B2158AAF29006CC8C9 /* frontmenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = frontmenu.h; sourceTree = "<group>"; };
+		CE9E90B3158AAF29006CC8C9 /* frontmenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = frontmenu.mm; sourceTree = "<group>"; };
 		CEA14DAA1587CA7E00735135 /* check-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "check-hd.png"; path = "Resources/check-hd.png"; sourceTree = "<group>"; };
 		CEA14DAB1587CA7E00735135 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = Resources/check.png; sourceTree = "<group>"; };
 		CEA14DAC1587CA7E00735135 /* clear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clear-hd.png"; path = "Resources/clear-hd.png"; sourceTree = "<group>"; };
@@ -841,8 +841,8 @@
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
-				CE5A6F3715795D8F0037206B /* mainmenu.h */,
-				CE5A6F3815795D8F0037206B /* mainmenu.mm */,
+				CE9E90B2158AAF29006CC8C9 /* frontmenu.h */,
+				CE9E90B3158AAF29006CC8C9 /* frontmenu.mm */,
 				CE9B89AD1586A59E0009C13F /* DrawMenu.h */,
 				CE9B89AE1586A59E0009C13F /* DrawMenu.mm */,
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
@@ -870,6 +870,7 @@
 		CE94AA6C15785F83009B35B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE9E90AF158AAEC0006CC8C9 /* frontmenu.ccbi */,
 				CE123C4C158811DC003AD813 /* background.jpg */,
 				CEA14DAA1587CA7E00735135 /* check-hd.png */,
 				CEA14DAB1587CA7E00735135 /* check.png */,
@@ -887,7 +888,6 @@
 				C54A05F5158151A100D7B369 /* blocks-hd.png */,
 				C5C01E38157AAEB2004CF358 /* pattern1.png */,
 				CE94AA6D15785F83009B35B4 /* Default.png */,
-				CE5A6F3015795D190037206B /* mainmenu.ccbi */,
 				CEFB2C4F157D7655008A808D /* treez.png */,
 				CE94AA6F15785F83009B35B4 /* fps_images.png */,
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
@@ -1486,7 +1486,6 @@
 				CE94AC7C15785F89009B35B4 /* blocks.png in Resources */,
 				C52986BE1578A43300656B50 /* README.md in Resources */,
 				C52986C01578A43300656B50 /* LICENSE in Resources */,
-				CE5A6F3115795D190037206B /* mainmenu.ccbi in Resources */,
 				C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */,
 				CE4BCDA5157AD080002FD1F3 /* btn-test-0.png in Resources */,
 				CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */,
@@ -1508,6 +1507,7 @@
 				CEA14DB01587CA7E00735135 /* clear-hd.png in Resources */,
 				CEA14DB11587CA7E00735135 /* clear.png in Resources */,
 				CE123C4D158811DC003AD813 /* background.jpg in Resources */,
+				CE9E90B0158AAEC0006CC8C9 /* frontmenu.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1683,7 +1683,6 @@
 				C52986C31578A43300656B50 /* unzip.c in Sources */,
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
-				CE5A6F3915795D8F0037206B /* mainmenu.mm in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
 				CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
@@ -1695,6 +1694,7 @@
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
 				CE9B89AF1586A59E0009C13F /* DrawMenu.mm in Sources */,
 				CE123C5015883687003AD813 /* TerrainShader.frag in Sources */,
+				CE9E90B4158AAF29006CC8C9 /* frontmenu.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
