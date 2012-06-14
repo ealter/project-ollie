@@ -7,6 +7,7 @@
 //
 
 #import "Background.h"
+#import "cocos2d.h"
 
 #define BACKGROUND_IMAGE_TAG 37475912 /* Kinda random integer to avoid conflicts */
 
