@@ -23,7 +23,8 @@ public:
     ~ShapeField();
     
     void clipCircle(bool add, float r, float x, float y);
-    void clipThickLine(bool add, float x1, float y1, float x2, float y2, float r);
+    void clipQuad(bool add, float* x, float* y);
+    void clear();
 private:
     std::vector<PointEdge*> **spatialGrid;
     float width;

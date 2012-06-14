@@ -68,12 +68,12 @@
 - (void) clear
 {
     //Clear the shape field
-    ShapeField.clear();
+    shapeField->clear();
 }
 
 - (void) dealloc
 {
-    
+    delete shapeField;
     [super dealloc];
 }
 
