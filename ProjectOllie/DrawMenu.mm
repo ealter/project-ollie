@@ -9,6 +9,7 @@
 #import "DrawMenu.h"
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
+#import "Terrain.h"
 
 @implementation DrawMenu
 
@@ -40,6 +41,7 @@
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     SandboxScene* scene = [SandboxScene node];
+
     [parent_node removeChild:parent_node.terrain cleanup:YES];
     [scene.actionLayer addChild:parent_node.terrain];
     
