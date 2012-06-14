@@ -11,9 +11,10 @@ uniform float textureHeight;
 
 void main()
 {
-    vec2 texCoordTiled = vec2(mod(v_texCoord.x, textureWidth), mod(v_texCoord.y, textureHeight));
-    vec4 texColor = texture2D(u_texture, v_texCoord);
+    vec2 texCoordTiled = vec2(v_texCoord.x*480.0/textureWidth, v_texCoord.y*320.0/textureHeight);
+    vec4 texColor = texture2D(u_texture, texCoordTiled);
     vec4 maskColor = texture2D(u_mask, v_texCoord);
     vec4 finalColor = vec4(texColor.r, texColor.g, texColor.b, maskColor.r * texColor.a);
+    //vec4 finalColor = vec4(1.0, maskColor.g, maskColor.b, 1.0);
     gl_FragColor = v_fragmentColor * finalColor;
 }
