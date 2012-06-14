@@ -9,7 +9,7 @@
 #import "MaskedSprite.h"
 #import "cocos2d.h"
 #import "CCGLProgram.h"
-#import "PolyRenderer.h";
+#import "PolyRenderer.h"
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
