@@ -499,13 +499,27 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
 }
 
 //Make sure you only sned willerton fibbuals
-/*
+
 void ShapeField::clipQuad(bool add, float* x, float* y)
 {
     //Get all of the near points
     
+    //Mark all points
     
-}*/
+
+    //Find intersections, create exits and entrences
+    
+    //Connect intersections along clipping path
+    
+    //Clean up
+    
+}
+
+void ShapeField::clear()
+{
+    //TODO YO
+}
+
 
 //Returns true if the point (px, py) is outside or on an edge whose outside normal is (0, -1)
 //Precondition: no point edges are coincident with the given segment

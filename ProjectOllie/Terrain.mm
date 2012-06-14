@@ -10,6 +10,12 @@
 #import "ShapeField.h"
 #import "PointEdge.h"
 #import "ccMacros.h"
+#import "MaskedSprite.h"
+
+@interface Terrain(){
+    MaskedSprite *drawSprite;
+}
+@end
 
 @implementation Terrain
 
@@ -21,6 +27,9 @@
     {
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
+        
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(480,320)];
+        drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
     }
     return self;
 }
@@ -68,12 +77,13 @@
 - (void) clear
 {
     //Clear the shape field
-   // ShapeField.clear();
+    shapeField->clear();
+
 }
 
 - (void) dealloc
 {
-    
+    delete shapeField;
     [super dealloc];
 }
 

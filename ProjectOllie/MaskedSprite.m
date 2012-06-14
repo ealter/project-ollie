@@ -136,6 +136,21 @@
 
 }
 
+-(void)drawCircleAt:(CGPoint)center withRadius:(float)radius{
+    
+    int numPoints = 60;
+    CGPoint circle[numPoints];
+    for(int i = 0; i < numPoints; i++)
+    {
+        float degree = 360.f/numPoints * i;
+        float radian = M_PI * degree / 180.f;
+        circle[i] = ccp(center.x+radius*cos(radian),center.y+radius*sin(radian));
+    }
+    
+    [self drawPolygon:circle numPoints:numPoints];
+    
+}
+
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self.maskTexture begin];

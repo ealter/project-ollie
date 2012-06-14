@@ -386,8 +386,8 @@ m_debugDraw = NULL;
     
     DRAW(points3);
     SUB(points2);
-    sprite.position = ccp(0,0);
-    sprite.anchorPoint = ccp(0,0);
+    //sprite.position = ccp(0,0);
+    //sprite.anchorPoint = ccp(0,0);
     [self addChild:sprite];
     [sprite saveMaskToFile:@"testmask.png"];
 }

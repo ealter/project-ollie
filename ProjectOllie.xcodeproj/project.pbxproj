@@ -831,7 +831,6 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
-				CE894EFC158299CE00E412E1 /* CSG */,
 				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
@@ -913,6 +912,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE894EFC158299CE00E412E1 /* CSG */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
 				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,

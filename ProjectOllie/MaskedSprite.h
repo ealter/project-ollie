@@ -11,6 +11,7 @@
 
 @interface MaskedSprite : CCSprite
 
+- (void)drawCircleAt:(CGPoint) center withRadius:(float)radius;
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (BOOL)saveMaskToFile:(NSString *)fileName;
