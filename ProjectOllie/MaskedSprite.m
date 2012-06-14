@@ -9,12 +9,16 @@
 #import "MaskedSprite.h"
 #import "cocos2d.h"
 #import "CCGLProgram.h"
+#import "PolyRenderer.h";
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 
-@interface MaskedSprite ()
+@interface MaskedSprite (){
+    
+    
+}
 
 @property (nonatomic, strong) CCRenderTexture *maskTexture;
 @property (nonatomic) GLuint textureWidthLocation;
