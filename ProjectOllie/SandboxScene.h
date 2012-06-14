@@ -11,12 +11,8 @@
 #import "ActionLayer.h"
 #import "CCScene.h"
 
+@interface SandboxScene : CCScene
 
-@interface SandboxScene : CCScene {
-    
-    
-    
-}
 @property (strong, nonatomic) ActionLayer* actionLayer;
 
 @end
