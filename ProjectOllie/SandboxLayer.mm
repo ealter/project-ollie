@@ -343,7 +343,6 @@ m_debugDraw = NULL;
     for( UITouch *touch in touches ) {
         CGPoint location = [touch locationInView: [touch view]];
         
-        
         location = [[CCDirector sharedDirector] convertToGL: location];
         location = [self convertToNodeSpace:location];
         
@@ -377,16 +376,18 @@ m_debugDraw = NULL;
 
 - (void)testMaskedSprite
 {
-    MaskedSprite *sprite = [[MaskedSprite alloc]initWithFile:@"blocks-hd.png"];
-    CGPoint points[] = {ccp(50,50),ccp(50,100),ccp(150,120),ccp(150,50)};
+    MaskedSprite *sprite = [[MaskedSprite alloc]initWithFile:@"blocks-hd.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+    CGPoint points[] = {ccp(0,0),ccp(0,50),ccp(100,70),ccp(100,0)};
     CGPoint points2[] = {ccp(50,70),ccp(70,150),ccp(150,190),ccp(200,90)};
-    CGPoint points3[] = {ccp(0,0),ccp(600,30),ccp(630,450),ccp(0,450)};
+    CGPoint points3[] = {ccp(0,0),ccp(600,50),ccp(630,450),ccp(0,400)};
+    CGPoint points4[] = {ccp(0,0),ccp(300,25),ccp(315,225),ccp(0,200)};
 #define DRAW(name) [sprite drawPolygon:name numPoints:sizeof(name)/sizeof(*name)]
 #define SUB(name) [sprite subtractPolygon:name numPoints:sizeof(name)/sizeof(*name)]
-    DRAW(points);
-    //SUB(points2);
-    //DRAW(points3);
-    sprite.position = ccp(100,100);
+    
+    DRAW(points3);
+    SUB(points2);
+    sprite.position = ccp(0,0);
+    sprite.anchorPoint = ccp(0,0);
     [self addChild:sprite];
     [sprite saveMaskToFile:@"testmask.png"];
 }

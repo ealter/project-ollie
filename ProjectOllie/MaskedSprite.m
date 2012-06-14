@@ -12,6 +12,7 @@
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
+#define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 
 @interface MaskedSprite ()
 
@@ -28,16 +29,28 @@
 @synthesize maskTexture = _maskTexture;
 @synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_;
 
-- (id)initWithFile:(NSString *)file
+- (id)initWithFile:(NSString *)file size:(CGSize)size
 {
-    self = [super initWithFile:file];
+    self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
-        self.flipY = YES;
+    
+        ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
+        [self.texture setTexParameters: &params];
         
-        // 1
-        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
-        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:0];
+        // Set up the mask texture with appropriate texture coordinates
+        self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
+        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
+  
+        //makes 0,0,1,1 texturecoordinates
+        quad_.bl.texCoords.u = 0;
+		quad_.bl.texCoords.v = 0;
+		quad_.br.texCoords.u = 1;
+		quad_.br.texCoords.v = 0;
+		quad_.tl.texCoords.u = 0;
+		quad_.tl.texCoords.v = 1;
+		quad_.tr.texCoords.u = 1;
+		quad_.tr.texCoords.v = 1;
+        
         
         // 2
         NSError *error = nil;
@@ -46,8 +59,7 @@
             DebugLog(@"The error: %@", error);
         }
         assert(mask_frag);
-        self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         
-                                                         fragmentShaderByteArray:mask_frag] autorelease];
+        self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         fragmentShaderByteArray:mask_frag] autorelease];
         
         CHECK_GL_ERROR_DEBUG();
         
@@ -83,7 +95,7 @@
     CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
     // 1
-    ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
+    ccGLBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ccGLUseProgram( shaderProgram_->program_ );
     [shaderProgram_ setUniformForModelViewProjectionMatrix];
     
@@ -96,8 +108,8 @@
     glBindTexture( GL_TEXTURE_2D,  [mask name] );
     glUniform1i(self.maskLocation, 1);
     
-    glUniform1f(self.textureWidthLocation, self.textureRect.size.width);
-    glUniform1f(self.textureHeightLocation, self.textureRect.size.height);
+    glUniform1f(self.textureWidthLocation, self.texture.pixelsWide);
+    glUniform1f(self.textureHeightLocation, self.texture.pixelsHigh);
     
     // 3
 #define kQuadSize sizeof(quad_.bl)
@@ -114,12 +126,15 @@
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
+    
+    
+
 }
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self.maskTexture begin];
-    ccColor4F color = {COVERED_RED, 0, 0, 0};
+    ccColor4F color = {COVERED_RED, 0, 0, 1};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
     [self.maskTexture end];
@@ -128,7 +143,7 @@
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self.maskTexture begin];
-    ccColor4F color = {INITIAL_RED, 0, 0, 0};
+    ccColor4F color = {INITIAL_RED, 0, 0, 1};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
     [self.maskTexture end];
@@ -136,6 +151,8 @@
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
 {
+    if(PIXEL_FORMAT != kCCTexture2DPixelFormat_RGBA8888)
+        return NO;
     return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
 }
 

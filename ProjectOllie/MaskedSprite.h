@@ -14,5 +14,6 @@
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (BOOL)saveMaskToFile:(NSString *)fileName;
+- (id)initWithFile:(NSString *)file size:(CGSize)size;
 
 @end
