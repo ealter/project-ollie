@@ -202,8 +202,9 @@ void ccDrawSolidPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F 
 	[shader_ setUniformForModelViewProjectionMatrix];    
 	[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color.r count:1];
     
+    
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
-
+ 
 	// XXX: Mac OpenGL error. arrays can't go out of scope before draw is executed
 	ccVertex2F newPoli[numberOfPoints];
 

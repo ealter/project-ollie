@@ -9,7 +9,6 @@
 #import "MaskedSprite.h"
 #import "cocos2d.h"
 #import "CCGLProgram.h"
-#import "PolyRenderer.h"
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
@@ -17,8 +16,7 @@
 
 @interface MaskedSprite (){
     
-    PolyRenderer* pr;
-    
+
 }
 
 @property (nonatomic, strong) CCRenderTexture *maskTexture;
@@ -47,7 +45,7 @@
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
-        self->pr = [[PolyRenderer alloc] initWithProjection:nil];
+
         
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
@@ -168,6 +166,9 @@
     [self.maskTexture begin];
 
     ccColor4F color = {red, 0, 0, 1};
+    ccColor4F colorStroke = {1,1,1,1};
+    //[self->pr drawPolyWithVerts:poly count:numberOfPoints width:1.f fill:color line:colorStroke];
+    //[self->pr draw];
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
     [self.maskTexture end];
