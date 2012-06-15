@@ -333,7 +333,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 out.angle= atan2f(outY - y, outX - x);
                 if(isnan(out.angle))
                 {
-                    printf("circle center: %f, %f,  intersection: %f, %f", x, y, outX, outY);
+                    printf("circle center: %f, %f,  intersection: %f, %f\n", x, y, outX, outY);
+                    
                 }
                 exits.push_back(out);
             }
