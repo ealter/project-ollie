@@ -42,7 +42,6 @@
 
 static BOOL initialized = NO;
 static CCGLProgram *shader_ = nil;  //For solid colored things
-static CCGLProgram *tshader_ = nil; //For textured things
 static int colorLocation_ = -1;
 static ccColor4F color_ = {1,1,1,1};
 static int pointSizeLocation_ = -1;
@@ -56,7 +55,7 @@ static void lazy_init( void )
 		// Position and 1 color passed as a uniform (to simulate glColor4ub )
 		//
 		shader_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_Position_uColor];
-        tshader_ = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTexture];
+ 
 
 		colorLocation_ = glGetUniformLocation( shader_->program_, "u_color");
 		pointSizeLocation_ = glGetUniformLocation( shader_->program_, "u_pointSize");
@@ -202,9 +201,9 @@ void ccDrawSolidPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F 
 	[shader_ setUniformForModelViewProjectionMatrix];    
 	[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color.r count:1];
     
-    
+
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
- 
+    
 	// XXX: Mac OpenGL error. arrays can't go out of scope before draw is executed
 	ccVertex2F newPoli[numberOfPoints];
 
@@ -224,49 +223,6 @@ void ccDrawSolidPoly( const CGPoint *poli, NSUInteger numberOfPoints, ccColor4F 
 	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) numberOfPoints);
 }
 
-void ccDrawTexturedTriStrip( const ccVertex2F *triStrip, const ccVertex2F *texCoords, int numberOfPoints, CCTexture2D *texture )
-{
-	lazy_init();
-    
-    //Use the texure shader
-    
-	[tshader_ use];
-	[tshader_ setUniformForModelViewProjectionMatrix];    
-	//[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color.r count:1];
-    
-    CC_PROFILER_START(@"Drawing textured tristrip");
-    
-    //ccGLBlendFunc( blendFunc.src, blendFunc.dst );
-    
-	// we have a pointer to vertex points so enable client state
-	ccGLBindTexture2D( [texture name] );
-    
-    // when texture area is small, bilinear filter the closest mipmap
- //   glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST );
-    // when texture area is large, bilinear filter the original
- //   glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    
-    // Make the texture repeat
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
-	
-    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position | kCCVertexAttribFlag_TexCoords );
-    
-#define kPointSize sizeof(ccVertex2F)
-    // vertex
-	glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, kPointSize, triStrip);
-    
-	// texCoods
-	glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, kPointSize, texCoords);
-    
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, numberOfPoints);
-	//glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-    
-    CC_INCREMENT_GL_DRAWS(1);
-	
-    CC_PROFILER_STOP(@"Drawing textured tristrip");
-
-}
 
 
 void ccDrawCircle( CGPoint center, float r, float a, NSUInteger segs, BOOL drawLineToCenter)

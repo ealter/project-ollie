@@ -34,6 +34,8 @@
     return self;
 }
 
+
+
 //Building land
 - (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
 {
@@ -42,6 +44,7 @@
     //part of drawing, unrelated to terrain
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
 }
+
 
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
 {
@@ -56,11 +59,11 @@
     //CC_NODE_DRAW_SETUP();
     ccGLEnable( glServerState_ );
     [drawSprite draw];
-    
+    /*
     for (int i = 0 ; i < shapeField->peSet.size(); i++)
       ccDrawLine(ccp(shapeField->peSet[i]->x, shapeField->peSet[i]->y),
                 ccp(shapeField->peSet[i]->next->x, shapeField->peSet[i]->next->y));
-    
+    */
     
 }
 

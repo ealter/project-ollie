@@ -27,9 +27,9 @@
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
 		C54A05F6158151A100D7B369 /* blocks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C54A05F5158151A100D7B369 /* blocks-hd.png */; };
-		C578AF5C158AC4150049FE58 /* HMVectorNode.fsh in Sources */ = {isa = PBXBuildFile; fileRef = C578AF58158AC4150049FE58 /* HMVectorNode.fsh */; };
-		C578AF5D158AC4150049FE58 /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C578AF5A158AC4150049FE58 /* HMVectorNode.m */; };
-		C578AF5E158AC4150049FE58 /* HMVectorNode.vsh in Sources */ = {isa = PBXBuildFile; fileRef = C578AF5B158AC4150049FE58 /* HMVectorNode.vsh */; };
+		C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C578AF85158AF4720049FE58 /* HMVectorNode.m */; };
+		C578B3E3158AFC2C0049FE58 /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C578AF8C158AF8AD0049FE58 /* HMVectorNode.fsh */; };
+		C578B3E4158AFC2C0049FE58 /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C578AF8D158AF8AD0049FE58 /* HMVectorNode.vsh */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
@@ -279,10 +279,10 @@
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		C54A05F5158151A100D7B369 /* blocks-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blocks-hd.png"; path = "Resources/blocks-hd.png"; sourceTree = "<group>"; };
-		C578AF58158AC4150049FE58 /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
-		C578AF59158AC4150049FE58 /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
-		C578AF5A158AC4150049FE58 /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
-		C578AF5B158AC4150049FE58 /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
+		C578AF84158AF4720049FE58 /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
+		C578AF85158AF4720049FE58 /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
+		C578AF8C158AF8AD0049FE58 /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
+		C578AF8D158AF8AD0049FE58 /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5C01E38157AAEB2004CF358 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
@@ -801,16 +801,15 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
-		C578AF57158AC4150049FE58 /* PolyRenderer */ = {
+		C578AF7E158AF4710049FE58 /* HMUtils */ = {
 			isa = PBXGroup;
 			children = (
-				C578AF58158AC4150049FE58 /* HMVectorNode.fsh */,
-				C578AF59158AC4150049FE58 /* HMVectorNode.h */,
-				C578AF5A158AC4150049FE58 /* HMVectorNode.m */,
-				C578AF5B158AC4150049FE58 /* HMVectorNode.vsh */,
+				C578AF8C158AF8AD0049FE58 /* HMVectorNode.fsh */,
+				C578AF8D158AF8AD0049FE58 /* HMVectorNode.vsh */,
+				C578AF84158AF4720049FE58 /* HMVectorNode.h */,
+				C578AF85158AF4720049FE58 /* HMVectorNode.m */,
 			);
-			name = PolyRenderer;
-			path = libs/PolyRenderer;
+			path = HMUtils;
 			sourceTree = "<group>";
 		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
@@ -861,6 +860,7 @@
 			children = (
 				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
+				C578AF7E158AF4710049FE58 /* HMUtils */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
 				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
 				CE8429E4157981BB0038C653 /* ActionLayer.h */,
@@ -945,7 +945,6 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				C578AF57158AC4150049FE58 /* PolyRenderer */,
 				CE894EFC158299CE00E412E1 /* CSG */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
@@ -1504,6 +1503,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C578B3E3158AFC2C0049FE58 /* HMVectorNode.fsh in Resources */,
+				C578B3E4158AFC2C0049FE58 /* HMVectorNode.vsh in Resources */,
 				CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */,
 				CE94AA6E15785F83009B35B4 /* Default.png in Resources */,
 				CE94AA7015785F83009B35B4 /* fps_images.png in Resources */,
@@ -1732,11 +1733,8 @@
 				CE9B89AF1586A59E0009C13F /* DrawMenu.mm in Sources */,
 				CE123C5015883687003AD813 /* TerrainShader.frag in Sources */,
 				CE9E90B4158AAF29006CC8C9 /* frontmenu.mm in Sources */,
-			C578AF40158AB08E0049FE58 /* HMVectorNode.fsh in Sources */,
-				C578AF41158AB08E0049FE58 /* HMVectorNode.vsh in Sources */,
-				C578AF48158AB0AC0049FE58 /* HMVectorNode.m in Sources */,
 				CE9957DA158AB6C900B863DF /* backoverlay.mm in Sources */,
-
+				C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

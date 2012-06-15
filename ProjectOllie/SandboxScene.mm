@@ -30,6 +30,9 @@
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"backoverlay.ccbi"];
         [self addChild:backnode];
         [self reorderChild:backnode z:2];
+        
+        
+        
     }
     return self;
 }

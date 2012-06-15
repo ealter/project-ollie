@@ -46,6 +46,8 @@
     [scene.actionLayer addChild:parent_node.terrain];
     
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    
+ 
 }
 
 -(void)pressedClear:(id)sender
