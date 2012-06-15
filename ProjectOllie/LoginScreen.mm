@@ -8,10 +8,17 @@
 
 #import "LoginScreen.h"
 #import "CCBReader.h"
+#import "Authentication.h"
+
+@interface LoginScreen ()
+
+- (void)onSuccessfullLogin;
+- (void)onFailedLogin:(NSString *)error;
+
+@end
 
 @implementation LoginScreen
 @synthesize nameField, pwField;
-
 
 -(id)init
 {
@@ -67,15 +74,31 @@
 
 -(void)pressedLogin:(id)sender
 {
+    NSString *username = [nameField text];
+    NSString *password = [pwField text];
+    NSString *error = [[Authentication mainAuth] loginWithUsername:username password:password];
+    if(error)
+        [self onFailedLogin:error];
+    else
+        [self onSuccessfullLogin];
+}
+
+- (void)onSuccessfullLogin
+{
     [nameField removeFromSuperview];
     [nameField release];
     [pwField removeFromSuperview];
     [pwField release];
     
-    
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
+- (void)onFailedLogin:(NSString *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alert show];
+    [self onSuccessfullLogin]; //TODO: Make the person log in again
+}
 
 @end
