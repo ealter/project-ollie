@@ -1,5 +1,5 @@
 //
-//  frontmenu.h
+//  ActionMenu.h
 //  ProjectOllie
 //
 //  Created by Lion User on 6/14/12.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface frontmenu : CCLayer {
+@interface ActionMenu : CCLayer {
     
 }
 

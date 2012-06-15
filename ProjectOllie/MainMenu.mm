@@ -1,23 +1,21 @@
 //
-//  frontmenu.m
+//  MainMenu.m
 //  ProjectOllie
 //
 //  Created by Lion User on 6/14/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "frontmenu.h"
+#import "MainMenu.h"
 #import "CCBReader.h"
-#import "ActionLayer.h"
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
 
-@implementation frontmenu
+@implementation MainMenu
 
 -(void)pressedMakeSquares: (id)sender
 {
     SandboxScene *scene = [SandboxScene node];
-    //CCScene* scene = [ActionLayer scene];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
