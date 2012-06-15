@@ -10,7 +10,7 @@
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
 #import "Terrain.h"
-
+#import "CCBReader.h"
 @implementation DrawMenu
 
 -(void)pressedLarge:(id)sender
@@ -54,6 +54,13 @@
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     [parent_node.terrain clear];
+}
+
+-(void)pressedBack:(id)sender
+{
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"frontmenu.ccbi"];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 @end
