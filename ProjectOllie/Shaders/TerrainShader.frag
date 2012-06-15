@@ -17,4 +17,5 @@ void main()
     vec4 finalColor = vec4(texColor.r, texColor.g, texColor.b, maskColor.r * texColor.a);
     //vec4 finalColor = vec4(1.0, maskColor.g, maskColor.b, 1.0);
     gl_FragColor = v_fragmentColor * finalColor;
+
 }

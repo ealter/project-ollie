@@ -9,15 +9,16 @@
 #import "MaskedSprite.h"
 #import "cocos2d.h"
 #import "CCGLProgram.h"
-//#import "HMVectorNode.h"
+#import "HMVectorNode.h"
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 
+
 @interface MaskedSprite (){
     
-//    HMVectorNode* pr;
+    HMVectorNode* pr;
 
 }
 
@@ -43,12 +44,12 @@
     
         
         //set up rendering paramters
-        ccTexParams params = {GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP_TO_EDGE};
+        ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
-        //self->pr = [[HMVectorNode alloc] init];
-        
+        self->pr = [[HMVectorNode alloc] init];
+
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
         [self clear];
@@ -109,6 +110,8 @@
 }
 
 -(void) draw {
+  
+    
     CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
     // 1
@@ -143,10 +146,13 @@
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
+    
+    
 }
 
--(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add{
-
+-(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add
+{
+    /*
     int numPoints = 360;
     CGPoint circle[numPoints];
     for(int i = 0; i < numPoints; i++)
@@ -160,7 +166,18 @@
         [self drawPolygon:circle numPoints:numPoints];
     else
         [self subtractPolygon:circle numPoints:numPoints];
+    */
     
+    ccColor4F color;
+    if(add)
+        color = ccc4f(COVERED_RED,0,0,1);
+    else
+        color = ccc4f(INITIAL_RED,0,0,1);
+    [self.maskTexture begin];
+    [self->pr drawDot:center radius:radius color:color];
+    [self->pr visit];
+    [self->pr clear];
+    [self.maskTexture end];
 }
 
 - (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
@@ -169,9 +186,14 @@
 
     ccColor4F color = {red, 0, 0, 1};
     ccColor4F colorStroke = {1,1,1,1};
-    //[self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:colorStroke];
+    [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:colorStroke];
+    //[self->pr drawDot:ccp(0,0) radius:20 color:color];
+    [self->pr visit];
+    [self->pr clear];
     //[self->pr draw];
-    ccDrawSolidPoly(poly, numberOfPoints, color);
+    //ccDrawSolidPoly(poly, numberOfPoints, color);
+    
+
     
     [self.maskTexture end];
 }

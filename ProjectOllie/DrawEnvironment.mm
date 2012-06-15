@@ -70,8 +70,13 @@
         location.y=self.contentSize.height*0.9-brushradius;
     }
     prevpoint = location;
-    
-    [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
+    if (brushradius > 0)
+    {
+        [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
+    }
+    else {
+        [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+    }
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -94,13 +99,14 @@
         location.y=self.contentSize.height*0.9-brushradius;
     }
     
-    //makes sure the circles are far enough away to merit new circle
-    if (ccpDistanceSQ(location, prevpoint)>4)
+    if (brushradius > 0)
     {
         [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
-        
-        prevpoint = location;
     }
+    else {
+        [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+    }
+    prevpoint = location;
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

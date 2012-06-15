@@ -10,7 +10,7 @@
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
 #import "Terrain.h"
-
+#import "CCBReader.h"
 @implementation DrawMenu
 
 -(void)pressedLarge:(id)sender
@@ -34,7 +34,7 @@
 -(void)pressedEraser:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    parent_node.brushradius = -smallradius;
+    parent_node.brushradius = -mediumradius;
 }
 
 -(void)pressedCheck:(id)sender
@@ -46,12 +46,21 @@
     [scene.actionLayer addChild:parent_node.terrain];
     
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    
+ 
 }
 
 -(void)pressedClear:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    [[parent_node terrain] clear];
+    [parent_node.terrain clear];
+}
+
+-(void)pressedBack:(id)sender
+{
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 @end

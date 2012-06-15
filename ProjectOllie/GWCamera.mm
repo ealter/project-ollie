@@ -239,7 +239,8 @@
     
     averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
-
+    
+    CGPoint avgConvertedPosition = [subject_ convertToNodeSpace:averageCurrentPosition];
     CGPoint newAnchor = 
     ccp(averageCurrentPosition.x/subject_.contentSize.width,averageCurrentPosition.y/subject_.contentSize.height);
     [subject_ setAnchorPoint:newAnchor];
