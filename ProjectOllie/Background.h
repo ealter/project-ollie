@@ -6,6 +6,11 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
+
+//TODO:
+//  Give Parallax (make independent of parallax node)
+
+
 #import <Foundation/Foundation.h>
 #import "CCLayer.h"
 

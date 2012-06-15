@@ -15,6 +15,7 @@
 
 @interface ActionLayer : CCLayer <UIGestureRecognizerDelegate>
 {
+
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
@@ -31,6 +32,7 @@
 +(CCScene *) scene;
 
 // adds terrain to build
--(void) addTerrain:(CGPoint*)points;
+//-(void) addTerrain:(CGPoint*)points;
+
 
 @end
