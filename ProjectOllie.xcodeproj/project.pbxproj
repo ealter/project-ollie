@@ -224,6 +224,10 @@
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
+		CE9957D5158AB5F000B863DF /* back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9957D3158AB5F000B863DF /* back-hd.png */; };
+		CE9957D6158AB5F000B863DF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9957D4158AB5F000B863DF /* back.png */; };
+		CE9957DA158AB6C900B863DF /* backoverlay.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9957D9158AB6C900B863DF /* backoverlay.mm */; };
+		CE9957DC158AB88B00B863DF /* backoverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE9957DB158AB88B00B863DF /* backoverlay.ccbi */; };
 		CE9B89AF1586A59E0009C13F /* DrawMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9B89AE1586A59E0009C13F /* DrawMenu.mm */; };
 		CE9E90B0158AAEC0006CC8C9 /* frontmenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE9E90AF158AAEC0006CC8C9 /* frontmenu.ccbi */; };
 		CE9E90B4158AAF29006CC8C9 /* frontmenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9E90B3158AAF29006CC8C9 /* frontmenu.mm */; };
@@ -667,6 +671,11 @@
 		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
 		CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
+		CE9957D3158AB5F000B863DF /* back-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-hd.png"; path = "Resources/back-hd.png"; sourceTree = "<group>"; };
+		CE9957D4158AB5F000B863DF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back.png; path = Resources/back.png; sourceTree = "<group>"; };
+		CE9957D8158AB6C900B863DF /* backoverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = backoverlay.h; sourceTree = "<group>"; };
+		CE9957D9158AB6C900B863DF /* backoverlay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = backoverlay.mm; sourceTree = "<group>"; };
+		CE9957DB158AB88B00B863DF /* backoverlay.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = backoverlay.ccbi; path = Resources/backoverlay.ccbi; sourceTree = "<group>"; };
 		CE9B89AD1586A59E0009C13F /* DrawMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawMenu.h; sourceTree = "<group>"; };
 		CE9B89AE1586A59E0009C13F /* DrawMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawMenu.mm; sourceTree = "<group>"; };
 		CE9E90AF158AAEC0006CC8C9 /* frontmenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = frontmenu.ccbi; path = Resources/frontmenu.ccbi; sourceTree = "<group>"; };
@@ -860,6 +869,8 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE9E90B2158AAF29006CC8C9 /* frontmenu.h */,
 				CE9E90B3158AAF29006CC8C9 /* frontmenu.mm */,
+				CE9957D8158AB6C900B863DF /* backoverlay.h */,
+				CE9957D9158AB6C900B863DF /* backoverlay.mm */,
 				CE9B89AD1586A59E0009C13F /* DrawMenu.h */,
 				CE9B89AE1586A59E0009C13F /* DrawMenu.mm */,
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
@@ -887,13 +898,16 @@
 		CE94AA6C15785F83009B35B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE9957D3158AB5F000B863DF /* back-hd.png */,
+				CE9957D4158AB5F000B863DF /* back.png */,
+				CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */,
 				CE9E90AF158AAEC0006CC8C9 /* frontmenu.ccbi */,
+				CE9957DB158AB88B00B863DF /* backoverlay.ccbi */,
 				CE123C4C158811DC003AD813 /* background.jpg */,
 				CEA14DAA1587CA7E00735135 /* check-hd.png */,
 				CEA14DAB1587CA7E00735135 /* check.png */,
 				CEA14DAC1587CA7E00735135 /* clear-hd.png */,
 				CEA14DAD1587CA7E00735135 /* clear.png */,
-				CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */,
 				CE1BB5171586A6BA0095A793 /* eraser-hd.png */,
 				CE1BB5181586A6BA0095A793 /* eraser.png */,
 				CE1BB5191586A6BA0095A793 /* large-hd.png */,
@@ -1528,6 +1542,9 @@
 				CEA14DB11587CA7E00735135 /* clear.png in Resources */,
 				CE123C4D158811DC003AD813 /* background.jpg in Resources */,
 				CE9E90B0158AAEC0006CC8C9 /* frontmenu.ccbi in Resources */,
+				CE9957D5158AB5F000B863DF /* back-hd.png in Resources */,
+				CE9957D6158AB5F000B863DF /* back.png in Resources */,
+				CE9957DC158AB88B00B863DF /* backoverlay.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1718,6 +1735,7 @@
 				C578AF40158AB08E0049FE58 /* HMVectorNode.fsh in Sources */,
 				C578AF41158AB08E0049FE58 /* HMVectorNode.vsh in Sources */,
 				C578AF48158AB0AC0049FE58 /* HMVectorNode.m in Sources */,
+				CE9957DA158AB6C900B863DF /* backoverlay.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
