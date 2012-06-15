@@ -14,7 +14,11 @@
 #endif
 
 #ifdef DEBUG
+#ifdef __OBJC__
 #define DebugLog( s, ... ) NSLog( @"<%p %@:(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent], __LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+#else
+#define DebugLog( s, ... ) do { printf( "<%s:(%d)> ", __FILE__, __LINE__); printf(s, ##__VA_ARGS__); putchar('\n'); }while(0)
+#endif /* ifdef __OBJC__ */
 #else
 #define DebugLog( s, ... )
 #endif

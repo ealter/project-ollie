@@ -43,7 +43,7 @@
 							   numberOfSamples:0];
     
     [glView setMultipleTouchEnabled:YES];
-	
+ 
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
 	
 	director_.wantsFullScreenLayout = YES;
@@ -76,7 +76,7 @@
 	// set the Navigation Controller as the root view controller
 	//	[window_ setRootViewController:rootViewController_];
 	[window_ addSubview:navController_.view];
-	
+    
 	// make main window visible
 	[window_ makeKeyAndVisible];
 	
