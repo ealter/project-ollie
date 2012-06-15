@@ -55,12 +55,12 @@
 {
     //CC_NODE_DRAW_SETUP();
     ccGLEnable( glServerState_ );
-    
-    //for (int i = 0 ; i < shapeField->peSet.size(); i++)
-  //  ccDrawLine(ccp(shapeField->peSet[i]->x, shapeField->peSet[i]->y),
-    //           ccp(shapeField->peSet[i]->next->x, shapeField->peSet[i]->next->y));
-    
     [drawSprite draw];
+    
+    for (int i = 0 ; i < shapeField->peSet.size(); i++)
+      ccDrawLine(ccp(shapeField->peSet[i]->x, shapeField->peSet[i]->y),
+                ccp(shapeField->peSet[i]->next->x, shapeField->peSet[i]->next->y));
+    
     
 }
 

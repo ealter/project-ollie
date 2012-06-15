@@ -17,7 +17,7 @@
 #define cellHeight 32
 
 //Maximum distance for a segment on a circle
-#define maxCircleSeg 1
+#define maxCircleSeg 4
 
 // Define the smallest float difference that could matter
 #define plankFloat 0.1f
@@ -86,8 +86,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
     //Loop through and collect all potential PointEdges that we could be affecting
     vector<PointEdge*> nearPEs;
-    for (int i = 0; i < peSet.size(); i++) nearPEs.push_back(peSet[i]);
-    /*for (int i = minCellX; i <= maxCellX; i++)
+    //for (int i = 0; i < peSet.size(); i++) nearPEs.push_back(peSet[i]);
+    for (int i = minCellX; i <= maxCellX; i++)
         for (int j = minCellY; j <= maxCellY; j++)
             for (int k = 0; k < spatialGrid[i][j].size(); k++)
             {
@@ -100,7 +100,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     }
                 if (!cont) nearPEs.push_back(spatialGrid[i][j][k]);
             }
-    */
+    
     //Classify each of the points of every near PointEdge as inside, on edge, or outside
     float rsq = r*r;
     for (int i = 0; i < nearPEs.size(); i++)

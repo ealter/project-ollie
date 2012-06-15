@@ -104,33 +104,8 @@
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{/*
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView: [touch view]];
-    location = [[CCDirector sharedDirector] convertToGL: location];
-    location = [self convertToNodeSpace:location];
-
-    if (location.x -brushradius<self.contentSize.width/20) {
-        location.x=self.contentSize.width/20+brushradius;
-    }
-    if (location.x +brushradius>self.contentSize.width*0.95) {
-        location.x=self.contentSize.width*0.95-brushradius;
-    }
-    if (location.y -brushradius<self.contentSize.height/20) {
-        location.y=self.contentSize.height/20+brushradius;
-    }
-    if (location.y+brushradius>self.contentSize.height*0.9) {
-        location.y=self.contentSize.height*0.9-brushradius;
-    }
+{
     
-    gpc_polygon *newcircle = gpc_offset_clone(brush, location.x, location.y);
-    [terrain addPolygon:newcircle];
-    gpc_free_polygon(newcircle);
-    delete newcircle;
-    
-    gpc_polygon newrectangle = [self rectangleMakeWithPoint:prevpoint andPoint:location withWidth:brushradius];
-    [terrain addPolygon:&newrectangle];
-    gpc_free_polygon(&newrectangle);*/
 }
 
 /*
