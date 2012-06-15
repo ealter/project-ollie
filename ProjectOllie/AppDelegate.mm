@@ -39,8 +39,8 @@
 								   depthFormat:0	//GL_DEPTH_COMPONENT24_OES
 							preserveBackbuffer:NO
 									sharegroup:nil
-								 multiSampling:YES
-							   numberOfSamples:2];
+								 multiSampling:NO
+							   numberOfSamples:0];
     
     [glView setMultipleTouchEnabled:YES];
 	

@@ -41,7 +41,8 @@
     
         
         //set up rendering paramters
-        ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
+        ccTexParams params = {GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP_TO_EDGE};
+        
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
