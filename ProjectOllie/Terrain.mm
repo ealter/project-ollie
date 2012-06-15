@@ -59,11 +59,19 @@
     //CC_NODE_DRAW_SETUP();
     ccGLEnable( glServerState_ );
     [drawSprite draw];
-    /*
-    for (int i = 0 ; i < shapeField->peSet.size(); i++)
-      ccDrawLine(ccp(shapeField->peSet[i]->x, shapeField->peSet[i]->y),
-                ccp(shapeField->peSet[i]->next->x, shapeField->peSet[i]->next->y));
-    */
+
+    
+ /*   int numLines = shapeField->peSet.size()*2;
+    ccVertex2F* points = new ccVertex2F[numLines];
+    for (int i = 0; i < shapeField->peSet.size(); i++)
+    {
+        points[i*2].x = shapeField->peSet[i]->x;
+        points[i*2].y = shapeField->peSet[i]->y;
+        points[i*2+1].x = shapeField->peSet[i]->next->x;
+        points[i*2+1].y = shapeField->peSet[i]->next->y;
+    }
+    ccDrawLines(points, numLines);*/
+    
     
 }
 
@@ -71,7 +79,7 @@
 {
     //Clear the shape field
     shapeField->clear();
-
+    [drawSprite clear];
 }
 
 - (void) dealloc

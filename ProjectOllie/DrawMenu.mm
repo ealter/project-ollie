@@ -34,7 +34,7 @@
 -(void)pressedEraser:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    parent_node.brushradius = -smallradius;
+    parent_node.brushradius = -mediumradius;
 }
 
 -(void)pressedCheck:(id)sender
@@ -53,7 +53,7 @@
 -(void)pressedClear:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    [[parent_node terrain] clear];
+    [parent_node.terrain clear];
 }
 
 @end
