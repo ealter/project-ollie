@@ -239,6 +239,7 @@
 		CEA14DB01587CA7E00735135 /* clear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAC1587CA7E00735135 /* clear-hd.png */; };
 		CEA14DB11587CA7E00735135 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAD1587CA7E00735135 /* clear.png */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
+		CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00100158BDCE100F7F1A8 /* Authentication.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
@@ -693,6 +694,8 @@
 		CEA14DAC1587CA7E00735135 /* clear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clear-hd.png"; path = "Resources/clear-hd.png"; sourceTree = "<group>"; };
 		CEA14DAD1587CA7E00735135 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear.png; path = Resources/clear.png; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = Resources/DrawMenu.ccbi; sourceTree = "<group>"; };
+		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; };
+		CEF00100158BDCE100F7F1A8 /* Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Authentication.m; path = ProjectOllie/Server/Authentication.m; sourceTree = "<group>"; };
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
@@ -847,6 +850,7 @@
 		CE94AA4A15785F83009B35B4 = {
 			isa = PBXGroup;
 			children = (
+				CEF00102158BDCE500F7F1A8 /* Server */,
 				CE94AA6B15785F83009B35B4 /* ProjectOllie */,
 				CE94AA5815785F83009B35B4 /* Frameworks */,
 				CE94AA5615785F83009B35B4 /* Products */,
@@ -964,6 +968,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				C578AF7E158AF4710049FE58 /* HMUtils */,
 				CE894EFC158299CE00E412E1 /* CSG */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
@@ -1464,6 +1469,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CEF00102158BDCE500F7F1A8 /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
+				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
+			);
+			name = Server;
+			sourceTree = "<group>";
+		};
 		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1757,6 +1771,7 @@
 				CE9957DA158AB6C900B863DF /* ActionMenu.mm in Sources */,
 				C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */,
 				CE4B4883158BC43E00040C1C /* LoginScreen.mm in Sources */,
+				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

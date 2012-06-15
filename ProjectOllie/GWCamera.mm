@@ -12,6 +12,7 @@
 #import "CGPointExtension.h"
 #import "CCActionInstant.h"
 #import "CCActionEase.h"
+#import "ActionLayer.h"
 
 @interface GWCamera()
 {
@@ -25,6 +26,8 @@
 -(void)followDel;
 -(void)handleOneFingerMotion:(NSSet*)touches;
 -(void)handleTwoFingerMotion:(NSSet*)touches;
+-(void)twoFingerPan:(NSSet*)touches;
+-(void)twoFingerZoom:(NSSet*)touches;
 
 /*private helper functions*/
 -(void)createShakeEffect:(float)dt;
@@ -67,6 +70,7 @@
     
     //stop all previous actions
     [self->subject_ stopAllActions];
+    [self->subject_ setAnchorPoint:ccp(.5f,.5f)];
     self.target = focused;
     id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
     id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
@@ -80,7 +84,7 @@
 -(void)revertTo:(CCNode*)center{
     //all very similar to followNode, but reverts to initial zoom
     [self->subject_ stopAllActions];
-    
+    [self->subject_ setAnchorPoint:ccp(.5f,.5f)];
     self.target = center;
     
     id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
@@ -111,11 +115,7 @@
     // Set the scale.
     float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
     [self->subject_ setScale: newScale];
-    
-    //translate by zoom amount
-    CGPoint currentUpdatedOrigin = ccpMult(self.zoomOrigin, self->subject_.scale);
-    //[self panBy:ccpSub(scaleCenter, currentUpdatedOrigin)];
-    //[subject_ setAnchorPoint:ccpSub(scaleCenter, currentUpdatedOrigin)];
+
 }
 
 -(void)createShakeEffect:(float)dt{
@@ -156,6 +156,7 @@
 
 
 -(void)touchesBegan:(NSSet *)touches{
+    [self->subject_ setAnchorPoint:ccp(0,0)];
     if([touches count] == 2) {
         UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
         UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
@@ -168,7 +169,6 @@
         touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
         touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
         
-        self.zoomOrigin =ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     }
 }
 
@@ -209,8 +209,18 @@
      * Uses pinch to zoom and scrolling simultaneously
      */
     
-    /* PANNING */
+    //moves from motion
+    [self twoFingerPan:touches];
     
+    //pans from motion
+    [self twoFingerZoom:touches];
+    
+}
+-(void)twoFingerPan:(NSSet *)touches{
+    
+    /* PANNING */
+
+    //create touches
     UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
     UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
     
@@ -223,33 +233,57 @@
     CGPoint prevLocation2 = [touch2 previousLocationInView: [touch2 view]];
     touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
     prevLocation2 = [[CCDirector sharedDirector] convertToGL: prevLocation2];
-    
+
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
     
     [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
-    
-    
+}
+
+-(void)twoFingerZoom:(NSSet *)touches{
     /* ZOOMING */
     
+    //create touches
+    UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
+    UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
+    
+    CGPoint touchLocation1 = [touch1 locationInView: [touch1 view]];
+    CGPoint prevLocation1 = [touch1 previousLocationInView: [touch1 view]];
+    touchLocation1 = [[CCDirector sharedDirector] convertToGL: touchLocation1];
+    prevLocation1 = [[CCDirector sharedDirector] convertToGL: prevLocation1];
+    
+    CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];
+    CGPoint prevLocation2 = [touch2 previousLocationInView: [touch2 view]];
+    touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
+    prevLocation2 = [[CCDirector sharedDirector] convertToGL: prevLocation2];
+
     touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
     prevLocation2 = [self->subject_ convertToNodeSpace:prevLocation2];
     touchLocation1 = [self->subject_ convertToNodeSpace:touchLocation1];
     prevLocation1 = [self->subject_ convertToNodeSpace:prevLocation1];
     
-    averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
-    averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
+    CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     
-    CGPoint avgConvertedPosition = [subject_ convertToNodeSpace:averageCurrentPosition];
-    CGPoint newAnchor = 
-    ccp(averageCurrentPosition.x/subject_.contentSize.width,averageCurrentPosition.y/subject_.contentSize.height);
-    [subject_ setAnchorPoint:newAnchor];
+    // Get the original center point.
+    CGPoint oldCenterPoint = ccp(averageCurrentPosition.x * subject_.scale, averageCurrentPosition.y * subject_.scale); 
     
+    //adjust the scale
     float difScale = 
     ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
     
     CGPoint diffPos = ccpMult(averageCurrentPosition,self->subject_.scale);
     [self zoomBy:difScale atScaleCenter:diffPos];
+    
+    // Get the new center point.
+    CGPoint newCenterPoint = ccp(averageCurrentPosition.x * subject_.scale, averageCurrentPosition.y * subject_.scale); 
+    
+    // Then calculate the delta.
+    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
+    
+    // Now adjust the layer by the delta.
+    [self panBy:centerPointDelta];
+    //[subject_ setAnchorPoint:ccp(averageCurrentPosition.x/subject_.contentSize.width,averageCurrentPosition.y/subject_.contentSize.height)];
+    
 }
 
 /*PRIVATE HELPER FUNCTIONS FOR DELEGATES*/

@@ -57,7 +57,7 @@
     ccGLEnable( glServerState_ );
     [drawSprite draw];
     
- /*   int numLines = shapeField->peSet.size()*2;
+    int numLines = shapeField->peSet.size()*2;
     ccVertex2F* points = new ccVertex2F[numLines];
     for (int i = 0; i < shapeField->peSet.size(); i++)
     {
@@ -66,7 +66,7 @@
         points[i*2+1].x = shapeField->peSet[i]->next->x;
         points[i*2+1].y = shapeField->peSet[i]->next->y;
     }
-    ccDrawLines(points, numLines);*/
+    ccDrawLines(points, numLines);
 }
 
 - (void) clear

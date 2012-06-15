@@ -36,7 +36,6 @@ enum {
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 
-- (void)testMaskedSprite;
 
 @end
 
@@ -65,13 +64,10 @@ enum {
 {
     if( (self=[super init])) {
         
-        
-        self.anchorPoint = ccp(.5f,.5f);
+        s = self.contentSize;
+        self.anchorPoint = ccp(0.f,0.f);
         
         //keep track of camera motion
-
-        s = self.contentSize;
-
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
@@ -80,9 +76,11 @@ enum {
 
         //set up parallax
         parallax_ = [CCParallaxNode node];
-
+        parallax_.anchorPoint = ccp(0,0);
         Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
-        
+        bglayer1.anchorPoint = ccp(0,0);
+        [bglayer1 setIgnoreAnchorPointForPosition:YES];
+       //[parallax_ setIgnoreAnchorPointForPosition:YES];
 
         
         [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:ccp(0,0)];
@@ -125,7 +123,7 @@ enum {
         [self addChild:self.center];
         [self scheduleUpdate];
         
-        [self testMaskedSprite];
+        
     }
     return self;
 }
@@ -229,12 +227,12 @@ m_debugDraw = NULL;
      */
     
     //[parent addChild:sprite];
-    // will eventually make this a piece of terrain
+    //will eventually make this a piece of terrain
 
-   // sprite.position = ccp( p.x, p.y); //cocos2d point
+    //sprite.position = ccp( p.x, p.y); //cocos2d point
 
     // Define the dynamic body.
-    //Set up a 1m squared box in the physics world
+    // Set up a 1m squared box in the physics world
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
     bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
@@ -326,6 +324,7 @@ m_debugDraw = NULL;
      * User-made objects that also require updates
      */
 	[self.camera update:dt];
+    
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -340,18 +339,23 @@ m_debugDraw = NULL;
 {
 
     //Add a new body/atlas sprite at the touched location
-  
+    CGPoint location;
     for( UITouch *touch in touches ) {
-        CGPoint location = [touch locationInView: [touch view]];
+        location = [touch locationInView: [touch view]];
         
         location = [[CCDirector sharedDirector] convertToGL: location];
         location = [self convertToNodeSpace:location];
         
-        CGRect bounds = CGRectMake(0, 0, s.width, s.height);
-      //  if(CGRectContainsPoint(bounds, location))
-        //   [self addNewSpriteAtPosition: location];
-        //[self.camera addIntensity:6.f];
     }
+    
+    /* add box */
+    CGRect bounds = CGRectMake(0, 0, s.width, s.height);
+    if([touches count] == 3)
+        if(CGRectContainsPoint(bounds, location))
+        {
+            [self addNewSpriteAtPosition: location];
+            [self.camera addIntensity:6.f]; 
+        }
     
 }
 
@@ -375,24 +379,6 @@ m_debugDraw = NULL;
     
 }
 
-- (void)testMaskedSprite
-{
-
-    MaskedSprite *sprite = [[MaskedSprite alloc]initWithFile:@"blocks-hd.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
-    CGPoint points[] = {ccp(0,0),ccp(0,50),ccp(100,70),ccp(100,0)};
-    CGPoint points2[] = {ccp(50,70),ccp(70,150),ccp(150,190),ccp(200,90)};
-    CGPoint points3[] = {ccp(0,0),ccp(600,50),ccp(630,450),ccp(0,400)};
-    CGPoint points4[] = {ccp(0,0),ccp(300,25),ccp(315,225),ccp(0,200)};
-#define DRAW(name) [sprite drawPolygon:name numPoints:sizeof(name)/sizeof(*name)]
-#define SUB(name) [sprite subtractPolygon:name numPoints:sizeof(name)/sizeof(*name)]
-    
-    DRAW(points3);
-    SUB(points2);
-    //sprite.position = ccp(0,0);
-    //sprite.anchorPoint = ccp(0,0);
-    [self addChild:sprite];
-    [sprite saveMaskToFile:@"testmask.png"];
-}
 
 @end
 
