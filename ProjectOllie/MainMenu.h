@@ -1,5 +1,5 @@
 //
-//  backoverlay.h
+//  MainMenu.h
 //  ProjectOllie
 //
 //  Created by Lion User on 6/14/12.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface backoverlay : CCLayer {
+@interface MainMenu: CCLayer {
     
 }
 
