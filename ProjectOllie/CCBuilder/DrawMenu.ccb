@@ -39,8 +39,8 @@
 						<key>value</key>
 						<array>
 							<real>0.0</real>
-							<real>272</real>
-							<integer>0</integer>
+							<real>85</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -62,8 +62,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -76,7 +76,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -101,7 +101,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -288,9 +288,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>50</real>
-							<real>272</real>
-							<integer>0</integer>
+							<real>10.416666984558105</real>
+							<real>85</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -312,8 +312,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -326,7 +326,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -351,7 +351,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -538,9 +538,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>272</real>
-							<integer>0</integer>
+							<real>20.833333969116211</real>
+							<real>85</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -562,8 +562,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -576,7 +576,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -601,7 +601,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -788,9 +788,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>150</real>
-							<real>272</real>
-							<integer>0</integer>
+							<real>31.25</real>
+							<real>85</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -812,8 +812,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -826,7 +826,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -851,7 +851,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1038,9 +1038,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>349</real>
-							<real>272</real>
-							<integer>0</integer>
+							<real>75</real>
+							<real>85</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1062,8 +1062,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -1076,7 +1076,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1101,7 +1101,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1288,9 +1288,9 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>414</real>
-							<real>272</real>
-							<integer>0</integer>
+							<real>86.25</real>
+							<real>85</real>
+							<integer>4</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1312,8 +1312,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>0.0</real>
 						</array>
 					</dict>
 					<dict>
@@ -1326,7 +1326,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1351,7 +1351,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1546,9 +1546,9 @@
 				<string>Size</string>
 				<key>value</key>
 				<array>
-					<real>0.0</real>
-					<real>0.0</real>
-					<integer>0</integer>
+					<real>100</real>
+					<real>100</real>
+					<integer>1</integer>
 				</array>
 			</dict>
 			<dict>
@@ -1666,6 +1666,20 @@
 			<real>1</real>
 			<key>width</key>
 			<integer>480</integer>
+		</dict>
+		<dict>
+			<key>centeredOrigin</key>
+			<false/>
+			<key>ext</key>
+			<string>ipad hd</string>
+			<key>height</key>
+			<integer>768</integer>
+			<key>name</key>
+			<string>iPad Landscape</string>
+			<key>scale</key>
+			<real>2</real>
+			<key>width</key>
+			<integer>1024</integer>
 		</dict>
 	</array>
 </dict>
