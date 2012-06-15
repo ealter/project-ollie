@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include <stdio.h>
 #include "ShapeField.h"
 #include "PointEdge.h"
 #include <math.h>
@@ -65,7 +66,8 @@ ShapeField::ShapeField(float width, float height)
 ShapeField::~ShapeField()
 {
     //Delete every point
-    for (int i = 0; i < peSet.size(); i++)
+    int numPoints = peSet.size();
+    for (int i = 0; i < numPoints; i++)
         delete peSet[i];
     
     //Delete the grid
@@ -97,12 +99,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     //Loop through and collect all potential PointEdges that we could be affecting
     vector<PointEdge*> nearPEs;
     //for (int i = 0; i < peSet.size(); i++) nearPEs.push_back(peSet[i]);
-    for (int i = minCellX; i <= maxCellX; i++)
-        for (int j = minCellY; j <= maxCellY; j++)
-            for (int k = 0; k < spatialGrid[i][j].size(); k++)
+    for (unsigned i = minCellX; i <= maxCellX; i++)
+        for (unsigned j = minCellY; j <= maxCellY; j++)
+            for (unsigned k = 0; k < spatialGrid[i][j].size(); k++)
             {
                 bool cont = false;
-                for (int l = 0; l < nearPEs.size(); l++)
+                unsigned numNearPEs = nearPEs.size();
+                for (unsigned l = 0; l < numNearPEs; l++)
                     if (nearPEs[l] == spatialGrid[i][j][k])
                     {
                         cont = true;
@@ -113,7 +116,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
     //Classify each of the points of every near PointEdge as inside, on edge, or outside
     float rsq = r*r;
-    for (int i = 0; i < nearPEs.size(); i++)
+    unsigned numNearPEs = nearPEs.size();
+    for (unsigned i = 0; i < numNearPEs; i++)
     {
         PointEdge* pe = nearPEs[i];
         //Find square of the distance to the point
@@ -134,7 +138,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     //Find intersections, create points, link them, create enterence or exit
     vector<circleIntersection> entrences;
     vector<circleIntersection> exits;
-    for (int i = 0; i < nearPEs.size(); i++)
+    for (unsigned i = 0; i < nearPEs.size(); i++)
     {
         PointEdge* pe = nearPEs[i];
         PointEdge* npe = pe->next;
@@ -344,7 +348,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     }
     
     //Check that all of the points are real and in view, like we didn't delete anything or put it in a strange place
-    for(int i = 0; i < peSet.size(); i++)
+    unsigned numPoints = peSet.size();
+    for(unsigned i = 0; i < numPoints; i++)
     {
         PointEdge* pe = peSet[i];
         //Check that it exists and isn't null somehow
@@ -428,7 +433,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     else    //Entrences and exits not empty, adjust intersecting geometry accordingly
     {
         //For each enterence, extend to the next exit
-        for (int i = 0; i < entrences.size(); i++)
+        for (unsigned i = 0; i < entrences.size(); i++)
         {
             circleIntersection in = entrences[i];
             
@@ -439,7 +444,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             if (add)
             {
                 dTheta = 1000.0f;   //Bigger than 2pi
-                for (int j = 0; j < exits.size(); j++)
+                for (unsigned j = 0; j < exits.size(); j++)
                 {
                     circleIntersection tmpOut = exits[j];
                     
@@ -459,7 +464,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             else
             {
                 dTheta = -1000.0f;  //Less then -2pi
-                for (int j = 0; j < exits.size(); j++)
+                for (unsigned j = 0; j < exits.size(); j++)
                 {
                     circleIntersection tmpOut = exits[j];
                     printf("r %f\n", r);
@@ -540,7 +545,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     }
     
     //Remove all of the circumvented PointEdges from the spatial grid
-    for (int i = 0; i < peSet.size(); i++)
+    for (unsigned i = 0; i < peSet.size(); i++)
     {
         PointEdge* pe = peSet[i];
         if (pe->tmpMark == inside)
@@ -549,7 +554,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         {
             //Check if it was circumvented
             bool circumvented = false;
-            for (int j = 0; j < circumventedEdgePE.size(); j++)
+            for (unsigned j = 0; j < circumventedEdgePE.size(); j++)
                 if (pe == circumventedEdgePE[j])
                 {
                     //Found it. We did circumvent it and therefore it should be removed
@@ -563,7 +568,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         }
     }
     //Delete inside points which are now only irrelevantly linked to themselves
-    for (int i = 0; i < peSet.size(); i++)
+    for (unsigned i = 0; i < peSet.size(); i++)
     {
         PointEdge* pe = peSet[i];
         if (pe->tmpMark == inside)
@@ -578,7 +583,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
     fflush(stdout);
     //Check the consistancy of the linked list structures
-    for(int i = 0; i < peSet.size(); i++)
+    numPoints = peSet.size();
+    for(unsigned i = 0; i < numPoints; i++)
     {
         PointEdge* pe = peSet[i];
         //Check that it exists and isn't null somehow
@@ -621,7 +627,7 @@ void ShapeField::clipQuad(bool add, float* x, float* y)
 void ShapeField::clear()
 {
     //Free everything in the point set
-    for (int i = 0; i < peSet.size(); i++)
+    for (unsigned i = 0; i < peSet.size(); i++)
         delete peSet[i];
     
     //Clear the point set
@@ -648,7 +654,7 @@ bool ShapeField::isOutside(float px, float py)
     for (; cellY < gridHeight; cellY++)
     {
         vector<PointEdge*>* cell = &(spatialGrid[cellX][cellY]);
-        for (int i = 0; i < cell->size(); i++)
+        for (unsigned i = 0; i < cell->size(); i++)
         {
             PointEdge* pe = cell->at(i);
             PointEdge* npe = pe->next;
@@ -711,9 +717,9 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
     unsigned int maxCellY = maxY/cellHeight;
     
     //Remove from all of these cells
-    for (int i = minCellX; i <= maxCellX; i++)
-        for (int j = minCellY; j <= maxCellY; j++)
-            for (int k = 0; k < spatialGrid[i][j].size(); k++)
+    for (unsigned i = minCellX; i <= maxCellX; i++)
+        for (unsigned j = minCellY; j <= maxCellY; j++)
+            for (unsigned k = 0; k < spatialGrid[i][j].size(); k++)
                 if (spatialGrid[i][j][k] == pe)
                 {
                     //Quick removal from unordered vector
@@ -740,8 +746,8 @@ void ShapeField::addToSpatialGrid(PointEdge* pe)
     unsigned int maxCellY = maxY/cellHeight;
     
     //Add to all of these cells
-    for (int i = minCellX; i <= maxCellX; i++)
-        for (int j = minCellY; j <= maxCellY; j++)
+    for (unsigned i = minCellX; i <= maxCellX; i++)
+        for (unsigned j = minCellY; j <= maxCellY; j++)
             spatialGrid[i][j].push_back(pe);
 }
 
