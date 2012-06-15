@@ -27,7 +27,7 @@
         [blayer initwithSpeed:3 andImage:@"background.jpg"];
         [self addChild:blayer];
         [self reorderChild:blayer z:-100];*/
-        CCNode *backnode = [CCBReader nodeGraphFromFile:@"backoverlay.ccbi"];
+        CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
         [self reorderChild:backnode z:2];
         
