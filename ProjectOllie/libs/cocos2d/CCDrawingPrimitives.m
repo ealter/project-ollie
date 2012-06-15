@@ -140,6 +140,21 @@ void ccDrawLine( CGPoint origin, CGPoint destination )
 	CC_INCREMENT_GL_DRAWS(1);
 }
 
+void ccDrawLines( ccVertex2F* vertices, int count )
+{
+	lazy_init();
+    
+	[shader_ use];
+	[shader_ setUniformForModelViewProjectionMatrix];
+	[shader_ setUniformLocation:colorLocation_ with4fv:(GLfloat*) &color_.r count:1];
+    
+	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+	glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, vertices);
+	glDrawArrays(GL_LINES, 0, count);
+	
+	CC_INCREMENT_GL_DRAWS(1);
+}
+
 void ccDrawRect( CGPoint origin, CGPoint destination )
 {
 	ccDrawLine(CGPointMake(origin.x, origin.y), CGPointMake(destination.x, origin.y));
