@@ -81,9 +81,11 @@ enum {
         //set up parallax
         parallax_ = [CCParallaxNode node];
 
-        CCSprite* bglayer1 = [CCSprite spriteWithFile:@"background.jpg"];
-        bglayer1.scale = 2.f;
-        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:self.center.position];
+        Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        
+
+        
+        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:ccp(0,0)];
         
         [self addChild:parallax_ z:-1];
         
