@@ -195,7 +195,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -445,7 +445,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -695,7 +695,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -870,7 +870,7 @@
 						<array>
 							<string>pressedEraser:</string>
 							<integer>1</integer>
-							<integer>33</integer>
+							<integer>32</integer>
 						</array>
 					</dict>
 					<dict>
@@ -945,7 +945,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1120,7 +1120,7 @@
 						<array>
 							<string>pressedClear:</string>
 							<integer>1</integer>
-							<integer>33</integer>
+							<integer>32</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1195,7 +1195,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1370,7 +1370,7 @@
 						<array>
 							<string>pressedCheck:</string>
 							<integer>1</integer>
-							<integer>33</integer>
+							<integer>32</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1445,7 +1445,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>

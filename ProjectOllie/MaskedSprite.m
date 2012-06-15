@@ -17,7 +17,7 @@
 
 @interface MaskedSprite (){
     
-    HMVectorNode* pr;
+//    HMVectorNode* pr;
 
 }
 
@@ -47,7 +47,7 @@
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
-        self->pr = [[HMVectorNode alloc] init];
+        //self->pr = [[HMVectorNode alloc] init];
         
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
