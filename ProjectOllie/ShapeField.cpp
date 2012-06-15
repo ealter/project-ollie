@@ -28,6 +28,16 @@
 //Finds if the winding of 3 points is counterclockwise
 #define ccw(x1, y1, x2, y2, x3, y3) ((x2 - x1)*(y3 - y1) - (y2 - y1)*(x3 - x1))
 
+#ifdef DEBUG
+#define PRINT_DEBUGGING_STATEMENTS
+#endif
+
+#ifdef PRINT_DEBUGGING_STATEMENTS
+#define printq(s, ...) printf(s, ##__VA_ARGS__)
+#else
+#define printq(s, ...)
+#endif
+
 using namespace std;
 
 struct circleIntersection
@@ -155,7 +165,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     float lenToCenterSq = dx*dx + dy*dy;
                     if (lenToCenterSq < rsq)
                     {
-                        printf("O-O intersection\n");
+                        printq("O-O intersection\n");
                         //Line crosses inside the circle, cut it and make intersections
                         removeFromSpatialGrid(pe);
                         
@@ -198,7 +208,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             }
             else if (npe->tmpMark == inside)
             {
-                printf("O-I intersection in\n");
+                printq("O-I intersection in\n");
                 //P outside, np inside: enterence intersection in the middle somewhere
                 removeFromSpatialGrid(pe);
                 //Get unit vector in the direction of the pe
@@ -243,7 +253,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 //This on edge, next outside, determine if we came from inside or outside
                 if (pe->prev->tmpMark != outside)
                 {
-                    printf("I-Edge-O intersection out\n");
+                    printq("I-Edge-O intersection out\n");
                     //Set this pe as exit intersection
                     circleIntersection out;
                     out.intersection = pe;
@@ -259,7 +269,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 //P on edge, np either inside or on edge, determine if we came from outside
                 if (pe->prev->tmpMark == outside)
                 {
-                    printf("O-Edge-I intersection in\n");
+                    printq("O-Edge-I intersection in\n");
                     //Set this pe as an enterence intersection
                     removeFromSpatialGrid(pe);
                     circleIntersection in;
@@ -296,7 +306,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float distanceToEdge = sqrtf(rsq - dx*dx - dy*dy);
                 float outX = unitX * distanceToEdge + xClosest;
                 float outY = unitY * distanceToEdge + yClosest;
-                printf("I-O intersection out: %f, %f, \n", outX, outY);
+                printq("I-O intersection out: %f, %f, \n", outX, outY);
                 //Make point
                 PointEdge* outP = new PointEdge(outX, outY, npe, NULL);
                 //Rerout pe to new point
@@ -324,13 +334,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         //See if the location is in a strange place
         if (pe->x < 0 || pe->x > width || pe->y < 0 || pe->y > height)
         {
-            printf("Strange point edge coordinates %f, %f", pe->x, pe->y);
+            printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
             assert(false);
         }
     }
     
     //If this isn't true, something fucked up. Abort mission, refund investors, etc.
-    printf("in: %lu, out: %lu\n", entrences.size(), exits.size());
+    printq("in: %lu, out: %lu\n", entrences.size(), exits.size());
     assert(entrences.size() == exits.size());
     
     //Figure out the maximum theta for the given radius and maxCircleSeg
@@ -344,7 +354,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         //assert(outside);
         if (outside && add)
         {
-            printf("adding new loop\n");
+            printq("adding new loop\n");
             //The circle edge is outside and we are adding, so we must create a new loop
             int numSegs = (int)(TAU/maxTheta) + 1;
             float dtheta = TAU/numSegs;
@@ -371,7 +381,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         }
         else if (!outside && !add)
         {
-            printf("Adding new hole loop");
+            printq("Adding new hole loop");
             //Inside and subtracting, add a new hole
             int numSegs = (int)(-TAU/maxTheta) + 1;
             float dtheta = -TAU/numSegs;
@@ -428,7 +438,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             //If the enterence and exit are at a really close theta, then we just want to merge these points,
             if (dTheta < .01)
             {
-                printf("Merging close enterence and exit\n");
+                printq("Merging close enterence and exit\n");
                 //Bypass the "in" PointEdge
                 in.intersection->tmpMark = onEdge;
                 in.intersection->next = NULL;
@@ -444,7 +454,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 int numSegs = (dTheta/maxTheta) + 1;   //Ceil of dtheta/maxTheta
                 //Find the angle that each of these segments needs
                 float segTheta = dTheta/numSegs;
-                printf("building %d new edges with dtheta %f\n", numSegs, segTheta);
+                printq("building %d new edges with dtheta %f\n", numSegs, segTheta);
                 //Extend entrence to exit along the circle edge in +theta
                 PointEdge* prev = in.intersection;
                 float angle = in.angle + segTheta;
@@ -525,7 +535,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         //See if the location is in a strange place
         if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height)
         {
-            printf("Strange point edge coordinates %f, %f", pe->x, pe->y);
+            printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
             assert(false);
         }
         //Check that it has a next and previous
