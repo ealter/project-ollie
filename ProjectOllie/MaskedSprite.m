@@ -9,6 +9,7 @@
 #import "MaskedSprite.h"
 #import "cocos2d.h"
 #import "CCGLProgram.h"
+//#import "HMVectorNode.h"
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
@@ -16,6 +17,7 @@
 
 @interface MaskedSprite (){
     
+    HMVectorNode* pr;
 
 }
 
@@ -42,15 +44,14 @@
         
         //set up rendering paramters
         ccTexParams params = {GL_LINEAR_MIPMAP_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP_TO_EDGE};
-        
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
-
+        self->pr = [[HMVectorNode alloc] init];
         
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
-        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
+        [self clear];
   
         //makes 0,0,1,1 texturecoordinates
         quad_.bl.texCoords.u = 0;
@@ -168,7 +169,7 @@
 
     ccColor4F color = {red, 0, 0, 1};
     ccColor4F colorStroke = {1,1,1,1};
-    //[self->pr drawPolyWithVerts:poly count:numberOfPoints width:1.f fill:color line:colorStroke];
+    //[self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:colorStroke];
     //[self->pr draw];
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
@@ -190,6 +191,10 @@
     if(PIXEL_FORMAT != kCCTexture2DPixelFormat_RGBA8888)
         return NO;
     return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
+}
+
+- (void)clear{
+    [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
 }
 
 @end
