@@ -9,12 +9,17 @@
 #import "MaskedSprite.h"
 #import "cocos2d.h"
 #import "CCGLProgram.h"
+#import "PolyRenderer.h"
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 
-@interface MaskedSprite ()
+@interface MaskedSprite (){
+    
+    PolyRenderer* pr;
+    
+}
 
 @property (nonatomic, strong) CCRenderTexture *maskTexture;
 @property (nonatomic) GLuint textureWidthLocation;
@@ -22,7 +27,7 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
-- (void)polygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+- (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
 
 @end
 
@@ -36,8 +41,13 @@
     self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
     
+        
+        //set up rendering paramters
         ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
         [self.texture setTexParameters: &params];
+        [self.texture setAntiAliasTexParameters];
+        [self.maskTexture.sprite.texture setAntiAliasTexParameters];
+        self->pr = [[PolyRenderer alloc] initWithProjection:nil];
         
         // Set up the mask texture with appropriate texture coordinates
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:size.width height:size.height pixelFormat:PIXEL_FORMAT];
@@ -136,6 +146,7 @@
 }
 
 -(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add{
+
     int numPoints = 360;
     CGPoint circle[numPoints];
     for(int i = 0; i < numPoints; i++)
@@ -152,9 +163,10 @@
     
 }
 
-- (void)polygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
+- (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     [self.maskTexture begin];
+
     ccColor4F color = {red, 0, 0, 1};
     ccDrawSolidPoly(poly, numberOfPoints, color);
     
@@ -163,12 +175,12 @@
 
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self polygon:poly numPoints:numberOfPoints red:COVERED_RED];
+    [self constructPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
 }
 
 - (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self polygon:poly numPoints:numberOfPoints red:INITIAL_RED];
+    [self constructPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName

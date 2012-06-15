@@ -27,6 +27,9 @@
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
 		C54A05F6158151A100D7B369 /* blocks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C54A05F5158151A100D7B369 /* blocks-hd.png */; };
+		C578AF40158AB08E0049FE58 /* HMVectorNode.fsh in Sources */ = {isa = PBXBuildFile; fileRef = C578AF3E158AB08C0049FE58 /* HMVectorNode.fsh */; };
+		C578AF41158AB08E0049FE58 /* HMVectorNode.vsh in Sources */ = {isa = PBXBuildFile; fileRef = C578AF3F158AB08D0049FE58 /* HMVectorNode.vsh */; };
+		C578AF48158AB0AC0049FE58 /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C578AF45158AB0AC0049FE58 /* HMVectorNode.m */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
@@ -48,7 +51,7 @@
 		CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */; };
 		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
-		CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* SandboxLayer.mm */; };
+		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -272,6 +275,10 @@
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		C54A05F5158151A100D7B369 /* blocks-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blocks-hd.png"; path = "Resources/blocks-hd.png"; sourceTree = "<group>"; };
+		C578AF3E158AB08C0049FE58 /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = HMVectorNode.fsh; path = Shaders/HMVectorNode.fsh; sourceTree = "<group>"; };
+		C578AF3F158AB08D0049FE58 /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = HMVectorNode.vsh; path = Shaders/HMVectorNode.vsh; sourceTree = "<group>"; };
+		C578AF44158AB0AC0049FE58 /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
+		C578AF45158AB0AC0049FE58 /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5C01E38157AAEB2004CF358 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
@@ -297,8 +304,8 @@
 		CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "comic andy.ttf"; path = "Resources/comic andy.ttf"; sourceTree = "<group>"; };
 		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
 		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
-		CE8429E4157981BB0038C653 /* SandboxLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxLayer.h; sourceTree = "<group>"; };
-		CE8429E5157981BB0038C653 /* SandboxLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxLayer.mm; sourceTree = "<group>"; };
+		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
+		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
@@ -785,6 +792,16 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
+		C578AF42158AB0AC0049FE58 /* PolyRenderer */ = {
+			isa = PBXGroup;
+			children = (
+				C578AF44158AB0AC0049FE58 /* HMVectorNode.h */,
+				C578AF45158AB0AC0049FE58 /* HMVectorNode.m */,
+			);
+			name = PolyRenderer;
+			path = libs/PolyRenderer;
+			sourceTree = "<group>";
+		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
@@ -835,8 +852,8 @@
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
 				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
-				CE8429E4157981BB0038C653 /* SandboxLayer.h */,
-				CE8429E5157981BB0038C653 /* SandboxLayer.mm */,
+				CE8429E4157981BB0038C653 /* ActionLayer.h */,
+				CE8429E5157981BB0038C653 /* ActionLayer.mm */,
 				C5FE5FED15796E6F008F4298 /* CCBReader.h */,
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
@@ -912,6 +929,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				C578AF42158AB0AC0049FE58 /* PolyRenderer */,
 				CE894EFC158299CE00E412E1 /* CSG */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
@@ -1415,6 +1433,8 @@
 		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				C578AF3E158AB08C0049FE58 /* HMVectorNode.fsh */,
+				C578AF3F158AB08D0049FE58 /* HMVectorNode.vsh */,
 				CE123C4F15883687003AD813 /* TerrainShader.frag */,
 			);
 			name = Shaders;
@@ -1684,7 +1704,7 @@
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
-				CE8429E6157981BB0038C653 /* SandboxLayer.mm in Sources */,
+				CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
@@ -1695,6 +1715,9 @@
 				CE9B89AF1586A59E0009C13F /* DrawMenu.mm in Sources */,
 				CE123C5015883687003AD813 /* TerrainShader.frag in Sources */,
 				CE9E90B4158AAF29006CC8C9 /* frontmenu.mm in Sources */,
+				C578AF40158AB08E0049FE58 /* HMVectorNode.fsh in Sources */,
+				C578AF41158AB08E0049FE58 /* HMVectorNode.vsh in Sources */,
+				C578AF48158AB0AC0049FE58 /* HMVectorNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

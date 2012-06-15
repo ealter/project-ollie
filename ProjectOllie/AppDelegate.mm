@@ -19,7 +19,7 @@
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "HelloWorldLayer.h"
-#import "SandBoxLayer.h"
+#import "ActionLayer.h"
 #import "CCBReader.h"
 
 
@@ -39,8 +39,8 @@
 								   depthFormat:0	//GL_DEPTH_COMPONENT24_OES
 							preserveBackbuffer:NO
 									sharegroup:nil
-								 multiSampling:NO
-							   numberOfSamples:0];
+								 multiSampling:YES
+							   numberOfSamples:2];
     
     [glView setMultipleTouchEnabled:YES];
 	
@@ -102,7 +102,7 @@
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"frontmenu.ccbi"];
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
-	//[director_ pushScene: [SandboxLayer scene]]; 
+	//[director_ pushScene: [ActionLayer scene]]; 
     
 	[director_ pushScene:scene];
     
