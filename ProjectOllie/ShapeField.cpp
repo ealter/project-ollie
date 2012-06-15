@@ -110,12 +110,12 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         float dx = pe->x - x;
         float dy = pe->y - y;
         float dsq = dx*dx + dy*dy;
-        if (dsq < rsq - plankFloat)
+        if (dsq <= rsq )//+ plankFloat)
             pe->tmpMark = inside;
-        else if (dsq > rsq + plankFloat)
+        else// if (dsq > rsq + plankFloat)
             pe->tmpMark = outside;
-        else 
-            pe->tmpMark = onEdge;
+       /* else 
+            pe->tmpMark = onEdge;*/
     }
     
     //All inside points will be circumvented and some edge points. Remember which edge points
