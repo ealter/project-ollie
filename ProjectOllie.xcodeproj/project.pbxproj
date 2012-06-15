@@ -240,6 +240,8 @@
 		CEA14DB11587CA7E00735135 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAD1587CA7E00735135 /* clear.png */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00100158BDCE100F7F1A8 /* Authentication.m */; };
+		CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */; };
+		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
@@ -696,6 +698,10 @@
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = Resources/DrawMenu.ccbi; sourceTree = "<group>"; };
 		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; };
 		CEF00100158BDCE100F7F1A8 /* Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Authentication.m; path = ProjectOllie/Server/Authentication.m; sourceTree = "<group>"; };
+		CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+URLEncoding.h"; path = "ProjectOllie/Server/NSDictionary+URLEncoding.h"; sourceTree = "<group>"; };
+		CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+URLEncoding.m"; path = "ProjectOllie/Server/NSDictionary+URLEncoding.m"; sourceTree = "<group>"; };
+		CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "ProjectOllie/Server/NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "ProjectOllie/Server/NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
@@ -1473,6 +1479,10 @@
 			children = (
 				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
 				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
+				CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */,
+				CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */,
+				CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */,
+				CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -1771,6 +1781,8 @@
 				C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */,
 				CE4B4883158BC43E00040C1C /* LoginScreen.mm in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
+				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
+				CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

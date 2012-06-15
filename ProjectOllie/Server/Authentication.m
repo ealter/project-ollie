@@ -7,6 +7,7 @@
 //
 
 #import "Authentication.h"
+#import "NSDictionary+URLEncoding.h"
 
 static Authentication *auth = nil;
 
