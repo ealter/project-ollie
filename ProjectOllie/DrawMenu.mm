@@ -50,7 +50,8 @@
 
 -(void)pressedClear:(id)sender
 {
-    
+    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
+    [[parent_node terrain] clear];
 }
 
 @end
