@@ -1,23 +1,21 @@
 //
-//  LoginScreen.m
+//  NewAccountMenu.m
 //  ProjectOllie
 //
 //  Created by Lion User on 6/15/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "LoginScreen.h"
+#import "NewAccountMenu.h"
 #import "CCBReader.h"
 
-@implementation LoginScreen
-@synthesize nameField, pwField;
-
-
+@implementation NewAccountMenu
+@synthesize emailField, pwField, nameField;
 -(id)init
 {
-    if(self = [super init])
+    if(self=[super init])
     {
-        CGRect nameframe = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30);
+        CGRect nameframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
         nameField = [[UITextField alloc]initWithFrame:nameframe];
         nameField.clearsOnBeginEditing = YES;
         nameField.placeholder = @"Username";
@@ -32,7 +30,7 @@
         CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159/2);  
         nameField.transform = transform;
         
-        CGRect pwframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
+        CGRect pwframe = CGRectMake(self.contentSize.height/5, self.contentSize.width/2-15, 150, 30);
         pwField = [[UITextField alloc]initWithFrame:pwframe];
         pwField.clearsOnBeginEditing = YES;
         pwField.placeholder = @"Password";
@@ -40,19 +38,34 @@
         pwField.returnKeyType = UIReturnKeyDone;
         pwField.autocorrectionType = UITextAutocorrectionTypeNo;
         pwField.adjustsFontSizeToFitWidth = YES;
-        pwField.secureTextEntry = YES;
         pwField.textColor = [UIColor blackColor];
         [pwField setFont:[UIFont fontWithName:@"Arial" size:14]];
         pwField.backgroundColor = [UIColor whiteColor];
         pwField.borderStyle = UITextBorderStyleRoundedRect;
         pwField.transform = transform;
+        pwField.secureTextEntry = YES;
+        
+        CGRect emailframe = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30);
+        emailField = [[UITextField alloc]initWithFrame:emailframe];
+        emailField.clearsOnBeginEditing = YES;
+        emailField.placeholder = @"email";
+        emailField.keyboardType = UIKeyboardTypeDefault;
+        emailField.returnKeyType = UIReturnKeyDone;
+        emailField.autocorrectionType = UITextAutocorrectionTypeNo;
+        emailField.adjustsFontSizeToFitWidth = YES;
+        emailField.textColor = [UIColor blackColor];
+        [emailField setFont:[UIFont fontWithName:@"Arial" size:14]];
+        emailField.backgroundColor = [UIColor whiteColor];
+        emailField.borderStyle = UITextBorderStyleRoundedRect;
+        emailField.transform = transform;
         
         [nameField setDelegate:self];
         [pwField setDelegate:self];
+        [emailField setDelegate:self];
         
         [[[[CCDirector sharedDirector] view] window] addSubview:nameField];  
-        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];  
-
+        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
+        [[[[CCDirector sharedDirector] view] window] addSubview:emailField];
     }
     
     return self;
@@ -65,27 +78,22 @@
     return YES;
 }
 
--(void)pressedLogin:(id)sender
+-(void)pressedMake:(id)sender
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    [pwField removeFromSuperview];
-    [pwField release];
     
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
--(void)pressedMakeNew:(id)sender
+-(void)pressedCancel:(id)sender
 {
     [nameField removeFromSuperview];
     [nameField release];
     [pwField removeFromSuperview];
     [pwField release];
+    [emailField removeFromSuperview];
+    [emailField release];
     
     
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"NewAccountMenu.ccbi"];
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 

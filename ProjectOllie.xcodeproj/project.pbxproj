@@ -46,6 +46,8 @@
 		CE1BB5241586A6BA0095A793 /* medium.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB51C1586A6BA0095A793 /* medium.png */; };
 		CE1BB5251586A6BA0095A793 /* small-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB51D1586A6BA0095A793 /* small-hd.png */; };
 		CE1BB5261586A6BA0095A793 /* small.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB51E1586A6BA0095A793 /* small.png */; };
+		CE29916C158BF26A00F33ACD /* NewAccountMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE29916B158BF26A00F33ACD /* NewAccountMenu.mm */; };
+		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE412619157FF6B8001FA126 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = CE412618157FF6B8001FA126 /* Background.m */; };
@@ -305,6 +307,9 @@
 		CE1BB51C1586A6BA0095A793 /* medium.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = medium.png; path = Resources/medium.png; sourceTree = "<group>"; };
 		CE1BB51D1586A6BA0095A793 /* small-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "small-hd.png"; path = "Resources/small-hd.png"; sourceTree = "<group>"; };
 		CE1BB51E1586A6BA0095A793 /* small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = small.png; path = Resources/small.png; sourceTree = "<group>"; };
+		CE29916A158BF26A00F33ACD /* NewAccountMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAccountMenu.h; sourceTree = "<group>"; };
+		CE29916B158BF26A00F33ACD /* NewAccountMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NewAccountMenu.mm; sourceTree = "<group>"; };
+		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = Resources/NewAccountMenu.ccbi; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = Resources/ActionMenu.ccbi; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = Resources/MainMenu.ccbi; sourceTree = "<group>"; };
 		CE412617157FF6B8001FA126 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
@@ -833,6 +838,8 @@
 				CE9957D9158AB6C900B863DF /* ActionMenu.mm */,
 				CE9B89AD1586A59E0009C13F /* DrawMenu.h */,
 				CE9B89AE1586A59E0009C13F /* DrawMenu.mm */,
+				CE29916A158BF26A00F33ACD /* NewAccountMenu.h */,
+				CE29916B158BF26A00F33ACD /* NewAccountMenu.mm */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -884,6 +891,8 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
+				C578AF7E158AF4710049FE58 /* HMUtils */,
+				CE4B4887158BDAB800040C1C /* Menus */,
 				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
@@ -923,6 +932,7 @@
 				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
 				CE9957D3158AB5F000B863DF /* back-hd.png */,
 				CE9957D4158AB5F000B863DF /* back.png */,
+				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
 				CE4B487E158BC40000040C1C /* LoginScreen.ccbi */,
 				CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */,
 				CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */,
@@ -1580,6 +1590,7 @@
 				CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */,
 				CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */,
 				CE4B487F158BC40000040C1C /* LoginScreen.ccbi in Resources */,
+				CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1771,6 +1782,7 @@
 				C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */,
 				CE4B4883158BC43E00040C1C /* LoginScreen.mm in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
+				CE29916C158BF26A00F33ACD /* NewAccountMenu.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
