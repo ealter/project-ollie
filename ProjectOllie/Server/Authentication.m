@@ -18,6 +18,8 @@ static Authentication *auth = nil;
 @property (retain) NSMutableData *data;
 
 + (NSString *)errorForServerResult:(NSDictionary *)result;
+- (void)broadcastLoginSucceeded;
+- (void)broadcastLoginFailedWithError:(NSString *)error;
 
 @end
 
@@ -26,7 +28,6 @@ static Authentication *auth = nil;
 @synthesize authToken = _authToken;
 @synthesize username = _username;
 @synthesize data = _data;
-@synthesize delegate = _delegate;
 
 + (Authentication *)mainAuth {
     if(!auth) {
@@ -38,6 +39,16 @@ static Authentication *auth = nil;
 + (NSString *)errorForServerResult:(NSDictionary *)result
 {
     return [result objectForKey:@"error"];
+}
+
+- (void)broadcastLoginSucceeded
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_SUCCEEDED_NOTIFIATION object:self];
+}
+
+- (void)broadcastLoginFailedWithError:(NSString *)error
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:LOGIN_FAILED_NOTIFICATION object:error];
 }
 
 - (BOOL)isLoggedIn
@@ -52,7 +63,7 @@ static Authentication *auth = nil;
     NSURL *loginURL = [BASE_URL URLByAppendingPathComponent:@"login"];
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", nil]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:loginURL];
-    request.HTTPMethod = @"get";
+    request.HTTPMethod = @"POST";
     request.HTTPBody = [[requestData urlEncodedString] dataUsingEncoding:NSUTF8StringEncoding];
     
     self.data = [[NSMutableData alloc]initWithCapacity:128];
@@ -83,27 +94,27 @@ static Authentication *auth = nil;
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if(!self.data) {
-        [self.delegate loginFailedWithError:nil];
+        [self broadcastLoginFailedWithError:nil];
         return;
     }
     NSError *error = nil;
     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:self.data options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error when logging in with username %@: %@", self.username, error);
-        [self.delegate loginFailedWithError:@"Internal server error"];
+        [self broadcastLoginFailedWithError:@"Internal server error"];
         return;
     }
     if([[self class] errorForServerResult:result]) {
         NSString *error = [[self class] errorForServerResult:result];
         DebugLog(@"Error when logging in with username %@: %@", self.username, error);
-        [self.delegate loginFailedWithError:error];
+        [self broadcastLoginFailedWithError:error];
         return;
     }
     self.authToken = [result objectForKey:@"auth_token"];
     if(self.authToken)
-        [self.delegate loginSucceeded];
+        [self broadcastLoginSucceeded];
     else
-        [self.delegate loginFailedWithError:nil];
+        [self broadcastLoginFailedWithError:nil];
 }
 
 @end

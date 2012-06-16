@@ -12,20 +12,17 @@
 #define DOMAIN_NAME @"http://106.187.44.7"
 #endif
 
-/* A singleton class that handles server authentication */
-@protocol Authentication_delegate <NSObject>
-@optional
-- (void)loginSucceeded;
-- (void)loginFailedWithError:(NSString *)error;
+/* This class uses NSNotificationCenter to broadcast these events */
+#define LOGIN_SUCCEEDED_NOTIFIATION @"authentication_login_succeeded"
+#define LOGIN_FAILED_NOTIFICATION @"loginFailed" /* Sends an error message which is the object */
 
-@end
+/* A singleton class that handles server authentication */
 
 @interface Authentication : NSObject
 
 @property (nonatomic, copy) NSString *authToken;
 @property (nonatomic, readonly, retain) NSString *username;
 @property (nonatomic, readonly) BOOL isLoggedIn;
-@property (nonatomic, assign) id<Authentication_delegate> delegate;
 
 + (Authentication *)mainAuth;
 

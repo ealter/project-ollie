@@ -12,8 +12,8 @@
 
 @interface LoginScreen ()
 
-- (void)onSuccessfullLogin;
-- (void)onFailedLogin:(NSString *)error;
+- (void)onSuccessfulLogin:(NSNotification *)notification;
+- (void)onFailedLogin:(NSNotification *)notification;
 
 @end
 
@@ -36,7 +36,7 @@
         [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
         nameField.backgroundColor = [UIColor clearColor];
         nameField.borderStyle = UITextBorderStyleRoundedRect;
-        CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159/2);  
+        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
         nameField.transform = transform;
         
         CGRect pwframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
@@ -57,11 +57,9 @@
         [nameField setDelegate:self];
         [pwField setDelegate:self];
         
-        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];  
-        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];  
-
+        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];
+        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
     }
-    
     return self;
 }
 
@@ -72,19 +70,19 @@
     return YES;
 }
 
--(void)pressedLogin:(id)sender
+- (void)pressedLogin:(id)sender
 {
     NSString *username = [nameField text];
     NSString *password = [pwField text];
-    NSString *error = [[Authentication mainAuth] loginWithUsername:username password:password];
-    if(error)
-        [self onFailedLogin:error];
-    else
-        [self onSuccessfullLogin];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSuccessfulLogin) name:LOGIN_SUCCEEDED_NOTIFIATION object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFailedLogin:) name:LOGIN_FAILED_NOTIFICATION object:nil];
+    [[Authentication mainAuth] loginWithUsername:username password:password];
 }
 
-- (void)onSuccessfullLogin
+- (void)onSuccessfulLogin:(NSNotification *)notification
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [nameField removeFromSuperview];
     [nameField release];
     [pwField removeFromSuperview];
@@ -94,11 +92,21 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
-- (void)onFailedLogin:(NSString *)error
+- (void)onFailedLogin:(NSNotification *)notification
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    NSString *error = notification.object;
+    if(!error) error = @"unknown error";
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alert show];
-    [self onSuccessfullLogin]; //TODO: Make the person log in again
+    [self onSuccessfulLogin:nil]; //TODO: Make the person log in again
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
 }
 
 @end
