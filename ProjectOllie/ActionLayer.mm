@@ -83,7 +83,7 @@ enum {
        //[parallax_ setIgnoreAnchorPointForPosition:YES];
 
         
-        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.5f) positionOffset:ccp(0,0)];
+        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.4f) positionOffset:ccp(0,0)];
         
         [self addChild:parallax_ z:-1];
         
@@ -324,6 +324,7 @@ m_debugDraw = NULL;
      * User-made objects that also require updates
      */
 	[self.camera update:dt];
+    [parallax_ setPosition:self.position];
     
 }
 
