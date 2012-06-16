@@ -158,9 +158,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<integer>201</integer>
+							<integer>161</integer>
 							<integer>255</integer>
-							<integer>181</integer>
+							<integer>64</integer>
 						</array>
 					</dict>
 					<dict>
@@ -169,7 +169,7 @@
 						<key>type</key>
 						<string>Byte</string>
 						<key>value</key>
-						<integer>255</integer>
+						<integer>200</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -205,7 +205,7 @@
 						<key>value</key>
 						<array>
 							<real>50</real>
-							<real>25</real>
+							<real>30</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -216,8 +216,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>125</real>
-							<real>50</real>
+							<real>110</real>
+							<real>45</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -284,7 +284,7 @@
 						<string>BlockCCControl</string>
 						<key>value</key>
 						<array>
-							<string>pressedLogin:</string>
+							<string>pressedMake:</string>
 							<integer>1</integer>
 							<integer>32</integer>
 						</array>
@@ -311,7 +311,7 @@
 						<key>type</key>
 						<string>String</string>
 						<key>value</key>
-						<string>Login</string>
+						<string>Create</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -328,7 +328,7 @@
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>12</real>
+							<real>15</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -350,8 +350,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>125</real>
-							<real>50</real>
+							<real>110</real>
+							<real>45</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -454,8 +454,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
+							<real>50</real>
 							<real>15</real>
-							<real>12</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -466,8 +466,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>110</real>
-							<real>32</real>
+							<real>100</real>
+							<real>34</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -534,7 +534,7 @@
 						<string>BlockCCControl</string>
 						<key>value</key>
 						<array>
-							<string>pressedMakeNew:</string>
+							<string>pressedCancel:</string>
 							<integer>1</integer>
 							<integer>32</integer>
 						</array>
@@ -561,7 +561,7 @@
 						<key>type</key>
 						<string>String</string>
 						<key>value</key>
-						<string>New Account?</string>
+						<string>Cancel</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -600,8 +600,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>110</real>
-							<real>32</real>
+							<real>100</real>
+							<real>34</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -621,7 +621,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>btn-test-0.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -686,7 +686,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>LoginScreen</string>
+		<string>NewAccountMenu</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
 		<key>memberVarAssignmentType</key>
