@@ -34,7 +34,7 @@
         nameField.adjustsFontSizeToFitWidth = YES;
         nameField.textColor = [UIColor blackColor];
         [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        nameField.backgroundColor = [UIColor clearColor];
+        nameField.backgroundColor = [UIColor whiteColor];
         nameField.borderStyle = UITextBorderStyleRoundedRect;
         CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
         nameField.transform = transform;
@@ -50,7 +50,7 @@
         pwField.secureTextEntry = YES;
         pwField.textColor = [UIColor blackColor];
         [pwField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        pwField.backgroundColor = [UIColor clearColor];
+        pwField.backgroundColor = [UIColor whiteColor];
         pwField.borderStyle = UITextBorderStyleRoundedRect;
         pwField.transform = transform;
         
@@ -107,6 +107,18 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
+}
+
+-(void)pressedMakeNew:(id)sender
+{
+    [nameField removeFromSuperview];
+    [nameField release];
+    [pwField removeFromSuperview];
+    [pwField release];
+    
+    
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"NewAccountMenu.ccbi"];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 @end
