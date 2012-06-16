@@ -8,17 +8,17 @@
 
 #import "LoginScreen.h"
 #import "CCBReader.h"
-#import "Authentication.h"
+#import "Login.h"
 
-@interface LoginScreen ()
+@interface LoginScreen () <Login_Delegate>
 
-- (void)onSuccessfulLogin:(NSNotification *)notification;
-- (void)onFailedLogin:(NSNotification *)notification;
+@property (nonatomic, retain) Login *login;
 
 @end
 
 @implementation LoginScreen
 @synthesize nameField, pwField;
+@synthesize login = _login;
 
 -(id)init
 {
@@ -70,19 +70,24 @@
     return YES;
 }
 
+- (Login *)login
+{
+    if(!_login) {
+        _login = [[Login alloc]init];
+        _login.delegate = self;
+    }
+    return _login;
+}
+
 - (void)pressedLogin:(id)sender
 {
     NSString *username = [nameField text];
     NSString *password = [pwField text];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onSuccessfulLogin) name:LOGIN_SUCCEEDED_NOTIFIATION object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onFailedLogin:) name:LOGIN_FAILED_NOTIFICATION object:nil];
-    [[Authentication mainAuth] loginWithUsername:username password:password];
+    [self.login loginWithUsername:username password:password];
 }
 
-- (void)onSuccessfulLogin:(NSNotification *)notification
+- (void)loginSucceeded
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     [nameField removeFromSuperview];
     [nameField release];
     [pwField removeFromSuperview];
@@ -92,21 +97,11 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
-- (void)onFailedLogin:(NSNotification *)notification
+- (void)loginFailedWithError:(NSString *)error
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    NSString *error = notification.object;
     if(!error) error = @"unknown error";
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [alert show];
-    [self onSuccessfulLogin:nil]; //TODO: Make the person log in again
-}
-
-- (void)dealloc
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
+    [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    [self loginSucceeded]; //TODO: Make the person log in again
 }
 
 -(void)pressedMakeNew:(id)sender
