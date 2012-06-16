@@ -13,17 +13,24 @@
 #endif
 
 /* A singleton class that handles server authentication */
+@protocol Authentication_delegate <NSObject>
+@optional
+- (void)loginSucceeded;
+- (void)loginFailedWithError:(NSString *)error;
+
+@end
 
 @interface Authentication : NSObject
 
 @property (nonatomic, copy) NSString *authToken;
 @property (nonatomic, readonly, retain) NSString *username;
 @property (nonatomic, readonly) BOOL isLoggedIn;
+@property (nonatomic, assign) id<Authentication_delegate> delegate;
 
 + (Authentication *)mainAuth;
 
 /* The NSString* functions return nil on success, an error message on failure */
-- (NSString *)loginWithUsername:(NSString *)username password:(NSString *)password;
-- (NSString *)logout;
+- (void)loginWithUsername:(NSString *)username password:(NSString *)password;
+- (void)logout;
 
 @end

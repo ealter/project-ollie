@@ -856,7 +856,6 @@
 		CE94AA4A15785F83009B35B4 = {
 			isa = PBXGroup;
 			children = (
-				CEF00102158BDCE500F7F1A8 /* Server */,
 				CE94AA6B15785F83009B35B4 /* ProjectOllie */,
 				CE94AA5815785F83009B35B4 /* Frameworks */,
 				CE94AA5615785F83009B35B4 /* Products */,
@@ -916,6 +915,7 @@
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
+				CEF00102158BDCE500F7F1A8 /* Server */,
 				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
 				CE94AA6C15785F83009B35B4 /* Resources */,
 				CE94AA8415785F84009B35B4 /* libs */,
@@ -1485,6 +1485,7 @@
 				CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */,
 			);
 			name = Server;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
