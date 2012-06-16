@@ -23,7 +23,7 @@ public:
     ~ShapeField();
     
     void clipCircle(bool add, float r, float x, float y);
-    void clipQuad(bool add, float* x, float* y);
+    void clipConvexPolygon(bool add, PointEdge* head);
     void clear();
 private:
     std::vector<PointEdge*> **spatialGrid;

@@ -78,41 +78,17 @@ ShapeField::~ShapeField()
 
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
-    //Bound by the world size
+    //Bound by the world size so we cannot possibly get spatial grid errors
     if (x <= r) x = r + 1;
     if (y <= r) y = r + 1;
     if (x >= width-r) x = width-r-1;
     if (y >= height-r) y = height-r-1;
     
-    //Create bounding box for affected area
-    unsigned int minX = x - r        - plankFloat;
-    unsigned int minY = y - r        - plankFloat;
-    unsigned int maxX = x + r + 1.0f + plankFloat;
-    unsigned int maxY = y + r + 1.0f + plankFloat;
+    //Use this as the r when creating new points so going over circles won't ever expand the curve into the float trig error spots
+    float rMarginal = r - .01;
     
-    //Find the corrosponding grid spaces that we are affecting
-    unsigned int minCellX = minX/cellWidth;
-    unsigned int minCellY = minY/cellHeight;
-    unsigned int maxCellX = maxX/cellWidth;
-    unsigned int maxCellY = maxY/cellHeight;
-    
-    //Loop through and collect all potential PointEdges that we could be affecting
-    vector<PointEdge*> nearPEs;
-    //for (int i = 0; i < peSet.size(); i++) nearPEs.push_back(peSet[i]);
-    for (unsigned i = minCellX; i <= maxCellX; i++)
-        for (unsigned j = minCellY; j <= maxCellY; j++)
-            for (unsigned k = 0; k < spatialGrid[i][j].size(); k++)
-            {
-                bool cont = false;
-                unsigned numNearPEs = nearPEs.size();
-                for (unsigned l = 0; l < numNearPEs; l++)
-                    if (nearPEs[l] == spatialGrid[i][j][k])
-                    {
-                        cont = true;
-                        break;
-                    }
-                if (!cont) nearPEs.push_back(spatialGrid[i][j][k]);
-            }
+    //Get all potential PointEdges that we could be affecting in a bounding box
+    vector<PointEdge*> nearPEs = pointsNear(x-r, y-r, x+r, y+r);
     
     //Classify each of the points of every near PointEdge as inside, on edge, or outside
     float rsq = r*r;
@@ -236,7 +212,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float xClosest = pe->x + unitX * diffDotUnitPe;
                 float yClosest = pe->y + unitY * diffDotUnitPe;
                 //Check if the closest point on the line to the citcle center is inside the radius
-                float dx = x - xClosest;
+                float dx = x - xClosest; 
                 float dy = y - yClosest;
                 //Calculate enterence x, y
                 float distanceToEdge = sqrtf(rsq - dx*dx - dy*dy);
@@ -257,6 +233,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 if(isnan(in.angle))
                 {
                     printf("circle center: %f, %f,  intersection: %f, %f", x, y, inX, inY);
+                    printf("pe: %f, %f\nnpe: %f, %f\nped: %f, %f\npeLen: %f", pe->x, pe->y, npe->x, npe->y, pedx, pedy, peLen);
+                    printf("ped unit: %f, %f", unitX, unitY);
+                    printf("p to c: %f, %f", dxPtoC, dyPtoC);
+                    printf("dot: %f\nClosest: %f, %f", diffDotUnitPe, xClosest, yClosest);
+                    printf("dx dy: %f, %f", dx, dy);
+                    printf("distance to edge: %f\nin: %f, %f", distanceToEdge, inX, inY);
+                    assert(false);
                 }
                 entrences.push_back(in);
             }
@@ -337,8 +320,14 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 out.angle= atan2f(outY - y, outX - x);
                 if(isnan(out.angle))
                 {
-                    printf("circle center: %f, %f,  intersection: %f, %f\n", x, y, outX, outY);
-                    
+                    printf("circle center: %f, %f,  intersection: %f, %f", x, y, outX, outY);
+                    printf("pe: %f, %f\nnpe: %f, %f\nped: %f, %f\npeLen: %f", pe->x, pe->y, npe->x, npe->y, pedx, pedy, peLen);
+                    printf("ped unit: %f, %f", unitX, unitY);
+                    printf("p to c: %f, %f", dxPtoC, dyPtoC);
+                    printf("dot: %f\nClosest: %f, %f", diffDotUnitPe, xClosest, yClosest);
+                    printf("dx dy: %f, %f", dx, dy);
+                    printf("distance to edge: %f\nin: %f, %f", distanceToEdge, outX, outY);
+                    assert(false);
                 }
                 exits.push_back(out);
             }
@@ -384,13 +373,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             
             //Build a counter clockwise circle (increasing theta)
             float angle = 0;
-            PointEdge* first = new PointEdge(x + r, y, NULL, NULL);
+            PointEdge* first = new PointEdge(x + rMarginal, y, NULL, NULL);
             peSet.push_back(first);
             PointEdge* prev = first;
             for (int i = 1; i < numSegs; i++)
             {
-                float px = x + r*cosf(angle);
-                float py = y + r*sinf(angle);
+                float px = x + rMarginal*cosf(angle);
+                float py = y + rMarginal*sinf(angle);
                 PointEdge* pe = new PointEdge(px, py, NULL, prev);
                 peSet.push_back(pe);
                 prev->next = pe;
@@ -411,13 +400,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             
             //Build a counter clockwise circle (increasing theta)
             float angle = 0;
-            PointEdge* first = new PointEdge(x + r, y, NULL, NULL);
+            PointEdge* first = new PointEdge(x + rMarginal, y, NULL, NULL);
             peSet.push_back(first);
             PointEdge* prev = first;
             for (int i = 1; i < numSegs; i++)
             {
-                float px = x + r*cosf(angle);
-                float py = y + r*sinf(angle);
+                float px = x + rMarginal*cosf(angle);
+                float py = y + rMarginal*sinf(angle);
                 PointEdge* pe = new PointEdge(px, py, NULL, prev);
                 peSet.push_back(pe);
                 prev->next = pe;
@@ -517,8 +506,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 for (int j = 1; j < numSegs; j++)
                 {
                     //Make a new point at this theta
-                    float px = x + r*cosf(angle);
-                    float py = y + r*sinf(angle);
+                    float px = x + rMarginal*cosf(angle);
+                    float py = y + rMarginal*sinf(angle);
                     PointEdge* pe = new PointEdge(px, py, NULL, prev);
                     peSet.push_back(pe);
                     
@@ -546,7 +535,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
     //Remove all of the circumvented PointEdges from the spatial grid
     for (unsigned i = 0; i < peSet.size(); i++)
-    {
+    {	
         PointEdge* pe = peSet[i];
         if (pe->tmpMark == inside)
             removeFromSpatialGrid(pe);
@@ -607,15 +596,41 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     
 }
 
-//Make sure you only sned willerton fibbuals
-
-void ShapeField::clipQuad(bool add, float* x, float* y)
+//Clips a convex polygon
+void ShapeField::clipConvexPolygon(bool add, PointEdge* head)
 {
-    //Get all of the near points
+    //Find the min and max x and y to make a bounding box
+    float minX = head->x;
+    float minY = head->y;
+    float maxX = head->x;
+    float maxY = head->y;
+    PointEdge* pe = head->next;
+    while (pe != head) {
+        if (pe->x < minX) minX = pe->x;
+        if (pe->y < minY) minY = pe->y;
+        if (pe->x > maxX) maxX = pe->x;
+        if (pe->y > maxY) maxY = pe->y;
+    }
+    
+    //Get all of the near points with these bounds
+    vector<PointEdge*> nearPEs = pointsNear(minX, minY, maxX, maxY);
     
     //Mark all points
+    for (int i = 0; i < nearPEs.size(); i++)
+    {
+        PointEdge* pe;
+        
+    }
+    pe = head;
+    do
+    {
+        PointEdge* npe = pe->next;
+        //It's inside unless it's on the right of something
+        
+        
+        pe = npe;
+    } while(pe != head);
     
-
     //Find intersections, create exits and entrences
     
     //Connect intersections along clipping path
@@ -658,35 +673,36 @@ bool ShapeField::isOutside(float px, float py)
         {
             PointEdge* pe = cell->at(i);
             PointEdge* npe = pe->next;
-            if (pe->tmpMark == inside)
-                continue;   //Don't bother evaluating anything inside or on the edge ... no intersections implies these cannot interfere
+            if (pe->tmpMark == outside)
+            {
             
-            bool peLeft = pe->x < px;
-            bool npeLeft = npe->x < px;
-            if (peLeft && !npeLeft)
-            {
-                //P is left of normal, Np right
-                //Find actual intersection
-                float m = (npe->y - pe->y)/(npe->x - pe->x);
-                float tmpYdistance = pe->y + (px - pe->x) * m - py;
-                if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance > 0)
+                bool peLeft = pe->x < px;
+                bool npeLeft = npe->x < px;
+                if (peLeft && !npeLeft)
                 {
-                    //Closest intersection thus far, implies outside
-                    isOutside = true;
-                    yDistance = tmpYdistance;
+                    //P is left of normal, Np right
+                    //Find actual intersection
+                    float m = (npe->y - pe->y)/(npe->x - pe->x);
+                    float tmpYdistance = pe->y + (px - pe->x) * m - py;
+                    if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance >= 0)
+                    {
+                        //Closest intersection thus far, implies outside
+                        isOutside = true;
+                        yDistance = tmpYdistance;
+                    }
                 }
-            }
-            else if (!peLeft && npeLeft)
-            {
-                //P is right of normal, Np left
-                //Find actual intersection
-                float m = (npe->y - pe->y)/(npe->x - pe->x);
-                float tmpYdistance = pe->y + (px - pe->x) * m - py;
-                if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance > 0)
+                else if (!peLeft && npeLeft)
                 {
-                    //Closest intersection thus far, implies inside
-                    isOutside = false;
-                    yDistance = tmpYdistance;
+                    //P is right of normal, Np left
+                    //Find actual intersection
+                    float m = (npe->y - pe->y)/(npe->x - pe->x);
+                    float tmpYdistance = pe->y + (px - pe->x) * m - py;
+                    if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance >= 0)
+                    {
+                        //Closest intersection thus far, implies inside
+                        isOutside = false;
+                        yDistance = tmpYdistance;
+                    }
                 }
             }
         }
@@ -698,7 +714,29 @@ bool ShapeField::isOutside(float px, float py)
 //Returns all of the points inside and near a bounding box
 vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 {
+    //Find the corrosponding grid spaces that we are affecting
+    unsigned int minCellX = ((unsigned)minX)/cellWidth;
+    unsigned int minCellY = ((unsigned)minY)/cellHeight;
+    unsigned int maxCellX = ((unsigned)maxX+1)/cellWidth;
+    unsigned int maxCellY = ((unsigned)maxY+1)/cellHeight;
     
+    vector<PointEdge*> nearPEs;
+    for (unsigned i = minCellX; i <= maxCellX; i++)
+        for (unsigned j = minCellY; j <= maxCellY; j++)
+            for (unsigned k = 0; k < spatialGrid[i][j].size(); k++)
+            {
+                bool cont = false;
+                unsigned numNearPEs = nearPEs.size();
+                for (unsigned l = 0; l < numNearPEs; l++)
+                    if (nearPEs[l] == spatialGrid[i][j][k])
+                    {
+                        cont = true;
+                        break;
+                    }
+                if (!cont) nearPEs.push_back(spatialGrid[i][j][k]);
+            }
+    
+    return nearPEs;
 }
 
 void ShapeField::removeFromSpatialGrid(PointEdge* pe)
