@@ -21,7 +21,7 @@
 #import "HelloWorldLayer.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
-
+#import "Authentication.h"
 
 @implementation AppController
 
@@ -99,16 +99,15 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
     //Load the CCBI file
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
+    CCScene *scene;
+    if([[Authentication mainAuth] isLoggedIn])
+        scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
+    else
+        scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [ActionLayer scene]]; 
 	[director_ pushScene:scene];
-    
-    
-    
-    
-    
     
 	return YES;
 }
@@ -118,8 +117,6 @@
 {
 	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
-
-
 
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application

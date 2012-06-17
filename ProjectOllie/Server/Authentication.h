@@ -16,8 +16,8 @@
 
 @interface Authentication : NSObject
 
-@property (nonatomic, copy) NSString *authToken;
-@property (nonatomic, copy) NSString *username;
+@property (nonatomic, retain) NSString *authToken;
+@property (nonatomic, retain) NSString *username;
 @property (nonatomic, readonly) BOOL isLoggedIn;
 
 + (Authentication *)mainAuth;
