@@ -16,7 +16,7 @@
 - (id)init
 {
     if(self = [super init]) {
-        data_ = [[NSMutableData alloc]initWithCapacity:100];
+        data_ = [[NSMutableData alloc]initWithCapacity:128];
     }
     return self;
 }

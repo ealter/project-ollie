@@ -20,7 +20,6 @@
 @implementation Login
 
 @synthesize delegate = _delegate;
-@synthesize auth = _auth;
 
 - (void)broadcastLoginSucceeded
 {
@@ -44,7 +43,6 @@
     request.HTTPMethod = @"POST";
     request.HTTPBody = [[requestData urlEncodedString] dataUsingEncoding:NSUTF8StringEncoding];
     
-    data_ = [[NSMutableData alloc]initWithCapacity:128];
     [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 

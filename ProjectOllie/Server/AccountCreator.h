@@ -18,4 +18,8 @@
 
 @interface AccountCreator : ServerAPI
 
+@property (nonatomic, assign) id<AccountCreator_Delegate> delegate;
+
+- (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email;
+
 @end
