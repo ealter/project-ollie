@@ -20,6 +20,7 @@
 
 @property (nonatomic, assign) id<AccountCreator_Delegate> delegate;
 
+/* Creates an account. On success, it also logs the person in. */
 - (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email;
 
 @end

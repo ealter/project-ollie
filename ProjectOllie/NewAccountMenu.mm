@@ -12,6 +12,8 @@
 
 @interface NewAccountMenu () <AccountCreator_Delegate>
 @property (nonatomic, retain) AccountCreator *accountCreator;
+- (void)returnToMainMenu;
+
 @end
 
 @implementation NewAccountMenu
@@ -103,7 +105,7 @@
     [self.accountCreator createAccountWithUsername:username password:password email:email];
 }
 
--(void)pressedCancel:(id)sender
+- (void)returnToMainMenu
 {
     [nameField removeFromSuperview];
     [nameField release];
@@ -117,10 +119,14 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
+-(void)pressedCancel:(id)sender
+{
+    [self returnToMainMenu];
+}
+
 - (void)accountCreationSucceeded
 {
-    //TODO: automatically login
-    [self pressedCancel:self];
+    [self returnToMainMenu];
 }
 
 - (void)accountCreationFailedWithError:(NSString *)error
