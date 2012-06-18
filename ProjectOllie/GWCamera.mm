@@ -56,7 +56,7 @@
         self.actionIntensity = 0;
         self->actionCount = 0;
         self.zoomOrigin = ccp(0,0);
-        self.maximumScale = 4.f;
+        self.maximumScale = 6.f;
         self.minimumScale = 1.f;
         self.defaultScale = 1.f;
 
@@ -75,7 +75,7 @@
     id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
     id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
     id moveFollow = [CCSequence actions:bMotion,follow,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.95f scale:self.maximumScale]];
+    [self->subject_ runAction:[CCScaleTo actionWithDuration:.95f scale:3.f]];
     [self->subject_ runAction:moveFollow];
 }
 
