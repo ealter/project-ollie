@@ -158,9 +158,9 @@
 						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<integer>52</integer>
-							<integer>151</integer>
 							<integer>20</integer>
+							<integer>118</integer>
+							<integer>24</integer>
 						</array>
 					</dict>
 					<dict>
@@ -186,7 +186,7 @@
 			</dict>
 			<dict>
 				<key>baseClass</key>
-				<string>CCControlButton</string>
+				<string>CCLabelTTF</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
@@ -205,7 +205,7 @@
 						<key>value</key>
 						<array>
 							<real>50</real>
-							<real>20</real>
+							<real>95</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -216,8 +216,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>110</real>
-							<real>45</real>
+							<real>96</real>
+							<real>18</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -279,158 +279,78 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>ccControl</string>
-						<key>type</key>
-						<string>BlockCCControl</string>
-						<key>value</key>
-						<array>
-							<string>pressedMake:</string>
-							<integer>1</integer>
-							<integer>32</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>enabled</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>title|1</string>
-						<key>type</key>
-						<string>String</string>
-						<key>value</key>
-						<string>Create</string>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>titleTTF|1</string>
+						<string>fontName</string>
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Helvetica</string>
+						<string>Courier</string>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleTTFSize|1</string>
+						<string>fontSize</string>
 						<key>type</key>
 						<string>FloatScale</string>
 						<key>value</key>
 						<array>
-							<real>15</real>
+							<real>14</real>
 							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>labelAnchorPoint</string>
+						<string>opacity</string>
 						<key>type</key>
-						<string>Point</string>
+						<string>Byte</string>
+						<key>value</key>
+						<integer>255</integer>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>color</string>
+						<key>type</key>
+						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<integer>255</integer>
+							<integer>255</integer>
+							<integer>255</integer>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>preferedSize</string>
+						<string>dimensions</string>
 						<key>type</key>
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>110</real>
-							<real>45</real>
+							<real>0.0</real>
+							<real>0.0</real>
 							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>zoomOnTouchDown</string>
+						<string>horizontalAlignment</string>
 						<key>type</key>
-						<string>Check</string>
+						<string>IntegerLabeled</string>
 						<key>value</key>
-						<true/>
+						<integer>0</integer>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|1</string>
+						<string>verticalAlignment</string>
 						<key>type</key>
-						<string>SpriteFrame</string>
+						<string>IntegerLabeled</string>
 						<key>value</key>
-						<array>
-							<string></string>
-							<string>btn-test-0.png</string>
-						</array>
+						<integer>0</integer>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|1</string>
+						<string>string</string>
 						<key>type</key>
-						<string>Color3</string>
+						<string>Text</string>
 						<key>value</key>
-						<array>
-							<integer>255</integer>
-							<integer>255</integer>
-							<integer>255</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>backgroundSpriteFrame|2</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string>btn-test-1.png</string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>titleColor|2</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<integer>255</integer>
-							<integer>255</integer>
-							<integer>255</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
-						<key>type</key>
-						<string>SpriteFrame</string>
-						<key>value</key>
-						<array>
-							<string></string>
-							<string>btn-test-2.png</string>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>titleColor|4</string>
-						<key>type</key>
-						<string>Color3</string>
-						<key>value</key>
-						<array>
-							<integer>255</integer>
-							<integer>255</integer>
-							<integer>255</integer>
-						</array>
+						<string>Options Menu</string>
 					</dict>
 				</array>
 			</dict>
@@ -454,8 +374,8 @@
 						<string>Position</string>
 						<key>value</key>
 						<array>
-							<real>50</real>
-							<real>8</real>
+							<real>0.0</real>
+							<real>100</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -466,8 +386,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>34</real>
+							<real>48</real>
+							<real>48</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -478,8 +398,8 @@
 						<string>Point</string>
 						<key>value</key>
 						<array>
-							<real>0.5</real>
-							<real>0.5</real>
+							<real>0.0</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -492,7 +412,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -534,7 +454,7 @@
 						<string>BlockCCControl</string>
 						<key>value</key>
 						<array>
-							<string>pressedCancel:</string>
+							<string>pressedBack:</string>
 							<integer>1</integer>
 							<integer>32</integer>
 						</array>
@@ -561,7 +481,7 @@
 						<key>type</key>
 						<string>String</string>
 						<key>value</key>
-						<string>Cancel</string>
+						<string></string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -600,8 +520,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>100</real>
-							<real>34</real>
+							<real>48</real>
+							<real>48</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -611,7 +531,7 @@
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
-						<true/>
+						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -621,7 +541,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>back.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -644,7 +564,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>back.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -667,7 +587,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>back.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -686,7 +606,7 @@
 			</dict>
 		</array>
 		<key>customClass</key>
-		<string>NewAccountMenu</string>
+		<string>OptionsMenu</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
 		<key>memberVarAssignmentType</key>

@@ -53,6 +53,12 @@
 		CE30B196158FBA34009EC82B /* LoginScreen.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18F158FBA34009EC82B /* LoginScreen.mm */; };
 		CE30B197158FBA34009EC82B /* MainMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE30B191158FBA34009EC82B /* MainMenu.mm */; };
 		CE30B198158FBA34009EC82B /* NewAccountMenu.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE30B193158FBA34009EC82B /* NewAccountMenu.mm */; };
+		CE30B19D158FC0C6009EC82B /* optionsbutton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */; };
+		CE30B19E158FC0C6009EC82B /* optionsbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B19A158FC0C6009EC82B /* optionsbutton.png */; };
+		CE30B19F158FC0C6009EC82B /* terrainbutton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */; };
+		CE30B1A0158FC0C6009EC82B /* terrainbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B19C158FC0C6009EC82B /* terrainbutton.png */; };
+		CE30B1A2158FC37F009EC82B /* OptionsMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */; };
+		CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE412619157FF6B8001FA126 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = CE412618157FF6B8001FA126 /* Background.m */; };
@@ -326,6 +332,13 @@
 		CE30B191158FBA34009EC82B /* MainMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MainMenu.mm; sourceTree = "<group>"; };
 		CE30B192158FBA34009EC82B /* NewAccountMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAccountMenu.h; sourceTree = "<group>"; };
 		CE30B193158FBA34009EC82B /* NewAccountMenu.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NewAccountMenu.mm; sourceTree = "<group>"; };
+		CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "optionsbutton-hd.png"; path = "Resources/optionsbutton-hd.png"; sourceTree = "<group>"; };
+		CE30B19A158FC0C6009EC82B /* optionsbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = optionsbutton.png; path = Resources/optionsbutton.png; sourceTree = "<group>"; };
+		CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "terrainbutton-hd.png"; path = "Resources/terrainbutton-hd.png"; sourceTree = "<group>"; };
+		CE30B19C158FC0C6009EC82B /* terrainbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = terrainbutton.png; path = Resources/terrainbutton.png; sourceTree = "<group>"; };
+		CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = OptionsMenu.ccbi; path = Resources/OptionsMenu.ccbi; sourceTree = "<group>"; };
+		CE30B1A3158FC3F0009EC82B /* OptionsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionsMenu.h; sourceTree = "<group>"; };
+		CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsMenu.m; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = Resources/ActionMenu.ccbi; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = Resources/MainMenu.ccbi; sourceTree = "<group>"; };
 		CE412617157FF6B8001FA126 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
@@ -856,6 +869,8 @@
 				CE30B18F158FBA34009EC82B /* LoginScreen.mm */,
 				CE30B190158FBA34009EC82B /* MainMenu.h */,
 				CE30B191158FBA34009EC82B /* MainMenu.mm */,
+				CE30B1A3158FC3F0009EC82B /* OptionsMenu.h */,
+				CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */,
 				CE30B192158FBA34009EC82B /* NewAccountMenu.h */,
 				CE30B193158FBA34009EC82B /* NewAccountMenu.mm */,
 			);
@@ -945,9 +960,14 @@
 		CE94AA6C15785F83009B35B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
+				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
+				CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */,
+				CE30B19C158FC0C6009EC82B /* terrainbutton.png */,
 				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
 				CE9957D3158AB5F000B863DF /* back-hd.png */,
 				CE9957D4158AB5F000B863DF /* back.png */,
+				CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */,
 				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
 				CE4B487E158BC40000040C1C /* LoginScreen.ccbi */,
 				CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */,
@@ -1621,6 +1641,11 @@
 				CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */,
 				CE4B487F158BC40000040C1C /* LoginScreen.ccbi in Resources */,
 				CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */,
+				CE30B19D158FC0C6009EC82B /* optionsbutton-hd.png in Resources */,
+				CE30B19E158FC0C6009EC82B /* optionsbutton.png in Resources */,
+				CE30B19F158FC0C6009EC82B /* terrainbutton-hd.png in Resources */,
+				CE30B1A0158FC0C6009EC82B /* terrainbutton.png in Resources */,
+				CE30B1A2158FC37F009EC82B /* OptionsMenu.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1819,6 +1844,7 @@
 				CE30B196158FBA34009EC82B /* LoginScreen.mm in Sources */,
 				CE30B197158FBA34009EC82B /* MainMenu.mm in Sources */,
 				CE30B198158FBA34009EC82B /* NewAccountMenu.mm in Sources */,
+				CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
