@@ -43,19 +43,25 @@
 
 - (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email
 {
-    if([username hasWhitespace]) {
+    if([username hasWhitespace])
         [self broadcastAccountCreationFailedWithError:@"Username cannot contain whitespace"];
-        return;
+    else if(!username)
+        [self broadcastAccountCreationFailedWithError:@"Username cannot be blank"];
+    else if(!password)
+        [self broadcastAccountCreationFailedWithError:@"Password cannot be blank"];
+    else if(!email)
+        [self broadcastAccountCreationFailedWithError:@"Email cannot be blank"];
+    else {
+        self.username = username;
+        self.password = password;
+        NSURL *url = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"newAccount"];
+        NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, email, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", @"email", nil]];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+        request.HTTPMethod = @"POST";
+        request.HTTPBody = [[requestData urlEncodedString] dataUsingEncoding:NSUTF8StringEncoding];
+        
+        [[NSURLConnection alloc]initWithRequest:request delegate:self];
     }
-    self.username = username;
-    self.password = password;
-    NSURL *url = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"newAccount"];
-    NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, email, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", @"email", nil]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    request.HTTPBody = [[requestData urlEncodedString] dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
