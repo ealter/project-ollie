@@ -242,6 +242,11 @@
 		CEA14DB11587CA7E00735135 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAD1587CA7E00735135 /* clear.png */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00100158BDCE100F7F1A8 /* Authentication.m */; };
+		CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */; };
+		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
+		CEFA272B158D447600BC9710 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA272A158D447600BC9710 /* Login.m */; };
+		CEFA2732158D4B1A00BC9710 /* AccountCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2731158D4B1A00BC9710 /* AccountCreator.m */; };
+		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
 /* End PBXBuildFile section */
@@ -701,6 +706,16 @@
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = Resources/DrawMenu.ccbi; sourceTree = "<group>"; };
 		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; };
 		CEF00100158BDCE100F7F1A8 /* Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Authentication.m; path = ProjectOllie/Server/Authentication.m; sourceTree = "<group>"; };
+		CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+URLEncoding.h"; path = "ProjectOllie/Server/NSDictionary+URLEncoding.h"; sourceTree = "<group>"; };
+		CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+URLEncoding.m"; path = "ProjectOllie/Server/NSDictionary+URLEncoding.m"; sourceTree = "<group>"; };
+		CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "ProjectOllie/Server/NSString+URLEncoding.h"; sourceTree = "<group>"; };
+		CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "ProjectOllie/Server/NSString+URLEncoding.m"; sourceTree = "<group>"; };
+		CEFA2729158D447600BC9710 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Login.h; path = ProjectOllie/Server/Login.h; sourceTree = "<group>"; };
+		CEFA272A158D447600BC9710 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Login.m; path = ProjectOllie/Server/Login.m; sourceTree = "<group>"; };
+		CEFA2730158D4B1A00BC9710 /* AccountCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountCreator.h; path = ProjectOllie/Server/AccountCreator.h; sourceTree = "<group>"; };
+		CEFA2731158D4B1A00BC9710 /* AccountCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountCreator.m; path = ProjectOllie/Server/AccountCreator.m; sourceTree = "<group>"; };
+		CEFA2734158D4C0000BC9710 /* ServerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAPI.h; path = ProjectOllie/Server/ServerAPI.h; sourceTree = "<group>"; };
+		CEFA2735158D4C0000BC9710 /* ServerAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerAPI.m; path = ProjectOllie/Server/ServerAPI.m; sourceTree = "<group>"; };
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
@@ -857,7 +872,6 @@
 		CE94AA4A15785F83009B35B4 = {
 			isa = PBXGroup;
 			children = (
-				CEF00102158BDCE500F7F1A8 /* Server */,
 				CE94AA6B15785F83009B35B4 /* ProjectOllie */,
 				CE94AA5815785F83009B35B4 /* Frameworks */,
 				CE94AA5615785F83009B35B4 /* Products */,
@@ -916,6 +930,7 @@
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
+				CEF00102158BDCE500F7F1A8 /* Server */,
 				CE4B4887158BDAB800040C1C /* Menus */,
 				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
 				CE94AA6C15785F83009B35B4 /* Resources */,
@@ -1481,10 +1496,21 @@
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				CEFA2729158D447600BC9710 /* Login.h */,
+				CEFA272A158D447600BC9710 /* Login.m */,
 				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
 				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
+				CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */,
+				CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */,
+				CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */,
+				CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */,
+				CEFA2730158D4B1A00BC9710 /* AccountCreator.h */,
+				CEFA2731158D4B1A00BC9710 /* AccountCreator.m */,
+				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
+				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
 			);
 			name = Server;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
@@ -1782,7 +1808,12 @@
 				C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */,
 				CE4B4883158BC43E00040C1C /* LoginScreen.mm in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
+				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
+				CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */,
 				CE29916C158BF26A00F33ACD /* NewAccountMenu.mm in Sources */,
+				CEFA272B158D447600BC9710 /* Login.m in Sources */,
+				CEFA2732158D4B1A00BC9710 /* AccountCreator.m in Sources */,
+				CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

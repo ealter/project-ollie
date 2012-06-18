@@ -8,10 +8,17 @@
 
 #import "LoginScreen.h"
 #import "CCBReader.h"
+#import "Login.h"
+
+@interface LoginScreen () <Login_Delegate>
+
+@property (nonatomic, retain) Login *login;
+
+@end
 
 @implementation LoginScreen
 @synthesize nameField, pwField;
-
+@synthesize login = _login;
 
 -(id)init
 {
@@ -29,7 +36,7 @@
         [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
         nameField.backgroundColor = [UIColor whiteColor];
         nameField.borderStyle = UITextBorderStyleRoundedRect;
-        CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159/2);  
+        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
         nameField.transform = transform;
         
         CGRect pwframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
@@ -50,11 +57,9 @@
         [nameField setDelegate:self];
         [pwField setDelegate:self];
         
-        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];  
-        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];  
-
+        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];
+        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
     }
-    
     return self;
 }
 
@@ -65,16 +70,38 @@
     return YES;
 }
 
--(void)pressedLogin:(id)sender
+- (Login *)login
+{
+    if(!_login) {
+        _login = [[Login alloc]init];
+        _login.delegate = self;
+    }
+    return _login;
+}
+
+- (void)pressedLogin:(id)sender
+{
+    NSString *username = [nameField text];
+    NSString *password = [pwField text];
+    [self.login loginWithUsername:username password:password];
+}
+
+- (void)loginSucceeded
 {
     [nameField removeFromSuperview];
     [nameField release];
     [pwField removeFromSuperview];
     [pwField release];
     
-    
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+}
+
+- (void)loginFailedWithError:(NSString *)error
+{
+    if(!error) error = @"unknown error";
+    [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    [self loginSucceeded]; //TODO: Make the person log in again
 }
 
 -(void)pressedMakeNew:(id)sender

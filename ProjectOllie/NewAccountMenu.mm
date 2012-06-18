@@ -8,9 +8,16 @@
 
 #import "NewAccountMenu.h"
 #import "CCBReader.h"
+#import "AccountCreator.h"
+
+@interface NewAccountMenu () <AccountCreator_Delegate>
+@property (nonatomic, retain) AccountCreator *accountCreator;
+@end
 
 @implementation NewAccountMenu
 @synthesize emailField, pwField, nameField;
+@synthesize accountCreator = _accountCreator;
+
 -(id)init
 {
     if(self=[super init])
@@ -71,6 +78,15 @@
     return self;
 }
 
+- (AccountCreator *)accountCreator
+{
+    if(!_accountCreator) {
+        _accountCreator = [[AccountCreator alloc]init];
+        _accountCreator.delegate = self;
+    }
+    return _accountCreator;
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     // the user pressed the "Done" button, so dismiss the keyboard
@@ -78,9 +94,13 @@
     return YES;
 }
 
+//TODO: make user repeat password?
 -(void)pressedMake:(id)sender
 {
-    
+    NSString *username = nameField.text;
+    NSString *password = pwField.text;
+    NSString *email    = emailField.text;
+    [self.accountCreator createAccountWithUsername:username password:password email:email];
 }
 
 -(void)pressedCancel:(id)sender
@@ -95,6 +115,18 @@
     
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+}
+
+- (void)accountCreationSucceeded
+{
+    //TODO: automatically login
+    [self pressedCancel:self];
+}
+
+- (void)accountCreationFailedWithError:(NSString *)error
+{
+    if(!error) error = @"unknown error";
+    [[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 @end
