@@ -8,9 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-@interface DrawMenu : CCLayer {
-    
-}
-@property (nonatomic, retain) CCSprite *selected;
+@interface DrawMenu : CCLayer
 
 @end

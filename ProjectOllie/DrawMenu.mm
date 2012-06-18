@@ -11,15 +11,23 @@
 #import "SandboxScene.h"
 #import "Terrain.h"
 #import "CCBReader.h"
+
+#define HEIGHT_MULTIPLIER 0.84
+
+@interface DrawMenu ()
+@property (nonatomic, retain) CCSprite *selected;
+@end
+
 @implementation DrawMenu
-@synthesize selected;
+
+@synthesize selected = _selected;
 
 -(id)init
 {
     if (self=[super init]) {
-        selected = [CCSprite spriteWithFile:@"selectedoption.png" rect:CGRectMake(0, 0, 35, 3)];
-        [self addChild:selected];
-        selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height*0.84);
+        self.selected = [CCSprite spriteWithFile:@"selectedoption.png" rect:CGRectMake(0, 0, 35, 3)];
+        [self addChild:self.selected];
+        self.selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height * HEIGHT_MULTIPLIER);
     }
     
     return self;
@@ -29,28 +37,28 @@
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = largeradius;
-    selected.position = CGPointMake(self.contentSize.width*0.357, self.contentSize.height*0.84);
+    self.selected.position = CGPointMake(self.contentSize.width*0.357, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedMedium:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = mediumradius;
-    selected.position = CGPointMake(self.contentSize.width*0.461, self.contentSize.height*0.84);
+    self.selected.position = CGPointMake(self.contentSize.width*0.461, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedSmall:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = smallradius;
-    selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height*0.84);
+    self.selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedEraser:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = -mediumradius;
-    selected.position = CGPointMake(self.contentSize.width*0.669, self.contentSize.height*0.84);
+    self.selected.position = CGPointMake(self.contentSize.width*0.669, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedCheck:(id)sender
@@ -62,8 +70,6 @@
     [scene.actionLayer addChild:parent_node.terrain];
     
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
-    
- 
 }
 
 -(void)pressedClear:(id)sender
