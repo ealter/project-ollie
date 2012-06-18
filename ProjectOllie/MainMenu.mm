@@ -34,12 +34,17 @@
 -(void)pressedNewGame:(id)sender
 {
     CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 255)];
-    [colorLayer setOpacity:175];
+    [colorLayer setOpacity:190];
     [self addChild:colorLayer z:1];
     
     CCNode* newnode = [CCBReader nodeGraphFromFile:@"NewGameOverlay.ccbi"];
     [self addChild:newnode];
     [self reorderChild:newnode z:2];
+}
+
+-(void)pressedLogout:(id)sender
+{
+    
 }
 
 @end
