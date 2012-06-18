@@ -100,7 +100,9 @@
 - (void)loginFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
     [self loginSucceeded]; //TODO: Make the person log in again
 }
 

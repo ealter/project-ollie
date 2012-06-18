@@ -148,6 +148,7 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 	CC_DIRECTOR_END();
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 // purge memory

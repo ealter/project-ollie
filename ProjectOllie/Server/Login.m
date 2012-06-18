@@ -12,6 +12,8 @@
 
 @interface Login ()
 
+@property (nonatomic, strong) NSURLConnection *connection;
+
 - (void)broadcastLoginSucceeded;
 - (void)broadcastLoginFailedWithError:(NSString *)error;
 
@@ -20,6 +22,7 @@
 @implementation Login
 
 @synthesize delegate = _delegate;
+@synthesize connection = _connection;
 
 - (void)broadcastLoginSucceeded
 {
@@ -35,15 +38,21 @@
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password
 {
+    if(!username || !password || [username length] < 1 || [password length] < 1) {
+        [self broadcastLoginFailedWithError:@"Missing username or password"];
+        return;
+    }
     self.auth.authToken = nil;
     self.auth.username = username;
     NSURL *loginURL = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"login"];
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", nil]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:loginURL];
     request.HTTPMethod = @"POST";
-    request.HTTPBody = [[requestData urlEncodedString] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *postData = [requestData urlEncodedString];
+    [requestData release];
+    request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
     
-    [[NSURLConnection alloc]initWithRequest:request delegate:self];
+    self.connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {

@@ -15,4 +15,5 @@
 @property (nonatomic, retain) UITextField *emailField;
 @property (nonatomic, retain) UITextField *nameField;
 @property (nonatomic, retain) UITextField *pwField;
+@property (nonatomic, retain) UITextField *cfpwField;
 @end
