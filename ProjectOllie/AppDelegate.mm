@@ -107,7 +107,7 @@
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [ActionLayer scene]]; 
-	[director_ pushScene:scene];
+	[[CCDirector sharedDirector] pushScene:scene];
     
 	return YES;
 }
@@ -115,7 +115,7 @@
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return UIInterfaceOrientationLandscapeRight;
+	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 // getting a call, pause the game
