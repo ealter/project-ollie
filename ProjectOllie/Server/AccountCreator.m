@@ -9,6 +9,7 @@
 #import "AccountCreator.h"
 #import "Authentication.h"
 #import "NSDictionary+URLEncoding.h"
+#import "NSString+whitespace_check.h"
 #import "Login.h"
 
 @interface AccountCreator () <Login_Delegate>
@@ -42,6 +43,10 @@
 
 - (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email
 {
+    if([username hasWhitespace]) {
+        [self broadcastAccountCreationFailedWithError:@"Username cannot contain whitespace"];
+        return;
+    }
     self.username = username;
     self.password = password;
     NSURL *url = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"newAccount"];
