@@ -43,10 +43,10 @@
 -(void)panTo:(CGPoint)dest;
 
 /* Changes zoom by given amount */
--(void)zoomBy:(float)diff atScaleCenter:(CGPoint)scaleCenter;
+-(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition;
 
 /* Reverts camera to default zoom settings at a given location */
--(void)revertTo:(CCNode*)center;
+-(void)revert;
 
 /* Adds intensity to the camera, lets it know how crazy what it's viewing is */
 -(void)addIntensity:(float)intensity;
