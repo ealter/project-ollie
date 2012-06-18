@@ -35,6 +35,10 @@
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password
 {
+    if(!username || !password || [username length] < 1 || [password length] < 1) {
+        [self broadcastLoginFailedWithError:@"Missing username or password"];
+        return;
+    }
     self.auth.authToken = nil;
     self.auth.username = username;
     NSURL *loginURL = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"login"];
