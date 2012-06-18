@@ -17,14 +17,14 @@
 @end
 
 @implementation NewAccountMenu
-@synthesize emailField, pwField, nameField;
+@synthesize emailField, pwField, nameField, cfpwField;
 @synthesize accountCreator = _accountCreator;
 
 -(id)init
 {
     if(self=[super init])
     {
-        CGRect nameframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
+        CGRect nameframe = CGRectMake(self.contentSize.height*0.5, self.contentSize.width/2-15, 150, 30);
         nameField = [[UITextField alloc]initWithFrame:nameframe];
         nameField.clearsOnBeginEditing = YES;
         nameField.placeholder = @"Username";
@@ -39,7 +39,7 @@
         CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159/2);  
         nameField.transform = transform;
         
-        CGRect pwframe = CGRectMake(self.contentSize.height/5, self.contentSize.width/2-15, 150, 30);
+        CGRect pwframe = CGRectMake(self.contentSize.height*0.35, self.contentSize.width/2-15, 150, 30);
         pwField = [[UITextField alloc]initWithFrame:pwframe];
         pwField.clearsOnBeginEditing = YES;
         pwField.placeholder = @"Password";
@@ -54,10 +54,25 @@
         pwField.transform = transform;
         pwField.secureTextEntry = YES;
         
-        CGRect emailframe = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30);
+        CGRect cfpwframe = CGRectMake(self.contentSize.height*0.2, self.contentSize.width/2-15, 150, 30);
+        cfpwField = [[UITextField alloc]initWithFrame:cfpwframe];
+        cfpwField.clearsOnBeginEditing = YES;
+        cfpwField.placeholder = @"Confirm Password";
+        cfpwField.keyboardType = UIKeyboardTypeDefault;
+        cfpwField.returnKeyType = UIReturnKeyDone;
+        cfpwField.autocorrectionType = UITextAutocorrectionTypeNo;
+        cfpwField.adjustsFontSizeToFitWidth = YES;
+        cfpwField.textColor = [UIColor blackColor];
+        [cfpwField setFont:[UIFont fontWithName:@"Arial" size:14]];
+        cfpwField.backgroundColor = [UIColor whiteColor];
+        cfpwField.borderStyle = UITextBorderStyleRoundedRect;
+        cfpwField.transform = transform;
+        cfpwField.secureTextEntry = YES;
+        
+        CGRect emailframe = CGRectMake(self.contentSize.height*0.65, self.contentSize.width/2-15, 150, 30);
         emailField = [[UITextField alloc]initWithFrame:emailframe];
         emailField.clearsOnBeginEditing = YES;
-        emailField.placeholder = @"email";
+        emailField.placeholder = @"Email";
         emailField.keyboardType = UIKeyboardTypeDefault;
         emailField.returnKeyType = UIReturnKeyDone;
         emailField.autocorrectionType = UITextAutocorrectionTypeNo;
@@ -71,10 +86,13 @@
         [nameField setDelegate:self];
         [pwField setDelegate:self];
         [emailField setDelegate:self];
+        [cfpwField setDelegate:self];
         
         [[[[CCDirector sharedDirector] view] window] addSubview:nameField];  
         [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
         [[[[CCDirector sharedDirector] view] window] addSubview:emailField];
+        [[[[CCDirector sharedDirector] view] window] addSubview:cfpwField];
+        
     }
     
     return self;
@@ -109,6 +127,8 @@
 {
     [nameField removeFromSuperview];
     [nameField release];
+    [cfpwField removeFromSuperview];
+    [cfpwField release];
     [pwField removeFromSuperview];
     [pwField release];
     [emailField removeFromSuperview];
