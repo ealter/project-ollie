@@ -64,15 +64,16 @@ enum {
 {
     if( (self=[super init])) {
         
+        //set up screen parameters
         s = self.contentSize;
-        self.anchorPoint = ccp(0.f,0.f);
+        self.anchorPoint = ccp(0,0);
+        [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
         self.windowSize = s;
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
-        [self.camera revertTo:self.center];
 
         //set up parallax
         parallax_ = [CCParallaxNode node];
@@ -83,7 +84,7 @@ enum {
        //[parallax_ setIgnoreAnchorPointForPosition:YES];
 
         
-        [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.4f) positionOffset:ccp(0,0)];
+       // [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.4f) positionOffset:ccp(0,0)];
         
         [self addChild:parallax_ z:-1];
         
@@ -306,9 +307,9 @@ m_debugDraw = NULL;
     PhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
     if(lastChild != nil)
     {
-        if(![lastChild physicsBody]->IsAwake() && self.camera.target != self.center)
+        if(![lastChild physicsBody]->IsAwake() && self.camera.target != nil)
         {   
-            [self.camera revertTo:self.center];
+            [self.camera revert];
         }
     }
     

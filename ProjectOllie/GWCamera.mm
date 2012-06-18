@@ -24,6 +24,7 @@
 -(void)beginMotion;
 -(void)endMotion;
 -(void)followDel;
+-(void)stopActions;
 -(void)handleOneFingerMotion:(NSSet*)touches;
 -(void)handleTwoFingerMotion:(NSSet*)touches;
 -(void)twoFingerPan:(NSSet*)touches;
@@ -55,8 +56,8 @@
         self.actionIntensity = 0;
         self->actionCount = 0;
         self.zoomOrigin = ccp(0,0);
-        self.maximumScale = 3.f;
-        self.minimumScale = .85f;
+        self.maximumScale = 4.f;
+        self.minimumScale = 1.f;
         self.defaultScale = 1.f;
 
     }
@@ -69,52 +70,54 @@
     //and signals an end of change once the new node is followed
     
     //stop all previous actions
-    [self->subject_ stopAllActions];
-    [self->subject_ setAnchorPoint:ccp(.5f,.5f)];
+    [self stopActions];
     self.target = focused;
     id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
     id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
-    id eMotion = [CCCallFunc actionWithTarget:self selector:@selector(endMotion)];
-
-    id moveFollow = [CCSequence actions:bMotion,follow,eMotion,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.44f scale:2.f]];
+    id moveFollow = [CCSequence actions:bMotion,follow,nil];
+    [self->subject_ runAction:[CCScaleTo actionWithDuration:.95f scale:self.maximumScale]];
     [self->subject_ runAction:moveFollow];
 }
 
--(void)revertTo:(CCNode*)center{
-    //all very similar to followNode, but reverts to initial zoom
-    [self->subject_ stopAllActions];
-    [self->subject_ setAnchorPoint:ccp(.5f,.5f)];
-    self.target = center;
-    
-    id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
-    id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
-    id eMotion = [CCCallFunc actionWithTarget:self selector:@selector(endMotion)];
-    
-    id moveFollow = [CCSequence actions:bMotion,follow,eMotion,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.44f scale:self.defaultScale]];
-    [self->subject_ runAction:moveFollow];
+-(void)revert{
+    //sets specific case of changing, but with no target
+    [self stopActions];
+    self.isChanging = YES; 
 }
 
 -(void)panBy:(CGPoint)diff{
-    [self->subject_ stopAllActions];
+    [self stopActions];
     CGPoint oldPos = self->subject_.position;
-    [self->subject_ setPosition:ccpAdd(oldPos,diff)];
+    CGPoint newPos = ccpAdd(oldPos,diff);
+    [self->subject_ setPosition:newPos];
 }
 
 -(void)panTo:(CGPoint)dest{
-    [self->subject_ stopAllActions];
+    [self stopActions];
     [self->subject_ setPosition:dest];
 }
 
--(void)zoomBy:(float)diff atScaleCenter:(CGPoint)scaleCenter{
-    [self->subject_ stopAllActions];
+-(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition{
+    [self stopActions];
     
-    float scale = self->subject_.scale;
+    //calculate the old centerpoint
+    CGPoint oldCenterPoint = ccpMult(currentPosition,subject_.scale);
     
     // Set the scale.
+    float scale = self->subject_.scale;
     float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
     [self->subject_ setScale: newScale];
+
+    // Get the new center point.
+    CGPoint newCenterPoint = ccpMult(currentPosition,subject_.scale);
+
+    // Then calculate the delta.
+    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
+
+    // Now adjust the layer by the delta.
+    [self panBy:centerPointDelta];
+
+   
 
 }
 
@@ -141,6 +144,54 @@
 
 -(void)update:(float)dt{
     //updates camera qualities
+    
+    
+    //if in process of reverting, only time it is changing without a target
+    if(self.isChanging && self.target == nil)
+    {
+        if(subject_.scale > self.defaultScale)
+        {
+            float diff = subject_.scale - self.defaultScale;
+            [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]]; 
+            if(diff*diff < .01)
+                self.isChanging = NO;
+        }
+        
+    }
+    
+    //elastic borders
+    CGPoint worldPos = subject_.position;
+    //left border
+    if(worldPos.x > 0)
+    {
+        float offset = -worldPos.x;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+    }
+    //right border
+    else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
+    {
+        float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+    }
+    //bottom border
+    if(worldPos.y > 0)
+    {
+        float offset = -worldPos.y;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+    }
+   //top border
+    else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
+    {
+        float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+    }
+    
+    
+    //shake effect
     if(self.actionIntensity < .1f) {
         self.actionIntensity = 0;
         self->subject_.rotation = 0;
@@ -156,7 +207,7 @@
 
 
 -(void)touchesBegan:(NSSet *)touches{
-    [self->subject_ setAnchorPoint:ccp(0,0)];
+
     if([touches count] == 2) {
         UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
         UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
@@ -264,25 +315,16 @@
     
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     
-    // Get the original center point.
-    CGPoint oldCenterPoint = ccp(averageCurrentPosition.x * subject_.scale, averageCurrentPosition.y * subject_.scale); 
     
-    //adjust the scale
+    //find the new scale
     float difScale = 
     ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
     
-    CGPoint diffPos = ccpMult(averageCurrentPosition,self->subject_.scale);
-    [self zoomBy:difScale atScaleCenter:diffPos];
+   
+    [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
     
-    // Get the new center point.
-    CGPoint newCenterPoint = ccp(averageCurrentPosition.x * subject_.scale, averageCurrentPosition.y * subject_.scale); 
-    
-    // Then calculate the delta.
-    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
-    
-    // Now adjust the layer by the delta.
-    [self panBy:centerPointDelta];
-    //[subject_ setAnchorPoint:ccp(averageCurrentPosition.x/subject_.contentSize.width,averageCurrentPosition.y/subject_.contentSize.height)];
+
+
     
 }
 
@@ -297,6 +339,10 @@
 
 -(void)endMotion{
     self.isChanging = NO;
+}
+-(void)stopActions{
+    [self->subject_ stopAllActions];
+    self.target = nil;
 }
 
 @end

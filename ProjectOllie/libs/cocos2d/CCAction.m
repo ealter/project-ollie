@@ -341,7 +341,8 @@
     else{
         CGPoint moveVec;
         CCNode *n = (CCNode*)target_;
-        CGPoint p1 = ccpMult(halfScreenSize, n.scale);
+        CCNode *p = [target_ parent];
+        CGPoint p1 = ccpMult(halfScreenSize, 1.f/p.scale);
         CGPoint p2 = ccpMult(followedNode_.position, n.scale);
         destination = ccpSub(p1,p2);
         
@@ -349,15 +350,9 @@
         //and move a given percentage of that distance per update
         //until the distance is subpixel
         moveVec = ccpSub(destination, n.position);
-        float distance = ccpLengthSQ(moveVec);
         moveVec = ccpMult(moveVec,.1f);
-        if(distance < 1)
-            [target_ setPosition:destination];
-        else
-            
-            //[target_ setPosition:destination];
-            [target_ setPosition:ccpAdd(n.position,moveVec)]; 
-        }
+        [target_ setPosition:ccpAdd(n.position,moveVec)]; 
+    }
     
 
     
