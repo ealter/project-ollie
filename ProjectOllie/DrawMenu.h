@@ -11,6 +11,6 @@
 @interface DrawMenu : CCLayer {
     
 }
-
+@property (nonatomic, retain) CCSprite *selected;
 
 @end

@@ -12,29 +12,45 @@
 #import "Terrain.h"
 #import "CCBReader.h"
 @implementation DrawMenu
+@synthesize selected;
+
+-(id)init
+{
+    if (self=[super init]) {
+        selected = [CCSprite spriteWithFile:@"selectedoption.png" rect:CGRectMake(0, 0, 35, 3)];
+        [self addChild:selected];
+        selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height*0.84);
+    }
+    
+    return self;
+}
 
 -(void)pressedLarge:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = largeradius;
+    selected.position = CGPointMake(self.contentSize.width*0.357, self.contentSize.height*0.84);
 }
 
 -(void)pressedMedium:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = mediumradius;
+    selected.position = CGPointMake(self.contentSize.width*0.461, self.contentSize.height*0.84);
 }
 
 -(void)pressedSmall:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = smallradius;
+    selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height*0.84);
 }
 
 -(void)pressedEraser:(id)sender
 {
     DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
     parent_node.brushradius = -mediumradius;
+    selected.position = CGPointMake(self.contentSize.width*0.669, self.contentSize.height*0.84);
 }
 
 -(void)pressedCheck:(id)sender
