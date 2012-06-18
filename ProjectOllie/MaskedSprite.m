@@ -28,7 +28,7 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
-- (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+- (void)constructPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
 
 @end
 
@@ -42,7 +42,6 @@
     self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
     
-        
         //set up rendering paramters
         ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
         [self.texture setTexParameters: &params];
@@ -64,7 +63,6 @@
 		quad_.tr.texCoords.u = 1;
 		quad_.tr.texCoords.v = 1;
         
-
         // 1
         //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
@@ -180,7 +178,7 @@
     [self.maskTexture end];
 }
 
-- (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
+- (void)constructPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     [self.maskTexture begin];
 
@@ -198,12 +196,12 @@
     [self.maskTexture end];
 }
 
-- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self constructPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
 }
 
-- (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+- (void)subtractPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self constructPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
 }
