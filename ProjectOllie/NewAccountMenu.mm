@@ -131,7 +131,9 @@
 - (void)accountCreationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    [[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 @end

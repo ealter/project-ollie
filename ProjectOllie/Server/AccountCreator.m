@@ -17,6 +17,8 @@
 /* Used so that we can login after account creation */
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) Login *login;
+@property (nonatomic, strong) NSURLConnection *connection;
 
 - (void)broadcastAccountCreationSucceeded;
 - (void)broadcastAccountCreationFailedWithError:(NSString *)error;
@@ -28,6 +30,8 @@
 @synthesize delegate = _delegate;
 @synthesize username = _username;
 @synthesize password = _password;
+@synthesize login = _login;
+@synthesize connection = _connection;
 
 - (void)broadcastAccountCreationSucceeded
 {
@@ -58,9 +62,11 @@
         NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, email, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", @"email", nil]];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         request.HTTPMethod = @"POST";
-        request.HTTPBody = [[requestData urlEncodedString] dataUsingEncoding:NSUTF8StringEncoding];
+        NSString *postData = [requestData urlEncodedString];
+        [requestData release];
+        request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
         
-        [[NSURLConnection alloc]initWithRequest:request delegate:self];
+        self.connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
     }
 }
 
@@ -85,9 +91,9 @@
         return;
     }
     
-    Login *login = [[Login alloc]init];
-    login.delegate = self;
-    [login loginWithUsername:self.username password:self.password];
+    self.login = [[Login alloc]init];
+    self.login.delegate = self;
+    [self.login loginWithUsername:self.username password:self.password];
 }
 
 - (void)loginSucceeded
@@ -98,6 +104,13 @@
 - (void)loginFailedWithError:(NSString *)error
 {
     [self broadcastAccountCreationFailedWithError:[@"Account creation was successful, but login failed. The error was " stringByAppendingString:error]];
+}
+
+- (void)dealloc
+{
+    //[self.login release];
+    //[self.connection release];
+    [super dealloc];
 }
 
 @end
