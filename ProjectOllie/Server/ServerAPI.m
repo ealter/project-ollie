@@ -44,4 +44,10 @@
                        otherButtonTitles:nil] autorelease] show];
 }
 
+- (void)dealloc
+{
+    [data_ release];
+    [super dealloc];
+}
+
 @end
