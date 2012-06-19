@@ -27,11 +27,11 @@
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
 		C54A05F6158151A100D7B369 /* blocks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C54A05F5158151A100D7B369 /* blocks-hd.png */; };
-		C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C578AF85158AF4720049FE58 /* HMVectorNode.m */; };
-		C578B3E3158AFC2C0049FE58 /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C578AF8C158AF8AD0049FE58 /* HMVectorNode.fsh */; };
-		C578B3E4158AFC2C0049FE58 /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C578AF8D158AF8AD0049FE58 /* HMVectorNode.vsh */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
+		C5B4C57A1590142A000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C5771590142A000FD99F /* HMVectorNode.m */; };
+		C5B4C57C1590145C000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C5751590142A000FD99F /* HMVectorNode.fsh */; };
+		C5B4C57D1590145C000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C5781590142A000FD99F /* HMVectorNode.vsh */; };
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
@@ -300,13 +300,13 @@
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
 		C54A05F5158151A100D7B369 /* blocks-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blocks-hd.png"; path = "Resources/blocks-hd.png"; sourceTree = "<group>"; };
-		C578AF84158AF4720049FE58 /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
-		C578AF85158AF4720049FE58 /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
-		C578AF8C158AF8AD0049FE58 /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
-		C578AF8D158AF8AD0049FE58 /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
+		C5B4C5751590142A000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
+		C5B4C5761590142A000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
+		C5B4C5771590142A000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
+		C5B4C5781590142A000FD99F /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
 		C5C01E38157AAEB2004CF358 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
@@ -854,15 +854,16 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
-		C578AF7E158AF4710049FE58 /* HMUtils */ = {
+		C5B4C5741590142A000FD99F /* HMUtils */ = {
 			isa = PBXGroup;
 			children = (
-				C578AF8C158AF8AD0049FE58 /* HMVectorNode.fsh */,
-				C578AF8D158AF8AD0049FE58 /* HMVectorNode.vsh */,
-				C578AF84158AF4720049FE58 /* HMVectorNode.h */,
-				C578AF85158AF4720049FE58 /* HMVectorNode.m */,
+				C5B4C5761590142A000FD99F /* HMVectorNode.h */,
+				C5B4C5771590142A000FD99F /* HMVectorNode.m */,
+				C5B4C5751590142A000FD99F /* HMVectorNode.fsh */,
+				C5B4C5781590142A000FD99F /* HMVectorNode.vsh */,
 			);
-			path = HMUtils;
+			name = HMUtils;
+			path = libs/HMUtils;
 			sourceTree = "<group>";
 		};
 		CE30B189158FBA12009EC82B /* Menus */ = {
@@ -956,7 +957,6 @@
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
-				CE4B4887158BDAB800040C1C /* Menus */,
 				CE30B189158FBA12009EC82B /* Menus */,
 				CEF00102158BDCE500F7F1A8 /* Server */,
 				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
@@ -1025,8 +1025,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				C578AF7E158AF4710049FE58 /* HMUtils */,
-				C578AF7E158AF4710049FE58 /* HMUtils */,
+				C5B4C5741590142A000FD99F /* HMUtils */,
 				CE894EFC158299CE00E412E1 /* CSG */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
@@ -1607,8 +1606,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C578B3E3158AFC2C0049FE58 /* HMVectorNode.fsh in Resources */,
-				C578B3E4158AFC2C0049FE58 /* HMVectorNode.vsh in Resources */,
+				C5B4C57C1590145C000FD99F /* HMVectorNode.fsh in Resources */,
+				C5B4C57D1590145C000FD99F /* HMVectorNode.vsh in Resources */,
 				CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */,
 				CE94AA6E15785F83009B35B4 /* Default.png in Resources */,
 				CE94AA7015785F83009B35B4 /* fps_images.png in Resources */,
@@ -1845,7 +1844,6 @@
 				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
 				CE123C5015883687003AD813 /* TerrainShader.frag in Sources */,
-				C578AF8A158AF4720049FE58 /* HMVectorNode.m in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
 				CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */,
@@ -1860,6 +1858,7 @@
 				CE30B198158FBA34009EC82B /* NewAccountMenu.mm in Sources */,
 				CE30B1A5158FC3F0009EC82B /* OptionsMenu.mm in Sources */,
 				CE30B1A8158FD030009EC82B /* NewGameOverlay.mm in Sources */,
+				C5B4C57A1590142A000FD99F /* HMVectorNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

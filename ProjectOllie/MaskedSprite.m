@@ -28,8 +28,6 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
-- (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
-
 @end
 
 @implementation MaskedSprite
@@ -180,32 +178,30 @@
     [self.maskTexture end];
 }
 
-- (void)constructPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
+- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add
 {
+    
+    ccColor4F color;
+    if(add)
+        color = ccc4f(COVERED_RED,0,0,1);
+    else
+        color = ccc4f(INITIAL_RED,0,0,1);
+    
     [self.maskTexture begin];
-
-    ccColor4F color = {red, 0, 0, 1};
-    ccColor4F colorStroke = {1,1,1,1};
-    [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:colorStroke];
-    //[self->pr drawDot:ccp(0,0) radius:20 color:color];
+    [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:color];
     [self->pr visit];
     [self->pr clear];
-    //[self->pr draw];
-    //ccDrawSolidPoly(poly, numberOfPoints, color);
-    
-
-    
     [self.maskTexture end];
 }
 
-- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
-{
-    [self constructPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
-}
-
-- (void)subtractPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
-{
-    [self constructPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
+-(void)drawLine{
+    ccColor4F color = ccc4f(COVERED_RED,0,0,1);
+    
+    [self.maskTexture begin];
+    [self->pr drawSegmentFrom:ccp(0,0) to:ccp(50,50) radius:10.f color:color];
+    [self->pr visit];
+    [self->pr clear];
+    [self.maskTexture end];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName

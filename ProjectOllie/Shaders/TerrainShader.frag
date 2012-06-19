@@ -11,7 +11,7 @@ uniform float textureHeight;
 
 void main()
 {
-    
+
     vec2 texCoordTiled = vec2(v_texCoord.x*480.0/textureWidth, v_texCoord.y*320.0/textureHeight);
     vec4 texColor = texture2D(u_texture, texCoordTiled);
     vec4 maskColor = texture2D(u_mask, v_texCoord);
