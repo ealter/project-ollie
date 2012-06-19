@@ -10,6 +10,7 @@
 #import "CCBReader.h"
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
+#import "Logout.h"
 
 @implementation MainMenu
 
@@ -44,7 +45,12 @@
 
 -(void)pressedLogout:(id)sender
 {
+    Logout *logout = [[Logout alloc]init];
+    [logout logout];
+    [logout release];
     
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 @end
