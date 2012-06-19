@@ -28,11 +28,7 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
-<<<<<<< HEAD
-=======
-- (void)constructPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
 
->>>>>>> 5f7107993358eb1486c5fb252ebdebec561cf683
 @end
 
 @implementation MaskedSprite
