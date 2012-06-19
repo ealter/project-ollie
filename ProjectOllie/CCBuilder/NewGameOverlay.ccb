@@ -51,7 +51,7 @@
 						<key>value</key>
 						<array>
 							<real>395</real>
-							<real>235</real>
+							<real>275</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -76,7 +76,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -240,7 +240,7 @@
 						<key>value</key>
 						<array>
 							<real>1</real>
-							<real>1</real>
+							<real>1.2000000476837158</real>
 							<false/>
 							<integer>0</integer>
 						</array>
