@@ -26,6 +26,10 @@
 			<key>path</key>
 			<string>../Resources</string>
 		</dict>
+		<dict>
+			<key>path</key>
+			<string>../libs/facebook-ios-sdk</string>
+		</dict>
 	</array>
 </dict>
 </plist>

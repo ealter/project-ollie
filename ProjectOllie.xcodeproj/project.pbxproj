@@ -38,6 +38,7 @@
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
+		CE0BD6131590354400C380CA /* FBConnect.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD6121590354400C380CA /* FBConnect.bundle */; };
 		CE123C4D158811DC003AD813 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4C158811DC003AD813 /* background.jpg */; };
 		CE123C5015883687003AD813 /* TerrainShader.frag in Sources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
@@ -309,7 +310,6 @@
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5B4C5751590142A000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
-		C5B4C5761590142A000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C5771590142A000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
 		C5B4C5781590142A000FD99F /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
 		C5C01E38157AAEB2004CF358 /* pattern1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pattern1.png; sourceTree = "<group>"; };
@@ -334,6 +334,7 @@
 		CE0BD605159016E600C380CA /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		CE0BD606159016E600C380CA /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		CE0BD607159016E600C380CA /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		CE0BD6121590354400C380CA /* FBConnect.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBConnect.bundle; sourceTree = "<group>"; };
 		CE123C4C158811DC003AD813 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = Resources/background.jpg; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
@@ -879,18 +880,6 @@
 			path = minizip;
 			sourceTree = "<group>";
 		};
-		C5B4C5741590142A000FD99F /* HMUtils */ = {
-			isa = PBXGroup;
-			children = (
-				C5B4C5761590142A000FD99F /* HMVectorNode.h */,
-				C5B4C5771590142A000FD99F /* HMVectorNode.m */,
-				C5B4C5751590142A000FD99F /* HMVectorNode.fsh */,
-				C5B4C5781590142A000FD99F /* HMVectorNode.vsh */,
-			);
-			name = HMUtils;
-			path = libs/HMUtils;
-			sourceTree = "<group>";
-		};
 		CE0BD5F7158FFA3900C380CA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -907,6 +896,7 @@
 		CE0BD5F8159016E600C380CA /* facebook-ios-sdk */ = {
 			isa = PBXGroup;
 			children = (
+				CE0BD6121590354400C380CA /* FBConnect.bundle */,
 				CE0BD5F9159016E600C380CA /* Facebook.h */,
 				CE0BD5FA159016E600C380CA /* FBConnect.h */,
 				CE0BD5FB159016E600C380CA /* FBDialog.bundle */,
@@ -1089,7 +1079,6 @@
 			isa = PBXGroup;
 			children = (
 				CE0BD5F8159016E600C380CA /* facebook-ios-sdk */,
-				C578AF7E158AF4710049FE58 /* HMUtils */,
 				CE894EFC158299CE00E412E1 /* CSG */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
@@ -1723,6 +1712,7 @@
 				CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */,
 				CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */,
 				CE552268159014FE00CDB131 /* drawframe.png in Resources */,
+				CE0BD6131590354400C380CA /* FBConnect.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1924,7 +1914,6 @@
 				CE30B1A8158FD030009EC82B /* NewGameOverlay.mm in Sources */,
 				C5B4C57A1590142A000FD99F /* HMVectorNode.m in Sources */,
 				CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
