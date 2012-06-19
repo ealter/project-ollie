@@ -7,6 +7,7 @@
 //
 
 #import "Authentication.h"
+#import "FacebookLogin.h"
 
 static Authentication *auth = nil;
 
@@ -17,6 +18,7 @@ static Authentication *auth = nil;
 
 @synthesize authToken = _authToken;
 @synthesize username = _username;
+@synthesize facebookLogin = _facebookLogin;
 
 + (Authentication *)mainAuth {
     if(!auth) {

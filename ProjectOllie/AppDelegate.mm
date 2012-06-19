@@ -22,6 +22,7 @@
 #import "ActionLayer.h"
 #import "CCBReader.h"
 #import "Authentication.h"
+#import "FacebookLogin.h"
 
 @implementation AppController
 
@@ -161,6 +162,10 @@
 -(void) applicationSignificantTimeChange:(UIApplication *)application
 {
 	[[CCDirector sharedDirector] setNextDeltaTimeZero:YES];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [[Authentication mainAuth].facebookLogin.facebook handleOpenURL:url]; 
 }
 
 - (void) dealloc
