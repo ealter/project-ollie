@@ -86,6 +86,11 @@
     [self.login loginWithUsername:username password:password];
 }
 
+- (void)pressedLoginWithFacebook:(id)sender
+{
+    DebugLog(@"I don't always try to login with facebook, but when I do it hasn't been implemented yet.");
+}
+
 - (void)loginSucceeded
 {
     [nameField removeFromSuperview];

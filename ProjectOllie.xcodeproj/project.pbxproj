@@ -258,6 +258,10 @@
 		CEA14DB01587CA7E00735135 /* clear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAC1587CA7E00735135 /* clear-hd.png */; };
 		CEA14DB11587CA7E00735135 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAD1587CA7E00735135 /* clear.png */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
+		CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */; };
+		CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */; };
+		CEC7C99915903CEC00FFB4F7 /* LoginWithFacebookPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99515903CEC00FFB4F7 /* LoginWithFacebookPressed.png */; };
+		CEC7C99A15903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */; };
 		CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00100158BDCE100F7F1A8 /* Authentication.m */; };
 		CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */; };
 		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
@@ -755,6 +759,10 @@
 		CEA14DAC1587CA7E00735135 /* clear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clear-hd.png"; path = "Resources/clear-hd.png"; sourceTree = "<group>"; };
 		CEA14DAD1587CA7E00735135 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear.png; path = Resources/clear.png; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = Resources/DrawMenu.ccbi; sourceTree = "<group>"; };
+		CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookNormal.png; sourceTree = "<group>"; };
+		CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
+		CEC7C99515903CEC00FFB4F7 /* LoginWithFacebookPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookPressed.png; sourceTree = "<group>"; };
+		CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookPressed@2x.png"; sourceTree = "<group>"; };
 		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; };
 		CEF00100158BDCE100F7F1A8 /* Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Authentication.m; path = ProjectOllie/Server/Authentication.m; sourceTree = "<group>"; };
 		CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+URLEncoding.h"; path = "ProjectOllie/Server/NSDictionary+URLEncoding.h"; sourceTree = "<group>"; };
@@ -1035,6 +1043,7 @@
 		CE94AA6C15785F83009B35B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CEC7C99215903CEC00FFB4F7 /* Facebook */,
 				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
 				CE552267159014FE00CDB131 /* drawframe.png */,
 				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
@@ -1596,6 +1605,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CEC7C99215903CEC00FFB4F7 /* Facebook */ = {
+			isa = PBXGroup;
+			children = (
+				CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */,
+				CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */,
+				CEC7C99515903CEC00FFB4F7 /* LoginWithFacebookPressed.png */,
+				CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */,
+			);
+			name = Facebook;
+			path = Resources/Facebook;
+			sourceTree = "<group>";
+		};
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
@@ -1729,6 +1750,10 @@
 				CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */,
 				CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */,
 				CE552268159014FE00CDB131 /* drawframe.png in Resources */,
+				CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */,
+				CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */,
+				CEC7C99915903CEC00FFB4F7 /* LoginWithFacebookPressed.png in Resources */,
+				CEC7C99A15903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png in Resources */,
 				CE1F2E7C1590385800710A32 /* dottedbox-hd.png in Resources */,
 				CE1F2E7D1590385800710A32 /* drawframe-hd.png in Resources */,
 			);
