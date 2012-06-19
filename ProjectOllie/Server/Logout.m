@@ -27,7 +27,6 @@
         NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:nil];
         [connection release];
     }
-    auth.username = nil;
     auth.authToken = nil;
 }
 
