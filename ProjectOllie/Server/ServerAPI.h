@@ -10,6 +10,9 @@
 
 @class Authentication;
 
+#define SERVER_AUTH_TOKEN_KEY @"auth_token"
+#define SERVER_ERROR_KEY @"error"
+
 /* Used to handle interactions with the server that would otherwise be pretty boilerplate. Subclasses should implement - (void)connectionDidFinishLoading:(NSURLConnection *)connection
  */
 @interface ServerAPI : NSObject <NSURLConnectionDataDelegate> {

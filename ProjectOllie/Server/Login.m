@@ -67,13 +67,13 @@
         [self broadcastLoginFailedWithError:@"Internal server error"];
         return;
     }
-    if([result objectForKey:@"error"]) {
-        NSString *error = [result objectForKey:@"error"];
+    if([result objectForKey:SERVER_ERROR_KEY]) {
+        NSString *error = [result objectForKey:SERVER_ERROR_KEY];
         DebugLog(@"Error when logging in with username %@: %@", self.auth.username, error);
         [self broadcastLoginFailedWithError:error];
         return;
     }
-    self.auth.authToken = [result objectForKey:@"auth_token"];
+    self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     if(self.auth.authToken)
         [self broadcastLoginSucceeded];
     else
