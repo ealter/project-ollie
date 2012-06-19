@@ -9,7 +9,6 @@
 #import "DrawMenu.h"
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
-#import "Terrain.h"
 #import "CCBReader.h"
 
 #define HEIGHT_MULTIPLIER 0.84
@@ -21,6 +20,7 @@
 @implementation DrawMenu
 
 @synthesize selected = _selected;
+@synthesize delegate = _delegate;
 
 -(id)init
 {
@@ -35,47 +35,36 @@
 
 -(void)pressedLarge:(id)sender
 {
-    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    parent_node.brushradius = largeradius;
+    [self.delegate DrawMenu_setBrushRadius:largeradius];
     self.selected.position = CGPointMake(self.contentSize.width*0.357, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedMedium:(id)sender
 {
-    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    parent_node.brushradius = mediumradius;
+    [self.delegate DrawMenu_setBrushRadius:mediumradius];
     self.selected.position = CGPointMake(self.contentSize.width*0.461, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedSmall:(id)sender
 {
-    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    parent_node.brushradius = smallradius;
+    [self.delegate DrawMenu_setBrushRadius:smallradius];
     self.selected.position = CGPointMake(self.contentSize.width*0.565, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedEraser:(id)sender
 {
-    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    parent_node.brushradius = -mediumradius;
+    [self.delegate DrawMenu_setBrushRadius:-mediumradius];
     self.selected.position = CGPointMake(self.contentSize.width*0.669, self.contentSize.height * HEIGHT_MULTIPLIER);
 }
 
 -(void)pressedCheck:(id)sender
 {
-    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    SandboxScene* scene = [SandboxScene node];
-
-    [parent_node removeChild:parent_node.terrain cleanup:YES];
-    [scene.actionLayer addChild:parent_node.terrain];
-    
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self.delegate DrawMenu_doneDrawing];
 }
 
 -(void)pressedClear:(id)sender
 {
-    DrawEnvironment *parent_node = (DrawEnvironment *)[self parent];
-    [parent_node.terrain clear];
+    [self.delegate DrawMenu_clearDrawing];
 }
 
 -(void)pressedBack:(id)sender
