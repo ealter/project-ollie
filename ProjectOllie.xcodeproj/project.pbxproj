@@ -73,6 +73,7 @@
 		CE4BCDA7157AD080002FD1F3 /* btn-test-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */; };
 		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
+		CE552268159014FE00CDB131 /* drawframe.png in Resources */ = {isa = PBXBuildFile; fileRef = CE552267159014FE00CDB131 /* drawframe.png */; };
 		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -362,6 +363,7 @@
 		CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "comic andy.ttf"; path = "Resources/comic andy.ttf"; sourceTree = "<group>"; };
 		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
 		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
+		CE552267159014FE00CDB131 /* drawframe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drawframe.png; path = Resources/drawframe.png; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
@@ -989,6 +991,7 @@
 			isa = PBXGroup;
 			children = (
 				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
+				CE552267159014FE00CDB131 /* drawframe.png */,
 				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
 				CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */,
 				CE30B1AD158FE846009EC82B /* selectedoption.png */,
@@ -1676,6 +1679,7 @@
 				CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */,
 				CE30B1AC158FD0C8009EC82B /* dottedbox.png in Resources */,
 				CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */,
+				CE552268159014FE00CDB131 /* drawframe.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
