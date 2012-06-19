@@ -52,10 +52,4 @@ static Authentication *auth = nil;
     [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN_KEY];
 }
 
-- (void)logout
-{
-    self.authToken = nil;
-    //TODO: implement this on the server side
-}
-
 @end

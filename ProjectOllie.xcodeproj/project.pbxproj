@@ -35,6 +35,7 @@
 		C5C01E39157AAEB2004CF358 /* pattern1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5C01E38157AAEB2004CF358 /* pattern1.png */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
+		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE123C4D158811DC003AD813 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4C158811DC003AD813 /* background.jpg */; };
 		CE123C5015883687003AD813 /* TerrainShader.frag in Sources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
@@ -62,6 +63,7 @@
 		CE30B1A8158FD030009EC82B /* NewGameOverlay.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A7158FD02F009EC82B /* NewGameOverlay.mm */; };
 		CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */; };
 		CE30B1AC158FD0C8009EC82B /* dottedbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1AB158FD0C8009EC82B /* dottedbox.png */; };
+		CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1AD158FE846009EC82B /* selectedoption.png */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE412619157FF6B8001FA126 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = CE412618157FF6B8001FA126 /* Background.m */; };
@@ -312,6 +314,8 @@
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/Server/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/Server/NSString+whitespace_check.m"; sourceTree = "<group>"; };
+		CE0BD5F3158FFA2500C380CA /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Logout.h; sourceTree = "<group>"; };
+		CE0BD5F4158FFA2500C380CA /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ProjectOllie/Server/Logout.m; sourceTree = "<group>"; };
 		CE123C4C158811DC003AD813 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = Resources/background.jpg; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
@@ -346,6 +350,7 @@
 		CE30B1A7158FD02F009EC82B /* NewGameOverlay.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NewGameOverlay.mm; sourceTree = "<group>"; };
 		CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewGameOverlay.ccbi; path = Resources/NewGameOverlay.ccbi; sourceTree = "<group>"; };
 		CE30B1AB158FD0C8009EC82B /* dottedbox.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dottedbox.png; path = Resources/dottedbox.png; sourceTree = "<group>"; };
+		CE30B1AD158FE846009EC82B /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/selectedoption.png; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = Resources/ActionMenu.ccbi; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = Resources/MainMenu.ccbi; sourceTree = "<group>"; };
 		CE412617157FF6B8001FA126 /* Background.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Background.h; sourceTree = "<group>"; };
@@ -866,6 +871,19 @@
 			path = libs/HMUtils;
 			sourceTree = "<group>";
 		};
+		CE0BD5F7158FFA3900C380CA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */,
+				CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */,
+				CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */,
+				CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */,
+				CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */,
+				CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		CE30B189158FBA12009EC82B /* Menus */ = {
 			isa = PBXGroup;
 			children = (
@@ -973,6 +991,7 @@
 				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
 				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
 				CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */,
+				CE30B1AD158FE846009EC82B /* selectedoption.png */,
 				CE30B19C158FC0C6009EC82B /* terrainbutton.png */,
 				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
 				CE9957D3158AB5F000B863DF /* back-hd.png */,
@@ -1529,20 +1548,17 @@
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				CEFA2729158D447600BC9710 /* Login.h */,
-				CEFA272A158D447600BC9710 /* Login.m */,
-				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
-				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
-				CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */,
-				CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */,
-				CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */,
-				CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */,
 				CEFA2730158D4B1A00BC9710 /* AccountCreator.h */,
 				CEFA2731158D4B1A00BC9710 /* AccountCreator.m */,
+				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
+				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
+				CEFA2729158D447600BC9710 /* Login.h */,
+				CEFA272A158D447600BC9710 /* Login.m */,
+				CE0BD5F3158FFA2500C380CA /* Logout.h */,
+				CE0BD5F4158FFA2500C380CA /* Logout.m */,
 				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
-				CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */,
-				CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */,
+				CE0BD5F7158FFA3900C380CA /* Categories */,
 			);
 			name = Server;
 			path = ..;
@@ -1659,6 +1675,7 @@
 				CE30B1A2158FC37F009EC82B /* OptionsMenu.ccbi in Resources */,
 				CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */,
 				CE30B1AC158FD0C8009EC82B /* dottedbox.png in Resources */,
+				CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1859,6 +1876,8 @@
 				CE30B1A5158FC3F0009EC82B /* OptionsMenu.mm in Sources */,
 				CE30B1A8158FD030009EC82B /* NewGameOverlay.mm in Sources */,
 				C5B4C57A1590142A000FD99F /* HMVectorNode.m in Sources */,
+				CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

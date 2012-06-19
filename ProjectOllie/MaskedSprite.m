@@ -28,6 +28,11 @@
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
 
+<<<<<<< HEAD
+=======
+- (void)constructPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+
+>>>>>>> 5f7107993358eb1486c5fb252ebdebec561cf683
 @end
 
 @implementation MaskedSprite
@@ -40,7 +45,6 @@
     self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
     
-        
         //set up rendering paramters
         ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
         [self.texture setTexParameters: &params];
@@ -62,7 +66,6 @@
 		quad_.tr.texCoords.u = 1;
 		quad_.tr.texCoords.v = 1;
         
-
         // 1
         //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
         self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
@@ -178,6 +181,7 @@
     [self.maskTexture end];
 }
 
+
 - (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add
 {
     
@@ -203,6 +207,7 @@
     [self->pr clear];
     [self.maskTexture end];
 }
+
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
 {

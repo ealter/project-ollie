@@ -84,8 +84,8 @@
         [self broadcastAccountCreationFailedWithError:@"Internal server error"];
         return;
     }
-    if([result objectForKey:@"error"]) {
-        NSString *error = [result objectForKey:@"error"];
+    if([result objectForKey:SERVER_ERROR_KEY]) {
+        NSString *error = [result objectForKey:SERVER_ERROR_KEY];
         DebugLog(@"Error when creating account: %@", error);
         [self broadcastAccountCreationFailedWithError:error];
         return;

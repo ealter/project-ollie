@@ -12,6 +12,11 @@
 #import "CCBReader.h"
 #import "DrawMenu.h"
 #import "Terrain.h"
+#import "SandboxScene.h"
+
+@interface DrawEnvironment () <DrawMenu_delegate>
+
+@end
 
 @implementation DrawEnvironment
 @synthesize numpoints, prevpoint, brushradius;
@@ -45,7 +50,8 @@
         /*
         /Load the menu for the drawing environment
         */
-        CCNode *drawnode = [CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
+        DrawMenu *drawnode = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
+        drawnode.delegate = self;
         [self addChild:drawnode];
 	}
 	return self;
@@ -112,6 +118,26 @@
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
+}
+
+- (void)DrawMenu_setBrushRadius:(CGFloat)radius
+{
+    self.brushradius = radius;
+}
+
+- (void)DrawMenu_clearDrawing
+{
+    [self.terrain clear];
+}
+
+- (void)DrawMenu_doneDrawing
+{
+    SandboxScene *scene = [SandboxScene node];
+    
+    [self removeChild:self.terrain cleanup:YES];
+    [scene.actionLayer addChild:self.terrain];
+    
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 /*
