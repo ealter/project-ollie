@@ -70,11 +70,9 @@
         points[i*2].y = shapeField->peSet[i]->y;
         points[i*2+1].x = shapeField->peSet[i]->next->x;
         points[i*2+1].y = shapeField->peSet[i]->next->y;
-    }
-    for(int i = 0; i<numLines-1; i++)
-    {
-        CGPoint p1 = ccp(points[i].x, points[i].y);
-        CGPoint p2 = ccp(points[i+1].x,points[i+1].y);
+        
+        CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
+        CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
         [polyRenderer drawSegmentFrom:p1 to:p2 radius:2.f color:ccc4f(1,1,1,1)];
     }
     
