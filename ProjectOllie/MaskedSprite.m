@@ -13,6 +13,7 @@
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
+#define STROKE_BLUE 1.0
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 
 
@@ -158,13 +159,8 @@
         float radian = M_PI * degree / 180.f;
         circle[i] = ccp(center.x+radius*cos(radian),center.y+radius*sin(radian));
     }
-    
-    if(add)
-        [self drawPolygon:circle numPoints:numPoints];
-    else
-        [self subtractPolygon:circle numPoints:numPoints];
+    [self drawPolygon:circle numPoints:numPoints Additive:add];
     */
-    
     ccColor4F color;
     if(add)
         color = ccc4f(COVERED_RED,0,0,1);
@@ -194,11 +190,15 @@
     [self.maskTexture end];
 }
 
--(void)drawLine{
-    ccColor4F color = ccc4f(COVERED_RED,0,0,1);
+-(void)drawLines:(const CGPoint*)poly numPoints:(NSUInteger)num{
+    ccColor4F color = ccc4f(COVERED_RED,0,STROKE_BLUE,1);
     
     [self.maskTexture begin];
-    [self->pr drawSegmentFrom:ccp(0,0) to:ccp(50,50) radius:10.f color:color];
+    for(int i = 0; i < num-1; i++)
+    {
+       [self->pr drawSegmentFrom:poly[i] to:poly[i+1] radius:2.f color:color]; 
+    }
+    [self->pr drawSegmentFrom:poly[num-1] to:poly[0] radius:2.f color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];

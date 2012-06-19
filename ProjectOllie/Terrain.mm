@@ -11,9 +11,11 @@
 #import "PointEdge.h"
 #import "ccMacros.h"
 #import "MaskedSprite.h"
+#import "HMVectorNode.h"
 
 @interface Terrain(){
     MaskedSprite *drawSprite;
+    HMVectorNode *polyRenderer;
 }
 @end
 
@@ -30,6 +32,9 @@
         
         drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
         drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
+        
+        polyRenderer = [[HMVectorNode alloc] init];
+        [self addChild:polyRenderer];
     }
     return self;
 }
@@ -56,7 +61,7 @@
     //CC_NODE_DRAW_SETUP();
     ccGLEnable( glServerState_ );
     [drawSprite draw];
-    
+    [polyRenderer clear];
     int numLines = shapeField->peSet.size()*2;
     ccVertex2F* points = new ccVertex2F[numLines];
     for (int i = 0; i < shapeField->peSet.size(); i++)
@@ -66,7 +71,13 @@
         points[i*2+1].x = shapeField->peSet[i]->next->x;
         points[i*2+1].y = shapeField->peSet[i]->next->y;
     }
-   //ccDrawLines(points, numLines);
+    for(int i = 0; i<numLines-1; i++)
+    {
+        CGPoint p1 = ccp(points[i].x, points[i].y);
+        CGPoint p2 = ccp(points[i+1].x,points[i+1].y);
+        [polyRenderer drawSegmentFrom:p1 to:p2 radius:2.f color:ccc4f(1,1,1,1)];
+    }
+    
 }
 
 - (void) clear
@@ -74,6 +85,7 @@
     //Clear the shape field
     shapeField->clear();
     [drawSprite clear];
+    [polyRenderer clear];
 }
 
 - (void) dealloc

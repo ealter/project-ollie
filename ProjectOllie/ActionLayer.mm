@@ -386,7 +386,7 @@ m_debugDraw = NULL;
 -(void)testMaskedSprite{
     MaskedSprite* ms = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
     ms.position = ms.anchorPoint = ccp(0,0);
-    [ms drawLine];
+    [ms drawCircleAt:ccp(50,50) withRadius:20 Additive:YES];
     [self addChild:ms];
     [ms saveMaskToFile:@"testMask.png"];
 }
