@@ -8,10 +8,12 @@
 
 #import "ServerAPI.h"
 #import "FBConnect.h"
+#import "Login.h"
 
 @interface FacebookLogin : ServerAPI <FBSessionDelegate>
 
 @property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, assign) id<Login_Delegate> delegate;
 
 - (void)login;
 - (void)logout;
