@@ -32,7 +32,7 @@ enum {
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
-//-(void) followCenter;
+-(void) testMaskedSprite;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 
@@ -63,6 +63,8 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
+        
+        [self testMaskedSprite];
         
         //set up screen parameters
         s = self.contentSize;
@@ -381,6 +383,13 @@ m_debugDraw = NULL;
     
 }
 
+-(void)testMaskedSprite{
+    MaskedSprite* ms = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
+    ms.position = ms.anchorPoint = ccp(0,0);
+    [ms drawLine];
+    [self addChild:ms];
+    [ms saveMaskToFile:@"testMask.png"];
+}
 
 @end
 

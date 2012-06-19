@@ -66,7 +66,7 @@
         points[i*2+1].x = shapeField->peSet[i]->next->x;
         points[i*2+1].y = shapeField->peSet[i]->next->y;
     }
-    ccDrawLines(points, numLines);
+   //ccDrawLines(points, numLines);
 }
 
 - (void) clear
