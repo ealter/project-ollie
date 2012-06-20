@@ -22,6 +22,8 @@
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
                                                         // used for shaking effects currently.
 
+@property (assign, nonatomic) float currentScale;       // Used to communicate parallax effectively
+
 @property (assign, nonatomic) CGPoint zoomOrigin;       // used as the origin for camera zooming.
 
 @property (assign, nonatomic) float maximumScale;       // maximum scale size

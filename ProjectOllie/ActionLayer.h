@@ -7,10 +7,9 @@
 //
 
 #import <GameKit/GameKit.h>
-
+#import "ParallaxZoomNode.h"
 // When you import this file, you import all the cocos2d classes
 #import "GLES-Render.h"
-
 @class GWCamera;
 
 @interface ActionLayer : CCLayer <UIGestureRecognizerDelegate>
@@ -20,13 +19,12 @@
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
     CGSize s;
-    CCParallaxNode* parallax_;
+    ParallaxZoomNode* parallax_;
 }
 
 @property (strong, nonatomic) CCNode* center;
 @property (strong, nonatomic) GWCamera* camera;
 @property (assign, nonatomic) CGSize windowSize;
-
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;

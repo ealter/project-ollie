@@ -18,7 +18,6 @@
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) Login *login;
-@property (nonatomic, strong) NSURLConnection *connection;
 
 - (void)broadcastAccountCreationSucceeded;
 - (void)broadcastAccountCreationFailedWithError:(NSString *)error;
@@ -31,7 +30,6 @@
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize login = _login;
-@synthesize connection = _connection;
 
 - (void)broadcastAccountCreationSucceeded
 {
@@ -66,7 +64,7 @@
         [requestData release];
         request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
         
-        self.connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
+        [[[NSURLConnection alloc]initWithRequest:request delegate:self] release];
     }
 }
 
