@@ -23,6 +23,7 @@
 #import "CCBReader.h"
 #import "Authentication.h"
 #import "FacebookLogin.h"
+#import "Facebook.h"
 
 @implementation AppController
 
