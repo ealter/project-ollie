@@ -42,6 +42,14 @@ static Authentication *auth = nil;
     return self.authToken != nil;
 }
 
+- (FacebookLogin *)facebookLogin
+{
+    if(!_facebookLogin) {
+        _facebookLogin = [[FacebookLogin alloc]init];
+    }
+    return _facebookLogin;
+}
+
 - (void)setUsername:(NSString *)username
 {
     _username = username;

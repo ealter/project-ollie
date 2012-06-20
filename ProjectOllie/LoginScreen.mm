@@ -9,6 +9,8 @@
 #import "LoginScreen.h"
 #import "CCBReader.h"
 #import "Login.h"
+#import "FacebookLogin.h"
+#import "Authentication.h"
 
 @interface LoginScreen () <Login_Delegate>
 
@@ -88,7 +90,10 @@
 
 - (void)pressedLoginWithFacebook:(id)sender
 {
-    DebugLog(@"I don't always try to login with facebook, but when I do it hasn't been implemented yet.");
+    FacebookLogin *login = [Authentication mainAuth].facebookLogin;
+    login.delegate = self;
+    [login login];
+    //TODO: maybe release login?
 }
 
 - (void)loginSucceeded
