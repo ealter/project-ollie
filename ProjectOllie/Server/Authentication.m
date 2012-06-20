@@ -54,12 +54,14 @@ static Authentication *auth = nil;
 {
     _username = username;
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:USERNAME_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setAuthToken:(NSString *)authToken
 {
     _authToken = authToken;
     [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end
