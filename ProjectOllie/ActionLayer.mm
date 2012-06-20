@@ -49,7 +49,7 @@ enum {
 {
     // 'scene' is an autorelease object.
     CCScene *scene = [CCScene node];
-
+    
     // 'layer' is an autorelease object.
     ActionLayer *layer = [ActionLayer node];
 
@@ -78,22 +78,17 @@ enum {
         self.center.position = ccp(s.width/2, s.height/2);
 
         //set up parallax
-        parallax_ = [CCParallaxNode node];
-        parallax_.anchorPoint = ccp(0,0);
         Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         bglayer1.anchorPoint = ccp(0,0);
         [bglayer1 setIgnoreAnchorPointForPosition:YES];
-       //[parallax_ setIgnoreAnchorPointForPosition:YES];
 
         
-       // [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.4f) positionOffset:ccp(0,0)];
-        
-        [self addChild:parallax_ z:-1];
+        [self addChild:bglayer1 z:-1];
         
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
-        
+     
         
         // init physics
         [self initPhysics];
@@ -327,7 +322,7 @@ m_debugDraw = NULL;
      * User-made objects that also require updates
      */
 	[self.camera update:dt];
-    [parallax_ setPosition:self.position];
+  
     
 }
 
@@ -364,6 +359,7 @@ m_debugDraw = NULL;
 }
 
 
+
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
@@ -390,6 +386,8 @@ m_debugDraw = NULL;
     [self addChild:ms];
     [ms saveMaskToFile:@"testMask.png"];
 }
+
+
 
 @end
 

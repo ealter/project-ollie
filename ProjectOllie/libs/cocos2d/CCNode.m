@@ -754,6 +754,7 @@ static NSUInteger globalOrderOfArrival = 1;
 
 - (CGAffineTransform)nodeToParentTransform
 {
+    
 	if ( isTransformDirty_ ) {
 
 		// Translate values

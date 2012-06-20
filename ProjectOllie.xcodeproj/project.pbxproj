@@ -26,6 +26,11 @@
 		C52986C31578A43300656B50 /* unzip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AD1578A43300656B50 /* unzip.c */; };
 		C52986C41578A43300656B50 /* zip.c in Sources */ = {isa = PBXBuildFile; fileRef = C52986AF1578A43300656B50 /* zip.c */; };
 		C52986C51578A43300656B50 /* SSZipArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986B21578A43300656B50 /* SSZipArchive.m */; };
+		C545782915912F38002BE291 /* lava.png in Resources */ = {isa = PBXBuildFile; fileRef = C545782415912F38002BE291 /* lava.png */; };
+		C545782A15912F38002BE291 /* rocks.png in Resources */ = {isa = PBXBuildFile; fileRef = C545782515912F38002BE291 /* rocks.png */; };
+		C545782B15912F38002BE291 /* rocks2.png in Resources */ = {isa = PBXBuildFile; fileRef = C545782615912F38002BE291 /* rocks2.png */; };
+		C545782C15912F38002BE291 /* rocksandvines.png in Resources */ = {isa = PBXBuildFile; fileRef = C545782715912F38002BE291 /* rocksandvines.png */; };
+		C545782D15912F38002BE291 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C545782815912F38002BE291 /* snow.png */; };
 		C54A05F6158151A100D7B369 /* blocks-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C54A05F5158151A100D7B369 /* blocks-hd.png */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
@@ -310,6 +315,11 @@
 		C52986B01578A43300656B50 /* zip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zip.h; sourceTree = "<group>"; };
 		C52986B11578A43300656B50 /* SSZipArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSZipArchive.h; sourceTree = "<group>"; };
 		C52986B21578A43300656B50 /* SSZipArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSZipArchive.m; sourceTree = "<group>"; };
+		C545782415912F38002BE291 /* lava.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lava.png; sourceTree = "<group>"; };
+		C545782515912F38002BE291 /* rocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocks.png; sourceTree = "<group>"; };
+		C545782615912F38002BE291 /* rocks2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocks2.png; sourceTree = "<group>"; };
+		C545782715912F38002BE291 /* rocksandvines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocksandvines.png; sourceTree = "<group>"; };
+		C545782815912F38002BE291 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		C54A05F5158151A100D7B369 /* blocks-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "blocks-hd.png"; path = "Resources/blocks-hd.png"; sourceTree = "<group>"; };
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
@@ -1044,6 +1054,11 @@
 			isa = PBXGroup;
 			children = (
 				CEC7C99215903CEC00FFB4F7 /* Facebook */,
+				C545782415912F38002BE291 /* lava.png */,
+				C545782515912F38002BE291 /* rocks.png */,
+				C545782615912F38002BE291 /* rocks2.png */,
+				C545782715912F38002BE291 /* rocksandvines.png */,
+				C545782815912F38002BE291 /* snow.png */,
 				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
 				CE552267159014FE00CDB131 /* drawframe.png */,
 				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
@@ -1756,6 +1771,11 @@
 				CEC7C99A15903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png in Resources */,
 				CE1F2E7C1590385800710A32 /* dottedbox-hd.png in Resources */,
 				CE1F2E7D1590385800710A32 /* drawframe-hd.png in Resources */,
+				C545782915912F38002BE291 /* lava.png in Resources */,
+				C545782A15912F38002BE291 /* rocks.png in Resources */,
+				C545782B15912F38002BE291 /* rocks2.png in Resources */,
+				C545782C15912F38002BE291 /* rocksandvines.png in Resources */,
+				C545782D15912F38002BE291 /* snow.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
