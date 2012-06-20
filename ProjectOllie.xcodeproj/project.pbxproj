@@ -920,6 +920,7 @@
 				CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */,
 			);
 			name = Categories;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		CE0BD5F8159016E600C380CA /* facebook-ios-sdk */ = {
@@ -1111,6 +1112,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE0BD5F7158FFA3900C380CA /* Categories */,
 				C5B4C58A159023AC000FD99F /* HMUtils */,
 				CE0BD5F8159016E600C380CA /* facebook-ios-sdk */,
 				CE894EFC158299CE00E412E1 /* CSG */,
@@ -1640,7 +1642,6 @@
 				CE0BD5F4158FFA2500C380CA /* Logout.m */,
 				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
-				CE0BD5F7158FFA3900C380CA /* Categories */,
 			);
 			name = Server;
 			path = ..;
