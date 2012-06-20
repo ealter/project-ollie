@@ -44,7 +44,6 @@ enum {
 @synthesize center      = _center;
 @synthesize camera      = _camera;
 @synthesize windowSize  = _windowSize;
-
 +(CCScene *) scene
 {
     // 'scene' is an autorelease object.
@@ -76,24 +75,24 @@ enum {
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
-
-        //set up parallax
-        parallax_ = [CCParallaxNode node];
-        parallax_.anchorPoint = ccp(0,0);
-        Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
-        bglayer1.anchorPoint = ccp(0,0);
-        [bglayer1 setIgnoreAnchorPointForPosition:YES];
-       //[parallax_ setIgnoreAnchorPointForPosition:YES];
-
-        
-       // [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.4f) positionOffset:ccp(0,0)];
-        
-        [self addChild:parallax_ z:-1];
         
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
         
+        //parallax setup
+        parallax_ = [ParallaxZoomNode node];
+        parallax_.anchorPoint = ccp(0,0);
+        Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        bglayer1.anchorPoint = ccp(0,0);
+        bglayer1.position = CGPointMake(-200, -200);
+        bglayer1.contentSize=CGSizeMake(self.contentSize.width*1.5, self.contentSize.height*1.5);
+        [bglayer1 setIgnoreAnchorPointForPosition:YES];
+        [parallax_ setIgnoreAnchorPointForPosition:YES];
+        [parallax_ addChild:bglayer1 z:-3 parallaxRatio:ccp(.45f,.45f) positionOffset:ccp(0,0)];
+        parallax_.currentZoom = 1.0;
+        
+        [self addChild:parallax_ z:-2];
         
         // init physics
         [self initPhysics];
@@ -326,9 +325,10 @@ m_debugDraw = NULL;
     /**
      * User-made objects that also require updates
      */
+    
 	[self.camera update:dt];
     [parallax_ setPosition:self.position];
-    
+    parallax_.currentZoom = self.camera.currentScale;    
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

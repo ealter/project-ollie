@@ -45,7 +45,7 @@
 @synthesize maximumScale    = _maximumScale;
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
-
+@synthesize currentScale;
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
     if(( self = [super init] ))
     {
@@ -59,6 +59,7 @@
         self.maximumScale = 6.f;
         self.minimumScale = 1.f;
         self.defaultScale = 1.f;
+        self.currentScale = 1.f;
 
     }
     return self;
@@ -107,6 +108,7 @@
     float scale = self->subject_.scale;
     float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
     [self->subject_ setScale: newScale];
+    currentScale = newScale;
 
     // Get the new center point.
     CGPoint newCenterPoint = ccpMult(currentPosition,subject_.scale);
@@ -319,7 +321,6 @@
     //find the new scale
     float difScale = 
     ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
-    
    
     [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
     
