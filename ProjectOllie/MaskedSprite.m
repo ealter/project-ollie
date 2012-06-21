@@ -28,6 +28,8 @@
 @property (nonatomic) GLuint textureHeightLocation;
 @property (nonatomic) GLuint textureLocation;
 @property (nonatomic) GLuint maskLocation;
+@property (nonatomic) GLuint screenWidthLocation;
+@property (nonatomic) GLuint screenHeightLocation;
 
 
 @end
@@ -35,7 +37,7 @@
 @implementation MaskedSprite
 
 @synthesize maskTexture = _maskTexture;
-@synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_;
+@synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_, screenWidthLocation = screenWidthLocation_, screenHeightLocation = screenHeightLocation_;
 
 - (id)initWithFile:(NSString *)file size:(CGSize)size
 {
@@ -43,10 +45,14 @@
     if (self) {
     
         //set up rendering paramters
-        ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
+        //texture must be power of 2
+        ccTexParams params = {GL_NICEST, GL_NICEST, GL_REPEAT, GL_REPEAT};
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
+        
+        
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
+        [self.maskTexture.sprite.texture setTexParameters:&params];
         self->pr = [[HMVectorNode alloc] init];
 
         // Set up the mask texture with appropriate texture coordinates
@@ -101,6 +107,8 @@
         self.maskLocation          = glGetUniformLocation( shaderProgram_->program_, "u_mask");
         self.textureWidthLocation  = glGetUniformLocation( shaderProgram_->program_, "textureWidth");
         self.textureHeightLocation = glGetUniformLocation( shaderProgram_->program_, "textureHeight");
+        self.screenWidthLocation   = glGetUniformLocation( shaderProgram_->program_, "screenWidth");
+        self.screenHeightLocation  = glGetUniformLocation( shaderProgram_->program_, "screenHeight");
         
         CHECK_GL_ERROR_DEBUG();
     }
@@ -128,6 +136,10 @@
     
     glUniform1f(self.textureWidthLocation, self.texture.pixelsWide);
     glUniform1f(self.textureHeightLocation, self.texture.pixelsHigh);
+    
+    glUniform1f(self.screenWidthLocation, self.contentSize.width);
+    glUniform1f(self.screenHeightLocation, self.contentSize.height);
+   
     
     // 3
 #define kQuadSize sizeof(quad_.bl)

@@ -6,15 +6,13 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import "ServerAPI.h"
-#import "Login.h"
+#import "ServerAccountsAPI.h"
 
 @class Facebook;
 
-@interface FacebookLogin : ServerAPI
+@interface FacebookLogin : ServerAccountsAPI
 
 @property (nonatomic, retain) Facebook *facebook;
-@property (nonatomic, assign) id<Login_Delegate> delegate;
 
 - (void)login;
 - (void)logout;

@@ -30,7 +30,7 @@
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"snow.png" size:CGSizeMake(1024,768)];
         drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
         
         polyRenderer = [[HMVectorNode alloc] init];
@@ -46,6 +46,8 @@
     
     //part of drawing, unrelated to terrain
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
+    
+    
 }
 
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
@@ -73,7 +75,7 @@
         
         CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
         CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
-        [polyRenderer drawSegmentFrom:p1 to:p2 radius:2.f color:ccc4f(1,1,1,1)];
+        [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
     }
     
 }

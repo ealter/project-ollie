@@ -12,7 +12,7 @@
 #import "FacebookLogin.h"
 #import "Authentication.h"
 
-@interface LoginScreen () <Login_Delegate>
+@interface LoginScreen () <ServerAPI_delegate>
 
 @property (nonatomic, retain) Login *login;
 
@@ -96,7 +96,8 @@
     //TODO: maybe release login?
 }
 
-- (void)loginSucceeded
+//Called when login succeeds
+- (void)serverOperationSucceeded
 {
     [nameField removeFromSuperview];
     [nameField release];
@@ -107,13 +108,14 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
-- (void)loginFailedWithError:(NSString *)error
+//Called when login fails
+- (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
     [alert show];
     [alert release];
-    [self loginSucceeded]; //TODO: Make the person log in again
+    [self serverOperationSucceeded]; //TODO: Make the person log in again
 }
 
 -(void)pressedMakeNew:(id)sender
