@@ -21,15 +21,9 @@
         [self broadcastServerOperationFailedWithError:@"Missing username"];
         return;
     }
-    NSURL *url = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"changeUserName"];
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:currentUsername, newUsername, self.auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", @"newUsername", SERVER_AUTH_TOKEN_KEY, nil]];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *postData = [requestData urlEncodedString];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changeUserName"]];
     [requestData release];
-    request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
-    
-    [[[NSURLConnection alloc]initWithRequest:request delegate:self] release];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result {

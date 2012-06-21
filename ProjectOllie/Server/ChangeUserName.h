@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import "ServerAPI.h"
+#import "ServerAccountsAPI.h"
 
-@interface ChangeUserName : ServerAPI
+@interface ChangeUserName : ServerAccountsAPI
 
 - (void)changeUserNameTo:(NSString *)newUsername;
 

@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ServerAPI.h"
+#import "ServerAccountsAPI.h"
 
-@interface Login : ServerAPI
+@interface Login : ServerAccountsAPI
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password;
 

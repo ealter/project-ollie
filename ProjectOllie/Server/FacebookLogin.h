@@ -6,12 +6,12 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import "ServerAPI.h"
+#import "ServerAccountsAPI.h"
 #import "Login.h"
 
 @class Facebook;
 
-@interface FacebookLogin : ServerAPI
+@interface FacebookLogin : ServerAccountsAPI
 
 @property (nonatomic, retain) Facebook *facebook;
 

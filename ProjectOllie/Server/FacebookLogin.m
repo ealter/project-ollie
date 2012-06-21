@@ -52,22 +52,14 @@
 
 - (void)loginWithFacebookID:(NSString *)userId
 {
-    Authentication *auth = [Authentication mainAuth];
-    NSURL *url = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"facebookLogin"];
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc]initWithCapacity:3];
     [requestData setObject:userId forKey:@"facebookUserId"];
-    if(auth.authToken) {
-        [requestData setObject:auth.authToken forKey:SERVER_AUTH_TOKEN_KEY];
-        [requestData setObject:auth.username forKey:@"username"];
+    if(self.auth.authToken) {
+        [requestData setObject:self.auth.authToken forKey:SERVER_AUTH_TOKEN_KEY];
+        [requestData setObject:self.auth.username forKey:@"username"];
     }
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"POST";
-    NSString *postData = [requestData urlEncodedString];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"facebookLogin"]];
     [requestData release];
-    request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
-    
-    NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
-    [connection release];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

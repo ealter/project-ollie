@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ServerAPI.h"
+#import "ServerAccountsAPI.h"
 
-@interface AccountCreator : ServerAPI
+@interface AccountCreator : ServerAccountsAPI
 
 /* Creates an account. On success, it also logs the person in. */
 - (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email;

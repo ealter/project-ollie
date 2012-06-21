@@ -8,6 +8,7 @@
 
 #import "ServerAPI.h"
 #import "Authentication.h"
+#import "NSDictionary+URLEncoding.h"
 
 @implementation ServerAPI
 
@@ -79,6 +80,21 @@
 - (void)serverReturnedResult:(NSDictionary *)result
 {
     [NSException raise:NSInternalInconsistencyException format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
+- (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    NSString *postData = [requestData urlEncodedString];
+    request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
+    
+    [[[NSURLConnection alloc]initWithRequest:request delegate:self] release];
+}
+
++ (NSURL *)urlForPageName:(NSString *)page
+{
+    return [[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:page];
 }
 
 - (void)dealloc
