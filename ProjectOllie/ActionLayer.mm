@@ -47,7 +47,7 @@ enum {
 {
     // 'scene' is an autorelease object.
     CCScene *scene = [CCScene node];
-
+    
     // 'layer' is an autorelease object.
     ActionLayer *layer = [ActionLayer node];
 
@@ -61,6 +61,7 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
+
         //set up screen parameters
         s = self.contentSize;
         self.anchorPoint = ccp(0,0);
@@ -71,11 +72,11 @@ enum {
         self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
         self.center = [CCNode node];
         self.center.position = ccp(s.width/2, s.height/2);
-        
+
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
-        
+
         //parallax setup
         parallax_ = [ParallaxZoomNode node];
         parallax_.anchorPoint = ccp(0,0);
@@ -88,6 +89,7 @@ enum {
         parallax_.currentZoom = 1.0;
         
         [self addChild:parallax_ z:-2];
+
         
         // init physics
         [self initPhysics];
@@ -322,8 +324,10 @@ m_debugDraw = NULL;
      */
     
 	[self.camera update:dt];
+
     [parallax_ setPosition:self.position];
     parallax_.currentZoom = self.camera.currentScale;    
+
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -345,7 +349,7 @@ m_debugDraw = NULL;
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, s.width, s.height);
-    if([touches count] == 3)
+    if([touches count] == 2)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
@@ -353,6 +357,7 @@ m_debugDraw = NULL;
         }
     
 }
+
 
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -372,6 +377,7 @@ m_debugDraw = NULL;
         
     
 }
+
 
 
 @end
