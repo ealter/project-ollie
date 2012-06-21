@@ -32,22 +32,7 @@
     [[[NSURLConnection alloc]initWithRequest:request delegate:self] release];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    if(!data_) {
-        [self broadcastServerOperationFailedWithError:nil];
-        return;
-    }
-    NSError *error = nil;
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
-    if(error) {
-        [self broadcastServerOperationFailedWithError:@"Internal server error"];
-        return;
-    }
-    if([result objectForKey:SERVER_ERROR_KEY]) {
-        NSString *error = [result objectForKey:SERVER_ERROR_KEY];
-        [self broadcastServerOperationFailedWithError:error];
-        return;
-    }
+- (void)serverReturnedResult:(NSDictionary *)result {
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     if(self.auth.authToken)
         [self broadcastServerOperationSucceeded];

@@ -39,24 +39,8 @@
     self.connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    if(!data_) {
-        [self broadcastServerOperationFailedWithError:nil];
-        return;
-    }
-    NSError *error = nil;
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
-    if(error) {
-        DebugLog(@"Error when logging in with username %@: %@", self.auth.username, error);
-        [self broadcastServerOperationFailedWithError:@"Internal server error"];
-        return;
-    }
-    if([result objectForKey:SERVER_ERROR_KEY]) {
-        NSString *error = [result objectForKey:SERVER_ERROR_KEY];
-        DebugLog(@"Error when logging in with username %@: %@", self.auth.username, error);
-        [self broadcastServerOperationFailedWithError:error];
-        return;
-    }
+- (void)serverReturnedResult:(NSDictionary *)result
+{
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     if(self.auth.authToken)
         [self broadcastServerOperationSucceeded];

@@ -25,13 +25,16 @@
         [requestData release];
         request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
         
-        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:nil];
+        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:self];
         [connection release];
     }
     auth.authToken = nil;
     [auth.facebookLogin logout];
 }
 
-//TODO: call the delegate methods
+- (void)serverReturnedResult:(NSDictionary *)result
+{
+    [self broadcastServerOperationSucceeded];
+}
 
 @end

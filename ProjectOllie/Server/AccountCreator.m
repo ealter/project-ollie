@@ -52,27 +52,8 @@
     }
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+- (void)serverReturnedResult:(NSDictionary *)result
 {
-    if(!data_) {
-        [self broadcastServerOperationFailedWithError:nil];
-        DebugLog(@"Data is nil!!!");
-        return;
-    }
-    NSError *error = nil;
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
-    if(error) {
-        DebugLog(@"Error when creating account: %@", error);
-        [self broadcastServerOperationFailedWithError:@"Internal server error"];
-        return;
-    }
-    if([result objectForKey:SERVER_ERROR_KEY]) {
-        NSString *error = [result objectForKey:SERVER_ERROR_KEY];
-        DebugLog(@"Error when creating account: %@", error);
-        [self broadcastServerOperationFailedWithError:error];
-        return;
-    }
-    
     self.login = [[Login alloc]init];
     self.login.delegate = self;
     [self.login loginWithUsername:self.username password:self.password];

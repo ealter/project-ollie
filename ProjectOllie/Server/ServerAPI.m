@@ -57,6 +57,30 @@
                        otherButtonTitles:nil] autorelease] show];
 }
 
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    if(!data_) {
+        [self broadcastServerOperationFailedWithError:nil];
+        return;
+    }
+    NSError *error = nil;
+    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
+    if(error) {
+        DebugLog(@"Error when communicating with server (%@): %@", [self class], error);
+        [self broadcastServerOperationFailedWithError:@"Internal server error"];
+    } else if([result objectForKey:SERVER_ERROR_KEY]) {
+        NSString *error = [result objectForKey:SERVER_ERROR_KEY];
+        DebugLog(@"Error when communicating with server (%@): %@", [self class], error);
+        [self broadcastServerOperationFailedWithError:error];
+    } else {
+        [self serverReturnedResult:result];
+    }
+}
+
+- (void)serverReturnedResult:(NSDictionary *)result
+{
+    [NSException raise:NSInternalInconsistencyException format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
 - (void)dealloc
 {
     [data_ release];

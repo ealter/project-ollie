@@ -32,7 +32,7 @@
 
 @end
 
-/* Used to handle interactions with the server that would otherwise be pretty boilerplate. Subclasses should implement - (void)connectionDidFinishLoading:(NSURLConnection *)connection
+/* Used to handle interactions with the server that would otherwise be pretty boilerplate. This is an abstract class.
  */
 @interface ServerAPI : NSObject <NSURLConnectionDataDelegate> {
     NSMutableData *data_;
@@ -44,5 +44,6 @@
 //Protected methods
 - (void)broadcastServerOperationSucceeded;
 - (void)broadcastServerOperationFailedWithError:(NSString *)error;
+- (void)serverReturnedResult:(NSDictionary *)result; //Called only if the server did not return an error. Subclasses must override this
 
 @end
