@@ -44,6 +44,9 @@
     if (![self.facebook isSessionValid]) {
         [self.facebook authorize:nil];
     }
+    else {
+        [self broadcastServerOperationSucceeded];
+    }
 }
 
 - (void)logout
