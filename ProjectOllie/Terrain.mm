@@ -30,7 +30,7 @@
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"rocksandvines.png" size:CGSizeMake(1024,768)];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"snow.png" size:CGSizeMake(1024,768)];
         drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
         
         polyRenderer = [[HMVectorNode alloc] init];
@@ -75,7 +75,7 @@
         
         CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
         CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
-        [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.8f,.9f,.2f,1)];
+        [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
     }
     
 }

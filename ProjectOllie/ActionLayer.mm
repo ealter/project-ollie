@@ -32,7 +32,6 @@ enum {
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
--(void) testMaskedSprite;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 
@@ -62,8 +61,6 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
-        
-        [self testMaskedSprite];
         
         //set up screen parameters
         s = self.contentSize;
@@ -328,13 +325,10 @@ m_debugDraw = NULL;
      */
     
 	[self.camera update:dt];
-<<<<<<< HEAD
-  
-    
-=======
+
     [parallax_ setPosition:self.position];
     parallax_.currentZoom = self.camera.currentScale;    
->>>>>>> 74e3f52a2706402fce0ba0b4480db4848a3ad16d
+
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
@@ -360,7 +354,7 @@ m_debugDraw = NULL;
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, s.width, s.height);
-    if([touches count] == 3)
+    if([touches count] == 2)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
@@ -388,14 +382,6 @@ m_debugDraw = NULL;
 
         
     
-}
-
--(void)testMaskedSprite{
-    MaskedSprite* ms = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
-    ms.position = ms.anchorPoint = ccp(0,0);
-    [ms drawCircleAt:ccp(50,50) withRadius:20 Additive:YES];
-    [self addChild:ms];
-    [ms saveMaskToFile:@"testMask.png"];
 }
 
 

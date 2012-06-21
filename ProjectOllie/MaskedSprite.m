@@ -46,10 +46,13 @@
     
         //set up rendering paramters
         //texture must be power of 2
-        ccTexParams params = {GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT};
+        ccTexParams params = {GL_NICEST, GL_NICEST, GL_REPEAT, GL_REPEAT};
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
+        
+        
         [self.maskTexture.sprite.texture setAntiAliasTexParameters];
+        [self.maskTexture.sprite.texture setTexParameters:&params];
         self->pr = [[HMVectorNode alloc] init];
 
         // Set up the mask texture with appropriate texture coordinates
@@ -134,8 +137,9 @@
     glUniform1f(self.textureWidthLocation, self.texture.pixelsWide);
     glUniform1f(self.textureHeightLocation, self.texture.pixelsHigh);
     
-    glUniform1f(self.textureWidthLocation, 1024);
-    glUniform1f(self.textureHeightLocation, 768);
+    glUniform1f(self.screenWidthLocation, self.contentSize.width);
+    glUniform1f(self.screenHeightLocation, self.contentSize.height);
+   
     
     // 3
 #define kQuadSize sizeof(quad_.bl)
