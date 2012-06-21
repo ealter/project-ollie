@@ -127,17 +127,11 @@
     
 	while (cn.parent != nil) {
 		cn = cn.parent;
-		ret = ccpAdd( ret,  cn.position );
 	}
+    ret =[cn.parent convertToNodeSpace:self.position];
+    
     
 	return ret;
-}
-
--(void) setPosition: (CGPoint)newPosition
-{
-	position_.x = newPosition.x-position_.x/(currentZoom*2);
-    position_.y = newPosition.y-position_.y/(currentZoom*2);
-	isTransformDirty_ = isInverseDirty_ = YES;
 }
 
 /*
@@ -150,18 +144,19 @@
     //	CGPoint pos = position_;
     //	CGPoint	pos = [self convertToWorldSpace:CGPointZero];
 	CGPoint pos = [self absolutePosition_];
-	if( ! CGPointEqualToPoint(pos, lastPosition) ) {
+    for(unsigned int i=0; i < parallaxArray_->num; i++ ) {
         
-		for(unsigned int i=0; i < parallaxArray_->num; i++ ) {
-            
-			GWPointObject *point = parallaxArray_->arr[i];
-			float x = -pos.x + pos.x * point.ratio.x + point.offset.x - 0.8*point.child.contentSize.width/currentZoom;
-			float y = -pos.y + pos.y * point.ratio.y + point.offset.y - 0.35*point.child.contentSize.height/currentZoom;
-			point.child.position = ccp(x,y);
-		}
+        GWPointObject *point = parallaxArray_->arr[i];
+        CGPoint oldposition = lastPosition;
+        CGPoint diff = ccpSub(pos, oldposition);
+        CGPoint toAdd = ccp(diff.x*point.ratio.x, diff.y*point.ratio.y);
         
-		lastPosition = pos;
-	}
+        //float x = -pos.x + pos.x * point.ratio.x;// + point.offset.x;
+        //float y = -pos.y + pos.y * point.ratio.y;// + point.offset.y;
+        point.child.position = pos;// ccpAdd(oldposition, toAdd);
+    }
+    
+    lastPosition = pos;
     
 	[super visit];
 }

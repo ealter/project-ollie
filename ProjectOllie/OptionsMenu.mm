@@ -18,7 +18,6 @@
         
         userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Current Username: %@", myself.username] fontName:@"Helvetica" fontSize:20];
         userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height*4/5);
-        NSLog(@"Loels");
         [self addChild:userName z:1];
     }
     
