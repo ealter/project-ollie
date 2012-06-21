@@ -272,6 +272,7 @@
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
+		CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FDF1592A750005A233E /* ChangeUserName.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -784,6 +785,8 @@
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
+		CEFD6FDE1592A750005A233E /* ChangeUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeUserName.h; path = ProjectOllie/Server/ChangeUserName.h; sourceTree = "<group>"; };
+		CEFD6FDF1592A750005A233E /* ChangeUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeUserName.m; path = ProjectOllie/Server/ChangeUserName.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1642,6 +1645,8 @@
 				CE0BD5F4158FFA2500C380CA /* Logout.m */,
 				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
+				CEFD6FDE1592A750005A233E /* ChangeUserName.h */,
+				CEFD6FDF1592A750005A233E /* ChangeUserName.m */,
 			);
 			name = Server;
 			path = ..;
@@ -1970,6 +1975,7 @@
 				CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */,
 				C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */,
 				CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */,
+				CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
