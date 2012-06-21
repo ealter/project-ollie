@@ -11,8 +11,21 @@
 #import "DrawEnvironment.h"
 #import "SandboxScene.h"
 #import "Logout.h"
-
+#import "Authentication.h"
 @implementation MainMenu
+
+-(id)init
+{
+    if (self=[super init]) {
+        Authentication *myself = [Authentication mainAuth];        
+        userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Welcome, %@", myself.username] fontName:@"Chalkduster" fontSize:13];
+        userName.anchorPoint = ccp(0.5,1);
+        userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height);
+        [self addChild:userName z:1];
+    }
+    
+    return self;
+}
 
 -(void)pressedMakeSquares: (id)sender
 {

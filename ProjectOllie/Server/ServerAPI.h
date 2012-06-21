@@ -25,12 +25,28 @@
 #endif /* SERVER_IS_DEV */
 #endif /* DOMAIN_NAME */
 
-/* Used to handle interactions with the server that would otherwise be pretty boilerplate. Subclasses should implement - (void)connectionDidFinishLoading:(NSURLConnection *)connection
+@protocol ServerAPI_delegate <NSObject>
+
+- (void)serverOperationSucceeded;
+- (void)serverOperationFailedWithError:(NSString *)error;
+
+@end
+
+/* Used to handle interactions with the server that would otherwise be pretty boilerplate. This is an abstract class.
  */
 @interface ServerAPI : NSObject <NSURLConnectionDataDelegate> {
     NSMutableData *data_;
 }
 
 @property (nonatomic, readonly, retain) Authentication *auth;
+@property (nonatomic, assign) id<ServerAPI_delegate> delegate;
+
+//Protected methods
+- (void)broadcastServerOperationSucceeded;
+- (void)broadcastServerOperationFailedWithError:(NSString *)error;
+- (void)serverReturnedResult:(NSDictionary *)result; //Called only if the server did not return an error. Subclasses must override this
+- (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url;
+
++ (NSURL *)urlForPageName:(NSString *)page;
 
 @end

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface LoginScreen : CCLayer <UITextFieldDelegate>{
-    
-}
+@interface LoginScreen : CCLayer <UITextFieldDelegate>
+
 @property (nonatomic, retain) UITextField *nameField;
 @property (nonatomic, retain) UITextField *pwField;
+
 @end
