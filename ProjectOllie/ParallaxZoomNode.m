@@ -133,6 +133,13 @@
 	return ret;
 }
 
+-(void) setPosition: (CGPoint)newPosition
+{
+	position_.x = newPosition.x-position_.x/(currentZoom*2);
+    position_.y = newPosition.y-position_.y/(currentZoom*2);
+	isTransformDirty_ = isInverseDirty_ = YES;
+}
+
 /*
  The positions are updated at visit because:
  - using a timer is not guaranteed that it will called after all the positions were updated
@@ -148,8 +155,8 @@
 		for(unsigned int i=0; i < parallaxArray_->num; i++ ) {
             
 			GWPointObject *point = parallaxArray_->arr[i];
-			float x = -pos.x + pos.x * point.ratio.x + point.offset.x - 200/currentZoom;
-			float y = -pos.y + pos.y * point.ratio.y + point.offset.y - 200/currentZoom;
+			float x = -pos.x + pos.x * point.ratio.x + point.offset.x - 0.8*point.child.contentSize.width/currentZoom;
+			float y = -pos.y + pos.y * point.ratio.y + point.offset.y - 0.35*point.child.contentSize.height/currentZoom;
 			point.child.position = ccp(x,y);
 		}
         
