@@ -186,7 +186,7 @@
 }
 
 
-- (void)drawPolygon:(const CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add
+- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add
 {
     
     ccColor4F color;
