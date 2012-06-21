@@ -54,6 +54,7 @@
 {
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc]initWithCapacity:3];
     [requestData setObject:userId forKey:@"facebookUserId"];
+    [requestData setObject:self.facebook.accessToken forKey:@"facebookAccessToken"];
     if(self.auth.authToken) {
         [requestData setObject:self.auth.authToken forKey:SERVER_AUTH_TOKEN_KEY];
         [requestData setObject:self.auth.username forKey:@"username"];
