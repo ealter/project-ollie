@@ -8,17 +8,7 @@
 
 #import "ServerAPI.h"
 
-@protocol ChangeUserName_delegate <NSObject>
-
-@optional
-- (void)usernameChangeSucceded;
-- (void)usernameChangeFailedWithError:(NSString *)error;
-
-@end
-
 @interface ChangeUserName : ServerAPI
-
-@property (nonatomic, assign) id<ChangeUserName_delegate> delegate;
 
 - (void)changeUserNameTo:(NSString *)newUsername;
 

@@ -13,8 +13,6 @@
 
 @interface FacebookLogin () <FBSessionDelegate, FBRequestDelegate>
 
-- (void)broadcastLoginSucceeded;
-- (void)broadcastLoginFailedWithError:(NSString *)error;
 - (void)loginWithFacebookID:(NSString *)userId;
 
 @end
@@ -22,7 +20,6 @@
 @implementation FacebookLogin
 
 @synthesize facebook = _facebook;
-@synthesize delegate = _delegate;
 
 #define FB_ACCESS_TOKEN_KEY @"FBAccessTokenKey"
 #define FB_EXPIRATION_DATE_KEY @"FBExpirationDateKey"
@@ -76,40 +73,28 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     if(!data_) {
-        [self broadcastLoginFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
         return;
     }
     NSError *error = nil;
     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error when logging in to Facebook: %@", error);
-        [self broadcastLoginFailedWithError:@"Internal server error"];
+        [self broadcastServerOperationFailedWithError:@"Internal server error"];
         return;
     }
     if([result objectForKey:SERVER_ERROR_KEY]) {
         NSString *error = [result objectForKey:SERVER_ERROR_KEY];
         DebugLog(@"Error when logging in to Facebook: %@", error);
-        [self broadcastLoginFailedWithError:error];
+        [self broadcastServerOperationFailedWithError:error];
         return;
     }
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     self.auth.username  = [result objectForKey:@"username"];
     if(self.auth.authToken)
-        [self broadcastLoginSucceeded];
+        [self broadcastServerOperationSucceeded];
     else
-        [self broadcastLoginFailedWithError:nil];
-}
-
-- (void)broadcastLoginSucceeded
-{
-    if([self.delegate respondsToSelector:@selector(loginSucceeded)])
-        [self.delegate loginSucceeded];
-}
-
-- (void)broadcastLoginFailedWithError:(NSString *)error
-{
-    if([self.delegate respondsToSelector:@selector(loginFailedWithError:)])
-        [self.delegate loginFailedWithError:error];
+        [self broadcastServerOperationFailedWithError:nil];
 }
 
 - (void)fbDidLogin
@@ -133,10 +118,10 @@
 - (void)fbDidNotLogin:(BOOL)cancelled
 {
     if(cancelled) {
-        [self broadcastLoginFailedWithError:@"Facebook login was cancelled"];
+        [self broadcastServerOperationFailedWithError:@"Facebook login was cancelled"];
     }
     else {
-        [self broadcastLoginFailedWithError:@"Facebook login failed for an unknown reason"];
+        [self broadcastServerOperationFailedWithError:@"Facebook login failed for an unknown reason"];
     }
 }
 
@@ -155,14 +140,14 @@
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
 {
-    [self broadcastLoginFailedWithError:[error localizedDescription]];
+    [self broadcastServerOperationFailedWithError:[error localizedDescription]];
 }
 
 //TODO: this method assumes that the request was for @"me"
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
     if(!result) {
-        [self broadcastLoginFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
         return;
     }
     NSDictionary *dict;
@@ -175,7 +160,7 @@
     NSString *userId = [dict objectForKey:@"id"];
     if(!userId) {
         DebugLog(@"The user id for the user is nil!");
-        [self broadcastLoginFailedWithError:@"Facebook API returned junk"];
+        [self broadcastServerOperationFailedWithError:@"Facebook API returned junk"];
         return;
     }
     [self loginWithFacebookID:userId];

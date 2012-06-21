@@ -9,15 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "ServerAPI.h"
 
-@protocol Login_Delegate <NSObject>
-@optional
-- (void)loginSucceeded;
-- (void)loginFailedWithError:(NSString *)error;
-@end
-
 @interface Login : ServerAPI
-
-@property (nonatomic, assign) id<Login_Delegate> delegate;
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password;
 

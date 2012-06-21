@@ -25,6 +25,13 @@
 #endif /* SERVER_IS_DEV */
 #endif /* DOMAIN_NAME */
 
+@protocol ServerAPI_delegate <NSObject>
+
+- (void)serverOperationSucceeded;
+- (void)serverOperationFailedWithError:(NSString *)error;
+
+@end
+
 /* Used to handle interactions with the server that would otherwise be pretty boilerplate. Subclasses should implement - (void)connectionDidFinishLoading:(NSURLConnection *)connection
  */
 @interface ServerAPI : NSObject <NSURLConnectionDataDelegate> {
@@ -32,5 +39,10 @@
 }
 
 @property (nonatomic, readonly, retain) Authentication *auth;
+@property (nonatomic, assign) id<ServerAPI_delegate> delegate;
+
+//Protected methods
+- (void)broadcastServerOperationSucceeded;
+- (void)broadcastServerOperationFailedWithError:(NSString *)error;
 
 @end

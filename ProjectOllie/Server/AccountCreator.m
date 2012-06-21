@@ -12,47 +12,31 @@
 #import "NSString+whitespace_check.h"
 #import "Login.h"
 
-@interface AccountCreator () <Login_Delegate>
+@interface AccountCreator () <ServerAPI_delegate>
 
 /* Used so that we can login after account creation */
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) Login *login;
 
-- (void)broadcastAccountCreationSucceeded;
-- (void)broadcastAccountCreationFailedWithError:(NSString *)error;
-
 @end
 
 @implementation AccountCreator
 
-@synthesize delegate = _delegate;
 @synthesize username = _username;
 @synthesize password = _password;
 @synthesize login = _login;
 
-- (void)broadcastAccountCreationSucceeded
-{
-    if([self.delegate respondsToSelector:@selector(accountCreationSucceeded)])
-        [self.delegate accountCreationSucceeded];
-}
-
-- (void)broadcastAccountCreationFailedWithError:(NSString *)error
-{
-    if([self.delegate respondsToSelector:@selector(accountCreationFailedWithError:)])
-        [self.delegate accountCreationFailedWithError:error];
-}
-
 - (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email
 {
     if([username hasWhitespace])
-        [self broadcastAccountCreationFailedWithError:@"Username cannot contain whitespace"];
+        [self broadcastServerOperationFailedWithError:@"Username cannot contain whitespace"];
     else if(!username)
-        [self broadcastAccountCreationFailedWithError:@"Username cannot be blank"];
+        [self broadcastServerOperationFailedWithError:@"Username cannot be blank"];
     else if(!password)
-        [self broadcastAccountCreationFailedWithError:@"Password cannot be blank"];
+        [self broadcastServerOperationFailedWithError:@"Password cannot be blank"];
     else if(!email)
-        [self broadcastAccountCreationFailedWithError:@"Email cannot be blank"];
+        [self broadcastServerOperationFailedWithError:@"Email cannot be blank"];
     else {
         self.username = username;
         self.password = password;
@@ -71,7 +55,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     if(!data_) {
-        [self broadcastAccountCreationFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
         DebugLog(@"Data is nil!!!");
         return;
     }
@@ -79,13 +63,13 @@
     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error when creating account: %@", error);
-        [self broadcastAccountCreationFailedWithError:@"Internal server error"];
+        [self broadcastServerOperationFailedWithError:@"Internal server error"];
         return;
     }
     if([result objectForKey:SERVER_ERROR_KEY]) {
         NSString *error = [result objectForKey:SERVER_ERROR_KEY];
         DebugLog(@"Error when creating account: %@", error);
-        [self broadcastAccountCreationFailedWithError:error];
+        [self broadcastServerOperationFailedWithError:error];
         return;
     }
     
@@ -94,21 +78,14 @@
     [self.login loginWithUsername:self.username password:self.password];
 }
 
-- (void)loginSucceeded
+- (void)serverOperationSucceeded
 {
-    [self broadcastAccountCreationSucceeded];
+    [self broadcastServerOperationSucceeded];
 }
 
-- (void)loginFailedWithError:(NSString *)error
+- (void)serverOperationFailedWithError:(NSString *)error
 {
-    [self broadcastAccountCreationFailedWithError:[@"Account creation was successful, but login failed. The error was " stringByAppendingString:error]];
-}
-
-- (void)dealloc
-{
-    //[self.login release];
-    //[self.connection release];
-    [super dealloc];
+    [self broadcastServerOperationFailedWithError:[@"Account creation was successful, but login failed. The error was " stringByAppendingString:error]];
 }
 
 @end

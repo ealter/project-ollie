@@ -10,7 +10,7 @@
 #import "CCBReader.h"
 #import "AccountCreator.h"
 
-@interface NewAccountMenu () <AccountCreator_Delegate>
+@interface NewAccountMenu () <ServerAPI_delegate>
 @property (nonatomic, retain) AccountCreator *accountCreator;
 - (void)returnToMenuWithFile:(NSString *)menuName;
 
@@ -143,12 +143,12 @@
     [self returnToMenuWithFile:@"LoginScreen.ccbi"];
 }
 
-- (void)accountCreationSucceeded
+- (void)serverOperationSucceeded
 {
     [self returnToMenuWithFile:@"MainMenu.ccbi"];
 }
 
-- (void)accountCreationFailedWithError:(NSString *)error
+- (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];

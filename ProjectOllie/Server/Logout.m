@@ -32,4 +32,6 @@
     [auth.facebookLogin logout];
 }
 
+//TODO: call the delegate methods
+
 @end

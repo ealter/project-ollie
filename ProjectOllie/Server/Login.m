@@ -14,32 +14,16 @@
 
 @property (nonatomic, strong) NSURLConnection *connection;
 
-- (void)broadcastLoginSucceeded;
-- (void)broadcastLoginFailedWithError:(NSString *)error;
-
 @end
 
 @implementation Login
 
-@synthesize delegate = _delegate;
 @synthesize connection = _connection;
-
-- (void)broadcastLoginSucceeded
-{
-    if([self.delegate respondsToSelector:@selector(loginSucceeded)])
-        [self.delegate loginSucceeded];
-}
-
-- (void)broadcastLoginFailedWithError:(NSString *)error
-{
-    if([self.delegate respondsToSelector:@selector(loginFailedWithError:)])
-        [self.delegate loginFailedWithError:error];
-}
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password
 {
     if(!username || !password || [username length] < 1 || [password length] < 1) {
-        [self broadcastLoginFailedWithError:@"Missing username or password"];
+        [self broadcastServerOperationFailedWithError:@"Missing username or password"];
         return;
     }
     self.auth.authToken = nil;
@@ -57,27 +41,27 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if(!data_) {
-        [self broadcastLoginFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
         return;
     }
     NSError *error = nil;
     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error when logging in with username %@: %@", self.auth.username, error);
-        [self broadcastLoginFailedWithError:@"Internal server error"];
+        [self broadcastServerOperationFailedWithError:@"Internal server error"];
         return;
     }
     if([result objectForKey:SERVER_ERROR_KEY]) {
         NSString *error = [result objectForKey:SERVER_ERROR_KEY];
         DebugLog(@"Error when logging in with username %@: %@", self.auth.username, error);
-        [self broadcastLoginFailedWithError:error];
+        [self broadcastServerOperationFailedWithError:error];
         return;
     }
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     if(self.auth.authToken)
-        [self broadcastLoginSucceeded];
+        [self broadcastServerOperationSucceeded];
     else
-        [self broadcastLoginFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
 }
 
 @end

@@ -10,34 +10,15 @@
 #import "Authentication.h"
 #import "NSDictionary+URLEncoding.h"
 
-@interface ChangeUserName ()
-
-- (void)broadcastUsernameChangeSucceeded;
-- (void)broadcastUsernameChangeFailedWithError:(NSString *)error;
-
-@end
-
 @implementation ChangeUserName
 
 @synthesize delegate = _delegate;
-
-- (void)broadcastUsernameChangeSucceeded
-{
-    if([self.delegate respondsToSelector:@selector(usernameChangeSucceded)])
-        [self.delegate usernameChangeSucceded];
-}
-
-- (void)broadcastUsernameChangeFailedWithError:(NSString *)error
-{
-    if([self.delegate respondsToSelector:@selector(usernameChangeFailedWithError:)])
-        [self.delegate usernameChangeFailedWithError:error];
-}
 
 - (void)changeUserNameTo:(NSString *)newUsername
 {
     NSString *currentUsername = self.auth.username;
     if(!currentUsername || !newUsername || currentUsername.length < 1 || newUsername.length < 1) {
-        [self broadcastUsernameChangeFailedWithError:@"Missing username"];
+        [self broadcastServerOperationFailedWithError:@"Missing username"];
         return;
     }
     NSURL *url = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"changeUserName"];
@@ -53,25 +34,25 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if(!data_) {
-        [self broadcastUsernameChangeFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
         return;
     }
     NSError *error = nil;
     NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
     if(error) {
-        [self broadcastUsernameChangeFailedWithError:@"Internal server error"];
+        [self broadcastServerOperationFailedWithError:@"Internal server error"];
         return;
     }
     if([result objectForKey:SERVER_ERROR_KEY]) {
         NSString *error = [result objectForKey:SERVER_ERROR_KEY];
-        [self broadcastUsernameChangeFailedWithError:error];
+        [self broadcastServerOperationFailedWithError:error];
         return;
     }
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     if(self.auth.authToken)
-        [self broadcastUsernameChangeSucceeded];
+        [self broadcastServerOperationSucceeded];
     else
-        [self broadcastUsernameChangeFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:nil];
 }
 
 @end

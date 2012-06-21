@@ -12,6 +12,7 @@
 @implementation ServerAPI
 
 @synthesize auth = _auth;
+@synthesize delegate = _delegate;
 
 - (id)init
 {
@@ -26,6 +27,18 @@
     if(!_auth)
         _auth = [Authentication mainAuth];
     return _auth;
+}
+
+- (void)broadcastServerOperationSucceeded
+{
+    if([self.delegate respondsToSelector:@selector(serverOperationSucceeded)])
+        [self.delegate serverOperationSucceeded];
+}
+
+- (void)broadcastServerOperationFailedWithError:(NSString *)error
+{
+    if([self.delegate respondsToSelector:@selector(serverOperationFailedWithError:)])
+        [self.delegate serverOperationFailedWithError:error];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
