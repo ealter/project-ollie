@@ -11,9 +11,9 @@
 #import "FBConnect.h"
 #import "NSDictionary+URLEncoding.h"
 
-@interface FacebookLogin () <FBSessionDelegate, FBRequestDelegate>
+@interface FacebookLogin () <FBSessionDelegate>
 
-- (void)loginWithFacebookID:(NSString *)userId;
+- (void)sendFacebookLoginDetailsToServer;
 
 @end
 
@@ -23,11 +23,12 @@
 
 #define FB_ACCESS_TOKEN_KEY @"FBAccessTokenKey"
 #define FB_EXPIRATION_DATE_KEY @"FBExpirationDateKey"
+#define APP_ID @"395624167150736"
 
 - (Facebook *)facebook
 {
     if(!_facebook) {
-        _facebook = [[Facebook alloc] initWithAppId:@"395624167150736" andDelegate:self];
+        _facebook = [[Facebook alloc] initWithAppId:APP_ID andDelegate:self];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([defaults objectForKey:FB_ACCESS_TOKEN_KEY] 
             && [defaults objectForKey:FB_EXPIRATION_DATE_KEY]) {
@@ -50,10 +51,9 @@
     [self.facebook logout:self];
 }
 
-- (void)loginWithFacebookID:(NSString *)userId
+- (void)sendFacebookLoginDetailsToServer
 {
     NSMutableDictionary *requestData = [[NSMutableDictionary alloc]initWithCapacity:3];
-    [requestData setObject:userId forKey:@"facebookUserId"];
     [requestData setObject:self.facebook.accessToken forKey:@"facebookAccessToken"];
     if(self.auth.authToken) {
         [requestData setObject:self.auth.authToken forKey:SERVER_AUTH_TOKEN_KEY];
@@ -79,7 +79,7 @@
     [defaults setObject:[self.facebook accessToken]    forKey:FB_ACCESS_TOKEN_KEY];
     [defaults setObject:[self.facebook expirationDate] forKey:FB_EXPIRATION_DATE_KEY];
     [defaults synchronize];
-    [self.facebook requestWithGraphPath:@"me" andDelegate:self];
+    [self sendFacebookLoginDetailsToServer];
 }
 
 - (void)fbDidLogout
@@ -112,34 +112,6 @@
 - (void)fbSessionInvalidated
 {
 
-}
-
-- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
-{
-    [self broadcastServerOperationFailedWithError:[error localizedDescription]];
-}
-
-//TODO: this method assumes that the request was for @"me"
-- (void)request:(FBRequest *)request didLoad:(id)result
-{
-    if(!result) {
-        [self broadcastServerOperationFailedWithError:nil];
-        return;
-    }
-    NSDictionary *dict;
-    if([request isKindOfClass:[NSArray class]])
-        dict = [(NSArray *)result objectAtIndex:0];
-    else {
-        assert([result isKindOfClass:[NSDictionary class]]);
-        dict = result;
-    }
-    NSString *userId = [dict objectForKey:@"id"];
-    if(!userId) {
-        DebugLog(@"The user id for the user is nil!");
-        [self broadcastServerOperationFailedWithError:@"Facebook API returned junk"];
-        return;
-    }
-    [self loginWithFacebookID:userId];
 }
 
 @end
