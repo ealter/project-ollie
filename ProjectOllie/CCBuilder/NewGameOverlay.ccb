@@ -467,7 +467,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Didot</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -477,7 +477,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -717,7 +717,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Didot</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -727,7 +727,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -967,7 +967,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Didot</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -977,7 +977,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1217,7 +1217,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Didot</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1227,7 +1227,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1467,7 +1467,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Didot</string>
+						<string>Chalkduster</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1477,7 +1477,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>

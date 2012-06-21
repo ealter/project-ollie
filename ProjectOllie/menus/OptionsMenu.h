@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-@interface OptionsMenu : CCLayer {
+@interface OptionsMenu : CCLayer <UITextFieldDelegate>{
     CCLabelTTF *userName;
+    UITextField *nameField;
+
 }
+
+
 
 @end

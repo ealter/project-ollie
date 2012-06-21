@@ -216,8 +216,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>96</real>
-							<real>18</real>
+							<real>82</real>
+							<real>20</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -229,7 +229,7 @@
 						<key>value</key>
 						<array>
 							<real>0.5</real>
-							<real>0.5</real>
+							<real>1</real>
 						</array>
 					</dict>
 					<dict>
@@ -283,7 +283,7 @@
 						<key>type</key>
 						<string>FontTTF</string>
 						<key>value</key>
-						<string>Courier</string>
+						<string>MarkerFelt-Wide</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -293,7 +293,7 @@
 						<key>value</key>
 						<array>
 							<real>14</real>
-							<integer>0</integer>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -625,7 +625,7 @@
 						<key>value</key>
 						<array>
 							<real>50</real>
-							<real>10</real>
+							<real>5</real>
 							<integer>4</integer>
 						</array>
 					</dict>
@@ -636,8 +636,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>150</real>
-							<real>32</real>
+							<real>120</real>
+							<real>35</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -704,7 +704,7 @@
 						<string>BlockCCControl</string>
 						<key>value</key>
 						<array>
-							<string>pressedChangeUsername:</string>
+							<string>pressedConfirm:</string>
 							<integer>1</integer>
 							<integer>32</integer>
 						</array>
@@ -731,7 +731,7 @@
 						<key>type</key>
 						<string>String</string>
 						<key>value</key>
-						<string>Change Username</string>
+						<string>Confirm Changes</string>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -770,8 +770,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>150</real>
-							<real>32</real>
+							<real>120</real>
+							<real>35</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -791,7 +791,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>metalbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -814,7 +814,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>metalbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -837,7 +837,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>metalbutton.png</string>
 						</array>
 					</dict>
 					<dict>

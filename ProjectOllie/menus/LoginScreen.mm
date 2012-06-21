@@ -28,7 +28,7 @@
     {
         CGRect nameframe = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30);
         nameField = [[UITextField alloc]initWithFrame:nameframe];
-        nameField.clearsOnBeginEditing = YES;
+        nameField.clearsOnBeginEditing = NO;
         nameField.placeholder = @"Username";
         nameField.keyboardType = UIKeyboardTypeDefault;
         nameField.returnKeyType = UIReturnKeyDone;

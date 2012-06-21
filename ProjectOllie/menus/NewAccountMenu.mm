@@ -26,7 +26,7 @@
     {
         CGRect nameframe = CGRectMake(self.contentSize.height*0.5, self.contentSize.width/2-15, 150, 30);
         nameField = [[UITextField alloc]initWithFrame:nameframe];
-        nameField.clearsOnBeginEditing = YES;
+        nameField.clearsOnBeginEditing = NO;
         nameField.placeholder = @"Username";
         nameField.keyboardType = UIKeyboardTypeDefault;
         nameField.returnKeyType = UIReturnKeyDone;
@@ -71,7 +71,7 @@
         
         CGRect emailframe = CGRectMake(self.contentSize.height*0.65, self.contentSize.width/2-15, 150, 30);
         emailField = [[UITextField alloc]initWithFrame:emailframe];
-        emailField.clearsOnBeginEditing = YES;
+        emailField.clearsOnBeginEditing = NO;
         emailField.placeholder = @"Email";
         emailField.keyboardType = UIKeyboardTypeDefault;
         emailField.returnKeyType = UIReturnKeyDone;

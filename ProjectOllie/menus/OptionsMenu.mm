@@ -16,21 +16,51 @@
     if (self = [super init]) {
         Authentication *myself = [Authentication mainAuth];
         
-        userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Current Username: %@", myself.username] fontName:@"Helvetica" fontSize:20];
-        userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height*4/5);
+        userName = [CCLabelTTF labelWithString: @"Current Username: " fontName:@"Helvetica" fontSize:15];
+        userName.anchorPoint = ccp(1,0.5);
+        userName.position=ccp(self.contentSize.width*0.5 - 75, self.contentSize.height*4/5);
         [self addChild:userName z:1];
+        
+        CGRect nameframe = CGRectMake(self.contentSize.height*0.56, self.contentSize.width/2-15, 150, 30);
+        nameField = [[UITextField alloc]initWithFrame:nameframe];
+        nameField.clearsOnBeginEditing = NO;
+        nameField.text = [NSString stringWithFormat: @"%@", myself.username];
+        nameField.keyboardType = UIKeyboardTypeDefault;
+        nameField.returnKeyType = UIReturnKeyDone;
+        nameField.autocorrectionType = UITextAutocorrectionTypeNo;
+        nameField.adjustsFontSizeToFitWidth = YES;
+        nameField.textColor = [UIColor blackColor];
+        [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
+        nameField.backgroundColor = [UIColor whiteColor];
+        nameField.borderStyle = UITextBorderStyleRoundedRect;
+        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
+        nameField.transform = transform;
+        
+        [nameField setDelegate:self];
+        
+        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];
     }
     
     return self;
 }
 
--(void)pressedChangeUsername:(id)sender
+-(void)pressedConfirm:(id)sender
 {
     
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    // the user pressed the "Done" button, so dismiss the keyboard
+    [textField resignFirstResponder];
+    return YES;
+}
+
 -(void)pressedBack:(id)sender
 {
+    [nameField removeFromSuperview];
+    [nameField release];
+    
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
