@@ -32,7 +32,6 @@ enum {
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
--(void) testMaskedSprite;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 
@@ -62,9 +61,6 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
-        
-        [self testMaskedSprite];
-        
         //set up screen parameters
         s = self.contentSize;
         self.anchorPoint = ccp(0,0);
@@ -85,7 +81,6 @@ enum {
         parallax_.anchorPoint = ccp(0,0);
         Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         bglayer1.anchorPoint = ccp(0,0);
-        bglayer1.position = CGPointMake(-200, -200);
         bglayer1.contentSize=CGSizeMake(self.contentSize.width*1.5, self.contentSize.height*1.5);
         [bglayer1 setIgnoreAnchorPointForPosition:YES];
         [parallax_ setIgnoreAnchorPointForPosition:YES];
@@ -333,11 +328,7 @@ m_debugDraw = NULL;
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-
     [self.camera touchesBegan:[event allTouches]];
-    
-        
-    
 }
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -368,7 +359,6 @@ m_debugDraw = NULL;
 {
     
    [self.camera touchesMoved:[event allTouches]];
-    
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches
@@ -383,13 +373,6 @@ m_debugDraw = NULL;
     
 }
 
--(void)testMaskedSprite{
-    MaskedSprite* ms = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
-    ms.position = ms.anchorPoint = ccp(0,0);
-    [ms drawCircleAt:ccp(50,50) withRadius:20 Additive:YES];
-    [self addChild:ms];
-    [ms saveMaskToFile:@"testMask.png"];
-}
 
 @end
 
