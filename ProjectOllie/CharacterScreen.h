@@ -6,12 +6,12 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#import "CCScrollView.h"
 #import "SWTableView.h"
+#import "Menu.h"
 
-@interface CharacterScreen : CCLayer <SWTableViewDataSource, SWTableViewDelegate>
+@class CCScrollView;
+
+@interface CharacterScreen : Menu <SWTableViewDataSource, SWTableViewDelegate>
 {
     SWTableView * tableView;
 }

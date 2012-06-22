@@ -7,9 +7,9 @@
 //
 
 #import "OptionsMenu.h"
-#import "CCBReader.h"
 #import "Authentication.h"
 #import "ChangeUserName.h"
+#import "cocos2d.h"
 
 @interface OptionsMenu () <ServerAPI_delegate>
 
@@ -65,11 +65,7 @@
 
 -(void)pressedBack:(id)sender
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:[NSArray arrayWithObject:nameField]];
 }
 
 - (void)serverOperationSucceeded

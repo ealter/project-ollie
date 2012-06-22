@@ -12,6 +12,7 @@
 #import "SandboxScene.h"
 #import "Logout.h"
 #import "Authentication.h"
+#import "cocos2d.h"
 
 @interface MainMenu ()
 
@@ -55,8 +56,7 @@
 
 -(void)pressedOptions:(id)sender
 {
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"OptionsMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"OptionsMenu.ccbi" removeUIViews:nil];
 }
 
 -(void)pressedNewGame:(id)sender
@@ -72,8 +72,7 @@
 
 -(void)pressedCharacters:(id)sender
 {
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"CharacterScreen.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"CharacterScreen.ccbi" removeUIViews:nil];
 }
 
 -(void)pressedLogout:(id)sender
@@ -82,8 +81,7 @@
     [logout logout];
     [logout release];
     
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"LoginScreen.ccbi" removeUIViews:nil];
 }
 
 - (void)dealloc

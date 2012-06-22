@@ -39,6 +39,7 @@
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
+		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
@@ -345,6 +346,8 @@
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
 		CE000619159130D000A1B0CC /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLogin.m; path = ProjectOllie/Server/FacebookLogin.m; sourceTree = "<group>"; };
+		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
+		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE08B5B81591844800971FDA /* ParallaxZoomNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxZoomNode.h; sourceTree = "<group>"; };
@@ -1004,6 +1007,8 @@
 		CE30B189158FBA12009EC82B /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				CE01827F15951774003CE804 /* Menu.h */,
+				CE01828015951774003CE804 /* Menu.m */,
 				CE30B18A158FBA34009EC82B /* ActionMenu.h */,
 				CE30B18B158FBA34009EC82B /* ActionMenu.mm */,
 				CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */,
@@ -2071,6 +2076,7 @@
 				CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */,
 				CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */,
 				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
+				CE01828115951774003CE804 /* Menu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

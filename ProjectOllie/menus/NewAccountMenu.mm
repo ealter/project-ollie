@@ -7,10 +7,11 @@
 //
 
 #import "NewAccountMenu.h"
-#import "CCBReader.h"
 #import "AccountCreator.h"
+#import "cocos2d.h"
 
 @interface NewAccountMenu () <ServerAPI_delegate>
+
 @property (nonatomic, retain) AccountCreator *accountCreator;
 - (void)returnToMenuWithFile:(NSString *)menuName;
 
@@ -125,17 +126,7 @@
 
 - (void)returnToMenuWithFile:(NSString *)menuName
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    [cfpwField removeFromSuperview];
-    [cfpwField release];
-    [pwField removeFromSuperview];
-    [pwField release];
-    [emailField removeFromSuperview];
-    [emailField release];
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:menuName];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:menuName removeUIViews:[NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil]];
 }
 
 -(void)pressedCancel:(id)sender
@@ -151,9 +142,7 @@
 - (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    [[[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] autorelease] show];
 }
 
 @end

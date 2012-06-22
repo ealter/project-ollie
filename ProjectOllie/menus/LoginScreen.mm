@@ -7,7 +7,7 @@
 //
 
 #import "LoginScreen.h"
-#import "CCBReader.h"
+#import "cocos2d.h"
 #import "Login.h"
 #import "FacebookLogin.h"
 #import "Authentication.h"
@@ -99,13 +99,7 @@
 //Called when login succeeds
 - (void)serverOperationSucceeded
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    [pwField removeFromSuperview];
-    [pwField release];
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
 }
 
 //Called when login fails
@@ -120,14 +114,7 @@
 
 -(void)pressedMakeNew:(id)sender
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    [pwField removeFromSuperview];
-    [pwField release];
-    
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"NewAccountMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"NewAccountMenu.ccbi" removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
 }
 
 @end

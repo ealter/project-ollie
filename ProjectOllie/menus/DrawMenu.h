@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "Menu.h"
 
 @protocol DrawMenu_delegate <NSObject>
 
@@ -17,7 +17,7 @@
 
 @end
 
-@interface DrawMenu : CCLayer
+@interface DrawMenu : Menu
 
 @property (nonatomic, assign) id <DrawMenu_delegate> delegate;
 

@@ -7,15 +7,12 @@
 //
 
 #import "ActionMenu.h"
-#import "CCBReader.h"
 
 @implementation ActionMenu
 
 -(void)pressedBack:(id)sender
 {
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
 }
 
 @end

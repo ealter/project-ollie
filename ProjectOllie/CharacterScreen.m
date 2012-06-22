@@ -8,18 +8,15 @@
 
 #import "CharacterScreen.h"
 #import "CCScrollView.h"
-#import "CCBReader.h"
 #import "SWTableViewCell.h"
 #import "MyCell.h"
-
+#import "cocos2d.h"
 
 @implementation CharacterScreen
 @synthesize weaponScrollView;
 
 -(id) init
 {
-	// always call "super" init
-	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init] )) {
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
@@ -78,8 +75,7 @@
 
 -(void)pressedBack:(id)sender
 {
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
 }
 
 
