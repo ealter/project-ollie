@@ -6,10 +6,9 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "Menu.h"
 
-@interface LoginScreen : CCLayer <UITextFieldDelegate>
+@interface LoginScreen : Menu <UITextFieldDelegate>
 
 @property (nonatomic, retain) UITextField *nameField;
 @property (nonatomic, retain) UITextField *pwField;

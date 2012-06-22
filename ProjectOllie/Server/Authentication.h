@@ -10,6 +10,8 @@
 
 /* A singleton class that handles server authentication */
 
+#define USERNAME_CHANGED_BROADCAST @"username changed"
+
 @class FacebookLogin;
 
 @interface Authentication : NSObject

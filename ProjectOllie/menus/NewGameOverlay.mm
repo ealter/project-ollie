@@ -7,7 +7,6 @@
 //
 
 #import "NewGameOverlay.h"
-#import "CCBReader.h"
 
 @implementation NewGameOverlay
 
@@ -33,8 +32,7 @@
 
 -(void)pressedCancel:(id)sender
 {
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.1f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
 }
 
 @end

@@ -6,10 +6,9 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "Menu.h"
 
-@interface NewAccountMenu : CCLayer <UITextFieldDelegate>
+@interface NewAccountMenu : Menu <UITextFieldDelegate>
 
 @property (nonatomic, retain) UITextField *emailField;
 @property (nonatomic, retain) UITextField *nameField;

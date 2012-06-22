@@ -6,11 +6,13 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "Menu.h"
 
-@interface OptionsMenu : CCLayer {
+@class CCLabelTTF;
+
+@interface OptionsMenu : Menu <UITextFieldDelegate>{
     CCLabelTTF *userName;
+    UITextField *nameField;
 }
 
 @end

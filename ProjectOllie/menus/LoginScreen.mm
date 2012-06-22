@@ -7,7 +7,7 @@
 //
 
 #import "LoginScreen.h"
-#import "CCBReader.h"
+#import "cocos2d.h"
 #import "Login.h"
 #import "FacebookLogin.h"
 #import "Authentication.h"
@@ -24,43 +24,16 @@
 
 -(id)init
 {
-    if(self = [super init])
-    {
-        CGRect nameframe = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30);
-        nameField = [[UITextField alloc]initWithFrame:nameframe];
-        nameField.clearsOnBeginEditing = YES;
+    if (self = [super init]) {
+        nameField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30)];
         nameField.placeholder = @"Username";
-        nameField.keyboardType = UIKeyboardTypeDefault;
-        nameField.returnKeyType = UIReturnKeyDone;
-        nameField.autocorrectionType = UITextAutocorrectionTypeNo;
-        nameField.adjustsFontSizeToFitWidth = YES;
-        nameField.textColor = [UIColor blackColor];
-        [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        nameField.backgroundColor = [UIColor whiteColor];
-        nameField.borderStyle = UITextBorderStyleRoundedRect;
-        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
-        nameField.transform = transform;
+        nameField.delegate    = self;
         
-        CGRect pwframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
-        pwField = [[UITextField alloc]initWithFrame:pwframe];
+        pwField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30)];
         pwField.clearsOnBeginEditing = YES;
-        pwField.placeholder = @"Password";
-        pwField.keyboardType = UIKeyboardTypeDefault;
-        pwField.returnKeyType = UIReturnKeyDone;
-        pwField.autocorrectionType = UITextAutocorrectionTypeNo;
-        pwField.adjustsFontSizeToFitWidth = YES;
-        pwField.secureTextEntry = YES;
-        pwField.textColor = [UIColor blackColor];
-        [pwField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        pwField.backgroundColor = [UIColor whiteColor];
-        pwField.borderStyle = UITextBorderStyleRoundedRect;
-        pwField.transform = transform;
-        
-        [nameField setDelegate:self];
-        [pwField setDelegate:self];
-        
-        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];
-        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
+        pwField.placeholder          = @"Password";
+        pwField.secureTextEntry      = YES;
+        pwField.delegate             = self;
     }
     return self;
 }
@@ -83,8 +56,8 @@
 
 - (void)pressedLogin:(id)sender
 {
-    NSString *username = [nameField text];
-    NSString *password = [pwField text];
+    NSString *username = nameField.text;
+    NSString *password = pwField.text;
     [self.login loginWithUsername:username password:password];
 }
 
@@ -99,13 +72,7 @@
 //Called when login succeeds
 - (void)serverOperationSucceeded
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    [pwField removeFromSuperview];
-    [pwField release];
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
 }
 
 //Called when login fails
@@ -120,14 +87,7 @@
 
 -(void)pressedMakeNew:(id)sender
 {
-    [nameField removeFromSuperview];
-    [nameField release];
-    [pwField removeFromSuperview];
-    [pwField release];
-    
-    
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"NewAccountMenu.ccbi"];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [self transitionToSceneWithFile:@"NewAccountMenu.ccbi" removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
 }
 
 @end

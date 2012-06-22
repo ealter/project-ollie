@@ -40,6 +40,7 @@
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
+		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
@@ -84,6 +85,16 @@
 		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
 		CE552268159014FE00CDB131 /* drawframe.png in Resources */ = {isa = PBXBuildFile; fileRef = CE552267159014FE00CDB131 /* drawframe.png */; };
+		CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC7A1593DAD300BEB3BE /* metalbutton.png */; };
+		CE62FC7F1593E8D000BEB3BE /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */; };
+		CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */; };
+		CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */; };
+		CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9D1594085800BEB3BE /* SWScrollView.m */; };
+		CE62FCA81594085800BEB3BE /* SWSorting.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9F1594085800BEB3BE /* SWSorting.m */; };
+		CE62FCA91594085800BEB3BE /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA11594085800BEB3BE /* SWTableView.m */; };
+		CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA31594085800BEB3BE /* SWTableViewCell.m */; };
+		CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */; };
+		CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCAD15940A0200BEB3BE /* MyCell.m */; };
 		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -337,6 +348,8 @@
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
 		CE000619159130D000A1B0CC /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLogin.m; path = ProjectOllie/Server/FacebookLogin.m; sourceTree = "<group>"; };
+		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
+		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE0BD5F3158FFA2500C380CA /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Logout.h; sourceTree = "<group>"; };
@@ -405,6 +418,24 @@
 		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
 		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
 		CE552267159014FE00CDB131 /* drawframe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drawframe.png; path = Resources/drawframe.png; sourceTree = "<group>"; };
+		CE62FC7A1593DAD300BEB3BE /* metalbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbutton.png; path = Resources/metalbutton.png; sourceTree = "<group>"; };
+		CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterScreen.h; sourceTree = "<group>"; };
+		CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterScreen.m; sourceTree = "<group>"; };
+		CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = CharacterScreen.ccbi; path = Resources/CharacterScreen.ccbi; sourceTree = "<group>"; };
+		CE62FC9A1594085800BEB3BE /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWMultiColumnTableView.h; sourceTree = "<group>"; };
+		CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWMultiColumnTableView.m; sourceTree = "<group>"; };
+		CE62FC9C1594085800BEB3BE /* SWScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWScrollView.h; sourceTree = "<group>"; };
+		CE62FC9D1594085800BEB3BE /* SWScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWScrollView.m; sourceTree = "<group>"; };
+		CE62FC9E1594085800BEB3BE /* SWSorting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSorting.h; sourceTree = "<group>"; };
+		CE62FC9F1594085800BEB3BE /* SWSorting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSorting.m; sourceTree = "<group>"; };
+		CE62FCA01594085800BEB3BE /* SWTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableView.h; sourceTree = "<group>"; };
+		CE62FCA11594085800BEB3BE /* SWTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableView.m; sourceTree = "<group>"; };
+		CE62FCA21594085800BEB3BE /* SWTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewCell.h; sourceTree = "<group>"; };
+		CE62FCA31594085800BEB3BE /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewCell.m; sourceTree = "<group>"; };
+		CE62FCA41594085800BEB3BE /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTableViewSpriteCell.h; sourceTree = "<group>"; };
+		CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewSpriteCell.m; sourceTree = "<group>"; };
+		CE62FCAC15940A0100BEB3BE /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
+		CE62FCAD15940A0200BEB3BE /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
@@ -976,8 +1007,14 @@
 		CE30B189158FBA12009EC82B /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				CE01827F15951774003CE804 /* Menu.h */,
+				CE01828015951774003CE804 /* Menu.m */,
 				CE30B18A158FBA34009EC82B /* ActionMenu.h */,
 				CE30B18B158FBA34009EC82B /* ActionMenu.mm */,
+				CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */,
+				CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */,
+				CE62FCAC15940A0100BEB3BE /* MyCell.h */,
+				CE62FCAD15940A0200BEB3BE /* MyCell.m */,
 				CE30B18C158FBA34009EC82B /* DrawMenu.h */,
 				CE30B18D158FBA34009EC82B /* DrawMenu.mm */,
 				CE30B18E158FBA34009EC82B /* LoginScreen.h */,
@@ -992,6 +1029,25 @@
 				CE30B193158FBA34009EC82B /* NewAccountMenu.mm */,
 			);
 			name = Menus;
+			sourceTree = "<group>";
+		};
+		CE62FC991594084000BEB3BE /* CCTableSuite */ = {
+			isa = PBXGroup;
+			children = (
+				CE62FC9A1594085800BEB3BE /* SWMultiColumnTableView.h */,
+				CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */,
+				CE62FC9C1594085800BEB3BE /* SWScrollView.h */,
+				CE62FC9D1594085800BEB3BE /* SWScrollView.m */,
+				CE62FC9E1594085800BEB3BE /* SWSorting.h */,
+				CE62FC9F1594085800BEB3BE /* SWSorting.m */,
+				CE62FCA01594085800BEB3BE /* SWTableView.h */,
+				CE62FCA11594085800BEB3BE /* SWTableView.m */,
+				CE62FCA21594085800BEB3BE /* SWTableViewCell.h */,
+				CE62FCA31594085800BEB3BE /* SWTableViewCell.m */,
+				CE62FCA41594085800BEB3BE /* SWTableViewSpriteCell.h */,
+				CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */,
+			);
+			name = CCTableSuite;
 			sourceTree = "<group>";
 		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
@@ -1093,6 +1149,7 @@
 				CE9957D3158AB5F000B863DF /* back-hd.png */,
 				CE9957D4158AB5F000B863DF /* back.png */,
 				CE30B1AB158FD0C8009EC82B /* dottedbox.png */,
+				CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */,
 				CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */,
 				CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */,
 				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
@@ -1120,6 +1177,7 @@
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
 				CE94AA7515785F83009B35B4 /* Icon-72.png */,
+				CE62FC7A1593DAD300BEB3BE /* metalbutton.png */,
 				CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */,
 				CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */,
 				CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */,
@@ -1139,6 +1197,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE62FC991594084000BEB3BE /* CCTableSuite */,
 				CE0BD5F7158FFA3900C380CA /* Categories */,
 				C5B4C58A159023AC000FD99F /* HMUtils */,
 				CE0BD5F8159016E600C380CA /* facebook-ios-sdk */,
@@ -1802,6 +1861,8 @@
 				C566AC331592A55A00D92879 /* rocks2.png in Resources */,
 				C566AC341592A55A00D92879 /* rocksandvines.png in Resources */,
 				C566AC351592A55A00D92879 /* snow.png in Resources */,
+				CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */,
+				CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2006,7 +2067,19 @@
 				CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */,
 				CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */,
 				CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */,
+
 				C5846920159400DF00EEDCA7 /* GWParallaxNode.m in Sources */,
+
+				CE62FC7F1593E8D000BEB3BE /* CharacterScreen.m in Sources */,
+				CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */,
+				CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */,
+				CE62FCA81594085800BEB3BE /* SWSorting.m in Sources */,
+				CE62FCA91594085800BEB3BE /* SWTableView.m in Sources */,
+				CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */,
+				CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */,
+				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
+				CE01828115951774003CE804 /* Menu.m in Sources */,
+
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
