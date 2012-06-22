@@ -56,6 +56,12 @@
     [self reorderChild:newnode z:2];
 }
 
+-(void)pressedCharacters:(id)sender
+{
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"CharacterScreen.ccbi"];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+}
+
 -(void)pressedLogout:(id)sender
 {
     Logout *logout = [[Logout alloc]init];
