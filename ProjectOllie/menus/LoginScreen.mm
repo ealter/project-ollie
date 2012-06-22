@@ -24,43 +24,16 @@
 
 -(id)init
 {
-    if(self = [super init])
-    {
-        CGRect nameframe = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30);
-        nameField = [[UITextField alloc]initWithFrame:nameframe];
-        nameField.clearsOnBeginEditing = NO;
+    if (self = [super init]) {
+        nameField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2-15, 150, 30)];
         nameField.placeholder = @"Username";
-        nameField.keyboardType = UIKeyboardTypeDefault;
-        nameField.returnKeyType = UIReturnKeyDone;
-        nameField.autocorrectionType = UITextAutocorrectionTypeNo;
-        nameField.adjustsFontSizeToFitWidth = YES;
-        nameField.textColor = [UIColor blackColor];
-        [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        nameField.backgroundColor = [UIColor whiteColor];
-        nameField.borderStyle = UITextBorderStyleRoundedRect;
-        CGAffineTransform transform = CGAffineTransformMakeRotation(M_PI/2);
-        nameField.transform = transform;
+        nameField.delegate    = self;
         
-        CGRect pwframe = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30);
-        pwField = [[UITextField alloc]initWithFrame:pwframe];
+        pwField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2-15, 150, 30)];
         pwField.clearsOnBeginEditing = YES;
-        pwField.placeholder = @"Password";
-        pwField.keyboardType = UIKeyboardTypeDefault;
-        pwField.returnKeyType = UIReturnKeyDone;
-        pwField.autocorrectionType = UITextAutocorrectionTypeNo;
-        pwField.adjustsFontSizeToFitWidth = YES;
-        pwField.secureTextEntry = YES;
-        pwField.textColor = [UIColor blackColor];
-        [pwField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        pwField.backgroundColor = [UIColor whiteColor];
-        pwField.borderStyle = UITextBorderStyleRoundedRect;
-        pwField.transform = transform;
-        
-        [nameField setDelegate:self];
-        [pwField setDelegate:self];
-        
-        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];
-        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
+        pwField.placeholder          = @"Password";
+        pwField.secureTextEntry      = YES;
+        pwField.delegate             = self;
     }
     return self;
 }
@@ -83,8 +56,8 @@
 
 - (void)pressedLogin:(id)sender
 {
-    NSString *username = [nameField text];
-    NSString *password = [pwField text];
+    NSString *username = nameField.text;
+    NSString *password = pwField.text;
     [self.login loginWithUsername:username password:password];
 }
 

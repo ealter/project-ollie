@@ -26,21 +26,9 @@
         [self addChild:userName z:1];
         
         CGRect nameframe = CGRectMake(self.contentSize.height*0.56, self.contentSize.width/2-15, 150, 30);
-        nameField = [[UITextField alloc]initWithFrame:nameframe];
-        nameField.clearsOnBeginEditing = NO;
+        [self addTextFieldWithFrame:nameframe];
         nameField.text = [Authentication mainAuth].username;
-        nameField.keyboardType = UIKeyboardTypeDefault;
-        nameField.returnKeyType = UIReturnKeyDone;
-        nameField.autocorrectionType = UITextAutocorrectionTypeNo;
-        nameField.adjustsFontSizeToFitWidth = YES;
-        [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        nameField.backgroundColor = [UIColor whiteColor];
-        nameField.borderStyle = UITextBorderStyleRoundedRect;
-        nameField.transform = CGAffineTransformMakeRotation(M_PI/2);
-        
         nameField.delegate = self;
-        
-        [[CCDirector sharedDirector].view.window addSubview:nameField];
     }
     
     return self;

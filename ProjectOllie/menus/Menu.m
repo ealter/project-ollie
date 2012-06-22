@@ -26,4 +26,19 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
+- (UITextField *)addTextFieldWithFrame:(CGRect)frame
+{
+    UITextField *field = [[UITextField alloc]initWithFrame:frame];
+    field.clearsOnBeginEditing = NO;
+    field.returnKeyType = UIReturnKeyDone;
+    field.autocorrectionType = UITextAutocorrectionTypeNo;
+    field.adjustsFontSizeToFitWidth = YES;
+    [field setFont:[UIFont fontWithName:@"Arial" size:14]];
+    field.backgroundColor = [UIColor whiteColor];
+    field.borderStyle = UITextBorderStyleRoundedRect;
+    field.transform = CGAffineTransformMakeRotation(M_PI/2);
+    [[CCDirector sharedDirector].view.window addSubview:field];
+    return field;
+}
+
 @end

@@ -26,74 +26,28 @@
     if(self=[super init])
     {
         CGRect nameframe = CGRectMake(self.contentSize.height*0.5, self.contentSize.width/2-15, 150, 30);
-        nameField = [[UITextField alloc]initWithFrame:nameframe];
-        nameField.clearsOnBeginEditing = NO;
+        nameField = [self addTextFieldWithFrame:nameframe];
         nameField.placeholder = @"Username";
-        nameField.keyboardType = UIKeyboardTypeDefault;
-        nameField.returnKeyType = UIReturnKeyDone;
-        nameField.autocorrectionType = UITextAutocorrectionTypeNo;
-        nameField.adjustsFontSizeToFitWidth = YES;
-        nameField.textColor = [UIColor blackColor];
-        [nameField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        nameField.backgroundColor = [UIColor whiteColor];
-        nameField.borderStyle = UITextBorderStyleRoundedRect;
-        CGAffineTransform transform = CGAffineTransformMakeRotation(3.14159/2);  
-        nameField.transform = transform;
+        nameField.delegate    = self;
         
         CGRect pwframe = CGRectMake(self.contentSize.height*0.35, self.contentSize.width/2-15, 150, 30);
-        pwField = [[UITextField alloc]initWithFrame:pwframe];
+        pwField = [self addTextFieldWithFrame:pwframe];
         pwField.clearsOnBeginEditing = YES;
-        pwField.placeholder = @"Password";
-        pwField.keyboardType = UIKeyboardTypeDefault;
-        pwField.returnKeyType = UIReturnKeyDone;
-        pwField.autocorrectionType = UITextAutocorrectionTypeNo;
-        pwField.adjustsFontSizeToFitWidth = YES;
-        pwField.textColor = [UIColor blackColor];
-        [pwField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        pwField.backgroundColor = [UIColor whiteColor];
-        pwField.borderStyle = UITextBorderStyleRoundedRect;
-        pwField.transform = transform;
-        pwField.secureTextEntry = YES;
+        pwField.placeholder          = @"Password";
+        pwField.secureTextEntry      = YES;
+        pwField.delegate             = self;
         
         CGRect cfpwframe = CGRectMake(self.contentSize.height*0.2, self.contentSize.width/2-15, 150, 30);
-        cfpwField = [[UITextField alloc]initWithFrame:cfpwframe];
+        cfpwField = [self addTextFieldWithFrame:cfpwframe];
         cfpwField.clearsOnBeginEditing = YES;
-        cfpwField.placeholder = @"Confirm Password";
-        cfpwField.keyboardType = UIKeyboardTypeDefault;
-        cfpwField.returnKeyType = UIReturnKeyDone;
-        cfpwField.autocorrectionType = UITextAutocorrectionTypeNo;
-        cfpwField.adjustsFontSizeToFitWidth = YES;
-        cfpwField.textColor = [UIColor blackColor];
-        [cfpwField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        cfpwField.backgroundColor = [UIColor whiteColor];
-        cfpwField.borderStyle = UITextBorderStyleRoundedRect;
-        cfpwField.transform = transform;
-        cfpwField.secureTextEntry = YES;
+        cfpwField.placeholder          = @"Confirm Password";
+        cfpwField.secureTextEntry      = YES;
+        cfpwField.delegate             = self;
         
         CGRect emailframe = CGRectMake(self.contentSize.height*0.65, self.contentSize.width/2-15, 150, 30);
-        emailField = [[UITextField alloc]initWithFrame:emailframe];
-        emailField.clearsOnBeginEditing = NO;
+        emailField = [self addTextFieldWithFrame:emailframe];
         emailField.placeholder = @"Email";
-        emailField.keyboardType = UIKeyboardTypeDefault;
-        emailField.returnKeyType = UIReturnKeyDone;
-        emailField.autocorrectionType = UITextAutocorrectionTypeNo;
-        emailField.adjustsFontSizeToFitWidth = YES;
-        emailField.textColor = [UIColor blackColor];
-        [emailField setFont:[UIFont fontWithName:@"Arial" size:14]];
-        emailField.backgroundColor = [UIColor whiteColor];
-        emailField.borderStyle = UITextBorderStyleRoundedRect;
-        emailField.transform = transform;
-        
-        [nameField setDelegate:self];
-        [pwField setDelegate:self];
-        [emailField setDelegate:self];
-        [cfpwField setDelegate:self];
-        
-        [[[[CCDirector sharedDirector] view] window] addSubview:nameField];  
-        [[[[CCDirector sharedDirector] view] window] addSubview:pwField];
-        [[[[CCDirector sharedDirector] view] window] addSubview:emailField];
-        [[[[CCDirector sharedDirector] view] window] addSubview:cfpwField];
-        
+        emailField.delegate    = self;
     }
     
     return self;
