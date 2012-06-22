@@ -8,7 +8,6 @@
 
 #import "Logout.h"
 #import "Authentication.h"
-#import "NSDictionary+URLEncoding.h"
 #import "FacebookLogin.h"
 
 @implementation Logout

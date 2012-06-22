@@ -8,7 +8,6 @@
 
 #import "ChangeUserName.h"
 #import "Authentication.h"
-#import "NSDictionary+URLEncoding.h"
 
 @interface ChangeUserName ()
 @property (nonatomic, retain) NSString *changedUsername;

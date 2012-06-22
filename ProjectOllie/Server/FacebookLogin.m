@@ -9,7 +9,6 @@
 #import "FacebookLogin.h"
 #import "Authentication.h"
 #import "FBConnect.h"
-#import "NSDictionary+URLEncoding.h"
 
 @interface FacebookLogin () <FBSessionDelegate>
 
