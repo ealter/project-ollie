@@ -21,17 +21,17 @@
         [self broadcastServerOperationFailedWithError:@"Missing username"];
         return;
     }
+    if(!self.auth.authToken) {
+        [self broadcastServerOperationFailedWithError:@"Missing authentication"];
+        return;
+    }
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:currentUsername, newUsername, self.auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", @"newUsername", SERVER_AUTH_TOKEN_KEY, nil]];
     [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changeUserName"]];
     [requestData release];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result {
-    self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
-    if(self.auth.authToken)
-        [self broadcastServerOperationSucceeded];
-    else
-        [self broadcastServerOperationFailedWithError:nil];
+    [self broadcastServerOperationSucceeded];
 }
 
 @end
