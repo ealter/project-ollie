@@ -12,19 +12,33 @@
 #import "SandboxScene.h"
 #import "Logout.h"
 #import "Authentication.h"
+
+@interface MainMenu ()
+
+- (void)receivedNotification:(NSNotification *)notification;
+
+@end
+
 @implementation MainMenu
 
 -(id)init
 {
     if (self=[super init]) {
-        Authentication *myself = [Authentication mainAuth];        
-        userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Welcome, %@", myself.username] fontName:@"Chalkduster" fontSize:13];
+        userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Welcome, %@", [Authentication mainAuth].username] fontName:@"Chalkduster" fontSize:13];
         userName.anchorPoint = ccp(0.5,1);
         userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height);
         [self addChild:userName z:1];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification:) name:USERNAME_CHANGED_BROADCAST object:nil];
     }
     
     return self;
+}
+
+- (void)receivedNotification:(NSNotification *)notification
+{
+    if([notification.name isEqualToString:USERNAME_CHANGED_BROADCAST]) {
+        [userName setString:[Authentication mainAuth].username];
+    }
 }
 
 -(void)pressedMakeSquares: (id)sender
@@ -64,6 +78,12 @@
     
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super dealloc];
 }
 
 @end
