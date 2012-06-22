@@ -26,7 +26,7 @@
         [self addChild:userName z:1];
         
         CGRect nameframe = CGRectMake(self.contentSize.height*0.56, self.contentSize.width/2-15, 150, 30);
-        [self addTextFieldWithFrame:nameframe];
+        nameField = [self addTextFieldWithFrame:nameframe];
         nameField.text = [Authentication mainAuth].username;
         nameField.delegate = self;
     }
