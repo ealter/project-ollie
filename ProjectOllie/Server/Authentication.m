@@ -53,6 +53,7 @@ static Authentication *auth = nil;
 - (void)setUsername:(NSString *)username
 {
     _username = username;
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:USERNAME_CHANGED_BROADCAST object:self]];
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:USERNAME_KEY];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }

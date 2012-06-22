@@ -8,7 +8,6 @@
 
 #import "Login.h"
 #import "Authentication.h"
-#import "NSDictionary+URLEncoding.h"
 
 @implementation Login
 

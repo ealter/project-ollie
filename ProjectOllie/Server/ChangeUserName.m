@@ -8,11 +8,16 @@
 
 #import "ChangeUserName.h"
 #import "Authentication.h"
-#import "NSDictionary+URLEncoding.h"
+
+@interface ChangeUserName ()
+@property (nonatomic, retain) NSString *changedUsername;
+
+@end
 
 @implementation ChangeUserName
 
 @synthesize delegate = _delegate;
+@synthesize changedUsername = _changedUsername;
 
 - (void)changeUserNameTo:(NSString *)newUsername
 {
@@ -21,17 +26,20 @@
         [self broadcastServerOperationFailedWithError:@"Missing username"];
         return;
     }
+    if(!self.auth.authToken) {
+        [self broadcastServerOperationFailedWithError:@"Missing authentication"];
+        return;
+    }
+    self.changedUsername = newUsername;
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:currentUsername, newUsername, self.auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", @"newUsername", SERVER_AUTH_TOKEN_KEY, nil]];
     [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changeUserName"]];
     [requestData release];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result {
-    self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
-    if(self.auth.authToken)
-        [self broadcastServerOperationSucceeded];
-    else
-        [self broadcastServerOperationFailedWithError:nil];
+    assert(self.changedUsername);
+    self.auth.username = self.changedUsername;
+    [self broadcastServerOperationSucceeded];
 }
 
 @end
