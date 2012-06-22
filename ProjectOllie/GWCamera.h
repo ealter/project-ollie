@@ -22,10 +22,6 @@
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
                                                         // used for shaking effects currently.
 
-@property (assign, nonatomic) float currentScale;       // Used to communicate parallax effectively
-
-@property (assign, nonatomic) CGPoint zoomOrigin;       // used as the origin for camera zooming.
-
 @property (assign, nonatomic) float maximumScale;       // maximum scale size
 
 @property (assign, nonatomic) float minimumScale;       // minimum scale size
@@ -34,6 +30,9 @@
 
 /* Inits the camera with a world and its dimensions */
 -(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
+
+/* sets a new subject to affect */
+-(void)setSubject:(CCNode*)sub;
 
 /* Starts following the given node with realistic motion */
 -(void)followNode:(CCNode*)focused;

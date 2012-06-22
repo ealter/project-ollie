@@ -33,6 +33,7 @@
 		C566AC341592A55A00D92879 /* rocksandvines.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2E1592A55A00D92879 /* rocksandvines.png */; };
 		C566AC351592A55A00D92879 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2F1592A55A00D92879 /* snow.png */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
+		C5846920159400DF00EEDCA7 /* GWParallaxNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C584691F159400DF00EEDCA7 /* GWParallaxNode.m */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
@@ -73,7 +74,6 @@
 		CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */; };
 		CE30B1AC158FD0C8009EC82B /* dottedbox.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1AB158FD0C8009EC82B /* dottedbox.png */; };
 		CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1AD158FE846009EC82B /* selectedoption.png */; };
-		CE319059159267F400F8E42C /* ParallaxZoomNode.m in Sources */ = {isa = PBXBuildFile; fileRef = CE08B5B91591844800971FDA /* ParallaxZoomNode.m */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE412619157FF6B8001FA126 /* Background.m in Sources */ = {isa = PBXBuildFile; fileRef = CE412618157FF6B8001FA126 /* Background.m */; };
@@ -325,6 +325,8 @@
 		C566AC2E1592A55A00D92879 /* rocksandvines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocksandvines.png; sourceTree = "<group>"; };
 		C566AC2F1592A55A00D92879 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
+		C584691E159400DF00EEDCA7 /* GWParallaxNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWParallaxNode.h; sourceTree = "<group>"; };
+		C584691F159400DF00EEDCA7 /* GWParallaxNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWParallaxNode.m; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
@@ -337,8 +339,6 @@
 		CE000619159130D000A1B0CC /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLogin.m; path = ProjectOllie/Server/FacebookLogin.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
-		CE08B5B81591844800971FDA /* ParallaxZoomNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParallaxZoomNode.h; sourceTree = "<group>"; };
-		CE08B5B91591844800971FDA /* ParallaxZoomNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParallaxZoomNode.m; sourceTree = "<group>"; };
 		CE0BD5F3158FFA2500C380CA /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Logout.h; sourceTree = "<group>"; };
 		CE0BD5F4158FFA2500C380CA /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ProjectOllie/Server/Logout.m; sourceTree = "<group>"; };
 		CE0BD5F9159016E600C380CA /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -1052,8 +1052,8 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
-				CE08B5B81591844800971FDA /* ParallaxZoomNode.h */,
-				CE08B5B91591844800971FDA /* ParallaxZoomNode.m */,
+				C584691E159400DF00EEDCA7 /* GWParallaxNode.h */,
+				C584691F159400DF00EEDCA7 /* GWParallaxNode.m */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
 				CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */,
@@ -1812,7 +1812,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE319059159267F400F8E42C /* ParallaxZoomNode.m in Sources */,
 				CE94AA8815785F84009B35B4 /* CCAction.m in Sources */,
 				CE94AA8B15785F84009B35B4 /* CCActionCamera.m in Sources */,
 				CE94AA8E15785F84009B35B4 /* CCActionCatmullRom.m in Sources */,
@@ -2007,6 +2006,7 @@
 				CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */,
 				CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */,
 				CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */,
+				C5846920159400DF00EEDCA7 /* GWParallaxNode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -28,21 +28,24 @@ enum {
 };
 
 @interface ActionLayer()
+{
 
+}
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
+-(void) updateParallax;
 
 
 @end
 
 @implementation ActionLayer
 
-@synthesize center      = _center;
-@synthesize camera      = _camera;
-@synthesize windowSize  = _windowSize;
+@synthesize camera           = _camera;
+@synthesize parallaxElements = _parallaxElements; 
+
 +(CCScene *) scene
 {
     // 'scene' is an autorelease object.
@@ -62,40 +65,24 @@ enum {
 {
     if( (self=[super init])) {
 
+        //parallax elements setup
+        self.parallaxElements = [NSMutableArray array];
+        
         //set up screen parameters
-        s = self.contentSize;
         self.anchorPoint = ccp(0,0);
         [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.windowSize = s;
-        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
-        self.center = [CCNode node];
-        self.center.position = ccp(s.width/2, s.height/2);
+        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize];
 
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
 
-        //parallax setup
-        parallax_ = [ParallaxZoomNode node];
-        parallax_.anchorPoint = ccp(0,0);
-        Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
-        bglayer1.anchorPoint = ccp(0,0);
-        bglayer1.contentSize=CGSizeMake(self.contentSize.width*1.5, self.contentSize.height*1.5);
-        [bglayer1 setIgnoreAnchorPointForPosition:YES];
-        [parallax_ setIgnoreAnchorPointForPosition:YES];
-        [parallax_ addChild:bglayer1 z:-3 parallaxRatio:ccp(.45f,.45f) positionOffset:ccp(0,0)];
-        parallax_.currentZoom = 1.0;
-        
-        [self addChild:parallax_ z:-2];
-
-        
         // init physics
         [self initPhysics];
         
         //Set up sprite
-        
 #if 1
         // Use batch node. Faster
         CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:100];
@@ -107,19 +94,13 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
-        /*Background *blayer = [Background node];
-        [blayer initWithSpeed:180 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
-        [self addChild:blayer];
-        [self reorderChild:blayer z:-1];*/
-        
-        [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
+        [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
-        label.position = ccp( s.width/2, s.height-50);
+        label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);
         
-        [self addChild:self.center];
         [self scheduleUpdate];
         
         
@@ -177,9 +158,9 @@ m_debugDraw = NULL;
     b2ChainShape dynamicBox;
     b2Vec2 vs[4];
     vs[0].Set(0,0);
-    vs[1].Set(s.width/PTM_RATIO,0);
-    vs[2].Set(s.width/PTM_RATIO,s.height/PTM_RATIO);
-    vs[3].Set(0,s.height/PTM_RATIO);
+    vs[1].Set(self.contentSize.width/PTM_RATIO,0);
+    vs[2].Set(self.contentSize.width/PTM_RATIO,self.contentSize.height/PTM_RATIO);
+    vs[3].Set(0,self.contentSize.height/PTM_RATIO);
     dynamicBox.CreateLoop(vs, 4);
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
@@ -324,9 +305,18 @@ m_debugDraw = NULL;
      */
     
 	[self.camera update:dt];
+    //[self updateParallax];
 
-    [parallax_ setPosition:self.position];
-    parallax_.currentZoom = self.camera.currentScale;    
+
+
+}
+
+-(void)updateParallax{
+        
+    for (Background* b in self.parallaxElements) {
+        [b setPosition:ccpMult(self.position,1./self.scale)];
+        [b setScale:self.scale];
+    }
 
 }
 
@@ -348,7 +338,7 @@ m_debugDraw = NULL;
     }
     
     /* add box */
-    CGRect bounds = CGRectMake(0, 0, s.width, s.height);
+    CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
     if([touches count] == 2)
         if(CGRectContainsPoint(bounds, location))
         {

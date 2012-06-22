@@ -41,11 +41,10 @@
 @synthesize isChanging      = _isChanging;
 @synthesize target          = _target;
 @synthesize actionIntensity = _actionIntensity;
-@synthesize zoomOrigin      = _zoomOrigin;
 @synthesize maximumScale    = _maximumScale;
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
-@synthesize currentScale;
+
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
     if(( self = [super init] ))
     {
@@ -55,11 +54,10 @@
         self->worldDimensions = wd;
         self.actionIntensity = 0;
         self->actionCount = 0;
-        self.zoomOrigin = ccp(0,0);
         self.maximumScale = 6.f;
         self.minimumScale = 1.f;
         self.defaultScale = 1.f;
-        self.currentScale = 1.f;
+
 
     }
     return self;
@@ -78,6 +76,10 @@
     id moveFollow = [CCSequence actions:bMotion,follow,nil];
     [self->subject_ runAction:[CCScaleTo actionWithDuration:.95f scale:3.f]];
     [self->subject_ runAction:moveFollow];
+}
+
+-(void)setSubject:(CCNode *)sub{
+    subject_ = sub;
 }
 
 -(void)revert{
@@ -108,7 +110,6 @@
     float scale = self->subject_.scale;
     float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
     [self->subject_ setScale: newScale];
-    currentScale = newScale;
 
     // Get the new center point.
     CGPoint newCenterPoint = ccpMult(currentPosition,subject_.scale);
@@ -133,7 +134,8 @@
     float currentDegree = self.actionIntensity * sin(actionCount);
     
     //set rotation
-    self->subject_.rotation = currentDegree;
+    CCNode* parent = [subject_ parent];
+    parent.rotation = currentDegree;
 }
 -(void)addIntensity:(float)intensity{
     //add intensity to camera (determines shake)
@@ -196,7 +198,8 @@
     //shake effect
     if(self.actionIntensity < .1f) {
         self.actionIntensity = 0;
-        self->subject_.rotation = 0;
+        CCNode* parent = [subject_ parent];
+        parent.rotation = 0;
         actionCount = 0;
     }
     else {

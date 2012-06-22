@@ -7,30 +7,28 @@
 //
 
 #import <GameKit/GameKit.h>
-#import "ParallaxZoomNode.h"
 // When you import this file, you import all the cocos2d classes
 #import "GLES-Render.h"
 @class GWCamera;
 
+
+//Action Layer is different from a regular layer in that it has a camera that follows it
+//And it keeps track of parallax brothers in a scene
 @interface ActionLayer : CCLayer <UIGestureRecognizerDelegate>
 {
 
 	CCTexture2D *spriteTexture_;	// weak ref
 	b2World* world;					// strong ref
 	GLESDebugDraw *m_debugDraw;		// strong ref
-    CGSize s;
-    ParallaxZoomNode* parallax_;
 }
 
-@property (strong, nonatomic) CCNode* center;
-@property (strong, nonatomic) GWCamera* camera;
-@property (assign, nonatomic) CGSize windowSize;
+@property (strong, nonatomic) GWCamera* camera;//camera that watches the action
+
+@property (strong, nonatomic) NSMutableArray* parallaxElements; //the elements it updates the position of
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 
-// adds terrain to build
-//-(void) addTerrain:(CGPoint*)points;
 
 
 @end
