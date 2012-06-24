@@ -23,7 +23,9 @@
         }
     }
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:sceneName];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    //Disabled temp cause of poor shader interaction
+    //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [[CCDirector sharedDirector] pushScene:scene];
 }
 
 - (UITextField *)addTextFieldWithFrame:(CGRect)frame
