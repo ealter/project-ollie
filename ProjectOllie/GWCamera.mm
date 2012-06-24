@@ -26,6 +26,7 @@
     CGSize worldDimensions; //dimensions of the world we are observing
     float actionCount;      //helps keep track of the duration of action
     float parallaxRatio;
+    float targetScale;
 }
 
 /*private functions for callfunc delegate*/
@@ -37,6 +38,10 @@
 -(void)handleTwoFingerMotion:(NSSet*)touches;
 -(void)twoFingerPan:(NSSet*)touches;
 -(void)twoFingerZoom:(NSSet*)touches;
+-(void)checkBounds;
+-(void)updateZoom;
+-(void)followTarget;
+-(void)handleShakeEffect:(float)dt;
 
 /*private helper functions*/
 -(void)createShakeEffect:(float)dt;
@@ -53,22 +58,27 @@
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
 @synthesize bounded         = _bounded;
+@synthesize children        = _children;
 
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd withParallaxRatio:(float)ratio{
     if(( self = [super init] ))
     {
-        subject_ = subject;
-        self.target = self->subject_;
-        self.isChanging = NO;
+        //private variables
+        subject_        = subject;
         worldDimensions = wd;
+        actionCount     = 0;
+        targetScale     = 1.f;
+        parallaxRatio   = ratio;
+        
+        //public properties
+        self.target          = self->subject_;
+        self.isChanging      = NO;
         self.actionIntensity = 0;
-        actionCount = 0;
-        self.maximumScale = 6.f;
-        self.minimumScale = 1.f;
-        self.defaultScale = 1.f;
-        parallaxRatio = ratio;
-        self.bounded = YES;
-        self.children = [NSMutableArray array];
+        self.maximumScale    = 6.f;
+        self.minimumScale    = 1.f;
+        self.defaultScale    = 1.f;
+        self.bounded         = YES;
+        self.children        = [NSMutableArray array];
     }
     return self;
 }
@@ -162,64 +172,9 @@
     //updates camera qualities
     
     if(self.bounded){
-        //if in process of reverting, only time it is changing without a target
-        if(self.isChanging && self.target == nil)
-        {
-            if(subject_.scale > self.defaultScale)
-            {
-                float diff = subject_.scale - self.defaultScale;
-                [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]]; 
-                if(diff*diff < .01)
-                    self.isChanging = NO;
-            }
-            
-        }
-        
-        //elastic borders
-        CGPoint worldPos = subject_.position;
-        //left border
-        if(worldPos.x > 0)
-        {
-            float offset = -worldPos.x;
-            float elasticity = .15f;
-            [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
-        }
-        //right border
-        else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
-        {
-            float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
-            float elasticity = .15f;
-            [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
-        }
-        //bottom border
-        if(worldPos.y > 0)
-        {
-            float offset = -worldPos.y;
-            float elasticity = .15f;
-            [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
-        }
-       //top border
-        else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
-        {
-            float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
-            float elasticity = .15f;
-            [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
-        }
-        
-        
-        //shake effect
-        if(self.actionIntensity < .1f) {
-            self.actionIntensity = 0;
-            CCNode* parent = [subject_ parent];
-            parent.rotation = 0;
-            actionCount = 0;
-        }
-        else {
-            [self createShakeEffect:dt];
-            
-            //decrease intensity
-            self.actionIntensity = self.actionIntensity*.87f;
-        }
+        [self updateZoom];
+        [self checkBounds];
+        [self handleShakeEffect:dt];
     }
 }
 
@@ -317,19 +272,19 @@
     UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
     
     CGPoint touchLocation1 = [touch1 locationInView: [touch1 view]];
-    CGPoint prevLocation1 = [touch1 previousLocationInView: [touch1 view]];
-    touchLocation1 = [[CCDirector sharedDirector] convertToGL: touchLocation1];
-    prevLocation1 = [[CCDirector sharedDirector] convertToGL: prevLocation1];
+    CGPoint prevLocation1  = [touch1 previousLocationInView: [touch1 view]];
+    touchLocation1         = [[CCDirector sharedDirector] convertToGL: touchLocation1];
+    prevLocation1          = [[CCDirector sharedDirector] convertToGL: prevLocation1];
     
     CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];
-    CGPoint prevLocation2 = [touch2 previousLocationInView: [touch2 view]];
-    touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
-    prevLocation2 = [[CCDirector sharedDirector] convertToGL: prevLocation2];
+    CGPoint prevLocation2  = [touch2 previousLocationInView: [touch2 view]];
+    touchLocation2         = [[CCDirector sharedDirector] convertToGL: touchLocation2];
+    prevLocation2          = [[CCDirector sharedDirector] convertToGL: prevLocation2];
 
-    touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
-    prevLocation2 = [self->subject_ convertToNodeSpace:prevLocation2];
-    touchLocation1 = [self->subject_ convertToNodeSpace:touchLocation1];
-    prevLocation1 = [self->subject_ convertToNodeSpace:prevLocation1];
+    touchLocation2 = [subject_ convertToNodeSpace:touchLocation2];
+    prevLocation2  = [subject_ convertToNodeSpace:prevLocation2];
+    touchLocation1 = [subject_ convertToNodeSpace:touchLocation1];
+    prevLocation1  = [subject_ convertToNodeSpace:prevLocation1];
     
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     
@@ -339,9 +294,6 @@
     ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
    
     [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
-    
-
-
     
 }
 
@@ -362,4 +314,75 @@
     self.target = nil;
 }
 
+/*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA*/
+
+-(void)checkBounds{
+    //elastic borders
+    CGPoint worldPos = subject_.position;
+    //left border
+    if(worldPos.x > 0)
+    {
+        float offset = -worldPos.x;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+    }
+    //right border
+    else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
+    {
+        float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+    }
+    //bottom border
+    if(worldPos.y > 0)
+    {
+        float offset = -worldPos.y;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+    }
+    //top border
+    else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
+    {
+        float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
+        float elasticity = .15f;
+        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+    }
+    
+}
+
+-(void)handleShakeEffect:(float)dt{
+    //shake effect
+    if(self.actionIntensity < .1f) {
+        self.actionIntensity = 0;
+        CCNode* parent = [subject_ parent];
+        parent.rotation = 0;
+        actionCount = 0;
+    }
+    else {
+        [self createShakeEffect:dt];
+        
+        //decrease intensity
+        self.actionIntensity = self.actionIntensity*.87f;
+    }
+}
+
+-(void)updateZoom{
+    
+    //adjust zoom to be at target scale
+    
+    
+    //if in process of reverting, only time it is changing without a target
+    if(self.isChanging && self.target == nil)
+    {
+        if(subject_.scale > self.defaultScale)
+        {
+            float diff = subject_.scale - self.defaultScale;
+            [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]]; 
+            if(diff*diff < .01)
+                self.isChanging = NO;
+        }
+        
+    }
+    
+}
 @end
