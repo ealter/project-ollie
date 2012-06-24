@@ -37,6 +37,7 @@
     field.backgroundColor = [UIColor whiteColor];
     field.borderStyle = UITextBorderStyleRoundedRect;
     field.transform = CGAffineTransformMakeRotation(M_PI/2);
+    field.frame = CGRectMake(field.frame.origin.x, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
     [[CCDirector sharedDirector].view.window addSubview:field];
     return field;
 }
