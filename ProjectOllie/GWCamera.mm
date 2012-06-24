@@ -7,11 +7,7 @@
 //
 
 #import "GWCamera.h"
-#import "CCAction.h"
-#import "CCActionInterval.h"
 #import "CGPointExtension.h"
-#import "CCActionInstant.h"
-#import "CCActionEase.h"
 #import "ActionLayer.h"
 
 /******************
@@ -25,15 +21,10 @@
 {
     CGSize worldDimensions; //dimensions of the world we are observing
     float actionCount;      //helps keep track of the duration of action
-    float parallaxRatio;
-    float targetScale;
+    float targetScale;      //the scale we will zoom to in update
 }
 
 /*private functions for callfunc delegate*/
--(void)beginMotion;
--(void)endMotion;
--(void)followDel;
--(void)stopActions;
 -(void)handleOneFingerMotion:(NSSet*)touches;
 -(void)handleTwoFingerMotion:(NSSet*)touches;
 -(void)twoFingerPan:(NSSet*)touches;
@@ -60,7 +51,7 @@
 @synthesize bounded         = _bounded;
 @synthesize children        = _children;
 
--(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd withParallaxRatio:(float)ratio{
+-(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
     if(( self = [super init] ))
     {
         //private variables
@@ -68,12 +59,11 @@
         worldDimensions = wd;
         actionCount     = 0;
         targetScale     = 1.f;
-        parallaxRatio   = ratio;
         
         //public properties
-        self.target          = self->subject_;
+        self.target          = nil;
         self.isChanging      = NO;
-        self.actionIntensity = 0;
+        self.actionIntensity = 0.f;
         self.maximumScale    = 6.f;
         self.minimumScale    = 1.f;
         self.defaultScale    = 1.f;
@@ -87,15 +77,18 @@
     //creates a sequence of events that signals change
     //starts following a new node
     //and signals an end of change once the new node is followed
+    targetScale = 3.f;
+    self.isChanging = YES;
+    self.target = focused;
     
     //stop all previous actions
-    [self stopActions];
+    /*[self stopActions];
     self.target = focused;
     id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
     id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
     id moveFollow = [CCSequence actions:bMotion,follow,nil];
     [self->subject_ runAction:[CCScaleTo actionWithDuration:.95f scale:3.f]];
-    [self->subject_ runAction:moveFollow];
+    [self->subject_ runAction:moveFollow];*/
 }
 
 -(void)setSubject:(CCNode *)sub{
@@ -104,34 +97,42 @@
 
 -(void)revert{
     //sets specific case of changing, but with no target
-    [self stopActions];
+    targetScale = self.defaultScale;
+    self.target = nil;
     self.isChanging = YES; 
 }
 
 -(void)panBy:(CGPoint)diff{
-    [self stopActions];
-    CGPoint oldPos = self->subject_.position;
-    
-    diff = ccpMult(diff,parallaxRatio);
+
+    //self.target = nil;
+    CGPoint oldPos = subject_.position;
     CGPoint newPos = ccpAdd(oldPos,diff);
-    [self->subject_ setPosition:newPos];
+    [subject_ setPosition:newPos];
+    
+    for (id <CameraObject> child in self.children) {
+        CGPoint tdiff = ccpMult(diff,[child getParallaxRatio]);
+        CCNode* c = (CCNode*)child;
+        CGPoint oldPos = c.position;
+        [c setPosition:ccpAdd(oldPos,tdiff)];
+    }
 }
 
 -(void)panTo:(CGPoint)dest{
-    [self stopActions];
-    [self->subject_ setPosition:dest];
+    [subject_ setPosition:dest];
 }
 
 -(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition{
-    [self stopActions];
+    
+    CGPoint utCurrentPosition = currentPosition;
+    currentPosition = [subject_ convertToNodeSpace:currentPosition];
     
     //calculate the old centerpoint
     CGPoint oldCenterPoint = ccpMult(currentPosition,subject_.scale);
     
     // Set the scale.
-    float scale = self->subject_.scale;
+    float scale = subject_.scale;
     float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
-    [self->subject_ setScale: newScale];
+    [subject_ setScale: newScale];
 
     // Get the new center point.
     CGPoint newCenterPoint = ccpMult(currentPosition,subject_.scale);
@@ -142,13 +143,28 @@
     // Now adjust the layer by the delta.
     //[self panBy:centerPointDelta];
     [subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
-   
-
+    
+    for (id<CameraObject> child in self.children) {
+        CCNode* c = (CCNode*)child;
+        CGPoint tempPosition = [c convertToNodeSpace:utCurrentPosition];
+        
+        CGPoint oldCenterPoint = ccpMult(tempPosition,c.scale);
+    
+        // Set the scale.
+        [c setScale: newScale];
+        
+        // Get the new center point.
+        CGPoint newCenterPoint = ccpMult(tempPosition,c.scale);
+        
+        // Then calculate the delta.
+        CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
+        [c setPosition:ccpAdd(c.position,centerPointDelta)];
+    }
 }
 
 -(void)createShakeEffect:(float)dt{
     //the shakeRate will determine the weight given to dt
-    float shakeRate = 60;
+    float shakeRate = 55;
     actionCount+=dt*shakeRate;
     
     //modulo the total action count around 360 degrees
@@ -172,9 +188,10 @@
     //updates camera qualities
     
     if(self.bounded){
-        [self updateZoom];
-        [self checkBounds];
+       // [self checkBounds];
         [self handleShakeEffect:dt];
+        [self followTarget];
+        [self updateZoom];
     }
 }
 
@@ -242,6 +259,7 @@
 }
 -(void)twoFingerPan:(NSSet *)touches{
     
+    
     /* PANNING */
 
     //create touches
@@ -281,10 +299,11 @@
     touchLocation2         = [[CCDirector sharedDirector] convertToGL: touchLocation2];
     prevLocation2          = [[CCDirector sharedDirector] convertToGL: prevLocation2];
 
+    /*
     touchLocation2 = [subject_ convertToNodeSpace:touchLocation2];
     prevLocation2  = [subject_ convertToNodeSpace:prevLocation2];
     touchLocation1 = [subject_ convertToNodeSpace:touchLocation1];
-    prevLocation1  = [subject_ convertToNodeSpace:prevLocation1];
+    prevLocation1  = [subject_ convertToNodeSpace:prevLocation1];*/
     
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     
@@ -297,57 +316,56 @@
     
 }
 
-/*PRIVATE HELPER FUNCTIONS FOR DELEGATES*/
--(void)followDel{
-    [self->subject_ runAction:[CCFollow actionWithTarget:self.target]];
-}
-
--(void)beginMotion{
-    self.isChanging = YES;
-}
-
--(void)endMotion{
-    self.isChanging = NO;
-}
--(void)stopActions{
-    [self->subject_ stopAllActions];
-    self.target = nil;
-}
-
 /*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA*/
 
 -(void)checkBounds{
     //elastic borders
     CGPoint worldPos = subject_.position;
+    CGPoint newPos = ccp(0,0);
     //left border
     if(worldPos.x > 0)
     {
         float offset = -worldPos.x;
         float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+        newPos = ccp(offset * elasticity,0); 
+        [self panBy:newPos];
+
+
     }
     //right border
     else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
     {
         float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
         float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+        newPos = ccp(offset * elasticity,0);
+        [self panBy:newPos];
+
+
     }
     //bottom border
     if(worldPos.y > 0)
     {
         float offset = -worldPos.y;
         float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+        newPos = ccp(0,offset * elasticity);
+        [self panBy:newPos];
+
+
     }
     //top border
     else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
     {
         float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
         float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+        newPos = ccp(0,offset * elasticity);
+        [self panBy:newPos];
+
+
     }
-    
+   /* for (CCNode* child in self.children) {
+        [child setPosition:subject_.position];
+    }*/
+
 }
 
 -(void)handleShakeEffect:(float)dt{
@@ -369,20 +387,49 @@
 -(void)updateZoom{
     
     //adjust zoom to be at target scale
-    
-    
     //if in process of reverting, only time it is changing without a target
     if(self.isChanging && self.target == nil)
     {
         if(subject_.scale > self.defaultScale)
         {
+            CCLOG(@"reverting...");
             float diff = subject_.scale - self.defaultScale;
-            [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]]; 
+            [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]];
             if(diff*diff < .01)
                 self.isChanging = NO;
         }
-        
     }
-    
+    else if(self.target != nil){
+        //adjust scale to match the desired scale
+        float scaleDiff = targetScale - subject_.scale;
+        float zoomMultiplier = 0;
+        if(scaleDiff < 0) 
+            zoomMultiplier = .9f;
+        else {
+            zoomMultiplier = 1.1f;
+        }
+        if(scaleDiff*scaleDiff > .01f)
+            [self zoomBy:zoomMultiplier withAverageCurrentPosition: self.target.position];
+    }
+}
+
+-(void)followTarget{
+    if(self.target != nil)
+    {
+        CGPoint moveVec;
+        CCNode *n = subject_;
+        CCNode *p = [subject_ parent];
+        CGPoint halfScreenSize = ccp(subject_.contentSize.width/2.f,subject_.contentSize.height/2.f);
+        CGPoint p1 = ccpMult(halfScreenSize, 1.f/p.scale);
+        CGPoint p2 = ccpMult(self.target.position, n.scale);
+        CGPoint destination = ccpSub(p1,p2);
+        
+        //using correctly calculated destination, normalize distance
+        //and move a given percentage of that distance per update
+        //until the distance is subpixel
+        moveVec = ccpSub(destination, n.position);
+        moveVec = ccpMult(moveVec,.1f);
+        [self panBy:moveVec];
+    }
 }
 @end

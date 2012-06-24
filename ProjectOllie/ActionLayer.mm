@@ -69,7 +69,7 @@ enum {
         [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize withParallaxRatio:1.f];
+        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize];
 
         // enable events
         self.isTouchEnabled = YES;
@@ -339,8 +339,8 @@ m_debugDraw = NULL;
     if([touches count] == 2)
         if(CGRectContainsPoint(bounds, location))
         {
-            //[self addNewSpriteAtPosition: location];
-           // [self.camera addIntensity:6.f]; 
+           // [self addNewSpriteAtPosition: location];
+            //[self.camera addIntensity:10.f]; 
         }
     
 }

@@ -24,12 +24,12 @@
         [self setAnchorPoint:ccp(.5,.5)];
 
         [self addChild:self.actionLayer];
-
         
         Background *blayer = [Background node];
         [blayer initWithSpeed:3 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
-        //[self addChild:blayer];
-        //[self reorderChild:blayer z:-100];
+        [self addChild:blayer];
+        [self reorderChild:blayer z:-100];
+        [self.actionLayer.camera.children addObject:blayer];
         
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];

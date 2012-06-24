@@ -38,7 +38,7 @@
 @property (assign, nonatomic) bool bounded;             // whether or not to have elastic bounds
 
 /* Inits the camera with a world and its dimensions */
--(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd withParallaxRatio:(float)ratio;
+-(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
 
 /* sets a new subject to affect */
 -(void)setSubject:(CCNode*)sub;
