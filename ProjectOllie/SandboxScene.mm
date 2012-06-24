@@ -10,7 +10,7 @@
 #import "ActionLayer.h"
 #import "CCBReader.h"
 #import "Background.h"
-#import "GWParallaxNode.h"
+
 
 @implementation SandboxScene
 
@@ -25,11 +25,12 @@
 
         [self addChild:self.actionLayer];
 
-        /*
+        
         Background *blayer = [Background node];
-        [blayer initwithSpeed:3 andImage:@"background.jpg"];
-        [self addChild:blayer];
-        [self reorderChild:blayer z:-100];*/
+        [blayer initWithSpeed:3 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        //[self addChild:blayer];
+        //[self reorderChild:blayer z:-100];
+        
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
         [self reorderChild:backnode z:2];

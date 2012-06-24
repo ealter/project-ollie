@@ -9,15 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "cocos2d.h"
 
+@protocol CameraObject <NSObject>
+
+-(float)getParallaxRatio;
+-(bool)isBounded;
+
+@end
 
 @interface GWCamera : NSObject
 {
     CCNode* subject_; //The world we are observing
 }
-
 @property (assign, nonatomic) bool isChanging;          // Tells whether or not camera is transitioning
 
 @property (strong, nonatomic) CCNode* target;           // The target in the world we are following
+
+@property (strong, nonatomic) NSMutableArray* children; // The other nodes that move in relation to the subject
 
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
                                                         // used for shaking effects currently.
@@ -28,8 +35,10 @@
 
 @property (assign, nonatomic) float defaultScale;       // default scale size
 
+@property (assign, nonatomic) bool bounded;             // whether or not to have elastic bounds
+
 /* Inits the camera with a world and its dimensions */
--(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
+-(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd withParallaxRatio:(float)ratio;
 
 /* sets a new subject to affect */
 -(void)setSubject:(CCNode*)sub;

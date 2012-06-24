@@ -9,12 +9,13 @@
 #import <GameKit/GameKit.h>
 // When you import this file, you import all the cocos2d classes
 #import "GLES-Render.h"
-@class GWCamera;
+#import "GWCamera.h"
+
 
 
 //Action Layer is different from a regular layer in that it has a camera that follows it
 //And it keeps track of parallax brothers in a scene
-@interface ActionLayer : CCLayer <UIGestureRecognizerDelegate>
+@interface ActionLayer : CCLayer <CameraObject>
 {
 
 	CCTexture2D *spriteTexture_;	// weak ref

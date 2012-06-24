@@ -8,6 +8,7 @@
 
 #import "Background.h"
 #import "cocos2d.h"
+#import "GWCamera.h"
 
 #define BACKGROUND_IMAGE_TAG 37475912 /* Kinda random integer to avoid conflicts */
 
@@ -26,10 +27,17 @@
 @implementation Background
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
-@synthesize imageNames = _imageNames;
+@synthesize imageNames  = _imageNames;
+@synthesize camera      = _camera;
 
 - (void)initBackgrounds;
 {
+    [self scheduleUpdate];
+    self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize withParallaxRatio:.8f];
+   // self.camera.bounded = NO;
+    self.isTouchEnabled = YES;
+    [self setAnchorPoint:ccp(0,0)];
+    
     if(self.children.count > 0)
         [self removeChildByTag:BACKGROUND_IMAGE_TAG cleanup:YES];
     NSArray *imageNames = self.imageNames;
@@ -98,9 +106,15 @@
         [self initBackgrounds];
 }
 
-- (void) scroll:(ccTime)dt{
-    if(self.scrollSpeed == 0) return;
+-(void)update:(float)dt{
     
+    
+     [self.camera update:dt];
+}
+
+- (void) scroll:(ccTime)dt{
+
+    if(self.scrollSpeed == 0) return;
     
     float deltaX = self.scrollSpeed * dt;
     int numBackgrounds = self.backgrounds.count;
@@ -140,8 +154,24 @@
     }
 }
 
+- (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.camera touchesBegan:[event allTouches]];
+}
 
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    
+    [self.camera touchesMoved:[event allTouches]];
+}
 
+//Camera object
 
-//OVERRIDE
+-(float)getParallaxRatio{
+    return .8f;
+}
+
+-(bool)isBounded{
+    return NO;
+}
 @end

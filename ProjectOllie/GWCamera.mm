@@ -14,10 +14,18 @@
 #import "CCActionEase.h"
 #import "ActionLayer.h"
 
+/******************
+ *      TODO      *
+ ******************
+ Make camera a master controller
+      - With children it updates as the master
+      - Remove ccactions and ccfollow stuff. You already rewrote that shiz anyway.
+*/
 @interface GWCamera()
 {
     CGSize worldDimensions; //dimensions of the world we are observing
     float actionCount;      //helps keep track of the duration of action
+    float parallaxRatio;
 }
 
 /*private functions for callfunc delegate*/
@@ -44,21 +52,23 @@
 @synthesize maximumScale    = _maximumScale;
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
+@synthesize bounded         = _bounded;
 
--(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
+-(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd withParallaxRatio:(float)ratio{
     if(( self = [super init] ))
     {
-        self->subject_ = subject;
+        subject_ = subject;
         self.target = self->subject_;
         self.isChanging = NO;
-        self->worldDimensions = wd;
+        worldDimensions = wd;
         self.actionIntensity = 0;
-        self->actionCount = 0;
+        actionCount = 0;
         self.maximumScale = 6.f;
         self.minimumScale = 1.f;
         self.defaultScale = 1.f;
-
-
+        parallaxRatio = ratio;
+        self.bounded = YES;
+        self.children = [NSMutableArray array];
     }
     return self;
 }
@@ -91,6 +101,8 @@
 -(void)panBy:(CGPoint)diff{
     [self stopActions];
     CGPoint oldPos = self->subject_.position;
+    
+    diff = ccpMult(diff,parallaxRatio);
     CGPoint newPos = ccpAdd(oldPos,diff);
     [self->subject_ setPosition:newPos];
 }
@@ -118,8 +130,8 @@
     CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
 
     // Now adjust the layer by the delta.
-    [self panBy:centerPointDelta];
-
+    //[self panBy:centerPointDelta];
+    [subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
    
 
 }
@@ -149,64 +161,65 @@
 -(void)update:(float)dt{
     //updates camera qualities
     
-    
-    //if in process of reverting, only time it is changing without a target
-    if(self.isChanging && self.target == nil)
-    {
-        if(subject_.scale > self.defaultScale)
+    if(self.bounded){
+        //if in process of reverting, only time it is changing without a target
+        if(self.isChanging && self.target == nil)
         {
-            float diff = subject_.scale - self.defaultScale;
-            [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]]; 
-            if(diff*diff < .01)
-                self.isChanging = NO;
+            if(subject_.scale > self.defaultScale)
+            {
+                float diff = subject_.scale - self.defaultScale;
+                [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]]; 
+                if(diff*diff < .01)
+                    self.isChanging = NO;
+            }
+            
         }
         
-    }
-    
-    //elastic borders
-    CGPoint worldPos = subject_.position;
-    //left border
-    if(worldPos.x > 0)
-    {
-        float offset = -worldPos.x;
-        float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
-    }
-    //right border
-    else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
-    {
-        float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
-        float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
-    }
-    //bottom border
-    if(worldPos.y > 0)
-    {
-        float offset = -worldPos.y;
-        float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
-    }
-   //top border
-    else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
-    {
-        float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
-        float elasticity = .15f;
-        [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
-    }
-    
-    
-    //shake effect
-    if(self.actionIntensity < .1f) {
-        self.actionIntensity = 0;
-        CCNode* parent = [subject_ parent];
-        parent.rotation = 0;
-        actionCount = 0;
-    }
-    else {
-        [self createShakeEffect:dt];
+        //elastic borders
+        CGPoint worldPos = subject_.position;
+        //left border
+        if(worldPos.x > 0)
+        {
+            float offset = -worldPos.x;
+            float elasticity = .15f;
+            [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+        }
+        //right border
+        else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
+        {
+            float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
+            float elasticity = .15f;
+            [subject_ setPosition:ccpAdd(subject_.position,ccp(offset * elasticity,0))];
+        }
+        //bottom border
+        if(worldPos.y > 0)
+        {
+            float offset = -worldPos.y;
+            float elasticity = .15f;
+            [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+        }
+       //top border
+        else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
+        {
+            float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
+            float elasticity = .15f;
+            [subject_ setPosition:ccpAdd(subject_.position,ccp(0,offset * elasticity))];
+        }
         
-        //decrease intensity
-        self.actionIntensity = self.actionIntensity*.87f;
+        
+        //shake effect
+        if(self.actionIntensity < .1f) {
+            self.actionIntensity = 0;
+            CCNode* parent = [subject_ parent];
+            parent.rotation = 0;
+            actionCount = 0;
+        }
+        else {
+            [self createShakeEffect:dt];
+            
+            //decrease intensity
+            self.actionIntensity = self.actionIntensity*.87f;
+        }
     }
 }
 

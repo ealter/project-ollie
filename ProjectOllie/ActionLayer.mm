@@ -8,8 +8,6 @@
 
 #import "ActionLayer.h"
 #import "AppDelegate.h"
-#import "CCAction.h"
-#import "GWCamera.h"
 #import "PhysicsSprite.h"
 #import "Background.h"
 #import "MaskedSprite.h"
@@ -21,7 +19,6 @@
 #define PTM_RATIO (32)
 #define kTagPoly 10
 #define kTagBox 20
-
 
 enum {
 	kTagParentNode = 1,
@@ -36,7 +33,6 @@ enum {
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
--(void) updateParallax;
 
 
 @end
@@ -73,7 +69,7 @@ enum {
         [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize];
+        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize withParallaxRatio:1.f];
 
         // enable events
         self.isTouchEnabled = YES;
@@ -324,6 +320,7 @@ m_debugDraw = NULL;
 {
     [self.camera touchesBegan:[event allTouches]];
 }
+
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 
@@ -342,13 +339,11 @@ m_debugDraw = NULL;
     if([touches count] == 2)
         if(CGRectContainsPoint(bounds, location))
         {
-            [self addNewSpriteAtPosition: location];
-            [self.camera addIntensity:6.f]; 
+            //[self addNewSpriteAtPosition: location];
+           // [self.camera addIntensity:6.f]; 
         }
     
 }
-
-
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -368,6 +363,15 @@ m_debugDraw = NULL;
     
 }
 
+//CAMERA OBJECT FUNCTIONS
+
+-(float) getParallaxRatio{
+    return 1.f;
+}
+
+-(bool) isBounded{
+    return YES;
+}
 
 
 @end

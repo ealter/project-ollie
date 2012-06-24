@@ -33,7 +33,6 @@
 		C566AC341592A55A00D92879 /* rocksandvines.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2E1592A55A00D92879 /* rocksandvines.png */; };
 		C566AC351592A55A00D92879 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2F1592A55A00D92879 /* snow.png */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
-		C5846920159400DF00EEDCA7 /* GWParallaxNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C584691F159400DF00EEDCA7 /* GWParallaxNode.m */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
@@ -336,8 +335,6 @@
 		C566AC2E1592A55A00D92879 /* rocksandvines.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocksandvines.png; sourceTree = "<group>"; };
 		C566AC2F1592A55A00D92879 /* snow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = snow.png; sourceTree = "<group>"; };
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
-		C584691E159400DF00EEDCA7 /* GWParallaxNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWParallaxNode.h; sourceTree = "<group>"; };
-		C584691F159400DF00EEDCA7 /* GWParallaxNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWParallaxNode.m; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
@@ -1108,8 +1105,6 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
-				C584691E159400DF00EEDCA7 /* GWParallaxNode.h */,
-				C584691F159400DF00EEDCA7 /* GWParallaxNode.m */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
 				CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */,
@@ -2067,9 +2062,6 @@
 				CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */,
 				CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */,
 				CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */,
-
-				C5846920159400DF00EEDCA7 /* GWParallaxNode.m in Sources */,
-
 				CE62FC7F1593E8D000BEB3BE /* CharacterScreen.m in Sources */,
 				CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */,
 				CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */,
@@ -2079,7 +2071,6 @@
 				CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */,
 				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
 				CE01828115951774003CE804 /* Menu.m in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

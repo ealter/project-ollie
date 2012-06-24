@@ -13,11 +13,14 @@
 
 #import <Foundation/Foundation.h>
 #import "CCLayer.h"
+#import "GWCamera.h"
 
-@interface Background : CCLayer 
+@interface Background : CCLayer <CameraObject> 
 
 @property (assign, nonatomic) float scrollSpeed; /* In pixels/second. Positive means left to right, negative means right to left. */
 @property (nonatomic, strong) NSArray *imageNames; //An array of NSStrings
+
+@property (nonatomic, strong) GWCamera* camera;
 
 - (id)initWithSpeed:(int)speed images:(NSArray *)imageNames;
 - (void)scroll:(ccTime)dt;
