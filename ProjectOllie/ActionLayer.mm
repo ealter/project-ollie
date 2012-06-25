@@ -323,6 +323,7 @@ m_debugDraw = NULL;
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self.camera touchesEnded:touches];
 
     //Add a new body/atlas sprite at the touched location
     CGPoint location;
@@ -336,11 +337,11 @@ m_debugDraw = NULL;
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if([touches count] == 2)
+    if([touches count] == 3)
         if(CGRectContainsPoint(bounds, location))
         {
-           // [self addNewSpriteAtPosition: location];
-            //[self.camera addIntensity:10.f]; 
+            [self addNewSpriteAtPosition: location];
+            [self.camera addIntensity:10.f]; 
         }
     
 }

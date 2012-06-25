@@ -11,7 +11,6 @@
 #import "CCBReader.h"
 #import "Background.h"
 
-
 @implementation SandboxScene
 
 @synthesize actionLayer = _actionLayer;
@@ -26,7 +25,7 @@
         [self addChild:self.actionLayer];
         
         Background *blayer = [Background node];
-        [blayer initWithSpeed:3 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        [blayer initWithSpeed:300 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         [self addChild:blayer];
         [self reorderChild:blayer z:-100];
         [self.actionLayer.camera.children addObject:blayer];
@@ -34,9 +33,7 @@
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
         [self reorderChild:backnode z:2];
-        
-        
-        
+
     }
     return self;
 }
