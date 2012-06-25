@@ -7,8 +7,8 @@ uniform sampler2D u_texture;
 uniform float u_time;
 
 // 1
-const float speed = 3.0;
-const float invdistance = 15.0;//higher = smaller distance
+uniform float speed;
+uniform float invdistance;//higher = smaller distance
 void main()
 {
     vec2 tc = v_texCoord;

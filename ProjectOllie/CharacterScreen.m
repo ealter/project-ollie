@@ -20,7 +20,11 @@
 {
 	if( (self=[super init] )) {
         //Shader testy stuff here
-        RippleEffect *ripple = [RippleEffect node];
+        CCSprite *sprite = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
+		sprite.anchorPoint = CGPointMake(0.5, 0.5);
+		sprite.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
+		[self addChild:sprite];
+        RippleEffect *ripple =[RippleEffect nodeWithTarget:sprite];
         [self addChild:ripple];
         
         

@@ -53,6 +53,7 @@
         DrawMenu *drawnode = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
         drawnode.delegate = self;
         [self addChild:drawnode];
+        
 	}
 	return self;
 }
@@ -136,7 +137,6 @@
     
     [self removeChild:self.terrain cleanup:YES];
     [scene.actionLayer addChild:self.terrain];
-    
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
