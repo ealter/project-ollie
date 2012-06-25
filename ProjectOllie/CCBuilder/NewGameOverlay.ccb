@@ -50,9 +50,9 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>395</real>
-							<real>275</real>
-							<integer>0</integer>
+							<real>80.5</real>
+							<real>85.9375</real>
+							<integer>1</integer>
 						</array>
 					</dict>
 					<dict>
@@ -76,7 +76,7 @@
 							<real>1</real>
 							<real>1</real>
 							<false/>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -186,7 +186,7 @@
 			</dict>
 			<dict>
 				<key>baseClass</key>
-				<string>CCSprite</string>
+				<string>CCControlButton</string>
 				<key>children</key>
 				<array/>
 				<key>customClass</key>
@@ -216,8 +216,8 @@
 						<string>Size</string>
 						<key>value</key>
 						<array>
-							<real>420</real>
-							<real>250</real>
+							<real>408</real>
+							<real>288</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -240,7 +240,7 @@
 						<key>value</key>
 						<array>
 							<real>1</real>
-							<real>1.2000000476837158</real>
+							<real>1</real>
 							<false/>
 							<integer>0</integer>
 						</array>
@@ -279,7 +279,93 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>displayFrame</string>
+						<string>ccControl</string>
+						<key>type</key>
+						<string>BlockCCControl</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<integer>0</integer>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>enabled</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<false/>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>selected</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<false/>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>title|1</string>
+						<key>type</key>
+						<string>String</string>
+						<key>value</key>
+						<string></string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>titleTTF|1</string>
+						<key>type</key>
+						<string>FontTTF</string>
+						<key>value</key>
+						<string>Helvetica</string>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>titleTTFSize|1</string>
+						<key>type</key>
+						<string>FloatScale</string>
+						<key>value</key>
+						<array>
+							<real>12</real>
+							<integer>0</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>labelAnchorPoint</string>
+						<key>type</key>
+						<string>Point</string>
+						<key>value</key>
+						<array>
+							<real>0.5</real>
+							<real>0.5</real>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>preferedSize</string>
+						<key>type</key>
+						<string>Size</string>
+						<key>value</key>
+						<array>
+							<real>85</real>
+							<real>90</real>
+							<integer>1</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>zoomOnTouchDown</string>
+						<key>type</key>
+						<string>Check</string>
+						<key>value</key>
+						<false/>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>backgroundSpriteFrame|1</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -290,15 +376,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>opacity</string>
-						<key>type</key>
-						<string>Byte</string>
-						<key>value</key>
-						<integer>255</integer>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>color</string>
+						<string>titleColor|1</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -310,24 +388,48 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>flip</string>
+						<string>backgroundSpriteFrame|2</string>
 						<key>type</key>
-						<string>Flip</string>
+						<string>SpriteFrame</string>
 						<key>value</key>
 						<array>
-							<false/>
-							<false/>
+							<string></string>
+							<string>dottedbox.png</string>
 						</array>
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>blendFunc</string>
+						<string>titleColor|2</string>
 						<key>type</key>
-						<string>Blendmode</string>
+						<string>Color3</string>
 						<key>value</key>
 						<array>
-							<integer>1</integer>
-							<integer>771</integer>
+							<integer>255</integer>
+							<integer>255</integer>
+							<integer>255</integer>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>backgroundSpriteFrame|4</string>
+						<key>type</key>
+						<string>SpriteFrame</string>
+						<key>value</key>
+						<array>
+							<string></string>
+							<string>dottedbox.png</string>
+						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>titleColor|4</string>
+						<key>type</key>
+						<string>Color3</string>
+						<key>value</key>
+						<array>
+							<integer>255</integer>
+							<integer>255</integer>
+							<integer>255</integer>
 						</array>
 					</dict>
 				</array>
@@ -477,7 +579,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -727,7 +829,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -977,7 +1079,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1227,7 +1329,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1477,7 +1579,7 @@
 						<key>value</key>
 						<array>
 							<real>12</real>
-							<integer>1</integer>
+							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>

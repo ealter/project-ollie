@@ -25,7 +25,7 @@
 -(id)init
 {
     if (self=[super init]) {
-        userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Welcome, %@", [Authentication mainAuth].username] fontName:@"Chalkduster" fontSize:13];
+        userName = [CCLabelTTF labelWithString:[NSString stringWithFormat: @"Welcome, %@", [Authentication mainAuth].username] fontName:@"Chalkduster" fontSize:13 * [[UIScreen mainScreen]bounds].size.width/480];
         userName.anchorPoint = ccp(0.5,1);
         userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height);
         [self addChild:userName z:1];

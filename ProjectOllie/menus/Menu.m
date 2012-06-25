@@ -23,7 +23,9 @@
         }
     }
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:sceneName];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    //Disabled temp cause of poor shader interaction
+    //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [[CCDirector sharedDirector] pushScene:scene];
 }
 
 - (UITextField *)addTextFieldWithFrame:(CGRect)frame
@@ -37,7 +39,7 @@
     field.backgroundColor = [UIColor whiteColor];
     field.borderStyle = UITextBorderStyleRoundedRect;
     field.transform = CGAffineTransformMakeRotation(M_PI/2);
-    field.frame = CGRectMake(field.frame.origin.x, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
+    field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
     [[CCDirector sharedDirector].view.window addSubview:field];
     return field;
 }

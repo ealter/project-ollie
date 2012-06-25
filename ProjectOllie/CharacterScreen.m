@@ -11,6 +11,7 @@
 #import "SWTableViewCell.h"
 #import "MyCell.h"
 #import "cocos2d.h"
+#import "RippleEffect.h"
 
 @implementation CharacterScreen
 @synthesize weaponScrollView;
@@ -18,6 +19,11 @@
 -(id) init
 {
 	if( (self=[super init] )) {
+        //Shader testy stuff here
+        RippleEffect *ripple = [RippleEffect node];
+        [self addChild:ripple];
+        
+        
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
         CGSize tableViewSize = CGSizeMake(winSize.width, winSize.height*0.3);

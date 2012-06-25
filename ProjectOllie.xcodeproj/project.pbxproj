@@ -84,6 +84,8 @@
 		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
 		CE552268159014FE00CDB131 /* drawframe.png in Resources */ = {isa = PBXBuildFile; fileRef = CE552267159014FE00CDB131 /* drawframe.png */; };
+		CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE5C59341597CA2800C121B4 /* RippleEffect.fsh */; };
+		CE5C59391597CAB700C121B4 /* RippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C59381597CAB700C121B4 /* RippleEffect.m */; };
 		CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC7A1593DAD300BEB3BE /* metalbutton.png */; };
 		CE62FC7F1593E8D000BEB3BE /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */; };
 		CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */; };
@@ -415,6 +417,9 @@
 		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
 		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
 		CE552267159014FE00CDB131 /* drawframe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drawframe.png; path = Resources/drawframe.png; sourceTree = "<group>"; };
+		CE5C59341597CA2800C121B4 /* RippleEffect.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RippleEffect.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CE5C59371597CAB700C121B4 /* RippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleEffect.h; sourceTree = "<group>"; };
+		CE5C59381597CAB700C121B4 /* RippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleEffect.m; sourceTree = "<group>"; };
 		CE62FC7A1593DAD300BEB3BE /* metalbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbutton.png; path = Resources/metalbutton.png; sourceTree = "<group>"; };
 		CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterScreen.h; sourceTree = "<group>"; };
 		CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterScreen.m; sourceTree = "<group>"; };
@@ -1736,6 +1741,9 @@
 			isa = PBXGroup;
 			children = (
 				CE123C4F15883687003AD813 /* TerrainShader.frag */,
+				CE5C59341597CA2800C121B4 /* RippleEffect.fsh */,
+				CE5C59371597CAB700C121B4 /* RippleEffect.h */,
+				CE5C59381597CAB700C121B4 /* RippleEffect.m */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -1790,6 +1798,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */,
 				C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */,
 				C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */,
 				CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */,
@@ -2071,6 +2080,7 @@
 				CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */,
 				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
 				CE01828115951774003CE804 /* Menu.m in Sources */,
+				CE5C59391597CAB700C121B4 /* RippleEffect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
