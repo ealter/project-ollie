@@ -109,7 +109,7 @@
 }
 
 - (void) scroll:(ccTime)dt{
-/*
+
     if(self.scrollSpeed == 0) return;
     
     float deltaX = self.scrollSpeed * dt;
@@ -147,13 +147,13 @@
                 background.position = ccp(newX, background.position.y);
             }
         }
-    }*/
+    }
 }
 
 //Camera object
 
 -(float)getParallaxRatio{
-    return .4f;
+    return .3f;
 }
 
 -(bool)isBounded{

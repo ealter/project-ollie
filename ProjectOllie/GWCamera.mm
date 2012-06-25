@@ -29,7 +29,8 @@
 -(void)handleTwoFingerMotion:(NSSet*)touches;
 -(void)twoFingerPan:(NSSet*)touches;
 -(void)twoFingerZoom:(NSSet*)touches;
--(void)checkBounds;
+-(void)updateBounds;
+-(void)checkBounds:(CCNode*)current;
 -(void)updateZoom;
 -(void)followTarget;
 -(void)handleShakeEffect:(float)dt;
@@ -48,7 +49,6 @@
 @synthesize maximumScale    = _maximumScale;
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
-@synthesize bounded         = _bounded;
 @synthesize children        = _children;
 
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
@@ -67,7 +67,6 @@
         self.maximumScale    = 6.f;
         self.minimumScale    = 1.f;
         self.defaultScale    = 1.f;
-        self.bounded         = YES;
         self.children        = [NSMutableArray array];
     }
     return self;
@@ -80,15 +79,6 @@
     targetScale = 3.f;
     self.isChanging = YES;
     self.target = focused;
-    
-    //stop all previous actions
-    /*[self stopActions];
-    self.target = focused;
-    id bMotion = [CCCallFunc actionWithTarget:self selector:@selector(beginMotion)];
-    id follow  = [CCCallFunc actionWithTarget:self selector:@selector(followDel)];
-    id moveFollow = [CCSequence actions:bMotion,follow,nil];
-    [self->subject_ runAction:[CCScaleTo actionWithDuration:.95f scale:3.f]];
-    [self->subject_ runAction:moveFollow];*/
 }
 
 -(void)setSubject:(CCNode *)sub{
@@ -104,7 +94,6 @@
 
 -(void)panBy:(CGPoint)diff{
 
-    //self.target = nil;
     CGPoint oldPos = subject_.position;
     CGPoint newPos = ccpAdd(oldPos,diff);
     [subject_ setPosition:newPos];
@@ -146,12 +135,14 @@
     
     for (id<CameraObject> child in self.children) {
         CCNode* c = (CCNode*)child;
-        CGPoint tempPosition = [c convertToNodeSpace:utCurrentPosition];
+        CGPoint tempPosition = [subject_ convertToNodeSpace:utCurrentPosition];
         
         CGPoint oldCenterPoint = ccpMult(tempPosition,c.scale);
-    
+        float scaleDiff = (newScale - scale)*([child getParallaxRatio]);
+        float tempNewScale = c.scale+scaleDiff;
+        
         // Set the scale.
-        [c setScale: newScale];
+        [c setScale: tempNewScale];
         
         // Get the new center point.
         CGPoint newCenterPoint = ccpMult(tempPosition,c.scale);
@@ -169,6 +160,7 @@
     
     //modulo the total action count around 360 degrees
     actionCount = fmod(actionCount,360.f);
+
     float currentDegree = self.actionIntensity * sin(actionCount);
     
     //set rotation
@@ -186,13 +178,10 @@
 
 -(void)update:(float)dt{
     //updates camera qualities
-    
-    if(self.bounded){
-       // [self checkBounds];
-        [self handleShakeEffect:dt];
-        [self followTarget];
-        [self updateZoom];
-    }
+    [self updateZoom];
+    [self updateBounds];
+    [self handleShakeEffect:dt];
+    [self followTarget];
 }
 
 
@@ -209,7 +198,6 @@
         CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];
         touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
         touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
-        
     }
 }
 
@@ -222,7 +210,7 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches{
-    
+
 }
 
 /* PRIVATE GESTURE RECOGNITION */
@@ -241,7 +229,11 @@
         prevLocation  = [[CCDirector sharedDirector] convertToGL: prevLocation];
 
         CGPoint diff = ccpSub(touchLocation,prevLocation);
+        
+        
+        self.target = nil;
         [self panBy:diff];
+
     }
 }
 
@@ -250,11 +242,27 @@
      * Uses pinch to zoom and scrolling simultaneously
      */
     
-    //moves from motion
-    [self twoFingerPan:touches];
+    UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
+    UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
     
-    //pans from motion
-    [self twoFingerZoom:touches];
+    CGPoint touchLocation1 = [touch1 locationInView: [touch1 view]];
+    CGPoint prevLocation1 = [touch1 previousLocationInView: [touch1 view]];
+    touchLocation1 = [[CCDirector sharedDirector] convertToGL: touchLocation1];
+    prevLocation1 = [[CCDirector sharedDirector] convertToGL: prevLocation1];
+    
+    CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];
+    CGPoint prevLocation2 = [touch2 previousLocationInView: [touch2 view]];
+    touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
+    prevLocation2 = [[CCDirector sharedDirector] convertToGL: prevLocation2];
+    
+    if(ccpLength(ccpSub(touchLocation2,touchLocation1)) > 80)
+    {
+        //moves from motion
+        [self twoFingerPan:touches];
+        
+        //pans from motion
+        [self twoFingerZoom:touches];
+    }
     
 }
 -(void)twoFingerPan:(NSSet *)touches{
@@ -279,6 +287,8 @@
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
     
+    
+    self.target = nil;
     [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
 }
 
@@ -298,19 +308,11 @@
     CGPoint prevLocation2  = [touch2 previousLocationInView: [touch2 view]];
     touchLocation2         = [[CCDirector sharedDirector] convertToGL: touchLocation2];
     prevLocation2          = [[CCDirector sharedDirector] convertToGL: prevLocation2];
-
-    /*
-    touchLocation2 = [subject_ convertToNodeSpace:touchLocation2];
-    prevLocation2  = [subject_ convertToNodeSpace:prevLocation2];
-    touchLocation1 = [subject_ convertToNodeSpace:touchLocation1];
-    prevLocation1  = [subject_ convertToNodeSpace:prevLocation1];*/
     
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
-    
-    
-    //find the new scale
-    float difScale = 
-    ccpLength(ccpSub(touchLocation1,touchLocation2))/ccpLength(ccpSub(prevLocation1,prevLocation2));
+    float curLength = ccpLength(ccpSub(touchLocation1,touchLocation2));
+    float prevLength = ccpLength(ccpSub(prevLocation1, prevLocation2));
+    float difScale = curLength/prevLength;
    
     [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
     
@@ -318,9 +320,17 @@
 
 /*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA*/
 
--(void)checkBounds{
+-(void)updateBounds{
+    
+    if(self.target == nil)
+    {
+        [self checkBounds:subject_];
+    }
+}
+
+-(void)checkBounds:(CCNode*)current{
     //elastic borders
-    CGPoint worldPos = subject_.position;
+    CGPoint worldPos =  current.position;
     CGPoint newPos = ccp(0,0);
     //left border
     if(worldPos.x > 0)
@@ -329,7 +339,6 @@
         float elasticity = .15f;
         newPos = ccp(offset * elasticity,0); 
         [self panBy:newPos];
-
 
     }
     //right border
@@ -340,7 +349,6 @@
         newPos = ccp(offset * elasticity,0);
         [self panBy:newPos];
 
-
     }
     //bottom border
     if(worldPos.y > 0)
@@ -349,7 +357,6 @@
         float elasticity = .15f;
         newPos = ccp(0,offset * elasticity);
         [self panBy:newPos];
-
 
     }
     //top border
@@ -360,11 +367,7 @@
         newPos = ccp(0,offset * elasticity);
         [self panBy:newPos];
 
-
     }
-   /* for (CCNode* child in self.children) {
-        [child setPosition:subject_.position];
-    }*/
 
 }
 
@@ -380,7 +383,7 @@
         [self createShakeEffect:dt];
         
         //decrease intensity
-        self.actionIntensity = self.actionIntensity*.87f;
+        self.actionIntensity = self.actionIntensity*.93f;
     }
 }
 
