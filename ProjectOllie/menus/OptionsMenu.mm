@@ -19,16 +19,16 @@
 
 -(id)init
 {
-    if (self = [super init]) {
-        userName = [CCLabelTTF labelWithString: @"Current Username: " fontName:@"Helvetica" fontSize:15];
-        userName.anchorPoint = ccp(1,0.5);
-        userName.position=ccp(self.contentSize.width*0.5 - 75, self.contentSize.height*4/5);
-        [self addChild:userName z:1];
-        
-        CGRect nameframe = CGRectMake(self.contentSize.height*0.56, self.contentSize.width/2, 150, 30);
+    if (self = [super init]) {     
+        CGRect nameframe = CGRectMake(self.contentSize.height*4/5, self.contentSize.width/2, 150, 30);
         nameField = [self addTextFieldWithFrame:nameframe];
         nameField.text = [Authentication mainAuth].username;
         nameField.delegate = self;
+        
+        userName = [CCLabelTTF labelWithString: @"Current Username: " fontName:@"Helvetica" fontSize:15];
+        userName.anchorPoint = ccp(1,0.5);
+        userName.position=ccp(self.contentSize.width*0.5 - nameframe.size.width/2, self.contentSize.height*4/5);
+        [self addChild:userName z:1];
     }
     
     return self;

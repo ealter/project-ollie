@@ -25,19 +25,19 @@
 {
     if(self=[super init])
     {
-        CGRect nameframe = CGRectMake(self.contentSize.height*0.5, self.contentSize.width/2, 150, 30);
+        CGRect nameframe = CGRectMake(self.contentSize.height*0.8, self.contentSize.width/2, 150, 30);
         nameField = [self addTextFieldWithFrame:nameframe];
         nameField.placeholder = @"Username";
         nameField.delegate    = self;
         
-        CGRect pwframe = CGRectMake(self.contentSize.height*0.35, self.contentSize.width/2, 150, 30);
+        CGRect pwframe = CGRectMake(self.contentSize.height*0.5, self.contentSize.width/2, 150, 30);
         pwField = [self addTextFieldWithFrame:pwframe];
         pwField.clearsOnBeginEditing = YES;
         pwField.placeholder          = @"Password";
         pwField.secureTextEntry      = YES;
         pwField.delegate             = self;
         
-        CGRect cfpwframe = CGRectMake(self.contentSize.height*0.2, self.contentSize.width/2, 150, 30);
+        CGRect cfpwframe = CGRectMake(self.contentSize.height*0.35, self.contentSize.width/2, 150, 30);
         cfpwField = [self addTextFieldWithFrame:cfpwframe];
         cfpwField.clearsOnBeginEditing = YES;
         cfpwField.placeholder          = @"Confirm Password";
