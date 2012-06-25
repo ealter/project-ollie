@@ -7,20 +7,14 @@ uniform sampler2D u_texture;
 uniform float u_time;
 
 // 1
-const float speed = 2.0;
-const float bendFactor = 0.2;
+const float speed = 3.0;
+const float invdistance = 15.0;//higher = smaller distance
 void main()
 {
-    // 2
-    float vector = 1.0 - v_texCoord.y;
-    
-    // 3
-    float offset = pow(vector, 2.5);
-    
-    // 4 multiply by sin since it gives us nice bending
-    offset *= (cos(u_time * speed) * bendFactor);
-    
-    // 5
-    vec3 normalColor = texture2D(u_texture, fract(vec2(v_texCoord.x + offset, v_texCoord.y))).rgb;
-    gl_FragColor = vec4(normalColor, 1);
+    vec2 tc = v_texCoord;
+    vec2 p = -1.0+2.0*tc;
+    float len = length(p);
+    vec2 uv = tc + (p/len)*cos(len*invdistance-u_time*speed);
+    vec3 col = texture2D(u_texture, uv).rgb;
+    gl_FragColor = vec4(col, 1.0);
 }
