@@ -10,13 +10,6 @@
 #import "CGPointExtension.h"
 #import "ActionLayer.h"
 
-/******************
- *      TODO      *
- ******************
- Make camera a master controller
-      - With children it updates as the master
-      - Remove ccactions and ccfollow stuff. You already rewrote that shiz anyway.
-*/
 @interface GWCamera()
 {
     CGSize worldDimensions; //dimensions of the world we are observing

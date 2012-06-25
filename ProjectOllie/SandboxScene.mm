@@ -25,7 +25,7 @@
         [self addChild:self.actionLayer];
         
         Background *blayer = [Background node];
-        [blayer initWithSpeed:300 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        [blayer initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         [self addChild:blayer];
         [self reorderChild:blayer z:-100];
         [self.actionLayer.camera.children addObject:blayer];

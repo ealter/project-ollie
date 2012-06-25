@@ -162,24 +162,14 @@
 
 -(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add
 {
-    /*
-    int numPoints = 360;
-    CGPoint circle[numPoints];
-    for(int i = 0; i < numPoints; i++)
-    {
-        float degree = 360.f/numPoints * i;
-        float radian = M_PI * degree / 180.f;
-        circle[i] = ccp(center.x+radius*cos(radian),center.y+radius*sin(radian));
-    }
-    [self drawPolygon:circle numPoints:numPoints Additive:add];
-    */
+
     ccColor4F color;
     if(add)
         color = ccc4f(COVERED_RED,0,0,1);
     else
         color = ccc4f(INITIAL_RED,0,0,1);
     [self.maskTexture begin];
-    [self->pr drawDot:center radius:radius color:color];
+    [self->pr drawDot:center radius:(radius+.5f) color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];
