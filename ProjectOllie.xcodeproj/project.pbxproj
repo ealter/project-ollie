@@ -96,6 +96,11 @@
 		CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA31594085800BEB3BE /* SWTableViewCell.m */; };
 		CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */; };
 		CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCAD15940A0200BEB3BE /* MyCell.m */; };
+		CE70E1FA159943C30065B440 /* greenbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F5159943C30065B440 /* greenbutton-dark.png */; };
+		CE70E1FB159943C30065B440 /* greenbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F6159943C30065B440 /* greenbutton.png */; };
+		CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F7159943C30065B440 /* metalbutton-dark.png */; };
+		CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F8159943C30065B440 /* silverbutton-dark.png */; };
+		CE70E1FE159943C30065B440 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F9159943C30065B440 /* silverbutton.png */; };
 		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -438,6 +443,11 @@
 		CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewSpriteCell.m; sourceTree = "<group>"; };
 		CE62FCAC15940A0100BEB3BE /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		CE62FCAD15940A0200BEB3BE /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
+		CE70E1F5159943C30065B440 /* greenbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenbutton-dark.png"; path = "Resources/greenbutton-dark.png"; sourceTree = "<group>"; };
+		CE70E1F6159943C30065B440 /* greenbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenbutton.png; path = Resources/greenbutton.png; sourceTree = "<group>"; };
+		CE70E1F7159943C30065B440 /* metalbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbutton-dark.png"; path = "Resources/metalbutton-dark.png"; sourceTree = "<group>"; };
+		CE70E1F8159943C30065B440 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/silverbutton-dark.png"; sourceTree = "<group>"; };
+		CE70E1F9159943C30065B440 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/silverbutton.png; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
@@ -1138,6 +1148,11 @@
 				C566AC291592A55A00D92879 /* Land Textures */,
 				CEC7C99215903CEC00FFB4F7 /* Facebook */,
 				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
+				CE70E1F5159943C30065B440 /* greenbutton-dark.png */,
+				CE70E1F6159943C30065B440 /* greenbutton.png */,
+				CE70E1F7159943C30065B440 /* metalbutton-dark.png */,
+				CE70E1F8159943C30065B440 /* silverbutton-dark.png */,
+				CE70E1F9159943C30065B440 /* silverbutton.png */,
 				CE552267159014FE00CDB131 /* drawframe.png */,
 				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
 				CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */,
@@ -1867,6 +1882,11 @@
 				C566AC351592A55A00D92879 /* snow.png in Resources */,
 				CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */,
 				CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */,
+				CE70E1FA159943C30065B440 /* greenbutton-dark.png in Resources */,
+				CE70E1FB159943C30065B440 /* greenbutton.png in Resources */,
+				CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */,
+				CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */,
+				CE70E1FE159943C30065B440 /* silverbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

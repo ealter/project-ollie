@@ -30,7 +30,7 @@
         
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
-        CGSize tableViewSize = CGSizeMake(winSize.width, winSize.height*0.3);
+        CGSize tableViewSize = CGSizeMake(winSize.width, 100);
         tableView = [SWTableView viewWithDataSource:self size:tableViewSize];
         
         tableView.direction = SWScrollViewDirectionHorizontal;
@@ -65,6 +65,7 @@
         cell = [[MyCell new] autorelease];
 		CCSprite *sprite = [CCSprite spriteWithFile:@"back-hd.png"];
 		sprite.anchorPoint = CGPointZero;
+        
 		[cell addChild:sprite];
 		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:20.0];
 		label.position = ccp(20, 20);
