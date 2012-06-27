@@ -2158,12 +2158,15 @@
 				GCC_OPTIMIZATION_LEVEL = 1;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ProjectOllie/Prefix.pch;
+				GCC_SHORT_ENUMS = YES;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
 				);
+				LLVM_LTO = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -2184,12 +2187,15 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ProjectOllie/Prefix.pch;
+				GCC_SHORT_ENUMS = YES;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
 				);
+				LLVM_LTO = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
