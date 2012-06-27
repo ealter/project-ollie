@@ -68,9 +68,4 @@
     return CGPointMake(pos.x * PTM_RATIO, pos.y * PTM_RATIO);
 }
 
--(void) dealloc
-{
-	[super dealloc];
-}
-
 @end

@@ -21,7 +21,6 @@
             if([view isKindOfClass:[UIView class]]) {
                 [view removeFromSuperview];
             }
-            [view release];
         }
     }
     [self stopActivityIndicator];

@@ -82,7 +82,6 @@
         CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
         [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
     }
-    
 }
 
 - (void) clear
@@ -96,7 +95,6 @@
 - (void) dealloc
 {
     delete shapeField;
-    [super dealloc];
 }
 
 /* Random Land Generators */

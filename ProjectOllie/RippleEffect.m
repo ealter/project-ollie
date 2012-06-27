@@ -34,8 +34,8 @@
     return [self init];
 }
 
-+(id)nodeWithTarget:(CCNode *)target{
-    return  [[[self alloc] initWithTarget:target] autorelease];
++ (id)nodeWithTarget:(CCNode *)target{
+    return  [[self alloc] initWithTarget:target];
 }
 
 - (id)init

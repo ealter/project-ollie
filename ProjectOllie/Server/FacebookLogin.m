@@ -62,7 +62,6 @@
         [requestData setObject:self.auth.username forKey:@"username"];
     }
     [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"facebookLogin"]];
-    [requestData release];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

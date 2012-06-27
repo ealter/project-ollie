@@ -18,7 +18,6 @@
     if(auth.username && auth.authToken) {
         NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:auth.username, auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", SERVER_AUTH_TOKEN_KEY, nil]];
         [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"logout"]];
-        [requestData release];
     }
     auth.authToken = nil;
     [auth.facebookLogin logout];

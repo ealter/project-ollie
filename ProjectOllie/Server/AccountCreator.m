@@ -41,7 +41,6 @@
         self.password = password;
         NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, email, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", @"email", nil]];
         [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"newAccount"]];
-        [requestData release];
     }
 }
 

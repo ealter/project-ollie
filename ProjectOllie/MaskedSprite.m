@@ -81,7 +81,7 @@
             DebugLog(@"The error: %@", error);
         }
         assert(mask_frag);
-        self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         fragmentShaderByteArray:mask_frag] autorelease];
+        self.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert fragmentShaderByteArray:mask_frag];
         
         CHECK_GL_ERROR_DEBUG();
         

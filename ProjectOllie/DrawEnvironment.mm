@@ -13,6 +13,7 @@
 #import "DrawMenu.h"
 #import "Terrain.h"
 #import "SandboxScene.h"
+#import "ActionLayer.h"
 
 @interface DrawEnvironment () <DrawMenu_delegate>
 
