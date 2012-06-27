@@ -16,6 +16,9 @@
 
 @interface DrawEnvironment () <DrawMenu_delegate>
 
+- (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location;
+- (void)drawCircleAt:(CGPoint)location;
+
 @end
 
 @implementation DrawEnvironment
@@ -58,10 +61,8 @@
 	return self;
 }
 
--(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView: [touch view]];
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
     if (location.x -brushradius<self.contentSize.width/20) {
@@ -76,6 +77,11 @@
     if (location.y+brushradius>self.contentSize.height*0.9) {
         location.y=self.contentSize.height*0.9-brushradius;
     }
+    return location;
+}
+
+- (void)drawCircleAt:(CGPoint)location
+{
     if (brushradius > 0) {
         [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
     } else {
@@ -83,32 +89,18 @@
     }
 }
 
--(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView: [touch view]];
-    location = [[CCDirector sharedDirector] convertToGL:location];
-    location = [self convertToNodeSpace:location];
-    
-    if (location.x -brushradius<self.contentSize.width/20) {
-        location.x=self.contentSize.width/20+brushradius;
-    }
-    if (location.x +brushradius>self.contentSize.width*0.95) {
-        location.x=self.contentSize.width*0.95-brushradius;
-    }
-    if (location.y -brushradius<self.contentSize.height/20) {
-        location.y=self.contentSize.height/20+brushradius;
-    }
-    if (location.y+brushradius>self.contentSize.height*0.9) {
-        location.y=self.contentSize.height*0.9-brushradius;
-    }
-    
-    if (brushradius > 0)
-    {
-        [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
-    }
-    else {
-        [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+    CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
+    [self drawCircleAt:location];
+}
+
+-(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for(UITouch *touch in touches) {
+        CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
+        [self drawCircleAt:location];
     }
 }
 
