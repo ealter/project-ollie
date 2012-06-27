@@ -19,14 +19,12 @@
 -(id) init
 {
     if (self = [super init]) {
-        // 'layer' is an autorelease object.
         self.actionLayer = [ActionLayer node];
         [self setAnchorPoint:ccp(.5,.5)];
 
         [self addChild:self.actionLayer];
         
-        Background *blayer = [Background node];
-        [blayer initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        Background *blayer = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         [self addChild:blayer];
         [self reorderChild:blayer z:-100];
         [self.actionLayer.camera.children addObject:blayer];
