@@ -19,14 +19,6 @@
 -(id) init
 {
 	if(self = [super init]) {
-        //Shader testy stuff here
-        CCSprite *sprite = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
-		sprite.anchorPoint = CGPointMake(0.5, 0.5);
-		sprite.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
-		[self addChild:sprite];
-        RippleEffect *ripple =[RippleEffect nodeWithTarget:sprite];
-        [self addChild:ripple];
-        
         CGSize winSize = [CCDirector sharedDirector].winSize;
         CGSize tableViewSize = CGSizeMake(winSize.width, 100);
         tableView = [SWTableView viewWithDataSource:self size:tableViewSize];
@@ -40,6 +32,28 @@
         
         [self addChild:tableView];
         [tableView reloadData];
+        
+        CGSize s = [[CCDirector sharedDirector] winSize];
+        
+        CCSprite *sprite2 = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
+		sprite2.anchorPoint = CGPointMake(0.5, 0.5);
+		sprite2.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
+		[self addChild:sprite2];
+        
+        CCRenderTexture *renderTextureA = [[CCRenderTexture renderTextureWithWidth:s.width height:s.height] retain];
+        [renderTextureA begin];
+        [self visit];
+        [renderTextureA end];
+        renderTextureA.position = CGPointMake(s.width, s.height);
+        //Shader testy stuff here
+        CCSprite *sprite = [CCSprite spriteWithTexture:renderTextureA.sprite.texture];
+		sprite.anchorPoint = CGPointMake(0.5, 0.5);
+		sprite.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
+		[self addChild:sprite];
+        
+        RippleEffect *ripple =[RippleEffect nodeWithTarget:sprite];
+        [self addChild:ripple];
+        
     }
 	return self;
 }

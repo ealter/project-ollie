@@ -42,8 +42,8 @@
 {
     self = [super init];
     if (self) {
-        rippleSpeed = 2.;
-        invDistanceValue = 10;        
+        rippleSpeed = 1.;
+        invDistanceValue = 20;        
         // 2
         NSError *error = nil;
         GLchar *mask_frag = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RippleEffect" ofType:@"fsh"] encoding:NSUTF8StringEncoding error:&error] UTF8String];
