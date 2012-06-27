@@ -6,10 +6,9 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#import "ActionLayer.h"
 #import "CCScene.h"
+
+@class ActionLayer;
 
 @interface SandboxScene : CCScene
 

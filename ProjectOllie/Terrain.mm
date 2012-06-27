@@ -58,6 +58,11 @@
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
 }
 
+- (void)shapeChanged
+{
+    //TODO: implement this
+}
+
 - (void) draw
 {
     //CC_NODE_DRAW_SETUP();
