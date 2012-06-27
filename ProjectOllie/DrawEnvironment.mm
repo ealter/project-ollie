@@ -22,8 +22,9 @@
 @end
 
 @implementation DrawEnvironment
-@synthesize numpoints, brushradius;
-@synthesize terrain;
+@synthesize numpoints   = _numpoints;
+@synthesize brushradius = _brushradius;
+@synthesize terrain     = _terrain;
 
 +(CCScene *) scene
 {
@@ -44,15 +45,11 @@
 {
 	if(self=[super init]) {
         CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
-        terrain = [[Terrain alloc]initWithTexture:texture];
-        [self addChild:terrain];
+        self.terrain = [[Terrain alloc]initWithTexture:texture];
+        [self addChild:self.terrain];
         self.isTouchEnabled = YES;
-                
-        brushradius = smallradius;
+        self.brushradius    = smallradius;
         
-        /*
-        /Load the menu for the drawing environment
-        */
         DrawMenu *drawnode = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
         drawnode.delegate = self;
         [self addChild:drawnode];
@@ -65,6 +62,7 @@
 {
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
+    float brushradius = self.brushradius;
     if (location.x -brushradius<self.contentSize.width/20) {
         location.x=self.contentSize.width/20+brushradius;
     }
@@ -82,10 +80,10 @@
 
 - (void)drawCircleAt:(CGPoint)location
 {
-    if (brushradius > 0) {
-        [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
+    if (self.brushradius > 0) {
+        [self.terrain addCircleWithRadius:self.brushradius x:location.x y:location.y];
     } else {
-        [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+        [self.terrain removeCircleWithRadius:-self.brushradius x:location.x y:location.y];
     }
 }
 
