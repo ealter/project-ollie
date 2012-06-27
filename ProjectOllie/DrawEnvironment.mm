@@ -19,7 +19,7 @@
 @end
 
 @implementation DrawEnvironment
-@synthesize numpoints, prevpoint, brushradius;
+@synthesize numpoints, brushradius;
 @synthesize terrain;
 
 +(CCScene *) scene
@@ -76,12 +76,9 @@
     if (location.y+brushradius>self.contentSize.height*0.9) {
         location.y=self.contentSize.height*0.9-brushradius;
     }
-    prevpoint = location;
-    if (brushradius > 0)
-    {
+    if (brushradius > 0) {
         [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
-    }
-    else {
+    } else {
         [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
     }
 }
@@ -90,7 +87,7 @@
 {
     UITouch *touch = [[event allTouches] anyObject];
     CGPoint location = [touch locationInView: [touch view]];
-    location = [[CCDirector sharedDirector] convertToGL: location];
+    location = [[CCDirector sharedDirector] convertToGL:location];
     location = [self convertToNodeSpace:location];
     
     if (location.x -brushradius<self.contentSize.width/20) {
@@ -113,7 +110,6 @@
     else {
         [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
     }
-    prevpoint = location;
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

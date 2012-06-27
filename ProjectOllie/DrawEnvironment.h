@@ -18,10 +18,9 @@
 @interface DrawEnvironment : CCLayer
 
 @property int numpoints;
-@property CGPoint prevpoint;
 @property float brushradius;
 
-@property (nonatomic, strong)Terrain *terrain;
+@property (nonatomic, strong) Terrain *terrain;
 
 +(CCScene *) scene;
 @end
