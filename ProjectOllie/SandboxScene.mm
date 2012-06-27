@@ -7,6 +7,7 @@
 //
 
 #import "SandboxScene.h"
+#import "cocos2d.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
 #import "Background.h"

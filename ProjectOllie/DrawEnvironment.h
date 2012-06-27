@@ -6,14 +6,14 @@
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
-#import "CCScene.h"
-#import "cocos2d.h"
+#import "CCLayer.h"
 
 #define smallradius 10.0f
 #define mediumradius 20.0f
 #define largeradius 30.0f
 
 @class Terrain;
+@class CCScene;
 
 @interface DrawEnvironment : CCLayer
 

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "cocos2d.h"
+
+@class CCNode;
 
 @protocol CameraObject <NSObject>
 

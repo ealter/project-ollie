@@ -9,6 +9,7 @@
 #import "GWCamera.h"
 #import "CGPointExtension.h"
 #import "ActionLayer.h"
+#import "cocos2d.h"
 
 @interface GWCamera()
 {
