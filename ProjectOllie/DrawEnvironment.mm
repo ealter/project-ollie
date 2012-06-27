@@ -89,9 +89,10 @@
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
-    [self drawCircleAt:location];
+    for(UITouch *touch in touches) {
+        CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
+        [self drawCircleAt:location];
+    }
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
