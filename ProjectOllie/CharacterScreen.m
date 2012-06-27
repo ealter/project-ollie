@@ -18,7 +18,7 @@
 
 -(id) init
 {
-	if( (self=[super init] )) {
+	if(self = [super init]) {
         //Shader testy stuff here
         CCSprite *sprite = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
 		sprite.anchorPoint = CGPointMake(0.5, 0.5);
@@ -26,8 +26,6 @@
 		[self addChild:sprite];
         RippleEffect *ripple =[RippleEffect nodeWithTarget:sprite];
         [self addChild:ripple];
-        
-        
         
         CGSize winSize = [CCDirector sharedDirector].winSize;
         CGSize tableViewSize = CGSizeMake(winSize.width, 100);
@@ -42,8 +40,6 @@
         
         [self addChild:tableView];
         [tableView reloadData];
-        
-        
     }
 	return self;
 }
@@ -88,7 +84,5 @@
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
 }
-
-
 
 @end

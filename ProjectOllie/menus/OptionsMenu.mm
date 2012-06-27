@@ -40,6 +40,7 @@
     if(![newUsername isEqualToString:[Authentication mainAuth].username]) {
         ChangeUserName *changeUserName = [[[ChangeUserName alloc]init] autorelease];
         changeUserName.delegate = self;
+        [self startActivityIndicator];
         [changeUserName changeUserNameTo:newUsername];
     }
 }

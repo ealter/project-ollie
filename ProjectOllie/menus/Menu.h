@@ -10,9 +10,13 @@
 
 @interface Menu : CCLayer
 
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+
 /* Transitions to the specified scene. If uiviews is not nil, it calls removeFromSuperview and release on each element. */
 - (void)transitionToSceneWithFile:(NSString *)sceneName removeUIViews:(NSArray *)uiviews;
 /* Adds a text field setting a bunch of common parameters */
 - (UITextField *)addTextFieldWithFrame:(CGRect)frame;
+- (void)startActivityIndicator;
+- (void)stopActivityIndicator;
 
 @end

@@ -58,6 +58,7 @@
 {
     NSString *username = nameField.text;
     NSString *password = pwField.text;
+    [self startActivityIndicator];
     [self.login loginWithUsername:username password:password];
 }
 
