@@ -8,9 +8,10 @@
 
 
 #import "PhysicsSprite.h"
+#import "Box2D.h"
 
 // Needed PTM_RATIO
-#import "HelloWorldLayer.h"
+#import "ActionLayer.h"
 
 #pragma mark - PhysicsSprite
 @implementation PhysicsSprite

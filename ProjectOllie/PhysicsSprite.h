@@ -7,7 +7,8 @@
 //
 
 #import "cocos2d.h"
-#import "Box2D.h"
+
+class b2Body;
 
 @interface PhysicsSprite : CCSprite
 {
