@@ -2,7 +2,7 @@
 //  ActionLayer.h
 //  ProjectOllie
 //
-//  Created by Lion User on 6/1/12.
+//  Created by Sam Zeckendorf on 6/1/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 

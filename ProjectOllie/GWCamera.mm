@@ -23,7 +23,7 @@
 -(void)twoFingerPan:(NSSet*)touches;
 -(void)twoFingerZoom:(NSSet*)touches;
 -(void)updateBounds;
--(void)checkBounds:(CCNode*)current;
+-(void)checkBounds;
 -(void)updateZoom;
 -(void)followTarget;
 -(void)handleShakeEffect:(float)dt;
@@ -317,13 +317,13 @@
     
     if(self.target == nil)
     {
-        [self checkBounds:subject_];
+        [self checkBounds];
     }
 }
 
--(void)checkBounds:(CCNode*)current{
+-(void)checkBounds{
     //elastic borders
-    CGPoint worldPos =  current.position;
+    CGPoint worldPos =  subject_.position;
     CGPoint newPos = ccp(0,0);
     //left border
     if(worldPos.x > 0)

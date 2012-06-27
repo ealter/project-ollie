@@ -2,7 +2,7 @@
 //  DrawEnvironment.h
 //  ProjectOllie
 //
-//  Created by Lion User on 6/2/12.
+//  Created by Tucker Stone on 6/2/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 

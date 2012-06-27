@@ -2,19 +2,9 @@
 //  AppDelegate.mm
 //  ProjectOllie
 //
-//  Created by Lion User on 5/31/12.
+//  Created by Eliot Alter on 5/31/12.
 //  Copyright hi ku llc 2012. All rights reserved.
 //
-
-
-/**
- * TODO
- **
- * Create TexturizedBody superclass (that land inherits from, maybe auxilliarry things too)
- * Implement texturized body into sandbox
- *
- *
- */
 
 #import "cocos2d.h"
 #import "AppDelegate.h"

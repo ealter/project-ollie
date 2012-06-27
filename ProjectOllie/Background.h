@@ -7,9 +7,6 @@
 //
 
 
-//TODO:
-//  Give Parallax (make independent of parallax node)
-
 
 #import <Foundation/Foundation.h>
 #import "CCLayer.h"
