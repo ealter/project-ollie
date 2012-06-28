@@ -814,7 +814,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>metalbutton.png</string>
+							<string>metalbutton-dark.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -837,7 +837,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>metalbutton.png</string>
+							<string>metalbutton-dark.png</string>
 						</array>
 					</dict>
 					<dict>

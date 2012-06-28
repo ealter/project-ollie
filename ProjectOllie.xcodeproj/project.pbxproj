@@ -96,6 +96,11 @@
 		CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA31594085800BEB3BE /* SWTableViewCell.m */; };
 		CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */; };
 		CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCAD15940A0200BEB3BE /* MyCell.m */; };
+		CE70E1FA159943C30065B440 /* greenbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F5159943C30065B440 /* greenbutton-dark.png */; };
+		CE70E1FB159943C30065B440 /* greenbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F6159943C30065B440 /* greenbutton.png */; };
+		CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F7159943C30065B440 /* metalbutton-dark.png */; };
+		CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F8159943C30065B440 /* silverbutton-dark.png */; };
+		CE70E1FE159943C30065B440 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F9159943C30065B440 /* silverbutton.png */; };
 		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -438,8 +443,13 @@
 		CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTableViewSpriteCell.m; sourceTree = "<group>"; };
 		CE62FCAC15940A0100BEB3BE /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
 		CE62FCAD15940A0200BEB3BE /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
-		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = ActionLayer.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = ActionLayer.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		CE70E1F5159943C30065B440 /* greenbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenbutton-dark.png"; path = "Resources/greenbutton-dark.png"; sourceTree = "<group>"; };
+		CE70E1F6159943C30065B440 /* greenbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenbutton.png; path = Resources/greenbutton.png; sourceTree = "<group>"; };
+		CE70E1F7159943C30065B440 /* metalbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbutton-dark.png"; path = "Resources/metalbutton-dark.png"; sourceTree = "<group>"; };
+		CE70E1F8159943C30065B440 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/silverbutton-dark.png"; sourceTree = "<group>"; };
+		CE70E1F9159943C30065B440 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/silverbutton.png; sourceTree = "<group>"; };
+		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
+		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Terrain.mm; sourceTree = "<group>"; };
 		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
@@ -969,6 +979,73 @@
 			path = libs/HMUtils;
 			sourceTree = "<group>";
 		};
+		C5FBA726159A8B0F00C1C624 /* Menu Objects */ = {
+			isa = PBXGroup;
+			children = (
+				C5FBA728159A8B6F00C1C624 /* CCBIs */,
+				CEA14DAA1587CA7E00735135 /* check-hd.png */,
+				CEA14DAB1587CA7E00735135 /* check.png */,
+				CEA14DAC1587CA7E00735135 /* clear-hd.png */,
+				CEA14DAD1587CA7E00735135 /* clear.png */,
+				CE1BB5171586A6BA0095A793 /* eraser-hd.png */,
+				CE1BB5181586A6BA0095A793 /* eraser.png */,
+				CE1BB5191586A6BA0095A793 /* large-hd.png */,
+				CE1BB51A1586A6BA0095A793 /* large.png */,
+				CE1BB51B1586A6BA0095A793 /* medium-hd.png */,
+				CE1BB51C1586A6BA0095A793 /* medium.png */,
+				CE1BB51D1586A6BA0095A793 /* small-hd.png */,
+				CE1BB51E1586A6BA0095A793 /* small.png */,
+				CE9957D3158AB5F000B863DF /* back-hd.png */,
+				CE9957D4158AB5F000B863DF /* back.png */,
+				CE30B1AB158FD0C8009EC82B /* dottedbox.png */,
+				CE70E1F5159943C30065B440 /* greenbutton-dark.png */,
+				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
+				CE70E1F6159943C30065B440 /* greenbutton.png */,
+				CE70E1F7159943C30065B440 /* metalbutton-dark.png */,
+				CE70E1F8159943C30065B440 /* silverbutton-dark.png */,
+				CE70E1F9159943C30065B440 /* silverbutton.png */,
+				CE552267159014FE00CDB131 /* drawframe.png */,
+				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
+				CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */,
+				CE30B1AD158FE846009EC82B /* selectedoption.png */,
+				CE30B19C158FC0C6009EC82B /* terrainbutton.png */,
+				CE1F2E7A1590385800710A32 /* dottedbox-hd.png */,
+				CE1F2E7B1590385800710A32 /* drawframe-hd.png */,
+				CEFB2C4F157D7655008A808D /* treez.png */,
+				CE62FC7A1593DAD300BEB3BE /* metalbutton.png */,
+				CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */,
+				CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */,
+				CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */,
+			);
+			name = "Menu Objects";
+			sourceTree = "<group>";
+		};
+		C5FBA728159A8B6F00C1C624 /* CCBIs */ = {
+			isa = PBXGroup;
+			children = (
+				CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */,
+				CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */,
+				CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */,
+				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
+				CE4B487E158BC40000040C1C /* LoginScreen.ccbi */,
+				CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */,
+				CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */,
+				CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */,
+			);
+			name = CCBIs;
+			sourceTree = "<group>";
+		};
+		C5FBA729159A8BCB00C1C624 /* Miscellaneous */ = {
+			isa = PBXGroup;
+			children = (
+				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
+				CE123C4C158811DC003AD813 /* background.jpg */,
+				C54A05F5158151A100D7B369 /* blocks-hd.png */,
+				CE94AC7B15785F89009B35B4 /* blocks.png */,
+			);
+			name = Miscellaneous;
+			sourceTree = "<group>";
+		};
 		CE0BD5F7158FFA3900C380CA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,50 +1214,13 @@
 			children = (
 				C566AC291592A55A00D92879 /* Land Textures */,
 				CEC7C99215903CEC00FFB4F7 /* Facebook */,
-				CE30B199158FC0C6009EC82B /* optionsbutton-hd.png */,
-				CE552267159014FE00CDB131 /* drawframe.png */,
-				CE30B19A158FC0C6009EC82B /* optionsbutton.png */,
-				CE30B19B158FC0C6009EC82B /* terrainbutton-hd.png */,
-				CE30B1AD158FE846009EC82B /* selectedoption.png */,
-				CE30B19C158FC0C6009EC82B /* terrainbutton.png */,
-				CE1F2E7A1590385800710A32 /* dottedbox-hd.png */,
-				CE1F2E7B1590385800710A32 /* drawframe-hd.png */,
-				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
-				CE9957D3158AB5F000B863DF /* back-hd.png */,
-				CE9957D4158AB5F000B863DF /* back.png */,
-				CE30B1AB158FD0C8009EC82B /* dottedbox.png */,
-				CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */,
-				CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */,
-				CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */,
-				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
-				CE4B487E158BC40000040C1C /* LoginScreen.ccbi */,
-				CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */,
-				CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */,
-				CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */,
-				CE123C4C158811DC003AD813 /* background.jpg */,
-				CEA14DAA1587CA7E00735135 /* check-hd.png */,
-				CEA14DAB1587CA7E00735135 /* check.png */,
-				CEA14DAC1587CA7E00735135 /* clear-hd.png */,
-				CEA14DAD1587CA7E00735135 /* clear.png */,
-				CE1BB5171586A6BA0095A793 /* eraser-hd.png */,
-				CE1BB5181586A6BA0095A793 /* eraser.png */,
-				CE1BB5191586A6BA0095A793 /* large-hd.png */,
-				CE1BB51A1586A6BA0095A793 /* large.png */,
-				CE1BB51B1586A6BA0095A793 /* medium-hd.png */,
-				CE1BB51C1586A6BA0095A793 /* medium.png */,
-				CE1BB51D1586A6BA0095A793 /* small-hd.png */,
-				CE1BB51E1586A6BA0095A793 /* small.png */,
-				C54A05F5158151A100D7B369 /* blocks-hd.png */,
-				CE94AA6D15785F83009B35B4 /* Default.png */,
-				CEFB2C4F157D7655008A808D /* treez.png */,
+				C5FBA726159A8B0F00C1C624 /* Menu Objects */,
+				C5FBA729159A8BCB00C1C624 /* Miscellaneous */,
 				CE94AA6F15785F83009B35B4 /* fps_images.png */,
+				CE94AA6D15785F83009B35B4 /* Default.png */,
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
 				CE94AA7515785F83009B35B4 /* Icon-72.png */,
-				CE62FC7A1593DAD300BEB3BE /* metalbutton.png */,
-				CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */,
-				CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */,
-				CE4BCDA3157AD07F002FD1F3 /* btn-test-2.png */,
 				CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */,
 				CE94AA7715785F83009B35B4 /* Icon-Small-50.png */,
 				CE94AA7915785F83009B35B4 /* Icon-Small.png */,
@@ -1189,7 +1229,6 @@
 				CE94AA7F15785F84009B35B4 /* Icon@2x.png */,
 				CE94AA8115785F84009B35B4 /* Info.plist */,
 				CE94AA8215785F84009B35B4 /* iTunesArtwork */,
-				CE94AC7B15785F89009B35B4 /* blocks.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1867,6 +1906,11 @@
 				C566AC351592A55A00D92879 /* snow.png in Resources */,
 				CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */,
 				CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */,
+				CE70E1FA159943C30065B440 /* greenbutton-dark.png in Resources */,
+				CE70E1FB159943C30065B440 /* greenbutton.png in Resources */,
+				CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */,
+				CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */,
+				CE70E1FE159943C30065B440 /* silverbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
