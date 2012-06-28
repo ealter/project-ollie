@@ -41,6 +41,7 @@
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
+		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
@@ -356,6 +357,8 @@
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
+		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOS_Versions.h; sourceTree = "<group>"; };
+		CE081665159BE73600064E04 /* IOS_Versions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOS_Versions.m; sourceTree = "<group>"; };
 		CE0BD5F3158FFA2500C380CA /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Logout.h; sourceTree = "<group>"; };
 		CE0BD5F4158FFA2500C380CA /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ProjectOllie/Server/Logout.m; sourceTree = "<group>"; };
 		CE0BD5F9159016E600C380CA /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -1130,6 +1133,8 @@
 				CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */,
 				CE8429F5157BD0E50038C653 /* Terrain.h */,
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
+				CE081664159BE73400064E04 /* IOS_Versions.h */,
+				CE081665159BE73600064E04 /* IOS_Versions.m */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
 				CE30B189158FBA12009EC82B /* Menus */,
@@ -2101,6 +2106,7 @@
 				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5C59391597CAB700C121B4 /* RippleEffect.m in Sources */,
+				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2172,7 +2178,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
 				);
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
