@@ -16,7 +16,6 @@
 /* Used so that we can login after account creation */
 @property (nonatomic, strong) NSString *username;
 @property (nonatomic, strong) NSString *password;
-@property (nonatomic, strong) Login *login;
 
 @end
 
@@ -24,7 +23,6 @@
 
 @synthesize username = _username;
 @synthesize password = _password;
-@synthesize login = _login;
 
 - (void)createAccountWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email
 {
@@ -46,9 +44,9 @@
 
 - (void)serverReturnedResult:(NSDictionary *)result
 {
-    self.login = [[Login alloc]init];
-    self.login.delegate = self;
-    [self.login loginWithUsername:self.username password:self.password];
+    Login *login = [[Login alloc]init];
+    login.delegate = self;
+    [login loginWithUsername:self.username password:self.password];
 }
 
 - (void)serverOperationSucceeded
