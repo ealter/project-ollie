@@ -13,9 +13,9 @@
 
 @interface RippleEffect ()
 
-@property  (nonatomic) GLuint invdistance;
-@property  (nonatomic) GLuint speed;
-@property (nonatomic, retain) CCNode *target;
+@property (nonatomic) GLuint invdistance;
+@property (nonatomic) GLuint speed;
+@property (nonatomic, strong) CCNode *target;
 @property (nonatomic) float rippleSpeed;
 @property (nonatomic) float invDistanceValue;
 

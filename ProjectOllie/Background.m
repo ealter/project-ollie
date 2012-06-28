@@ -17,7 +17,7 @@
  * Each of those CGSprite's has the same x position and are tiled vertically.
  * Invariant: The images in backgrounds are in order of left to right
  */
-@property (nonatomic, retain) NSMutableArray *backgrounds;
+@property (nonatomic, strong) NSMutableArray *backgrounds;
 
 - (void)initBackgrounds;
 
