@@ -102,13 +102,11 @@ enum {
 
 -(void) dealloc
 {
-delete world;
-world = NULL;
+    delete world;
+    world = NULL;
 
-delete m_debugDraw;
-m_debugDraw = NULL;
-
-[super dealloc];
+    delete m_debugDraw;
+    m_debugDraw = NULL;
 }	
 
 -(void) initPhysics

@@ -81,7 +81,7 @@
             DebugLog(@"The error: %@", error);
         }
         assert(mask_frag);
-        self.shaderProgram = [[[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert                                                                         fragmentShaderByteArray:mask_frag] autorelease];
+        self.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureColor_vert fragmentShaderByteArray:mask_frag];
         
         CHECK_GL_ERROR_DEBUG();
         
@@ -116,8 +116,6 @@
 }
 
 -(void) draw {
-  
-    
     CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
     // 1
@@ -214,7 +212,8 @@
     return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
 }
 
-- (void)clear{
+- (void)clear
+{
     [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
 }
 

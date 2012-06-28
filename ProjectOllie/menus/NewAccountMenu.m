@@ -96,7 +96,7 @@
 - (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    [[[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] autorelease] show];
+    [[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 @end

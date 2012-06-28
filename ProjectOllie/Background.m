@@ -17,7 +17,7 @@
  * Each of those CGSprite's has the same x position and are tiled vertically.
  * Invariant: The images in backgrounds are in order of left to right
  */
-@property (nonatomic, retain) NSMutableArray *backgrounds;
+@property (nonatomic, strong) NSMutableArray *backgrounds;
 
 - (void)initBackgrounds;
 
@@ -28,10 +28,8 @@
 @synthesize backgrounds = _backgrounds;
 @synthesize imageNames  = _imageNames;
 
-
 - (void)initBackgrounds;
 {
-
     [self setAnchorPoint:ccp(0,0)];
     
     if(self.children.count > 0)
@@ -77,14 +75,11 @@
     }
 }
 
-- (id)initWithSpeed:(int)speed images:(NSArray *)imageNames
+- (id)initWithSpeed:(float)speed images:(NSArray *)imageNames
 {
     if (self = [super init]) {
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
-        
-        //add schedule to move backgrounds
-        [self schedule:@selector(scroll:)];
     }
     return self;
 }
@@ -102,14 +97,7 @@
         [self initBackgrounds];
 }
 
--(void)update:(float)dt{
-    
-    
-
-}
-
-- (void) scroll:(ccTime)dt{
-
+- (void)update:(ccTime)dt{
     if(self.scrollSpeed == 0) return;
     
     float deltaX = self.scrollSpeed * dt;
@@ -120,7 +108,7 @@
         for(CCSprite *background in backgroundTiled)
             background.position = ccp(background.position.x - deltaX, background.position.y);
             if((self.scrollSpeed > 0 && background.position.x + background.boundingBox.size.width < 0) ||
-            (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) 
+               (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) 
             {
                 CGFloat newX = 0;
                 if(self.scrollSpeed > 0) {

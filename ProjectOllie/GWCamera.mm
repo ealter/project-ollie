@@ -18,6 +18,8 @@
     float targetScale;      //the scale we will zoom to in update
 }
 
++ (BOOL)isCCNodeCameraObject:(id)obj;
+
 /*private functions for callfunc delegate*/
 -(void)handleOneFingerMotion:(NSSet*)touches;
 -(void)handleTwoFingerMotion:(NSSet*)touches;
@@ -46,8 +48,7 @@
 @synthesize children        = _children;
 
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
-    if(( self = [super init] ))
-    {
+    if(self = [super init]) {
         //private variables
         subject_        = subject;
         worldDimensions = wd;
@@ -64,6 +65,11 @@
         self.children        = [NSMutableArray array];
     }
     return self;
+}
+
++ (BOOL)isCCNodeCameraObject:(id)obj
+{
+    return [obj conformsToProtocol:@protocol(CameraObject)] && [obj isKindOfClass:[CCNode class]];
 }
 
 -(void)followNode:(CCNode *)focused{
@@ -87,16 +93,15 @@
 }
 
 -(void)panBy:(CGPoint)diff{
-
     CGPoint oldPos = subject_.position;
     CGPoint newPos = ccpAdd(oldPos,diff);
     [subject_ setPosition:newPos];
     
-    for (id <CameraObject> child in self.children) {
-        CGPoint tdiff = ccpMult(diff,[child getParallaxRatio]);
-        CCNode* c = (CCNode*)child;
-        CGPoint oldPos = c.position;
-        [c setPosition:ccpAdd(oldPos,tdiff)];
+    for (CCNode<CameraObject> *child in self.children) {
+        if(![[self class] isCCNodeCameraObject:child]) continue;
+        CGPoint tdiff = ccpMult(diff, [child getParallaxRatio]);
+        CGPoint oldPos = child.position;
+        [child setPosition:ccpAdd(oldPos,tdiff)];
     }
 }
 
@@ -104,8 +109,7 @@
     [subject_ setPosition:dest];
 }
 
--(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition{
-    
+-(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition {
     CGPoint utCurrentPosition = currentPosition;
     currentPosition = [subject_ convertToNodeSpace:currentPosition];
     
@@ -114,11 +118,11 @@
     
     // Set the scale.
     float scale = subject_.scale;
-    float newScale = max(self.minimumScale,min(scale*diff, self.maximumScale));
+    float newScale = max(self.minimumScale, min(scale*diff, self.maximumScale));
     [subject_ setScale: newScale];
 
     // Get the new center point.
-    CGPoint newCenterPoint = ccpMult(currentPosition,subject_.scale);
+    CGPoint newCenterPoint = ccpMult(currentPosition, subject_.scale);
 
     // Then calculate the delta.
     CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
@@ -127,23 +131,23 @@
     //[self panBy:centerPointDelta];
     [subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
     
-    for (id<CameraObject> child in self.children) {
-        CCNode* c = (CCNode*)child;
+    for (CCNode<CameraObject> *child in self.children) {
+        if(![[self class] isCCNodeCameraObject:child]) continue;
+        
         CGPoint tempPosition = [subject_ convertToNodeSpace:utCurrentPosition];
         
-        CGPoint oldCenterPoint = ccpMult(tempPosition,c.scale);
+        CGPoint oldCenterPoint = ccpMult(tempPosition,child.scale);
         float scaleDiff = (newScale - scale)*([child getParallaxRatio]);
-        float tempNewScale = c.scale+scaleDiff;
+        float tempNewScale = child.scale+scaleDiff;
         
-        // Set the scale.
-        [c setScale: tempNewScale];
+        child.scale = tempNewScale;
         
         // Get the new center point.
-        CGPoint newCenterPoint = ccpMult(tempPosition,c.scale);
+        CGPoint newCenterPoint = ccpMult(tempPosition,child.scale);
         
         // Then calculate the delta.
         CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
-        [c setPosition:ccpAdd(c.position,centerPointDelta)];
+        [child setPosition:ccpAdd(child.position, centerPointDelta)];
     }
 }
 
@@ -153,7 +157,7 @@
     actionCount+=dt*shakeRate;
     
     //modulo the total action count around 360 degrees
-    actionCount = fmod(actionCount,360.f);
+    actionCount = fmod(actionCount, 360.f);
 
     float currentDegree = self.actionIntensity * sin(actionCount);
     
@@ -161,6 +165,7 @@
     CCNode* parent = [subject_ parent];
     parent.rotation = currentDegree;
 }
+
 -(void)addIntensity:(float)intensity{
     //add intensity to camera (determines shake)
     //but caps it at 50 (as it is degrees of rotation)
@@ -178,9 +183,7 @@
     [self followTarget];
 }
 
-
 -(void)touchesBegan:(NSSet *)touches{
-
     if([touches count] == 2) {
         UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
         UITouch *touch2 = [[touches allObjects] objectAtIndex:1];

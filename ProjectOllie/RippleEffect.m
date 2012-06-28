@@ -15,8 +15,6 @@
 @property (nonatomic, strong) CCRenderTexture *renderTexture;
 @property (nonatomic, strong) CCNode *renderParent;
 
--(void)updateRenderTexture;
-
 @end
 
 @implementation RippleEffect{
@@ -42,10 +40,6 @@
     return self;
 }
 
-+(id)nodeWithParent:(CCNode *)parent
-{
-    return [[RippleEffect alloc] initWithParent:parent];
-}
 - (id)init
 {
     self = [super init];

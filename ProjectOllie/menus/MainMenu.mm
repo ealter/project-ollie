@@ -77,17 +77,13 @@
 
 -(void)pressedLogout:(id)sender
 {
-    Logout *logout = [[Logout alloc]init];
-    [logout logout];
-    [logout release];
-    
+    [[[Logout alloc]init] logout];
     [self transitionToSceneWithFile:@"LoginScreen.ccbi" removeUIViews:nil];
 }
 
 - (void)dealloc
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
 }
 
 @end

@@ -58,7 +58,7 @@
     
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
-        cell = [[MyCell new] autorelease];
+        cell = [MyCell new];
 		CCSprite *sprite = [CCSprite spriteWithFile:@"back-hd.png"];
 		sprite.anchorPoint = CGPointZero;
         

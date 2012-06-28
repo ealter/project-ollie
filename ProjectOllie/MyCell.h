@@ -8,8 +8,6 @@
 
 #import "SWTableViewCell.h"
 
-@interface MyCell : SWTableViewCell {
-    
-}
+@interface MyCell : SWTableViewCell
 
 @end

@@ -9,6 +9,7 @@
 #import "Menu.h"
 #import "cocos2d.h"
 #import "CCBReader.h"
+#import "IOS_Versions.h"
 
 @implementation Menu
 
@@ -21,7 +22,6 @@
             if([view isKindOfClass:[UIView class]]) {
                 [view removeFromSuperview];
             }
-            [view release];
         }
     }
     [self stopActivityIndicator];
@@ -52,7 +52,8 @@
     if(!self.activityIndicator) {
         self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
         UIView *mainView = [CCDirector sharedDirector].view;
-        self.activityIndicator.color = [UIColor grayColor];
+        if([IOS_Versions iOS_5])
+            self.activityIndicator.color = [UIColor grayColor];
         self.activityIndicator.center = mainView.center;
         [mainView addSubview:self.activityIndicator];
     }
