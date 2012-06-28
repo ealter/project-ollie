@@ -23,19 +23,19 @@
         CGSize tableViewSize = CGSizeMake(winSize.width, 100);
         tableView = [SWTableView viewWithDataSource:self size:tableViewSize];
         
-        tableView.direction = SWScrollViewDirectionHorizontal;
-        tableView.anchorPoint = ccp(0,0);
-        tableView.position = ccp(0,0);
-        tableView.contentOffset = ccp(0,0);
-        tableView.delegate = self;
+        tableView.direction         = SWScrollViewDirectionHorizontal;
+        tableView.anchorPoint       = CGPointZero;
+        tableView.position          = CGPointZero;
+        tableView.contentOffset     = CGPointZero;
+        tableView.delegate          = self;
         tableView.verticalFillOrder = SWTableViewFillTopDown;
         
         [self addChild:tableView];
         [tableView reloadData];
         
-        CCSprite *sprite2 = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
-		sprite2.anchorPoint = CGPointMake(0.5, 0.5);
-		sprite2.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
+        CCSprite *sprite2   = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
+		sprite2.anchorPoint = ccp(0.5, 0.5);
+		sprite2.position    = ccp([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
 		[self addChild:sprite2];
         
         RippleEffect *ripple =[RippleEffect nodeWithParent:self];

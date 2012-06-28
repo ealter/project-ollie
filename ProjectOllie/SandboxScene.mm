@@ -35,7 +35,7 @@
         
         
         
-        RippleEffect *ripple = [RippleEffect nodeWithParent:self];
+        //RippleEffect *ripple = [RippleEffect nodeWithParent:self];
     }
     return self;
 }
