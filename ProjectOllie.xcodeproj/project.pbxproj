@@ -84,6 +84,7 @@
 		CE4BCDA8157AD080002FD1F3 /* comic andy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */; };
 		CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */; };
 		CE552268159014FE00CDB131 /* drawframe.png in Resources */ = {isa = PBXBuildFile; fileRef = CE552267159014FE00CDB131 /* drawframe.png */; };
+		CE5734DD159BDE5B00AEFB84 /* RippleSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5734DC159BDE5A00AEFB84 /* RippleSprite.m */; };
 		CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE5C59341597CA2800C121B4 /* RippleEffect.fsh */; };
 		CE5C59391597CAB700C121B4 /* RippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5C59381597CAB700C121B4 /* RippleEffect.m */; };
 		CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC7A1593DAD300BEB3BE /* metalbutton.png */; };
@@ -422,6 +423,8 @@
 		CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawEnvironment.h; sourceTree = "<group>"; };
 		CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = DrawEnvironment.mm; sourceTree = "<group>"; };
 		CE552267159014FE00CDB131 /* drawframe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = drawframe.png; path = Resources/drawframe.png; sourceTree = "<group>"; };
+		CE5734DB159BDE5900AEFB84 /* RippleSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleSprite.h; sourceTree = "<group>"; };
+		CE5734DC159BDE5A00AEFB84 /* RippleSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleSprite.m; sourceTree = "<group>"; };
 		CE5C59341597CA2800C121B4 /* RippleEffect.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = RippleEffect.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		CE5C59371597CAB700C121B4 /* RippleEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RippleEffect.h; sourceTree = "<group>"; };
 		CE5C59381597CAB700C121B4 /* RippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RippleEffect.m; sourceTree = "<group>"; };
@@ -1132,6 +1135,8 @@
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
+				CE5734DB159BDE5900AEFB84 /* RippleSprite.h */,
+				CE5734DC159BDE5A00AEFB84 /* RippleSprite.m */,
 				CE30B189158FBA12009EC82B /* Menus */,
 				CEF00102158BDCE500F7F1A8 /* Server */,
 				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
@@ -2101,6 +2106,7 @@
 				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5C59391597CAB700C121B4 /* RippleEffect.m in Sources */,
+				CE5734DD159BDE5B00AEFB84 /* RippleSprite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

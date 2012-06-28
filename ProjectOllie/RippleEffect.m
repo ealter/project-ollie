@@ -8,78 +8,69 @@
 
 #import "RippleEffect.h"
 #import "cocos2d.h"
-#import "CCGLProgram.h"
-#import "HMVectorNode.h"
+#import "RippleSprite.h"
 
 @interface RippleEffect ()
 
-@property  (nonatomic) GLuint invdistance;
-@property  (nonatomic) GLuint speed;
-@property (nonatomic, retain) CCNode *target;
-@property (nonatomic) float rippleSpeed;
-@property (nonatomic) float invDistanceValue;
+@property (nonatomic, strong) CCRenderTexture *renderTexture;
+@property (nonatomic, strong) CCNode *renderParent;
+
+-(void)updateRenderTexture;
 
 @end
 
 @implementation RippleEffect{
-    CCSprite *sprite;  //1
-    int timeUniformLocation;
-    float totalTime;
+    
+    RippleSprite* ripplesprite;
+    
 }
-@synthesize invdistance = invdistance_, speed = speed_, target, rippleSpeed, invDistanceValue;
 
--(id)initWithTarget:(CCNode *)targetNode
+@synthesize renderTexture = _renderTexture;
+@synthesize renderParent  = _renderParent;
+
+-(id)initWithParent:(CCNode *)parent
 {
-    self.target = targetNode;
-    return [self init];
+    if((self = [self init]))
+    {
+        self.renderParent = parent;
+        [self updateRenderTexture];
+        [self scheduleUpdate];
+        
+        ripplesprite = [RippleSprite spriteWithTexture:self.renderTexture.sprite.texture];
+        [self.renderParent addChild:ripplesprite];
+    }
+    return self;
 }
 
-+(id)nodeWithTarget:(CCNode *)target{
-    return  [[[self alloc] initWithTarget:target] autorelease];
++(id)nodeWithParent:(CCNode *)parent
+{
+    return [[RippleEffect alloc] initWithParent:parent];
 }
-
 - (id)init
 {
     self = [super init];
     if (self) {
-        rippleSpeed = 1.;
-        invDistanceValue = 20;        
-        // 2
-        NSError *error = nil;
-        GLchar *mask_frag = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RippleEffect" ofType:@"fsh"] encoding:NSUTF8StringEncoding error:&error] UTF8String];
-        if(error) {
-            DebugLog(@"The error: %@", error);
-        }
-        assert(mask_frag);
-        self.target.shaderProgram = [[CCGLProgram alloc] initWithVertexShaderByteArray:ccPositionTextureA8Color_vert fragmentShaderByteArray:mask_frag];
-        [self.target.shaderProgram addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
-        [self.target.shaderProgram addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
-        [self.target.shaderProgram link];
-        [self.target.shaderProgram updateUniforms];
-        
-        // 3
-		timeUniformLocation = glGetUniformLocation(self.target.shaderProgram->program_, "u_time");
-        
-		// 4
-		[self scheduleUpdate];
-        
-        self.invdistance  = glGetUniformLocation(self.target.shaderProgram->program_, "invdistance");
-        self.speed  = glGetUniformLocation(self.target.shaderProgram->program_, "speed");
-        
-        // 5
-        [self.target.shaderProgram use];
+        CGSize s = [[CCDirector sharedDirector] winSize];
+
+        self.renderTexture = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        self.renderTexture.position = CGPointMake(s.width, s.height);
+        [self.renderTexture clear:0 g:0 b:0 a:0];
+        glClearColor(0, 0, 0, 0);
         
     }
     return self;
 }
 
-- (void)update:(float)dt
+
+-(void)updateRenderTexture
 {
-    totalTime += dt;
-    [self.target.shaderProgram use];
-    glUniform1f(timeUniformLocation, totalTime);
-    glUniform1f(self.speed, rippleSpeed);
-    glUniform1f(self.invdistance, invDistanceValue);
+    [self.renderTexture clear:0 g:0 b:0 a:0];
+    [self.renderTexture begin];
+    [self.renderParent visit];
+    [self.renderTexture end];
+    ripplesprite.texture = self.renderTexture.sprite.texture;
+
 }
+
 
 @end

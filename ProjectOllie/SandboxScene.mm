@@ -35,23 +35,9 @@
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
         
-        CGSize s = [[CCDirector sharedDirector] winSize];
         
-        CCRenderTexture *renderTextureA = [[CCRenderTexture renderTextureWithWidth:s.width height:s.height] retain];
-        [renderTextureA begin];
-        [self visit];
-        [renderTextureA end];
-        renderTextureA.position = CGPointMake(s.width, s.height);
-        //Shader testy stuff here
-        CCSprite *sprite = [CCSprite spriteWithTexture:renderTextureA.sprite.texture];
-		sprite.anchorPoint = CGPointMake(0.5, 0.5);
-		sprite.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
-        [self addChild:sprite];
         
-        RippleEffect *ripple =[RippleEffect nodeWithTarget:sprite];
-        
-        [self addChild:ripple z:3];
-
+        RippleEffect *ripple = [RippleEffect nodeWithParent:self];
     }
     return self;
 }

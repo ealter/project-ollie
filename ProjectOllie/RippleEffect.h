@@ -12,7 +12,7 @@
 @interface RippleEffect : CCLayer {
     
 }
--(id)initWithTarget:(CCNode *)targetNode;
-+(id)nodeWithTarget:(CCNode *)target;
+-(id)initWithParent:(CCNode *)parent;
++(id)nodeWithParent:(CCNode *)parent;
 
 @end
