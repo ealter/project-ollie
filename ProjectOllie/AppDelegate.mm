@@ -159,11 +159,4 @@
     return [[Authentication mainAuth].facebookLogin.facebook handleOpenURL:url]; 
 }
 
-- (void) dealloc
-{
-	[window_ release];
-	[navController_ release];
-	
-	[super dealloc];
-}
 @end

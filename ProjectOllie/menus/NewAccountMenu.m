@@ -23,8 +23,7 @@
 
 -(id)init
 {
-    if(self=[super init])
-    {
+    if(self=[super init]) {
         CGRect nameframe = CGRectMake(self.contentSize.height*0.8, self.contentSize.width/2, 150, 30);
         nameField = [self addTextFieldWithFrame:nameframe];
         nameField.placeholder = @"Username";
@@ -75,6 +74,7 @@
     NSString *username = nameField.text;
     NSString *password = pwField.text;
     NSString *email    = emailField.text;
+    [self startActivityIndicator];
     [self.accountCreator createAccountWithUsername:username password:password email:email];
 }
 
@@ -96,7 +96,7 @@
 - (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    [[[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] autorelease] show];
+    [[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @interface LoginScreen : Menu <UITextFieldDelegate>
 
-@property (nonatomic, retain) UITextField *nameField;
-@property (nonatomic, retain) UITextField *pwField;
+@property (nonatomic, strong) UITextField *nameField;
+@property (nonatomic, strong) UITextField *pwField;
 
 @end

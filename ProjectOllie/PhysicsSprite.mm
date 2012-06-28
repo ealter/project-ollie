@@ -8,9 +8,10 @@
 
 
 #import "PhysicsSprite.h"
+#import "Box2D.h"
 
 // Needed PTM_RATIO
-#import "HelloWorldLayer.h"
+#import "ActionLayer.h"
 
 #pragma mark - PhysicsSprite
 @implementation PhysicsSprite
@@ -65,11 +66,6 @@
 -(CGPoint)position {
     b2Vec2 pos = body_->GetPosition();
     return CGPointMake(pos.x * PTM_RATIO, pos.y * PTM_RATIO);
-}
-
--(void) dealloc
-{
-	[super dealloc];
 }
 
 @end

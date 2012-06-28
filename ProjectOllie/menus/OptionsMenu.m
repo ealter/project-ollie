@@ -38,8 +38,9 @@
 {
     NSString *newUsername = nameField.text;
     if(![newUsername isEqualToString:[Authentication mainAuth].username]) {
-        ChangeUserName *changeUserName = [[[ChangeUserName alloc]init] autorelease];
+        ChangeUserName *changeUserName = [[ChangeUserName alloc] init];
         changeUserName.delegate = self;
+        [self startActivityIndicator];
         [changeUserName changeUserNameTo:newUsername];
     }
 }
@@ -63,7 +64,7 @@
 
 - (void)serverOperationFailedWithError:(NSString *)error
 {
-    [[[[UIAlertView alloc]initWithTitle:@"Error when changing username" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] autorelease] show];
+    [[[UIAlertView alloc]initWithTitle:@"Error when changing username" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 @end

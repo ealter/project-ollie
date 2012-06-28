@@ -18,17 +18,7 @@
 
 -(id) init
 {
-	if( (self=[super init] )) {
-        //Shader testy stuff here
-        CCSprite *sprite = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
-		sprite.anchorPoint = CGPointMake(0.5, 0.5);
-		sprite.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
-		[self addChild:sprite];
-        RippleEffect *ripple =[RippleEffect nodeWithTarget:sprite];
-        [self addChild:ripple];
-        
-        
-        
+	if(self = [super init]) {
         CGSize winSize = [CCDirector sharedDirector].winSize;
         CGSize tableViewSize = CGSizeMake(winSize.width, 100);
         tableView = [SWTableView viewWithDataSource:self size:tableViewSize];
@@ -43,6 +33,12 @@
         [self addChild:tableView];
         [tableView reloadData];
         
+        CCSprite *sprite2 = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
+		sprite2.anchorPoint = CGPointMake(0.5, 0.5);
+		sprite2.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
+		[self addChild:sprite2];
+        
+        RippleEffect *ripple =[RippleEffect nodeWithParent:self];
         
     }
 	return self;
@@ -62,7 +58,7 @@
     
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
-        cell = [[MyCell new] autorelease];
+        cell = [MyCell new];
 		CCSprite *sprite = [CCSprite spriteWithFile:@"back-hd.png"];
 		sprite.anchorPoint = CGPointZero;
         
@@ -88,7 +84,5 @@
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
 }
-
-
 
 @end

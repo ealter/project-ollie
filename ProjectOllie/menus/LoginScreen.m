@@ -58,6 +58,7 @@
 {
     NSString *username = nameField.text;
     NSString *password = pwField.text;
+    [self startActivityIndicator];
     [self.login loginWithUsername:username password:password];
 }
 
@@ -79,9 +80,7 @@
 - (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
-    [alert show];
-    [alert release];
+    [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
     [self serverOperationSucceeded]; //TODO: Make the person log in again
 }
 

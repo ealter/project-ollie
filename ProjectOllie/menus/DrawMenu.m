@@ -12,7 +12,7 @@
 #define HEIGHT_MULTIPLIER 0.84
 
 @interface DrawMenu ()
-@property (nonatomic, retain) CCSprite *selected;
+@property (nonatomic, strong) CCSprite *selected;
 @end
 
 @implementation DrawMenu

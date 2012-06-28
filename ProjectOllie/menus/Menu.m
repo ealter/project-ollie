@@ -9,8 +9,11 @@
 #import "Menu.h"
 #import "cocos2d.h"
 #import "CCBReader.h"
+#import "IOS_Versions.h"
 
 @implementation Menu
+
+@synthesize activityIndicator = _activityIndicator;
 
 - (void)transitionToSceneWithFile:(NSString *)sceneName removeUIViews:(NSArray *)uiviews
 {
@@ -19,9 +22,9 @@
             if([view isKindOfClass:[UIView class]]) {
                 [view removeFromSuperview];
             }
-            [view release];
         }
     }
+    [self stopActivityIndicator];
     CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:sceneName];
     //Disabled temp cause of poor shader interaction
     //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
@@ -42,6 +45,25 @@
     field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
     [[CCDirector sharedDirector].view.window addSubview:field];
     return field;
+}
+
+- (void)startActivityIndicator
+{
+    if(!self.activityIndicator) {
+        self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        UIView *mainView = [CCDirector sharedDirector].view;
+        if([IOS_Versions iOS_5])
+            self.activityIndicator.color = [UIColor grayColor];
+        self.activityIndicator.center = mainView.center;
+        [mainView addSubview:self.activityIndicator];
+    }
+    [self.activityIndicator startAnimating];
+}
+
+- (void)stopActivityIndicator
+{
+    [self.activityIndicator stopAnimating];
+    [self.activityIndicator removeFromSuperview];
 }
 
 @end

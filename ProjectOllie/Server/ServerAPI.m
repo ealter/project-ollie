@@ -51,11 +51,11 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    [[[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
+    [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"")
                                  message:[error localizedDescription]
                                 delegate:nil
                        cancelButtonTitle:NSLocalizedString(@"OK", @"") 
-                       otherButtonTitles:nil] autorelease] show];
+                       otherButtonTitles:nil] show];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
@@ -89,18 +89,12 @@
     NSString *postData = [requestData urlEncodedString];
     request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
     
-    [[[NSURLConnection alloc]initWithRequest:request delegate:self] release];
+    (void)[[NSURLConnection alloc]initWithRequest:request delegate:self];
 }
 
 + (NSURL *)urlForPageName:(NSString *)page
 {
     return [[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:page];
-}
-
-- (void)dealloc
-{
-    [data_ release];
-    [super dealloc];
 }
 
 @end
