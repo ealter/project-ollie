@@ -12,6 +12,7 @@
 #import "Background.h"
 #import "MaskedSprite.h"
 #import "RippleEffect.h"
+#import "GameConstants.h"
 
 #define kTagPoly 10
 #define kTagBox 20

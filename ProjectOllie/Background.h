@@ -6,8 +6,6 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-
-
 #import "CCLayer.h"
 #import "GWCamera.h"
 

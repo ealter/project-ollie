@@ -9,7 +9,6 @@
 #import "RippleEffect.h"
 #import "cocos2d.h"
 
-
 @interface RippleEffect()
 
 /* Shader locations for the values we give it */
@@ -37,18 +36,12 @@
 /* The total time elapsed since updating hath begun */
 @property (assign, nonatomic) float totalTime;
 
-/* the X coordinate of the origin of the ripple */
-@property (assign, nonatomic) float originX;
-
-/* the Y coordinate of the origin of the ripple */
-@property (assign, nonatomic) float originY;
-
+/* The origin of the ripple */
+@property (assign, nonatomic) CGPoint origin;
 
 @end
 
-@implementation RippleEffect{
-
-}
+@implementation RippleEffect
 
 @synthesize invDistanceLoc      = _invDistanceLoc;
 @synthesize speedLoc            = _speedLoc;
@@ -63,8 +56,7 @@
 @synthesize totalTime           = _totalTime;
 @synthesize renderTexture       = _renderTexture;
 @synthesize scaledTexture       = _scaledTexture;
-@synthesize originX             = _originX;
-@synthesize originY             = _originY;
+@synthesize origin              = _origin;
 
 -(id)initWithSubject:(CCNode*)subject atOrigin:(CGPoint)origin{
     
@@ -77,17 +69,14 @@
     [rt clear:0 g:0 b:0 a:0];
     
     //call init using rendertexture's texture
-    if(self = [super initWithTexture:rt.sprite.texture])
-    {
-
+    if(self = [super initWithTexture:rt.sprite.texture]) {
         self.rippleSpeed      = 20.0;
         self.invDistanceValue = 18.0;
         self.lifetime         = .5f;
         self.totalTime        = 0.f;
         self.target           = subject;
         self.renderTexture    = rt;
-        self.originX          = -origin.x/s.width;
-        self.originY          = -origin.y/s.height;
+        self.origin           = ccp(-origin.x/s.width, -origin.y/s.height);
         
         self.scaledTexture = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
@@ -120,8 +109,8 @@
         glUniform1f(self.speedLoc, self.rippleSpeed);
         glUniform1f(self.invDistanceLoc, self.invDistanceValue);
         glUniform1f(self.lifetimeLoc, self.lifetime);
-        glUniform1f(self.originXUniformLoc, self.originX);
-        glUniform1f(self.originYUniformLoc, self.originY);
+        glUniform1f(self.originXUniformLoc, self.origin.x);
+        glUniform1f(self.originYUniformLoc, self.origin.y);
         
         //sprite properties
         [self scheduleUpdate];
@@ -133,10 +122,7 @@
 }
 
 -(void)update:(float)dt{
-
-    
-    if(self.totalTime < self.lifetime)
-    {
+    if(self.totalTime < self.lifetime) {
         [self.renderTexture clear:0 g:0 b:0 a:0];
         [self.renderTexture begin];
         [self.target visit];
@@ -147,18 +133,14 @@
         [self.parent removeChild:self cleanup:YES];
     }
     
-    
     self.totalTime += dt;
     [self.shaderProgram use];
     glUniform1f(self.timeUniformLoc, self.totalTime);
-    
 }
 
 -(void)setLifetime:(float)lifetime{
-    
     self->_lifetime = lifetime;
     glUniform1f(self.lifetimeLoc, self.lifetime);
-    
 }
 
 @end
