@@ -23,7 +23,7 @@
 
 @synthesize texture = texture_;
 
-- (id) initWithTexture:(CCTexture2D*)t
+- (id)initWithTexture:(CCTexture2D*)t
 {
     if(self = [super init])
     {
@@ -31,7 +31,7 @@
         self->texture_ = t;
         
         drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(480,320)];
-        drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
+        drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
         polyRenderer = [[HMVectorNode alloc] init];
         [self addChild:polyRenderer];
@@ -40,33 +40,33 @@
 }
 
 //Building land
-- (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
+- (void)addCircleWithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField->clipCircle(true, r, x, y);
-    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
+    shapeField->clipCircle(true, radius, x, y);
+    [drawSprite addCircleAt:ccp(x,y) radius:radius];
 }
 
-- (void) addQuadWithPoints:(CGPoint[])p
+- (void)addQuadWithPoints:(CGPoint[])p
 {
     float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
     float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
     shapeField->clipConvexQuad(true, x, y);
-    [drawSprite drawPolygon:p numPoints:4 Additive:YES];
+    [drawSprite addPolygon:p numPoints:4];
 }
 
 //Removing land
-- (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
+- (void)removeCircleWithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField->clipCircle(false, r, x, y);
-    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
+    shapeField->clipCircle(false, radius, x, y);
+    [drawSprite removeCircleAt:ccp(x,y) radius:radius];
 }
 
-- (void) removeQuadWithPoints:(CGPoint[])p
+- (void)removeQuadWithPoints:(CGPoint[])p
 {
     float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
     float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
     shapeField->clipConvexQuad(false, x, y);
-    [drawSprite drawPolygon:p numPoints:4 Additive:NO];
+    [drawSprite removePolygon:p numPoints:4];
 }
 
 - (void)shapeChanged
@@ -74,7 +74,7 @@
     //TODO: implement this
 }
 
-- (void) draw
+- (void)draw
 {
     //CC_NODE_DRAW_SETUP();
     ccGLEnable( glServerState_ );
@@ -99,7 +99,7 @@
 */
 }
 
-- (void) clear
+- (void)clear
 {
     //Clear the shape field
     shapeField->clear();
@@ -107,14 +107,14 @@
     [polyRenderer clear];
 }
 
-- (void) dealloc
+- (void)dealloc
 {
     delete shapeField;
 }
 
 /* Random Land Generators */
 
-+ (Terrain*) generateRandomOneIsland
++ (Terrain*)generateRandomOneIsland
 {
     return nil;
 }

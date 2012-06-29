@@ -29,6 +29,9 @@
 @property (nonatomic) GLuint screenWidthLocation;
 @property (nonatomic) GLuint screenHeightLocation;
 
+- (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red;
+- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+
 @end
 
 @implementation MaskedSprite
@@ -170,14 +173,20 @@
     
 }
 
--(void)drawCircleAt:(CGPoint)center withRadius:(float)radius Additive:(bool)add
+- (void)addCircleAt:(CGPoint)center radius:(float)radius
+{
+    [self drawCircleAt:center radius:radius red:COVERED_RED];
+}
+
+- (void)removeCircleAt:(CGPoint)center radius:(float)radius
+{
+    [self drawCircleAt:center radius:radius red:INITIAL_RED];
+}
+
+- (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
 {
 
-    ccColor4F color;
-    if(add)
-        color = ccc4f(COVERED_RED,0,0,1);
-    else
-        color = ccc4f(INITIAL_RED,0,0,1);
+    ccColor4F color = ccc4f(red,0,0,1);
     [self.maskTexture begin];
     [self->pr drawDot:ccpMult(center,.5f) radius:(radius/2.f + .5f) color:color];
     [self->pr visit];
@@ -185,19 +194,24 @@
     [self.maskTexture end];
 }
 
+- (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [self drawPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
+}
 
-- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add
+- (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
+{
+    [self drawPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
+}
+
+- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     for(int i = 0; i < numberOfPoints; i++)
     {
         poly[i] = ccpMult(poly[i],.5f);
     }
     
-    ccColor4F color;
-    if(add)
-        color = ccc4f(COVERED_RED,0,0,1);
-    else
-        color = ccc4f(INITIAL_RED,0,0,1);
+    ccColor4F color = ccc4f(red,0,0,1);
     
     [self.maskTexture begin];
     [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:color];
