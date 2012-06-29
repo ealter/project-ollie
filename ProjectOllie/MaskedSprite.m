@@ -109,6 +109,7 @@
         
         /* Handles the CCRenderTexture positions/scales */
         
+        //Rescale back to greater size
         self.renderTexture.scale = 2;
         
         //On the lower left quarter of the screen.

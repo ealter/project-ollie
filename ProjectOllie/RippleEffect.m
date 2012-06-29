@@ -139,7 +139,6 @@
         [self.parent removeChild:self cleanup:YES];
     }
     
-    
     self.totalTime += dt;
     [self.shaderProgram use];
     glUniform1f(self.timeUniformLoc, self.totalTime);

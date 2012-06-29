@@ -325,8 +325,8 @@ enum {
         location = [touch locationInView: [touch view]];
         location = [[CCDirector sharedDirector] convertToGL: location];
         
-       // RippleEffect* ripple = [[RippleEffect alloc] initWithSubject:self.parent atOrigin:location];
-       // [self.parent.parent addChild: ripple];
+        RippleEffect* ripple = [[RippleEffect alloc] initWithSubject:self.parent atOrigin:location];
+        [self.parent.parent addChild: ripple];
         
         location = [self convertToNodeSpace:location];
         
