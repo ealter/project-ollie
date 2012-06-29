@@ -9,7 +9,6 @@
 #import "RippleEffect.h"
 #import "cocos2d.h"
 
-
 @interface RippleEffect()
 
 /* Shader locations for the values we give it */
@@ -35,18 +34,12 @@
 /* The total time elapsed since updating hath begun */
 @property (assign, nonatomic) float totalTime;
 
-/* the X coordinate of the origin of the ripple */
-@property (assign, nonatomic) float originX;
-
-/* the Y coordinate of the origin of the ripple */
-@property (assign, nonatomic) float originY;
-
+/* The origin of the ripple */
+@property (assign, nonatomic) CGPoint origin;
 
 @end
 
-@implementation RippleEffect{
-
-}
+@implementation RippleEffect
 
 @synthesize invDistanceLoc      = _invDistanceLoc;
 @synthesize speedLoc            = _speedLoc;
@@ -60,8 +53,7 @@
 @synthesize lifetime            = _lifetime;
 @synthesize totalTime           = _totalTime;
 @synthesize renderTexture       = _renderTexture;
-@synthesize originX             = _originX;
-@synthesize originY             = _originY;
+@synthesize origin              = _origin;
 
 -(id)initWithSubject:(CCNode*)subject atOrigin:(CGPoint)origin{
     
@@ -82,8 +74,7 @@
         self.totalTime        = 0.f;
         self.target           = subject;
         self.renderTexture    = rt;
-        self.originX          = -origin.x/s.width;
-        self.originY          = -origin.y/s.height;
+        self.origin           = ccp(-origin.x/s.width, -origin.y/s.height);
         
         NSError *error = nil;
         GLchar *ripple_frag = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RippleEffect" ofType:@"fsh"] encoding:NSUTF8StringEncoding error:&error] UTF8String];
@@ -112,8 +103,8 @@
         glUniform1f(self.speedLoc, self.rippleSpeed);
         glUniform1f(self.invDistanceLoc, self.invDistanceValue);
         glUniform1f(self.lifetimeLoc, self.lifetime);
-        glUniform1f(self.originXUniformLoc, self.originX);
-        glUniform1f(self.originYUniformLoc, self.originY);
+        glUniform1f(self.originXUniformLoc, self.origin.x);
+        glUniform1f(self.originYUniformLoc, self.origin.y);
         
         //sprite properties
         [self scheduleUpdate];
