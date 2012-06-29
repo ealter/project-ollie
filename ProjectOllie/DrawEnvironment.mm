@@ -99,33 +99,25 @@
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch *touch in touches) {
-        CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
-        [self drawCircleAt:location];
+        CGPoint location      = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         CGPoint previousPoint = [self transformTouchLocationFromTouchView:[touch previousLocationInView:touch.view]];
+        [self drawCircleAt:location];
 
         //Compute rectangle
         //Make unit vector between the two points
-        CGPoint unitvector;
-        unitvector.x = (location.x - previousPoint.x);
-        unitvector.y = (location.y - previousPoint.y);
-        float len = sqrt((unitvector.x*unitvector.x) + (unitvector.y*unitvector.y));
-        if (len == 0) return;
-        unitvector.x = unitvector.x/len;
-        unitvector.y = unitvector.y/len;
+        CGPoint unitvector = ccpSub(location, previousPoint);
+        if (unitvector.x == 0 && unitvector.y == 0) return;
+        unitvector = ccpNormalize(unitvector);
         
         //Rotate vector by 90 degrees, multiply by desired width
-        float holdy = unitvector.y;
-        unitvector.y=unitvector.x;
-        unitvector.x=-holdy;
+        unitvector = ccpPerp(unitvector);
+        unitvector = ccpMult(unitvector, fabs(self.brushradius));
         
-        unitvector.y=unitvector.y*fabs(self.brushradius);
-        unitvector.x=unitvector.x*fabs(self.brushradius);
-        
-        //Find the points, add them to the gpc_polygon
-        CGPoint points[] = {ccp(location.x+unitvector.x, location.y+unitvector.y),
-                            ccp(previousPoint.x+unitvector.x, previousPoint.y+unitvector.y),
-                            ccp(previousPoint.x-unitvector.x, previousPoint.y-unitvector.y),
-                            ccp(location.x-unitvector.x, location.y-unitvector.y)};
+        CGPoint points[] = {ccpAdd(location,      unitvector),
+                            ccpAdd(previousPoint, unitvector),
+                            ccpSub(previousPoint, unitvector),
+                            ccpSub(location,      unitvector)};
+        assert(sizeof(points)/sizeof(points[0]) == 4); //Make sure we made a rectangle
         
         //Add/subtract the rectangle
         if (self.brushradius > 0) {
