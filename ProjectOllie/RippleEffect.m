@@ -66,8 +66,7 @@
     [rt clear:0 g:0 b:0 a:0];
     
     //call init using rendertexture's texture
-    if(self = [super initWithTexture:rt.sprite.texture])
-    {
+    if(self = [super initWithTexture:rt.sprite.texture]) {
         self.rippleSpeed      = 20.0;
         self.invDistanceValue = 18.0;
         self.lifetime         = .5f;
@@ -115,10 +114,7 @@
 }
 
 -(void)update:(float)dt{
-
-    
-    if(self.totalTime < self.lifetime)
-    {
+    if(self.totalTime < self.lifetime) {
         [self.renderTexture clear:0 g:0 b:0 a:0];
         [self.renderTexture begin];
         [self.target visit];
@@ -130,18 +126,14 @@
         [self.parent removeChild:self cleanup:YES];
     }
     
-    
     self.totalTime += dt;
     [self.shaderProgram use];
     glUniform1f(self.timeUniformLoc, self.totalTime);
-    
 }
 
 -(void)setLifetime:(float)lifetime{
-    
     self->_lifetime = lifetime;
     glUniform1f(self.lifetimeLoc, self.lifetime);
-    
 }
 
 @end
