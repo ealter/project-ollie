@@ -26,11 +26,11 @@ class ShapeField;
 - (id) initWithTexture:(CCTexture2D*)t;
 
 //Building land
-- (void) addCircleWithRadius:(float)r x:(float)x y:(float)y;
+- (void) addCircleWithRadius:(float)radius x:(float)x y:(float)y;
 - (void) addQuadWithPoints:(CGPoint[])p;
 
 //Removing land
-- (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
+- (void) removeCircleWithRadius:(float)radius x:(float)x y:(float)y;
 - (void) removeQuadWithPoints:(CGPoint[])p;
 
 //Call whenever shape is changed to rebuild the stroke raster
