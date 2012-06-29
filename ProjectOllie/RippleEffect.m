@@ -31,6 +31,8 @@
 /* The renderTexture of the screen that we use */
 @property (nonatomic, strong) CCRenderTexture *renderTexture;
 
+@property (nonatomic, strong) CCRenderTexture *scaledTexture;
+
 /* The total time elapsed since updating hath begun */
 @property (assign, nonatomic) float totalTime;
 
@@ -53,6 +55,7 @@
 @synthesize lifetime            = _lifetime;
 @synthesize totalTime           = _totalTime;
 @synthesize renderTexture       = _renderTexture;
+@synthesize scaledTexture       = _scaledTexture;
 @synthesize origin              = _origin;
 
 -(id)initWithSubject:(CCNode*)subject atOrigin:(CGPoint)origin{
@@ -61,7 +64,7 @@
     CGSize s = [[CCDirector sharedDirector] winSize];
     
     CCRenderTexture* rt = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-    rt.position = CGPointMake(s.width, s.height);
+    rt.position = CGPointMake(s.width/4, s.height/4);
     
     [rt clear:0 g:0 b:0 a:0];
     
@@ -74,6 +77,10 @@
         self.target           = subject;
         self.renderTexture    = rt;
         self.origin           = ccp(-origin.x/s.width, -origin.y/s.height);
+        
+        self.scaledTexture = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        
+        
         
         NSError *error = nil;
         GLchar *ripple_frag = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"RippleEffect" ofType:@"fsh"] encoding:NSUTF8StringEncoding error:&error] UTF8String];
@@ -108,7 +115,8 @@
         //sprite properties
         [self scheduleUpdate];
         self.flipY = YES;
-        [self setPosition:ccp(self.contentSize.width/2.f,self.contentSize.height/2.f)];
+        
+        [self setPosition:ccp(self.contentSize.width/4.f,self.contentSize.height/4.f)];
     }
     return self;
 }
@@ -119,7 +127,6 @@
         [self.renderTexture begin];
         [self.target visit];
         [self.renderTexture end];
-        
         self.texture = self.renderTexture.sprite.texture;
     }
     else {
