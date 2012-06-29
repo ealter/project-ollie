@@ -43,19 +43,30 @@
 - (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(true, r, x, y);
-    
-    //part of drawing, unrelated to terrain
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
-    
-    
 }
 
+- (void) addQuadWithPoints:(CGPoint[])p
+{
+    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
+    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
+    shapeField->clipConvexQuad(true, x, y);
+    [drawSprite drawPolygon:p numPoints:4 Additive:YES];
+}
+
+//Removing land
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(false, r, x, y);
-    
-    //part of drawing, unrelated to terrain
     [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
+}
+
+- (void) removeQuadWithPoints:(CGPoint[])p
+{
+    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
+    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
+    shapeField->clipConvexQuad(false, x, y);
+    [drawSprite drawPolygon:p numPoints:4 Additive:NO];
 }
 
 - (void)shapeChanged
@@ -77,10 +88,14 @@
         points[i*2].y = shapeField->peSet[i]->y;
         points[i*2+1].x = shapeField->peSet[i]->next->x;
         points[i*2+1].y = shapeField->peSet[i]->next->y;
-        
-        CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
-        CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
-        [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
+    }
+#if 0
+    ccDrawLines(points, numLines);
+    delete [] points;
+#endif
+    CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
+    CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
+    [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
 */
 }
 

@@ -39,7 +39,6 @@
 		[self addChild:sprite2];
         
         //RippleEffect *ripple =[[RippleEffect alloc] initWithParent:self];
-        
     }
 	return self;
 }
