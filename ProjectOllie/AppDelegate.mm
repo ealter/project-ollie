@@ -8,7 +8,6 @@
 
 #import "cocos2d.h"
 #import "AppDelegate.h"
-#import "HelloWorldLayer.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
 #import "Authentication.h"

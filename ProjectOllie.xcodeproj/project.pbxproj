@@ -271,7 +271,6 @@
 		CE94AC6815785F89009B35B4 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC6715785F89009B35B4 /* b2Rope.cpp */; };
 		CE94AC6E15785F89009B35B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC6D15785F89009B35B4 /* main.m */; };
 		CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7015785F89009B35B4 /* AppDelegate.mm */; };
-		CE94AC7415785F89009B35B4 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
@@ -807,8 +806,6 @@
 		CE94AC6D15785F89009B35B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE94AC6F15785F89009B35B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CE94AC7015785F89009B35B4 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = AppDelegate.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
 		CE94AC7515785F89009B35B4 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		CE94AC7615785F89009B35B4 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
@@ -1192,8 +1189,6 @@
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
-				CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */,
-				CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
@@ -2071,7 +2066,6 @@
 				CE94AC6815785F89009B35B4 /* b2Rope.cpp in Sources */,
 				CE94AC6E15785F89009B35B4 /* main.m in Sources */,
 				CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */,
-				CE94AC7415785F89009B35B4 /* HelloWorldLayer.mm in Sources */,
 				CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */,
 				CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */,
 				C52986B31578A43300656B50 /* CCControl.m in Sources */,
