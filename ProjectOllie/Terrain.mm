@@ -30,7 +30,7 @@
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(1024,768)];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(480,320)];
         drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
         
         polyRenderer = [[HMVectorNode alloc] init];
