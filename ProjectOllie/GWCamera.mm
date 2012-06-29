@@ -392,7 +392,6 @@
     {
         if(subject_.scale > self.defaultScale)
         {
-            CCLOG(@"reverting...");
             float diff = subject_.scale - self.defaultScale;
             [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]];
             if(diff*diff < .01)

@@ -38,7 +38,7 @@
 		sprite2.position = CGPointMake([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
 		[self addChild:sprite2];
         
-        RippleEffect *ripple =[RippleEffect nodeWithParent:self];
+        //RippleEffect *ripple =[[RippleEffect alloc] initWithParent:self];
         
     }
 	return self;
