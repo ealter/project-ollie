@@ -7,22 +7,28 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "cocos2d.h"
 
+@class CCNode;
+
+@protocol CameraObject <NSObject>
+
+-(float)getParallaxRatio;
+-(bool)isBounded;
+
+@end
 
 @interface GWCamera : NSObject
 {
     CCNode* subject_; //The world we are observing
 }
-
 @property (assign, nonatomic) bool isChanging;          // Tells whether or not camera is transitioning
 
 @property (strong, nonatomic) CCNode* target;           // The target in the world we are following
 
+@property (strong, nonatomic) NSMutableArray* children; // The other nodes that move in relation to the subject
+
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
                                                         // used for shaking effects currently.
-
-@property (assign, nonatomic) CGPoint zoomOrigin;       // used as the origin for camera zooming.
 
 @property (assign, nonatomic) float maximumScale;       // maximum scale size
 
@@ -32,6 +38,9 @@
 
 /* Inits the camera with a world and its dimensions */
 -(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
+
+/* sets a new subject to affect */
+-(void)setSubject:(CCNode*)sub;
 
 /* Starts following the given node with realistic motion */
 -(void)followNode:(CCNode*)focused;

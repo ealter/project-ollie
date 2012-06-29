@@ -11,9 +11,11 @@
 #import "PointEdge.h"
 #import "ccMacros.h"
 #import "MaskedSprite.h"
+#import "HMVectorNode.h"
 
 @interface Terrain(){
     MaskedSprite *drawSprite;
+    HMVectorNode *polyRenderer;
 }
 @end
 
@@ -28,8 +30,11 @@
         self->shapeField = new ShapeField(1024, 768);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"pattern1.png" size:CGSizeMake(1024,768)];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(1024,768)];
         drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
+        
+        polyRenderer = [[HMVectorNode alloc] init];
+        [self addChild:polyRenderer];
     }
     return self;
 }
@@ -38,7 +43,7 @@
 - (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(true, r, x, y);
-    //[drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
+    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
 }
 
 - (void) addQuadWithPoints:(CGPoint[])p
@@ -64,12 +69,17 @@
     //[drawSprite subtractPolygon:p numPoints:4];
 }
 
+- (void)shapeChanged
+{
+    //TODO: implement this
+}
+
 - (void) draw
 {
     //CC_NODE_DRAW_SETUP();
     ccGLEnable( glServerState_ );
     [drawSprite draw];
-    
+    /*[polyRenderer clear];
     int numLines = shapeField->peSet.size()*2;
     ccVertex2F* points = new ccVertex2F[numLines];
     for (int i = 0; i < shapeField->peSet.size(); i++)
@@ -79,8 +89,14 @@
         points[i*2+1].x = shapeField->peSet[i]->next->x;
         points[i*2+1].y = shapeField->peSet[i]->next->y;
     }
+#if 0
     ccDrawLines(points, numLines);
     delete [] points;
+#endif
+    CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
+    CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
+    [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
+*/
 }
 
 - (void) clear
@@ -88,12 +104,12 @@
     //Clear the shape field
     shapeField->clear();
     [drawSprite clear];
+    [polyRenderer clear];
 }
 
 - (void) dealloc
 {
     delete shapeField;
-    [super dealloc];
 }
 
 /* Random Land Generators */

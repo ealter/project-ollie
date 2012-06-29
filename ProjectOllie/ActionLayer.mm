@@ -8,31 +8,24 @@
 
 #import "ActionLayer.h"
 #import "AppDelegate.h"
-#import "CCAction.h"
-#import "GWCamera.h"
 #import "PhysicsSprite.h"
 #import "Background.h"
 #import "MaskedSprite.h"
 
-//Pixel to metres ratio. Box2D uses metres as the unit for measurement.
-//This ratio defines how many pixels correspond to 1 Box2D "metre"
-//Box2D is optimized for objects of 1x1 metre therefore it makes sense
-//to define the ratio so that your most common object type is 1x1 metre.
-#define PTM_RATIO (32)
 #define kTagPoly 10
 #define kTagBox 20
-
 
 enum {
 	kTagParentNode = 1,
 };
 
 @interface ActionLayer()
+{
 
+}
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
 -(void) addNewStaticBodyAtPosition:(CGPoint)p;
-//-(void) followCenter;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 
@@ -41,15 +34,14 @@ enum {
 
 @implementation ActionLayer
 
-@synthesize center      = _center;
-@synthesize camera      = _camera;
-@synthesize windowSize  = _windowSize;
+@synthesize camera           = _camera;
+@synthesize parallaxElements = _parallaxElements; 
 
 +(CCScene *) scene
 {
     // 'scene' is an autorelease object.
     CCScene *scene = [CCScene node];
-
+    
     // 'layer' is an autorelease object.
     ActionLayer *layer = [ActionLayer node];
 
@@ -63,41 +55,25 @@ enum {
 -(id) init
 {
     if( (self=[super init])) {
+
+        //parallax elements setup
+        self.parallaxElements = [NSMutableArray array];
         
         //set up screen parameters
-        s = self.contentSize;
         self.anchorPoint = ccp(0,0);
         [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.windowSize = s;
-        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:s];
-        self.center = [CCNode node];
-        self.center.position = ccp(s.width/2, s.height/2);
+        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize];
 
-        //set up parallax
-        parallax_ = [CCParallaxNode node];
-        parallax_.anchorPoint = ccp(0,0);
-        Background* bglayer1 = [[Background alloc]initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
-        bglayer1.anchorPoint = ccp(0,0);
-        [bglayer1 setIgnoreAnchorPointForPosition:YES];
-       //[parallax_ setIgnoreAnchorPointForPosition:YES];
-
-        
-       // [parallax_ addChild:bglayer1 z:-1 parallaxRatio:ccp(.4f,.4f) positionOffset:ccp(0,0)];
-        
-        [self addChild:parallax_ z:-1];
-        
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
-        
-        
+
         // init physics
         [self initPhysics];
         
         //Set up sprite
-        
 #if 1
         // Use batch node. Faster
         CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:@"blocks.png" capacity:100];
@@ -109,19 +85,13 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
-        /*Background *blayer = [Background node];
-        [blayer initWithSpeed:180 images:[NSArray arrayWithObjects:@"background.jpg", nil]];
-        [self addChild:blayer];
-        [self reorderChild:blayer z:-1];*/
-        
-        [self addNewStaticBodyAtPosition:ccp(s.width/2, s.height/2)];
+        [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
-        label.position = ccp( s.width/2, s.height-50);
+        label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);
         
-        [self addChild:self.center];
         [self scheduleUpdate];
         
         
@@ -132,13 +102,11 @@ enum {
 
 -(void) dealloc
 {
-delete world;
-world = NULL;
+    delete world;
+    world = NULL;
 
-delete m_debugDraw;
-m_debugDraw = NULL;
-
-[super dealloc];
+    delete m_debugDraw;
+    m_debugDraw = NULL;
 }	
 
 -(void) initPhysics
@@ -179,9 +147,9 @@ m_debugDraw = NULL;
     b2ChainShape dynamicBox;
     b2Vec2 vs[4];
     vs[0].Set(0,0);
-    vs[1].Set(s.width/PTM_RATIO,0);
-    vs[2].Set(s.width/PTM_RATIO,s.height/PTM_RATIO);
-    vs[3].Set(0,s.height/PTM_RATIO);
+    vs[1].Set(self.contentSize.width/PTM_RATIO,0);
+    vs[2].Set(self.contentSize.width/PTM_RATIO,self.contentSize.height/PTM_RATIO);
+    vs[3].Set(0,self.contentSize.height/PTM_RATIO);
     dynamicBox.CreateLoop(vs, 4);
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
@@ -324,21 +292,31 @@ m_debugDraw = NULL;
     /**
      * User-made objects that also require updates
      */
-	[self.camera update:dt];
-    [parallax_ setPosition:self.position];
     
+	[self.camera update:dt];
+    //[self updateParallax];
+
+
+
+}
+
+-(void)updateParallax{
+        
+    for (Background* b in self.parallaxElements) {
+        [b setPosition:ccpMult(self.position,1./self.scale)];
+        [b setScale:self.scale];
+    }
+
 }
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-
     [self.camera touchesBegan:[event allTouches]];
-    
-        
-    
 }
+
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    [self.camera touchesEnded:touches];
 
     //Add a new body/atlas sprite at the touched location
     CGPoint location;
@@ -351,22 +329,20 @@ m_debugDraw = NULL;
     }
     
     /* add box */
-    CGRect bounds = CGRectMake(0, 0, s.width, s.height);
+    CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
     if([touches count] == 3)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
-            [self.camera addIntensity:6.f]; 
+            [self.camera addIntensity:10.f]; 
         }
     
 }
-
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
    [self.camera touchesMoved:[event allTouches]];
-    
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches
@@ -379,6 +355,16 @@ m_debugDraw = NULL;
 
         
     
+}
+
+//CAMERA OBJECT FUNCTIONS
+
+-(float) getParallaxRatio{
+    return 1.f;
+}
+
+-(bool) isBounded{
+    return YES;
 }
 
 

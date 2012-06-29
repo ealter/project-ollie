@@ -146,7 +146,6 @@
 	if( ! CGPointEqualToPoint(pos, lastPosition) ) {
 
 		for(unsigned int i=0; i < parallaxArray_->num; i++ ) {
-
 			CGPointObject *point = parallaxArray_->arr[i];
 			float x = -pos.x + pos.x * point.ratio.x + point.offset.x;
 			float y = -pos.y + pos.y * point.ratio.y + point.offset.y;

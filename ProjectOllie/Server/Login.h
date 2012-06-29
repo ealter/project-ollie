@@ -6,18 +6,9 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "ServerAPI.h"
+#import "ServerAccountsAPI.h"
 
-@protocol Login_Delegate <NSObject>
-@optional
-- (void)loginSucceeded;
-- (void)loginFailedWithError:(NSString *)error;
-@end
-
-@interface Login : ServerAPI
-
-@property (nonatomic, assign) id<Login_Delegate> delegate;
+@interface Login : ServerAccountsAPI
 
 - (void)loginWithUsername:(NSString *)username password:(NSString *)password;
 

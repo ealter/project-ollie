@@ -8,7 +8,7 @@
 
 #import "Logout.h"
 #import "Authentication.h"
-#import "NSDictionary+URLEncoding.h"
+#import "FacebookLogin.h"
 
 @implementation Logout
 
@@ -16,18 +16,16 @@
 {
     Authentication *auth = [Authentication mainAuth];
     if(auth.username && auth.authToken) {
-        NSURL *logoutURL = [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"accounts"] URLByAppendingPathComponent:@"logout"];
         NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:auth.username, auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", SERVER_AUTH_TOKEN_KEY, nil]];
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:logoutURL];
-        request.HTTPMethod = @"POST";
-        NSString *postData = [requestData urlEncodedString];
-        [requestData release];
-        request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
-        
-        NSURLConnection *connection = [[NSURLConnection alloc]initWithRequest:request delegate:nil];
-        [connection release];
+        [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"logout"]];
     }
     auth.authToken = nil;
+    [auth.facebookLogin logout];
+}
+
+- (void)serverReturnedResult:(NSDictionary *)result
+{
+    [self broadcastServerOperationSucceeded];
 }
 
 @end

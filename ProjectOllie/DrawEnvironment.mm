@@ -13,14 +13,19 @@
 #import "DrawMenu.h"
 #import "Terrain.h"
 #import "SandboxScene.h"
+#import "ActionLayer.h"
 
 @interface DrawEnvironment () <DrawMenu_delegate>
+
+- (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location;
+- (void)drawCircleAt:(CGPoint)location;
 
 @end
 
 @implementation DrawEnvironment
-@synthesize numpoints, prevpoint, brushradius;
-@synthesize terrain;
+@synthesize numpoints   = _numpoints;
+@synthesize brushradius = _brushradius;
+@synthesize terrain     = _terrain;
 
 +(CCScene *) scene
 {
@@ -41,30 +46,24 @@
 {
 	if(self=[super init]) {
         CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
-        terrain = [[Terrain alloc]initWithTexture:texture];
-        [self addChild:terrain];
+        self.terrain = [[Terrain alloc]initWithTexture:texture];
+        [self addChild:self.terrain];
         self.isTouchEnabled = YES;
-                
-        brushradius = smallradius;
+        self.brushradius    = smallradius;
         
-        /*
-        /Load the menu for the drawing environment
-        */
         DrawMenu *drawnode = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
         drawnode.delegate = self;
         [self addChild:drawnode];
+        
 	}
 	return self;
 }
 
--(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+- (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView: [touch view]];
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
-    
-    //Apply bounds
+    float brushradius = self.brushradius;
     if (location.x -brushradius<self.contentSize.width/20) {
         location.x=self.contentSize.width/20+brushradius;
     }
@@ -77,78 +76,71 @@
     if (location.y+brushradius>self.contentSize.height*0.9) {
         location.y=self.contentSize.height*0.9-brushradius;
     }
-    
-    //Add or subtract a circle
-    if (brushradius > 0)
-    {
-        [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
+    return location;
+}
+
+- (void)drawCircleAt:(CGPoint)location
+{
+    if (self.brushradius > 0) {
+        [self.terrain addCircleWithRadius:self.brushradius x:location.x y:location.y];
+    } else {
+        [self.terrain removeCircleWithRadius:-self.brushradius x:location.x y:location.y];
     }
-    else 
-    {
-        [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+}
+
+-(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for(UITouch *touch in touches) {
+        CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
+        [self drawCircleAt:location];
     }
-    
-    prevpoint = location;
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    UITouch *touch = [[event allTouches] anyObject];
-    CGPoint location = [touch locationInView: [touch view]];
-    location = [[CCDirector sharedDirector] convertToGL: location];
-    location = [self convertToNodeSpace:location];
-    
-    //Apply bounds
-    if (location.x -brushradius<self.contentSize.width/20) {
-        location.x=self.contentSize.width/20+brushradius;
-    }
-    if (location.x +brushradius>self.contentSize.width*0.95) {
-        location.x=self.contentSize.width*0.95-brushradius;
-    }
-    if (location.y -brushradius<self.contentSize.height/20) {
-        location.y=self.contentSize.height/20+brushradius;
-    }
-    if (location.y+brushradius>self.contentSize.height*0.9) {
-        location.y=self.contentSize.height*0.9-brushradius;
-    }
-    
-    //Compute rectangle
-    //Make unit vector between the two points
-    CGPoint unitvector;
-    unitvector.x = (location.x - prevpoint.x);
-    unitvector.y = (location.y - prevpoint.y);
-    float len = sqrt((unitvector.x*unitvector.x) + (unitvector.y*unitvector.y));
-    if (len == 0) return;
-    unitvector.x = unitvector.x/len;
-    unitvector.y = unitvector.y/len;
-    
-    //Rotate vector by 90 degrees, multiply by desired width
-    float holdy = unitvector.y;
-    unitvector.y=unitvector.x;
-    unitvector.x=-holdy;
-    
-    unitvector.y=unitvector.y*fabs(brushradius);
-    unitvector.x=unitvector.x*fabs(brushradius);
-    
-    //Find the points, add them to the gpc_polygon
-    CGPoint points[] = {ccp(location.x+unitvector.x, location.y+unitvector.y),
-                        ccp(prevpoint.x+unitvector.x, prevpoint.y+unitvector.y),
-                        ccp(prevpoint.x-unitvector.x, prevpoint.y-unitvector.y),
-                        ccp(location.x-unitvector.x, location.y-unitvector.y)};
-    
-    //Add/subtract the rectangle
-    if (brushradius > 0)
-    {
-        [terrain addQuadWithPoints:points];
-        [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
-    }
-    else 
-    {
-        [terrain removeQuadWithPoints:points];
-        //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
-    }
     
     prevpoint = location;
+
+    for(UITouch *touch in touches) {
+        CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
+        [self drawCircleAt:location];
+
+        //Compute rectangle
+        //Make unit vector between the two points
+        CGPoint unitvector;
+        unitvector.x = (location.x - prevpoint.x);
+        unitvector.y = (location.y - prevpoint.y);
+        float len = sqrt((unitvector.x*unitvector.x) + (unitvector.y*unitvector.y));
+        if (len == 0) return;
+        unitvector.x = unitvector.x/len;
+        unitvector.y = unitvector.y/len;
+        
+        //Rotate vector by 90 degrees, multiply by desired width
+        float holdy = unitvector.y;
+        unitvector.y=unitvector.x;
+        unitvector.x=-holdy;
+        
+        unitvector.y=unitvector.y*fabs(brushradius);
+        unitvector.x=unitvector.x*fabs(brushradius);
+        
+        //Find the points, add them to the gpc_polygon
+        CGPoint points[] = {ccp(location.x+unitvector.x, location.y+unitvector.y),
+                            ccp(prevpoint.x+unitvector.x, prevpoint.y+unitvector.y),
+                            ccp(prevpoint.x-unitvector.x, prevpoint.y-unitvector.y),
+                            ccp(location.x-unitvector.x, location.y-unitvector.y)};
+        
+        //Add/subtract the rectangle
+        if (brushradius > 0)
+        {
+            [terrain addQuadWithPoints:points];
+            [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
+        }
+        else 
+        {
+            [terrain removeQuadWithPoints:points];
+            //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+        }
+    }
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -172,7 +164,6 @@
     
     [self removeChild:self.terrain cleanup:YES];
     [scene.actionLayer addChild:self.terrain];
-    
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 

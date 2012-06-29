@@ -7,6 +7,7 @@
 //
 
 #import "Authentication.h"
+#import "FacebookLogin.h"
 
 static Authentication *auth = nil;
 
@@ -17,6 +18,7 @@ static Authentication *auth = nil;
 
 @synthesize authToken = _authToken;
 @synthesize username = _username;
+@synthesize facebookLogin = _facebookLogin;
 
 + (Authentication *)mainAuth {
     if(!auth) {
@@ -40,16 +42,27 @@ static Authentication *auth = nil;
     return self.authToken != nil;
 }
 
+- (FacebookLogin *)facebookLogin
+{
+    if(!_facebookLogin) {
+        _facebookLogin = [[FacebookLogin alloc]init];
+    }
+    return _facebookLogin;
+}
+
 - (void)setUsername:(NSString *)username
 {
     _username = username;
+    [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:USERNAME_CHANGED_BROADCAST object:self]];
     [[NSUserDefaults standardUserDefaults] setObject:username forKey:USERNAME_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setAuthToken:(NSString *)authToken
 {
     _authToken = authToken;
     [[NSUserDefaults standardUserDefaults] setObject:authToken forKey:AUTH_TOKEN_KEY];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

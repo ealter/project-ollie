@@ -7,8 +7,12 @@
 //
 
 #import "SandboxScene.h"
+#import "cocos2d.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
+#import "Background.h"
+#import "RippleEffect.h"
+
 @implementation SandboxScene
 
 @synthesize actionLayer = _actionLayer;
@@ -16,23 +20,22 @@
 -(id) init
 {
     if (self = [super init]) {
-        // 'layer' is an autorelease object.
         self.actionLayer = [ActionLayer node];
+        [self setAnchorPoint:ccp(.5,.5)];
+
+        [self addChild:self.actionLayer];
         
-        // add layer as a child to scene
-        [self addChild: self.actionLayer];
-        
-        /*
-        Background *blayer = [Background node];
-        [blayer initwithSpeed:3 andImage:@"background.jpg"];
+        Background *blayer = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         [self addChild:blayer];
-        [self reorderChild:blayer z:-100];*/
+        [self reorderChild:blayer z:-100];
+        [self.actionLayer.camera.children addObject:blayer];
+        
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
-        [self reorderChild:backnode z:2];
         
         
         
+        //RippleEffect *ripple = [RippleEffect nodeWithParent:self];
     }
     return self;
 }

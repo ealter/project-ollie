@@ -11,15 +11,15 @@
 //  Give Parallax (make independent of parallax node)
 
 
-#import <Foundation/Foundation.h>
 #import "CCLayer.h"
+#import "GWCamera.h"
 
-@interface Background : CCLayer 
+@interface Background : CCLayer <CameraObject> 
 
 @property (assign, nonatomic) float scrollSpeed; /* In pixels/second. Positive means left to right, negative means right to left. */
 @property (nonatomic, strong) NSArray *imageNames; //An array of NSStrings
 
-- (id)initWithSpeed:(int)speed images:(NSArray *)imageNames;
-- (void)scroll:(ccTime)dt;
+/* Note: It is fine to call the regular init method instead of this one. If you do that, make sure to set the imageNames at some point or else this class will not display anything. */
+- (id)initWithSpeed:(float)speed images:(NSArray *)imageNames;
 
 @end

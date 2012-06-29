@@ -10,10 +10,15 @@
 
 /* A singleton class that handles server authentication */
 
+#define USERNAME_CHANGED_BROADCAST @"username changed"
+
+@class FacebookLogin;
+
 @interface Authentication : NSObject
 
 @property (nonatomic, retain) NSString *authToken;
 @property (nonatomic, retain) NSString *username;
+@property (nonatomic, retain) FacebookLogin *facebookLogin;
 @property (nonatomic, readonly) BOOL isLoggedIn;
 
 + (Authentication *)mainAuth;

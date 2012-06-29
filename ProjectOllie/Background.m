@@ -17,7 +17,7 @@
  * Each of those CGSprite's has the same x position and are tiled vertically.
  * Invariant: The images in backgrounds are in order of left to right
  */
-@property (nonatomic, retain) NSMutableArray *backgrounds;
+@property (nonatomic, strong) NSMutableArray *backgrounds;
 
 - (void)initBackgrounds;
 
@@ -26,10 +26,12 @@
 @implementation Background
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
-@synthesize imageNames = _imageNames;
+@synthesize imageNames  = _imageNames;
 
 - (void)initBackgrounds;
 {
+    [self setAnchorPoint:ccp(0,0)];
+    
     if(self.children.count > 0)
         [self removeChildByTag:BACKGROUND_IMAGE_TAG cleanup:YES];
     NSArray *imageNames = self.imageNames;
@@ -73,14 +75,11 @@
     }
 }
 
-- (id)initWithSpeed:(int)speed images:(NSArray *)imageNames
+- (id)initWithSpeed:(float)speed images:(NSArray *)imageNames
 {
     if (self = [super init]) {
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
-        
-        //add schedule to move backgrounds
-        [self schedule:@selector(scroll:)];
     }
     return self;
 }
@@ -98,8 +97,9 @@
         [self initBackgrounds];
 }
 
-- (void) scroll:(ccTime)dt{
+- (void)update:(ccTime)dt{
     if(self.scrollSpeed == 0) return;
+    
     float deltaX = self.scrollSpeed * dt;
     int numBackgrounds = self.backgrounds.count;
     for(int i=0; i<numBackgrounds; i++) {
@@ -107,18 +107,19 @@
         CCSprite *background = [backgroundTiled lastObject];
         for(CCSprite *background in backgroundTiled)
             background.position = ccp(background.position.x - deltaX, background.position.y);
-        if((self.scrollSpeed > 0 && background.position.x + background.boundingBox.size.width < 0) ||
-           (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) {
-            CGFloat newX = 0;
-            if(self.scrollSpeed > 0) {
-                int index = i-1;
-                if(index < 0) {
-                    index += numBackgrounds;
-                    newX = -deltaX;
-                }
-                CCSprite *leftBackground = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
-                assert(leftBackground);
-                newX += leftBackground.position.x + leftBackground.boundingBox.size.width;
+            if((self.scrollSpeed > 0 && background.position.x + background.boundingBox.size.width < 0) ||
+               (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) 
+            {
+                CGFloat newX = 0;
+                if(self.scrollSpeed > 0) {
+                    int index = i-1;
+                    if(index < 0) {
+                        index += numBackgrounds;
+                        newX = -deltaX;
+                    }
+                    CCSprite *leftBackground = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
+                    assert(leftBackground);
+                    newX += leftBackground.position.x + leftBackground.boundingBox.size.width;
             }
             else {
                 int index = i+1;
@@ -137,7 +138,13 @@
     }
 }
 
+//Camera object
 
-//OVERRIDE
+-(float)getParallaxRatio{
+    return .3f;
+}
 
+-(bool)isBounded{
+    return NO;
+}
 @end
