@@ -63,6 +63,8 @@
     CGPoint location = [touch locationInView: [touch view]];
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
+    
+    //Apply bounds
     if (location.x -brushradius<self.contentSize.width/20) {
         location.x=self.contentSize.width/20+brushradius;
     }
@@ -75,14 +77,18 @@
     if (location.y+brushradius>self.contentSize.height*0.9) {
         location.y=self.contentSize.height*0.9-brushradius;
     }
-    prevpoint = location;
+    
+    //Add or subtract a circle
     if (brushradius > 0)
     {
         [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
     }
-    else {
+    else 
+    {
         [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
     }
+    
+    prevpoint = location;
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -92,6 +98,7 @@
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
     
+    //Apply bounds
     if (location.x -brushradius<self.contentSize.width/20) {
         location.x=self.contentSize.width/20+brushradius;
     }
@@ -105,13 +112,42 @@
         location.y=self.contentSize.height*0.9-brushradius;
     }
     
+    //Compute rectangle
+    //Make unit vector between the two points
+    CGPoint unitvector;
+    unitvector.x = (location.x - prevpoint.x);
+    unitvector.y = (location.y - prevpoint.y);
+    float len = sqrt((unitvector.x*unitvector.x) + (unitvector.y*unitvector.y));
+    if (len == 0) return;
+    unitvector.x = unitvector.x/len;
+    unitvector.y = unitvector.y/len;
+    
+    //Rotate vector by 90 degrees, multiply by desired width
+    float holdy = unitvector.y;
+    unitvector.y=unitvector.x;
+    unitvector.x=-holdy;
+    
+    unitvector.y=unitvector.y*fabs(brushradius);
+    unitvector.x=unitvector.x*fabs(brushradius);
+    
+    //Find the points, add them to the gpc_polygon
+    CGPoint points[] = {ccp(location.x+unitvector.x, location.y+unitvector.y),
+                        ccp(prevpoint.x+unitvector.x, prevpoint.y+unitvector.y),
+                        ccp(prevpoint.x-unitvector.x, prevpoint.y-unitvector.y),
+                        ccp(location.x-unitvector.x, location.y-unitvector.y)};
+    
+    //Add/subtract the rectangle
     if (brushradius > 0)
     {
+        [terrain addQuadWithPoints:points];
         [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
     }
-    else {
-        [terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
+    else 
+    {
+        [terrain removeQuadWithPoints:points];
+        //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
     }
+    
     prevpoint = location;
 }
 
@@ -140,45 +176,4 @@
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
-/*
-//MAKE SURE YOU FREE THE RECTANGLE AFTER YOU MAKE IT
--(gpc_polygon)rectangleMakeWithPoint:(CGPoint)pointa andPoint:(CGPoint)pointb withWidth:(float)width
-{
-    gpc_polygon rectangle;
-    rectangle.hole=new int(0);
-    rectangle.num_contours = 1;
-    
-    //Make unit vector between the two points
-    CGPoint unitvector;
-    unitvector.x = (pointa.x - pointb.x);
-    unitvector.y = (pointa.y - pointb.y);
-    float len = sqrt((unitvector.x*unitvector.x) + (unitvector.y*unitvector.y));
-    unitvector.x = unitvector.x/len;
-    unitvector.y = unitvector.y/len;
-    
-    //Rotate vector by 90 degrees, multiply by desired width
-    float holdy = unitvector.y;
-    unitvector.y=unitvector.x;
-    unitvector.x=-holdy;
-    
-    unitvector.y=unitvector.y*width;
-    unitvector.x=unitvector.x*width;
-    
-    //Find the points, add them to the gpc_polygon
-    rectangle.contour = new vertex_list;
-    rectangle.contour->num_vertices=4;
-    rectangle.contour->vertex = new ccVertex2F[4];
-    rectangle.contour->vertex[0].x = pointa.x+unitvector.x;
-    rectangle.contour->vertex[0].y = pointa.y+unitvector.y;
-    rectangle.contour->vertex[1].x = pointa.x-unitvector.x;
-    rectangle.contour->vertex[1].y = pointa.y-unitvector.y;
-    rectangle.contour->vertex[2].x = pointb.x-unitvector.x;
-    rectangle.contour->vertex[2].y = pointb.y-unitvector.y;
-    rectangle.contour->vertex[3].x = pointb.x+unitvector.x;
-    rectangle.contour->vertex[3].y = pointb.y+unitvector.y;
-    
-    
-    return rectangle;
-}
-*/
 @end

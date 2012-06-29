@@ -27,11 +27,13 @@ class ShapeField;
 
 //Building land
 - (void) addCircleWithRadius:(float)r x:(float)x y:(float)y;
+- (void) addQuadWithPoints:(CGPoint[])p;
 
 //Removing land
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
+- (void) removeQuadWithPoints:(CGPoint[])p;
 
-//Call whenever shape is changed to rebuild the derived physical bodies and drawing
+//Call whenever shape is changed to rebuild the stroke raster
 - (void) shapeChanged;
 
 //Reset to a blank terrain
