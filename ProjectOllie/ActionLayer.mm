@@ -2,7 +2,7 @@
 //  ActionLayer.m
 //  ProjectOllie
 //
-//  Created by Lion User on 6/1/12.
+//  Created by Sam Zeckendorf on 6/1/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
@@ -11,6 +11,7 @@
 #import "PhysicsSprite.h"
 #import "Background.h"
 #import "MaskedSprite.h"
+#import "RippleEffect.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -322,8 +323,11 @@ enum {
     CGPoint location;
     for( UITouch *touch in touches ) {
         location = [touch locationInView: [touch view]];
-        
         location = [[CCDirector sharedDirector] convertToGL: location];
+        
+       // RippleEffect* ripple = [[RippleEffect alloc] initWithSubject:self.parent atOrigin:location];
+       // [self.parent.parent addChild: ripple];
+        
         location = [self convertToNodeSpace:location];
         
     }

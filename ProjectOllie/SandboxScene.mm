@@ -2,8 +2,8 @@
 //  SandboxScene.m
 //  ProjectOllie
 //
-//  Created by Lion User on 6/6/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Created by Sam Zeckendorf on 6/6/12.
+//  Copyright 2012 hi ku llc All rights reserved.
 //
 
 #import "SandboxScene.h"
@@ -14,30 +14,36 @@
 #import "RippleEffect.h"
 
 @implementation SandboxScene
-
+{
+    RippleEffect *ripple;
+}
 @synthesize actionLayer = _actionLayer;
 
 -(id) init
 {
     if (self = [super init]) {
-        self.actionLayer = [ActionLayer node];
-        [self setAnchorPoint:ccp(.5,.5)];
-
-        [self addChild:self.actionLayer];
         
+        /* Set up action layer (where action occurs */
+        self.actionLayer = [ActionLayer node];
         Background *blayer = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
-        [self addChild:blayer];
-        [self reorderChild:blayer z:-100];
         [self.actionLayer.camera.children addObject:blayer];
         
+        CCNode* actionNode = [CCNode node];
+        [actionNode addChild:blayer];
+        [actionNode addChild:self.actionLayer];
+        
+        [self addChild:actionNode];
+
+        /* Set up sandbox scene properties */
+        [self setAnchorPoint:ccp(.5,.5)];
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
+        [self reorderChild:backnode z:1000];
         
-        
-        
-        //RippleEffect *ripple = [RippleEffect nodeWithParent:self];
+
     }
     return self;
 }
+
 
 @end

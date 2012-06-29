@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Eliot Alter on 6/11/12.
-//  Copyright (c) 2012 hi ku LLC. All rights reserved.
+//  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
 #import "CCSprite.h"
@@ -12,7 +12,6 @@
 
 - (void)drawCircleAt:(CGPoint) center withRadius:(float)radius Additive:(bool)add;
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add;
-- (void)drawLines:(const CGPoint*)poly numPoints:(NSUInteger)num;
 - (BOOL)saveMaskToFile:(NSString *)fileName;
 - (id)initWithFile:(NSString *)file size:(CGSize)size;
 - (void)clear;

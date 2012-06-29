@@ -7,9 +7,6 @@
 //
 
 
-//TODO:
-//  Give Parallax (make independent of parallax node)
-
 
 #import "CCLayer.h"
 #import "GWCamera.h"
