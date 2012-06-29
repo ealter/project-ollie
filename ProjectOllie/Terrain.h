@@ -6,12 +6,13 @@
 //  Copyright 2012 hi ku. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#import "Box2D.h"
+#import "CCNode.h"
 #include <vector>
 
 class ShapeField;
+class b2World;
+class b2Body;
+@class CCTexture2D;
 
 /*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
