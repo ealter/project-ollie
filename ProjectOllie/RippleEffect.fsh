@@ -27,5 +27,5 @@ void main()
     vec2 uv = tc + (amp)*cos(len*invdistance-u_time*speed);
     vec4 col = texture2D(u_texture, uv);
      
-    gl_FragColor = texture2D(u_texture,v_texCoord);
+    gl_FragColor = col;
 }

@@ -17,10 +17,11 @@
 
 @interface DrawEnvironment : CCLayer
 
-@property int numpoints;
-@property float brushradius;
+@property (nonatomic) int numpoints;
+@property (nonatomic) float brushradius;
 
 @property (nonatomic, strong) Terrain *terrain;
 
-+(CCScene *) scene;
++ (CCScene *)scene;
+
 @end

@@ -40,6 +40,7 @@
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
+		CE029088159E6AD100CEF219 /* GameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029087159E6AD000CEF219 /* GameConstants.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
@@ -271,7 +272,6 @@
 		CE94AC6815785F89009B35B4 /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC6715785F89009B35B4 /* b2Rope.cpp */; };
 		CE94AC6E15785F89009B35B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC6D15785F89009B35B4 /* main.m */; };
 		CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7015785F89009B35B4 /* AppDelegate.mm */; };
-		CE94AC7415785F89009B35B4 /* HelloWorldLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
@@ -355,6 +355,8 @@
 		CE000619159130D000A1B0CC /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLogin.m; path = ProjectOllie/Server/FacebookLogin.m; sourceTree = "<group>"; };
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
+		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
+		CE029087159E6AD000CEF219 /* GameConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConstants.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOS_Versions.h; sourceTree = "<group>"; };
@@ -807,8 +809,6 @@
 		CE94AC6D15785F89009B35B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE94AC6F15785F89009B35B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CE94AC7015785F89009B35B4 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = AppDelegate.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelloWorldLayer.h; sourceTree = "<group>"; };
-		CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = HelloWorldLayer.mm; sourceTree = "<group>"; };
 		CE94AC7515785F89009B35B4 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		CE94AC7615785F89009B35B4 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
@@ -1190,10 +1190,10 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
+				CE029086159E6AD000CEF219 /* GameConstants.h */,
+				CE029087159E6AD000CEF219 /* GameConstants.m */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
-				CE94AC7215785F89009B35B4 /* HelloWorldLayer.h */,
-				CE94AC7315785F89009B35B4 /* HelloWorldLayer.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
@@ -2071,7 +2071,6 @@
 				CE94AC6815785F89009B35B4 /* b2Rope.cpp in Sources */,
 				CE94AC6E15785F89009B35B4 /* main.m in Sources */,
 				CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */,
-				CE94AC7415785F89009B35B4 /* HelloWorldLayer.mm in Sources */,
 				CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */,
 				CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */,
 				C52986B31578A43300656B50 /* CCControl.m in Sources */,
@@ -2131,6 +2130,7 @@
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
+				CE029088159E6AD100CEF219 /* GameConstants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

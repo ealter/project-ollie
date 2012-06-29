@@ -112,6 +112,7 @@
         
         /* Handles the CCRenderTexture positions/scales */
         
+        //Rescale back to greater size
         self.renderTexture.scale = 2;
         
         //On the lower left quarter of the screen.
@@ -187,7 +188,7 @@
 
     ccColor4F color = ccc4f(red,0,0,1);
     [self.maskTexture begin];
-    [self->pr drawDot:ccpMult(center,.5f) radius:(radius/2.f + .5f) color:color];
+    [self->pr drawDot:ccpMult(center,.5f) radius:(radius/2.f + .15f) color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];

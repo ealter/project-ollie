@@ -7,11 +7,13 @@
 //
 
 #import "Terrain.h"
+#import "cocos2d.h"
 #import "ShapeField.h"
 #import "PointEdge.h"
 #import "ccMacros.h"
 #import "MaskedSprite.h"
 #import "HMVectorNode.h"
+#import "Box2D.h"
 
 @interface Terrain(){
     MaskedSprite *drawSprite;
