@@ -51,14 +51,14 @@
     float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
     float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
     shapeField->clipConvexQuad(true, x, y);
-    //[drawSprite drawPolygon:p numPoints:4];
+    [drawSprite drawPolygon:p numPoints:4 Additive:YES];
 }
 
 //Removing land
 - (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
 {
     shapeField->clipCircle(false, r, x, y);
-    //[drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
+    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
 }
 
 - (void) removeQuadWithPoints:(CGPoint[])p
@@ -66,7 +66,7 @@
     float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
     float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
     shapeField->clipConvexQuad(false, x, y);
-    //[drawSprite subtractPolygon:p numPoints:4];
+    [drawSprite drawPolygon:p numPoints:4 Additive:NO];
 }
 
 - (void)shapeChanged

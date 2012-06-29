@@ -658,7 +658,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     
     //Get all of the near points
     vector<PointEdge*> nearPEs = pointsNear(minX, minY, maxX, maxY);
-    printq("RECT near points count: %d\n", nearPEs.size());
+    printq("RECT near points count: %lu\n", nearPEs.size());
     //Mark inside or outside
     for (int i = 0; i < nearPEs.size(); i++)
     {

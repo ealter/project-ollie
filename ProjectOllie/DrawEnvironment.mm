@@ -98,18 +98,16 @@
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
-    prevpoint = location;
-
     for(UITouch *touch in touches) {
         CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         [self drawCircleAt:location];
+        CGPoint previousPoint = [self transformTouchLocationFromTouchView:[touch previousLocationInView:touch.view]];
 
         //Compute rectangle
         //Make unit vector between the two points
         CGPoint unitvector;
-        unitvector.x = (location.x - prevpoint.x);
-        unitvector.y = (location.y - prevpoint.y);
+        unitvector.x = (location.x - previousPoint.x);
+        unitvector.y = (location.y - previousPoint.y);
         float len = sqrt((unitvector.x*unitvector.x) + (unitvector.y*unitvector.y));
         if (len == 0) return;
         unitvector.x = unitvector.x/len;
@@ -120,24 +118,21 @@
         unitvector.y=unitvector.x;
         unitvector.x=-holdy;
         
-        unitvector.y=unitvector.y*fabs(brushradius);
-        unitvector.x=unitvector.x*fabs(brushradius);
+        unitvector.y=unitvector.y*fabs(self.brushradius);
+        unitvector.x=unitvector.x*fabs(self.brushradius);
         
         //Find the points, add them to the gpc_polygon
         CGPoint points[] = {ccp(location.x+unitvector.x, location.y+unitvector.y),
-                            ccp(prevpoint.x+unitvector.x, prevpoint.y+unitvector.y),
-                            ccp(prevpoint.x-unitvector.x, prevpoint.y-unitvector.y),
+                            ccp(previousPoint.x+unitvector.x, previousPoint.y+unitvector.y),
+                            ccp(previousPoint.x-unitvector.x, previousPoint.y-unitvector.y),
                             ccp(location.x-unitvector.x, location.y-unitvector.y)};
         
         //Add/subtract the rectangle
-        if (brushradius > 0)
-        {
-            [terrain addQuadWithPoints:points];
-            [terrain addCircleWithRadius:brushradius x:location.x y:location.y];
-        }
-        else 
-        {
-            [terrain removeQuadWithPoints:points];
+        if (self.brushradius > 0) {
+            [self.terrain addQuadWithPoints:points];
+            [self.terrain addCircleWithRadius:self.brushradius x:location.x y:location.y];
+        } else {
+            [self.terrain removeQuadWithPoints:points];
             //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
         }
     }
