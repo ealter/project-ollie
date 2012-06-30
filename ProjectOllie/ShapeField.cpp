@@ -14,8 +14,6 @@
 #include <float.h>
 #include <assert.h>
 
-#define checkConsistancy 1
-
 // Size of each cell in the spatial grid
 #define cellWidth 32
 #define cellHeight 32
@@ -574,7 +572,7 @@ bool intersects(float x1,float y1,float x2,float y2,float x3,float y3,float x4,f
         float p4p1dx = x4 - x1;
         float p4p1dy = y4 - y1;
         float p1dp4 = p4p1dx*adx + p4p1dy*ady;
-        if (p1dp3 > 0 != p1dp4 > 0)
+        if ((p1dp3 > 0) != (p1dp4 > 0))
         {
             *Xint = x1;
             *Yint = y1;
@@ -772,45 +770,42 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                 //Potential O-O intersection
                 
                 //In intersection only possible on edges which PE is on the right side of
-                float Xint;
-                float Yint;
-                float t;
-                float peT;
-                vector<PolyIntersection>* segIns; 
+                float XintIn;
+                float YintIn;
+                float tIn;
+                float peTIn;
+                vector<PolyIntersection>* segIns = NULL;
                 
-                if      (pe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Ains.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                if      (pe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Ains;
-                }
-                else if (pe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Bins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                else if (pe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Bins;
-                }
-                else if (pe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Cins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                else if (pe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Cins;
-                }
-                else if (pe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Dins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                else if (pe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Dins;
-                }
                 else continue;  //Intersection not found
+                
                 printq("RECT O-O intersection in and out, outside sides: %d, %d\n", pe->tmpMark, npe->tmpMark);
                 
+                float XintOut;
+                float YintOut;
+                float tOut;
+                float peTOut;
+                
                 //In intersection was found, try to find an out intersection now
-                if      (npe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Aouts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else if (npe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Bouts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else if (npe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Couts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else if (npe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Douts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else segIns->pop_back();    //Nevermind don't intersect or whatever
+                if      (npe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Aouts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else if (npe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Bouts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else if (npe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Couts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else if (npe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Douts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else continue;    //Nevermind don't intersect or whatever
+                
+                //Add in intersection because an out intersection was found too
+                
             }
         }
         
@@ -1076,7 +1071,7 @@ bool ShapeField::linesClose(PointEdge* a1, PointEdge* a2,  PointEdge* b1, PointE
     }
     
     return aMaxX >= bMinX && bMaxX >= aMinX
-        && aMaxX >= bMinX && bMaxX >= aMinX;
+        && aMaxY >= bMinY && bMaxY >= aMinY;
 }
 
 void ShapeField::clear()
@@ -1154,7 +1149,8 @@ bool ShapeField::isOutside(float px, float py)
 //Returns all of the points inside and near a bounding box
 vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 {
-    return peSet;
+//    return peSet;
+
     //Find the corrosponding grid spaces that we are affecting
     unsigned int minCellX = ((unsigned)minX)/cellWidth;
     unsigned int minCellY = ((unsigned)minY)/cellHeight;
