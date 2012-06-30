@@ -29,14 +29,15 @@
 {
     if(self = [super init])
     {
-        self->shapeField = new ShapeField([CCDirector sharedDirector].winSize.width, [CCDirector sharedDirector].winSize.height);
+        self.contentSize = [[CCDirector sharedDirector] winSize];
+        self->shapeField = new ShapeField(self.contentSize.width, self.contentSize.height);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:[CCDirector sharedDirector].winSize];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
         drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
         polyRenderer = [[HMVectorNode alloc] init];
-        [self addChild:drawSprite];
+       // [self addChild:drawSprite];
         [self addChild:polyRenderer];
     }
     return self;
@@ -46,7 +47,7 @@
 - (void)addCircleWithRadius:(float)radius x:(float)x y:(float)y
 {
     shapeField->clipCircle(true, radius, x, y);
-    [drawSprite addCircleAt:ccp(x,y) radius:radius];
+    //[drawSprite addCircleAt:ccp(x,y) radius:radius];
     [self shapeChanged];
 }
 
@@ -55,7 +56,7 @@
     float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
     float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
     shapeField->clipConvexQuad(true, x, y);
-    [drawSprite addPolygon:p numPoints:4];
+   // [drawSprite addPolygon:p numPoints:4];
     [self shapeChanged];
 }
 

@@ -33,7 +33,7 @@
 #define ccw(x1, y1, x2, y2, x3, y3) (((x2) - (x1))*((y3) - (y1)) - ((y2) - (y1))*((x3) - (x1)))
 
 #ifdef DEBUG
-#define PRINT_DEBUGGING_STATEMENTS
+//#define PRINT_DEBUGGING_STATEMENTS
 #endif
 
 #ifdef PRINT_DEBUGGING_STATEMENTS
@@ -166,7 +166,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                         in.angle = atan2f(inY - y, inX - x);
                         if(isnan(in.angle))
                         {
-                            printf("circle center: %f, %f,  intersection: %f, %f", x, y, inX, inY);
+                            printq("circle center: %f, %f,  intersection: %f, %f", x, y, inX, inY);
                         }
                         entrences.push_back(in);
                         
@@ -176,7 +176,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                         out.angle = atan2f(outY - y, outX - x);
                         if(isnan(out.angle))
                         {
-                            printf("circle center: %f, %f,  intersection: %f, %f", x, y, outX, outY);
+                            printq("circle center: %f, %f,  intersection: %f, %f", x, y, outX, outY);
                         }
                         exits.push_back(out);
                     }
@@ -223,13 +223,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 in.angle= atan2f(inY - y, inX - x);
                 if(isnan(in.angle))
                 {
-                    printf("circle center: %f, %f,  intersection: %f, %f", x, y, inX, inY);
-                    printf("pe: %f, %f\nnpe: %f, %f\nped: %f, %f\npeLen: %f", pe->x, pe->y, npe->x, npe->y, pedx, pedy, peLen);
-                    printf("ped unit: %f, %f", unitX, unitY);
-                    printf("p to c: %f, %f", dxPtoC, dyPtoC);
-                    printf("dot: %f\nClosest: %f, %f", diffDotUnitPe, xClosest, yClosest);
-                    printf("dx dy: %f, %f", dx, dy);
-                    printf("distance to edge: %f\nin: %f, %f", distanceToEdge, inX, inY);
+                    printq("circle center: %f, %f,  intersection: %f, %f", x, y, inX, inY);
+                    printq("pe: %f, %f\nnpe: %f, %f\nped: %f, %f\npeLen: %f", pe->x, pe->y, npe->x, npe->y, pedx, pedy, peLen);
+                    printq("ped unit: %f, %f", unitX, unitY);
+                    printq("p to c: %f, %f", dxPtoC, dyPtoC);
+                    printq("dot: %f\nClosest: %f, %f", diffDotUnitPe, xClosest, yClosest);
+                    printq("dx dy: %f, %f", dx, dy);
+                    printq("distance to edge: %f\nin: %f, %f", distanceToEdge, inX, inY);
                     assert(false);
                 }
                 entrences.push_back(in);
@@ -277,13 +277,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 out.angle= atan2f(outY - y, outX - x);
                 if(isnan(out.angle))
                 {
-                    printf("circle center: %f, %f,  intersection: %f, %f", x, y, outX, outY);
-                    printf("pe: %f, %f\nnpe: %f, %f\nped: %f, %f\npeLen: %f", pe->x, pe->y, npe->x, npe->y, pedx, pedy, peLen);
-                    printf("ped unit: %f, %f", unitX, unitY);
-                    printf("p to c: %f, %f", dxPtoC, dyPtoC);
-                    printf("dot: %f\nClosest: %f, %f", diffDotUnitPe, xClosest, yClosest);
-                    printf("dx dy: %f, %f", dx, dy);
-                    printf("distance to edge: %f\nin: %f, %f", distanceToEdge, outX, outY);
+                    printq("circle center: %f, %f,  intersection: %f, %f", x, y, outX, outY);
+                    printq("pe: %f, %f\nnpe: %f, %f\nped: %f, %f\npeLen: %f", pe->x, pe->y, npe->x, npe->y, pedx, pedy, peLen);
+                    printq("ped unit: %f, %f", unitX, unitY);
+                    printq("p to c: %f, %f", dxPtoC, dyPtoC);
+                    printq("dot: %f\nClosest: %f, %f", diffDotUnitPe, xClosest, yClosest);
+                    printq("dx dy: %f, %f", dx, dy);
+                    printq("distance to edge: %f\nin: %f, %f", distanceToEdge, outX, outY);
                     assert(false);
                 }
                 exits.push_back(out);
@@ -413,7 +413,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 for (unsigned j = 0; j < exits.size(); j++)
                 {
                     CircleIntersection tmpOut = exits[j];
-                    printf("r %f\n", r);
+                    printq("r %f\n", r);
                     //Get the +ccw change in the angle from the enterence to this exit
                     float tmpDtheta = tmpOut.angle - in.angle;
                     if (tmpDtheta > 0) tmpDtheta -= TAU;
@@ -450,10 +450,10 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 printq("building %d new edges with dtheta %f\n", numSegs, segTheta);
                 if(dTheta > 10)
                 {
-                    printf("dtheta: %f\n", dTheta);
-                    printf("maxTheta: %f\n", maxTheta);
-                    printf("in angle: %f\n", in.angle);
-                    printf("out angle: %f\n", out.angle);
+                    printq("dtheta: %f\n", dTheta);
+                    printq("maxTheta: %f\n", maxTheta);
+                    printq("in angle: %f\n", in.angle);
+                    printq("out angle: %f\n", out.angle);
                     assert(false);
                 }
                 //Extend entrence to exit along the circle edge in +theta
@@ -724,7 +724,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             //Check that npe is not inside
             if (!(npe->tmpMark & inside))
             {
-                printf("RECT I-O intersection out, outside side: %d\n", npe->tmpMark);
+                printq("RECT I-O intersection out, outside side: %d\n", npe->tmpMark);
                 //There is an I-O intersection out, lets find the line that it is on
                 //Find the intersection and where it is on the segments
                 float Xint;

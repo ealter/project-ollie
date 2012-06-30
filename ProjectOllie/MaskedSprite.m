@@ -31,6 +31,7 @@
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red;
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+- (void)updateMask;
 
 @end
 
@@ -41,17 +42,17 @@
 
 - (id)initWithFile:(NSString *)file size:(CGSize)size
 {
-    self = [super initWithFile:file rect:CGRectMake(0,0,size.width/2,size.height/2)];
+    self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
-    
+        
         //set up rendering paramters
         //texture must be power of 2
         ccTexParams params = {GL_NICEST, GL_NICEST, GL_REPEAT, GL_REPEAT};
         [self.texture setTexParameters: &params];
         [self.texture setAntiAliasTexParameters];
-
+        
         self->pr = [[HMVectorNode alloc] init];
-  
+        
         //makes 0,0,1,1 texturecoordinates
         quad_.bl.texCoords.u = 0;
 		quad_.bl.texCoords.v = 0;
@@ -69,7 +70,7 @@
         
         self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         [self.renderTexture clear:0 g:0 b:0 a:1];
-
+        
         
         // 2
         NSError *error = nil;
@@ -109,24 +110,25 @@
         
         CHECK_GL_ERROR_DEBUG();
         
-        
-        /* Handles the CCRenderTexture positions/scales */
-        
-        //Rescale back to greater size
-        self.renderTexture.scale = 2;
-        
-        //On the lower left quarter of the screen.
-        [self setPosition:ccp(size.width/4,size.height/4)];
-        [self.maskTexture setPosition:ccp(size.width/4,size.height/4)];
-        
-        //On the center because scaled by 2 will fill the screen.
         [self.renderTexture setPosition:ccp(size.width/2,size.height/2)];
-
+        /* Handles the CCRenderTexture positions/scales */
+        /*
+         //Rescale back to greater size
+         self.renderTexture.scale = 2;
+         
+         //On the lower left quarter of the screen.
+         [self setPosition:ccp(size.width/4,size.height/4)];
+         [self.maskTexture setPosition:ccp(size.width/4,size.height/4)];
+         
+         //On the center because scaled by 2 will fill the screen.
+         
+         */
+        
     }
     return self;
 }
 
--(void) draw {
+-(void) updateMask {
     
     [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
     CCTexture2D *mask = self.maskTexture.sprite.texture;
@@ -151,7 +153,7 @@
     
     glUniform1f(self.screenWidthLocation, self.contentSize.width);
     glUniform1f(self.screenHeightLocation, self.contentSize.height);
-   
+    
     
     // 3
 #define kQuadSize sizeof(quad_.bl)
@@ -169,26 +171,33 @@
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
     [self.renderTexture end];
-    [self.renderTexture visit];
+    //[self.renderTexture visit];
+
+    
+}
+
+-(void)draw{
     
 }
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:COVERED_RED];
+    //[self updateMask];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:INITIAL_RED];
+    //[self updateMask];
 }
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
 {
-
+    
     ccColor4F color = ccc4f(red,0,0,1);
     [self.maskTexture begin];
-    [self->pr drawDot:ccpMult(center,.5f) radius:(radius/2.f + .15f) color:color];
+    [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];
@@ -197,18 +206,20 @@
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
+    //[self updateMask];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
+    //[self updateMask];
 }
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     for(int i = 0; i < numberOfPoints; i++)
     {
-        poly[i] = ccpMult(poly[i],.5f);
+        poly[i] = ccpMult(poly[i],1.f);
     }
     
     ccColor4F color = ccc4f(red,0,0,1);
@@ -231,7 +242,7 @@
 {
     [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
     [self.renderTexture clear:0 g:0 b:0 a:0];
-
+    
 }
 
 @end
