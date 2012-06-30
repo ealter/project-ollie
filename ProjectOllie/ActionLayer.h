@@ -23,7 +23,6 @@
 
 @property (strong, nonatomic) GWCamera* camera;//camera that watches the action
 
-@property (strong, nonatomic) NSMutableArray* parallaxElements; //the elements it updates the position of
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;

@@ -38,7 +38,7 @@
         
         polyRenderer = [[HMVectorNode alloc] init];
         [self addChild:drawSprite];
-       // [self addChild:polyRenderer];
+        [self addChild:polyRenderer];
     }
     return self;
 }

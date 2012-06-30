@@ -71,6 +71,9 @@
         self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         [self.renderTexture clear:0 g:0 b:0 a:1];
         
+        ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
+        [self.renderTexture.sprite.texture setTexParameters:&renderParams];
+        
         
         // 2
         NSError *error = nil;
@@ -124,6 +127,8 @@
          
          */
         
+        self.scale *= -1./6.;
+        [self setPosition:ccp(self.contentSize.width,self.contentSize.height)];
     }
     return self;
 }
@@ -207,13 +212,13 @@
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
-    //[self updateMask];
+    [self updateMask];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
-    //[self updateMask];
+    [self updateMask];
 }
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red

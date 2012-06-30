@@ -119,16 +119,16 @@
                             ccpSub(location,      unitvector)};
         assert(sizeof(points)/sizeof(points[0]) == 4); //Make sure we made a rectangle
         
-        /*
+        
         //Add/subtract the rectangle
-        if (self.brushradius > 0) {
+       /* if (self.brushradius > 0) {
             [self.terrain addQuadWithPoints:points];
             [self.terrain addCircleWithRadius:self.brushradius x:location.x y:location.y];
         } else {
             [self.terrain removeQuadWithPoints:points];
             //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
-        }
-         */
+        }*/
+         
     }
 }
 

@@ -78,6 +78,7 @@
 - (id)initWithSpeed:(float)speed images:(NSArray *)imageNames
 {
     if (self = [super init]) {
+        [self setContentSize:CGSizeMake(self.contentSize.width*2, self.contentSize.height*2)];
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
     }
