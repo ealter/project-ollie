@@ -14,7 +14,7 @@ uniform float screenHeight;
 void main()
 {
 
-    vec2 texCoordTiled = vec2(v_texCoord.x*4.80, v_texCoord.y*3.20);
+    vec2 texCoordTiled = vec2(v_texCoord.x, v_texCoord.y);
     vec4 texColor = texture2D(u_texture, v_texCoord);
     vec4 maskColor = texture2D(u_mask, v_texCoord);
     vec4 finalColor = vec4(texColor.r, texColor.g, texColor.b, maskColor.r * texColor.a);
