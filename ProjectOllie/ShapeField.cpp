@@ -504,9 +504,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         if (pe->tmpMark != inside && pe->getLenSq() < plankFloat)
         {
             removeFromSpatialGrid(pe);
+            removeFromSpatialGrid(pe->prev);
             pe->tmpMark = inside;
             pe->next->prev = pe->prev;
             pe->prev->next = pe->next;
+            addToSpatialGrid(pe->prev);
         }
         if (pe->tmpMark == inside)
         {
@@ -995,9 +997,11 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
         if (pe->tmpMark != inside && pe->getLenSq() < plankFloat)
         {
             removeFromSpatialGrid(pe);
+            removeFromSpatialGrid(pe->prev);
             pe->tmpMark = inside;
             pe->next->prev = pe->prev;
             pe->prev->next = pe->next;
+            addToSpatialGrid(pe->prev);
         }
         if (pe->tmpMark == inside)
         {
@@ -1178,7 +1182,7 @@ vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, fl
 
 void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 {
-    if (!pe->next) return;
+//    if (!pe->next) return;    //Use to bypass spatial grid optimization
     
     //Create a slightly generous bounding box
     unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
