@@ -55,13 +55,13 @@
         
         //makes 0,0,1,1 texturecoordinates
         quad_.bl.texCoords.u = 0;
-		quad_.bl.texCoords.v = 0;
-		quad_.br.texCoords.u = 1;
-		quad_.br.texCoords.v = 0;
-		quad_.tl.texCoords.u = 0;
-		quad_.tl.texCoords.v = 1;
-		quad_.tr.texCoords.u = 1;
-		quad_.tr.texCoords.v = 1;
+        quad_.bl.texCoords.v = 0;
+        quad_.br.texCoords.u = 1;
+        quad_.br.texCoords.v = 0;
+        quad_.tl.texCoords.u = 0;
+        quad_.tl.texCoords.v = 1;
+        quad_.tr.texCoords.u = 1;
+        quad_.tr.texCoords.v = 1;
         
         // 1
         //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
@@ -126,8 +126,6 @@
          //On the center because scaled by 2 will fill the screen.
          
          */
-        
-        self.scale *= -1./6.;
         [self setPosition:ccp(self.contentSize.width,self.contentSize.height)];
     }
     return self;
