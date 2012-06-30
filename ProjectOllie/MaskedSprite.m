@@ -41,7 +41,7 @@
 
 - (id)initWithFile:(NSString *)file size:(CGSize)size
 {
-    self = [super initWithFile:file rect:CGRectMake(0,0,size.width/2,size.height/2)];
+    self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
     if (self) {
     
         //set up rendering paramters
@@ -111,7 +111,7 @@
         
         
         /* Handles the CCRenderTexture positions/scales */
-        
+        /*
         //Rescale back to greater size
         self.renderTexture.scale = 2;
         
@@ -120,7 +120,7 @@
         [self.maskTexture setPosition:ccp(size.width/4,size.height/4)];
         
         //On the center because scaled by 2 will fill the screen.
-        [self.renderTexture setPosition:ccp(size.width/2,size.height/2)];
+        [self.renderTexture setPosition:ccp(size.width/2,size.height/2)];*/
 
     }
     return self;
@@ -128,7 +128,7 @@
 
 -(void) draw {
     
-    [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
+   // [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
     CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
     // 1
@@ -168,8 +168,8 @@
     // 4
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
-    [self.renderTexture end];
-    [self.renderTexture visit];
+    //[self.renderTexture end];
+    //[self.renderTexture visit];
     
 }
 
@@ -188,7 +188,7 @@
 
     ccColor4F color = ccc4f(red,0,0,1);
     [self.maskTexture begin];
-    [self->pr drawDot:ccpMult(center,.5f) radius:(radius/2.f + .15f) color:color];
+    [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];
@@ -208,7 +208,7 @@
 {
     for(int i = 0; i < numberOfPoints; i++)
     {
-        poly[i] = ccpMult(poly[i],.5f);
+        poly[i] = ccpMult(poly[i],1.f);
     }
     
     ccColor4F color = ccc4f(red,0,0,1);
