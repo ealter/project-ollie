@@ -8,7 +8,7 @@
 
 #import "CCSprite.h"
 
-@interface MaskedSprite : CCSprite
+@interface MaskedSprite : CCSprite <NSCoding>
 
 - (void)addCircleAt:   (CGPoint)center radius:(float)radius;
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius;

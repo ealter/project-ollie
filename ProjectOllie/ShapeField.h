@@ -38,6 +38,10 @@ public:
     void clipConvexQuad(bool add, float* x, float* y);
     void clipConvexPolygon(bool add, PointEdge* head);
     void clear();
+    
+    //Useful for pickling the data structure
+    ShapeField(const void *data);
+    void *pickleDataStructure(int &dataLength);
 private:
     std::vector<PointEdge*> **spatialGrid;
     float width;

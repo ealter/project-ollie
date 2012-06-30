@@ -67,6 +67,17 @@ ShapeField::~ShapeField()
     delete[] spatialGrid;
 }
 
+ShapeField::ShapeField(const void *data) {
+    //TODO: implement this
+    ShapeField(1024, 768);
+}
+
+void *ShapeField::pickleDataStructure(int &dataLength) {
+    //TODO: implement this
+    dataLength = 0;
+    return NULL;
+}
+
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
     //Bound by the world size so we cannot possibly get spatial grid errors

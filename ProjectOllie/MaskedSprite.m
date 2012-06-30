@@ -39,6 +39,16 @@
 @synthesize maskTexture = _maskTexture, renderTexture = _renderTexture;
 @synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_, screenWidthLocation = screenWidthLocation_, screenHeightLocation = screenHeightLocation_;
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    return nil; //TODO
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder
+{
+    
+}
+
 - (id)initWithFile:(NSString *)file size:(CGSize)size
 {
     self = [super initWithFile:file rect:CGRectMake(0,0,size.width/2,size.height/2)];
