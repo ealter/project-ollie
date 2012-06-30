@@ -8,7 +8,6 @@
 
 #import "GWCamera.h"
 #import "CGPointExtension.h"
-#import "ActionLayer.h"
 #import "cocos2d.h"
 
 @interface GWCamera()
@@ -118,7 +117,7 @@
     
     // Set the scale.
     float scale = subject_.scale;
-    float newScale = max(self.minimumScale, min(scale*diff, self.maximumScale));
+    float newScale = clampf(scale * diff, self.minimumScale, self.maximumScale);
     [subject_ setScale: newScale];
 
     // Get the new center point.
