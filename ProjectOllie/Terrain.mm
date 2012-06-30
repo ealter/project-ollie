@@ -37,8 +37,8 @@
         drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
         polyRenderer = [[HMVectorNode alloc] init];
-       // [self addChild:drawSprite];
-        [self addChild:polyRenderer];
+        [self addChild:drawSprite];
+       // [self addChild:polyRenderer];
     }
     return self;
 }
@@ -47,7 +47,7 @@
 - (void)addCircleWithRadius:(float)radius x:(float)x y:(float)y
 {
     shapeField->clipCircle(true, radius, x, y);
-    //[drawSprite addCircleAt:ccp(x,y) radius:radius];
+    [drawSprite addCircleAt:ccp(x,y) radius:radius];
     [self shapeChanged];
 }
 
@@ -56,7 +56,7 @@
     float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
     float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
     shapeField->clipConvexQuad(true, x, y);
-   // [drawSprite addPolygon:p numPoints:4];
+    [drawSprite addPolygon:p numPoints:4];
     [self shapeChanged];
 }
 
@@ -80,12 +80,12 @@
 - (void)shapeChanged
 {
     //The shape is changed so we must update the stroke
-    		[polyRenderer clear];
+    /*[polyRenderer clear];
     for (int i = 0; i < shapeField->peSet.size(); i++)
     {
         PointEdge* pe = shapeField->peSet[i];
         [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
-    }
+    }*/
 }
 
 - (void)clear

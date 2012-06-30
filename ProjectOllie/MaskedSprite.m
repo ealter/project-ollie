@@ -178,18 +178,19 @@
 
 -(void)draw{
     
+    [self.renderTexture visit];
 }
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:COVERED_RED];
-    //[self updateMask];
+    [self updateMask];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:INITIAL_RED];
-    //[self updateMask];
+    [self updateMask];
 }
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
