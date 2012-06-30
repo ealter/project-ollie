@@ -2,8 +2,8 @@
 //  SandboxScene.h
 //  ProjectOllie
 //
-//  Created by Lion User on 6/6/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Created by Tucker Stone on 6/6/12.
+//  Copyright 2012 hi ku llc All rights reserved.
 //
 
 #import "CCScene.h"

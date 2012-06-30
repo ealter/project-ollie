@@ -3,16 +3,19 @@
 //  ProjectOllie
 //
 //  Created by Eliot Alter on 6/11/12.
-//  Copyright (c) 2012 hi ku LLC. All rights reserved.
+//  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
 #import "CCSprite.h"
 
 @interface MaskedSprite : CCSprite
 
-- (void)drawCircleAt:(CGPoint) center withRadius:(float)radius Additive:(bool)add;
-- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints Additive:(bool)add;
-- (void)drawLines:(const CGPoint*)poly numPoints:(NSUInteger)num;
+- (void)addCircleAt:   (CGPoint)center radius:(float)radius;
+- (void)removeCircleAt:(CGPoint)center radius:(float)radius;
+
+- (void)addPolygon:   (CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
+- (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
+
 - (BOOL)saveMaskToFile:(NSString *)fileName;
 - (id)initWithFile:(NSString *)file size:(CGSize)size;
 - (void)clear;

@@ -6,12 +6,13 @@
 //  Copyright 2012 hi ku. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#import "Box2D.h"
+#import "CCNode.h"
 #include <vector>
 
 class ShapeField;
+class b2World;
+class b2Body;
+@class CCTexture2D;
 
 /*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
@@ -26,12 +27,14 @@ class ShapeField;
 - (id) initWithTexture:(CCTexture2D*)t;
 
 //Building land
-- (void) addCircleWithRadius:(float)r x:(float)x y:(float)y;
+- (void) addCircleWithRadius:(float)radius x:(float)x y:(float)y;
+- (void) addQuadWithPoints:(CGPoint[])p;
 
 //Removing land
-- (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y;
+- (void) removeCircleWithRadius:(float)radius x:(float)x y:(float)y;
+- (void) removeQuadWithPoints:(CGPoint[])p;
 
-//Call whenever shape is changed to rebuild the derived physical bodies and drawing
+//Call whenever shape is changed to rebuild the stroke raster
 - (void) shapeChanged;
 
 //Reset to a blank terrain

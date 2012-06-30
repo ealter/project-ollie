@@ -2,7 +2,7 @@
 //  ActionLayer.m
 //  ProjectOllie
 //
-//  Created by Lion User on 6/1/12.
+//  Created by Sam Zeckendorf on 6/1/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
@@ -11,6 +11,8 @@
 #import "PhysicsSprite.h"
 #import "Background.h"
 #import "MaskedSprite.h"
+#import "RippleEffect.h"
+#import "GameConstants.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -35,7 +37,7 @@ enum {
 @implementation ActionLayer
 
 @synthesize camera           = _camera;
-@synthesize parallaxElements = _parallaxElements; 
+
 
 +(CCScene *) scene
 {
@@ -56,9 +58,7 @@ enum {
 {
     if( (self=[super init])) {
 
-        //parallax elements setup
-        self.parallaxElements = [NSMutableArray array];
-        
+        self.contentSize = CGSizeMake(self.contentSize.width,self.contentSize.height);
         //set up screen parameters
         self.anchorPoint = ccp(0,0);
         [self setIgnoreAnchorPointForPosition:YES];
@@ -93,6 +93,7 @@ enum {
         label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);
         
         [self scheduleUpdate];
+
         
         
     }
@@ -300,14 +301,6 @@ enum {
 
 }
 
--(void)updateParallax{
-        
-    for (Background* b in self.parallaxElements) {
-        [b setPosition:ccpMult(self.position,1./self.scale)];
-        [b setScale:self.scale];
-    }
-
-}
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -322,8 +315,11 @@ enum {
     CGPoint location;
     for( UITouch *touch in touches ) {
         location = [touch locationInView: [touch view]];
-        
         location = [[CCDirector sharedDirector] convertToGL: location];
+        
+        //RippleEffect* ripple = [[RippleEffect alloc] initWithSubject:self.parent atOrigin:location];
+        //[self.parent.parent addChild: ripple];
+        
         location = [self convertToNodeSpace:location];
         
     }

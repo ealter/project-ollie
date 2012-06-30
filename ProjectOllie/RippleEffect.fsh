@@ -1,20 +1,31 @@
 #ifdef GL_ES
-precision mediump float;
+precision lowp float;
 #endif
 
-varying vec2 v_texCoord;
+varying lowp vec2 v_texCoord;
 uniform sampler2D u_texture;
-uniform float u_time;
 
-// 1
+//assigned values
+uniform float u_time;
+uniform float lifetime;
 uniform float speed;
 uniform float invdistance;//higher = smaller distance
+uniform float originX;
+uniform float originY;
+
 void main()
 {
-    vec2 tc = v_texCoord;
-    vec2 p = -1.0+2.0*tc;
-    float len = max(length(p),pow(length(p),15.0));
-    vec2 uv = tc + (p/len/80.0)*cos(len*invdistance-u_time*speed);
+    
+    vec2 origin = vec2(originX, originY);
+    vec2 tc     = v_texCoord;
+    vec2 p      = tc + origin;
+    float len   = length(p);
+    vec2 amp    = p/max(len*5.0,pow(len*5.0,2.0))*.2;
+    
+    amp = amp * (lifetime - u_time)/lifetime;
+    
+    vec2 uv = tc + (amp)*cos(len*invdistance-u_time*speed);
     vec4 col = texture2D(u_texture, uv);
+     
     gl_FragColor = col;
 }

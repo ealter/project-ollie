@@ -2,16 +2,18 @@
 //  Terrain.m
 //  ProjectOllie
 //
-//  Created by Lion User on 6/4/12.
+//  Created by Steve Gregory on 6/4/12.
 //  Copyright 2012 hi ku llc All rights reserved.
 //
 
 #import "Terrain.h"
+#import "cocos2d.h"
 #import "ShapeField.h"
 #import "PointEdge.h"
 #import "ccMacros.h"
 #import "MaskedSprite.h"
 #import "HMVectorNode.h"
+#import "Box2D.h"
 
 @interface Terrain(){
     MaskedSprite *drawSprite;
@@ -23,68 +25,70 @@
 
 @synthesize texture = texture_;
 
-- (id) initWithTexture:(CCTexture2D*)t
+- (id)initWithTexture:(CCTexture2D*)t
 {
     if(self = [super init])
     {
-        self->shapeField = new ShapeField(1024, 768);
+        self.contentSize = [[CCDirector sharedDirector] winSize];
+        self->shapeField = new ShapeField(self.contentSize.width, self.contentSize.height);
         self->texture_ = t;
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(1024,768)];
-        drawSprite.position = drawSprite.anchorPoint = ccp(0,0);
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+        drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
         polyRenderer = [[HMVectorNode alloc] init];
+        [self addChild:drawSprite];
         [self addChild:polyRenderer];
     }
     return self;
 }
 
 //Building land
-- (void) addCircleWithRadius:(float)r x:(float)x y:(float)y
+- (void)addCircleWithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField->clipCircle(true, r, x, y);
-    
-    //part of drawing, unrelated to terrain
-    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:YES];
-    
-    
+    shapeField->clipCircle(true, radius, x, y);
+    [drawSprite addCircleAt:ccp(x,y) radius:radius];
+    [self shapeChanged];
 }
 
-- (void) removeCircleWithRadius:(float)r x:(float)x y:(float)y
+- (void)addQuadWithPoints:(CGPoint[])p
 {
-    shapeField->clipCircle(false, r, x, y);
-    
-    //part of drawing, unrelated to terrain
-    [drawSprite drawCircleAt:ccp(x,y) withRadius:r Additive:NO];
+    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
+    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
+    shapeField->clipConvexQuad(true, x, y);
+    [drawSprite addPolygon:p numPoints:4];
+    [self shapeChanged];
+}
+
+//Removing land
+- (void)removeCircleWithRadius:(float)radius x:(float)x y:(float)y
+{
+    shapeField->clipCircle(false, radius, x, y);
+    [drawSprite removeCircleAt:ccp(x,y) radius:radius];
+    [self shapeChanged];
+}
+
+- (void)removeQuadWithPoints:(CGPoint[])p
+{
+    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
+    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
+    shapeField->clipConvexQuad(false, x, y);
+    [drawSprite removePolygon:p numPoints:4];
+    [self shapeChanged];
 }
 
 - (void)shapeChanged
 {
-    //TODO: implement this
-}
-
-- (void) draw
-{
-    //CC_NODE_DRAW_SETUP();
-    ccGLEnable( glServerState_ );
-    [drawSprite draw];
+    //The shape is changed so we must update the stroke
     /*[polyRenderer clear];
-    int numLines = shapeField->peSet.size()*2;
-    ccVertex2F* points = new ccVertex2F[numLines];
     for (int i = 0; i < shapeField->peSet.size(); i++)
     {
-        points[i*2].x = shapeField->peSet[i]->x;
-        points[i*2].y = shapeField->peSet[i]->y;
-        points[i*2+1].x = shapeField->peSet[i]->next->x;
-        points[i*2+1].y = shapeField->peSet[i]->next->y;
-        
-        CGPoint p1 = ccp(points[i*2].x, points[i*2].y);
-        CGPoint p2 = ccp(points[i*2+1].x,points[i*2+1].y);
-        [polyRenderer drawSegmentFrom:p1 to:p2 radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
-*/
+        PointEdge* pe = shapeField->peSet[i];
+        [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
+    }*/
 }
 
-- (void) clear
+- (void)clear
 {
     //Clear the shape field
     shapeField->clear();
@@ -92,14 +96,14 @@
     [polyRenderer clear];
 }
 
-- (void) dealloc
+- (void)dealloc
 {
     delete shapeField;
 }
 
 /* Random Land Generators */
 
-+ (Terrain*) generateRandomOneIsland
++ (Terrain*)generateRandomOneIsland
 {
     return nil;
 }

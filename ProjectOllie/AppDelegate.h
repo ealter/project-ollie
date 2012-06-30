@@ -2,7 +2,7 @@
 //  AppDelegate.h
 //  ProjectOllie
 //
-//  Created by Lion User on 5/31/12.
+//  Created by Eliot Alter on 5/31/12.
 //  Copyright hi ku llc 2012. All rights reserved.
 //
 

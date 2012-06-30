@@ -6,11 +6,6 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-
-//TODO:
-//  Give Parallax (make independent of parallax node)
-
-
 #import "CCLayer.h"
 #import "GWCamera.h"
 

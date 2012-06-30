@@ -2,16 +2,14 @@
 //  PhysicsSprite.mm
 //  ProjectOllie
 //
-//  Created by Lion User on 5/31/12.
+//  Created by Sam Zeckendorf on 5/31/12.
 //  Copyright hi ku llc 2012. All rights reserved.
 //
 
 
 #import "PhysicsSprite.h"
 #import "Box2D.h"
-
-// Needed PTM_RATIO
-#import "ActionLayer.h"
+#import "GameConstants.h"
 
 #pragma mark - PhysicsSprite
 @implementation PhysicsSprite

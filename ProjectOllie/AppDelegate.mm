@@ -2,23 +2,12 @@
 //  AppDelegate.mm
 //  ProjectOllie
 //
-//  Created by Lion User on 5/31/12.
+//  Created by Eliot Alter on 5/31/12.
 //  Copyright hi ku llc 2012. All rights reserved.
 //
 
-
-/**
- * TODO
- **
- * Create TexturizedBody superclass (that land inherits from, maybe auxilliarry things too)
- * Implement texturized body into sandbox
- *
- *
- */
-
 #import "cocos2d.h"
 #import "AppDelegate.h"
-#import "HelloWorldLayer.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
 #import "Authentication.h"
@@ -47,40 +36,42 @@
     [glView setMultipleTouchEnabled:YES];
  
 	director_ = (CCDirectorIOS*) [CCDirector sharedDirector];
+    assert([self.director isKindOfClass:[CCDirectorIOS class]]);
 	
-	director_.wantsFullScreenLayout = YES;
+	self.director.wantsFullScreenLayout = YES;
 	
 	// Display FSP and SPF
-	[director_ setDisplayStats:YES];
+    self.director.displayStats = YES;
 	
 	// set FPS at 60
-	[director_ setAnimationInterval:1.0/60];
+    self.director.animationInterval = 1.0/60;
 	
 	// attach the openglView to the director
-	[director_ setView:glView];
+    self.director.view = glView;
 	
 	// for rotation and other messages
-	[director_ setDelegate:self];
+    self.director.delegate = self;
 	
 	// 2D projection
-	[director_ setProjection:kCCDirectorProjection2D];
+    self.director.projection = kCCDirectorProjection2D;
 	//	[director setProjection:kCCDirectorProjection3D];
 	
     
+    
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:YES] )
+	if( ! [director_ enableRetinaDisplay:NO] )
 		CCLOG(@"Retina Display Not supported");
 	
 	// Create a Navigation Controller with the Director
 	navController_ = [[UINavigationController alloc] initWithRootViewController:director_];
-	navController_.navigationBarHidden = YES;
+	self.navController.navigationBarHidden = YES;
 	
 	// set the Navigation Controller as the root view controller
 	//	[window_ setRootViewController:rootViewController_];
-	[window_ addSubview:navController_.view];
+	[self.window addSubview:navController_.view];
     
 	// make main window visible
-	[window_ makeKeyAndVisible];
+	[self.window makeKeyAndVisible];
 	
 	// Default texture format for PNG/BMP/TIFF/JPEG/GIF images
 	// It can be RGBA8888, RGBA4444, RGB5_A1, RGB565
@@ -123,27 +114,27 @@
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ pause];
+	if( [self.navController visibleViewController] == self.director )
+		[self.director pause];
 }
 
 // call got rejected
 -(void) applicationDidBecomeActive:(UIApplication *)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ resume];
+	if( [self.navController visibleViewController] == self.director )
+		[self.director resume];
 }
 
 -(void) applicationDidEnterBackground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ stopAnimation];
+	if( [self.navController visibleViewController] == self.director )
+		[self.director stopAnimation];
 }
 
 -(void) applicationWillEnterForeground:(UIApplication*)application
 {
-	if( [navController_ visibleViewController] == director_ )
-		[director_ startAnimation];
+	if( [self.navController visibleViewController] == self.director )
+		[self.director startAnimation];
 }
 
 // application will be killed

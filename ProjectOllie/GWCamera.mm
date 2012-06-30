@@ -8,7 +8,6 @@
 
 #import "GWCamera.h"
 #import "CGPointExtension.h"
-#import "ActionLayer.h"
 #import "cocos2d.h"
 
 @interface GWCamera()
@@ -26,7 +25,7 @@
 -(void)twoFingerPan:(NSSet*)touches;
 -(void)twoFingerZoom:(NSSet*)touches;
 -(void)updateBounds;
--(void)checkBounds:(CCNode*)current;
+-(void)checkBounds;
 -(void)updateZoom;
 -(void)followTarget;
 -(void)handleShakeEffect:(float)dt;
@@ -118,7 +117,7 @@
     
     // Set the scale.
     float scale = subject_.scale;
-    float newScale = max(self.minimumScale, min(scale*diff, self.maximumScale));
+    float newScale = clampf(scale * diff, self.minimumScale, self.maximumScale);
     [subject_ setScale: newScale];
 
     // Get the new center point.
@@ -321,13 +320,13 @@
     
     if(self.target == nil)
     {
-        [self checkBounds:subject_];
+        [self checkBounds];
     }
 }
 
--(void)checkBounds:(CCNode*)current{
+-(void)checkBounds{
     //elastic borders
-    CGPoint worldPos =  current.position;
+    CGPoint worldPos =  subject_.position;
     CGPoint newPos = ccp(0,0);
     //left border
     if(worldPos.x > 0)
@@ -392,7 +391,6 @@
     {
         if(subject_.scale > self.defaultScale)
         {
-            CCLOG(@"reverting...");
             float diff = subject_.scale - self.defaultScale;
             [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]];
             if(diff*diff < .01)
