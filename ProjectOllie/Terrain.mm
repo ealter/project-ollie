@@ -80,12 +80,12 @@
 - (void)shapeChanged
 {
     //The shape is changed so we must update the stroke
-    /*[polyRenderer clear];
+    [polyRenderer clear];
     for (int i = 0; i < shapeField->peSet.size(); i++)
     {
         PointEdge* pe = shapeField->peSet[i];
         [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
-    }*/
+    }
 }
 
 - (void)clear

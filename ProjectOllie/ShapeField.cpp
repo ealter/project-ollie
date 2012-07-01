@@ -14,6 +14,9 @@
 #include <float.h>
 #include <assert.h>
 
+//Turn off to disable rectangles from being constructed independently of other geometry so they must intersect to be built
+#define INDEPENDENT_RECTANGLES 0
+
 // Size of each cell in the spatial grid
 #define cellWidth 32
 #define cellHeight 32
@@ -97,8 +100,6 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             pe->tmpMark = inside;
         else// if (dsq > rsq + plankFloat)
             pe->tmpMark = outside;
-       /* else
-            pe->tmpMark = onEdge;*/
     }
 
     //Find intersections, create points, link them, create enterence or exit
@@ -303,11 +304,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         //Check that it exists and isn't null somehow
         assert(pe);
         //See if the location is in a strange place
+#ifdef USE_EXPENSIVE_ASSERTS
         if (pe->x < 0 || pe->x > width || pe->y < 0 || pe->y > height)
         {
             printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
             assert(false);
         }
+#endif
     }
 
     //If this isn't true, something fucked up. Abort mission, refund investors, etc.
@@ -555,6 +558,21 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         }
     }
 
+    
+#ifdef USE_EXPENSIVE_ASSERTS
+    //Check the spatial grid to make sure everything exists
+    for (int i = 0; i < gridWidth; i++)
+        for (int j = 0; j < gridHeight; j++)
+            for (int k = 0; k < spatialGrid[i][j].size(); k++)
+            {
+                PointEdge* pe = spatialGrid[i][j][k];
+                assert(pe);
+                assert(pe->x);
+                assert(pe->next);
+                assert(pe->next->x);
+            }
+#endif
+
 }
 
 //Returns true if line seg A from (x1, y1) to (x2, y2) intersects line seg B from (x3, y3) to (x4, y4) and
@@ -658,6 +676,8 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
 {
     //Make sure the points are counterclockwise
     assert(ccw(x[0], y[0], x[1], y[1], x[2], y[2]) > FLT_EPSILON);
+    assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
+    assert(ccw(x[2], y[2], x[3], y[3], x[0], y[0]) > FLT_EPSILON);
 
     //Find a bounding box to get near points
     float minX = min(min(x[0], x[1]), min(x[2], x[3]));
@@ -827,9 +847,8 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     printq("RECT ins: %d, outs: %d\n", ins, outs);
     assert(ins == outs);
 
-    if (ins == 0)
+    if (ins == 0 && INDEPENDENT_RECTANGLES)
     {
-        return;//For now there is no way we want to do this
         //There are no intersections, figure out what where the fuck we are
         bool aOutside = isOutside((x[0]+x[2])/2, (y[0]+y[2])/2);
         if (add && aOutside)
@@ -887,7 +906,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             peSet.push_back(D);
         }
     }
-    else
+    else if (ins > 0)
     {
         //There are intersections
         //Loop through the enterences and connect them to the exits in the counterclockwise direction
@@ -942,8 +961,10 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                 {
                     //Bypass the in intersection and delete it
                     printq("RECT bypass\n");
+                    removeFromSpatialGrid(in->intersection->prev);
                     in->intersection->prev->next = out->intersection;
                     out->intersection->prev = in->intersection->prev;
+                    addToSpatialGrid(in->intersection->prev);
                     in->intersection->tmpMark = inside;
                 }
                 else
@@ -998,7 +1019,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     {
         PointEdge* pe = peSet[i];
         //Check if we can bypass the point
-        if (pe->tmpMark != inside && pe->getLenSq() < plankFloat)
+        if (pe->tmpMark != inside && pe->getLenSq() < 4*FLT_EPSILON)
         {
             removeFromSpatialGrid(pe);
             removeFromSpatialGrid(pe->prev);
@@ -1047,8 +1068,21 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             //printq("pe %p npe %p p: \n%f, %f\n%f, %f\n", pe, pe->next, pe->x, pe->y, pe->next->x, pe->next->y);
             //assert(false);
         }
-
     }
+    
+#ifdef USE_EXPENSIVE_ASSERTS
+    //Check the spatial grid to make sure everything exists
+    for (int i = 0; i < gridWidth; i++)
+        for (int j = 0; j < gridHeight; j++)
+            for (int k = 0; k < spatialGrid[i][j].size(); k++)
+            {
+                PointEdge* pe = spatialGrid[i][j][k];
+                assert(pe);
+                assert(pe->x);
+                assert(pe->next);
+                assert(pe->next->x);
+            }
+#endif
 }
 
 bool ShapeField::linesClose(PointEdge* a1, PointEdge* a2,  PointEdge* b1, PointEdge*b2)
@@ -1160,7 +1194,7 @@ bool ShapeField::isOutside(float px, float py)
 //Returns all of the points inside and near a bounding box
 vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 {
-//    return peSet;
+    return peSet;
     
     //Find the corrosponding grid spaces that we are affecting
     unsigned int minCellX = ((unsigned)minX)/cellWidth;
@@ -1189,7 +1223,7 @@ vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, fl
 
 void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 {
-//    if (!pe->next) return;    //Use to bypass spatial grid optimization
+    assert(pe->next);
 
     //Create a slightly generous bounding box
     unsigned int minX = min(pe->x, pe->next->x) - plankFloat;

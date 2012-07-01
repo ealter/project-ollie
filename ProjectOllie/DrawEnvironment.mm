@@ -63,7 +63,7 @@
 {
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
-    float brushradius = self.brushradius;
+    float brushradius = fabs(self.brushradius);
     if (location.x -brushradius<self.contentSize.width/20) {
         location.x=self.contentSize.width/20+brushradius;
     }
@@ -101,15 +101,17 @@
     for(UITouch *touch in touches) {
         CGPoint location      = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         CGPoint previousPoint = [self transformTouchLocationFromTouchView:[touch previousLocationInView:touch.view]];
+        
+        //Add circle
         [self drawCircleAt:location];
 
         //Compute rectangle
         //Make unit vector between the two points
-        CGPoint unitvector = ccpSub(location, previousPoint);
-        if (unitvector.x == 0 && unitvector.y == 0) return;
-        unitvector = ccpNormalize(unitvector);
+        CGPoint vector = ccpSub(location, previousPoint);
+        if (fabs(vector.x) <FLT_EPSILON && fabs(vector.y) <FLT_EPSILON) return;
+        CGPoint unitvector = ccpNormalize(vector);
         
-        //Rotate vector by 90 degrees, multiply by desired width
+        //Rotate vector left by 90 degrees, multiply by desired width
         unitvector = ccpPerp(unitvector);
         unitvector = ccpMult(unitvector, fabs(self.brushradius));
         
@@ -117,17 +119,13 @@
                             ccpAdd(previousPoint, unitvector),
                             ccpSub(previousPoint, unitvector),
                             ccpSub(location,      unitvector)};
-        assert(sizeof(points)/sizeof(points[0]) == 4); //Make sure we made a rectangle
-        
         
         //Add/subtract the rectangle
-       /* if (self.brushradius > 0) {
+        if (self.brushradius > 0) {
             [self.terrain addQuadWithPoints:points];
-            [self.terrain addCircleWithRadius:self.brushradius x:location.x y:location.y];
         } else {
             [self.terrain removeQuadWithPoints:points];
-            //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
-        }*/
+        }
          
     }
 }
