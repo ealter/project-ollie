@@ -35,6 +35,8 @@
 
 #ifdef DEBUG
 //#define PRINT_DEBUGGING_STATEMENTS
+#define KEEP_TOUCH_INPUT
+#define USE_EXPENSIVE_ASSERTS
 #endif
 
 #ifdef PRINT_DEBUGGING_STATEMENTS
@@ -43,11 +45,38 @@
 #define printq(s, ...)
 #endif
 
-#ifdef DEBUG
-#define USE_EXPENSIVE_ASSERTS
-#endif
-
 using namespace std;
+
+#ifdef KEEP_TOUCH_INPUT
+struct ShapeField_input {
+    bool isCircle;
+    bool add;
+    union {
+        struct {
+            float r, x, y;
+        } circleInput;
+        struct {
+            float x[4];
+            float y[4];
+        } rectInput;
+    } input;
+};
+
+static vector<ShapeField_input> shapefieldInput;
+
+void printTouchInput()
+{
+    ShapeField_input input = shapefieldInput.back();
+    const char *add = input.add ? "add" : "remove";
+    if(input.isCircle) {
+      printq("circle %s %f %f %f\n", add, input.input.circleInput.r, input.input.circleInput.x, input.input.circleInput.y);
+    } else {
+      float *xs = input.input.rectInput.x;
+      float *ys = input.input.rectInput.y;
+      printq("rect %s %f %f %f %f %f %f %f %f\n", add, xs[0], xs[1], xs[2], xs[3], ys[0], ys[1], ys[2], ys[3]);
+    }
+}
+#endif /* KEEP_TOUCH_INPUT */
 
 ShapeField::ShapeField(float width, float height)
 :width(width), height(height), gridWidth(width/cellWidth + 1), gridHeight(height/cellHeight + 1)
@@ -74,6 +103,17 @@ ShapeField::~ShapeField()
 
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
+#ifdef KEEP_TOUCH_INPUT
+    ShapeField_input input;
+    input.isCircle = true;
+    input.add      = add;
+    input.input.circleInput.r = r;
+    input.input.circleInput.x = x;
+    input.input.circleInput.y = y;
+    shapefieldInput.push_back(input);
+    printTouchInput();
+#endif
+
     //Bound by the world size so we cannot possibly get spatial grid errors
     if (x <= r) x = r + 1;
     if (y <= r) y = r + 1;
@@ -674,6 +714,18 @@ PolyIntersection ShapeField::makePolyIntersectionIn(float x, float y, float t, f
 //Requires 4 x and 4 y for points in a counterclockwise rotation
 void ShapeField::clipConvexQuad(bool add, float* x, float* y)
 {
+#ifdef KEEP_TOUCH_INPUT
+    ShapeField_input input;
+    input.isCircle = false;
+    input.add = add;
+    for(int i=0; i<4; i++) {
+        input.input.rectInput.x[i] = x[i];
+        input.input.rectInput.y[i] = y[i];
+    }
+    shapefieldInput.push_back(input);
+    printTouchInput();
+#endif
+
     //Make sure the points are counterclockwise
     assert(ccw(x[0], y[0], x[1], y[1], x[2], y[2]) > FLT_EPSILON);
     assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
