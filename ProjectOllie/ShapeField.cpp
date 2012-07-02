@@ -34,7 +34,7 @@
 #define ccw(x1, y1, x2, y2, x3, y3) (((x2) - (x1))*((y3) - (y1)) - ((y2) - (y1))*((x3) - (x1)))
 
 #ifdef DEBUG
-//#define PRINT_DEBUGGING_STATEMENTS
+#define PRINT_DEBUGGING_STATEMENTS
 #define KEEP_TOUCH_INPUT
 #define USE_EXPENSIVE_ASSERTS
 #endif
@@ -544,17 +544,18 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     //Delete inside points which are now only irrelevantly linked to themselves
     for (unsigned i = 0; i < peSet.size(); i++)
     {
-        PointEdge* pe = peSet[i];
+        PointEdge* pe = peSet[i];/*
         //Check if we can bypass the point
         if (pe->tmpMark != inside && pe->getLenSq() < plankFloat)
         {
+            printq("Bypassing point in clip circle\n");
             removeFromSpatialGrid(pe);
             removeFromSpatialGrid(pe->prev);
             pe->tmpMark = inside;
             pe->next->prev = pe->prev;
             pe->prev->next = pe->next;
             addToSpatialGrid(pe->prev);
-        }
+        }*/
         if (pe->tmpMark == inside)
         {
             //Remove from the set of all points
@@ -590,12 +591,12 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         if(pe->prev->next != pe) {
           assert(pe->prev->next);
           assert(0);
-        }
+        }/*
         if ((fabs(pe->x - pe->next->x) < FLT_EPSILON && fabs(pe->y - pe->next->y) < FLT_EPSILON))
         {
             printq("pe %p npe %p center %f, %f\n, p: \n%f, %f\n%f, %f\n", pe, pe->next, x, y, pe->x, pe->y, pe->next->x, pe->next->y);
             assert(false);
-        }
+        }*/
     }
 
     
@@ -1008,7 +1009,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                 printq("in seg:%d t:%f extending to out seg:%d t:%f\n", i, in->t, outSeg, out->t);
                 //Lets see if we need to merge
                 float dx = out->intersection->x - in->intersection->x;
-                float dy = out->intersection->y - in->intersection->y;
+                float dy = out->intersection->y - in->intersection->y;/*
                 if(fabs(out->t - in->t) < plankFloat || (dx*dx+dy*dy < plankFloat && outSeg == ((i+1)%4)))
                 {
                     //Bypass the in intersection and delete it
@@ -1019,12 +1020,12 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                     addToSpatialGrid(in->intersection->prev);
                     in->intersection->tmpMark = inside;
                 }
-                else
+                else*/
                 {
                     //Connect the in to the out
                     PointEdge* prev = in->intersection;
                     bool wrapped = false;
-                    for (int cseg = i; cseg != outSeg || (!wrapped && in->t >= out->t);)
+                    for (int cseg = i; cseg != outSeg || (!wrapped && in->t > out->t);)
                     {
                         int nextSeg = (cseg + 1)%4;
                         //Create the corner point
@@ -1069,7 +1070,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     //Delete inside points which are now only irrelevantly linked to themselves
     for (unsigned i = 0; i < peSet.size(); i++)
     {
-        PointEdge* pe = peSet[i];
+        PointEdge* pe = peSet[i];/*
         //Check if we can bypass the point
         if (pe->tmpMark != inside && pe->getLenSq() < 4*FLT_EPSILON)
         {
@@ -1079,7 +1080,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             pe->next->prev = pe->prev;
             pe->prev->next = pe->next;
             addToSpatialGrid(pe->prev);
-        }
+        }*/
         if (pe->tmpMark == inside)
         {
             //Remove from the set of all points
@@ -1097,16 +1098,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     {
         PointEdge* pe = peSet[i];
         //Check that it exists and isn't null somehow
-        assert(pe);
-        //See if the location is in a strange place
-#ifdef USE_EXPENSIVE_ASSERTS
-        if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height)
-        {
-            printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
-            assert(false);
-        }
-#endif
-        //Check that it has a next and previous
+        assert(pe);        //Check that it has a next and previous
         assert(pe->next);
         assert(pe->prev);
         //Check that linked nodes link back correctly
@@ -1114,12 +1106,21 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
         assert(pe->next->prev == pe);
         assert(pe->prev->next);
         assert(pe->prev->next == pe);
+#ifdef USE_EXPENSIVE_ASSERTS
+        //See if the location is in a strange place
+        if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height)
+        {
+            printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
+            assert(false);
+        }/*
         //Check that the next point is far enough away that PE has a valid edge
         if ((fabs(pe->x - pe->next->x) < FLT_EPSILON && fabs(pe->y - pe->next->y) < FLT_EPSILON))
         {
-            //printq("pe %p npe %p p: \n%f, %f\n%f, %f\n", pe, pe->next, pe->x, pe->y, pe->next->x, pe->next->y);
-            //assert(false);
-        }
+            printq("pe %p npe %p p: \n%f, %f\n%f, %f\n", pe, pe->next, pe->x, pe->y, pe->next->x, pe->next->y);
+            assert(false);
+        }*/
+#endif
+        
     }
     
 #ifdef USE_EXPENSIVE_ASSERTS

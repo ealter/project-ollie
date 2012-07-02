@@ -113,7 +113,7 @@
         
         //Rotate vector left by 90 degrees, multiply by desired width
         unitvector = ccpPerp(unitvector);
-        unitvector = ccpMult(unitvector, fabs(self.brushradius));
+        unitvector = ccpMult(unitvector, fabs(self.brushradius-0.05));
         
         CGPoint points[] = {ccpAdd(location,      unitvector),
                             ccpAdd(previousPoint, unitvector),
