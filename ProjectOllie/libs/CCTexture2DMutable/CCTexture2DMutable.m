@@ -29,11 +29,11 @@
 	if((self = [super initWithData:data pixelFormat:pixelFormat pixelsWide:width pixelsHigh:height contentSize:size])){
 		
 		switch (pixelFormat) {
-			case kTexture2DPixelFormat_RGBA8888:	bytesPerPixel_ = 4; break;
-			case kTexture2DPixelFormat_A8:			bytesPerPixel_ = 1; break;
-			case kTexture2DPixelFormat_RGBA4444:
-			case kTexture2DPixelFormat_RGB565:
-			case kTexture2DPixelFormat_RGB5A1:
+			case kCCTexture2DPixelFormat_RGBA8888:	bytesPerPixel_ = 4; break;
+			case kCCTexture2DPixelFormat_A8:			bytesPerPixel_ = 1; break;
+			case kCCTexture2DPixelFormat_RGBA4444:
+			case kCCTexture2DPixelFormat_RGB565:
+			case kCCTexture2DPixelFormat_RGB5A1:
 				bytesPerPixel_ = 2;
 				break;
 			default:break;
@@ -57,35 +57,35 @@
 	
 	uint x = pt.x, y = pt.y;
 	
-	if(format_ == kTexture2DPixelFormat_RGBA8888){
+	if(format_ == kCCTexture2DPixelFormat_RGBA8888){
 		uint *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		c.r = *pixel & 0xff;
 		c.g = (*pixel >> 8) & 0xff;
 		c.b = (*pixel >> 16) & 0xff;
 		c.a = (*pixel >> 24) & 0xff;
-	} else if(format_ == kTexture2DPixelFormat_RGBA4444){
+	} else if(format_ == kCCTexture2DPixelFormat_RGBA4444){
 		GLushort *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		c.a = ((*pixel & 0xf) << 4) | (*pixel & 0xf);
 		c.b = (((*pixel >> 4) & 0xf) << 4) | ((*pixel >> 4) & 0xf);
 		c.g = (((*pixel >> 8) & 0xf) << 4) | ((*pixel >> 8) & 0xf);
 		c.r = (((*pixel >> 12) & 0xf) << 4) | ((*pixel >> 12) & 0xf);
-	} else if(format_ == kTexture2DPixelFormat_RGB5A1){
+	} else if(format_ == kCCTexture2DPixelFormat_RGB5A1){
 		GLushort *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		c.r = ((*pixel >> 11) & 0x1f)<<3;
 		c.g = ((*pixel >> 6) & 0x1f)<<3;
 		c.b = ((*pixel >> 1) & 0x1f)<<3;
 		c.a = (*pixel & 0x1)*255;
-	} else if(format_ == kTexture2DPixelFormat_RGB565){
+	} else if(format_ == kCCTexture2DPixelFormat_RGB565){
 		GLushort *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		c.b = (*pixel & 0x1f)<<3;
 		c.g = ((*pixel >> 5) & 0x3f)<<2;
 		c.r = ((*pixel >> 11) & 0x1f)<<3;
 		c.a = 255;
-	} else if(format_ == kTexture2DPixelFormat_A8){
+	} else if(format_ == kCCTexture2DPixelFormat_A8){
 		GLubyte *pixel = data_;
 		c.a = pixel[(y * width_) + x];
 		// Default white
@@ -109,22 +109,22 @@
 	//	Shifted bit placement based on little-endian, let's make this more
 	//	portable =/
 	
-	if(format_ == kTexture2DPixelFormat_RGBA8888){
+	if(format_ == kCCTexture2DPixelFormat_RGBA8888){
 		uint *pixel = data_;
 		pixel[(y * width_) + x] = (c.a << 24) | (c.b << 16) | (c.g << 8) | c.r;
-	} else if(format_ == kTexture2DPixelFormat_RGBA4444){
+	} else if(format_ == kCCTexture2DPixelFormat_RGBA4444){
 		GLushort *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		*pixel = ((c.r >> 4) << 12) | ((c.g >> 4) << 8) | ((c.b >> 4) << 4) | (c.a >> 4);
-	} else if(format_ == kTexture2DPixelFormat_RGB5A1){
+	} else if(format_ == kCCTexture2DPixelFormat_RGB5A1){
 		GLushort *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		*pixel = ((c.r >> 3) << 11) | ((c.g >> 3) << 6) | ((c.b >> 3) << 1) | (c.a > 0);
-	} else if(format_ == kTexture2DPixelFormat_RGB565){
+	} else if(format_ == kCCTexture2DPixelFormat_RGB565){
 		GLushort *pixel = data_;
 		pixel = pixel + (y * width_) + x;
 		*pixel = ((c.r >> 3) << 11) | ((c.g >> 2) << 5) | (c.b >> 3);
-	} else if(format_ == kTexture2DPixelFormat_A8){
+	} else if(format_ == kCCTexture2DPixelFormat_A8){
 		GLubyte *pixel = data_;
 		pixel[(y * width_) + x] = c.a;
 	} else {
@@ -190,19 +190,19 @@
 	
 	switch(format_)
 	{
-		case kTexture2DPixelFormat_RGBA8888:
+		case kCCTexture2DPixelFormat_RGBA8888:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_BYTE, data_);
 			break;
-		case kTexture2DPixelFormat_RGBA4444:
+		case kCCTexture2DPixelFormat_RGBA4444:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_SHORT_4_4_4_4, data_);
 			break;
-		case kTexture2DPixelFormat_RGB5A1:
+		case kCCTexture2DPixelFormat_RGB5A1:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, data_);
 			break;
-		case kTexture2DPixelFormat_RGB565:
+		case kCCTexture2DPixelFormat_RGB565:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width_, height_, 0, GL_RGB, GL_UNSIGNED_SHORT_5_6_5, data_);
 			break;
-		case kTexture2DPixelFormat_A8:
+		case kCCTexture2DPixelFormat_A8:
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, width_, height_, 0, GL_ALPHA, GL_UNSIGNED_BYTE, data_);
 			break;
 		default:
@@ -218,7 +218,6 @@
 #if CC_MUTABLE_TEXTURE_SAVE_ORIGINAL_DATA
 	free(originalData_);
 #endif
-	[super dealloc];
 }
 
 

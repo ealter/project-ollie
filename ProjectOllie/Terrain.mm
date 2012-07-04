@@ -53,11 +53,11 @@
 
 - (id)initWithTextureType:(TerrainTexture)textureType
 {
-    if(self = [super init])
-    {
-        ShapeField *shapeField = new ShapeField(1024, 768);
-        MaskedSprite *mask = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(1024, 768)];
-        self = [self initWithTextureType:textureType shapeField:shapeField mask:mask];
+    if(self = [super init]) {
+        self.contentSize = [[CCDirector sharedDirector] winSize];
+        self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+        self = [self initWithTextureType:textureType shapeField:shapeField_ mask:drawSprite];
     }
     return self;
 }
@@ -133,8 +133,7 @@
 {
     //The shape is changed so we must update the stroke
     [polyRenderer clear];
-    for (int i = 0; i < shapeField_->peSet.size(); i++)
-    {
+    for (int i = 0; i < shapeField_->peSet.size(); i++) {
         PointEdge* pe = shapeField_->peSet[i];
         [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
     }
