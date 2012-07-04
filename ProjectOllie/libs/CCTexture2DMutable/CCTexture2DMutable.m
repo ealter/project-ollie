@@ -12,19 +12,19 @@
 @synthesize originalTexData = originalData_;
 #endif
 
-- (void) releaseData:(void*)data
+- (void)releaseData:(void*)data
 {
 	//Don't free the data
 }
 
-- (void*) keepData:(void*)data lenght:(NSUInteger)lenght
+- (void *)keepData:(void*)data lenght:(NSUInteger)lenght
 {
 	void *newData = malloc(lenght);
 	memmove(newData, data, lenght);
 	return newData;
 }
 
-- (id) initWithData:(const void*)data pixelFormat:(CCTexture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size
+- (id)initWithData:(const void*)data pixelFormat:(CCTexture2DPixelFormat)pixelFormat pixelsWide:(NSUInteger)width pixelsHigh:(NSUInteger)height contentSize:(CGSize)size
 {
 	if((self = [super initWithData:data pixelFormat:pixelFormat pixelsWide:width pixelsHigh:height contentSize:size])){
 		
@@ -48,7 +48,7 @@
 	return self;
 }
 
-- (ccColor4B) pixelAt:(CGPoint) pt
+- (ccColor4B)pixelAt:(CGPoint) pt
 {
 	ccColor4B c = {0, 0, 0, 0};
 	if(!data_) return c;
@@ -97,7 +97,7 @@
 	return c;
 }
 
-- (BOOL) setPixelAt:(CGPoint) pt rgba:(ccColor4B) c
+- (BOOL)setPixelAt:(CGPoint) pt rgba:(ccColor4B) c
 {
 	if(!data_)return NO;
 	if(pt.x < 0 || pt.y < 0) return NO;
@@ -134,14 +134,14 @@
 	return YES;
 }
 
-- (void) fill:(ccColor4B) p
+- (void)fill:(ccColor4B) p
 {
 	for(int r = 0; r < size_.height; ++r)
 		for(int c = 0; c < size_.width; ++c)
 			[self setPixelAt:CGPointMake(c, r) rgba:p];
 }
 
-- (id) copyMutable:(BOOL)isMutable 
+- (id)copyMutable:(BOOL)isMutable 
 {	
 	id co;
 	if(isMutable)
@@ -157,12 +157,12 @@
 	return co;
 }
 
-- (id) copy
+- (id)copy
 {
 	return [self copyMutable:YES];
 }
 
-- (void) copy:(CCTexture2DMutable*)textureToCopy offset:(CGPoint) offset
+- (void)copy:(CCTexture2DMutable*)textureToCopy offset:(CGPoint) offset
 {
 	for(int r = 0; r < size_.height;++r){
 		for(int c = 0; c < size_.width; ++c){
@@ -171,7 +171,7 @@
 	}
 }
 
-- (void) restore
+- (void)restore
 {
 #if CC_MUTABLE_TEXTURE_SAVE_ORIGINAL_DATA
 	memcpy(data_, originalData_, bytesPerPixel_*width_*height_);
@@ -182,9 +182,10 @@
 #endif
 }
 
-- (void) apply
+- (void)apply
 {
 	if(!data_) return;
+    if(!dirty_) return;
 	
 	glBindTexture(GL_TEXTURE_2D, name_);
 	
@@ -212,7 +213,7 @@
 	dirty_ = NO;
 }
 
-- (void) dealloc
+- (void)dealloc
 {
 	free(data_);
 #if CC_MUTABLE_TEXTURE_SAVE_ORIGINAL_DATA
