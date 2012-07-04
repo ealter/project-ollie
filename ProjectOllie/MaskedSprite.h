@@ -16,8 +16,8 @@
 - (void)addPolygon:   (CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints;
 
-- (void)addPoint:   (CGPoint)point;
-- (void)removePoint:(CGPoint)point;
+- (void)addPoints:    (NSArray *)points; //An array of CGPoints (encapsulated in NSValues)
+- (void)removePoints: (NSArray *)points;
 
 - (BOOL)saveMaskToFile:(NSString *)fileName;
 - (id)initWithFile:(NSString *)file size:(CGSize)size;

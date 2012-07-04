@@ -36,6 +36,7 @@
 - (void)initWithMaskTexture:(CCRenderTexture *)maskTexture size:(CGSize)size;
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red;
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+- (void)drawPoints:(NSArray *)points red:(float)red;
 - (void)updateMask;
 
 @end
@@ -249,14 +250,25 @@
     [self updateMask];
 }
 
-- (void)addPoint:(CGPoint)point
+- (void)addPoints:(NSArray *)points
 {
-    
+    [self drawPoints:points red:COVERED_RED];
 }
 
-- (void)removePoint:(CGPoint)point
+- (void)removePoints:(NSArray *)points
 {
-    
+    [self drawPoints:points red:INITIAL_RED];
+}
+
+- (void)drawPoints:(NSArray *)points red:(float)red
+{
+    ccColor4F color = ccc4f(red,0,0,1);
+    for(NSValue *point in points) {
+        if(![point isKindOfClass:[NSValue class]]) continue;
+        CGPoint p = [point CGPointValue];
+        [self->pr drawDot:p radius:0.5 color:color];
+    }
+    [self updateMask];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
