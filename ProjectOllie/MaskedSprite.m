@@ -14,6 +14,8 @@
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
+
+//TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 
 
@@ -69,8 +71,7 @@
     if (self) {
         self.textureFileName = file;
         
-        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
-        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
         [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
         [self initWithMaskTexture:self.maskTexture size:size];
     }
@@ -205,8 +206,8 @@
     //[self.renderTexture visit];
 }
 
--(void)draw{
-    
+- (void)draw
+{    
     [self.renderTexture visit];
 }
 
@@ -240,9 +241,7 @@
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     for(int i = 0; i < numberOfPoints; i++)
-    {
         poly[i] = ccpMult(poly[i],1.f);
-    }
     
     ccColor4F color = ccc4f(red,0,0,1);
     
@@ -271,7 +270,6 @@
 {
     [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
     [self.renderTexture clear:0 g:0 b:0 a:0];
-    
 }
 
 @end
