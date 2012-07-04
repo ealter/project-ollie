@@ -23,7 +23,7 @@
 @property (nonatomic) TerrainTexture textureType;
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType;
-- (id)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField mask:(MaskedSprite *)mask;
+- (id)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField;
 
 @end
 
@@ -32,7 +32,7 @@
 @synthesize texture = texture_;
 @synthesize textureType = _textureType;
 
-- (id)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField mask:(MaskedSprite *)mask
+- (id)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField
 {
     self->shapeField_ = shapeField;
     CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:[[self class] fileNameForTextureType:textureType]];
@@ -42,7 +42,7 @@
     }
     self->texture_ = texture;
     
-    drawSprite = mask;
+    drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
@@ -56,23 +56,20 @@
     if(self = [super init]) {
         self.contentSize = [[CCDirector sharedDirector] winSize];
         self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
-        self = [self initWithTextureType:textureType shapeField:shapeField_ mask:drawSprite];
+        self = [self initWithTextureType:textureType shapeField:shapeField_];
     }
     return self;
 }
 
 #define TEXTURE_TYPE_KEY @"Texture type"
 #define SHAPEFIELD_KEY   @"Shapefield Data"
-#define MASK_KEY         @"Masked Sprite"
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:TEXTURE_TYPE_KEY];
     NSData *shapeFieldData     = [aDecoder decodeObjectForKey:SHAPEFIELD_KEY];
     ShapeField *shapeField     = new ShapeField(shapeFieldData.bytes);
-    MaskedSprite *mask         = [aDecoder decodeObjectForKey:MASK_KEY];
-    return [self initWithTextureType:textureType shapeField:shapeField mask:mask];
+    return [self initWithTextureType:textureType shapeField:shapeField];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
@@ -82,7 +79,6 @@
     void *shapeFieldBytes = shapeField_->pickleDataStructure(shapeFieldNumBytes);
     NSData *shapeFieldData = [NSData dataWithBytes:shapeFieldBytes length:shapeFieldNumBytes];
     [aCoder encodeObject:shapeFieldData forKey:SHAPEFIELD_KEY];
-    [aCoder encodeObject:drawSprite forKey:MASK_KEY];
 }
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
