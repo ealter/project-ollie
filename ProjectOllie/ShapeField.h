@@ -40,7 +40,7 @@ public:
     void clear();
     
     //Useful for pickling the data structure
-    ShapeField(const void *data);
+    ShapeField(const void *data, size_t numBytes);
     void *pickleDataStructure(int &dataLength);
 private:
     std::vector<PointEdge*> **spatialGrid;

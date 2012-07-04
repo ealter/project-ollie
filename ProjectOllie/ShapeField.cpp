@@ -101,7 +101,7 @@ ShapeField::~ShapeField()
     delete[] spatialGrid;
 }
 
-ShapeField::ShapeField(const void *data) {
+ShapeField::ShapeField(const void *data, size_t numBytes) {
     //TODO: implement this
     ShapeField(1024, 768);
 }

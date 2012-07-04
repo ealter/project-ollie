@@ -68,8 +68,11 @@
 {
     TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:TEXTURE_TYPE_KEY];
     NSData *shapeFieldData     = [aDecoder decodeObjectForKey:SHAPEFIELD_KEY];
-    ShapeField *shapeField     = new ShapeField(shapeFieldData.bytes);
-    return [self initWithTextureType:textureType shapeField:shapeField];
+    ShapeField *shapeField     = new ShapeField(shapeFieldData.bytes, shapeFieldData.length);
+    if( self = [self initWithTextureType:textureType shapeField:shapeField]) {
+        //TODO: Update the mask with the shapefield info
+    }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
