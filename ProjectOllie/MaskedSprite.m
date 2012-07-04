@@ -156,6 +156,11 @@
 }
 
 -(void) updateMask {
+    [self.maskTexture begin];
+    [self->pr visit];
+    [self->pr clear];
+    [self.maskTexture end];
+    
     [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
     CCTexture2D *mask = self.maskTexture.sprite.texture;
     ccGLEnableVertexAttribs(kCCVertexAttribFlag_PosColorTex );
@@ -208,36 +213,28 @@
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:COVERED_RED];
-    [self updateMask];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:INITIAL_RED];
-    [self updateMask];
 }
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
 {
-    
     ccColor4F color = ccc4f(red,0,0,1);
-    [self.maskTexture begin];
     [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
-    [self->pr visit];
-    [self->pr clear];
-    [self.maskTexture end];
+    [self updateMask];
 }
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
-    [self updateMask];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
-    [self updateMask];
 }
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
@@ -249,11 +246,8 @@
     
     ccColor4F color = ccc4f(red,0,0,1);
     
-    [self.maskTexture begin];
     [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:color];
-    [self->pr visit];
-    [self->pr clear];
-    [self.maskTexture end];
+    [self updateMask];
 }
 
 - (void)addPoint:(CGPoint)point
