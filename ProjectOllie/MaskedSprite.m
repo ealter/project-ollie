@@ -256,6 +256,16 @@
     [self.maskTexture end];
 }
 
+- (void)addPoint:(CGPoint)point
+{
+    
+}
+
+- (void)removePoint:(CGPoint)point
+{
+    
+}
+
 - (BOOL)saveMaskToFile:(NSString *)fileName
 {
     if(PIXEL_FORMAT != kCCTexture2DPixelFormat_RGBA8888)
