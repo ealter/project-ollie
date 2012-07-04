@@ -294,6 +294,7 @@
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
+		CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */; };
 		CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FDF1592A750005A233E /* ChangeUserName.m */; };
 		CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */; };
 /* End PBXBuildFile section */
@@ -840,6 +841,8 @@
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
+		CEFBC9BF159EA1E3001C1FD1 /* CCTexture2DMutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCTexture2DMutable.h; path = libs/CCTexture2DMutable/CCTexture2DMutable.h; sourceTree = "<group>"; };
+		CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCTexture2DMutable.m; path = libs/CCTexture2DMutable/CCTexture2DMutable.m; sourceTree = "<group>"; };
 		CEFD6FDE1592A750005A233E /* ChangeUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeUserName.h; path = ProjectOllie/Server/ChangeUserName.h; sourceTree = "<group>"; };
 		CEFD6FDF1592A750005A233E /* ChangeUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeUserName.m; path = ProjectOllie/Server/ChangeUserName.m; sourceTree = "<group>"; };
 		CEFD6FE21592B5CB005A233E /* ServerAccountsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAccountsAPI.h; path = ProjectOllie/Server/ServerAccountsAPI.h; sourceTree = "<group>"; };
@@ -1241,6 +1244,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */,
 				CE62FC991594084000BEB3BE /* CCTableSuite */,
 				CE0BD5F7158FFA3900C380CA /* Categories */,
 				C5B4C58A159023AC000FD99F /* HMUtils */,
@@ -1792,6 +1796,15 @@
 			name = Shaders;
 			sourceTree = "<group>";
 		};
+		CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */ = {
+			isa = PBXGroup;
+			children = (
+				CEFBC9BF159EA1E3001C1FD1 /* CCTexture2DMutable.h */,
+				CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */,
+			);
+			name = CCTexture2DMutable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2131,6 +2144,7 @@
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
 				CE029088159E6AD100CEF219 /* GameConstants.m in Sources */,
+				CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
