@@ -14,7 +14,7 @@
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
-
+#define SCALE_RATIO 1.0
 
 @interface MaskedSprite (){
     HMVectorNode* pr;
@@ -69,7 +69,7 @@
         [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
         
         self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        [self.renderTexture clear:0 g:0 b:0 a:1];
+        [self.renderTexture clear:0 g:0 b:0 a:0];
         
         ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
@@ -127,8 +127,6 @@
          
          */
         
-        self.scale *= -1./6.;
-        [self setPosition:ccp(self.contentSize.width,self.contentSize.height)];
     }
     return self;
 }
@@ -203,7 +201,7 @@
     
     ccColor4F color = ccc4f(red,0,0,1);
     [self.maskTexture begin];
-    [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
+    [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius*SCALE_RATIO) color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];
@@ -225,7 +223,7 @@
 {
     for(int i = 0; i < numberOfPoints; i++)
     {
-        poly[i] = ccpMult(poly[i],1.f);
+        poly[i] = ccpMult(poly[i],SCALE_RATIO);
     }
     
     ccColor4F color = ccc4f(red,0,0,1);

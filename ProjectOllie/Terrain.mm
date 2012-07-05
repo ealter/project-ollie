@@ -37,8 +37,8 @@
         drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
         polyRenderer = [[HMVectorNode alloc] init];
-        [self addChild:drawSprite];
-        [self addChild:polyRenderer];
+       // [self addChild:drawSprite];
+        //[self addChild:polyRenderer];
     }
     return self;
 }
@@ -80,7 +80,7 @@
 - (void)shapeChanged
 {
     //The shape is changed so we must update the stroke
-    /*[polyRenderer clear];
+ /*   [polyRenderer clear];
     for (int i = 0; i < shapeField->peSet.size(); i++)
     {
         PointEdge* pe = shapeField->peSet[i];

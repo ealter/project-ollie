@@ -34,6 +34,7 @@
 		C566AC351592A55A00D92879 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2F1592A55A00D92879 /* snow.png */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
+		C589042515A4FD3D00E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589042415A4FD3D00E0EB70 /* Skeleton.cpp */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
@@ -345,6 +346,8 @@
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
+		C589042415A4FD3D00E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
+		C589042615A4FD4D00E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
@@ -970,6 +973,16 @@
 			path = "Resources/Land Textures";
 			sourceTree = "<group>";
 		};
+		C589042315A4FD2500E0EB70 /* SkeletonUtils */ = {
+			isa = PBXGroup;
+			children = (
+				C589042415A4FD3D00E0EB70 /* Skeleton.cpp */,
+				C589042615A4FD4D00E0EB70 /* Skeleton.h */,
+			);
+			name = SkeletonUtils;
+			path = libs/SkeletonUtils;
+			sourceTree = "<group>";
+		};
 		C5B4C58A159023AC000FD99F /* HMUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1241,15 +1254,16 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				C589042315A4FD2500E0EB70 /* SkeletonUtils */,
+				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
+				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
+				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
+				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
 				CE62FC991594084000BEB3BE /* CCTableSuite */,
 				CE0BD5F7158FFA3900C380CA /* Categories */,
 				C5B4C58A159023AC000FD99F /* HMUtils */,
 				CE0BD5F8159016E600C380CA /* facebook-ios-sdk */,
 				CE894EFC158299CE00E412E1 /* CSG */,
-				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
-				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
-				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
-				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
 				C52986871578A43300656B50 /* CCControlExtension */,
 				C52986A21578A43300656B50 /* CCScrollView */,
 				C52986A51578A43300656B50 /* SSZipArchive */,
@@ -2131,6 +2145,7 @@
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
 				CE029088159E6AD100CEF219 /* GameConstants.m in Sources */,
+				C589042515A4FD3D00E0EB70 /* Skeleton.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
