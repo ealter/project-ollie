@@ -14,17 +14,21 @@ class b2World;
 class b2Body;
 @class CCTexture2D;
 
+typedef enum TerrainTexture {
+    TerrainTexture_pattern1 = 0
+} TerrainTexture;
+
 /*   Terrain class  */
 // Manages pieces of land: adds, removes, draws, generates
-@interface Terrain : CCNode {
+@interface Terrain : CCNode <NSCoding> {
     std::vector<b2Body*> b2Bodies;   //Bodies of chain shapes currently in the world
     b2World             *world;      //Physical world this land is in
-    ShapeField          *shapeField;
+    ShapeField          *shapeField_;
 }
 
-@property (nonatomic,strong) CCTexture2D *texture;
+@property (nonatomic, strong) CCTexture2D *texture;
 
-- (id) initWithTexture:(CCTexture2D*)t;
+- (id) initWithTextureType:(TerrainTexture)textureType;
 
 //Building land
 - (void) addCircleWithRadius:(float)radius x:(float)x y:(float)y;
