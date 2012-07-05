@@ -12,7 +12,7 @@
 
 @interface NewAccountMenu () <ServerAPI_delegate>
 
-@property (nonatomic, retain) AccountCreator *accountCreator;
+@property (nonatomic, strong) AccountCreator *accountCreator;
 
 @end
 

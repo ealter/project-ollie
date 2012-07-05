@@ -38,7 +38,7 @@
     NSMutableData *data_;
 }
 
-@property (nonatomic, readonly, retain) Authentication *auth;
+@property (nonatomic, readonly, strong) Authentication *auth;
 @property (nonatomic, assign) id<ServerAPI_delegate> delegate;
 
 //Protected methods
