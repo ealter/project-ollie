@@ -98,6 +98,17 @@ ShapeField::~ShapeField()
     delete[] spatialGrid;
 }
 
+ShapeField::ShapeField(const void *data, size_t numBytes) {
+    //TODO: implement this
+    ShapeField(1024, 768);
+}
+
+void *ShapeField::pickleDataStructure(int &dataLength) {
+    //TODO: implement this
+    dataLength = 0;
+    return NULL;
+}
+
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
 #ifdef KEEP_TOUCH_INPUT

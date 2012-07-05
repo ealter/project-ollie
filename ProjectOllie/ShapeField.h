@@ -35,6 +35,10 @@ public:
     void clipConvexQuadBridge(bool add, float* x, float* y);
     void clear();
     void checkConsistency();
+    
+    //Useful for pickling the data structure
+    ShapeField(const void *data, size_t numBytes);
+    void *pickleDataStructure(int &dataLength);
 private:
     std::set<PointEdge*> **spatialGrid;
     float width;

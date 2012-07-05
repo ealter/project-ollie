@@ -200,7 +200,7 @@
 -(void)touchesMoved:(NSSet *)touches{
     if([touches count] == 1)
         [self handleOneFingerMotion:touches];
-    if([touches count] == 2)
+    else if([touches count] == 2)
         [self handleTwoFingerMotion:touches];
 
 }
@@ -226,10 +226,8 @@
 
         CGPoint diff = ccpSub(touchLocation,prevLocation);
         
-        
         self.target = nil;
         [self panBy:diff];
-
     }
 }
 
@@ -262,8 +260,6 @@
     
 }
 -(void)twoFingerPan:(NSSet *)touches{
-    
-    
     /* PANNING */
 
     //create touches
@@ -282,7 +278,6 @@
 
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
-    
     
     self.target = nil;
     [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
@@ -311,7 +306,6 @@
     float difScale = curLength/prevLength;
    
     [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
-    
 }
 
 /*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA*/

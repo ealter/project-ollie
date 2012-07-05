@@ -20,19 +20,19 @@
 
 @synthesize facebook = _facebook;
 
-#define FB_ACCESS_TOKEN_KEY @"FBAccessTokenKey"
-#define FB_EXPIRATION_DATE_KEY @"FBExpirationDateKey"
-#define APP_ID @"395624167150736"
+static NSString *kFBAccessTokenKey    = @"FBAccessTokenKey";
+static NSString *kFBExpirationDateKey = @"FBExpirationDateKey";
+static NSString *kAppId               = @"395624167150736";
 
 - (Facebook *)facebook
 {
     if(!_facebook) {
-        _facebook = [[Facebook alloc] initWithAppId:APP_ID andDelegate:self];
+        _facebook = [[Facebook alloc] initWithAppId:kAppId andDelegate:self];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        if ([defaults objectForKey:FB_ACCESS_TOKEN_KEY] 
-            && [defaults objectForKey:FB_EXPIRATION_DATE_KEY]) {
-            _facebook.accessToken = [defaults objectForKey:FB_ACCESS_TOKEN_KEY];
-            _facebook.expirationDate = [defaults objectForKey:FB_EXPIRATION_DATE_KEY];
+        if ([defaults objectForKey:kFBAccessTokenKey] 
+            && [defaults objectForKey:kFBExpirationDateKey]) {
+            _facebook.accessToken = [defaults objectForKey:kFBAccessTokenKey];
+            _facebook.expirationDate = [defaults objectForKey:kFBExpirationDateKey];
         }
     }
     return _facebook;
@@ -77,8 +77,8 @@
 - (void)fbDidLogin
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:[self.facebook accessToken]    forKey:FB_ACCESS_TOKEN_KEY];
-    [defaults setObject:[self.facebook expirationDate] forKey:FB_EXPIRATION_DATE_KEY];
+    [defaults setObject:[self.facebook accessToken]    forKey:kFBAccessTokenKey];
+    [defaults setObject:[self.facebook expirationDate] forKey:kFBExpirationDateKey];
     [defaults synchronize];
     [self sendFacebookLoginDetailsToServer];
 }
@@ -86,8 +86,8 @@
 - (void)fbDidLogout
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults removeObjectForKey:FB_ACCESS_TOKEN_KEY];
-    [defaults removeObjectForKey:FB_EXPIRATION_DATE_KEY];
+    [defaults removeObjectForKey:kFBAccessTokenKey];
+    [defaults removeObjectForKey:kFBExpirationDateKey];
     [defaults synchronize];
     //TODO: tell authentication class
 }
@@ -105,14 +105,12 @@
 - (void)fbDidExtendToken:(NSString *)accessToken expiresAt:(NSDate *)expiresAt
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:accessToken forKey:FB_ACCESS_TOKEN_KEY];
-    [defaults setObject:expiresAt   forKey:FB_EXPIRATION_DATE_KEY];
+    [defaults setObject:accessToken forKey:kFBAccessTokenKey];
+    [defaults setObject:expiresAt   forKey:kFBExpirationDateKey];
     [defaults synchronize];
 }
 
 - (void)fbSessionInvalidated
-{
-
-}
+{ }
 
 @end

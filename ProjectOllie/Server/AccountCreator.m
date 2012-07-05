@@ -14,8 +14,8 @@
 @interface AccountCreator () <ServerAPI_delegate>
 
 /* Used so that we can login after account creation */
-@property (nonatomic, strong) NSString *username;
-@property (nonatomic, strong) NSString *password;
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *password;
 
 @end
 

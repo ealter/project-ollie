@@ -45,8 +45,7 @@
 -(id) init
 {
 	if(self=[super init]) {
-        CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:@"pattern1.png"];
-        self.terrain = [[Terrain alloc]initWithTexture:texture];
+        self.terrain = [[Terrain alloc]initWithTextureType:kTerrainTexture_pattern1];
         [self addChild:self.terrain];
         self.isTouchEnabled = YES;
         self.brushradius    = smallradius;

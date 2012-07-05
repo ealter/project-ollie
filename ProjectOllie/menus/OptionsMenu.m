@@ -54,7 +54,8 @@
 
 -(void)pressedBack:(id)sender
 {
-    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:[NSArray arrayWithObject:nameField]];
+    [self removeUIViews:[NSArray arrayWithObject:nameField]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
 - (void)serverOperationSucceeded

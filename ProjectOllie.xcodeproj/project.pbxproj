@@ -60,6 +60,8 @@
 		CE1BB5261586A6BA0095A793 /* small.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB51E1586A6BA0095A793 /* small.png */; };
 		CE1F2E7C1590385800710A32 /* dottedbox-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2E7A1590385800710A32 /* dottedbox-hd.png */; };
 		CE1F2E7D1590385800710A32 /* drawframe-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2E7B1590385800710A32 /* drawframe-hd.png */; };
+		CE22740215A0193100F3217E /* GWParticles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22740115A0193100F3217E /* GWParticles.m */; };
+		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
@@ -294,6 +296,7 @@
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFB2C50157D7655008A808D /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFB2C4F157D7655008A808D /* treez.png */; };
+		CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */; };
 		CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FDF1592A750005A233E /* ChangeUserName.m */; };
 		CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */; };
 /* End PBXBuildFile section */
@@ -392,6 +395,9 @@
 		CE1BB51E1586A6BA0095A793 /* small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = small.png; path = Resources/small.png; sourceTree = "<group>"; };
 		CE1F2E7A1590385800710A32 /* dottedbox-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dottedbox-hd.png"; path = "Resources/dottedbox-hd.png"; sourceTree = "<group>"; };
 		CE1F2E7B1590385800710A32 /* drawframe-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "drawframe-hd.png"; path = "Resources/drawframe-hd.png"; sourceTree = "<group>"; };
+		CE22740015A0193100F3217E /* GWParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWParticles.h; sourceTree = "<group>"; };
+		CE22740115A0193100F3217E /* GWParticles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWParticles.m; sourceTree = "<group>"; };
+		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = Resources/NewAccountMenu.ccbi; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
@@ -840,6 +846,8 @@
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MaskedSprite.m; sourceTree = "<group>"; };
 		CEFB2C4F157D7655008A808D /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = treez.png; path = Resources/treez.png; sourceTree = "<group>"; };
+		CEFBC9BF159EA1E3001C1FD1 /* CCTexture2DMutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCTexture2DMutable.h; path = libs/CCTexture2DMutable/CCTexture2DMutable.h; sourceTree = "<group>"; };
+		CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCTexture2DMutable.m; path = libs/CCTexture2DMutable/CCTexture2DMutable.m; sourceTree = "<group>"; };
 		CEFD6FDE1592A750005A233E /* ChangeUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeUserName.h; path = ProjectOllie/Server/ChangeUserName.h; sourceTree = "<group>"; };
 		CEFD6FDF1592A750005A233E /* ChangeUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeUserName.m; path = ProjectOllie/Server/ChangeUserName.m; sourceTree = "<group>"; };
 		CEFD6FE21592B5CB005A233E /* ServerAccountsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAccountsAPI.h; path = ProjectOllie/Server/ServerAccountsAPI.h; sourceTree = "<group>"; };
@@ -1041,6 +1049,7 @@
 		C5FBA729159A8BCB00C1C624 /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
+				CE22740815A01D6D00F3217E /* fire.png */,
 				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
 				CE123C4C158811DC003AD813 /* background.jpg */,
 				C54A05F5158151A100D7B369 /* blocks-hd.png */,
@@ -1204,6 +1213,8 @@
 				CE081665159BE73600064E04 /* IOS_Versions.m */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
+				CE22740015A0193100F3217E /* GWParticles.h */,
+				CE22740115A0193100F3217E /* GWParticles.m */,
 				CE30B189158FBA12009EC82B /* Menus */,
 				CEF00102158BDCE500F7F1A8 /* Server */,
 				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
@@ -1241,6 +1252,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */,
 				CE62FC991594084000BEB3BE /* CCTableSuite */,
 				CE0BD5F7158FFA3900C380CA /* Categories */,
 				C5B4C58A159023AC000FD99F /* HMUtils */,
@@ -1792,6 +1804,15 @@
 			name = Shaders;
 			sourceTree = "<group>";
 		};
+		CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */ = {
+			isa = PBXGroup;
+			children = (
+				CEFBC9BF159EA1E3001C1FD1 /* CCTexture2DMutable.h */,
+				CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */,
+			);
+			name = CCTexture2DMutable;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1916,6 +1937,7 @@
 				CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */,
 				CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */,
 				CE70E1FE159943C30065B440 /* silverbutton.png in Resources */,
+				CE22740915A01D6D00F3217E /* fire.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2131,6 +2153,8 @@
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
 				CE029088159E6AD100CEF219 /* GameConstants.m in Sources */,
+				CE22740215A0193100F3217E /* GWParticles.m in Sources */,
+				CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

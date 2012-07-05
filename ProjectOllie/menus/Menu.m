@@ -15,7 +15,16 @@
 
 @synthesize activityIndicator = _activityIndicator;
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName removeUIViews:(NSArray *)uiviews
+- (void)transitionToSceneWithFile:(NSString *)sceneName
+{
+    [self stopActivityIndicator];
+    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:sceneName];
+    //Disabled temp cause of poor shader interaction
+    //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [[CCDirector sharedDirector] pushScene:scene];
+}
+
+- (void)removeUIViews:(NSArray *)uiviews
 {
     if(uiviews) {
         for(UIView *view in uiviews) {
@@ -24,11 +33,6 @@
             }
         }
     }
-    [self stopActivityIndicator];
-    CCScene *scene = [CCBReader sceneWithNodeGraphFromFile:sceneName];
-    //Disabled temp cause of poor shader interaction
-    //[[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
-    [[CCDirector sharedDirector] pushScene:scene];
 }
 
 - (UITextField *)addTextFieldWithFrame:(CGRect)frame

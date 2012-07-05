@@ -12,6 +12,7 @@
 #import "MyCell.h"
 #import "cocos2d.h"
 #import "RippleEffect.h"
+#import "GWParticles.h"
 
 @implementation CharacterScreen
 @synthesize weaponScrollView;
@@ -33,25 +34,30 @@
         [self addChild:tableView];
         [tableView reloadData];
         
-        CCSprite *sprite2   = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
+        /*CCSprite *sprite2   = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
 		sprite2.anchorPoint = ccp(0.5, 0.5);
 		sprite2.position    = ccp([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
-		[self addChild:sprite2];
+		[self addChild:sprite2];*/
         
-        //RippleEffect *ripple =[[RippleEffect alloc] initWithParent:self];
+        //Particle stuffs
+        CCParticleSystem *emitter = [GWParticleMuzzleFlash node];
+        [self addChild:emitter];
+        
     }
 	return self;
 }
 
--(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell {
-    
+-(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
+{  
 }
 
--(CGSize)cellSizeForTable:(SWTableView *)table {
+-(CGSize)cellSizeForTable:(SWTableView *)table
+{
     return CGSizeMake(300, 100);
 }
 
--(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx {
+-(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
+{
     
     NSString *string = [NSString stringWithFormat:@"%d", idx];
     
@@ -75,13 +81,14 @@
     return cell;
 }
 
--(NSUInteger)numberOfCellsInTableView:(SWTableView *)table {
+-(NSUInteger)numberOfCellsInTableView:(SWTableView *)table
+{
     return 20;
 }
 
 -(void)pressedBack:(id)sender
 {
-    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
 @end
