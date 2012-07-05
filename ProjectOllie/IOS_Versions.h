@@ -10,6 +10,7 @@
 
 @interface IOS_Versions : NSObject
 
+//Returns true if the current ios version is >= to ios5
 + (BOOL)iOS_5;
 
 @end
