@@ -37,7 +37,7 @@
 @property (assign, nonatomic) float defaultScale;       // default scale size
 
 /* Inits the camera with a world and its dimensions */
--(id)initWithSubject:(id)subject worldDimensions:(CGSize)wd;
+-(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd;
 
 /* sets a new subject to affect */
 -(void)setSubject:(CCNode*)sub;
