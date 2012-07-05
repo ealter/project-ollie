@@ -12,8 +12,10 @@
 
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
 
-/* Transitions to the specified scene. If uiviews is not nil, it calls removeFromSuperview and release on each element. */
-- (void)transitionToSceneWithFile:(NSString *)sceneName removeUIViews:(NSArray *)uiviews;
+/* Transitions to the specified scene. */
+- (void)transitionToSceneWithFile:(NSString *)sceneName;
+/* If uiviews is not nil, it calls removeFromSuperview and release on each element. */
+- (void)removeUIViews:(NSArray *)uiviews;
 /* Adds a text field setting a bunch of common parameters */
 - (UITextField *)addTextFieldWithFrame:(CGRect)frame;
 - (void)startActivityIndicator;

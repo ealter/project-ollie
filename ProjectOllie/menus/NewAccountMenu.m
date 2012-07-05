@@ -13,7 +13,6 @@
 @interface NewAccountMenu () <ServerAPI_delegate>
 
 @property (nonatomic, retain) AccountCreator *accountCreator;
-- (void)returnToMenuWithFile:(NSString *)menuName;
 
 @end
 
@@ -78,19 +77,20 @@
     [self.accountCreator createAccountWithUsername:username password:password email:email];
 }
 
-- (void)returnToMenuWithFile:(NSString *)menuName
+- (void)transitionToSceneWithFile:(NSString *)sceneName
 {
-    [self transitionToSceneWithFile:menuName removeUIViews:[NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil]];
+    [self removeUIViews:[NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil]];
+    [self transitionToSceneWithFile:sceneName];
 }
 
 -(void)pressedCancel:(id)sender
 {
-    [self returnToMenuWithFile:@"LoginScreen.ccbi"];
+    [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
 - (void)serverOperationSucceeded
 {
-    [self returnToMenuWithFile:@"MainMenu.ccbi"];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
 - (void)serverOperationFailedWithError:(NSString *)error

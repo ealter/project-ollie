@@ -56,7 +56,7 @@
 
 -(void)pressedOptions:(id)sender
 {
-    [self transitionToSceneWithFile:@"OptionsMenu.ccbi" removeUIViews:nil];
+    [self transitionToSceneWithFile:@"OptionsMenu.ccbi"];
 }
 
 -(void)pressedNewGame:(id)sender
@@ -72,13 +72,13 @@
 
 -(void)pressedCharacters:(id)sender
 {
-    [self transitionToSceneWithFile:@"CharacterScreen.ccbi" removeUIViews:nil];
+    [self transitionToSceneWithFile:@"CharacterScreen.ccbi"];
 }
 
 -(void)pressedLogout:(id)sender
 {
     [[[Logout alloc]init] logout];
-    [self transitionToSceneWithFile:@"LoginScreen.ccbi" removeUIViews:nil];
+    [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
 - (void)dealloc
