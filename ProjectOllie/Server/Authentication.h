@@ -10,7 +10,7 @@
 
 /* A singleton class that handles server authentication */
 
-#define USERNAME_CHANGED_BROADCAST @"username changed"
+extern const NSString *kUsernameChangedBroadcast;
 
 @class FacebookLogin;
 

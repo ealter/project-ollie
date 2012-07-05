@@ -29,7 +29,7 @@
         userName.anchorPoint = ccp(0.5,1);
         userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height);
         [self addChild:userName z:1];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification:) name:USERNAME_CHANGED_BROADCAST object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification:) name:(NSString *)kUsernameChangedBroadcast object:nil];
     }
     
     return self;
@@ -37,7 +37,7 @@
 
 - (void)receivedNotification:(NSNotification *)notification
 {
-    if([notification.name isEqualToString:USERNAME_CHANGED_BROADCAST]) {
+    if([notification.name isEqualToString:(NSString *)kUsernameChangedBroadcast]) {
         [userName setString:[Authentication mainAuth].username];
     }
 }
