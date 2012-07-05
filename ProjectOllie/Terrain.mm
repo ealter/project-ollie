@@ -61,13 +61,13 @@
     return self;
 }
 
-#define TEXTURE_TYPE_KEY @"Texture type"
-#define SHAPEFIELD_KEY   @"Shapefield Data"
+static NSString *kTextureTypeKey = @"Texture type";
+static NSString *kShapefieldKey  = @"Shapefield Data";
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:TEXTURE_TYPE_KEY];
-    NSData *shapeFieldData     = [aDecoder decodeObjectForKey:SHAPEFIELD_KEY];
+    TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:kTextureTypeKey];
+    NSData *shapeFieldData     = [aDecoder decodeObjectForKey:kShapefieldKey];
     ShapeField *shapeField     = new ShapeField(shapeFieldData.bytes, shapeFieldData.length);
     if( self = [self initWithTextureType:textureType shapeField:shapeField]) {
         //TODO: Update the mask with the shapefield info
@@ -77,11 +77,11 @@
 
 - (void)encodeWithCoder:(NSCoder *)aCoder
 {
-    [aCoder encodeInt:self.textureType forKey:TEXTURE_TYPE_KEY];
+    [aCoder encodeInt:self.textureType forKey:kTextureTypeKey];
     int shapeFieldNumBytes = 0;
     void *shapeFieldBytes = shapeField_->pickleDataStructure(shapeFieldNumBytes);
     NSData *shapeFieldData = [NSData dataWithBytes:shapeFieldBytes length:shapeFieldNumBytes];
-    [aCoder encodeObject:shapeFieldData forKey:SHAPEFIELD_KEY];
+    [aCoder encodeObject:shapeFieldData forKey:kShapefieldKey];
 }
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
