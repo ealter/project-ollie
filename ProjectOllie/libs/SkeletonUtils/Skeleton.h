@@ -11,7 +11,7 @@
 
 #include "string.h"
 #include "Box2D.h"
-//#include "GameConstants.h"
+#include "GameConstants.h"
 
 
 #define MAX_CHCOUNT				8  //max amount of children for bone

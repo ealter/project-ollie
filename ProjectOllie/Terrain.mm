@@ -42,11 +42,12 @@
         return;
     }
     self->texture_ = texture;
-    
-    self->drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+
+    drawSprite = [[MaskedSprite alloc] initWithFile:[[self class] fileNameForTextureType:textureType] size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
+    
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
 }
@@ -58,7 +59,7 @@
         self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
         assert(shapeField_);
         [self initWithTextureType:textureType shapeField:shapeField_];
-        assert(self->drawSprite);
+
     }
     return self;
 }

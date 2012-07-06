@@ -74,7 +74,7 @@ static const float kCoveredRed = 1.0;
         self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
-        [self.renderTexture clear:0 g:0 b:0 a:1];
+        [self.renderTexture clear:0 g:0 b:0 a:0];
         self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
         [self.maskTexture clear:kInitialRed g:0 b:0 a:1];
         
