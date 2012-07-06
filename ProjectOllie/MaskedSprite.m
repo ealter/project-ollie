@@ -135,6 +135,7 @@ static const float kCoveredRed = 1.0;
 
 - (void)updateMask
 {
+    
     [self.maskTexture begin];
     [self->pr visit];
     [self->pr clear];
@@ -202,16 +203,8 @@ static const float kCoveredRed = 1.0;
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
 {
     ccColor4F color = ccc4f(red,0,0,1);
-<<<<<<< HEAD
-    [self.maskTexture begin];
-    [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius*SCALE_RATIO) color:color];
-    [self->pr visit];
-    [self->pr clear];
-    [self.maskTexture end];
-=======
-    [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
+    [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius + .5f)*SCALE_RATIO color:color];
     [self updateMask];
->>>>>>> b235590cd831dd6b0d441f721ac448f5cd4defe3
 }
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
