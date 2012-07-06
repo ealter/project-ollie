@@ -32,12 +32,8 @@ typedef enum TerrainTexture {
 - (id) initWithTextureType:(TerrainTexture)textureType;
 
 //Building land
-- (void) addCircleWithRadius:(float)radius x:(float)x y:(float)y;
-- (void) addQuadWithPoints:(CGPoint[])p;
-
-//Removing land
-- (void) removeCircleWithRadius:(float)radius x:(float)x y:(float)y;
-- (void) removeQuadWithPoints:(CGPoint[])p;
+- (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y;
+- (void) bridgeCircles:(bool)add from:(CGPoint)p to:(CGPoint) p2;
 
 //Call whenever shape is changed to rebuild the stroke raster
 - (void) shapeChanged;

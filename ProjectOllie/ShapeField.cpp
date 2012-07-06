@@ -20,10 +20,13 @@
 #define cellHeight 32
 
 //Maximum distance for a segment on a circle
-#define maxCircleSeg 4
+#define maxCircleSegTheta .1
 
 // Define the smallest float difference that could matter
 #define plankFloat 0.001f
+
+//Constant we 
+#define radiusMargin .01
 
 //2 pi
 #define TAU (M_PI*2)
@@ -109,6 +112,12 @@ void *ShapeField::pickleDataStructure(int &dataLength) {
     return NULL;
 }
 
+
+float getRinside(float r)
+{
+    return (r - radiusMargin)*cosf(maxCircleSegTheta/2) - radiusMargin;
+}
+
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
 #ifdef KEEP_TOUCH_INPUT
@@ -123,7 +132,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
 #endif
 
     //Use this as the r when creating new points so going over circles won't ever expand the curve into the float trig error spots
-    float rMarginal = r - .01;
+    float rMarginal = r - radiusMargin;
 
     //Get all potential PointEdges that we could be affecting in a bounding box
     PeSet nearPEs = pointsNear(x-r, y-r, x+r, y+r);
@@ -341,7 +350,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     assert(entrences.size() == exits.size());
 
     //Figure out the maximum theta for the given radius and maxCircleSeg
-    float maxTheta = 2*asinf(maxCircleSeg/(r*2));
+    float maxTheta = maxCircleSegTheta;
 
     //If nothing intersects, we have no geometry to adjust, perhaps we will make some new independant shapes
     if (entrences.empty())
