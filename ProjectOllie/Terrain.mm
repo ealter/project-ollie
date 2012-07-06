@@ -132,16 +132,18 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     unitvector = ccpPerp(unitvector);
     unitvector = ccpMult(unitvector, shapeField_->getRinside(r));
     
-    CGPoint p[] = { ccpAdd(p1,      unitvector),
+    CGPoint p[] = { ccpAdd(p1, unitvector),
                     ccpAdd(p2, unitvector),
                     ccpSub(p2, unitvector),
-                    ccpSub(p1,      unitvector)};
+                    ccpSub(p1, unitvector)};
     
     float x[] = {p[3].x, p[2].x, p[1].x, p[0].x};
     float y[] = {p[3].y, p[2].y, p[1].y, p[0].y};
     shapeField_->clipConvexQuadBridge(add, x, y);
-    if (add) [drawSprite addPolygon:p numPoints:4];
-    else [drawSprite removePolygon:p numPoints:4];
+    if (add)
+        [drawSprite addPolygon:p numPoints:4];
+    else
+        [drawSprite removePolygon:p numPoints:4];
 }
 
 - (void)shapeChanged
