@@ -11,7 +11,10 @@
 @implementation NSString (URLEncoding)
 
 -(NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding {
-	return (__bridge NSString *)CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)self, NULL, (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ", CFStringConvertNSStringEncodingToEncoding(encoding));
+	CFStringRef urlRef = CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)self, NULL, (CFStringRef)@"!*'\"();:@&=+$,/?%#[]% ", CFStringConvertNSStringEncodingToEncoding(encoding));
+    NSString *str = (__bridge NSString *)urlRef;
+    CFRelease(urlRef);
+    return str;
 }
 
 @end

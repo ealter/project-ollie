@@ -13,12 +13,13 @@
 
 - (NSString*)urlEncodedString {
     NSMutableArray *parts = [NSMutableArray array];
-    for (id key in self) {
-        id value = [self objectForKey: key];
-        NSString *part = [NSString stringWithFormat: @"%@=%@", [key urlEncodeUsingEncoding:NSUTF8StringEncoding], [value urlEncodeUsingEncoding:NSUTF8StringEncoding]];
-        [parts addObject: part];
+    for (NSString *key in self) {
+        NSString *value = [self objectForKey: key];
+        if(!([key isKindOfClass:[NSString class]] && [value isKindOfClass:[NSString class]])) continue;
+        NSString *part = [NSString stringWithFormat:@"%@=%@", [key urlEncodeUsingEncoding:NSUTF8StringEncoding], [value urlEncodeUsingEncoding:NSUTF8StringEncoding]];
+        [parts addObject:part];
     }
-    return [parts componentsJoinedByString: @"&"];
+    return [parts componentsJoinedByString:@"&"];
 }
 
 @end
