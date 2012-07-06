@@ -44,7 +44,7 @@ static NSString *kAppId               = @"395624167150736";
         [self.facebook authorize:nil];
     }
     else {
-        [self broadcastServerOperationSucceeded];
+        [self sendFacebookLoginDetailsToServer];
     }
 }
 

@@ -37,7 +37,7 @@
     if(self.auth.authToken)
         [self broadcastServerOperationSucceeded];
     else
-        [self broadcastServerOperationFailedWithError:nil];
+        [self broadcastServerOperationFailedWithError:@"Server did not send authorization token"];
 }
 
 @end

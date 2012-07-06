@@ -14,7 +14,7 @@
 #define SERVER_ERROR_KEY @"error"
 
 #ifndef SERVER_IS_DEV
-#define SERVER_IS_DEV 0
+#define SERVER_IS_DEV 1
 #endif
 
 #ifndef DOMAIN_NAME
