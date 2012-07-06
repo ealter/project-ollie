@@ -176,14 +176,14 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
         DebugLog(@"Going to reproduce touch input");
         NSError *error = nil;
-        DebugLog(@"The path is %@", path);
         NSString *fileData = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:&error];
         if(error) {
             DebugLog(@"Error: %@", error);
             return;
         }
         NSArray *lines = [fileData componentsSeparatedByString:@"\n"];
-        DebugLog(@"The lines are %@", lines);
+        CGPoint previous = CGPointMake(-1, -1);
+        float previousRadius = 0;
         for(NSString *line in lines) {
             NSArray *words = [line componentsSeparatedByString:@" "];
             if(words.count < 5) continue;
@@ -202,23 +202,13 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
                 float radius = [[words objectAtIndex:2] floatValue];
                 float x      = [[words objectAtIndex:3] floatValue];
                 float y      = [[words objectAtIndex:4] floatValue];
-                if(add)
-                    [self addCircleWithRadius:radius x:x y:y];
-                else
-                    [self removeCircleWithRadius:radius x:x y:y];
-            } else if([shapeType isEqualToString:@"rect"]) {
-                CGPoint points[4];
-                int wordsBaseIndex = 2;
-                for(int i=0; i<4; i++)
-                    points[i].x = [[words objectAtIndex:i + wordsBaseIndex] floatValue];
-                wordsBaseIndex += 4;
-                for(int i=0; i<4; i++)
-                    points[i].y = [[words objectAtIndex:i + wordsBaseIndex] floatValue];
-                if(add)
-                    [self addQuadWithPoints:points];
-                else
-                    [self removeQuadWithPoints:points];
-            }
+                [self clipCircle:add WithRadius:radius x:x y:y];
+                if(previous.x > 0 && radius == previousRadius) {
+                    [self bridgeCircles:add from:previous to:ccp(x,y) radiusUsed:radius];
+                }
+                previous = ccp(x,y);
+                previousRadius = radius;
+            } 
         }
     }
 }
