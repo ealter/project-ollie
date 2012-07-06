@@ -31,9 +31,11 @@ typedef enum TerrainTexture {
 
 - (id) initWithTextureType:(TerrainTexture)textureType;
 
-//Building land
+//Changing land
 - (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y;
-- (void) bridgeCircles:(bool)add from:(CGPoint)p to:(CGPoint) p2;
+
+//Only call this after two circles have been clipped
+- (void) bridgeCircles:(bool)add from:(CGPoint)p1 to:(CGPoint) p2 radiusUsed:(float)r;
 
 //Call whenever shape is changed to rebuild the stroke raster
 - (void) shapeChanged;

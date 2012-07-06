@@ -113,7 +113,7 @@ void *ShapeField::pickleDataStructure(int &dataLength) {
 }
 
 
-float getRinside(float r)
+float ShapeField::getRinside(float r)
 {
     return (r - radiusMargin)*cosf(maxCircleSegTheta/2) - radiusMargin;
 }
@@ -464,9 +464,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     }
                 }
             }
-            
-            assert((dTheta >= 0) == add);
-            
+                        
             //If the enterence and exit are at a really close theta, then we just want to merge these points
             if (fabs(dTheta) < .01) printf("COULDA MERGED\n");
             if (false && fabs(dTheta) < .01)
