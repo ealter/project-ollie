@@ -112,33 +112,36 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 }
 
 //Building land
-- (void)addCircleWithRadius:(float)radius x:(float)x y:(float)y
+- (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField_->clipCircle(true, radius, x, y);
-    [drawSprite addCircleAt:ccp(x,y) radius:radius];
+    shapeField_->clipCircle(add, radius, x, y);
+    if (add) [drawSprite addCircleAt:ccp(x,y) radius:radius];
+    else [drawSprite removeCircleAt:ccp(x,y) radius:radius];
 }
 
-- (void)addQuadWithPoints:(CGPoint[])p
-{
-    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
-    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
-    shapeField_->clipConvexQuadBridge(true, x, y);
-    [drawSprite addPolygon:p numPoints:4];
-}
 
-//Removing land
-- (void)removeCircleWithRadius:(float)radius x:(float)x y:(float)y
+- (void) bridgeCircles:(bool)add from:(CGPoint)p1 to:(CGPoint) p2 radiusUsed:(float)r
 {
-    shapeField_->clipCircle(false, radius, x, y);
-    [drawSprite removeCircleAt:ccp(x,y) radius:radius];
-}
-
-- (void)removeQuadWithPoints:(CGPoint[])p
-{
-    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
-    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
-    shapeField_->clipConvexQuadBridge(false, x, y);
-    [drawSprite removePolygon:p numPoints:4];
+    //Compute rectangle
+    //Make unit vector between the two points
+    CGPoint vector = ccpSub(p2, p1);
+    if (fabs(vector.x) <FLT_EPSILON && fabs(vector.y) <FLT_EPSILON) return;
+    CGPoint unitvector = ccpNormalize(vector);
+    
+    //Rotate vector left by 90 degrees, multiply by desired width
+    unitvector = ccpPerp(unitvector);
+    unitvector = ccpMult(unitvector, shapeField_->getRinside(r));
+    
+    CGPoint p[] = { ccpAdd(p1,      unitvector),
+                    ccpAdd(p2, unitvector),
+                    ccpSub(p2, unitvector),
+                    ccpSub(p1,      unitvector)};
+    
+    float x[] = {p[3].x, p[2].x, p[1].x, p[0].x};
+    float y[] = {p[3].y, p[2].y, p[1].y, p[0].y};
+    shapeField_->clipConvexQuadBridge(add, x, y);
+    if (add) [drawSprite addPolygon:p numPoints:4];
+    else [drawSprite removePolygon:p numPoints:4];
 }
 
 - (void)shapeChanged

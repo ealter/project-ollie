@@ -78,20 +78,11 @@
     return location;
 }
 
-- (void)drawCircleAt:(CGPoint)location
-{
-    if (self.brushradius > 0) {
-        [self.terrain addCircleWithRadius:self.brushradius x:location.x y:location.y];
-    } else {
-        [self.terrain removeCircleWithRadius:-self.brushradius x:location.x y:location.y];
-    }
-}
-
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch *touch in touches) {
         CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
-        [self drawCircleAt:location];
+        [self.terrain clipCircle:_brushradius>0 WithRadius:fabs(_brushradius) x:location.x y:location.y];
     }
     
     [self.terrain shapeChanged];
@@ -104,31 +95,10 @@
         CGPoint previousPoint = [self transformTouchLocationFromTouchView:[touch previousLocationInView:touch.view]];
         
         //Add circle
-        [self drawCircleAt:location];
+        [self.terrain clipCircle:_brushradius>0 WithRadius:fabs(_brushradius) x:location.x y:location.y];
 
-        //Compute rectangle
-        //Make unit vector between the two points
-        CGPoint vector = ccpSub(location, previousPoint);
-        if (fabs(vector.x) <FLT_EPSILON && fabs(vector.y) <FLT_EPSILON) return;
-        CGPoint unitvector = ccpNormalize(vector);
-        
-        //Rotate vector left by 90 degrees, multiply by desired width
-        unitvector = ccpPerp(unitvector);
-        unitvector = ccpMult(unitvector, fabs(self.brushradius)-2);
-        
-        CGPoint points[] = {ccpAdd(location,      unitvector),
-                            ccpAdd(previousPoint, unitvector),
-                            ccpSub(previousPoint, unitvector),
-                            ccpSub(location,      unitvector)};
-        
         //Add/subtract the rectangle
-        if (self.brushradius > 0) {
-            [self.terrain addQuadWithPoints:points];
-        } else {
-            [self.terrain removeQuadWithPoints:points];
-            //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
-        }
-         
+        [self.terrain bridgeCircles:_brushradius>0 from:previousPoint to:location radiusUsed:fabs(_brushradius)];
     }
     
     [self.terrain shapeChanged];
