@@ -17,7 +17,7 @@ static const float kCoveredRed = 1.0;
 
 //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
-
+#define SCALE_RATIO 1.0
 
 @interface MaskedSprite (){
     HMVectorNode* pr;
@@ -72,6 +72,8 @@ static const float kCoveredRed = 1.0;
         
         // 1
         self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
+        [self.renderTexture.sprite.texture setTexParameters:&renderParams];
         [self.renderTexture clear:0 g:0 b:0 a:1];
         self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
         [self.maskTexture clear:kInitialRed g:0 b:0 a:1];
@@ -200,8 +202,16 @@ static const float kCoveredRed = 1.0;
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
 {
     ccColor4F color = ccc4f(red,0,0,1);
+<<<<<<< HEAD
+    [self.maskTexture begin];
+    [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius*SCALE_RATIO) color:color];
+    [self->pr visit];
+    [self->pr clear];
+    [self.maskTexture end];
+=======
     [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
     [self updateMask];
+>>>>>>> b235590cd831dd6b0d441f721ac448f5cd4defe3
 }
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
@@ -217,7 +227,9 @@ static const float kCoveredRed = 1.0;
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
 {
     for(int i = 0; i < numberOfPoints; i++)
-        poly[i] = ccpMult(poly[i],1.f);
+    {
+        poly[i] = ccpMult(poly[i],SCALE_RATIO);
+    }
     
     ccColor4F color = ccc4f(red,0,0,1);
     

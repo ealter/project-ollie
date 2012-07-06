@@ -977,6 +977,7 @@ bool ShapeField::isOutside(float px, float py)
 //Returns all of the points inside and near a bounding box
 PeSet ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 {
+
     //Find the corrosponding grid spaces that we are affecting
     unsigned int minCellX = ((unsigned)minX)/cellWidth;
     unsigned int minCellY = ((unsigned)minY)/cellHeight;

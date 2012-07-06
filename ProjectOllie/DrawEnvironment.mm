@@ -126,6 +126,7 @@
             [self.terrain addQuadWithPoints:points];
         } else {
             [self.terrain removeQuadWithPoints:points];
+            //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
         }
          
     }
