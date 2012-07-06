@@ -90,6 +90,14 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
 {
+#ifdef DEBUG
+    static const NSString *lands[] = {@"lava"};
+    assert(sizeof(lands)/sizeof(*lands) == kTerrainTexture_numTextures);
+    for(unsigned i=0; i<sizeof(lands)/sizeof(lands[i]); i++) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:(NSString *)lands[i] ofType:@"png"];
+        assert([[NSFileManager defaultManager] fileExistsAtPath:path]);
+    }
+#endif
     switch(textureType) {
         case kTerrainTexture_lava:
             return @"lava.png";
