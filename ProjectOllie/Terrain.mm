@@ -44,10 +44,11 @@
     }
     self->texture_ = texture;
     
-    drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+    drawSprite = [[MaskedSprite alloc] initWithFile:[[self class] fileNameForTextureType:textureType] size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
+    
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
 }
@@ -58,6 +59,7 @@
         self.contentSize = [[CCDirector sharedDirector] winSize];
         self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
         [self initWithTextureType:textureType shapeField:shapeField_];
+        CCLOG(@"THE NUMBER OF CHILDREN I HAVE IS: %d", [self.children count]);
     }
     return self;
 }
@@ -92,7 +94,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 {
     switch(textureType) {
         case kTerrainTexture_pattern1:
-            return @"pattern1.png";
+            return @"lava.png";
         default:
             return nil;
     }

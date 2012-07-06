@@ -41,7 +41,6 @@
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
-		CE029088159E6AD100CEF219 /* GameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029087159E6AD000CEF219 /* GameConstants.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
@@ -362,7 +361,6 @@
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
-		CE029087159E6AD000CEF219 /* GameConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConstants.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOS_Versions.h; sourceTree = "<group>"; };
@@ -1213,7 +1211,6 @@
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
 				CE029086159E6AD000CEF219 /* GameConstants.h */,
-				CE029087159E6AD000CEF219 /* GameConstants.m */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
@@ -2166,7 +2163,6 @@
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
-				CE029088159E6AD100CEF219 /* GameConstants.m in Sources */,
 				CE22740215A0193100F3217E /* GWParticles.m in Sources */,
 				CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */,
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
@@ -2247,7 +2243,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "452D8E3D-47DA-4A10-B5F0-5BBE3B1EB751";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDF559E1-66B2-452F-A632-2C86A0D5A2EC";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2282,7 +2278,7 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "452D8E3D-47DA-4A10-B5F0-5BBE3B1EB751";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDF559E1-66B2-452F-A632-2C86A0D5A2EC";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
