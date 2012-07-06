@@ -35,7 +35,6 @@
 
 - (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField
 {
-
     self->shapeField_ = shapeField;
     CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:[[self class] fileNameForTextureType:textureType]];
     if(!texture) {
@@ -43,7 +42,7 @@
         return;
     }
     self->texture_ = texture;
-    
+
     drawSprite = [[MaskedSprite alloc] initWithFile:[[self class] fileNameForTextureType:textureType] size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
@@ -58,8 +57,9 @@
     if((self = [super init])) {
         self.contentSize = [[CCDirector sharedDirector] winSize];
         self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
+        assert(shapeField_);
         [self initWithTextureType:textureType shapeField:shapeField_];
-        CCLOG(@"THE NUMBER OF CHILDREN I HAVE IS: %d", [self.children count]);
+
     }
     return self;
 }
@@ -69,7 +69,6 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-
     if((self = [super init]))
     {
         TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:kTextureTypeKey];
@@ -93,7 +92,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
 {
     switch(textureType) {
-        case kTerrainTexture_pattern1:
+        case kTerrainTexture_lava:
             return @"lava.png";
         default:
             return nil;
