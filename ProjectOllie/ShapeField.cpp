@@ -14,7 +14,8 @@
 #include <float.h>
 #include <assert.h>
 
-#define checkConsistancy 1
+//Turn off to disable rectangles from being constructed independently of other geometry so they must intersect to be built
+#define INDEPENDENT_RECTANGLES 0
 
 // Size of each cell in the spatial grid
 #define cellWidth 32
@@ -33,7 +34,9 @@
 #define ccw(x1, y1, x2, y2, x3, y3) (((x2) - (x1))*((y3) - (y1)) - ((y2) - (y1))*((x3) - (x1)))
 
 #ifdef DEBUG
-//#define PRINT_DEBUGGING_STATEMENTS
+#define PRINT_DEBUGGING_STATEMENTS
+#define KEEP_TOUCH_INPUT
+#define USE_EXPENSIVE_ASSERTS
 #endif
 
 #ifdef PRINT_DEBUGGING_STATEMENTS
@@ -44,6 +47,37 @@
 
 using namespace std;
 
+#ifdef KEEP_TOUCH_INPUT
+struct ShapeField_input {
+    bool isCircle;
+    bool add;
+    union {
+        struct {
+            float r, x, y;
+        } circleInput;
+        struct {
+            float x[4];
+            float y[4];
+        } rectInput;
+    } input;
+};
+
+static vector<ShapeField_input> shapefieldInput;
+
+void printTouchInput()
+{
+    ShapeField_input input = shapefieldInput.back();
+    const char *add = input.add ? "add" : "remove";
+    if(input.isCircle) {
+      printq("circle %s %f %f %f\n", add, input.input.circleInput.r, input.input.circleInput.x, input.input.circleInput.y);
+    } else {
+      float *xs = input.input.rectInput.x;
+      float *ys = input.input.rectInput.y;
+      printq("rect %s %f %f %f %f %f %f %f %f\n", add, xs[0], xs[1], xs[2], xs[3], ys[0], ys[1], ys[2], ys[3]);
+    }
+}
+#endif /* KEEP_TOUCH_INPUT */
+
 ShapeField::ShapeField(float width, float height)
 :width(width), height(height), gridWidth(width/cellWidth + 1), gridHeight(height/cellHeight + 1)
 {
@@ -51,7 +85,7 @@ ShapeField::ShapeField(float width, float height)
     spatialGrid = new vector<PointEdge*>*[gridWidth];
     for (int x = 0; x < gridWidth; x++)
         spatialGrid[x] = new vector<PointEdge*>[gridHeight];
-    
+
 }
 
 ShapeField::~ShapeField()
@@ -60,27 +94,49 @@ ShapeField::~ShapeField()
     int numPoints = peSet.size();
     for (int i = 0; i < numPoints; i++)
         delete peSet[i];
-    
+
     //Delete the grid
     for (int x = 0; x < gridWidth; x++)
         delete[] spatialGrid[x];
     delete[] spatialGrid;
 }
 
+ShapeField::ShapeField(const void *data, size_t numBytes) {
+    //TODO: implement this
+    ShapeField(1024, 768);
+}
+
+void *ShapeField::pickleDataStructure(int &dataLength) {
+    //TODO: implement this
+    dataLength = 0;
+    return NULL;
+}
+
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
+#ifdef KEEP_TOUCH_INPUT
+    ShapeField_input input;
+    input.isCircle = true;
+    input.add      = add;
+    input.input.circleInput.r = r;
+    input.input.circleInput.x = x;
+    input.input.circleInput.y = y;
+    shapefieldInput.push_back(input);
+    printTouchInput();
+#endif
+
     //Bound by the world size so we cannot possibly get spatial grid errors
     if (x <= r) x = r + 1;
     if (y <= r) y = r + 1;
     if (x >= width-r) x = width-r-1;
     if (y >= height-r) y = height-r-1;
-    
+
     //Use this as the r when creating new points so going over circles won't ever expand the curve into the float trig error spots
     float rMarginal = r - .01;
-    
+
     //Get all potential PointEdges that we could be affecting in a bounding box
     vector<PointEdge*> nearPEs = pointsNear(x-r, y-r, x+r, y+r);
-    
+
     //Classify each of the points of every near PointEdge as inside, on edge, or outside
     float rsq = r*r;
     unsigned numNearPEs = nearPEs.size();
@@ -95,10 +151,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             pe->tmpMark = inside;
         else// if (dsq > rsq + plankFloat)
             pe->tmpMark = outside;
-       /* else 
-            pe->tmpMark = onEdge;*/
     }
-    
+
     //Find intersections, create points, link them, create enterence or exit
     vector<CircleIntersection> entrences;
     vector<CircleIntersection> exits;
@@ -136,30 +190,30 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                         printq("O-O intersection\n");
                         //Line crosses inside the circle, cut it and make intersections
                         removeFromSpatialGrid(pe);
-                        
+
                         //Calculate intersection points
                         float distanceToEdge = sqrtf(rsq - lenToCenterSq);
                         float inX = -unitX * distanceToEdge + xClosest;
                         float inY = -unitY * distanceToEdge + yClosest;
                         float outX = unitX * distanceToEdge + xClosest;
                         float outY = unitY * distanceToEdge + yClosest;
-                        
+
                         //Create points
                         PointEdge* inP = new PointEdge(inX, inY, NULL, pe);
                         PointEdge* outP = new PointEdge(outX, outY, npe, NULL);
-                        
+
                         //Add new points to the PointEdge set
                         peSet.push_back(inP);
                         peSet.push_back(outP);
-                        
+
                         //Reroute pe to inP and npe after outP
                         pe->next = inP;
                         npe->prev = outP;
-                        
+
                         //Add new pe and outP to spatial grid
                         addToSpatialGrid(pe);
                         addToSpatialGrid(outP);
-                        
+
                         //In intersection
                         CircleIntersection in;
                         in.intersection = inP;
@@ -169,7 +223,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                             printq("circle center: %f, %f,  intersection: %f, %f", x, y, inX, inY);
                         }
                         entrences.push_back(in);
-                        
+
                         //Out intersection
                         CircleIntersection out;
                         out.intersection = outP;
@@ -200,7 +254,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float xClosest = pe->x + unitX * diffDotUnitPe;
                 float yClosest = pe->y + unitY * diffDotUnitPe;
                 //Check if the closest point on the line to the citcle center is inside the radius
-                float dx = x - xClosest; 
+                float dx = x - xClosest;
                 float dy = y - yClosest;
                 //Calculate enterence x, y
                 float dtesq = rsq - dx*dx - dy*dy;
@@ -292,7 +346,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         }
         else assert(false);
     }
-    
+
     //Check that all of the points are real and in view, like we didn't delete anything or put it in a strange place
     unsigned numPoints = peSet.size();
     for(unsigned i = 0; i < numPoints; i++)
@@ -301,20 +355,22 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         //Check that it exists and isn't null somehow
         assert(pe);
         //See if the location is in a strange place
+#ifdef USE_EXPENSIVE_ASSERTS
         if (pe->x < 0 || pe->x > width || pe->y < 0 || pe->y > height)
         {
             printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
             assert(false);
         }
+#endif
     }
-    
+
     //If this isn't true, something fucked up. Abort mission, refund investors, etc.
     printq("in: %lu, out: %lu\n", entrences.size(), exits.size());
     assert(entrences.size() == exits.size());
-    
+
     //Figure out the maximum theta for the given radius and maxCircleSeg
     float maxTheta = 2*asinf(maxCircleSeg/(r*2));
-    
+
     //If nothing intersects, we have no geometry to adjust, perhaps we will make some new independant shapes
     if (entrences.empty())
     {
@@ -327,7 +383,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             //The circle edge is outside and we are adding, so we must create a new loop
             int numSegs = (int)(TAU/maxTheta) + 1;
             float dtheta = TAU/numSegs;
-            
+
             //Build a counter clockwise circle (increasing theta)
             float angle = 0;
             PointEdge* first = new PointEdge(x + rMarginal, y, NULL, NULL);
@@ -354,7 +410,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             //Inside and subtracting, add a new hole
             int numSegs = (int)(TAU/maxTheta) + 1;
             float dtheta = -TAU/numSegs;
-            
+
             //Build a counter clockwise circle (increasing theta)
             float angle = 0;
             PointEdge* first = new PointEdge(x + rMarginal, y, NULL, NULL);
@@ -382,7 +438,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         for (unsigned i = 0; i < entrences.size(); i++)
         {
             CircleIntersection in = entrences[i];
-            
+
             //Find the subsequent exit in the +ccw direction
             CircleIntersection out;
             int outI;
@@ -393,11 +449,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 for (unsigned j = 0; j < exits.size(); j++)
                 {
                     CircleIntersection tmpOut = exits[j];
-                    
+
                     //Get the +ccw change in the angle from the enterence to this exit
                     float tmpDtheta = tmpOut.angle - in.angle;
                     if (tmpDtheta < 0) tmpDtheta += TAU;
-                    
+
                     //If it's smaller than the last one, it's closer
                     if (tmpDtheta < dTheta)
                     {
@@ -417,7 +473,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     //Get the +ccw change in the angle from the enterence to this exit
                     float tmpDtheta = tmpOut.angle - in.angle;
                     if (tmpDtheta > 0) tmpDtheta -= TAU;
-                    
+
                     //If it's smaller than the last one, it's closer
                     if (tmpDtheta > dTheta)
                     {
@@ -427,8 +483,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     }
                 }
             }
-                
-                
+
+
             //If the enterence and exit are at a really close theta, then we just want to merge these points,
             if (fabs(dTheta) < .01)
             {
@@ -466,13 +522,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     float py = y + rMarginal*sinf(angle);
                     PointEdge* pe = new PointEdge(px, py, NULL, prev);
                     peSet.push_back(pe);
-                    
+
                     //Make the prev point edge connect to this one
                     prev->next = pe;
-                    
+
                     //Now that the last PE has its edge defined, add it to our collections
                     addToSpatialGrid(prev);
-                    
+
                     //Set these for the next iteration
                     prev = pe;
                     angle += segTheta;
@@ -488,10 +544,10 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             exits.pop_back();
         }
     }
-    
+
     //Remove all of the circumvented PointEdges from the spatial grid
     for (unsigned i = 0; i < nearPEs.size(); i++)
-    {	
+    {
         PointEdge* pe = nearPEs[i];
         if (pe->tmpMark == inside)
             removeFromSpatialGrid(pe);
@@ -499,17 +555,18 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     //Delete inside points which are now only irrelevantly linked to themselves
     for (unsigned i = 0; i < peSet.size(); i++)
     {
-        PointEdge* pe = peSet[i];
+        PointEdge* pe = peSet[i];/*
         //Check if we can bypass the point
         if (pe->tmpMark != inside && pe->getLenSq() < plankFloat)
         {
+            printq("Bypassing point in clip circle\n");
             removeFromSpatialGrid(pe);
             removeFromSpatialGrid(pe->prev);
             pe->tmpMark = inside;
             pe->next->prev = pe->prev;
             pe->prev->next = pe->next;
             addToSpatialGrid(pe->prev);
-        }
+        }*/
         if (pe->tmpMark == inside)
         {
             //Remove from the set of all points
@@ -519,7 +576,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             delete pe;
         }
     }
-    
+
     //Check the consistancy of the linked list structures
     numPoints = peSet.size();
     for(unsigned i = 0; i < numPoints; i++)
@@ -528,26 +585,46 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
         //Check that it exists and isn't null somehow
         assert(pe);
         //See if the location is in a strange place
-        if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height)
-        {
+#ifdef USE_EXPENSIVE_ASSERTS
+        if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height) {
             printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
             assert(false);
         }
+#endif
         //Check that it has a next and previous
         assert(pe->next);
         assert(pe->prev);
         //Check that linked nodes link back correctly
-        assert(pe->next->prev);
-        assert(pe->next->prev == pe);
-        assert(pe->prev->next);
-        assert(pe->prev->next == pe);
+        if(pe->next->prev != pe) {
+          assert(pe->next->prev);
+          assert(0);
+        }
+        if(pe->prev->next != pe) {
+          assert(pe->prev->next);
+          assert(0);
+        }/*
         if ((fabs(pe->x - pe->next->x) < FLT_EPSILON && fabs(pe->y - pe->next->y) < FLT_EPSILON))
         {
             printq("pe %p npe %p center %f, %f\n, p: \n%f, %f\n%f, %f\n", pe, pe->next, x, y, pe->x, pe->y, pe->next->x, pe->next->y);
             assert(false);
-        }
+        }*/
     }
+
     
+#ifdef USE_EXPENSIVE_ASSERTS
+    //Check the spatial grid to make sure everything exists
+    for (int i = 0; i < gridWidth; i++)
+        for (int j = 0; j < gridHeight; j++)
+            for (int k = 0; k < spatialGrid[i][j].size(); k++)
+            {
+                PointEdge* pe = spatialGrid[i][j][k];
+                assert(pe);
+                assert(pe->x);
+                assert(pe->next);
+                assert(pe->next->x);
+            }
+#endif
+
 }
 
 //Returns true if line seg A from (x1, y1) to (x2, y2) intersects line seg B from (x3, y3) to (x4, y4) and
@@ -555,18 +632,18 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
 bool intersects(float x1,float y1,float x2,float y2,float x3,float y3,float x4,float y4, float* Xint, float* Yint, float* tA, float* tB)
 {
     float mua,mub;
-    
+
     float adx = x2-x1;
     float ady = y2-y1;
     float bdx = x4-x3;
     float bdy = y4-y3;
     float badx = x1-x3;
     float bady = y1-y3;
-    
+
     float denom  = bdy * adx - bdx * ady;
     float numera = bdx * bady - bdy * badx;
     float numerb = adx * bady - ady * badx;
-    
+
     /* Are the lines coincident? */
     if (fabs(numera) < FLT_EPSILON && fabs(numerb) < FLT_EPSILON && fabs(denom) < FLT_EPSILON) {
         //If each point on seg B is on an opposite side of the normal of seg A (from pt 1) then use pt 1
@@ -574,7 +651,7 @@ bool intersects(float x1,float y1,float x2,float y2,float x3,float y3,float x4,f
         float p4p1dx = x4 - x1;
         float p4p1dy = y4 - y1;
         float p1dp4 = p4p1dx*adx + p4p1dy*ady;
-        if (p1dp3 > 0 != p1dp4 > 0)
+        if ((p1dp3 > 0) != (p1dp4 > 0))
         {
             *Xint = x1;
             *Yint = y1;
@@ -589,7 +666,7 @@ bool intersects(float x1,float y1,float x2,float y2,float x3,float y3,float x4,f
         //Otherwise it's an intersection that should be accounted for later
         return false;
     }
-    
+
     /* Are the line parallel */
     if (fabs(denom) < FLT_EPSILON) {
         //*Xint = 0;
@@ -597,7 +674,7 @@ bool intersects(float x1,float y1,float x2,float y2,float x3,float y3,float x4,f
         printq("intersection F: parallel segments\n");
         return false;
     }
-    
+
     /* Is the intersection along the the segments */
     mua = numera / denom;
     mub = numerb / denom;
@@ -649,15 +726,29 @@ PolyIntersection ShapeField::makePolyIntersectionIn(float x, float y, float t, f
 //Requires 4 x and 4 y for points in a counterclockwise rotation
 void ShapeField::clipConvexQuad(bool add, float* x, float* y)
 {
+#ifdef KEEP_TOUCH_INPUT
+    ShapeField_input input;
+    input.isCircle = false;
+    input.add = add;
+    for(int i=0; i<4; i++) {
+        input.input.rectInput.x[i] = x[i];
+        input.input.rectInput.y[i] = y[i];
+    }
+    shapefieldInput.push_back(input);
+    printTouchInput();
+#endif
+
     //Make sure the points are counterclockwise
     assert(ccw(x[0], y[0], x[1], y[1], x[2], y[2]) > FLT_EPSILON);
-    
+    assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
+    assert(ccw(x[2], y[2], x[3], y[3], x[0], y[0]) > FLT_EPSILON);
+
     //Find a bounding box to get near points
     float minX = min(min(x[0], x[1]), min(x[2], x[3]));
     float minY = min(min(y[0], y[1]), min(y[2], y[3]));
     float maxX = max(max(x[0], x[1]), max(x[2], x[3]));
     float maxY = max(max(y[0], y[1]), max(y[2], y[3]));
-    
+
     //Get all of the near points
     vector<PointEdge*> nearPEs = pointsNear(minX, minY, maxX, maxY);
     printq("RECT near points count: %lu\n", nearPEs.size());
@@ -665,25 +756,25 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     for (int i = 0; i < nearPEs.size(); i++)
     {
         PointEdge* pe = nearPEs[i];
-        
+
         //Check Right of A
         if (rightOf(x[0], y[0], x[1], y[1], pe->x, pe->y))
             pe->tmpMark = rightA;
         //Check right of C
         else if (rightOf(x[2], y[2], x[3], y[3], pe->x, pe->y))
             pe->tmpMark = rightC;
-        
+
         //Check right of B
         if (rightOf(x[1], y[1], x[2], y[2], pe->x, pe->y))
             pe->tmpMark |= rightB;
         //Check right of d
         else if (rightOf(x[3], y[3], x[0], y[0], pe->x, pe->y))
             pe->tmpMark |= rightD;
-        
+
         //Check inside (unmarked so far)
         else if (pe->tmpMark == outside) pe->tmpMark = inside;
     }
-    
+
     //Create intersections
     vector<PolyIntersection> Ains = vector<PolyIntersection>();
     vector<PolyIntersection> Bins = vector<PolyIntersection>();
@@ -693,12 +784,12 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     vector<PolyIntersection> Bouts = vector<PolyIntersection>();
     vector<PolyIntersection> Couts = vector<PolyIntersection>();
     vector<PolyIntersection> Douts = vector<PolyIntersection>();
-    
+
     for (int i = 0; i < nearPEs.size(); i++)
     {
         PointEdge* pe = nearPEs[i];
         PointEdge* npe = pe->next;
-        
+
         //Make sure the next point is marked as a specific outside (in case it was off the nearPEs)
         if (npe->tmpMark == outside)
         {
@@ -708,18 +799,18 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             //Check right of C
             else if (rightOf(x[2], y[2], x[3], y[3], npe->x, npe->y))
                 npe->tmpMark = rightC;
-            
+
             //Check right of B
             if (rightOf(x[1], y[1], x[2], y[2], npe->x, npe->y))
                 npe->tmpMark |= rightB;
             //Check right of D
             else if (rightOf(x[3], y[3], x[0], y[0], npe->x, npe->y))
                 npe->tmpMark |= rightD;
-            
+
             //Check inside (unmarked so far)
             assert (npe->tmpMark != outside);
         }
-        
+
         //Check if we are inside
         if (pe->tmpMark == inside)
         {
@@ -764,68 +855,64 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                     Dins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
                 else assert(false);  //Intersection not found
             }
-            
-            
+
+
             //Both outside, check if the npe is not on the same side of the quad
             else if (pe->tmpMark != npe->tmpMark)
             {
                 //Potential O-O intersection
-                
+
                 //In intersection only possible on edges which PE is on the right side of
-                float Xint;
-                float Yint;
-                float t;
-                float peT;
-                vector<PolyIntersection>* segIns; 
+                float XintIn;
+                float YintIn;
+                float tIn;
+                float peTIn;
+                vector<PolyIntersection>* segIns = NULL;
                 
-                if      (pe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Ains.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                if      (pe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Ains;
-                }
-                else if (pe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Bins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                else if (pe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Bins;
-                }
-                else if (pe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Cins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                else if (pe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Cins;
-                }
-                else if (pe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                {
-                    Dins.push_back(makePolyIntersectionIn(Xint, Yint, t, peT, pe));
+                else if (pe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &XintIn, &YintIn, &tIn, &peTIn))
                     segIns = &Dins;
-                }
                 else continue;  //Intersection not found
+                
                 printq("RECT O-O intersection in and out, outside sides: %d, %d\n", pe->tmpMark, npe->tmpMark);
                 
+                float XintOut;
+                float YintOut;
+                float tOut;
+                float peTOut;
+                
                 //In intersection was found, try to find an out intersection now
-                if      (npe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Aouts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else if (npe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Bouts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else if (npe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Couts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else if (npe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &Xint, &Yint, &t, &peT))
-                    Douts.push_back(makePolyIntersectionOut(Xint, Yint, t, peT, npe));
-                else segIns->pop_back();    //Nevermind don't intersect or whatever
+                if      (npe->tmpMark & rightA && intersects(x[0], y[0], x[1], y[1], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Aouts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else if (npe->tmpMark & rightB && intersects(x[1], y[1], x[2], y[2], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Bouts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else if (npe->tmpMark & rightC && intersects(x[2], y[2], x[3], y[3], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Couts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else if (npe->tmpMark & rightD && intersects(x[3], y[3], x[0], y[0], pe->x, pe->y, npe->x, npe->y, &XintOut, &YintOut, &tOut, &peTOut))
+                    Douts.push_back(makePolyIntersectionOut(XintOut, YintOut, tOut, peTOut, npe));
+                else continue;    //Nevermind don't intersect or whatever
+                
+                //Add in intersection because an out intersection was found too
+                segIns->push_back(makePolyIntersectionIn(XintIn, YintIn, tIn, peTIn, pe));
             }
         }
-        
-        
+
+
     }
-    
+
     //Make sure we have the same number of ins as outs because otherwise something went wrong
     int ins = Ains.size() + Bins.size() + Cins.size() + Dins.size();
     int outs = Aouts.size() + Bouts.size() + Couts.size() + Douts.size();
     printq("RECT ins: %d, outs: %d\n", ins, outs);
     assert(ins == outs);
-    
-    if (ins == 0)
+
+    if (ins == 0 && INDEPENDENT_RECTANGLES)
     {
-        return;//For now there is no way we want to do this
         //There are no intersections, figure out what where the fuck we are
         bool aOutside = isOutside((x[0]+x[2])/2, (y[0]+y[2])/2);
         if (add && aOutside)
@@ -837,19 +924,19 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             PointEdge* B = new PointEdge(x[1], y[1], NULL, A);
             PointEdge* C = new PointEdge(x[2], y[2], NULL, B);
             PointEdge* D = new PointEdge(x[3], y[3], NULL, C);
-            
+
             A->prev = D;
-            
+
             A->next = B;
             B->next = C;
             C->next = D;
             D->next = A;
-            
+
             addToSpatialGrid(A);
             addToSpatialGrid(B);
             addToSpatialGrid(C);
             addToSpatialGrid(D);
-            
+
             peSet.push_back(A);
             peSet.push_back(B);
             peSet.push_back(C);
@@ -864,26 +951,26 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             PointEdge* B = new PointEdge(x[1], y[1], A, NULL);
             PointEdge* C = new PointEdge(x[2], y[2], B, NULL);
             PointEdge* D = new PointEdge(x[3], y[3], C, NULL);
-            
+
             A->next = D;
-            
+
             A->prev= B;
             B->prev = C;
             C->prev = D;
             D->prev = A;
-            
+
             addToSpatialGrid(A);
             addToSpatialGrid(B);
             addToSpatialGrid(C);
             addToSpatialGrid(D);
-            
+
             peSet.push_back(A);
             peSet.push_back(B);
             peSet.push_back(C);
             peSet.push_back(D);
         }
     }
-    else
+    else if (ins > 0)
     {
         //There are intersections
         //Loop through the enterences and connect them to the exits in the counterclockwise direction
@@ -908,7 +995,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                         inIndex = j;
                     }
                 }
-                
+
                 //Find the next out intersection
                 PolyIntersection* out = NULL;
                 int outSeg = i-1;
@@ -933,21 +1020,23 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                 printq("in seg:%d t:%f extending to out seg:%d t:%f\n", i, in->t, outSeg, out->t);
                 //Lets see if we need to merge
                 float dx = out->intersection->x - in->intersection->x;
-                float dy = out->intersection->y - in->intersection->y;
+                float dy = out->intersection->y - in->intersection->y;/*
                 if(fabs(out->t - in->t) < plankFloat || (dx*dx+dy*dy < plankFloat && outSeg == ((i+1)%4)))
                 {
                     //Bypass the in intersection and delete it
                     printq("RECT bypass\n");
+                    removeFromSpatialGrid(in->intersection->prev);
                     in->intersection->prev->next = out->intersection;
                     out->intersection->prev = in->intersection->prev;
+                    addToSpatialGrid(in->intersection->prev);
                     in->intersection->tmpMark = inside;
                 }
-                else
+                else*/
                 {
                     //Connect the in to the out
                     PointEdge* prev = in->intersection;
                     bool wrapped = false;
-                    for (int cseg = i; cseg != outSeg || (!wrapped && in->t >= out->t);)
+                    for (int cseg = i; cseg != outSeg || (!wrapped && in->t > out->t);)
                     {
                         int nextSeg = (cseg + 1)%4;
                         //Create the corner point
@@ -970,18 +1059,18 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
                     addToSpatialGrid(prev);
                     peSet.push_back(prev);
                 }
-                
+
                 //Remove that in intersection
                 ins[i]->at(inIndex) = ins[i]->back();
                 ins[i]->pop_back();
-                
+
                 //Remove that out intersection
                 outs[outSeg]->at(outIndex) = outs[outSeg]->back();
                 outs[outSeg]->pop_back();
             }
         }
     }
-    
+
     //Clean up, remove all the inside point edges from the grid
     for (unsigned i = 0; i < nearPEs.size(); i++)
     {
@@ -992,9 +1081,9 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
     //Delete inside points which are now only irrelevantly linked to themselves
     for (unsigned i = 0; i < peSet.size(); i++)
     {
-        PointEdge* pe = peSet[i];
+        PointEdge* pe = peSet[i];/*
         //Check if we can bypass the point
-        if (pe->tmpMark != inside && pe->getLenSq() < plankFloat)
+        if (pe->tmpMark != inside && pe->getLenSq() < 4*FLT_EPSILON)
         {
             removeFromSpatialGrid(pe);
             removeFromSpatialGrid(pe->prev);
@@ -1002,7 +1091,7 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
             pe->next->prev = pe->prev;
             pe->prev->next = pe->next;
             addToSpatialGrid(pe->prev);
-        }
+        }*/
         if (pe->tmpMark == inside)
         {
             //Remove from the set of all points
@@ -1013,36 +1102,51 @@ void ShapeField::clipConvexQuad(bool add, float* x, float* y)
         }
         else pe->tmpMark = outside;
     }
-    
+
     //Check the consistancy of the linked list structures
     int numPoints = peSet.size();
     for(unsigned i = 0; i < numPoints; i++)
     {
         PointEdge* pe = peSet[i];
         //Check that it exists and isn't null somehow
-        assert(pe);
+        assert(pe);        //Check that it has a next and previous
+        assert(pe->next);
+        assert(pe->prev);
+        //Check that linked nodes link back correctly
+        assert(pe->next->prev);
+        assert(pe->next->prev == pe);
+        assert(pe->prev->next);
+        assert(pe->prev->next == pe);
+#ifdef USE_EXPENSIVE_ASSERTS
         //See if the location is in a strange place
         if (pe->x <= 1 || pe->x > width || pe->y <= 1 || pe->y > height)
         {
             printq("Strange point edge coordinates %f, %f", pe->x, pe->y);
             assert(false);
-        }
-        //Check that it has a next and previous
-        assert(pe->next);
-        assert(pe->prev);
-        //Check that linked nodes link back correctly
-        assert(pe->next->prev);
-        assert(pe->next->prev == pe);	
-        assert(pe->prev->next); 
-        assert(pe->prev->next == pe);
+        }/*
         //Check that the next point is far enough away that PE has a valid edge
         if ((fabs(pe->x - pe->next->x) < FLT_EPSILON && fabs(pe->y - pe->next->y) < FLT_EPSILON))
         {
-            //printq("pe %p npe %p p: \n%f, %f\n%f, %f\n", pe, pe->next, pe->x, pe->y, pe->next->x, pe->next->y);
-            //assert(false);
-        }
+            printq("pe %p npe %p p: \n%f, %f\n%f, %f\n", pe, pe->next, pe->x, pe->y, pe->next->x, pe->next->y);
+            assert(false);
+        }*/
+#endif
         
     }
+    
+#ifdef USE_EXPENSIVE_ASSERTS
+    //Check the spatial grid to make sure everything exists
+    for (int i = 0; i < gridWidth; i++)
+        for (int j = 0; j < gridHeight; j++)
+            for (int k = 0; k < spatialGrid[i][j].size(); k++)
+            {
+                PointEdge* pe = spatialGrid[i][j][k];
+                assert(pe);
+                assert(pe->x);
+                assert(pe->next);
+                assert(pe->next->x);
+            }
+#endif
 }
 
 bool ShapeField::linesClose(PointEdge* a1, PointEdge* a2,  PointEdge* b1, PointEdge*b2)
@@ -1060,7 +1164,7 @@ bool ShapeField::linesClose(PointEdge* a1, PointEdge* a2,  PointEdge* b1, PointE
         aMinY = a2->y;
         aMaxY = a1->y;
     }
-    
+
     //Find b bounds
     int bMinX = b1->x, bMaxX = b2->x;
     if (b1->x > b2->x)
@@ -1074,9 +1178,9 @@ bool ShapeField::linesClose(PointEdge* a1, PointEdge* a2,  PointEdge* b1, PointE
         bMinY = b2->y;
         bMaxY = b1->y;
     }
-    
+
     return aMaxX >= bMinX && bMaxX >= aMinX
-        && aMaxX >= bMinX && bMaxX >= aMinX;
+        && aMaxY >= bMinY && bMaxY >= aMinY;
 }
 
 void ShapeField::clear()
@@ -1084,15 +1188,15 @@ void ShapeField::clear()
     //Free everything in the point set
     for (unsigned i = 0; i < peSet.size(); i++)
         delete peSet[i];
-    
+
     //Clear the point set
     peSet.clear();
-    
+
     //Clear the spatial grid vectors
     for (int i = 0; i < gridWidth; i++)
         for(int j = 0; j < gridHeight; j++)
             spatialGrid[i][j].clear();
-    
+
 }
 
 
@@ -1103,7 +1207,7 @@ bool ShapeField::isOutside(float px, float py)
     //Hold the current cell that we are in
     int cellX = px/cellWidth;
     int cellY = py/cellHeight;
-    
+
     float yDistance = -1.0f;    //Negative implies that no intersections have been found yet
     bool isOutside;
     for (; cellY < gridHeight; cellY++)
@@ -1115,7 +1219,7 @@ bool ShapeField::isOutside(float px, float py)
             PointEdge* npe = pe->next;
             if (pe->tmpMark != inside)
             {
-            
+
                 bool peLeft = pe->x < px;
                 bool npeLeft = npe->x < px;
                 if (peLeft && !npeLeft)
@@ -1154,13 +1258,15 @@ bool ShapeField::isOutside(float px, float py)
 //Returns all of the points inside and near a bounding box
 vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 {
-    //return peSet;
+
+    return peSet;
+    
     //Find the corrosponding grid spaces that we are affecting
     unsigned int minCellX = ((unsigned)minX)/cellWidth;
     unsigned int minCellY = ((unsigned)minY)/cellHeight;
     unsigned int maxCellX = ((unsigned)maxX+1)/cellWidth;
     unsigned int maxCellY = ((unsigned)maxY+1)/cellHeight;
-    
+
     vector<PointEdge*> nearPEs;
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
@@ -1176,25 +1282,25 @@ vector<PointEdge*> ShapeField::pointsNear(float minX, float minY, float maxX, fl
                     }
                 if (!cont) nearPEs.push_back(spatialGrid[i][j][k]);
             }
-    
+
     return nearPEs;
 }
 
 void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 {
-//    if (!pe->next) return;    //Use to bypass spatial grid optimization
-    
+    assert(pe->next);
+
     //Create a slightly generous bounding box
     unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
     unsigned int minY = min(pe->y, pe->next->y) - plankFloat;
     unsigned int maxX = max(pe->x, pe->next->x) + plankFloat + 1;
     unsigned int maxY = max(pe->y, pe->next->y) + plankFloat + 1;
-    
+
     unsigned int minCellX = minX/cellWidth;
     unsigned int minCellY = minY/cellHeight;
     unsigned int maxCellX = maxX/cellWidth;
     unsigned int maxCellY = maxY/cellHeight;
-    
+
     //Remove from all of these cells
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
@@ -1212,18 +1318,18 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 void ShapeField::addToSpatialGrid(PointEdge* pe)
 {
     assert(pe->next);
-    
+
     //Create a slightly generous bounding box
     unsigned int minX = min(pe->x, pe->next->x) - plankFloat;
     unsigned int minY = min(pe->y, pe->next->y) - plankFloat;
     unsigned int maxX = max(pe->x, pe->next->x) + plankFloat + 1;
     unsigned int maxY = max(pe->y, pe->next->y) + plankFloat + 1;
-    
+
     unsigned int minCellX = minX/cellWidth;
     unsigned int minCellY = minY/cellHeight;
     unsigned int maxCellX = maxX/cellWidth;
     unsigned int maxCellY = maxY/cellHeight;
-    
+
     //Add to all of these cells
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)

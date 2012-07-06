@@ -10,9 +10,12 @@
 #import "cocos2d.h"
 #import "CCGLProgram.h"
 #import "HMVectorNode.h"
+#import "CCTexture2DMutable.h"
 
 #define INITIAL_RED 0.0
 #define COVERED_RED 1.0
+
+//TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
 #define SCALE_RATIO 1.0
 
@@ -20,6 +23,7 @@
     HMVectorNode* pr;
 }
 
+@property (nonatomic, strong) NSString *textureFileName;
 @property (nonatomic, strong) CCRenderTexture *maskTexture;
 @property (nonatomic, strong) CCRenderTexture *renderTexture;
 @property (nonatomic) GLuint textureWidthLocation;
@@ -31,6 +35,7 @@
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red;
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
+- (void)drawPoints:(NSArray *)points red:(float)red;
 - (void)updateMask;
 
 @end
@@ -39,11 +44,13 @@
 
 @synthesize maskTexture = _maskTexture, renderTexture = _renderTexture;
 @synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_, screenWidthLocation = screenWidthLocation_, screenHeightLocation = screenHeightLocation_;
+@synthesize textureFileName = _textureFileName;
 
 - (id)initWithFile:(NSString *)file size:(CGSize)size
 {
-    self = [super initWithFile:file rect:CGRectMake(0,0,size.width,size.height)];
+    self = [super initWithFile:file rect:CGRectMake(0, 0, size.width, size.height)];
     if (self) {
+        self.textureFileName = file;
         
         //set up rendering paramters
         //texture must be power of 2
@@ -55,25 +62,21 @@
         
         //makes 0,0,1,1 texturecoordinates
         quad_.bl.texCoords.u = 0;
-		quad_.bl.texCoords.v = 0;
-		quad_.br.texCoords.u = 1;
-		quad_.br.texCoords.v = 0;
-		quad_.tl.texCoords.u = 0;
-		quad_.tl.texCoords.v = 1;
-		quad_.tr.texCoords.u = 1;
-		quad_.tr.texCoords.v = 1;
+        quad_.bl.texCoords.v = 0;
+        quad_.br.texCoords.u = 1;
+        quad_.br.texCoords.v = 0;
+        quad_.tl.texCoords.u = 0;
+        quad_.tl.texCoords.v = 1;
+        quad_.tr.texCoords.u = 1;
+        quad_.tr.texCoords.v = 1;
         
         // 1
-        //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
-        self.maskTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
-        
         self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
-        [self.renderTexture clear:0 g:0 b:0 a:0];
-        
         ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
-        
+        [self.renderTexture clear:0 g:0 b:0 a:1];
+        self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
+        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
         
         // 2
         NSError *error = nil;
@@ -113,7 +116,7 @@
         
         CHECK_GL_ERROR_DEBUG();
         
-        [self.renderTexture setPosition:ccp(size.width/2,size.height/2)];
+        
         /* Handles the CCRenderTexture positions/scales */
         /*
          //Rescale back to greater size
@@ -124,14 +127,18 @@
          [self.maskTexture setPosition:ccp(size.width/4,size.height/4)];
          
          //On the center because scaled by 2 will fill the screen.
-         
          */
-        
+        [self.renderTexture setPosition:ccp(size.width/2,size.height/2)];
     }
     return self;
 }
 
--(void) updateMask {
+- (void)updateMask
+{
+    [self.maskTexture begin];
+    [self->pr visit];
+    [self->pr clear];
+    [self.maskTexture end];
     
     [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
     CCTexture2D *mask = self.maskTexture.sprite.texture;
@@ -175,48 +182,46 @@
     glActiveTexture(GL_TEXTURE0);
     [self.renderTexture end];
     //[self.renderTexture visit];
-
-    
 }
 
--(void)draw{
-    
+- (void)draw
+{    
     [self.renderTexture visit];
 }
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:COVERED_RED];
-    [self updateMask];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
     [self drawCircleAt:center radius:radius red:INITIAL_RED];
-    [self updateMask];
 }
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
 {
-    
     ccColor4F color = ccc4f(red,0,0,1);
+<<<<<<< HEAD
     [self.maskTexture begin];
     [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius*SCALE_RATIO) color:color];
     [self->pr visit];
     [self->pr clear];
     [self.maskTexture end];
+=======
+    [self->pr drawDot:ccpMult(center,1.f) radius:(radius + .5f) color:color];
+    [self updateMask];
+>>>>>>> b235590cd831dd6b0d441f721ac448f5cd4defe3
 }
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
-    [self updateMask];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
     [self drawPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
-    [self updateMask];
 }
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
@@ -228,11 +233,29 @@
     
     ccColor4F color = ccc4f(red,0,0,1);
     
-    [self.maskTexture begin];
     [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:color];
-    [self->pr visit];
-    [self->pr clear];
-    [self.maskTexture end];
+    [self updateMask];
+}
+
+- (void)addPoints:(NSArray *)points
+{
+    [self drawPoints:points red:COVERED_RED];
+}
+
+- (void)removePoints:(NSArray *)points
+{
+    [self drawPoints:points red:INITIAL_RED];
+}
+
+- (void)drawPoints:(NSArray *)points red:(float)red
+{
+    ccColor4F color = ccc4f(red,0,0,1);
+    for(NSValue *point in points) {
+        if(![point isKindOfClass:[NSValue class]]) continue;
+        CGPoint p = [point CGPointValue];
+        [self->pr drawDot:p radius:0.5 color:color];
+    }
+    [self updateMask];
 }
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
@@ -246,7 +269,6 @@
 {
     [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
     [self.renderTexture clear:0 g:0 b:0 a:0];
-    
 }
 
 @end
