@@ -25,6 +25,7 @@
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType;
 - (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField;
+- (void)reproduceTouchInput;
 
 @end
 
@@ -50,6 +51,9 @@
     
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
+#ifdef DEBUG
+    [self reproduceTouchInput];
+#endif
 }
 
 - (id)initWithTextureType:(TerrainTexture)textureType
@@ -160,6 +164,60 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 - (void)dealloc
 {
     delete shapeField_;
+}
+
+- (void)reproduceTouchInput
+{
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"touchInput.txt"];
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        DebugLog(@"Going to reproduce touch input");
+        NSError *error = nil;
+        DebugLog(@"The path is %@", path);
+        NSString *fileData = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:&error];
+        if(error) {
+            DebugLog(@"Error: %@", error);
+            return;
+        }
+        NSArray *lines = [fileData componentsSeparatedByString:@"\n"];
+        DebugLog(@"The lines are %@", lines);
+        for(NSString *line in lines) {
+            NSArray *words = [line componentsSeparatedByString:@" "];
+            if(words.count < 5) continue;
+            BOOL add;
+            NSString *addType = [words objectAtIndex:1];
+            if([addType isEqualToString:@"add"])
+                add = YES;
+            else if([addType isEqualToString:@"remove"])
+                add = NO;
+            else {
+                DebugLog(@"Invalid input: %@", line);
+                continue;
+            }
+            NSString *shapeType = [words objectAtIndex:0];
+            if([shapeType isEqualToString:@"circle"]) {
+                float radius = [[words objectAtIndex:2] floatValue];
+                float x      = [[words objectAtIndex:3] floatValue];
+                float y      = [[words objectAtIndex:4] floatValue];
+                if(add)
+                    [self addCircleWithRadius:radius x:x y:y];
+                else
+                    [self removeCircleWithRadius:radius x:x y:y];
+            } else if([shapeType isEqualToString:@"rect"]) {
+                CGPoint points[4];
+                int wordsBaseIndex = 2;
+                for(int i=0; i<4; i++)
+                    points[i].x = [[words objectAtIndex:i + wordsBaseIndex] floatValue];
+                wordsBaseIndex += 4;
+                for(int i=0; i<4; i++)
+                    points[i].y = [[words objectAtIndex:i + wordsBaseIndex] floatValue];
+                if(add)
+                    [self addQuadWithPoints:points];
+                else
+                    [self removeQuadWithPoints:points];
+            }
+        }
+    }
 }
 
 /* Random Land Generators */
