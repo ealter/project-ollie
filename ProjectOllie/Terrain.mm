@@ -91,7 +91,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
 {
     switch(textureType) {
-        case kTerrainTexture_pattern1:
+        case kTerrainTexture_lava:
             return @"lava.png";
         default:
             return nil;
