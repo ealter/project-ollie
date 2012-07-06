@@ -532,9 +532,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     for (PeSet::iterator i = nearPEs.begin(); i != nearPEs.end(); i++)
         if ((*i)->tmpMark == inside) delete *i;
     
-#ifdef USE_EXPENSIVE_ASSERTS
+    
     //Make sure that the middle is inside if we're adding or outside if we're subtracting
     assert(isOutside(x, y) != add);
+    
+#ifdef USE_EXPENSIVE_ASSERTS
     //Check that everything makes sense in the ways we can validate
     checkConsistency();
 #endif
