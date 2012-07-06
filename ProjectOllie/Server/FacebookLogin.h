@@ -12,7 +12,7 @@
 
 @interface FacebookLogin : ServerAccountsAPI
 
-@property (nonatomic, retain) Facebook *facebook;
+@property (nonatomic, strong) Facebook *facebook;
 
 - (void)login;
 - (void)logout;

@@ -8,6 +8,10 @@
 
 #import "CCSprite.h"
 
+//This class provides a way to mask over a sprite. The sprite starts off as completely transparent.
+//As you add shapes to it, those parts of the sprite become opaque again. Removing shapes makes the parts
+//transparent again.
+
 @interface MaskedSprite : CCSprite
 
 - (void)addCircleAt:   (CGPoint)center radius:(float)radius;
@@ -19,8 +23,11 @@
 - (void)addPoints:    (NSArray *)points; //An array of CGPoints (encapsulated in NSValues)
 - (void)removePoints: (NSArray *)points;
 
+//Saves the mask to a file is possible. Returns true on success
 - (BOOL)saveMaskToFile:(NSString *)fileName;
+//Designated initializer
 - (id)initWithFile:(NSString *)file size:(CGSize)size;
+//Sets the entire shape to transparent again.
 - (void)clear;
 
 @end

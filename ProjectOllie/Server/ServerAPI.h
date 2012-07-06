@@ -18,11 +18,11 @@
 #endif
 
 #ifndef DOMAIN_NAME
-#if SERVER_IS_DEV
-#define DOMAIN_NAME @"http://dev.gorillawarefaregame.com"
-#else
-#define DOMAIN_NAME @"http://106.187.44.7"
-#endif /* SERVER_IS_DEV */
+ #if SERVER_IS_DEV
+ #define DOMAIN_NAME @"http://dev.gorillawarefaregame.com"
+ #else
+ #define DOMAIN_NAME @"http://106.187.44.7"
+ #endif /* SERVER_IS_DEV */
 #endif /* DOMAIN_NAME */
 
 @protocol ServerAPI_delegate <NSObject>
@@ -38,7 +38,7 @@
     NSMutableData *data_;
 }
 
-@property (nonatomic, readonly, retain) Authentication *auth;
+@property (nonatomic, readonly, strong) Authentication *auth;
 @property (nonatomic, assign) id<ServerAPI_delegate> delegate;
 
 //Protected methods

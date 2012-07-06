@@ -10,7 +10,8 @@
 #import "Authentication.h"
 
 @interface ChangeUserName ()
-@property (nonatomic, retain) NSString *changedUsername;
+
+@property (nonatomic, copy) NSString *changedUsername;
 
 @end
 
@@ -35,7 +36,8 @@
     [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changeUserName"]];
 }
 
-- (void)serverReturnedResult:(NSDictionary *)result {
+- (void)serverReturnedResult:(NSDictionary *)result
+{
     assert(self.changedUsername);
     self.auth.username = self.changedUsername;
     [self broadcastServerOperationSucceeded];

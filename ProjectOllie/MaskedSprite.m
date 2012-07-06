@@ -12,8 +12,8 @@
 #import "HMVectorNode.h"
 #import "CCTexture2DMutable.h"
 
-#define INITIAL_RED 0.0
-#define COVERED_RED 1.0
+static const float kInitialRed = 0.0;
+static const float kCoveredRed = 1.0;
 
 //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
@@ -76,7 +76,7 @@
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
         [self.renderTexture clear:0 g:0 b:0 a:1];
         self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
-        [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
+        [self.maskTexture clear:kInitialRed g:0 b:0 a:1];
         
         // 2
         NSError *error = nil;
@@ -191,12 +191,12 @@
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
-    [self drawCircleAt:center radius:radius red:COVERED_RED];
+    [self drawCircleAt:center radius:radius red:kCoveredRed];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
-    [self drawCircleAt:center radius:radius red:INITIAL_RED];
+    [self drawCircleAt:center radius:radius red:kInitialRed];
 }
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
@@ -216,12 +216,12 @@
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self drawPolygon:poly numPoints:numberOfPoints red:COVERED_RED];
+    [self drawPolygon:poly numPoints:numberOfPoints red:kCoveredRed];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self drawPolygon:poly numPoints:numberOfPoints red:INITIAL_RED];
+    [self drawPolygon:poly numPoints:numberOfPoints red:kInitialRed];
 }
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
@@ -239,12 +239,12 @@
 
 - (void)addPoints:(NSArray *)points
 {
-    [self drawPoints:points red:COVERED_RED];
+    [self drawPoints:points red:kCoveredRed];
 }
 
 - (void)removePoints:(NSArray *)points
 {
-    [self drawPoints:points red:INITIAL_RED];
+    [self drawPoints:points red:kInitialRed];
 }
 
 - (void)drawPoints:(NSArray *)points red:(float)red
@@ -267,7 +267,7 @@
 
 - (void)clear
 {
-    [self.maskTexture clear:INITIAL_RED g:0 b:0 a:1];
+    [self.maskTexture clear:kInitialRed g:0 b:0 a:1];
     [self.renderTexture clear:0 g:0 b:0 a:0];
 }
 

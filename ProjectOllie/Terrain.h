@@ -14,8 +14,9 @@ class b2World;
 class b2Body;
 @class CCTexture2D;
 
+//An enum for the different possible images to use with the texture.
 typedef enum TerrainTexture {
-    TerrainTexture_pattern1 = 0
+    kTerrainTexture_pattern1 = 0
 } TerrainTexture;
 
 /*   Terrain class  */

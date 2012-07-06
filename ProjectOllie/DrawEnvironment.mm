@@ -45,7 +45,7 @@
 -(id) init
 {
 	if(self=[super init]) {
-        self.terrain = [[Terrain alloc]initWithTextureType:TerrainTexture_pattern1];
+        self.terrain = [[Terrain alloc]initWithTextureType:kTerrainTexture_pattern1];
         [self addChild:self.terrain];
         self.isTouchEnabled = YES;
         self.brushradius    = smallradius;
@@ -93,6 +93,8 @@
         CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         [self drawCircleAt:location];
     }
+    
+    [self.terrain shapeChanged];
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -112,7 +114,7 @@
         
         //Rotate vector left by 90 degrees, multiply by desired width
         unitvector = ccpPerp(unitvector);
-        unitvector = ccpMult(unitvector, fabs(self.brushradius-0.05));
+        unitvector = ccpMult(unitvector, fabs(self.brushradius)-2);
         
         CGPoint points[] = {ccpAdd(location,      unitvector),
                             ccpAdd(previousPoint, unitvector),
@@ -128,6 +130,9 @@
         }
          
     }
+    
+    [self.terrain shapeChanged];
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

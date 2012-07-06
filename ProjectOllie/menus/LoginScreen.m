@@ -70,10 +70,16 @@
     //TODO: maybe release login?
 }
 
+- (void)transitionToSceneWithFile:(NSString *)sceneName
+{
+    [self removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
+    [super transitionToSceneWithFile:sceneName];
+}
+
 //Called when login succeeds
 - (void)serverOperationSucceeded
 {
-    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
 //Called when login fails
@@ -86,7 +92,7 @@
 
 -(void)pressedMakeNew:(id)sender
 {
-    [self transitionToSceneWithFile:@"NewAccountMenu.ccbi" removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
+    [self transitionToSceneWithFile:@"NewAccountMenu.ccbi"];
 }
 
 @end

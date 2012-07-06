@@ -32,7 +32,7 @@
 
 -(void)pressedCancel:(id)sender
 {
-    [self transitionToSceneWithFile:@"MainMenu.ccbi" removeUIViews:nil];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
 @end
