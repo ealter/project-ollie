@@ -16,7 +16,7 @@ class b2Body;
 
 //An enum for the different possible images to use with the texture.
 typedef enum TerrainTexture {
-    kTerrainTexture_pattern1 = 0
+    kTerrainTexture_lava = 0
 } TerrainTexture;
 
 /*   Terrain class  */

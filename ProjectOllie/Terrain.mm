@@ -24,7 +24,7 @@
 @property (nonatomic) TerrainTexture textureType;
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType;
-- (id)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField;
+- (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField;
 
 @end
 
@@ -33,31 +33,33 @@
 @synthesize texture = texture_;
 @synthesize textureType = _textureType;
 
-- (id)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField
+- (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField
 {
     self->shapeField_ = shapeField;
     CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:[[self class] fileNameForTextureType:textureType]];
     if(!texture) {
         DebugLog(@"The texture type is invalid.");
-        return nil;
+        return;
     }
     self->texture_ = texture;
-    
-    drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+
+    drawSprite = [[MaskedSprite alloc] initWithFile:[[self class] fileNameForTextureType:textureType] size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
+    
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
-    return self;
 }
 
 - (id)initWithTextureType:(TerrainTexture)textureType
 {
-    if(self = [super init]) {
+    if((self = [super init])) {
         self.contentSize = [[CCDirector sharedDirector] winSize];
         self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
-        self = [self initWithTextureType:textureType shapeField:shapeField_];
+        assert(shapeField_);
+        [self initWithTextureType:textureType shapeField:shapeField_];
+
     }
     return self;
 }
@@ -67,11 +69,13 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-    TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:kTextureTypeKey];
-    NSData *shapeFieldData     = [aDecoder decodeObjectForKey:kShapefieldKey];
-    ShapeField *shapeField     = new ShapeField(shapeFieldData.bytes, shapeFieldData.length);
-    if( self = [self initWithTextureType:textureType shapeField:shapeField]) {
-        //TODO: Update the mask with the shapefield info
+    if((self = [super init]))
+    {
+        TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:kTextureTypeKey];
+        NSData *shapeFieldData     = [aDecoder decodeObjectForKey:kShapefieldKey];
+        ShapeField *shapeField     = new ShapeField(shapeFieldData.bytes, shapeFieldData.length);
+        self->shapeField_          = shapeField;
+        [self initWithTextureType:textureType shapeField:shapeField];
     }
     return self;
 }
@@ -88,8 +92,8 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
 {
     switch(textureType) {
-        case kTerrainTexture_pattern1:
-            return @"pattern1.png";
+        case kTerrainTexture_lava:
+            return @"lava.png";
         default:
             return nil;
     }
