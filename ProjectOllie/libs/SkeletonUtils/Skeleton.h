@@ -10,6 +10,10 @@
 #define ProjectOllie_Skeleton_h
 
 #include "string.h"
+#include "Box2D.h"
+//#include "GameConstants.h"
+
+
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				30 //max amount of key frames per bone per animation
 
@@ -41,6 +45,8 @@ struct Bone{
     Bone*      children[MAX_CHCOUNT];
     Bone*      parent;
     KeyFrame  keyframes[MAX_KFCOUNT];
+
+    b2Body* box2DBody;
     
 };
 
@@ -51,6 +57,7 @@ private:
     Bone* root;
     Bone* loadStructure(string path);
     Bone* boneFreeTree(Bone* root);
+	b2World* world;	
     
 public:
     
@@ -86,14 +93,15 @@ public:
     Bone* ruLeg;
     Bone* rlLeg;
     
-    Skeleton(string path);
-    Skeleton();
+    Skeleton(b2World* world, string path);
+    Skeleton(b2World* world);
     ~Skeleton();
     
     Bone* boneAddChild(Bone* root, string name, float x, float y, float a, float length, float width);
-    void  boneDumpTree(Bone* root, int level);
     Bone* findBoneByName(Bone* root, string name);
+    void  boneDumpTree(Bone* root, int level);
     bool animating(Bone* root, float time);
+    void generateBox2DBodies();
     
 };
 

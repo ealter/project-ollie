@@ -10,14 +10,13 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <fstream>
-
 #include "Skeleton.h"
 
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)
 
 
-Skeleton::Skeleton(string path)
+Skeleton::Skeleton(b2World* world, string path)
 {
     this->root   = loadStructure(path);
     this->head   = this->root;
@@ -31,11 +30,14 @@ Skeleton::Skeleton(string path)
     this->ruLeg  = this->lTorso->children[1];
     this->llLeg  = this->luLeg->children[0];
     this->rlLeg  = this->ruLeg->children[0];
+    
+    this->world = world;
 }
 
-Skeleton::Skeleton()
+Skeleton::Skeleton(b2World* world)
 {
     this->root = NULL;
+    this->world = world;
 }
 
 Skeleton::~Skeleton()
@@ -77,6 +79,23 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float a,
     root->w = width;
 	root->childCount = 0;
     root->name = name;
+    
+    // tie to box2d
+    b2BodyDef bd;
+    b2PolygonShape box;
+    b2FixtureDef fixtureDef;
+    
+    bd.type = b2_dynamicBody;
+    box.SetAsBox(length/32,width/32);
+    fixtureDef.shape = &box;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.4f;
+    fixtureDef.restitution = 0.1f;
+    bd.position.Set(x/32, y/32);
+    b2Body *boneShape = this->world->CreateBody(&bd);
+    boneShape->CreateFixture(&fixtureDef);
+    
+    root->box2DBody = boneShape;
     
 	for (i = 0; i < MAX_CHCOUNT; i++)
 		root->children[i] = NULL;
@@ -259,4 +278,6 @@ bool Skeleton::animating(Bone *root, float time){
     
 	return others;
 }
+
+
 
