@@ -93,6 +93,8 @@
         CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         [self drawCircleAt:location];
     }
+    
+    [self.terrain shapeChanged];
 }
 
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -112,7 +114,7 @@
         
         //Rotate vector left by 90 degrees, multiply by desired width
         unitvector = ccpPerp(unitvector);
-        unitvector = ccpMult(unitvector, fabs(self.brushradius-0.05));
+        unitvector = ccpMult(unitvector, fabs(self.brushradius)-2);
         
         CGPoint points[] = {ccpAdd(location,      unitvector),
                             ccpAdd(previousPoint, unitvector),
@@ -124,9 +126,13 @@
             [self.terrain addQuadWithPoints:points];
         } else {
             [self.terrain removeQuadWithPoints:points];
+            //[terrain removeCircleWithRadius:-brushradius x:location.x y:location.y];
         }
          
     }
+    
+    [self.terrain shapeChanged];
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
