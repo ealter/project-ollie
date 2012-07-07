@@ -70,11 +70,11 @@ void printTouchInput()
     ShapeField_input input = shapefieldInput.back();
     const char *add = input.add ? "add" : "remove";
     if(input.isCircle) {
-      printq("circle %s %f %f %f\n", add, input.input.circleInput.r, input.input.circleInput.x, input.input.circleInput.y);
+      printf("circle %s %f %f %f\n", add, input.input.circleInput.r, input.input.circleInput.x, input.input.circleInput.y);
     } else {
       float *xs = input.input.rectInput.x;
       float *ys = input.input.rectInput.y;
-      printq("rect %s %f %f %f %f %f %f %f %f\n", add, xs[0], xs[1], xs[2], xs[3], ys[0], ys[1], ys[2], ys[3]);
+      printf("rect %s %f %f %f %f %f %f %f %f\n", add, xs[0], xs[1], xs[2], xs[3], ys[0], ys[1], ys[2], ys[3]);
     }
 }
 #endif /* KEEP_TOUCH_INPUT */

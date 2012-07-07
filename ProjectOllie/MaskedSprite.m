@@ -12,8 +12,8 @@
 #import "HMVectorNode.h"
 #import "CCTexture2DMutable.h"
 
-static const float kInitialRed = 0.0;
-static const float kCoveredRed = 1.0;
+#define INITIAL_COLOR ccc4f(0,0,0,1)
+#define COVERED_COLOR ccc4f(1,0,0,1)
 
 //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
@@ -33,9 +33,9 @@ static const float kCoveredRed = 1.0;
 @property (nonatomic) GLuint screenWidthLocation;
 @property (nonatomic) GLuint screenHeightLocation;
 
-- (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red;
-- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red;
-- (void)drawPoints:(NSArray *)points red:(float)red;
+- (void)drawCircleAt:(CGPoint)center radius:(float)radius color:(ccColor4F)color;
+- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints color:(ccColor4F)color;
+- (void)drawPoints:(NSArray *)points color:(ccColor4F)color;
 - (void)updateMask;
 
 @end
@@ -76,7 +76,7 @@ static const float kCoveredRed = 1.0;
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
         [self.renderTexture clear:0 g:0 b:0 a:0];
         self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
-        [self.maskTexture clear:kInitialRed g:0 b:0 a:1];
+        [self.maskTexture clear:INITIAL_COLOR.r g:INITIAL_COLOR.g b:INITIAL_COLOR.b a:INITIAL_COLOR.a];
         
         // 2
         NSError *error = nil;
@@ -192,39 +192,35 @@ static const float kCoveredRed = 1.0;
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
-    [self drawCircleAt:center radius:radius red:kCoveredRed];
+    [self drawCircleAt:center radius:radius color:COVERED_COLOR];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
-    [self drawCircleAt:center radius:radius red:kInitialRed];
+    [self drawCircleAt:center radius:radius color:INITIAL_COLOR];
 }
 
-- (void)drawCircleAt:(CGPoint)center radius:(float)radius red:(float)red
+- (void)drawCircleAt:(CGPoint)center radius:(float)radius color:(ccColor4F)color
 {
-    ccColor4F color = ccc4f(red,0,0,1);
     [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius + .5f)*SCALE_RATIO color:color];
     [self updateMask];
 }
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self drawPolygon:poly numPoints:numberOfPoints red:kCoveredRed];
+    [self drawPolygon:poly numPoints:numberOfPoints color:COVERED_COLOR];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self drawPolygon:poly numPoints:numberOfPoints red:kInitialRed];
+    [self drawPolygon:poly numPoints:numberOfPoints color:INITIAL_COLOR];
 }
 
-- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints red:(float)red
+- (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints color:(ccColor4F)color
 {
-    for(int i = 0; i < numberOfPoints; i++)
-    {
+    for(int i = 0; i < numberOfPoints; i++) {
         poly[i] = ccpMult(poly[i],SCALE_RATIO);
     }
-    
-    ccColor4F color = ccc4f(red,0,0,1);
     
     [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:color];
     [self updateMask];
@@ -232,17 +228,16 @@ static const float kCoveredRed = 1.0;
 
 - (void)addPoints:(NSArray *)points
 {
-    [self drawPoints:points red:kCoveredRed];
+    [self drawPoints:points color:COVERED_COLOR];
 }
 
 - (void)removePoints:(NSArray *)points
 {
-    [self drawPoints:points red:kInitialRed];
+    [self drawPoints:points color:INITIAL_COLOR];
 }
 
-- (void)drawPoints:(NSArray *)points red:(float)red
+- (void)drawPoints:(NSArray *)points color:(ccColor4F)color
 {
-    ccColor4F color = ccc4f(red,0,0,1);
     for(NSValue *point in points) {
         if(![point isKindOfClass:[NSValue class]]) continue;
         CGPoint p = [point CGPointValue];
@@ -260,7 +255,7 @@ static const float kCoveredRed = 1.0;
 
 - (void)clear
 {
-    [self.maskTexture clear:kInitialRed g:0 b:0 a:1];
+    [self.maskTexture clear:INITIAL_COLOR.r g:INITIAL_COLOR.g b:INITIAL_COLOR.b a:INITIAL_COLOR.a];
     [self.renderTexture clear:0 g:0 b:0 a:0];
 }
 

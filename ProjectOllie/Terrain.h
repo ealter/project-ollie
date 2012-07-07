@@ -50,6 +50,3 @@ typedef enum TerrainTexture {
 + (Terrain*) generateRandomCavern;
 
 @end
-
-
-
