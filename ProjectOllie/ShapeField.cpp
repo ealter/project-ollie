@@ -466,13 +466,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             }
                         
             //If the enterence and exit are at a really close theta, then we just want to merge these points
-            if (fabs(dTheta) < .01) printf("COULDA MERGED\n");
-            if (false && fabs(dTheta) < .01)
+            if (fabs(dTheta) < FLT_EPSILON)
             {
-                printq("Merging close enterence and exit\n");
+                printf("Merging close enterence and exit\n");
                 //Bypass the "in" PointEdge
-                in.intersection->tmpMark = inside;
-                in.intersection->next = NULL;
+                peSet.erase(in.intersection);
                 removeFromSpatialGrid(in.intersection->prev);
                 in.intersection->prev->next = out.intersection;
                 out.intersection->prev = in.intersection->prev;

@@ -145,6 +145,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     //The shape is changed so we must update the stroke
 
     [polyRenderer clear];
+    printf("Terrain shape changed, new number of edges: %lu\n", shapeField_->peSet.size());
     for (std::set<PointEdge*>::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
     {
         PointEdge* pe = *i;
