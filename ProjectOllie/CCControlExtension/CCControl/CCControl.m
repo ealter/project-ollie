@@ -381,6 +381,8 @@
     
     // Create the method signature for the invocation
     NSMethodSignature *sig = [target methodSignatureForSelector:action];
+    if(!sig)
+        DebugLog(@"The method is %@", NSStringFromSelector(action));
     NSAssert(sig, @"The given target does not implement the given action");
     
     // Create the invocation object

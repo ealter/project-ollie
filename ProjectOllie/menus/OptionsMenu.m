@@ -45,6 +45,17 @@
     }
 }
 
+- (void)transitionToSceneWithFile:(NSString *)sceneName
+{
+    [self removeUIViews:[NSArray arrayWithObject:nameField]];
+    [super transitionToSceneWithFile:sceneName];
+}
+
+- (void)pressedChangePassword:(id)sender
+{
+    [self transitionToSceneWithFile:@"PasswordChangeScreen.ccbi"];
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     // the user pressed the "Done" button, so dismiss the keyboard
@@ -54,7 +65,6 @@
 
 -(void)pressedBack:(id)sender
 {
-    [self removeUIViews:[NSArray arrayWithObject:nameField]];
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 

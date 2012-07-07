@@ -25,6 +25,7 @@
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType;
 - (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField;
+- (void)reproduceTouchInput;
 
 @end
 
@@ -35,7 +36,6 @@
 
 - (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField
 {
-
     self->shapeField_ = shapeField;
     CCTexture2D *texture = [[CCTextureCache sharedTextureCache] addImage:[[self class] fileNameForTextureType:textureType]];
     if(!texture) {
@@ -43,13 +43,17 @@
         return;
     }
     self->texture_ = texture;
-    
-    drawSprite = [[MaskedSprite alloc] initWithFile:@"lava.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+
+    drawSprite = [[MaskedSprite alloc] initWithFile:[[self class] fileNameForTextureType:textureType] size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
+    
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
+#ifdef DEBUG
+    [self reproduceTouchInput];
+#endif
 }
 
 - (id)initWithTextureType:(TerrainTexture)textureType
@@ -57,7 +61,9 @@
     if((self = [super init])) {
         self.contentSize = [[CCDirector sharedDirector] winSize];
         self->shapeField_ = new ShapeField(self.contentSize.width, self.contentSize.height);
+        assert(shapeField_);
         [self initWithTextureType:textureType shapeField:shapeField_];
+
     }
     return self;
 }
@@ -67,7 +73,6 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
-
     if((self = [super init]))
     {
         TerrainTexture textureType = (TerrainTexture)[aDecoder decodeIntForKey:kTextureTypeKey];
@@ -90,42 +95,55 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
 {
+#ifdef DEBUG
+    static const NSString *lands[] = {@"lava"};
+    assert(sizeof(lands)/sizeof(*lands) == kTerrainTexture_numTextures);
+    for(unsigned i=0; i<sizeof(lands)/sizeof(lands[i]); i++) {
+        NSString *path = [[NSBundle mainBundle] pathForResource:(NSString *)lands[i] ofType:@"png"];
+        assert([[NSFileManager defaultManager] fileExistsAtPath:path]);
+    }
+#endif
     switch(textureType) {
-        case kTerrainTexture_pattern1:
-            return @"pattern1.png";
+        case kTerrainTexture_lava:
+            return @"lava.png";
         default:
             return nil;
     }
 }
 
 //Building land
-- (void)addCircleWithRadius:(float)radius x:(float)x y:(float)y
+- (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField_->clipCircle(true, radius, x, y);
-    [drawSprite addCircleAt:ccp(x,y) radius:radius];
+    shapeField_->clipCircle(add, radius, x, y);
+    if (add) [drawSprite addCircleAt:ccp(x,y) radius:radius];
+    else [drawSprite removeCircleAt:ccp(x,y) radius:radius];
 }
 
-- (void)addQuadWithPoints:(CGPoint[])p
-{
-    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
-    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
-    shapeField_->clipConvexQuadBridge(true, x, y);
-    [drawSprite addPolygon:p numPoints:4];
-}
 
-//Removing land
-- (void)removeCircleWithRadius:(float)radius x:(float)x y:(float)y
+- (void) bridgeCircles:(bool)add from:(CGPoint)p1 to:(CGPoint) p2 radiusUsed:(float)r
 {
-    shapeField_->clipCircle(false, radius, x, y);
-    [drawSprite removeCircleAt:ccp(x,y) radius:radius];
-}
-
-- (void)removeQuadWithPoints:(CGPoint[])p
-{
-    float x[] = {p[0].x, p[1].x, p[2].x, p[3].x};
-    float y[] = {p[0].y, p[1].y, p[2].y, p[3].y};
-    shapeField_->clipConvexQuadBridge(false, x, y);
-    [drawSprite removePolygon:p numPoints:4];
+    //Compute rectangle
+    //Make unit vector between the two points
+    CGPoint vector = ccpSub(p2, p1);
+    if (fabs(vector.x) <FLT_EPSILON && fabs(vector.y) <FLT_EPSILON) return;
+    CGPoint unitvector = ccpNormalize(vector);
+    
+    //Rotate vector left by 90 degrees, multiply by desired width
+    unitvector = ccpPerp(unitvector);
+    unitvector = ccpMult(unitvector, shapeField_->getRinside(r));
+    
+    CGPoint p[] = { ccpAdd(p1, unitvector),
+                    ccpAdd(p2, unitvector),
+                    ccpSub(p2, unitvector),
+                    ccpSub(p1, unitvector)};
+    
+    float x[] = {p[3].x, p[2].x, p[1].x, p[0].x};
+    float y[] = {p[3].y, p[2].y, p[1].y, p[0].y};
+    shapeField_->clipConvexQuadBridge(add, x, y);
+    if (add)
+        [drawSprite addPolygon:p numPoints:4];
+    else
+        [drawSprite removePolygon:p numPoints:4];
 }
 
 - (void)shapeChanged
@@ -151,6 +169,50 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 - (void)dealloc
 {
     delete shapeField_;
+}
+
+- (void)reproduceTouchInput
+{
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"touchInput.txt"];
+    if([[NSFileManager defaultManager] fileExistsAtPath:path]) {
+        DebugLog(@"Going to reproduce touch input");
+        NSError *error = nil;
+        NSString *fileData = [NSString stringWithContentsOfFile:path encoding:NSASCIIStringEncoding error:&error];
+        if(error) {
+            DebugLog(@"Error: %@", error);
+            return;
+        }
+        NSArray *lines = [fileData componentsSeparatedByString:@"\n"];
+        CGPoint previous = CGPointMake(-1, -1);
+        float previousRadius = 0;
+        for(NSString *line in lines) {
+            NSArray *words = [line componentsSeparatedByString:@" "];
+            if(words.count < 5) continue;
+            BOOL add;
+            NSString *addType = [words objectAtIndex:1];
+            if([addType isEqualToString:@"add"])
+                add = YES;
+            else if([addType isEqualToString:@"remove"])
+                add = NO;
+            else {
+                DebugLog(@"Invalid input: %@", line);
+                continue;
+            }
+            NSString *shapeType = [words objectAtIndex:0];
+            if([shapeType isEqualToString:@"circle"]) {
+                float radius = [[words objectAtIndex:2] floatValue];
+                float x      = [[words objectAtIndex:3] floatValue];
+                float y      = [[words objectAtIndex:4] floatValue];
+                [self clipCircle:add WithRadius:radius x:x y:y];
+                if(previous.x > 0 && radius == previousRadius) {
+                    [self bridgeCircles:add from:previous to:ccp(x,y) radiusUsed:radius];
+                }
+                previous = ccp(x,y);
+                previousRadius = radius;
+            } 
+        }
+    }
 }
 
 /* Random Land Generators */

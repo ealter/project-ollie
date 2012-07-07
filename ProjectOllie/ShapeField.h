@@ -35,6 +35,7 @@ public:
     void clipConvexQuadBridge(bool add, float* x, float* y);
     void clear();
     void checkConsistency();
+    float getRinside(float r);  //Calculates a radius length that will certainly be inside a clipped circle of radius r
     
     //Useful for pickling the data structure
     ShapeField(const void *data, size_t numBytes);
