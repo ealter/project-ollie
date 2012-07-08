@@ -14,6 +14,7 @@
 #import "Terrain.h"
 #import "SandboxScene.h"
 #import "ActionLayer.h"
+#import "MaskedSprite.h"
 
 @interface DrawEnvironment () <DrawMenu_delegate>
 
@@ -114,6 +115,7 @@
 - (void)DrawMenu_setBrushRadius:(CGFloat)radius
 {
     self.brushradius = radius;
+    
 }
 
 - (void)DrawMenu_clearDrawing

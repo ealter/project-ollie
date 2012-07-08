@@ -25,14 +25,12 @@ uniform mediump mat4 projection;
 attribute mediump vec4 position;
 attribute mediump vec2 texcoord;
 
-//varying mediump vec4 frag_color;
 varying mediump vec2 frag_texcoord;
 
 uniform mat4 u_MVPMatrix;
 
 void main()
 {
-//	frag_color = vec4(1.0, 1.0, 1.0, 1.0); //color.rgb*color.a, color.a);
 	frag_texcoord = texcoord;
 	
     mediump vec4 p2 = vec4(position.x, po

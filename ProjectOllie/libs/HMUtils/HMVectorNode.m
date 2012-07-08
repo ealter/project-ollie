@@ -79,6 +79,7 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 			fragmentShaderFilename:@"HMVectorNode.fsh"
 		];
 
+
 		[shader addAttribute:@"position" index:kCCVertexAttrib_Position];
 		[shader addAttribute:@"texcoord" index:kCCVertexAttrib_TexCoords];
         
@@ -88,30 +89,30 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
         
         colorUniformLocation = glGetUniformLocation(shader->program_, "color");
         Color startColor;
-        startColor.r = 0.5;
-        startColor.g = 0.1;
+        startColor.r = 1.0;
+        startColor.g = 1.0;
         startColor.b = 1.0;
         startColor.a = 1.0;
         [self setColor:startColor];
 		
         [shader release];
 		
-    glGenVertexArraysOES(1, &_vao);
-    glBindVertexArrayOES(_vao); 
-		
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-		[self ensureCapacity:512];
-    
-		glEnableVertexAttribArray(kCCVertexAttrib_Position);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, vertex));
-		
-		glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texcoord));
-	
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArrayOES(0);
-		PRINT_GL_ERRORS();
+        glGenVertexArraysOES(1, &_vao);
+        glBindVertexArrayOES(_vao); 
+            
+        glGenBuffers(1, &_vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+            [self ensureCapacity:512];
+        
+            glEnableVertexAttribArray(kCCVertexAttrib_Position);
+        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, vertex));
+            
+            glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
+        glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texcoord));
+
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArrayOES(0);
+            PRINT_GL_ERRORS();
 	}
 	
 	return self;
@@ -135,9 +136,8 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
     if (c.a != currentColor.a || c.r != currentColor.r || c.g != currentColor.g || c.b != currentColor.b)
     {
         currentColor = c;
+        [self.shaderProgram use];
         glUniform4f(colorUniformLocation, c.r, c.g, c.b, c.a);
-        printf("setting color\n");
-		[[self shaderProgram] updateUniforms];
     }
 }
 
@@ -251,7 +251,9 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 		cpVect v1 = cpvsub(verts[i+1], cpvmult(extrude[i+1].offset, inset));
 		cpVect v2 = cpvsub(verts[i+2], cpvmult(extrude[i+2].offset, inset));
 		
+
 		*cursor++ = (Triangle){{v0, cpvzero}, {v1, cpvzero}, {v2, cpvzero}};
+
 	}
 	
 	for(int i=0; i<count; i++){

@@ -134,8 +134,7 @@
 }
 
 - (void)updateMask
-{
-    
+{    
     [self.maskTexture begin];
     [self->pr visit];
     [self->pr clear];
