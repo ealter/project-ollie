@@ -89,8 +89,8 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
         
         colorUniformLocation = glGetUniformLocation(shader->program_, "color");
         Color startColor;
-        startColor.r = 0.5;
-        startColor.g = 0.1;
+        startColor.r = 1.0;
+        startColor.g = 1.0;
         startColor.b = 1.0;
         startColor.a = 1.0;
         [self setColor:startColor];
@@ -133,12 +133,11 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 
 -(void)setColor:(Color)c
 {
-  //  if (c.a != currentColor.a || c.r != currentColor.r || c.g != currentColor.g || c.b != currentColor.b)
+    if (c.a != currentColor.a || c.r != currentColor.r || c.g != currentColor.g || c.b != currentColor.b)
     {
         currentColor = c;
+        [self.shaderProgram use];
         glUniform4f(colorUniformLocation, c.r, c.g, c.b, c.a);
-        printf("setting color\n");
-		[[self shaderProgram] updateUniforms];
     }
 }
 

@@ -244,6 +244,7 @@ Bone* Skeleton::loadBoneStructure(string path)
     
     return root;
     fl*/
+    return NULL;
 }
 
 bool Skeleton::animating(Bone *root, float time)

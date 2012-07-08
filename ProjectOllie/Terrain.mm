@@ -48,7 +48,7 @@
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
-    [polyRenderer setColor:ccc4f(.2f,.4f,.8f,1)];
+    [polyRenderer setColor:ccc4f(1.f,.4f,.8f,1)];
     
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
