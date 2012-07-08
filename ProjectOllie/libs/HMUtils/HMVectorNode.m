@@ -36,7 +36,7 @@
 //#define PRINT_GL_ERRORS() for(GLenum err = glGetError(); err; err = glGetError()) NSLog(@"GLError(%s:%d) 0x%04X", __FILE__, __LINE__, err);
 #define PRINT_GL_ERRORS() 
 
-typedef struct Vertex {cpVect vertex, texcoord; Color color;} Vertex;
+typedef struct Vertex {cpVect vertex, texcoord;} Vertex;
 typedef struct Triangle {Vertex a, b, c;} Triangle;
 
 @interface HMVectorNode(){
@@ -45,6 +45,9 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 	
 	NSUInteger _bufferCapacity, _bufferCount;
 	Vertex *_buffer;
+    
+    Color currentColor;
+    GLint colorUniformLocation;
 }
 
 @end
@@ -76,35 +79,40 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 			fragmentShaderFilename:@"HMVectorNode.fsh"
 		];
 
+
 		[shader addAttribute:@"position" index:kCCVertexAttrib_Position];
 		[shader addAttribute:@"texcoord" index:kCCVertexAttrib_TexCoords];
-		[shader addAttribute:@"color" index:kCCVertexAttrib_Color];
-
+        
 		[shader link];
 		[shader updateUniforms];
 		self.shaderProgram = shader;
+        
+        colorUniformLocation = glGetUniformLocation(shader->program_, "color");
+        Color startColor;
+        startColor.r = 1.0;
+        startColor.g = 1.0;
+        startColor.b = 1.0;
+        startColor.a = 1.0;
+        [self setColor:startColor];
+		
+        [shader release];
+		
+        glGenVertexArraysOES(1, &_vao);
+        glBindVertexArrayOES(_vao); 
+            
+        glGenBuffers(1, &_vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, _vbo);
+            [self ensureCapacity:512];
+        
+            glEnableVertexAttribArray(kCCVertexAttrib_Position);
+        glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, vertex));
+            
+            glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
+        glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texcoord));
 
-		[shader release];
-		
-    glGenVertexArraysOES(1, &_vao);
-    glBindVertexArrayOES(_vao);
-		
-    glGenBuffers(1, &_vbo);
-    glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-		[self ensureCapacity:512];
-    
-		glEnableVertexAttribArray(kCCVertexAttrib_Position);
-    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, vertex));
-		
-		glEnableVertexAttribArray(kCCVertexAttrib_TexCoords);
-    glVertexAttribPointer(kCCVertexAttrib_TexCoords, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, texcoord));
-		
-		glEnableVertexAttribArray(kCCVertexAttrib_Color);
-    glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex), (GLvoid *)offsetof(Vertex, color));
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glBindVertexArrayOES(0);
-		PRINT_GL_ERRORS();
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glBindVertexArrayOES(0);
+            PRINT_GL_ERRORS();
 	}
 	
 	return self;
@@ -121,6 +129,18 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 	
 	[super dealloc];
 }
+
+
+-(void)setColor:(Color)c
+{
+    if (c.a != currentColor.a || c.r != currentColor.r || c.g != currentColor.g || c.b != currentColor.b)
+    {
+        currentColor = c;
+        [self.shaderProgram use];
+        glUniform4f(colorUniformLocation, c.r, c.g, c.b, c.a);
+    }
+}
+
 
 //MARK: Rendering
 
@@ -151,15 +171,15 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 
 //MARK: Immediate Mode
 
--(void)drawDot:(cpVect)pos radius:(cpFloat)radius color:(Color)color;
-{
+-(void)drawDot:(cpVect)pos radius:(cpFloat)radius;
+{    
 	NSUInteger vertex_count = 2*3;
 	[self ensureCapacity:vertex_count];
 	
-	Vertex a = {{pos.x - radius, pos.y - radius}, {-1.0, -1.0}, color};
-	Vertex b = {{pos.x - radius, pos.y + radius}, {-1.0,  1.0}, color};
-	Vertex c = {{pos.x + radius, pos.y + radius}, { 1.0,  1.0}, color};
-	Vertex d = {{pos.x + radius, pos.y - radius}, { 1.0, -1.0}, color};
+	Vertex a = {{pos.x - radius, pos.y - radius}, {-1.0, -1.0}};
+	Vertex b = {{pos.x - radius, pos.y + radius}, {-1.0,  1.0}};
+	Vertex c = {{pos.x + radius, pos.y + radius}, { 1.0,  1.0}};
+	Vertex d = {{pos.x + radius, pos.y - radius}, { 1.0, -1.0}};
 	
 	Triangle *triangles = (Triangle *)(_buffer + _bufferCount);
 	triangles[0] = (Triangle){a, b, c};
@@ -168,7 +188,7 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 	_bufferCount += vertex_count;
 }
 
--(void)drawSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius color:(Color)color;
+-(void)drawSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius;
 {
 	NSUInteger vertex_count = 6*3;
 	[self ensureCapacity:vertex_count];
@@ -188,17 +208,17 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 	cpVect v7 = cpvadd(a, cpvadd(nw, tw));
 	
 	Triangle *triangles = (Triangle *)(_buffer + _bufferCount);
-	triangles[0] = (Triangle){{v0, cpvneg(cpvadd(n, t)), color}, {v1, cpvsub(n, t), color}, {v2, cpvneg(n), color},};
-	triangles[1] = (Triangle){{v3, n, color}, {v1, cpvsub(n, t), color}, {v2, cpvneg(n), color},};
-	triangles[2] = (Triangle){{v3, n, color}, {v4, cpvneg(n), color}, {v2, cpvneg(n), color},};
-	triangles[3] = (Triangle){{v3, n, color}, {v4, cpvneg(n), color}, {v5, n, color},};
-	triangles[4] = (Triangle){{v6, cpvsub(t, n), color}, {v4, cpvneg(n), color}, {v5, n, color},};
-	triangles[5] = (Triangle){{v6, cpvsub(t, n), color}, {v7, cpvadd(n, t), color}, {v5, n, color},};
+	triangles[0] = (Triangle){{v0, cpvneg(cpvadd(n, t))}, {v1, cpvsub(n, t)}, {v2, cpvneg(n)},};
+	triangles[1] = (Triangle){{v3, n}, {v1, cpvsub(n, t)}, {v2, cpvneg(n)},};
+	triangles[2] = (Triangle){{v3, n}, {v4, cpvneg(n)}, {v2, cpvneg(n)},};
+	triangles[3] = (Triangle){{v3, n}, {v4, cpvneg(n)}, {v5, n},};
+	triangles[4] = (Triangle){{v6, cpvsub(t, n)}, {v4, cpvneg(n)}, {v5, n},};
+	triangles[5] = (Triangle){{v6, cpvsub(t, n)}, {v7, cpvadd(n, t)}, {v5, n},};
 	
 	_bufferCount += vertex_count;
 }
 
--(void)drawPolyWithVerts:(cpVect *)verts count:(NSUInteger)count width:(cpFloat)width fill:(Color)fill line:(Color)line;
+-(void)drawPolyWithVerts:(cpVect *)verts count:(NSUInteger)count width:(cpFloat)width;
 {
 	struct ExtrudeVerts {cpVect offset, n;};
 	struct ExtrudeVerts extrude[count];
@@ -216,7 +236,7 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 		extrude[i] = (struct ExtrudeVerts){offset, n2};
 	}
 	
-	BOOL outline = (line.a > 0.0 && width > 0.0);
+	BOOL outline = (width > 0.0);
 	
 	NSUInteger triangle_count = 3*count - 2;
 	NSUInteger vertex_count = 3*triangle_count;
@@ -231,7 +251,9 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 		cpVect v1 = cpvsub(verts[i+1], cpvmult(extrude[i+1].offset, inset));
 		cpVect v2 = cpvsub(verts[i+2], cpvmult(extrude[i+2].offset, inset));
 		
-		*cursor++ = (Triangle){{v0, cpvzero, fill}, {v1, cpvzero, fill}, {v2, cpvzero, fill},};
+
+		*cursor++ = (Triangle){{v0, cpvzero}, {v1, cpvzero}, {v2, cpvzero}};
+
 	}
 	
 	for(int i=0; i<count; i++){
@@ -250,16 +272,16 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 			cpVect outer0 = cpvadd(v0, cpvmult(offset0, width));
 			cpVect outer1 = cpvadd(v1, cpvmult(offset1, width));
 			
-			*cursor++ = (Triangle){{inner0, cpvneg(n0), line}, {inner1, cpvneg(n0), line}, {outer1, n0, line}};
-			*cursor++ = (Triangle){{inner0, cpvneg(n0), line}, {outer0, n0, line}, {outer1, n0, line}};
+			*cursor++ = (Triangle){{inner0, cpvneg(n0)}, {inner1, cpvneg(n0)}, {outer1, n0}};
+			*cursor++ = (Triangle){{inner0, cpvneg(n0)}, {outer0, n0}, {outer1, n0}};
 		} else {
 			cpVect inner0 = cpvsub(v0, cpvmult(offset0, 0.5));
 			cpVect inner1 = cpvsub(v1, cpvmult(offset1, 0.5));
 			cpVect outer0 = cpvadd(v0, cpvmult(offset0, 0.5));
 			cpVect outer1 = cpvadd(v1, cpvmult(offset1, 0.5));
 			
-			*cursor++ = (Triangle){{inner0, cpvzero, fill}, {inner1, cpvzero, fill}, {outer1, n0, fill}};
-			*cursor++ = (Triangle){{inner0, cpvzero, fill}, {outer0, n0, fill}, {outer1, n0, fill}};
+			*cursor++ = (Triangle){{inner0, cpvzero}, {inner1, cpvzero}, {outer1, n0}};
+			*cursor++ = (Triangle){{inner0, cpvzero}, {outer0, n0}, {outer1, n0}};
 		}
 	}
 	

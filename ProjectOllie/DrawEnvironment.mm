@@ -14,6 +14,7 @@
 #import "Terrain.h"
 #import "SandboxScene.h"
 #import "ActionLayer.h"
+#import "MaskedSprite.h"
 
 @interface DrawEnvironment () <DrawMenu_delegate>
 
@@ -62,18 +63,19 @@
 {
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
-    float brushradius = fabs(self.brushradius);
-    if (location.x -brushradius<self.contentSize.width/20) {
-        location.x=self.contentSize.width/20+brushradius;
+    float minToEdge = fabs(self.brushradius);
+    if (self.brushradius < 0) minToEdge -= 1;
+    if (location.x -minToEdge<self.contentSize.width/20) {
+        location.x=self.contentSize.width/20+minToEdge;
     }
-    if (location.x +brushradius>self.contentSize.width*0.95) {
-        location.x=self.contentSize.width*0.95-brushradius;
+    if (location.x +minToEdge>self.contentSize.width*0.95) {
+        location.x=self.contentSize.width*0.95-minToEdge;
     }
-    if (location.y -brushradius<self.contentSize.height/20) {
-        location.y=self.contentSize.height/20+brushradius;
+    if (location.y -minToEdge<self.contentSize.height/20) {
+        location.y=self.contentSize.height/20+minToEdge;
     }
-    if (location.y+brushradius>self.contentSize.height*0.9) {
-        location.y=self.contentSize.height*0.9-brushradius;
+    if (location.y+minToEdge>self.contentSize.height*0.9) {
+        location.y=self.contentSize.height*0.9-minToEdge;
     }
     return location;
 }
@@ -113,6 +115,7 @@
 - (void)DrawMenu_setBrushRadius:(CGFloat)radius
 {
     self.brushradius = radius;
+    
 }
 
 - (void)DrawMenu_clearDrawing

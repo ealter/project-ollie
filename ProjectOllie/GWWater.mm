@@ -12,14 +12,18 @@
 #import "CCGLProgram.h"
 #import "CCActionCatmullRom.h"
 
+#import "GameConstants.h"
+
+#define pointCount 256
 
 static CCGLProgram *shader_ = nil;
-static int numVertices = 50; //The number of extra vertices on top of the water
+
+typedef struct Vertex {CGPoint vertex, texcoord;} Vertex;
 
 @interface GWWater (){
     //Array of CGPoints to hold water shape
-    NSMutableArray *waterPoly;
-}
+    Vertex *waterPoly;
+}	
 
 @property float waterHeight;
 
@@ -27,86 +31,56 @@ static int numVertices = 50; //The number of extra vertices on top of the water
 
 
 @implementation GWWater
-@synthesize waterHeight     = _waterHeight;
 
 -(id)init
 {
     if (self = [super init]) {
-        CGSize s = [[CCDirector sharedDirector] winSize];
-
-        self.waterHeight = s.height*0.3;
-        
-        
         //Code to make the water polygon
-        //4 corners of the rectangle
-        CGPoint tr = CGPointMake(s.width, self.waterHeight);
-        [waterPoly addObject:[NSValue valueWithCGPoint:tr]];
-        
-        CGPoint br = CGPointMake(s.width, 0);
-        [waterPoly addObject:[NSValue valueWithCGPoint:br]];
-
-        CGPoint bl = CGPointMake(0, 0);
-        [waterPoly addObject:[NSValue valueWithCGPoint:bl]];
-        
-        CGPoint tl = CGPointMake(0, self.waterHeight);
-        [waterPoly addObject:[NSValue valueWithCGPoint:tl]];
-        
-        for (int i=0; i<numVertices; i++) {
-            CGPoint p = CGPointMake(i*s.width/numVertices, self.waterHeight);
-            [waterPoly addObject:[NSValue valueWithCGPoint:p]]; 
-            //Get CGPoints with: CGPoint newPoint = [[waterPoly objectAtIndex:i] CGPointValue]
+        waterPoly = new Vertex[pointCount];
+        int width = [CCDirector sharedDirector].winSize.width;
+        int height = [CCDirector sharedDirector].winSize.height;
+        for (int i=0; i<pointCount; i++) {
+            waterPoly[i].vertex.x = pointCount/(2*width)-width/2;
+            waterPoly[i].texcoord.x = 0;
+            if (i%2)
+            {
+                waterPoly[i].vertex.y = -height/2;
+                waterPoly[i].texcoord.y = 0;
+            }
+            else 
+            {
+                waterPoly[i].vertex.y = height/8;
+                waterPoly[i].texcoord.y = 1;
+            }
         }
             
         
         
         //Shader stufff
-        GLchar *water_fsh = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WaterShader" ofType:@"fsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
+        GLchar *water_vsh = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WaterShader" ofType:@"vsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
         
-        shader_ = [[CCGLProgram alloc] initWithVertexShaderByteArray:water_fsh fragmentShaderByteArray:ccPositionColor_frag];
+        shader_ = [[CCGLProgram alloc] initWithVertexShaderByteArray:water_vsh fragmentShaderByteArray:ccPositionColor_frag];
         [shader_ addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
         [shader_ addAttribute:kCCAttributeNameTexCoord index:kCCVertexAttrib_TexCoords];
         [shader_ link];
         [shader_ updateUniforms];
         
-        //Make the CGPoint[] to pass to the shader
-        CGPoint verts[4+numVertices];
-        for (int i = 0; i<(4+numVertices); i++) {
-            verts[i] = [[waterPoly objectAtIndex:i] CGPointValue];
-        }
-        
-        [self ccDrawSolidPoly:verts numPoints:4+numVertices withColor:ccc4f(0, 0, 255, 1)];
+        //[self ccDrawSolidPoly:verts numPoints:4+numVertices withColor:ccc4f(0, 0, 255, 1)];
         
     }
     
     return self;
 }
 
--(void) ccDrawSolidPoly: (CGPoint *)poli numPoints: (NSUInteger) numberOfPoints withColor:(ccColor4F) color
+-(void) ccDraw
 {    
 	[shader_ use];
-	[shader_ setUniformForModelViewProjectionMatrix];    
-	[shader_ setUniformLocation:-1 with4fv:(GLfloat*) &color.r count:1];
-    
+	[shader_ setUniformForModelViewProjectionMatrix];
     
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, waterPoly);
     
-	// XXX: Mac OpenGL error. arrays can't go out of scope before draw is executed
-	ccVertex2F newPoli[numberOfPoints];
-    
-	// iPhone and 32-bit machines optimization
-	if( sizeof(CGPoint) == sizeof(ccVertex2F) )
-		glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, poli);
-	
-	else
-    {
-		// Mac on 64-bit
-		for( NSUInteger i=0; i<numberOfPoints;i++)
-			newPoli[i] = (ccVertex2F) { poli[i].x, poli[i].y };
-		
-		glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, newPoli);
-	}    
-    
-	glDrawArrays(GL_TRIANGLE_FAN, 0, (GLsizei) numberOfPoints);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) pointCount);
 }
 
 @end

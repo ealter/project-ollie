@@ -18,20 +18,8 @@
 
 Skeleton::Skeleton(b2World* world, string path)
 {
-    this->root   = loadStructure(path);
-    this->head   = this->root;
-    this->uTorso = this->root->children[0];
-    this->lTorso = this->uTorso->children[0];
-    this->luArm  = this->uTorso->children[1];
-    this->ruArm  = this->uTorso->children[2];
-    this->llArm  = this->luArm->children[0];
-    this->rlArm  = this->ruArm->children[0];
-    this->luLeg  = this->lTorso->children[0];
-    this->ruLeg  = this->lTorso->children[1];
-    this->llLeg  = this->luLeg->children[0];
-    this->rlLeg  = this->ruLeg->children[0];
-    
-    this->world = world;
+    this->root   = loadBoneStructure(path);
+    this->world  = world;
 }
 
 Skeleton::Skeleton(b2World* world)
@@ -46,7 +34,7 @@ Skeleton::~Skeleton()
     this->boneFreeTree(this->root);
 }
 
-Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float a, float length, float width)
+Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim)
 {
     Bone *t;
 	int i;
@@ -54,7 +42,7 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float a,
 	if (!root) /* If there is no root, create a new */
 	{
 		if (!(root = (Bone *)malloc(sizeof(Bone))))
-			return NULL; // BIG PROBLEMS, all is lost
+			return NULL; // all is lost
         
 		root->parent = NULL;
 	}
@@ -72,30 +60,46 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float a,
 		return NULL;
     
 	/* Set data */
-	root->x = x;
-	root->y = y;
-	root->a = a;
-	root->l = length;
-    root->w = width;
-	root->childCount = 0;
-    root->name = name;
+	root->x             = x;
+	root->y             = y;
+	root->a             = angle;
+	root->l             = length;
+    root->w             = width;
+	root->childCount    = 0;
+    root->name          = name;
+    root->jointAngleMax = jaMax;
+    root->jointAngleMin = jaMin;
+    root->jx            = jx;
+    root->jy            = jy;
+    root->animation     = anim;
     
-    // tie to box2d
+    /* Tie to box2d */
     b2BodyDef bd;
     b2PolygonShape box;
     b2FixtureDef fixtureDef;
+    b2RevoluteJointDef jointDef;
     
+    /* Body definition */
     bd.type = b2_dynamicBody;
-    box.SetAsBox(length/32,width/32);
+    box.SetAsBox(length/PTM_RATIO,width/PTM_RATIO);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.4f;
     fixtureDef.restitution = 0.1f;
-    bd.position.Set(x/32, y/32);
-    b2Body *boneShape = this->world->CreateBody(&bd);
+    bd.position.Set(x/PTM_RATIO, y/PTM_RATIO);
+    b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
-    
     root->box2DBody = boneShape;
+    
+    /* Joint definition */
+    if(root->parent)
+    {
+        jointDef.enableLimit = true;
+        jointDef.upperAngle  = root->jointAngleMax;
+        jointDef.upperAngle  = root->jointAngleMin;
+        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(jx,jy));
+        world->CreateJoint(&jointDef);
+    }
     
 	for (i = 0; i < MAX_CHCOUNT; i++)
 		root->children[i] = NULL;
@@ -115,10 +119,10 @@ void Skeleton::boneDumpTree(Bone *root, int level)
     
 	/* Now print animation info */
 	for (int i = 0; i < root->keyFrameCount; i++)
-		printf(" %4.4f %4.4f", root->keyframes[i].time, root->keyframes[i].angle);
+		printf(" %4.4f %4.4f", root->animation->keyframes[i].time, root->animation->keyframes[i].angle);
 	printf("\n");
     
-	/* Recursively call this on my childs */
+	/* Recursively call this on children */
 	for (int i = 0; i < root->childCount; i++)
 		boneDumpTree(root->children[i], level + 1);
 }
@@ -136,14 +140,14 @@ Bone* Skeleton::boneFreeTree(Bone *root)
 	return NULL;
 }
 
-Bone* Skeleton::loadStructure(string path)
+Bone* Skeleton::loadBoneStructure(string path)
 {
+    /*
     Bone *root,
     *temp;
     
     FILE *file;
-    
-    float x,
+    oat x,
     y,
     angle,
     length,
@@ -180,11 +184,11 @@ Bone* Skeleton::loadStructure(string path)
         fgets(buffer, 1024, file);
         sscanf(buffer, "%s %f %f %f %f %f %d %s %[^\n]", depthStr, &x, &y, &angle, &length, &width, &unusedChildrenCount, name, animBuf);
         
-        /* Avoid empty strings */
+        /* Avoid empty strings 
         if (strlen(buffer) < 3)
             continue;
         
-        /* Calculate the depth */
+        /* Calculate the depth 
         depth = strlen(depthStr) - 1;
         if (depth < 0 || depth > MAX_CHCOUNT)
         {
@@ -203,7 +207,7 @@ Bone* Skeleton::loadStructure(string path)
         else
             temp = boneAddChild(temp, name, x, y, angle, length, width);
         
-        /* Now check for animation data */
+        /* Now check for animation data 
         if (strlen(animBuf) > 3)
         {
             ptr = animBuf;
@@ -239,9 +243,12 @@ Bone* Skeleton::loadStructure(string path)
     }
     
     return root;
+    fl*/
+    return NULL;
 }
 
-bool Skeleton::animating(Bone *root, float time){
+bool Skeleton::animating(Bone *root, float time)
+{
     
     bool others = false;
     
@@ -250,13 +257,13 @@ bool Skeleton::animating(Bone *root, float time){
     
 	/* Check for keyframes */
 	for (int i = 0; i < root->keyFrameCount; i++)
-		if (root->keyframes[i].time == time)
+		if (root->animation->keyframes[i].time == time)
 		{
 			/* Find the index for the interpolation */
 			if (i != root->keyFrameCount - 1)
 			{
-				tdiff = root->keyframes[i + 1].time - root->keyframes[i].time;
-				adiff = root->keyframes[i + 1].angle - root->keyframes[i].angle;
+				tdiff = root->animation->keyframes[i + 1].time - root->animation->keyframes[i].time;
+				adiff = root->animation->keyframes[i + 1].angle - root->animation->keyframes[i].angle;
                 
 				root->offA = adiff / tdiff;
 			}
@@ -265,7 +272,7 @@ bool Skeleton::animating(Bone *root, float time){
 				root->offA = 0;
 			}
 		}
-		else if (root->keyframes[i].time > time)
+		else if (root->animation->keyframes[i].time > time)
 			others = true;
 	
 	/* Change animation */
@@ -278,6 +285,3 @@ bool Skeleton::animating(Bone *root, float time){
     
 	return others;
 }
-
-
-
