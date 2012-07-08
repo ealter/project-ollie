@@ -134,8 +134,7 @@ static const float kCoveredRed = 1.0;
 }
 
 - (void)updateMask
-{
-    
+{    
     [self.maskTexture begin];
     [self->pr visit];
     [self->pr clear];

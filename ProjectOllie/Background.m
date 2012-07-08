@@ -60,7 +60,7 @@
         for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
             CCSprite *background = [CCSprite spriteWithFile:[imageNames objectAtIndex:imageIndex]];
             backgroundHeight = background.boundingBox.size.height;
-            background.anchorPoint = ccp(0,0);
+            background.anchorPoint = ccp(.5f,.5f);
             background.position = ccp(offset, y);
             [verticalTiling addObject:background];
             [[batchNodes objectAtIndex:imageIndex] addChild:background];
@@ -81,6 +81,7 @@
         [self setContentSize:CGSizeMake(self.contentSize.width*2, self.contentSize.height*2)];
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
+        [self scheduleUpdate];
     }
     return self;
 }
