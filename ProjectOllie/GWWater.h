@@ -8,8 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GWCamera.h"
 
-@interface GWWater : CCLayer {
+@interface GWWater : CCLayer <CameraObject>
+{
     
 }
 

@@ -643,10 +643,10 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
     assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
     assert(ccw(x[2], y[2], x[3], y[3], x[0], y[0]) > FLT_EPSILON);
     //Check that all four points are inside if adding and outside if subtracting
-    assert(isOutside(x[0], y[0]) != add);
-    assert(isOutside(x[1], y[1]) != add);
-    assert(isOutside(x[2], y[2]) != add);
-    assert(isOutside(x[3], y[3]) != add);
+    if(isOutside(x[0], y[0]) == add)return;
+    if(isOutside(x[1], y[1]) == add)return;
+    if(isOutside(x[2], y[2]) == add)return;
+    if(isOutside(x[3], y[3]) == add)return;
 
     //Find a bounding box to get near points
     float minX = min(min(x[0], x[1]), min(x[2], x[3]));

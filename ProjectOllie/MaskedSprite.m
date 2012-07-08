@@ -202,7 +202,8 @@
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius color:(ccColor4F)color
 {
-    [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius + .5f)*SCALE_RATIO color:color];
+    [self->pr setColor:color];
+    [self->pr drawDot:ccpMult(center,SCALE_RATIO) radius:(radius + .5f)*SCALE_RATIO];
     [self updateMask];
 }
 
@@ -218,11 +219,13 @@
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints color:(ccColor4F)color
 {
+    [self->pr setColor:color];
+    
     for(int i = 0; i < numberOfPoints; i++) {
         poly[i] = ccpMult(poly[i],SCALE_RATIO);
     }
     
-    [self->pr drawPolyWithVerts:poly count:numberOfPoints width:1 fill:color line:color];
+    [self->pr drawPolyWithVerts:poly count:numberOfPoints width:0];
     [self updateMask];
 }
 
@@ -238,10 +241,11 @@
 
 - (void)drawPoints:(NSArray *)points color:(ccColor4F)color
 {
+    [self->pr setColor:color];
     for(NSValue *point in points) {
         if(![point isKindOfClass:[NSValue class]]) continue;
         CGPoint p = [point CGPointValue];
-        [self->pr drawDot:p radius:0.5 color:color];
+        [self->pr drawDot:p radius:0.5];
     }
     [self updateMask];
 }

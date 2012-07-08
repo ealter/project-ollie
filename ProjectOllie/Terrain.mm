@@ -48,6 +48,7 @@
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
+    [polyRenderer setColor:ccc4f(.2f,.4f,.8f,1)];
     
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
@@ -155,7 +156,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     for (std::set<PointEdge*>::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
     {
         PointEdge* pe = *i;
-        [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:1.3f color:ccc4f(.2f,.4f,.8f,1)];
+        [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:1.3f];
     }
 }
 
