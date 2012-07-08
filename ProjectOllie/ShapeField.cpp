@@ -20,10 +20,13 @@
 #define cellHeight 32
 
 //Maximum distance for a segment on a circle
-#define maxCircleSeg 4
+#define maxCircleSegTheta .1
 
 // Define the smallest float difference that could matter
 #define plankFloat 0.001f
+
+//Constant we 
+#define radiusMargin .01
 
 //2 pi
 #define TAU (M_PI*2)
@@ -67,11 +70,11 @@ void printTouchInput()
     ShapeField_input input = shapefieldInput.back();
     const char *add = input.add ? "add" : "remove";
     if(input.isCircle) {
-      printq("circle %s %f %f %f\n", add, input.input.circleInput.r, input.input.circleInput.x, input.input.circleInput.y);
+      printf("circle %s %f %f %f\n", add, input.input.circleInput.r, input.input.circleInput.x, input.input.circleInput.y);
     } else {
       float *xs = input.input.rectInput.x;
       float *ys = input.input.rectInput.y;
-      printq("rect %s %f %f %f %f %f %f %f %f\n", add, xs[0], xs[1], xs[2], xs[3], ys[0], ys[1], ys[2], ys[3]);
+      printf("rect %s %f %f %f %f %f %f %f %f\n", add, xs[0], xs[1], xs[2], xs[3], ys[0], ys[1], ys[2], ys[3]);
     }
 }
 #endif /* KEEP_TOUCH_INPUT */
@@ -109,6 +112,12 @@ void *ShapeField::pickleDataStructure(int &dataLength) {
     return NULL;
 }
 
+
+float ShapeField::getRinside(float r)
+{
+    return (r - radiusMargin)*cosf(maxCircleSegTheta/2) - radiusMargin;
+}
+
 void ShapeField::clipCircle(bool add, float r, float x, float y)
 {
 #ifdef KEEP_TOUCH_INPUT
@@ -123,7 +132,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
 #endif
 
     //Use this as the r when creating new points so going over circles won't ever expand the curve into the float trig error spots
-    float rMarginal = r - .01;
+    float rMarginal = r - radiusMargin;
 
     //Get all potential PointEdges that we could be affecting in a bounding box
     PeSet nearPEs = pointsNear(x-r, y-r, x+r, y+r);
@@ -341,7 +350,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     assert(entrences.size() == exits.size());
 
     //Figure out the maximum theta for the given radius and maxCircleSeg
-    float maxTheta = 2*asinf(maxCircleSeg/(r*2));
+    float maxTheta = maxCircleSegTheta;
 
     //If nothing intersects, we have no geometry to adjust, perhaps we will make some new independant shapes
     if (entrences.empty())
@@ -455,17 +464,13 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     }
                 }
             }
-            
-            assert((dTheta >= 0) == add);
-            
+                        
             //If the enterence and exit are at a really close theta, then we just want to merge these points
-            if (fabs(dTheta) < .01) printf("COULDA MERGED\n");
-            if (false && fabs(dTheta) < .01)
+            if (fabs(dTheta) < FLT_EPSILON)
             {
-                printq("Merging close enterence and exit\n");
+                printf("Merging close enterence and exit\n");
                 //Bypass the "in" PointEdge
-                in.intersection->tmpMark = inside;
-                in.intersection->next = NULL;
+                peSet.erase(in.intersection);
                 removeFromSpatialGrid(in.intersection->prev);
                 in.intersection->prev->next = out.intersection;
                 out.intersection->prev = in.intersection->prev;
@@ -532,9 +537,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     for (PeSet::iterator i = nearPEs.begin(); i != nearPEs.end(); i++)
         if ((*i)->tmpMark == inside) delete *i;
     
-#ifdef USE_EXPENSIVE_ASSERTS
+    
     //Make sure that the middle is inside if we're adding or outside if we're subtracting
     assert(isOutside(x, y) != add);
+    
+#ifdef USE_EXPENSIVE_ASSERTS
     //Check that everything makes sense in the ways we can validate
     checkConsistency();
 #endif
@@ -636,10 +643,10 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
     assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
     assert(ccw(x[2], y[2], x[3], y[3], x[0], y[0]) > FLT_EPSILON);
     //Check that all four points are inside if adding and outside if subtracting
-    assert(isOutside(x[0], y[0]) != add);
-    assert(isOutside(x[1], y[1]) != add);
-    assert(isOutside(x[2], y[2]) != add);
-    assert(isOutside(x[3], y[3]) != add);
+    if(isOutside(x[0], y[0]) == add)return;
+    if(isOutside(x[1], y[1]) == add)return;
+    if(isOutside(x[2], y[2]) == add)return;
+    if(isOutside(x[3], y[3]) == add)return;
 
     //Find a bounding box to get near points
     float minX = min(min(x[0], x[1]), min(x[2], x[3]));

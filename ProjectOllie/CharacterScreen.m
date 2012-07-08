@@ -11,8 +11,8 @@
 #import "SWTableViewCell.h"
 #import "MyCell.h"
 #import "cocos2d.h"
-#import "RippleEffect.h"
 #import "GWParticles.h"
+#import "GWWater.h"
 
 @implementation CharacterScreen
 @synthesize weaponScrollView;
@@ -34,10 +34,8 @@
         [self addChild:tableView];
         [tableView reloadData];
         
-        /*CCSprite *sprite2   = [CCSprite spriteWithFile:@"white_clouds.jpeg"];
-		sprite2.anchorPoint = ccp(0.5, 0.5);
-		sprite2.position    = ccp([[CCDirector sharedDirector] winSize].width/2, [[CCDirector sharedDirector] winSize].height/2);
-		[self addChild:sprite2];*/
+        //GWWater *water = [GWWater node];
+        //[self addChild:water];
         
         //Particle stuffs
         CCParticleSystem *emitter = [GWParticleMuzzleFlash node];
