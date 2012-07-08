@@ -1,0 +1,520 @@
+Frame number 0  time: 0.0
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 1  time: 0.042
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 2  time: 0.083
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 3  time: 0.125
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 4  time: 0.167
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 5  time: 0.208
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 6  time: 0.25
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 7  time: 0.292
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 8  time: 0.333
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 9  time: 0.375
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 10  time: 0.417
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 11  time: 0.458
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 12  time: 0.5
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 13  time: 0.542
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 14  time: 0.583
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 15  time: 0.625
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 16  time: 0.667
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 17  time: 0.708
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 18  time: 0.75
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 19  time: 0.792
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 20  time: 0.833
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 21  time: 0.875
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 22  time: 0.917
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 23  time: 0.958
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 24  time: 1.0
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 25  time: 1.042
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 26  time: 1.083
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 27  time: 1.125
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 28  time: 1.167
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 29  time: 1.208
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 30  time: 1.25
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 31  time: 1.292
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 32  time: 1.333
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 33  time: 1.375
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 34  time: 1.417
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 35  time: 1.458
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 36  time: 1.5
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 37  time: 1.542
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 38  time: 1.583
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
+Frame number 39  time: 1.625
+Torso head x, y, angle, len: 0.0, -0.0,  3.142,  0.0
+hand_L head x, y, angle, len: 0.133, -0.009,  0.0,  0.004
+arm_L head x, y, angle, len: 0.137, -0.009,  3.142,  0.01
+hand_R head x, y, angle, len: -0.133, -0.009,  3.142,  0.004
+arm_R head x, y, angle, len: -0.137, -0.009,  0.0,  0.01
+head head x, y, angle, len: -0.0, -0.0,  -1.571,  0.115
+eye head x, y, angle, len: 0.103, -0.767,  -1.571,  0.008
+thigh_L head x, y, angle, len: 0.046, 0.027,  0.0,  0.011
+leg_L head x, y, angle, len: 0.057, 0.027,  -1.571,  0.01
+thigh_R head x, y, angle, len: -0.046, 0.027,  3.142,  0.011
+leg_R head x, y, angle, len: -0.057, 0.027,  -1.571,  0.01
+
