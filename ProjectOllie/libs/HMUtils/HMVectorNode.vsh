@@ -35,5 +35,6 @@ void main()
 //	frag_color = vec4(1.0, 1.0, 1.0, 1.0); //color.rgb*color.a, color.a);
 	frag_texcoord = texcoord;
 	
-	gl_Position = u_MVPMatrix*position;
+    mediump vec4 p2 = vec4(position.x, po
+    gl_Position = u_MVPMatrix*position;
 }

@@ -132,7 +132,7 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 
 -(void)setColor:(Color)c
 {
-  //  if (c.a != currentColor.a || c.r != currentColor.r || c.g != currentColor.g || c.b != currentColor.b)
+    if (c.a != currentColor.a || c.r != currentColor.r || c.g != currentColor.g || c.b != currentColor.b)
     {
         currentColor = c;
         glUniform4f(colorUniformLocation, c.r, c.g, c.b, c.a);
