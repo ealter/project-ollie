@@ -36,7 +36,7 @@ import math
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
-
+'''
 def write(filename):
 	out = open(filename, "w")
 	sce= bpy.context.scene
@@ -67,6 +67,14 @@ def write(filename):
 			out.write( str(round(angle, 3)) + ",  " + str(round(dist, 3)) + "\n")
 		out.write("\n")
 	out.close()
+'''
+
+def write(filename):
+    out = open(filename, "w")
+    sce = bpy.context.scene
+    for ob in sce.objects:
+        out.write(ob.type + ": " + ob.name + "\n")
+    out.close()
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
