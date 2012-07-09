@@ -19,7 +19,7 @@
 # <pep8 compliant>
 
 bl_info = {
-    "name": "Skeleton Exporter Animation",
+    "name": "Skeleton Exporter Armature",
     "author": "hi ku studios",
     "version": (0, 1),
     "blender": (2, 5, 7),
@@ -39,33 +39,17 @@ from bpy_extras.io_utils import ExportHelper
 
 def write(filename):
 	out = open(filename, "w")
-	sce= bpy.context.scene
-	armature = bpy.data.objects["Armature"]
-	framecount = 0
-	(start_frame, end_frame) = armature.animation_data.action.frame_range
-	for frame in range(int(start_frame), int(end_frame) + 1):
-		sce.frame_set(frame)
-		
-		#calculate and write the time of the frame
-		time = framecount/sce.render.fps
-		out.write("Frame number " + str(framecount) + "  time: " + str(round(time, 3)) +"\n")
-		framecount = framecount + 1
-		
-		#print out the bones' positions, angles, and lengths
-		for pose_bone in armature.pose.bones:
-			#calculate bone angle and length
-			headx = pose_bone.head.x
-			heady = pose_bone.head.y
-			tailx = pose_bone.tail.x
-			taily = pose_bone.tail.y
-			angle = math.atan2(taily-heady, tailx-headx)
-			sq1 = (tailx-headx)*(tailx-headx)
-			sq2 = (taily-heady)*(taily-heady)
-			dist = math.sqrt(sq1+sq2)
-		
-			out.write( pose_bone.name + " head's x, y, angle, len: "+ str(round(headx, 3)) +", "+ str(round(heady, 3)) +",  ")
-			out.write( str(round(angle, 3)) + ",  " + str(round(dist, 3)) + "\n")
-		out.write("\n")
+	armature = bpy.data.armatures["Armature.001"]
+	for bone in armature.bones:
+		#calculate bone angle and length
+		headx = bone.head.y
+		heady = bone.head.z
+		tailx = bone.tail.y
+		taily = bone.tail.z
+		angle = math.atan2(taily-heady, tailx-headx)
+	
+		out.write( bone.name + " head's x, y, angle, len: "+ str(round(headx, 3)) +", "+ str(round(heady, 3)) +",  ")
+		out.write( str(round(angle, 3)) + ",  " + str(round(bone.length, 3)) + "\n \n")
 	out.close()
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
@@ -90,7 +74,7 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
 def menu_export(self, context):
     import os
     default_path = os.path.splitext(bpy.data.filepath)[0] + ".skel"
-    self.layout.operator(SkeletonExporter.bl_idname, text="Skeletons (.skel)").filepath = default_path
+    self.layout.operator(SkeletonExporter.bl_idname, text="Skeletons Armiture (.skel)").filepath = default_path
 
 
 def register():

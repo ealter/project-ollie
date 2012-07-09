@@ -36,7 +36,6 @@ import math
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
-'''
 def write(filename):
 	out = open(filename, "w")
 	sce= bpy.context.scene
@@ -54,37 +53,26 @@ def write(filename):
 		#print out the bones' positions, angles, and lengths
 		for pose_bone in armature.pose.bones:
 			#calculate bone angle and length
-			headx = pose_bone.head.x
-			heady = pose_bone.head.y
-			tailx = pose_bone.tail.x
-			taily = pose_bone.tail.y
+			headx = pose_bone.head.y
+			heady = pose_bone.head.z
+			tailx = pose_bone.tail.y
+			taily = pose_bone.tail.z
 			angle = math.atan2(taily-heady, tailx-headx)
-			sq1 = (tailx-headx)*(tailx-headx)
-			sq2 = (taily-heady)*(taily-heady)
-			dist = math.sqrt(sq1+sq2)
 		
 			out.write( pose_bone.name + " head's x, y, angle, len: "+ str(round(headx, 3)) +", "+ str(round(heady, 3)) +",  ")
-			out.write( str(round(angle, 3)) + ",  " + str(round(dist, 3)) + "\n")
+			out.write( str(round(angle, 3)) + ",  " + str(round(pose_bone.length, 3)) + "\n")
 		out.write("\n")
 	out.close()
-'''
-
-def write(filename):
-    out = open(filename, "w")
-    sce = bpy.context.scene
-    for ob in sce.objects:
-        out.write(ob.type + ": " + ob.name + "\n")
-    out.close()
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
     bl_idname = "skeleton_animation.cameras"
-    bl_label = "Export Skeleton Properties"
+    bl_label = "Export Skeleton Animation Properties"
     filename_ext = ".skel"
     filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
 	
     def execute(self, context):
-        write("character.skel")
+        write("characteranimation.skel")
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -98,7 +86,7 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
 def menu_export(self, context):
     import os
     default_path = os.path.splitext(bpy.data.filepath)[0] + ".skel"
-    self.layout.operator(SkeletonExporter.bl_idname, text="Skeletons (.skel)").filepath = default_path
+    self.layout.operator(SkeletonExporter.bl_idname, text="Skeleton Animation (.skel)").filepath = default_path
 
 
 def register():
