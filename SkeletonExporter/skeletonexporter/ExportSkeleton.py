@@ -34,7 +34,7 @@ bl_info = {
 import bpy
 import math
 import json
-
+import sys
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
@@ -43,7 +43,7 @@ def write():
   armature = bpy.data.objects["Armature"]
   framecount = 0
   start_frame, end_frame = armature.animation_data.action.frame_range
-  data = []
+  frames = []
   for frame in range(int(start_frame), int(end_frame) + 1):
     sce.frame_set(frame)
 
@@ -69,7 +69,7 @@ def write():
 
     frame = {'time': time, 'bones': bones, 'framecount': framecount} #TODO: maybe include the framecount
     frames.append(frame)
-  print(json.dump(frames))
+  json.dump(frames, sys.stdout)
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
