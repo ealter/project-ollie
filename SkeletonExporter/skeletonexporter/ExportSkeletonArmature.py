@@ -32,6 +32,7 @@ bl_info = {
 
 import bpy
 import math
+import json
 
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
@@ -52,7 +53,7 @@ def write(filename):
 
   armature = bpy.data.armatures["Armature.001"]
   fp = open(filename, "w")
-  bones = map(getBoneInfo, armature.bones)
+  bones = list(map(getBoneInfo, armature.bones))
   json.dump(bones, fp, separators=(',', ':'))
   fp.close()
 
