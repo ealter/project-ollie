@@ -67,8 +67,8 @@ def write():
       bone["length"] = pose_bone.length
       bones.append(bone)
 
-    frame = {'time': time, 'bones': bones} #TODO: maybe include the framecount
-    frames[framecount] = frame
+    frame = {'time': time, 'bones': bones, 'framecount': framecount} #TODO: maybe include the framecount
+    frames.append(frame)
   print(json.dump(frames))
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
