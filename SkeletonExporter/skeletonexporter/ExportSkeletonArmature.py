@@ -29,14 +29,12 @@ bl_info = {
     "support": 'OFFICIAL',
     "category": "Import-Export"}
 
-
 import bpy
 import math
 import json
 
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
-
 
 def write(filename):
   def getBoneInfo(bone):
