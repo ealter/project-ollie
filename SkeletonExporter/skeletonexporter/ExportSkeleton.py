@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # ##### BEGIN GPL LICENSE BLOCK #####
 #
 #  This program is free software; you can redistribute it and/or
@@ -32,37 +33,43 @@ bl_info = {
 
 import bpy
 import math
+import json
 
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
-def write(filename):
-	out = open(filename, "w")
-	sce= bpy.context.scene
-	armature = bpy.data.objects["Armature"]
-	framecount = 0
-	(start_frame, end_frame) = armature.animation_data.action.frame_range
-	for frame in range(int(start_frame), int(end_frame) + 1):
-		sce.frame_set(frame)
-		
-		#calculate and write the time of the frame
-		time = framecount/sce.render.fps
-		out.write("Frame number " + str(framecount) + "  time: " + str(round(time, 3)) +"\n")
-		framecount = framecount + 1
-		
-		#print out the bones' positions, angles, and lengths
-		for pose_bone in armature.pose.bones:
-			#calculate bone angle and length
-			headx = pose_bone.head.y
-			heady = pose_bone.head.z
-			tailx = pose_bone.tail.y
-			taily = pose_bone.tail.z
-			angle = math.atan2(taily-heady, tailx-headx)
-		
-			out.write( pose_bone.name + " head's x, y, angle, len: "+ str(round(headx, 3)) +", "+ str(round(heady, 3)) +",  ")
-			out.write( str(round(angle, 3)) + ",  " + str(round(pose_bone.length, 3)) + "\n")
-		out.write("\n")
-	out.close()
+def write():
+  sce = bpy.context.scene
+  armature = bpy.data.objects["Armature"]
+  framecount = 0
+  start_frame, end_frame = armature.animation_data.action.frame_range
+  data = []
+  for frame in range(int(start_frame), int(end_frame) + 1):
+    sce.frame_set(frame)
+
+    #calculate and write the time of the frame
+    time = framecount/sce.render.fps
+    framecount = framecount + 1
+
+    #print out the bones' positions, angles, and lengths
+    bones = []
+    for pose_bone in armature.pose.bones:
+      #calculate bone angle and length
+      headx = pose_bone.head.y
+      heady = pose_bone.head.z
+      tailx = pose_bone.tail.y
+      taily = pose_bone.tail.z
+      angle = math.atan2(taily-heady, tailx-headx)
+      bones.append({'head': {'x': pose_bone.head.y,
+                             'y': pose_bone.head.z},
+                    'tail': {'x': pose_bone.tail.y,
+                             'y': pose_bone.tail.z},
+                    'angle': angle,
+                    'length': pose_bone.length})
+
+    frame = {'time': time, 'bones': bones} #TODO: maybe include the framecount
+    frames[framecount] = frame
+  print json.dump(frames)
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
@@ -70,9 +77,9 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
     bl_label = "Export Skeleton Animation Properties"
     filename_ext = ".skel"
     filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
-	
+
     def execute(self, context):
-        write("characteranimation.skel")
+        write()
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -103,3 +110,4 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+
