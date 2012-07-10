@@ -34,11 +34,10 @@ bl_info = {
 import bpy
 import math
 import json
-import sys
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
-def write():
+def write(filename):
   sce = bpy.context.scene
   armature = bpy.data.objects["Armature"]
   framecount = 0
@@ -69,7 +68,9 @@ def write():
 
     frame = {'time': time, 'bones': bones, 'framecount': framecount} #TODO: maybe include the framecount
     frames.append(frame)
-  json.dump(frames, sys.stdout)
+  fp = open(filename, "w")
+  json.dump(frames, fp)
+  fp.close()
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
@@ -79,7 +80,7 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
     filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
 
     def execute(self, context):
-        write()
+        write("characteranimation.skel")
         return {'FINISHED'}
 
     def invoke(self, context, event):
