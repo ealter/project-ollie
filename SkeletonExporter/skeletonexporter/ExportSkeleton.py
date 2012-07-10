@@ -60,12 +60,12 @@ def write():
       tailx = pose_bone.tail.y
       taily = pose_bone.tail.z
       angle = math.atan2(taily-heady, tailx-headx)
-      bones.append({'head': {'x': pose_bone.head.y,
-                             'y': pose_bone.head.z},
-                    'tail': {'x': pose_bone.tail.y,
-                             'y': pose_bone.tail.z},
-                    'angle': angle,
-                    'length': pose_bone.length})
+      bone = {}
+      bone["head"]   = {'x': headx, 'y': heady}
+      bone["tail"]   = {'x': tailx, 'y': taily}
+      bone["angle"]  = angle
+      bone["length"] = pose_bone.length
+      bones.append(bone)
 
     frame = {'time': time, 'bones': bones} #TODO: maybe include the framecount
     frames[framecount] = frame
