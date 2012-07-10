@@ -16,7 +16,8 @@ class b2Body;
 
 //An enum for the different possible images to use with the texture.
 typedef enum TerrainTexture {
-    kTerrainTexture_pattern1 = 0
+    kTerrainTexture_lava = 0,
+    kTerrainTexture_numTextures //Do not use this!
 } TerrainTexture;
 
 /*   Terrain class  */
@@ -31,13 +32,11 @@ typedef enum TerrainTexture {
 
 - (id) initWithTextureType:(TerrainTexture)textureType;
 
-//Building land
-- (void) addCircleWithRadius:(float)radius x:(float)x y:(float)y;
-- (void) addQuadWithPoints:(CGPoint[])p;
+//Changing land
+- (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y;
 
-//Removing land
-- (void) removeCircleWithRadius:(float)radius x:(float)x y:(float)y;
-- (void) removeQuadWithPoints:(CGPoint[])p;
+//Only call this after two circles have been clipped
+- (void) bridgeCircles:(bool)add from:(CGPoint)p1 to:(CGPoint) p2 radiusUsed:(float)r;
 
 //Call whenever shape is changed to rebuild the stroke raster
 - (void) shapeChanged;
@@ -51,6 +50,3 @@ typedef enum TerrainTexture {
 + (Terrain*) generateRandomCavern;
 
 @end
-
-
-

@@ -33,9 +33,10 @@ typedef ccColor4F Color;
 
 @interface HMVectorNode : CCNode
 
--(void)drawDot:(cpVect)pos radius:(cpFloat)radius color:(Color)color;
--(void)drawSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius color:(Color)color;
--(void)drawPolyWithVerts:(cpVect *)verts count:(NSUInteger)count width:(cpFloat)width fill:(Color)fill line:(Color)line;
+-(void)drawDot:(cpVect)pos radius:(cpFloat)radius;
+-(void)drawSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius;
+-(void)drawPolyWithVerts:(cpVect *)verts count:(NSUInteger)count width:(cpFloat)width;
+-(void)setColor:(Color)c;
 
 /// Clear the geometry in the node's buffer.
 -(void)clear;

@@ -192,24 +192,23 @@ enum {
    // PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(16 * idx,16 * idy,16,16)];					
 	
     /**
-     * With the debug drawing features we have, bodies draw themselves. Not yet sure how we will texurize
-     * the polygons.
+     * With the debug drawing features we have, bodies draw themselves.
      */
     
-    //[parent addChild:sprite];
-    //will eventually make this a piece of terrain
+    // [parent addChild:sprite];
+    // Will eventually make this a piece of terrain
 
-    //sprite.position = ccp( p.x, p.y); //cocos2d point
+    // sprite.position = ccp( p.x, p.y); //cocos2d point
 
-    // Define the dynamic body.
+    // Define the static body.
     // Set up a 1m squared box in the physics world
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
     bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
     b2Body *body = world->CreateBody(&bodyDef);
 
-    // Define another box shape for our dynamic body.
-    //b2PolygonShape dynamicBox;
+    // Define another box shape for our static body.
+    //b2PolygonShape staticBox;
     //dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
     b2ChainShape dynamicBox;
     b2Vec2 vs[4];
@@ -218,6 +217,7 @@ enum {
     vs[2].Set(0,0);
     vs[3].Set(.24f,.24f);
     dynamicBox.CreateLoop(vs, 4);
+    
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &dynamicBox;	
@@ -225,7 +225,6 @@ enum {
     fixtureDef.friction = 0.3f;
     body->CreateFixture(&fixtureDef);
 
-    //[sprite setPhysicsBody:body];
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
@@ -296,8 +295,6 @@ enum {
     
 	[self.camera update:dt];
     //[self updateParallax];
-
-
 
 }
 

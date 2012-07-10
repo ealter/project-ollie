@@ -6,8 +6,6 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 @interface NSString (URLEncoding)
 
 - (NSString *)urlEncodeUsingEncoding:(NSStringEncoding)encoding;

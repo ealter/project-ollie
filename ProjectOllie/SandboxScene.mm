@@ -25,7 +25,7 @@
         
         /* Set up action layer (where action occurs */
         self.actionLayer = [ActionLayer node];
-        Background *blayer = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
+        Background *blayer = [[Background node] initWithSpeed:30.0 images:[NSArray arrayWithObject:@"white_clouds.jpeg"]];
         [self.actionLayer.camera.children addObject:blayer];
         
         CCNode* actionNode = [CCNode node];
@@ -39,8 +39,6 @@
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
         [self reorderChild:backnode z:1000];
-        
-        [self.actionLayer.camera revert];
         
 
     }

@@ -34,18 +34,21 @@
 		C566AC351592A55A00D92879 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2F1592A55A00D92879 /* snow.png */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
+		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
-		CE029088159E6AD100CEF219 /* GameConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = CE029087159E6AD000CEF219 /* GameConstants.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
+		CE0A522815A78DE10036F103 /* WaterShader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
+		CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
+		CE11B19115A68C03009B22CA /* GWWater.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE11B19015A68C03009B22CA /* GWWater.mm */; };
 		CE123C4D158811DC003AD813 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4C158811DC003AD813 /* background.jpg */; };
 		CE123C5015883687003AD813 /* TerrainShader.frag in Sources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
@@ -62,6 +65,9 @@
 		CE1F2E7D1590385800710A32 /* drawframe-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2E7B1590385800710A32 /* drawframe-hd.png */; };
 		CE22740215A0193100F3217E /* GWParticles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22740115A0193100F3217E /* GWParticles.m */; };
 		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
+		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
+		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
+		CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E915A6779E00A087F6 /* PasswordChanger.m */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
@@ -348,6 +354,8 @@
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
+		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
+		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
@@ -359,11 +367,11 @@
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameConstants.h; sourceTree = "<group>"; };
-		CE029087159E6AD000CEF219 /* GameConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameConstants.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOS_Versions.h; sourceTree = "<group>"; };
 		CE081665159BE73600064E04 /* IOS_Versions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IOS_Versions.m; sourceTree = "<group>"; };
+		CE0A522715A78DE10036F103 /* WaterShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = WaterShader.vsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		CE0BD5F3158FFA2500C380CA /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Logout.h; sourceTree = "<group>"; };
 		CE0BD5F4158FFA2500C380CA /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ProjectOllie/Server/Logout.m; sourceTree = "<group>"; };
 		CE0BD5F9159016E600C380CA /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
@@ -381,6 +389,8 @@
 		CE0BD605159016E600C380CA /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		CE0BD606159016E600C380CA /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		CE0BD607159016E600C380CA /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		CE11B18F15A68C03009B22CA /* GWWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWater.h; sourceTree = "<group>"; };
+		CE11B19015A68C03009B22CA /* GWWater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWater.mm; sourceTree = "<group>"; };
 		CE123C4C158811DC003AD813 /* background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = background.jpg; path = Resources/background.jpg; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
@@ -398,6 +408,11 @@
 		CE22740015A0193100F3217E /* GWParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWParticles.h; sourceTree = "<group>"; };
 		CE22740115A0193100F3217E /* GWParticles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWParticles.m; sourceTree = "<group>"; };
 		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire.png; sourceTree = "<group>"; };
+		CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PasswordChangeScreen.ccbi; path = Resources/PasswordChangeScreen.ccbi; sourceTree = "<group>"; };
+		CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChangeScreen.h; path = menus/PasswordChangeScreen.h; sourceTree = "<group>"; };
+		CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChangeScreen.m; path = menus/PasswordChangeScreen.m; sourceTree = "<group>"; };
+		CE2544E815A6779D00A087F6 /* PasswordChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChanger.h; path = ProjectOllie/Server/PasswordChanger.h; sourceTree = "<group>"; };
+		CE2544E915A6779E00A087F6 /* PasswordChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChanger.m; path = ProjectOllie/Server/PasswordChanger.m; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = Resources/NewAccountMenu.ccbi; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
@@ -978,6 +993,16 @@
 			path = "Resources/Land Textures";
 			sourceTree = "<group>";
 		};
+		C589042315A4FD2500E0EB70 /* SkeletonUtils */ = {
+			isa = PBXGroup;
+			children = (
+				C589043015A67DE000E0EB70 /* Skeleton.cpp */,
+				C589043115A67DE000E0EB70 /* Skeleton.h */,
+			);
+			name = SkeletonUtils;
+			path = libs/SkeletonUtils;
+			sourceTree = "<group>";
+		};
 		C5B4C58A159023AC000FD99F /* HMUtils */ = {
 			isa = PBXGroup;
 			children = (
@@ -1035,6 +1060,7 @@
 			isa = PBXGroup;
 			children = (
 				CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */,
+				CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */,
 				CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */,
 				CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */,
 				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
@@ -1104,20 +1130,22 @@
 				CE30B18B158FBA34009EC82B /* ActionMenu.m */,
 				CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */,
 				CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */,
-				CE62FCAC15940A0100BEB3BE /* MyCell.h */,
-				CE62FCAD15940A0200BEB3BE /* MyCell.m */,
 				CE30B18C158FBA34009EC82B /* DrawMenu.h */,
 				CE30B18D158FBA34009EC82B /* DrawMenu.m */,
 				CE30B18E158FBA34009EC82B /* LoginScreen.h */,
 				CE30B18F158FBA34009EC82B /* LoginScreen.m */,
 				CE30B190158FBA34009EC82B /* MainMenu.h */,
 				CE30B191158FBA34009EC82B /* MainMenu.mm */,
+				CE62FCAC15940A0100BEB3BE /* MyCell.h */,
+				CE62FCAD15940A0200BEB3BE /* MyCell.m */,
+				CE30B192158FBA34009EC82B /* NewAccountMenu.h */,
+				CE30B193158FBA34009EC82B /* NewAccountMenu.m */,
 				CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */,
 				CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */,
 				CE30B1A3158FC3F0009EC82B /* OptionsMenu.h */,
 				CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */,
-				CE30B192158FBA34009EC82B /* NewAccountMenu.h */,
-				CE30B193158FBA34009EC82B /* NewAccountMenu.m */,
+				CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */,
+				CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -1200,7 +1228,6 @@
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
 				CE029086159E6AD000CEF219 /* GameConstants.h */,
-				CE029087159E6AD000CEF219 /* GameConstants.m */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
@@ -1211,6 +1238,8 @@
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				CE081664159BE73400064E04 /* IOS_Versions.h */,
 				CE081665159BE73600064E04 /* IOS_Versions.m */,
+				CE11B18F15A68C03009B22CA /* GWWater.h */,
+				CE11B19015A68C03009B22CA /* GWWater.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
 				C584A88D157D969500936109 /* GWCamera.mm */,
 				CE22740015A0193100F3217E /* GWParticles.h */,
@@ -1252,16 +1281,17 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				C589042315A4FD2500E0EB70 /* SkeletonUtils */,
+				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
+				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
+				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
+				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
 				CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */,
 				CE62FC991594084000BEB3BE /* CCTableSuite */,
 				CE0BD5F7158FFA3900C380CA /* Categories */,
 				C5B4C58A159023AC000FD99F /* HMUtils */,
 				CE0BD5F8159016E600C380CA /* facebook-ios-sdk */,
 				CE894EFC158299CE00E412E1 /* CSG */,
-				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
-				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
-				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
-				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
 				C52986871578A43300656B50 /* CCControlExtension */,
 				C52986A21578A43300656B50 /* CCScrollView */,
 				C52986A51578A43300656B50 /* SSZipArchive */,
@@ -1788,6 +1818,8 @@
 				CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */,
 				CEFD6FDE1592A750005A233E /* ChangeUserName.h */,
 				CEFD6FDF1592A750005A233E /* ChangeUserName.m */,
+				CE2544E815A6779D00A087F6 /* PasswordChanger.h */,
+				CE2544E915A6779E00A087F6 /* PasswordChanger.m */,
 			);
 			name = Server;
 			path = ..;
@@ -1796,6 +1828,7 @@
 		CEFAF06A1586B4E000F6DDF9 /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				CE0A522715A78DE10036F103 /* WaterShader.vsh */,
 				CE123C4F15883687003AD813 /* TerrainShader.frag */,
 				CE5C59341597CA2800C121B4 /* RippleEffect.fsh */,
 				CE5734DB159BDE5900AEFB84 /* RippleEffect.h */,
@@ -1863,6 +1896,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */,
 				CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */,
 				C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */,
 				C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */,
@@ -1938,6 +1972,7 @@
 				CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */,
 				CE70E1FE159943C30065B440 /* silverbutton.png in Resources */,
 				CE22740915A01D6D00F3217E /* fire.png in Resources */,
+				CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2152,9 +2187,13 @@
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
-				CE029088159E6AD100CEF219 /* GameConstants.m in Sources */,
 				CE22740215A0193100F3217E /* GWParticles.m in Sources */,
 				CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */,
+				CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */,
+				CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */,
+				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
+				CE11B19115A68C03009B22CA /* GWWater.mm in Sources */,
+				CE0A522815A78DE10036F103 /* WaterShader.vsh in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2205,15 +2244,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ProjectOllie/Prefix.pch;
 				GCC_SHORT_ENUMS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
@@ -2242,13 +2284,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				GCC_DYNAMIC_NO_PIC = YES;
+				GCC_ENABLE_ASM_KEYWORD = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ProjectOllie/Prefix.pch;
 				GCC_SHORT_ENUMS = YES;
+				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
 				GCC_WARN_MULTIPLE_DEFINITION_TYPES_FOR_SELECTOR = NO;
@@ -2261,7 +2308,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
 				);
-				LLVM_LTO = YES;
+				LLVM_LTO = NO;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
