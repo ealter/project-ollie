@@ -69,7 +69,7 @@ def write():
 
     frame = {'time': time, 'bones': bones} #TODO: maybe include the framecount
     frames[framecount] = frame
-  print json.dump(frames)
+  print(json.dump(frames))
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
