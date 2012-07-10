@@ -69,7 +69,7 @@ def write(filename):
     frame = {'time': time, 'bones': bones, 'framecount': framecount} #TODO: maybe include the framecount
     frames.append(frame)
   fp = open(filename, "w")
-  json.dump(frames, fp)
+  json.dump(frames, fp, separators=(',', ':'))
   fp.close()
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
