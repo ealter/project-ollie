@@ -1113,6 +1113,29 @@
 			name = Miscellaneous;
 			sourceTree = "<group>";
 		};
+		CE02DC5815AE2D1800F16FAF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CE029086159E6AD000CEF219 /* GameConstants.h */,
+				CE081664159BE73400064E04 /* IOS_Versions.h */,
+				CE081665159BE73600064E04 /* IOS_Versions.m */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		CE02DC5915AE2D3300F16FAF /* Terrain */ = {
+			isa = PBXGroup;
+			children = (
+				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
+				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
+				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
+				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
+				CE8429F5157BD0E50038C653 /* Terrain.h */,
+				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
+			);
+			name = Terrain;
+			sourceTree = "<group>";
+		};
 		CE0BD5F7158FFA3900C380CA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
@@ -1244,8 +1267,6 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
-				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
-				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
 				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
 				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
 				CE8429E4157981BB0038C653 /* ActionLayer.h */,
@@ -1254,19 +1275,12 @@
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
-				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
-				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
-				CE029086159E6AD000CEF219 /* GameConstants.h */,
 				CE412617157FF6B8001FA126 /* Background.h */,
 				CE412618157FF6B8001FA126 /* Background.m */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
 				CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */,
-				CE8429F5157BD0E50038C653 /* Terrain.h */,
-				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
-				CE081664159BE73400064E04 /* IOS_Versions.h */,
-				CE081665159BE73600064E04 /* IOS_Versions.m */,
 				CE11B18F15A68C03009B22CA /* GWWater.h */,
 				CE11B19015A68C03009B22CA /* GWWater.mm */,
 				C584A88C157D969500936109 /* GWCamera.h */,
@@ -1275,6 +1289,8 @@
 				CE22740115A0193100F3217E /* GWParticles.m */,
 				C589647615AD038E00F044D9 /* GWSkeleton.h */,
 				C589647715AD038E00F044D9 /* GWSkeleton.mm */,
+				CE02DC5815AE2D1800F16FAF /* Utils */,
+				CE02DC5915AE2D3300F16FAF /* Terrain */,
 				CE30B189158FBA12009EC82B /* Menus */,
 				CEF00102158BDCE500F7F1A8 /* Server */,
 				CEFAF06A1586B4E000F6DDF9 /* Shaders */,
@@ -2297,7 +2313,7 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
@@ -2337,7 +2353,7 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
