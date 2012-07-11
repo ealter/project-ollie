@@ -43,15 +43,15 @@ def write(filename):
     tailx = bone.tail.y
     taily = bone.tail.z
     angle = math.atan2(taily-heady, tailx-headx)
-    return {'name': bone.name,
-            'head': {'x': headx,
+    return {'head': {'x': headx,
                      'y': heady},
             'angle': angle,
             'length': bone.length}
 
   armature = bpy.data.armatures["Armature.001"]
   fp = open(filename, "w")
-  bones = list(map(getBoneInfo, armature.bones))
+  names = map(lambda x: x.name, armature.bones)
+  bones = dict(zip(names, map(getBoneInfo, armature.bones)))
   json.dump(bones, fp, separators=(',', ':'))
   fp.close()
 
