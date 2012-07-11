@@ -13,7 +13,7 @@
 @interface GWSkeleton : CCNode {
     Skeleton* _skeleton;
 }
--(id)initFromFile:(NSString*)fileName;
+-(id)initFromFile:(NSString*)fileName box2dWorld:(b2World*)world;
 -(Bone*)getBoneByName:(NSString*)bName;
 -(Skeleton*)getSkeleton;
 

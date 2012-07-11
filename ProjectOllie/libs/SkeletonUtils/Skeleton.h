@@ -16,6 +16,8 @@
 
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
+#define RAD2DEG(a) (((a) * 180.0) / M_PI)
+#define DEG2RAD(a) (((a) / 180.0) * M_PI)
 
 using namespace std;
 
@@ -30,8 +32,8 @@ struct Animation{
 struct Bone{
     
     std::string name;
-    float     x, // x coordinate
-              y, // y coordinate
+    float     x, // x coordinate of center
+              y, // y coordinate of center
               a, // angle (in radians)
               l, // length (in meters)
               w, // width (in meters)
@@ -74,7 +76,6 @@ private:
 public:
     
     //constructors with box2dworld
-    Skeleton(b2World* world, string path);
     Skeleton(b2World* world);
     ~Skeleton();
     
@@ -87,9 +88,10 @@ public:
     /* Animates, returns whether or not it is still animating */
     bool animating(Bone* root, float time);
     
-    /* Load a structure of bones from a file, returns pointer to root */
-    Bone* loadBoneStructure(string path);
+    /* Setters and getters for root of tree */
+    void setRoot(Bone* bone);
     
+    Bone* getRoot();
     
 };
 
