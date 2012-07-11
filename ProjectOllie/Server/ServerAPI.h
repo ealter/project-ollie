@@ -39,7 +39,7 @@
 }
 
 @property (nonatomic, readonly, strong) Authentication *auth;
-@property (nonatomic, assign) id<ServerAPI_delegate> delegate;
+@property (nonatomic, weak) id<ServerAPI_delegate> delegate;
 
 //Protected methods
 - (void)broadcastServerOperationSucceeded;

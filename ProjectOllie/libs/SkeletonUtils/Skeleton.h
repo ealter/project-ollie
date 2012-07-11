@@ -30,8 +30,8 @@ struct Animation{
 struct Bone{
     
     std::string name;
-    float     x, // x coordinate
-              y, // y coordinate
+    float     x, // x coordinate of center
+              y, // y coordinate of center
               a, // angle (in radians)
               l, // length (in meters)
               w, // width (in meters)
