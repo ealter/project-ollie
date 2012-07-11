@@ -45,7 +45,7 @@ def write(filename):
     angle = math.atan2(taily-heady, tailx-headx)
     return {'head': {'x': headx,'y': heady},'tail': {'x': tailx, 'y': taily},'angle': angle,'length': bone.length}
 
-  armature = bpy.data.armatures["Armature.001"]
+  armature = bpy.data.armatures["Armature"]
   fp = open(filename, "w")
   names = map(lambda x: x.name, armature.bones)
   bones = dict(zip(names, map(getBoneInfo, armature.bones)))
