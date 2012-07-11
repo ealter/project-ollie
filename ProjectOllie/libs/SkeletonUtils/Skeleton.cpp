@@ -12,16 +12,6 @@
 #include <fstream>
 #include "Skeleton.h"
 
-#define RAD2DEG(a) (((a) * 180.0) / M_PI)
-#define DEG2RAD(a) (((a) / 180.0) * M_PI)
-
-
-Skeleton::Skeleton(b2World* world, string path)
-{
-    this->root   = loadBoneStructure(path);
-    this->world  = world;
-}
-
 Skeleton::Skeleton(b2World* world)
 {
     this->root = NULL;
@@ -140,12 +130,6 @@ Bone* Skeleton::boneFreeTree(Bone *root)
 	return NULL;
 }
 
-Bone* Skeleton::loadBoneStructure(string path)
-{
-    
-    return NULL;
-}
-
 bool Skeleton::animating(Bone *root, float time)
 {
     
@@ -183,4 +167,14 @@ bool Skeleton::animating(Bone *root, float time)
 			others = true;
     
 	return others;
+}
+
+void Skeleton::setRoot(Bone *bone)
+{
+    root = bone;
+}
+
+Bone* Skeleton::getRoot()
+{
+    return root;
 }
