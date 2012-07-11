@@ -50,7 +50,7 @@ def write(filename):
             'length': bone.length,
             'children': children}
 
-  armature = bpy.data.armatures["Armature.001"]
+  armature = bpy.data.armatures["Armature"]
   bones = {bone.name: getBoneInfo(bone) for bone in armature.bones if not bone.hasParent()}
 
   fp = open(filename, "w")
