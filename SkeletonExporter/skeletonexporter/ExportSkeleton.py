@@ -38,36 +38,34 @@ from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
 def write(filename):
+  def getBoneInfo(bone):
+    headx = bone.head.y
+    heady = bone.head.z
+    tailx = bone.tail.y
+    taily = bone.tail.z
+    angle = math.atan2(taily-heady, tailx-headx)
+    return {'name': bone.name,
+            'head': {'x': headx,
+                     'y': heady},
+            'tail': {'x': tailx,
+                     'y': taily},
+            'angle': angle,
+            'length': bone.length}
+
   sce = bpy.context.scene
   armature = bpy.data.objects["Armature"]
-  framecount = 0
   start_frame, end_frame = armature.animation_data.action.frame_range
-  frames = []
-  for frame in range(int(start_frame), int(end_frame) + 1):
+  start_frame = int(start_frame)
+  end_frame   = int(end_frame)
+
+  def getFrameInfo(frame):
     sce.frame_set(frame)
-
-    #calculate and write the time of the frame
+    framecount = frame - start_frame
     time = framecount/sce.render.fps
-    framecount = framecount + 1
+    bones = list(map(getBoneInfo, armature.pose.bones))
+    return {'time': time, 'bones': bones, 'framecount': framecount}
 
-    #print out the bones' positions, angles, and lengths
-    bones = []
-    for pose_bone in armature.pose.bones:
-      #calculate bone angle and length
-      headx = pose_bone.head.y
-      heady = pose_bone.head.z
-      tailx = pose_bone.tail.y
-      taily = pose_bone.tail.z
-      angle = math.atan2(taily-heady, tailx-headx)
-      bone = {}
-      bone["head"]   = {'x': headx, 'y': heady}
-      bone["tail"]   = {'x': tailx, 'y': taily}
-      bone["angle"]  = angle
-      bone["length"] = pose_bone.length
-      bones.append(bone)
-
-    frame = {'time': time, 'bones': bones, 'framecount': framecount} #TODO: maybe include the framecount
-    frames.append(frame)
+  frames = list(map(getFrameInfo, range(start_frame, end_frame + 1)))
   fp = open(filename, "w")
   json.dump(frames, fp, separators=(',', ':'))
   fp.close()

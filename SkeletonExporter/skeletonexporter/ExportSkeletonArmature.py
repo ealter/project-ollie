@@ -29,28 +29,28 @@ bl_info = {
     "support": 'OFFICIAL',
     "category": "Import-Export"}
 
-
 import bpy
 import math
+import json
 
 from bpy.props import StringProperty, IntProperty, BoolProperty
 from bpy_extras.io_utils import ExportHelper
 
-
 def write(filename):
-	out = open(filename, "w")
-	armature = bpy.data.armatures["Armature.001"]
-	for bone in armature.bones:
-		#calculate bone angle and length
-		headx = bone.head.y
-		heady = bone.head.z
-		tailx = bone.tail.y
-		taily = bone.tail.z
-		angle = math.atan2(taily-heady, tailx-headx)
-	
-		out.write( bone.name + " head's x, y, angle, len: "+ str(round(headx, 3)) +", "+ str(round(heady, 3)) +",  ")
-		out.write( str(round(angle, 3)) + ",  " + str(round(bone.length, 3)) + "\n \n")
-	out.close()
+  def getBoneInfo(bone):
+    headx = bone.head.y
+    heady = bone.head.z
+    tailx = bone.tail.y
+    taily = bone.tail.z
+    angle = math.atan2(taily-heady, tailx-headx)
+    return {'head': {'x': headx,'y': heady},'tail': {'x': tailx, 'y': taily},'angle': angle,'length': bone.length}
+
+  armature = bpy.data.armatures["Armature.001"]
+  fp = open(filename, "w")
+  names = map(lambda x: x.name, armature.bones)
+  bones = dict(zip(names, map(getBoneInfo, armature.bones)))
+  json.dump(bones, fp, separators=(',', ':'))
+  fp.close()
 
 class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
@@ -58,7 +58,7 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
     bl_label = "Export Skeleton Properties"
     filename_ext = ".skel"
     filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
-	
+
     def execute(self, context):
         write("character.skel")
         return {'FINISHED'}

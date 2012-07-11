@@ -9,7 +9,7 @@
 #ifndef ProjectOllie_Skeleton_h
 #define ProjectOllie_Skeleton_h
 
-#include "string.h"
+#include <string>
 #include "Box2D.h"
 #include "GameConstants.h"
 
@@ -29,7 +29,7 @@ struct Animation{
 
 struct Bone{
     
-    string name;
+    std::string name;
     float     x, // x coordinate
               y, // y coordinate
               a, // angle (in radians)
