@@ -411,7 +411,7 @@
         CGPoint moveVec;
         CCNode *n = subject_;
         CCNode *p = [subject_ parent];
-        CGPoint halfScreenSize = ccp(subject_.contentSize.width/2.f,subject_.contentSize.height/2.f);
+        CGPoint halfScreenSize = ccpMult(ccpFromSize(subject_.contentSize), 0.5);
         CGPoint p1 = ccpMult(halfScreenSize, 1.f/p.scale);
         CGPoint p2 = ccpMult(self.target.position, n.scale);
         CGPoint destination = ccpSub(p1,p2);
