@@ -43,10 +43,7 @@ def write(filename):
     tailx = bone.tail.y
     taily = bone.tail.z
     angle = math.atan2(taily-heady, tailx-headx)
-    return {'head': {'x': headx,
-                     'y': heady},
-            'angle': angle,
-            'length': bone.length}
+    return {'head': {'x': headx,'y': heady},'tail': {'x': tailx, 'y': taily},'angle': angle,'length': bone.length}
 
   armature = bpy.data.armatures["Armature.001"]
   fp = open(filename, "w")
