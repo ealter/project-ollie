@@ -51,7 +51,7 @@ def write(filename):
             'children': children}
 
   armature = bpy.data.armatures["Armature"]
-  bones = {bone.name: getBoneInfo(bone) for bone in armature.bones if not bone.hasParent()}
+  bones = {bone.name: getBoneInfo(bone) for bone in armature.bones if not bone.parent}
 
   fp = open(filename, "w")
   json.dump(bones, fp, separators=(',', ':'))
