@@ -10,6 +10,7 @@
 #import "CCTextureCache.h"
 #import "CCDirector.h"
 
+const static ccColor4F kColor4fZero = {0,0,0,0};
 
 @implementation GWParticleRain
 -(id) init
@@ -53,25 +54,10 @@
 		emissionRate = totalParticles/life;
         
 		// color of particles
-		startColor.r    = 0.7f;
-		startColor.g    = 0.78f;
-		startColor.b    = 1.0f;
-		startColor.a    = 0.86f;
-        
-		startColorVar.r = 0.0f;
-		startColorVar.g = 0.0f;
-		startColorVar.b = 0.51f;
-		startColorVar.a = 0.0f;
-        
-		endColor.r      = 0.0f;
-		endColor.g      = 0.44f;
-		endColor.b      = 1.0f;
-		endColor.a      = 0.0f;
-        
-		endColorVar.r   = 0.0f;
-		endColorVar.g   = 0.0f;
-		endColorVar.b   = 0.0f;
-		endColorVar.a   = 0.0f;
+        startColor    = ccc4f(0.7, 0.78, 1.0,  0.86);
+        startColorVar = ccc4f(0.0, 0.0,  0.51, 0.0);
+        endColor      = ccc4f(0.0, 0.44, 1.0,  0.0);
+        endColorVar   = kColor4fZero;
         
 		// size, in pixels
 		startSize = 6.0f;
@@ -105,7 +91,7 @@
 		self.emitterMode = kCCParticleModeGravity;
         
 		// Gravity Mode: gravity
-		self.gravity = CGPointMake(0,0);
+		self.gravity = CGPointZero;
         
 		// Gravity Mode:  radial
 		self.radialAccel = 0;
@@ -118,7 +104,7 @@
 		// emitter position
 		CGSize winSize = [[CCDirector sharedDirector] winSize];
 		self.position = CGPointMake(winSize.width/2, winSize.height/2);
-        self.posVar = CGPointMake(0, 0);
+        self.posVar = CGPointZero;
 		// angle
 		angle = 180;
 		angleVar = 0;
@@ -130,26 +116,11 @@
 		// emits per frame
 		emissionRate = totalParticles/life;
         
-		// color of particles
-		startColor.r    = 0.0f;
-		startColor.g    = 0.05f;
-		startColor.b    = 1.0f;
-		startColor.a    = 1.0f;
-        
-		startColorVar.r = 0.0f;
-		startColorVar.g = 0.0f;
-		startColorVar.b = 0.0f;
-		startColorVar.a = 0.0f;
-        
-		endColor.r      = 0.0f;
-		endColor.g      = 0.05f;
-		endColor.b      = 1.0f;
-		endColor.a      = 1.0f;
-        
-		endColorVar.r   = 0.0f;
-		endColorVar.g   = 0.0f;
-		endColorVar.b   = 0.0f;
-		endColorVar.a   = 0.0f;
+        // color of particles
+        startColor    = ccc4f(0.0, 0.05, 1.0, 1.0);
+        startColorVar = kColor4fZero;
+        endColor      = ccc4f(0.0, 0.05, 1.0, 1.0);
+        endColorVar   = kColor4fZero;
         
 		// size, in pixels
 		startSize = 20.0f;
@@ -215,25 +186,10 @@
 		emissionRate = totalParticles/life;
         
 		// color of particles
-		startColor.r    = 0.89f;
-		startColor.g    = 0.56f;
-		startColor.b    = 0.36f;
-		startColor.a    = 1.0f;
-        
-		startColorVar.r = 0.2f;
-		startColorVar.g = 0.2f;
-		startColorVar.b = 0.2f;
-		startColorVar.a = 0.5f;
-        
-		endColor.r      = 0.0f;
-		endColor.g      = 0.0f;
-		endColor.b      = 0.0f;
-		endColor.a      = 0.84f;
-        
-		endColorVar.r   = 0.0f;
-		endColorVar.g   = 0.0f;
-		endColorVar.b   = 0.0f;
-		endColorVar.a   = 0.0f;
+        startColor    = ccc4f(0.89, 0.56, 0.36, 1.0);
+        startColorVar = ccc4f(0.2,  0.2,  0.2,  0.5);
+        endColor      = ccc4f(0.0,  0.0,  0.0,  0.84);
+        endColorVar   = kColor4fZero;
         
 		// size, in pixels
 		startSize = 34.0f;
@@ -298,25 +254,10 @@
 		emissionRate = totalParticles/life;
         
 		// color of particles
-		startColor.r    = 0.0f;
-		startColor.g    = 0.49f;
-		startColor.b    = 0.66f;
-		startColor.a    = 1.0f;
-        
-		startColorVar.r = 0.59f;
-		startColorVar.g = 0.0f;
-		startColorVar.b = 0.0f;
-		startColorVar.a = 0.0f;
-        
-		endColor.r      = 0.14f;
-		endColor.g      = 0.26f;
-		endColor.b      = 0.39f;
-		endColor.a      = 1.0f;
-        
-		endColorVar.r   = 0.0f;
-		endColorVar.g   = 0.0f;
-		endColorVar.b   = 0.0f;
-		endColorVar.a   = 0.0f;
+        startColor    = ccc4f(0.0,  0.49, 0.66, 1.0);
+        startColorVar = ccc4f(0.59, 0.0,  0.0,  0.0);
+        endColor      = ccc4f(0.14, 0.26, 0.39, 1.0);
+        endColorVar   = kColor4fZero;
         
 		// size, in pixels
 		startSize = 0.0f;
@@ -383,25 +324,10 @@
 		emissionRate = totalParticles/life;
         
 		// color of particles
-		startColor.r    = 0.52f;
-		startColor.g    = 0.35f;
-		startColor.b    = 0.0f;
-		startColor.a    = 0.35f;
-        
-		startColorVar.r = 0.0f;
-		startColorVar.g = 0.0f;
-		startColorVar.b = 0.0f;
-		startColorVar.a = 0.0f;
-        
-		endColor.r      = 1.0f;
-		endColor.g      = 0.0f;
-		endColor.b      = 0.0f;
-		endColor.a      = 0.73f;
-        
-		endColorVar.r   = 0.0f;
-		endColorVar.g   = 0.0f;
-		endColorVar.b   = 0.0f;
-		endColorVar.a   = 0.0f;
+        startColor    = ccc4f(0.52, 0.35, 0.0, 0.35);
+        startColorVar = kColor4fZero;
+        endColor      = ccc4f(1.0,  0.0,  0.0, 0.73);
+        endColorVar   = kColor4fZero;
         
 		// size, in pixels
 		startSize = 20.0f;
