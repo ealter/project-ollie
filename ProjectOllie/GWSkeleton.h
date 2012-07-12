@@ -7,8 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#include "Skeleton.h"
+#import "CCNode.h"
+
+class Skeleton;
+struct Bone;
+class b2World;
 
 @interface GWSkeleton : CCNode {
     Skeleton* _skeleton;

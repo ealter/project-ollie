@@ -10,17 +10,16 @@
 #define ProjectOllie_Skeleton_h
 
 #include <string>
-#include "Box2D.h"
-#include "GameConstants.h"
 #include <vector>
 #include <queue>
 
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
 
-using namespace std;
 class b2Body;
 class b2World;
+
+using std::string;
 
 struct KeyFrame{
     float angle, time, x, y;
@@ -40,9 +39,9 @@ struct Bone{
   jointAngleMax, // joint angle maximum limit
   jointAngleMin; // joint angle minimum limit
         
-    vector<Bone*>     children;
-    Bone*             parent;
-    queue<KeyFrame*>  animation;
+    std::vector<Bone*>    children;
+    Bone*                 parent;
+    std::queue<KeyFrame*> animation;
 
     //every bone is a body with a joint
     //the joint is where it attaches to it's parent
