@@ -9,6 +9,7 @@
 #import "ServerAPI.h"
 #import "Authentication.h"
 #import "NSDictionary+URLEncoding.h"
+#import "SBJsonParser.h"
 
 @implementation ServerAPI
 
@@ -64,7 +65,8 @@
         return;
     }
     NSError *error = nil;
-    NSDictionary *result = [NSJSONSerialization JSONObjectWithData:data_ options:kNilOptions error:&error];
+    NSString *dataStr = [[NSString alloc] initWithData:data_ encoding:NSUTF8StringEncoding];
+    NSDictionary *result = [[[SBJsonParser alloc] init] objectWithString:dataStr];
     if(error) {
         DebugLog(@"Error when communicating with server (%@): %@", [self class], error);
         [self broadcastServerOperationFailedWithError:@"Internal server error"];
