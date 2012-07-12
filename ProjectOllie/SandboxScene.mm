@@ -13,8 +13,7 @@
 #import "Background.h"
 #import "RippleEffect.h"
 
-@implementation SandboxScene
-{
+@implementation SandboxScene {
     RippleEffect *ripple;
 }
 @synthesize actionLayer = _actionLayer;
@@ -22,7 +21,6 @@
 -(id) init
 {
     if (self = [super init]) {
-        
         /* Set up action layer (where action occurs */
         self.actionLayer = [ActionLayer node];
         Background *blayer = [[Background node] initWithSpeed:30.0 images:[NSArray arrayWithObject:@"background.jpg"]];
@@ -39,13 +37,8 @@
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
         [self addChild:backnode];
         [self reorderChild:backnode z:1000];
-        
-        
-        
-
     }
     return self;
 }
-
 
 @end
