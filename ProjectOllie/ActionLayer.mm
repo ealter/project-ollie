@@ -23,7 +23,7 @@ enum {
 
 @interface ActionLayer()
 {
-
+    GWSkeleton* gwskel;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -162,18 +162,11 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     
-    GWSkeleton* gwskel = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
+    gwskel = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
     Skeleton* skeleton = [gwskel getSkeleton];
     CCLOG(@"PRINTING SKELETON TREE!");
     skeleton->boneDumpTree(skeleton->getRoot(), 0);
-    b2Body* node = world->GetBodyList();
-    int counter = 0;
-    while(node)
-    {
-        node = node->GetNext();
-        counter++;
-    }
-    CCLOG(@"NUMBER OF BODIES IN WORLD: %d",counter); 
+
 }
 
 -(void) draw
@@ -314,7 +307,7 @@ enum {
      */
     
 	[self.camera update:dt];
-    //[self updateParallax];
+    [gwskel update:dt];
 
 }
 

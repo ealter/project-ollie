@@ -15,10 +15,19 @@
 using namespace std;
 
 @interface GWSkeleton(){
-    
+    float timeElapsed;
 }
+//Master function for loading file information for skeleton (.skel) files
 -(void)buildSkeletonFromFile:(NSString*)fileName;
+
+//Recursive helper function for building tree of bones
 -(void)assembleSkeleton:(NSArray*)currentBoneArray parentBone:(Bone*)parent;
+
+//Master function for loading file information for animation (.anim) files
+-(void)buildAnimationFromFile:(NSString*)fileName;
+
+//Helper function for attaching animations to bones
+-(void)assembleAnimation:(NSArray*)frames;
 @end
 
 @implementation GWSkeleton
@@ -26,10 +35,21 @@ using namespace std;
 -(id)initFromFile:(NSString*)fileName box2dWorld:(b2World *)world{
     if((self = [super init])){
         
-        _skeleton = new Skeleton(world);
+        timeElapsed = 0;
+        _skeleton   = new Skeleton(world);
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"]; 
         [self buildSkeletonFromFile:filePath];
+        
+        //if the above worked...
+        if(_skeleton->getRoot()){
+            filePath           = [[NSBundle mainBundle] pathForResource:fileName ofType:@"anim"];
+            [self buildAnimationFromFile:filePath];
+        }
+        else{
+            CCLOG(@"ERROR BUILDING SKELETONS. ABANDON ALL HOPE!");
+        }
+
     }
     return self;
 }
@@ -44,12 +64,13 @@ using namespace std;
     }
     NSArray* skeletonArray = [NSJSONSerialization JSONObjectWithData:skelData options:kNilOptions error:&error];
     if(error) {
-        DebugLog(@"Error creating dictionary from file (%@): %@", [self class], error);
+        DebugLog(@"Error creating array from file (%@): %@", [self class], error);
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
 }
 
+/* recursively assembles the bone tree imported from blender*/
 -(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
     
     CGPoint absoluteLocation = ccp(100.0,200.0);
@@ -85,7 +106,7 @@ using namespace std;
         bone->jointAngleMin        = jointAngleMin;
         bone->jx                   = headLoc.x;
         bone->jy                   = headLoc.y;
-        bone->name                 = [[currentBone objectForKey:@"name"] UTF8String];
+        bone->name                 = string([[currentBone objectForKey:@"name"] UTF8String]);
         bone->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
         bone->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
         bone->w                    = .6f;
@@ -98,12 +119,65 @@ using namespace std;
     }
 }
 
+-(void)buildAnimationFromFile:(NSString *)fileName{
+    
+    NSError* error = nil;
+    NSData* animData = [NSData dataWithContentsOfFile:fileName options:kNilOptions error:&error];
+    if(error) {
+        DebugLog(@"Error reading animation file (%@): %@", [self class], error);
+    }
+    NSArray* animArray = [NSJSONSerialization JSONObjectWithData:animData options:kNilOptions error:&error];
+    if(error) {
+        DebugLog(@"Error creating array from file (%@): %@", [self class], error);
+    }
+    [self assembleAnimation:animArray];
+
+}
+
+-(void)assembleAnimation:(NSArray *)frames{
+    
+    Bone* root = _skeleton->getRoot();
+    for (NSDictionary* frame in frames) {
+        
+        //get universal frame data
+        float time           = [(NSNumber*)[frame objectForKey:@"time"] floatValue];
+        //float frameCount     = [(NSNumber*)[frame objectForKey:@"framecount"] floatValue];
+        NSArray* bones       = [frame objectForKey:@"bones"];
+        
+        for (NSDictionary* bone in bones) {
+            
+            //get bone specific values
+            KeyFrame* key   = new KeyFrame;
+            string name = [(NSString*)[bone objectForKey:@"name"] UTF8String];
+            float angle = [(NSNumber*)[bone objectForKey:@"angle"] floatValue];
+            
+            //assign bone specific values
+            key->angle = angle;
+            key->time  = time;
+            
+            //access current bone from tree and put animation there
+            Bone* currentBone = _skeleton->getBoneByName(root, name);
+            currentBone->animation.push(key);
+            
+        }
+        
+    }
+}
+
 -(Bone*)getBoneByName:(NSString*)bName{
     
-    return nil;
+    string name = string([bName UTF8String]);
+    return _skeleton->getBoneByName(_skeleton->getRoot(), name);
+    
 }
 -(Skeleton*)getSkeleton{
     return _skeleton;
+}
+
+-(void)update:(float)dt{
+    
+    timeElapsed += dt;
+    _skeleton->animating(_skeleton->getRoot(), timeElapsed);
 }
 
 @end

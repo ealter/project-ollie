@@ -13,6 +13,7 @@
 #include "Box2D.h"
 #include "GameConstants.h"
 #include <vector>
+#include <queue>
 
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
@@ -23,10 +24,6 @@ class b2World;
 
 struct KeyFrame{
     float angle, time;
-};
-
-struct Animation{
-    vector<KeyFrame> keyFrames;
 };
 
 struct Bone{
@@ -43,9 +40,9 @@ struct Bone{
   jointAngleMax, // joint angle maximum limit
   jointAngleMin; // joint angle minimum limit
         
-    vector<Bone*>    children;
-    Bone*            parent;
-    Animation*       animation;
+    vector<Bone*>     children;
+    Bone*             parent;
+    queue<KeyFrame*>  animation;
 
     //every bone is a body with a joint
     //the joint is where it attaches to it's parent
@@ -74,7 +71,7 @@ public:
     Bone* findBoneByName(Bone* root, string name);
     
     /* Add a bone as a child of another bone, or as a child of nil (therefore the root) */
-    Bone* boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim);
+    Bone* boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin);
     
     Bone* boneAddChild(Bone *root, Bone* child);
     
@@ -87,6 +84,10 @@ public:
     /* Setters and getters for root of tree */
     void setRoot(Bone* bone);
     
+    /* Searches for specific name. Have to use string comparisons...maybe need better data structure */
+    Bone* getBoneByName(Bone* root, string name);
+    
+    /* Fetches root for traverals */
     Bone* getRoot();
 };
 

@@ -26,7 +26,7 @@ Skeleton::~Skeleton()
     this->boneFreeTree(this->root);
 }
 
-Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim)
+Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin)
 {
    
     Bone *t = new Bone;
@@ -42,7 +42,6 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
     t->jointAngleMin = jaMin;
     t->jx            = jx;
     t->jy            = jy;
-    t->animation     = anim;
     
     return boneAddChild(root, t);
     
@@ -121,7 +120,7 @@ void Skeleton::boneDumpTree(Bone *root, int level)
     
 	/* Now print animation info */
 	/*for (int i = 0; i < root->keyFrameCount; i++)
-		printf(" %4.4f %4.4f", root->animation->keyframes[i].time, root->animation->keyframes[i].angle);
+		printf(" %4.4f %4.4f", root->animation[i].time, root->animation[i].angle);
 	printf("\n");*/
     
 	/* Recursively call this on children */
@@ -144,41 +143,40 @@ Bone* Skeleton::boneFreeTree(Bone *root)
 
 bool Skeleton::animating(Bone *root, float time)
 {
-    
-    bool others = false;
-    
+        
 	float adiff,
     tdiff;
     
+    
+    KeyFrame* key = root->animation.front();
 	/* Check for keyframes */
-	for (int i = 0; i < root->animation->keyFrames.size(); i++)
-		if (root->animation->keyFrames[i].time == time)
+    if (!root->animation.empty()) 
+    {
+		if (key->time >= time)
 		{
 			/* Find the index for the interpolation */
-			if (i != root->animation->keyFrames.size() - 1)
-			{
-				tdiff = root->animation->keyFrames.at(i + 1).time - root->animation->keyFrames.at(i).time;
-				adiff = root->animation->keyFrames.at(i + 1).angle - root->animation->keyFrames.at(i).angle;
-                
-				root->offA = adiff / tdiff;
-			}
-			else
-			{
-				root->offA = 0;
-			}
-		}
-		else if (root->animation->keyFrames.at(i).time > time)
-			others = true;
+            tdiff = key->time - time;
+            adiff = key->angle - root->a;
+            root->offA = adiff / tdiff;
+            if(abs(root->offA) > 0)
+                DebugLog("The angle difference for %s is: %f",root->name.c_str(),root->offA);
+        }
+        else
+        {
+            root->offA = 0;
+        }
+        root->animation.pop();
+    
 	
 	/* Change animation */
 	root->a += root->offA;
-    
+    root->box2DBody->SetTransform(root->box2DBody->GetPosition(), root->a);
+    }
 	/* Call on other bones */
 	for (int i = 0; i < root->children.size(); i++)
-		if (animating(root->children.at(i), time))
-			others = true;
+		animating(root->children.at(i), time);
     
-	return others;
+	return true;
 }
 
 void Skeleton::setRoot(Bone *bone)
@@ -189,4 +187,19 @@ void Skeleton::setRoot(Bone *bone)
 Bone* Skeleton::getRoot()
 {
     return root;
+}
+
+Bone* Skeleton::getBoneByName(Bone* root, string name){
+    
+    if(!root->name.compare(name))
+    {
+        return root;
+    }
+    for (int i = 0; i < root->children.size(); i++) {
+        Bone* child = this->getBoneByName(root->children.at(i),name);
+        if(child)
+            return child;
+    }
+    
+    return NULL;
 }
