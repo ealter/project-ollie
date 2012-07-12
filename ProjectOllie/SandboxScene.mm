@@ -25,7 +25,7 @@
         
         /* Set up action layer (where action occurs */
         self.actionLayer = [ActionLayer node];
-        Background *blayer = [[Background node] initWithSpeed:30.0 images:[NSArray arrayWithObject:@"background_layer1_middleplants.png"]];
+        Background *blayer = [[Background node] initWithSpeed:30.0 images:[NSArray arrayWithObject:@"background.jpg"]];
         [self.actionLayer.camera.children addObject:blayer];
         
         CCNode* actionNode = [CCNode node];

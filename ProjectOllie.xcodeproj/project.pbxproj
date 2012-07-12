@@ -35,8 +35,6 @@
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C587305115AE81F30081520F /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C587305015AE81F30081520F /* character.skel */; };
 		C587305515AEE1FB0081520F /* character.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587305415AEE1FB0081520F /* character.anim */; };
-		C587306015AF82B70081520F /* characternew.skel in Resources */ = {isa = PBXBuildFile; fileRef = C587305F15AF82B70081520F /* characternew.skel */; };
-		C587306215AF82BF0081520F /* characternew.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587306115AF82BF0081520F /* characternew.anim */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = C589647715AD038E00F044D9 /* GWSkeleton.mm */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -72,6 +70,8 @@
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
 		CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E915A6779E00A087F6 /* PasswordChanger.m */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
+		CE2E840415AF9157000372BE /* characternew.skel in Resources */ = {isa = PBXBuildFile; fileRef = C587305F15AF82B70081520F /* characternew.skel */; };
+		CE2E840515AF9160000372BE /* characternew.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587306115AF82BF0081520F /* characternew.anim */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
 		CE30B196158FBA34009EC82B /* LoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18F158FBA34009EC82B /* LoginScreen.m */; };
@@ -2103,6 +2103,8 @@
 				CEEEE5F415AE2828000A3497 /* leaf5-hd.png in Resources */,
 				C587305115AE81F30081520F /* character.skel in Resources */,
 				C587305515AEE1FB0081520F /* character.anim in Resources */,
+				CE2E840415AF9157000372BE /* characternew.skel in Resources */,
+				CE2E840515AF9160000372BE /* characternew.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2392,7 +2394,7 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
@@ -2433,7 +2435,7 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
