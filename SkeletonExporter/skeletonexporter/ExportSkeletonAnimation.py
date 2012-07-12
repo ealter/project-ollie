@@ -74,11 +74,13 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
     bl_idname = "skeleton_animation.cameras"
     bl_label = "Export Skeleton Animation Properties"
-    filename_ext = ".anim"
+    filename_ext = ".skel"
     filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
 
     def execute(self, context):
-        write("characteranimation.skel")
+        filepath = self.filepath
+        filepath = bpy.path.ensure_ext(filepath, self.filename_ext)
+        write(filepath)        
         return {'FINISHED'}
 
     def invoke(self, context, event):

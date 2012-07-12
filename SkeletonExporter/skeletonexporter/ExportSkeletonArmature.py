@@ -66,7 +66,9 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
     filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
 
     def execute(self, context):
-        write("character.skel")
+        filepath = self.filepath
+        filepath = bpy.path.ensure_ext(filepath, self.filename_ext)
+        write(filepath)
         return {'FINISHED'}
 
     def invoke(self, context, event):
@@ -80,7 +82,7 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
 def menu_export(self, context):
     import os
     default_path = os.path.splitext(bpy.data.filepath)[0] + ".skel"
-    self.layout.operator(SkeletonExporter.bl_idname, text="Skeletons Armiture (.skel)").filepath = default_path
+    self.layout.operator(SkeletonExporter.bl_idname, text="Skeletons Armature (.skel)").filepath = default_path
 
 
 def register():
