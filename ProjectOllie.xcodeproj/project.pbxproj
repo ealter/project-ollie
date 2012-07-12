@@ -14,7 +14,6 @@
 		C52986B71578A43300656B50 /* CCControlSaturationBrightnessPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986921578A43300656B50 /* CCControlSaturationBrightnessPicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986B81578A43300656B50 /* CCControlSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986941578A43300656B50 /* CCControlSlider.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986B91578A43300656B50 /* CCControlSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = C52986961578A43300656B50 /* CCControlSwitch.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		C52986BA1578A43300656B50 /* CCControlSwitchMask.fsh in Sources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986BB1578A43300656B50 /* CCColourUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C529869B1578A43300656B50 /* CCColourUtils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986BC1578A43300656B50 /* CCScale9Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = C529869D1578A43300656B50 /* CCScale9Sprite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986BD1578A43300656B50 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = C529869F1578A43300656B50 /* Utils.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -43,6 +42,7 @@
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
+		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
@@ -1942,6 +1942,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */,
 				CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */,
 				CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */,
 				C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */,
@@ -2184,7 +2185,6 @@
 				C52986B71578A43300656B50 /* CCControlSaturationBrightnessPicker.m in Sources */,
 				C52986B81578A43300656B50 /* CCControlSlider.m in Sources */,
 				C52986B91578A43300656B50 /* CCControlSwitch.m in Sources */,
-				C52986BA1578A43300656B50 /* CCControlSwitchMask.fsh in Sources */,
 				C52986BB1578A43300656B50 /* CCColourUtils.m in Sources */,
 				C52986BC1578A43300656B50 /* CCScale9Sprite.m in Sources */,
 				C52986BD1578A43300656B50 /* Utils.m in Sources */,
