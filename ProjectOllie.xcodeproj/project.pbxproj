@@ -70,10 +70,6 @@
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
 		CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E915A6779E00A087F6 /* PasswordChanger.m */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
-		CE2E83FB15AF7718000372BE /* background_layer1_middleplants.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2E83F715AF7718000372BE /* background_layer1_middleplants.png */; };
-		CE2E83FC15AF7718000372BE /* background_layer1_rocksleaves.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2E83F815AF7718000372BE /* background_layer1_rocksleaves.png */; };
-		CE2E83FD15AF7718000372BE /* background_layer1_tree.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2E83F915AF7718000372BE /* background_layer1_tree.png */; };
-		CE2E83FE15AF7718000372BE /* background_layer1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2E83FA15AF7718000372BE /* background_layer1.png */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
 		CE30B196158FBA34009EC82B /* LoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18F158FBA34009EC82B /* LoginScreen.m */; };
@@ -439,10 +435,6 @@
 		CE2544E815A6779D00A087F6 /* PasswordChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChanger.h; path = ProjectOllie/Server/PasswordChanger.h; sourceTree = "<group>"; };
 		CE2544E915A6779E00A087F6 /* PasswordChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChanger.m; path = ProjectOllie/Server/PasswordChanger.m; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = Resources/NewAccountMenu.ccbi; sourceTree = "<group>"; };
-		CE2E83F715AF7718000372BE /* background_layer1_middleplants.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_layer1_middleplants.png; path = Resources/backgrounds/background_layer1_middleplants.png; sourceTree = "<group>"; };
-		CE2E83F815AF7718000372BE /* background_layer1_rocksleaves.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_layer1_rocksleaves.png; path = Resources/backgrounds/background_layer1_rocksleaves.png; sourceTree = "<group>"; };
-		CE2E83F915AF7718000372BE /* background_layer1_tree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_layer1_tree.png; path = Resources/backgrounds/background_layer1_tree.png; sourceTree = "<group>"; };
-		CE2E83FA15AF7718000372BE /* background_layer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background_layer1.png; path = Resources/backgrounds/background_layer1.png; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
 		CE30B18C158FBA34009EC82B /* DrawMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawMenu.h; path = menus/DrawMenu.h; sourceTree = "<group>"; };
@@ -1232,10 +1224,6 @@
 		CE2E83F615AF76F1000372BE /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
-				CE2E83F715AF7718000372BE /* background_layer1_middleplants.png */,
-				CE2E83F815AF7718000372BE /* background_layer1_rocksleaves.png */,
-				CE2E83F915AF7718000372BE /* background_layer1_tree.png */,
-				CE2E83FA15AF7718000372BE /* background_layer1.png */,
 				CE123C4C158811DC003AD813 /* background.jpg */,
 			);
 			name = Backgrounds;
@@ -2109,10 +2097,6 @@
 				CEEEE5F415AE2828000A3497 /* leaf5-hd.png in Resources */,
 				C587305115AE81F30081520F /* character.skel in Resources */,
 				C587305515AEE1FB0081520F /* character.anim in Resources */,
-				CE2E83FB15AF7718000372BE /* background_layer1_middleplants.png in Resources */,
-				CE2E83FC15AF7718000372BE /* background_layer1_rocksleaves.png in Resources */,
-				CE2E83FD15AF7718000372BE /* background_layer1_tree.png in Resources */,
-				CE2E83FE15AF7718000372BE /* background_layer1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
