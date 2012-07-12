@@ -10,7 +10,7 @@
 
 
 //BLENDER TO METER RATIO
-#define BTM_RATIO 40.0
+#define BTM_RATIO 6.0
 
 using namespace std;
 
@@ -37,7 +37,7 @@ using namespace std;
     if((self = [super init])){
         
         timeElapsed = 0;
-        absoluteLocation = ccp(100.0,50.0);
+        absoluteLocation = ccp(100.0,200.0);
         _skeleton   = new Skeleton(world);
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"]; 
@@ -110,7 +110,7 @@ using namespace std;
         bone->name                 = string([[currentBone objectForKey:@"name"] UTF8String]);
         bone->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
         bone->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-        bone->w                    = .6f;
+        bone->w                    = 4.f;
         
         _skeleton->boneAddChild(parent, bone);
         

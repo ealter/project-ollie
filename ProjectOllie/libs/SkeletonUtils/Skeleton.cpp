@@ -71,10 +71,10 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     
     /* Body definition */
     bd.type = b2_dynamicBody;
-    bd.gravityScale = 0;
-    bd.linearDamping = 1.f;
-    bd.angularDamping = 1.f;
-
+    bd.gravityScale = 1.;
+    bd.linearDamping = .1f;
+    bd.angularDamping = .1f;
+    
     box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
@@ -90,8 +90,6 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     root->box2DBody = boneShape;
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
-    boneShape->SetAngularVelocity(0);
-    boneShape->SetFixedRotation(true);
     
     /* Joint definition */
     if(root->parent)
@@ -191,39 +189,48 @@ bool Skeleton::animating(Bone *root, float time)
 	/* Check for current keyframe */
     if (!root->animation.empty()) 
     {
+        float currentX = root->x;
+        float currentY = root->y;
         //not a key frame, so interpolation
         if(key->time > time)
         {
             //interpolate
             float timeDiff  = (key->time - time)*60.f;
             float angleDiff = key->angle - root->a;
-            
+            float xDiff     = key->x - root->x;
+            float yDiff     = key->y - root->y;
+          /*  
+            angleDiff /= timeDiff;
+            xDiff     /= timeDiff;
+            yDiff     /= timeDiff;
+            root->x += xDiff;
+            root->y += yDiff;
+            root->a += angleDiff;*/
             
         }
         else // keyframe, so set it's values
         while (key->time <= time)
 		{
             anim = true;
-			/* Find the index for the interpolation */
             root->a = key->angle;
             root->x = key->x;
             root->y = key->y;
             /* Change animation */
-            //root->a += root->offA;
-            root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO), root->a);
-            root->box2DBody->SetAngularVelocity(0);
-            root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
             root->animation.pop();
-            
             if(root->animation.empty())break;
             key = root->animation.front();
+            
         }
-        
-        
+        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO + currentX/PTM_RATIO,root->y/PTM_RATIO + currentY/PTM_RATIO), root->a);
+        root->box2DBody->SetAngularVelocity(0);
     }
     else{
         anim = false;
     }
+    
+
+
+    
 	/* Call on other bones */
 	for (int i = 0; i < root->children.size(); i++)
 		if(animating(root->children.at(i), time))
