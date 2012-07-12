@@ -13,6 +13,7 @@
 #import "Authentication.h"
 #import "FacebookLogin.h"
 #import "Facebook.h"
+#import "GameConstants.h"
 
 @implementation AppController
 
@@ -44,7 +45,7 @@
     self.director.displayStats = YES;
 	
 	// set FPS at 60
-    self.director.animationInterval = 1.0/60;
+    self.director.animationInterval = 1.0/FPS;
 	
 	// attach the openglView to the director
     self.director.view = glView;

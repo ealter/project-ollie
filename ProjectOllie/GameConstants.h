@@ -2,6 +2,7 @@
 #define ProjectOllie_GameContants_h
 
 #define PTM_RATIO 32
+#define FPS 60
 
 #define CATEGORY_BONES       0x0001 // 0000000000000001 in binary
 #define CATEGORY_TERRAIN     0x0002 // 0000000000000010 in binary

@@ -11,7 +11,7 @@
 #import "CCShaderCache.h"
 #import "CCGLProgram.h"
 #import "CCActionCatmullRom.h"
-
+#import "cocos2d.h"
 #import "GameConstants.h"
 
 #define pointCount 256
