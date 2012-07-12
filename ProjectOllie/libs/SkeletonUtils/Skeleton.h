@@ -17,9 +17,6 @@
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
 
-#define RAD2DEG(a) (((a) * 180.0) / M_PI)
-#define DEG2RAD(a) (((a) / 180.0) * M_PI)
-
 using namespace std;
 class b2Body;
 class b2World;

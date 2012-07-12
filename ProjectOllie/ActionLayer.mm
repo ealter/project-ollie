@@ -128,7 +128,7 @@ enum {
 
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
-    //		flags += b2Draw::e_jointBit;
+    		flags += b2Draw::e_jointBit;
     //		flags += b2Draw::e_aabbBit;
     //		flags += b2Draw::e_pairBit;
     //		flags += b2Draw::e_centerOfMassBit;
@@ -157,6 +157,8 @@ enum {
     fixtureDef.shape = &dynamicBox;	
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+    fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
     
     
@@ -237,6 +239,8 @@ enum {
     fixtureDef.shape = &dynamicBox;	
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+    fixtureDef.filter.maskBits = MASK_TERRAIN;
     body->CreateFixture(&fixtureDef);
 
 }
@@ -271,6 +275,8 @@ enum {
     fixtureDef.shape = &dynamicBox;	
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
+    fixtureDef.filter.maskBits = MASK_PROJECTILES;
     body->CreateFixture(&fixtureDef);
    
     [sprite setPhysicsBody:body];

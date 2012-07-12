@@ -73,26 +73,31 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     /* Body definition */
     bd.type = b2_dynamicBody;
     bd.gravityScale = 0;
-    box.SetAsBox(root->l/PTM_RATIO,root->w/PTM_RATIO);
+    box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.4f;
     fixtureDef.restitution = 0.1f;
+    fixtureDef.filter.categoryBits = CATEGORY_BONES;
+    fixtureDef.filter.maskBits = MASK_BONES;
     bd.position.Set(root->x/PTM_RATIO, root->y/PTM_RATIO);
     b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
     root->box2DBody = boneShape;
     
+    boneShape->SetTransform(boneShape->GetPosition(), root->a);
+    
     
     /* Joint definition */
     if(root->parent)
     {
-       // jointDef.enableLimit = true;
-       // jointDef.upperAngle  = root->jointAngleMax;
-       // jointDef.upperAngle  = root->jointAngleMin;
-        jointDef.referenceAngle = 0;
-        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->parent->jx,root->parent->jy));
-        world->CreateJoint(&jointDef);
+        jointDef.enableLimit = true;
+        jointDef.upperAngle  = root->jointAngleMax;
+        jointDef.lowerAngle  = root->jointAngleMin;
+        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx/PTM_RATIO,root->jy/PTM_RATIO));
+       // jointDef.referenceAngle = abs(root->a - root->parent->a);
+        b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+        DebugLog("The angle between these two bodies are: %4.4f", j->GetJointAngle());
     }
     
     
@@ -108,7 +113,11 @@ void Skeleton::boneDumpTree(Bone *root, int level)
 	for (int i = 0; i < level; i++)
 		printf("#"); /* We print # to signal the level of this bone. */
     
-	printf("Name:%s X: %4.4f Y: %4.4f JX: %4.4f JY: %4.4f Ang: %4.4f \n",root->name.c_str(), root->x, root->y, root->jx, root->jy, root->a);
+    string pname = "none";
+    if(root->parent)
+        pname = root->parent->name;
+    
+	printf("Name:%s X: %4.4f Y: %4.4f JX: %4.4f JY: %4.4f Ang: %4.4f %s \n",root->name.c_str(), root->x, root->y, root->jx, root->jy, root->a, pname.c_str());
     
 	/* Now print animation info */
 	/*for (int i = 0; i < root->keyFrameCount; i++)

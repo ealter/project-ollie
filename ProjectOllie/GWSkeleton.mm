@@ -10,7 +10,7 @@
 
 
 //BLENDER TO METER RATIO
-#define BTM_RATIO 10.0
+#define BTM_RATIO 6.0
 
 using namespace std;
 
@@ -53,8 +53,8 @@ using namespace std;
 -(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
     
     CGPoint absoluteLocation = ccp(100.0,200.0);
-    float jointAngleMax = DEG2RAD(180.0);
-    float jointAngleMin = -DEG2RAD(90.0);
+    float jointAngleMax = DEG2RAD(45.0);
+    float jointAngleMin = -DEG2RAD(0.0);
     CGPoint headLoc;
     CGPoint tailLoc;
     CGPoint averageLoc;
@@ -88,7 +88,7 @@ using namespace std;
         bone->name                 = [[currentBone objectForKey:@"name"] UTF8String];
         bone->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
         bone->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-        bone->w                    = 2.0;
+        bone->w                    = .6f;
         
         _skeleton->boneAddChild(parent, bone);
         
