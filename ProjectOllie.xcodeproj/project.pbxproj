@@ -35,6 +35,8 @@
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C587305115AE81F30081520F /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C587305015AE81F30081520F /* character.skel */; };
 		C587305515AEE1FB0081520F /* character.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587305415AEE1FB0081520F /* character.anim */; };
+		C587305B15AF7FEA0081520F /* characternew.skel in Resources */ = {isa = PBXBuildFile; fileRef = C587305A15AF7FEA0081520F /* characternew.skel */; };
+		C587305E15AF7FF30081520F /* characternew.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587305D15AF7FF30081520F /* characternew.anim */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = C589647715AD038E00F044D9 /* GWSkeleton.mm */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -377,6 +379,8 @@
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C587305015AE81F30081520F /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
 		C587305415AEE1FB0081520F /* character.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.anim; sourceTree = "<group>"; };
+		C587305A15AF7FEA0081520F /* characternew.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = characternew.skel; sourceTree = "<group>"; };
+		C587305D15AF7FF30081520F /* characternew.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = characternew.anim; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C589647615AD038E00F044D9 /* GWSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSkeleton.h; sourceTree = "<group>"; };
@@ -1073,6 +1077,7 @@
 			isa = PBXGroup;
 			children = (
 				C587305415AEE1FB0081520F /* character.anim */,
+				C587305D15AF7FF30081520F /* characternew.anim */,
 			);
 			name = Animations;
 			sourceTree = "<group>";
@@ -1080,6 +1085,7 @@
 		C5F95E1115ACF98F005D6B59 /* Armatures */ = {
 			isa = PBXGroup;
 			children = (
+				C587305A15AF7FEA0081520F /* characternew.skel */,
 				C587305015AE81F30081520F /* character.skel */,
 			);
 			name = Armatures;
@@ -2113,6 +2119,8 @@
 				CE2E83FC15AF7718000372BE /* background_layer1_rocksleaves.png in Resources */,
 				CE2E83FD15AF7718000372BE /* background_layer1_tree.png in Resources */,
 				CE2E83FE15AF7718000372BE /* background_layer1.png in Resources */,
+				C587305B15AF7FEA0081520F /* characternew.skel in Resources */,
+				C587305E15AF7FF30081520F /* characternew.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

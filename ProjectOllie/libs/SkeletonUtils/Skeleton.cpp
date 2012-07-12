@@ -191,6 +191,16 @@ bool Skeleton::animating(Bone *root, float time)
 	/* Check for current keyframe */
     if (!root->animation.empty()) 
     {
+        //not a key frame, so interpolation
+        if(key->time > time)
+        {
+            //interpolate
+            float timeDiff  = (key->time - time)*60.f;
+            float angleDiff = key->angle - root->a;
+            
+            
+        }
+        else // keyframe, so set it's values
         while (key->time <= time)
 		{
             anim = true;
@@ -208,6 +218,7 @@ bool Skeleton::animating(Bone *root, float time)
             if(root->animation.empty())break;
             key = root->animation.front();
         }
+        
         
     }
     else{
