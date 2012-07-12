@@ -73,7 +73,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     /* Body definition */
     bd.type = b2_dynamicBody;
     bd.gravityScale = 0;
-    box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO);
+    box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.4f;
