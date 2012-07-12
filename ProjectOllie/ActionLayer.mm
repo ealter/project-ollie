@@ -13,7 +13,7 @@
 #import "MaskedSprite.h"
 #import "RippleEffect.h"
 #import "GameConstants.h"
-
+#import "GWSkeleton.h"
 #define kTagPoly 10
 #define kTagBox 20
 
@@ -158,6 +158,20 @@ enum {
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
     groundBody->CreateFixture(&fixtureDef);
+    
+    
+    GWSkeleton* gwskel = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
+    Skeleton* skeleton = [gwskel getSkeleton];
+    CCLOG(@"PRINTING SKELETON TREE!");
+    skeleton->boneDumpTree(skeleton->getRoot(), 0);
+    b2Body* node = world->GetBodyList();
+    int counter = 0;
+    while(node)
+    {
+        node = node->GetNext();
+        counter++;
+    }
+    CCLOG(@"NUMBER OF BODIES IN WORLD: %d",counter); 
 }
 
 -(void) draw

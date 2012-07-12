@@ -40,6 +40,8 @@
         [self addChild:backnode];
         [self reorderChild:backnode z:1000];
         
+        
+        
 
     }
     return self;

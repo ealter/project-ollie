@@ -12,7 +12,7 @@
 #include <string>
 #include "Box2D.h"
 #include "GameConstants.h"
-
+#include <vector>
 
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
@@ -26,12 +26,12 @@ struct KeyFrame{
 };
 
 struct Animation{
-    KeyFrame keyframes[MAX_KFCOUNT];
+    vector<KeyFrame> keyFrames;
 };
 
 struct Bone{
     
-    std::string name;
+    string name;
     float     x, // x coordinate of center
               y, // y coordinate of center
               a, // angle (in radians)
@@ -43,11 +43,7 @@ struct Bone{
   jointAngleMax, // joint angle maximum limit
   jointAngleMin; // joint angle minimum limit
         
-
-    
-    int              childCount;
-    int              keyFrameCount;
-    Bone*            children[MAX_CHCOUNT];
+    vector<Bone*>    children;
     Bone*            parent;
     Animation*       animation;
 
@@ -65,11 +61,6 @@ private:
     Bone* root;
     b2World* world;	
     
-    //private functions
-    
-    /* Add a bone as a child of another bone, or as a child of nil (therefore the root) */
-    Bone* boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim);
-    
     /* Free the tree of bones, for use with destructor */
     Bone* boneFreeTree(Bone* root);
     
@@ -81,6 +72,11 @@ public:
     
     /* Can get information about a bone from a string of its name */
     Bone* findBoneByName(Bone* root, string name);
+    
+    /* Add a bone as a child of another bone, or as a child of nil (therefore the root) */
+    Bone* boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim);
+    
+    Bone* boneAddChild(Bone *root, Bone* child);
     
     /* Prints out tree from given bone */
     void  boneDumpTree(Bone* root, int level);

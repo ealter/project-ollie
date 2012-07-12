@@ -26,42 +26,40 @@ Skeleton::~Skeleton()
 
 Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim)
 {
-    Bone *t;
-	int i;
+   
+    Bone *t = new Bone;
     
-	if (!root) /* If there is no root, create a new */
+    /* Set data */
+	t->x             = x;
+	t->y             = y;
+	t->a             = angle;
+	t->l             = length;
+    t->w             = width;
+    t->name          = name;
+    t->jointAngleMax = jaMax;
+    t->jointAngleMin = jaMin;
+    t->jx            = jx;
+    t->jy            = jy;
+    t->animation     = anim;
+    
+    return boneAddChild(root, t);
+    
+}
+
+Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
+    if (!root) /* If there is no root, create a new */
 	{
-		if (!(root = (Bone *)malloc(sizeof(Bone))))
-			return NULL; // all is lost
-        
-		root->parent = NULL;
+		root = child;
+        root->parent = NULL;
 	}
-	else if (root->childCount < MAX_CHCOUNT) /* If there is space for another child */
+	else if (root->children.size() < MAX_CHCOUNT) /* If there is space for another child */
 	{
-		if (!(t = (Bone *)malloc(sizeof(Bone))))
-			return NULL; // Let's just give up now
-        
-		t->parent = root;
-		root->children[root->childCount] = t; /* Set the pointer */
-		root->childCount++; /* Increment the childCounter */
-		root = t; /* Change the root */
+		child->parent = root;
+		root->children.push_back(child); /* Set the pointer */
+		root = child; /* Change the root */
 	}
 	else /* Can't add a child */
 		return NULL;
-    
-	/* Set data */
-	root->x             = x;
-	root->y             = y;
-	root->a             = angle;
-	root->l             = length;
-    root->w             = width;
-	root->childCount    = 0;
-    root->name          = name;
-    root->jointAngleMax = jaMax;
-    root->jointAngleMin = jaMin;
-    root->jx            = jx;
-    root->jy            = jy;
-    root->animation     = anim;
     
     /* Tie to box2d */
     b2BodyDef bd;
@@ -71,12 +69,12 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
     
     /* Body definition */
     bd.type = b2_dynamicBody;
-    box.SetAsBox(length/PTM_RATIO,width/PTM_RATIO);
+    box.SetAsBox(root->l/PTM_RATIO,root->w/PTM_RATIO);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.4f;
     fixtureDef.restitution = 0.1f;
-    bd.position.Set(x/PTM_RATIO, y/PTM_RATIO);
+    bd.position.Set(root->x/PTM_RATIO, root->y/PTM_RATIO);
     b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
     root->box2DBody = boneShape;
@@ -87,14 +85,13 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
         jointDef.enableLimit = true;
         jointDef.upperAngle  = root->jointAngleMax;
         jointDef.upperAngle  = root->jointAngleMin;
-        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(jx,jy));
+        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx,root->jy));
         world->CreateJoint(&jointDef);
     }
     
-	for (i = 0; i < MAX_CHCOUNT; i++)
-		root->children[i] = NULL;
     
 	return root;
+
 }
 
 void Skeleton::boneDumpTree(Bone *root, int level)
@@ -105,16 +102,16 @@ void Skeleton::boneDumpTree(Bone *root, int level)
 	for (int i = 0; i < level; i++)
 		printf("#"); /* We print # to signal the level of this bone. */
     
-	printf(" %4.4f %4.4f %4.4f %4.4f %s", root->x, root->y, root->a, root->l, root->name.c_str());
+	printf(" %4.4f %4.4f %4.4f %4.4f %s \n", root->x, root->y, root->a, root->l, root->name.c_str());
     
 	/* Now print animation info */
-	for (int i = 0; i < root->keyFrameCount; i++)
+	/*for (int i = 0; i < root->keyFrameCount; i++)
 		printf(" %4.4f %4.4f", root->animation->keyframes[i].time, root->animation->keyframes[i].angle);
-	printf("\n");
+	printf("\n");*/
     
 	/* Recursively call this on children */
-	for (int i = 0; i < root->childCount; i++)
-		boneDumpTree(root->children[i], level + 1);
+	for (int i = 0; i < root->children.size(); i++)
+		boneDumpTree(root->children.at(i), level + 1);
 }
 
 Bone* Skeleton::boneFreeTree(Bone *root)
@@ -122,10 +119,10 @@ Bone* Skeleton::boneFreeTree(Bone *root)
 	if (!root)
 		return NULL;
     
-	for (int i = 0; i < root->childCount; i++)
+	for (int i = 0; i < root->children.size(); i++)
 		boneFreeTree(root->children[i]);
     
-	free(root);
+	delete(root);
     
 	return NULL;
 }
@@ -139,14 +136,14 @@ bool Skeleton::animating(Bone *root, float time)
     tdiff;
     
 	/* Check for keyframes */
-	for (int i = 0; i < root->keyFrameCount; i++)
-		if (root->animation->keyframes[i].time == time)
+	for (int i = 0; i < root->animation->keyFrames.size(); i++)
+		if (root->animation->keyFrames[i].time == time)
 		{
 			/* Find the index for the interpolation */
-			if (i != root->keyFrameCount - 1)
+			if (i != root->animation->keyFrames.size() - 1)
 			{
-				tdiff = root->animation->keyframes[i + 1].time - root->animation->keyframes[i].time;
-				adiff = root->animation->keyframes[i + 1].angle - root->animation->keyframes[i].angle;
+				tdiff = root->animation->keyFrames.at(i + 1).time - root->animation->keyFrames.at(i).time;
+				adiff = root->animation->keyFrames.at(i + 1).angle - root->animation->keyFrames.at(i).angle;
                 
 				root->offA = adiff / tdiff;
 			}
@@ -155,15 +152,15 @@ bool Skeleton::animating(Bone *root, float time)
 				root->offA = 0;
 			}
 		}
-		else if (root->animation->keyframes[i].time > time)
+		else if (root->animation->keyFrames.at(i).time > time)
 			others = true;
 	
 	/* Change animation */
 	root->a += root->offA;
     
 	/* Call on other bones */
-	for (int i = 0; i < root->childCount; i++)
-		if (animating(root->children[i], time))
+	for (int i = 0; i < root->children.size(); i++)
+		if (animating(root->children.at(i), time))
 			others = true;
     
 	return others;
