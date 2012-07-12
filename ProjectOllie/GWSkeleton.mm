@@ -10,6 +10,7 @@
 #import "Skeleton.h"
 #import "GameConstants.h"
 #import "cocos2d.h"
+#import "NSString+SBJSON.h"
 
 //BLENDER TO METER RATIO
 #define BTM_RATIO 6.0
@@ -42,7 +43,8 @@ using namespace std;
         absoluteLocation = ccp(100.0,200.0);
         _skeleton   = new Skeleton(world);
         
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"]; 
+        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"];
+        DebugLog(@"The filepath for filename %@ is %@", fileName, filePath);
         [self buildSkeletonFromFile:filePath];
         
         //if the above worked...
@@ -62,13 +64,14 @@ using namespace std;
     
     /* Load the data and check for error */
     NSError* error = nil;
+    DebugLog(@"The file is %@", fileName);
     NSData* skelData = [NSData dataWithContentsOfFile:fileName options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error reading character file (%@): %@", [self class], error);
     }
-    NSArray* skeletonArray = [NSJSONSerialization JSONObjectWithData:skelData options:kNilOptions error:&error];
-    if(error) {
-        DebugLog(@"Error creating array from file (%@): %@", [self class], error);
+    NSArray *skeletonArray = [[[NSString alloc] initWithData:skelData encoding:NSUTF8StringEncoding] JSONValue];
+    if(!skeletonArray) {
+        DebugLog(@"Error creating array from file (%@)", fileName);
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
@@ -130,7 +133,7 @@ using namespace std;
     if(error) {
         DebugLog(@"Error reading animation file (%@): %@", [self class], error);
     }
-    NSArray* animArray = [NSJSONSerialization JSONObjectWithData:animData options:kNilOptions error:&error];
+    NSArray *animArray = [[[NSString alloc] initWithData:animData encoding:NSUTF8StringEncoding] JSONValue];
     if(error) {
         DebugLog(@"Error creating array from file (%@): %@", [self class], error);
     }
