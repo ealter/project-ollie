@@ -12,6 +12,7 @@
 #include <fstream>
 #include "Skeleton.h"
 #include "Box2D.h"
+#include "GameConstants.h"
 
 Skeleton::Skeleton(b2World* world)
 {
@@ -39,7 +40,7 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
 	}
 	else if (root->childCount < MAX_CHCOUNT) /* If there is space for another child */
 	{
-		if (!(t = (Bone *)malloc(sizeof(Bone))))
+		if (!(t = new Bone))
 			return NULL; // Let's just give up now
         
 		t->parent = root;

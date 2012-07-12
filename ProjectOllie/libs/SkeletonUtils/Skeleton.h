@@ -10,7 +10,6 @@
 #define ProjectOllie_Skeleton_h
 
 #include <string>
-#include "GameConstants.h"
 
 #define MAX_CHCOUNT	8  //max amount of children for bone
 #define MAX_KFCOUNT	60 //max amount of key frames per bone per animation
