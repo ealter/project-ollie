@@ -30,7 +30,7 @@
 
 - (void)initBackgrounds;
 {
-    [self setAnchorPoint:ccp(0,0)];
+    [self setAnchorPoint:CGPointZero];
     
     if(self.children.count > 0)
         [self removeChildByTag:BACKGROUND_IMAGE_TAG cleanup:YES];
@@ -43,9 +43,9 @@
         DebugLog(@"Warning: initBackgrounds was called and the content size was 0");
         return;
     }
-    self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
+    self.backgrounds = [[NSMutableArray alloc] initWithCapacity:2];
     
-    NSMutableArray *batchNodes = [[NSMutableArray alloc]initWithCapacity:imageNames.count];
+    NSMutableArray *batchNodes = [[NSMutableArray alloc] initWithCapacity:imageNames.count];
     for(NSString *imageName in imageNames) {
         CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:imageName capacity:2];
         [self addChild:parent z:1 tag:BACKGROUND_IMAGE_TAG];
@@ -99,7 +99,8 @@
         [self initBackgrounds];
 }
 
-- (void)update:(ccTime)dt{
+- (void)update:(ccTime)dt
+{
     if(self.scrollSpeed == 0) return;
     
     float deltaX = self.scrollSpeed * dt;
