@@ -33,6 +33,7 @@
 		C566AC351592A55A00D92879 /* snow.png in Resources */ = {isa = PBXBuildFile; fileRef = C566AC2F1592A55A00D92879 /* snow.png */; };
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
 		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
+		C587304B15AE6F320081520F /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C587304A15AE6F320081520F /* character.skel */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = C589647715AD038E00F044D9 /* GWSkeleton.mm */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -369,11 +370,11 @@
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/white_clouds.jpeg; sourceTree = "<group>"; };
 		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
 		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
+		C587304A15AE6F320081520F /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C589647615AD038E00F044D9 /* GWSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSkeleton.h; sourceTree = "<group>"; };
 		C589647715AD038E00F044D9 /* GWSkeleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWSkeleton.mm; sourceTree = "<group>"; };
-		C589648615AE445A00F044D9 /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
@@ -1068,7 +1069,7 @@
 		C5F95E1115ACF98F005D6B59 /* Armatures */ = {
 			isa = PBXGroup;
 			children = (
-				C589648615AE445A00F044D9 /* character.skel */,
+				C587304A15AE6F320081520F /* character.skel */,
 			);
 			name = Armatures;
 			sourceTree = "<group>";
@@ -2083,6 +2084,7 @@
 				CEEEE5F215AE2828000A3497 /* leaf3-hd.png in Resources */,
 				CEEEE5F315AE2828000A3497 /* leaf4-hd.png in Resources */,
 				CEEEE5F415AE2828000A3497 /* leaf5-hd.png in Resources */,
+				C587304B15AE6F320081520F /* character.skel in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
