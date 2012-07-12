@@ -45,14 +45,12 @@
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
-		CE0A522815A78DE10036F103 /* WaterShader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
 		CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
 		CE11B19115A68C03009B22CA /* GWWater.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE11B19015A68C03009B22CA /* GWWater.mm */; };
 		CE123C4D158811DC003AD813 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4C158811DC003AD813 /* background.jpg */; };
-		CE123C5015883687003AD813 /* TerrainShader.frag in Sources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE1488AE15803D1400DEC98D /* SandboxScene.mm */; };
 		CE1BB51F1586A6BA0095A793 /* eraser-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5171586A6BA0095A793 /* eraser-hd.png */; };
@@ -2205,7 +2203,6 @@
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
 				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
-				CE123C5015883687003AD813 /* TerrainShader.frag in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
 				CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */,
@@ -2242,7 +2239,6 @@
 				CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */,
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
 				CE11B19115A68C03009B22CA /* GWWater.mm in Sources */,
-				CE0A522815A78DE10036F103 /* WaterShader.vsh in Sources */,
 				C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
