@@ -19,6 +19,14 @@
 #define MAX_CHCOUNT 8  //max amount of children for bone
 #define MAX_KFCOUNT 60 //max amount of key frames per bone per animation
 
+/**
+ * TODO WITH SKELETON 
+ **
+ - ADD MARKER THAT ACTS AS POSITION INSTEAD (SOURCE OF MOTION)
+ - ANIMATE WITH TWEENING
+ */
+
+using namespace std;
 class b2Body;
 class b2World;
 
@@ -72,6 +80,12 @@ private:
     /* Free the tree of bones, for use with destructor */
     Bone* boneFreeTree(Bone* root);
     
+    /* Absolute position of the skeleton in a b2World. Needed because all we have are bones */
+    b2Vec2 absolutePosition;
+    
+    /* helper to adjust position all the way through the skeleton */
+    void adjustTreePosition(Bone* root);
+    
 public:
     
     //constructors with box2dworld
@@ -104,6 +118,15 @@ public:
     
     /* Loads this animation to the skeleton */
     void loadAnimation(string animationName);
+    
+    /* sets absolute position. Arguments are pixels */
+    void setPosition(Bone* root, float x, float y);
+    
+    float getX();
+    float getY();
+    
+    /* update values changing over time */
+    void update();
 };
 
 #endif
