@@ -10,16 +10,16 @@
 #define ProjectOllie_Skeleton_h
 
 #include <string>
-#include "Box2D.h"
 #include "GameConstants.h"
 
-
-#define MAX_CHCOUNT				8  //max amount of children for bone
-#define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
+#define MAX_CHCOUNT	8  //max amount of children for bone
+#define MAX_KFCOUNT	60 //max amount of key frames per bone per animation
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)
 
-using namespace std;
+using std::string;
+class b2Body;
+class b2World;
 
 struct KeyFrame{
     float angle, time;
@@ -92,9 +92,6 @@ public:
     void setRoot(Bone* bone);
     
     Bone* getRoot();
-    
 };
-
-
 
 #endif

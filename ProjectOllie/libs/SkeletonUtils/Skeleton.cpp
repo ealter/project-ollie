@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <fstream>
 #include "Skeleton.h"
+#include "Box2D.h"
 
 Skeleton::Skeleton(b2World* world)
 {
