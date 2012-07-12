@@ -49,7 +49,7 @@ using namespace std;
     if(error) {
         DebugLog(@"Error reading character file (%@): %@", [self class], error);
     }
-    NSDictionary* skeletonDictionary = [NSJSONSerialization JSONObjectWithData:skelData options:kNilOptions error:&error];
+    NSArray* skeletonArray = [NSJSONSerialization JSONObjectWithData:skelData options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error creating dictionary from file (%@): %@", [self class], error);
     }
@@ -57,7 +57,7 @@ using namespace std;
     
     // Must be done for every bone until proper tree is sent
     Bone* head = new Bone;
-    NSDictionary* currentBone  = [skeletonDictionary objectForKey:@"Head"];
+    NSDictionary* currentBone  = [skeletonArray objectAtIndex:0];
     head->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
     head->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
     head->w                    = 1.0 * BTM_RATIO;

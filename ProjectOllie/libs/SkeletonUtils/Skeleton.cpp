@@ -11,6 +11,8 @@
 #include <stdio.h>
 #include <fstream>
 #include "Skeleton.h"
+#include "Box2D.h"
+#include "GameConstants.h"
 
 Skeleton::Skeleton(b2World* world)
 {

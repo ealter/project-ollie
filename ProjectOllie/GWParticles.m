@@ -9,6 +9,7 @@
 #import "GWParticles.h"
 #import "CCTextureCache.h"
 #import "CCDirector.h"
+#import "CGPointExtension.h"
 
 const static ccColor4F kColor4fZero = {0,0,0,0};
 
@@ -40,8 +41,8 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // emitter position
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        self.position = CGPointMake(winSize.width/2, winSize.height);
-        self.posVar = CGPointMake(winSize.width/2, 0);
+        self.position  = ccp(winSize.width/2, winSize.height);
+        self.posVar    = ccp(winSize.width/2, 0);
         // angle
         angle = 90;
         angleVar = 12;
@@ -103,7 +104,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // emitter position
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        self.position = CGPointMake(winSize.width/2, winSize.height/2);
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
         self.posVar = CGPointZero;
         // angle
         angle = 180;
@@ -159,7 +160,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         self.emitterMode = kCCParticleModeGravity;
         
         // Gravity Mode: gravity
-        self.gravity = CGPointMake(1.15,1.58);
+        self.gravity = ccp(1.15, 1.58);
         
         // Gravity Mode:  radial
         self.radialAccel = 0;
@@ -171,8 +172,8 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // emitter position
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        self.position = CGPointMake(winSize.width/2, winSize.height/2);
-        self.posVar = CGPointMake(0, 0);
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
         
         // angle
         angle = 360;
@@ -227,7 +228,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         self.emitterMode = kCCParticleModeGravity;
         
         // Gravity Mode: gravity
-        self.gravity = CGPointMake(0,-750);
+        self.gravity = ccp(0,-750);
         
         // Gravity Mode:  radial
         self.radialAccel = 0;
@@ -239,8 +240,8 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // emitter position
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        self.position = CGPointMake(winSize.width/2, winSize.height/2);
-        self.posVar = CGPointMake(0, 0);
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
         
         // angle
         angle = 0;
@@ -297,7 +298,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode: gravity
         //This is where you would change the angle of the muzzle flash
-        self.gravity = CGPointMake(1000,0);
+        self.gravity = ccp(1000,0);
         
         // Gravity Mode:  radial
         self.radialAccel = 0;
@@ -309,8 +310,8 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // emitter position
         CGSize winSize = [[CCDirector sharedDirector] winSize];
-        self.position = CGPointMake(winSize.width/2, winSize.height/2);
-        self.posVar = CGPointMake(7, 4);
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = ccp(7, 4);
         
         // angle
         angle = 90;

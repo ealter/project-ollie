@@ -19,7 +19,6 @@
 @interface DrawEnvironment () <DrawMenu_delegate>
 
 - (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location;
-- (void)drawCircleAt:(CGPoint)location;
 
 @end
 
@@ -52,6 +51,7 @@
         self.brushradius    = smallradius;
         
         DrawMenu *drawnode = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
+        assert([drawnode isKindOfClass:[DrawMenu class]]);
         drawnode.delegate = self;
         [self addChild:drawnode];
         
