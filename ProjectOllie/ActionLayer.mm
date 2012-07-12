@@ -164,7 +164,7 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     
-    gwskel = [[GWSkeleton alloc]initFromFile:@"characternew" box2dWorld:world];
+    gwskel = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
     Skeleton* skeleton = [gwskel getSkeleton];
     CCLOG(@"PRINTING SKELETON TREE!");
     skeleton->boneDumpTree(skeleton->getRoot(), 0);

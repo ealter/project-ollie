@@ -115,7 +115,7 @@ using namespace std;
         bone->name                 = string([[currentBone objectForKey:@"name"] UTF8String]);
         bone->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
         bone->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-        bone->w                    = 4.f;
+        bone->w                    = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTM_RATIO;
         
         _skeleton->boneAddChild(parent, bone);
         
