@@ -19,7 +19,6 @@
 @interface DrawEnvironment () <DrawMenu_delegate>
 
 - (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location;
-- (void)drawCircleAt:(CGPoint)location;
 
 @end
 
