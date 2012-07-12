@@ -70,6 +70,7 @@ using namespace std;
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
+    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
 }
 
 /* recursively assembles the bone tree imported from blender*/
@@ -80,6 +81,7 @@ using namespace std;
     CGPoint headLoc;
     CGPoint tailLoc;
     CGPoint averageLoc;
+
     
     for (NSDictionary* currentBone in currentBoneArray) {
         //make new bone
@@ -96,8 +98,6 @@ using namespace std;
         //transform to screen coordinates
         headLoc                    = ccpMult(headLoc,BTM_RATIO);
         tailLoc                    = ccpMult(tailLoc,BTM_RATIO);
-        tailLoc                    = ccpAdd(tailLoc,absoluteLocation);
-        headLoc                    = ccpAdd(headLoc,absoluteLocation);
         averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
         
         //assign values to bone
@@ -118,6 +118,7 @@ using namespace std;
         [self assembleSkeleton:children parentBone:bone];
         
     }
+    
 }
 
 -(void)buildAnimationFromFile:(NSString *)fileName{
@@ -163,8 +164,6 @@ using namespace std;
             //transform to screen coordinates
             headLoc                    = ccpMult(headLoc,BTM_RATIO);
             tailLoc                    = ccpMult(tailLoc,BTM_RATIO);
-            tailLoc                    = ccpAdd(tailLoc,absoluteLocation);
-            headLoc                    = ccpAdd(headLoc,absoluteLocation);
             averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
@@ -200,7 +199,12 @@ using namespace std;
     
     if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
         timeElapsed += dt;
-    else timeElapsed = 0;
+    else{
+        timeElapsed = 0;
+        _skeleton->update();
+    }
+    
+
 }
 
 @end

@@ -189,16 +189,10 @@ bool Skeleton::animating(Bone *root, float time)
 	/* Check for current keyframe */
     if (!root->animation.empty()) 
     {
-        float currentX = root->x;
-        float currentY = root->y;
         //not a key frame, so interpolation
         if(key->time > time)
         {
-            //interpolate
-            float timeDiff  = (key->time - time)*60.f;
-            float angleDiff = key->angle - root->a;
-            float xDiff     = key->x - root->x;
-            float yDiff     = key->y - root->y;
+
           /*  
             angleDiff /= timeDiff;
             xDiff     /= timeDiff;
@@ -221,11 +215,26 @@ bool Skeleton::animating(Bone *root, float time)
             key = root->animation.front();
             
         }
-        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO + currentX/PTM_RATIO,root->y/PTM_RATIO + currentY/PTM_RATIO), root->a);
+        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
         root->box2DBody->SetAngularVelocity(0);
     }
     else{
+        // stop animating
         anim = false;
+        
+        // new position is torso's position
+        Bone* ll = getBoneByName(root, "ll_leg");
+        Bone* rl = getBoneByName(root, "rl_leg");
+
+        if(ll && rl)
+        {
+            float xpos = ll->box2DBody->GetPosition().x + rl->box2DBody->GetPosition().x;
+            xpos      /= 2;
+            float ypos = ll->box2DBody->GetPosition().y + rl->box2DBody->GetPosition().y;
+            ypos      /= 2;
+            
+            absolutePosition = b2Vec2(xpos,ypos);
+        }
     }
     
 
@@ -262,4 +271,23 @@ Bone* Skeleton::getBoneByName(Bone* root, string name){
     }
     
     return NULL;
+}
+
+void Skeleton::setPosition(Bone* root, float x, float y){
+    
+    absolutePosition = b2Vec2(x/PTM_RATIO,y/PTM_RATIO);
+    adjustTreePosition(this->root);
+
+}
+
+void Skeleton::adjustTreePosition(Bone* root){
+    
+    root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+    for(int i = 0; i < root->children.size(); i++)
+        adjustTreePosition(root->children.at(i));
+    
+}
+
+void Skeleton::update(){
+
 }
