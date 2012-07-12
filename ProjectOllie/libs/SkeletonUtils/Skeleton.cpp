@@ -72,6 +72,9 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     /* Body definition */
     bd.type = b2_dynamicBody;
     bd.gravityScale = 0;
+    bd.linearDamping = 1.f;
+    bd.angularDamping = 1.f;
+
     box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
@@ -85,7 +88,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     root->box2DBody = boneShape;
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
-    
+    boneShape->SetAngularVelocity(0);
     
     /* Joint definition */
     if(root->parent)
@@ -143,34 +146,25 @@ Bone* Skeleton::boneFreeTree(Bone *root)
 
 bool Skeleton::animating(Bone *root, float time)
 {
-        
-	float adiff,
-    tdiff;
-    
-    
     KeyFrame* key = root->animation.front();
 	/* Check for keyframes */
     if (!root->animation.empty()) 
     {
-		if (key->time >= time)
+		if (key->time <= time)
 		{
 			/* Find the index for the interpolation */
-            tdiff = key->time - time;
-            adiff = key->angle - root->a;
-            root->offA = adiff / tdiff;
-            if(abs(root->offA) > 0)
-                DebugLog("The angle difference for %s is: %f",root->name.c_str(),root->offA);
+            root->a = key->angle;
+            root->x = key->x;
+            root->y = key->y;
+            /* Change animation */
+            //root->a += root->offA;
+            root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO), root->a );
+            root->box2DBody->SetAngularVelocity(0);
+            root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
+
+            root->animation.pop();
         }
-        else
-        {
-            root->offA = 0;
-        }
-        root->animation.pop();
-    
-	
-	/* Change animation */
-	root->a += root->offA;
-    root->box2DBody->SetTransform(root->box2DBody->GetPosition(), root->a);
+        
     }
 	/* Call on other bones */
 	for (int i = 0; i < root->children.size(); i++)

@@ -10,12 +10,13 @@
 
 
 //BLENDER TO METER RATIO
-#define BTM_RATIO 6.0
+#define BTM_RATIO 16.0
 
 using namespace std;
 
 @interface GWSkeleton(){
     float timeElapsed;
+    CGPoint absoluteLocation; 
 }
 //Master function for loading file information for skeleton (.skel) files
 -(void)buildSkeletonFromFile:(NSString*)fileName;
@@ -36,6 +37,7 @@ using namespace std;
     if((self = [super init])){
         
         timeElapsed = 0;
+        absoluteLocation = ccp(100.0,200.0);
         _skeleton   = new Skeleton(world);
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"]; 
@@ -73,7 +75,6 @@ using namespace std;
 /* recursively assembles the bone tree imported from blender*/
 -(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
     
-    CGPoint absoluteLocation = ccp(100.0,200.0);
     float jointAngleMax = DEG2RAD(45.0);
     float jointAngleMin = -DEG2RAD(0.0);
     CGPoint headLoc;
@@ -136,6 +137,9 @@ using namespace std;
 
 -(void)assembleAnimation:(NSArray *)frames{
     
+    CGPoint headLoc;
+    CGPoint tailLoc;
+    CGPoint averageLoc;
     Bone* root = _skeleton->getRoot();
     for (NSDictionary* frame in frames) {
         
@@ -150,10 +154,25 @@ using namespace std;
             KeyFrame* key   = new KeyFrame;
             string name = [(NSString*)[bone objectForKey:@"name"] UTF8String];
             float angle = [(NSNumber*)[bone objectForKey:@"angle"] floatValue];
+            NSDictionary* headDict     = [bone objectForKey:@"head"];
+            headLoc.x                  = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
+            headLoc.y                  = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
+            NSDictionary* tailDict     = [bone objectForKey:@"tail"];
+            tailLoc.x                  = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
+            tailLoc.y                  = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
+            
+            //transform to screen coordinates
+            headLoc                    = ccpMult(headLoc,BTM_RATIO);
+            tailLoc                    = ccpMult(tailLoc,BTM_RATIO);
+            tailLoc                    = ccpAdd(tailLoc,absoluteLocation);
+            headLoc                    = ccpAdd(headLoc,absoluteLocation);
+            averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
             key->angle = angle;
             key->time  = time;
+            key->x     = averageLoc.x;
+            key->y     = averageLoc.y;
             
             //access current bone from tree and put animation there
             Bone* currentBone = _skeleton->getBoneByName(root, name);

@@ -23,7 +23,7 @@ class b2Body;
 class b2World;
 
 struct KeyFrame{
-    float angle, time;
+    float angle, time, x, y;
 };
 
 struct Bone{
