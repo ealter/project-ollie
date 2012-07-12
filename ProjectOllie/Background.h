@@ -17,6 +17,7 @@
 
 @property (assign, nonatomic) float scrollSpeed; /* In pixels/second. Positive means left to right, negative means right to left. */
 @property (nonatomic, strong) NSArray *imageNames; //An array of NSStrings
+@property (assign, nonatomic) float parallaxRatio;
 
 /* Note: It is fine to call the regular init method instead of this one. If you do that, make sure to set the imageNames at some point or else this class will not display anything. */
 - (id)initWithSpeed:(float)speed images:(NSArray *)imageNames;

@@ -27,6 +27,7 @@
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
 @synthesize imageNames  = _imageNames;
+@synthesize parallaxRatio = _parallaxRatio;
 
 - (void)initBackgrounds;
 {
@@ -59,6 +60,7 @@
         float backgroundHeight;
         for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
             CCSprite *background = [CCSprite spriteWithFile:[imageNames objectAtIndex:imageIndex]];
+            assert(background); //Make sure that this image exists
             backgroundHeight = background.boundingBox.size.height;
             background.anchorPoint = ccp(.5f,.5f);
             background.position = ccp(offset, y);
@@ -82,6 +84,7 @@
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
         [self scheduleUpdate];
+        self.parallaxRatio = 0.3;
     }
     return self;
 }
@@ -142,7 +145,7 @@
 //Camera object
 
 -(float)getParallaxRatio{
-    return .3f;
+    return self.parallaxRatio;
 }
 
 -(bool)isBounded{

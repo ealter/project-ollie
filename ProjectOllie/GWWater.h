@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "CCLayer.h"
 #import "GWCamera.h"
 
 @interface GWWater : CCLayer <CameraObject>
