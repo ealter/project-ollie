@@ -20,6 +20,6 @@ class b2World;
 -(Bone*)getBoneByName:(NSString*)bName;
 -(Skeleton*)getSkeleton;
 -(void)update:(float)dt;
-
+-(void)loadAnimation:(string)animationName;
 
 @end

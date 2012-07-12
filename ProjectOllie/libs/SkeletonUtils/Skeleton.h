@@ -9,9 +9,12 @@
 #ifndef ProjectOllie_Skeleton_h
 #define ProjectOllie_Skeleton_h
 
-#include <string>
+#include "Box2D.h"
+#include "GameConstants.h"
 #include <vector>
 #include <queue>
+#include <map>
+#include <string>
 
 #define MAX_CHCOUNT				8  //max amount of children for bone
 #define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
@@ -49,13 +52,22 @@ struct Bone{
     
 };
 
+struct Animation{
+    vector<KeyFrame*> frames;
+};
+
 // Holds a collection of Bone trees
 class Skeleton
 {
 private:
     //private variables
+    
+    //root of skeletal tree. The head of the body in this case
     Bone* root;
+    //Box2D world to put the skeleton in
     b2World* world;	
+    //Map of animations we loaded from file. Will have string keys
+    map<string, map<string,Animation*> > animations;
     
     /* Free the tree of bones, for use with destructor */
     Bone* boneFreeTree(Bone* root);
@@ -66,12 +78,10 @@ public:
     Skeleton(b2World* world);
     ~Skeleton();
     
-    /* Can get information about a bone from a string of its name */
-    Bone* findBoneByName(Bone* root, string name);
-    
     /* Add a bone as a child of another bone, or as a child of nil (therefore the root) */
     Bone* boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin);
     
+    /* Helper for adding bones */
     Bone* boneAddChild(Bone *root, Bone* child);
     
     /* Prints out tree from given bone */
@@ -88,6 +98,12 @@ public:
     
     /* Fetches root for traverals */
     Bone* getRoot();
+    
+    /* Adds this animation frame to the map */
+    void addAnimationFrame(string animationName, string boneName, KeyFrame* frame);
+    
+    /* Loads this animation to the skeleton */
+    void loadAnimation(string animationName);
 };
 
 #endif

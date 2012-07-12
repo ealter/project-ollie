@@ -130,7 +130,7 @@ enum {
 
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
-    		flags += b2Draw::e_jointBit;
+    //   	flags += b2Draw::e_jointBit;
     //		flags += b2Draw::e_aabbBit;
     //		flags += b2Draw::e_pairBit;
     //		flags += b2Draw::e_centerOfMassBit;
@@ -164,7 +164,7 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     
-    gwskel = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
+    gwskel = [[GWSkeleton alloc]initFromFile:@"characternew" box2dWorld:world];
     Skeleton* skeleton = [gwskel getSkeleton];
     CCLOG(@"PRINTING SKELETON TREE!");
     skeleton->boneDumpTree(skeleton->getRoot(), 0);
@@ -317,6 +317,8 @@ enum {
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.camera touchesBegan:[event allTouches]];
+    
+    [gwskel loadAnimation:"animation"];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
