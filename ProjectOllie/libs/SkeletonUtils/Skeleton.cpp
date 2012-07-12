@@ -85,10 +85,13 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     bd.position.Set(root->x/PTM_RATIO, root->y/PTM_RATIO);
     b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
+    
+    //TURN OFF FOR RAGDOLL EFFECT
     root->box2DBody = boneShape;
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
     boneShape->SetAngularVelocity(0);
+    boneShape->SetFixedRotation(true);
     
     /* Joint definition */
     if(root->parent)
@@ -97,7 +100,6 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
         jointDef.upperAngle  = root->jointAngleMax;
         jointDef.lowerAngle  = root->jointAngleMin;
         jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx/PTM_RATIO,root->jy/PTM_RATIO));
-       // jointDef.referenceAngle = abs(root->a - root->parent->a);
         b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
         DebugLog("The angle between these two bodies are: %4.4f", j->GetJointAngle());
     }
@@ -144,33 +146,79 @@ Bone* Skeleton::boneFreeTree(Bone *root)
 	return NULL;
 }
 
+void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame *frame)
+{
+    //pushes the frame back for that particular bone
+    Animation* animation = animations[animationName][boneName];
+    if(animation)
+    {
+        animation->frames.push_back(frame);
+    }
+    else{
+        printf("Loading new animation \n");
+        animation = new Animation;
+        animation->frames.push_back(frame);
+        animations[animationName][boneName] = animation;
+    }
+}
+
+void Skeleton::loadAnimation(string animationName)
+{
+    
+    map<string, Animation*>::iterator iter;
+    for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) 
+    {
+        Bone* bone = this->getBoneByName(this->root, iter->first);
+        if(bone)
+        {
+            if(iter->second)
+            {
+                queue<KeyFrame*> newAnimation;
+                for(int i = 0; i < iter->second->frames.size(); i++)
+                {
+                    newAnimation.push(iter->second->frames.at(i));
+                }
+                swap(bone->animation,newAnimation);
+            }
+        }
+    }
+}
+
 bool Skeleton::animating(Bone *root, float time)
 {
+    bool anim = true;
     KeyFrame* key = root->animation.front();
-	/* Check for keyframes */
+	/* Check for current keyframe */
     if (!root->animation.empty()) 
     {
-		if (key->time <= time)
+        while (key->time <= time)
 		{
+            anim = true;
 			/* Find the index for the interpolation */
             root->a = key->angle;
             root->x = key->x;
             root->y = key->y;
             /* Change animation */
             //root->a += root->offA;
-            root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO), root->a );
+            root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO), root->a);
             root->box2DBody->SetAngularVelocity(0);
             root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
-
             root->animation.pop();
+            
+            if(root->animation.empty())break;
+            key = root->animation.front();
         }
         
     }
+    else{
+        anim = false;
+    }
 	/* Call on other bones */
 	for (int i = 0; i < root->children.size(); i++)
-		animating(root->children.at(i), time);
+		if(animating(root->children.at(i), time))
+            anim = true;
     
-	return true;
+	return anim;
 }
 
 void Skeleton::setRoot(Bone *bone)

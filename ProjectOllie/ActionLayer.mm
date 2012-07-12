@@ -315,6 +315,8 @@ enum {
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.camera touchesBegan:[event allTouches]];
+    
+    [gwskel loadAnimation:"animation"];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

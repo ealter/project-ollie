@@ -10,7 +10,7 @@
 
 
 //BLENDER TO METER RATIO
-#define BTM_RATIO 16.0
+#define BTM_RATIO 40.0
 
 using namespace std;
 
@@ -37,7 +37,7 @@ using namespace std;
     if((self = [super init])){
         
         timeElapsed = 0;
-        absoluteLocation = ccp(100.0,200.0);
+        absoluteLocation = ccp(100.0,50.0);
         _skeleton   = new Skeleton(world);
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"]; 
@@ -140,7 +140,6 @@ using namespace std;
     CGPoint headLoc;
     CGPoint tailLoc;
     CGPoint averageLoc;
-    Bone* root = _skeleton->getRoot();
     for (NSDictionary* frame in frames) {
         
         //get universal frame data
@@ -174,9 +173,8 @@ using namespace std;
             key->x     = averageLoc.x;
             key->y     = averageLoc.y;
             
-            //access current bone from tree and put animation there
-            Bone* currentBone = _skeleton->getBoneByName(root, name);
-            currentBone->animation.push(key);
+            //adds the animation frame to the given animation name
+            _skeleton->addAnimationFrame("animation", name, key);
             
         }
         
@@ -193,10 +191,16 @@ using namespace std;
     return _skeleton;
 }
 
+-(void)loadAnimation:(string)animationName{
+    timeElapsed = 0;
+    _skeleton->loadAnimation(animationName);
+}
+
 -(void)update:(float)dt{
     
-    timeElapsed += dt;
-    _skeleton->animating(_skeleton->getRoot(), timeElapsed);
+    if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
+        timeElapsed += dt;
+    else timeElapsed = 0;
 }
 
 @end
