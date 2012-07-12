@@ -51,8 +51,9 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
 Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     if (!root) /* If there is no root, create a new */
 	{
-		root = child;
+		root         = child;
         root->parent = NULL;
+        this->root   = root;
 	}
 	else if (root->children.size() < MAX_CHCOUNT) /* If there is space for another child */
 	{
@@ -71,6 +72,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     
     /* Body definition */
     bd.type = b2_dynamicBody;
+    bd.gravityScale = 0;
     box.SetAsBox(root->l/PTM_RATIO,root->w/PTM_RATIO);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
@@ -81,13 +83,15 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     boneShape->CreateFixture(&fixtureDef);
     root->box2DBody = boneShape;
     
+    
     /* Joint definition */
     if(root->parent)
     {
-        jointDef.enableLimit = true;
-        jointDef.upperAngle  = root->jointAngleMax;
-        jointDef.upperAngle  = root->jointAngleMin;
-        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx,root->jy));
+       // jointDef.enableLimit = true;
+       // jointDef.upperAngle  = root->jointAngleMax;
+       // jointDef.upperAngle  = root->jointAngleMin;
+        jointDef.referenceAngle = 0;
+        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->parent->jx,root->parent->jy));
         world->CreateJoint(&jointDef);
     }
     
@@ -104,7 +108,7 @@ void Skeleton::boneDumpTree(Bone *root, int level)
 	for (int i = 0; i < level; i++)
 		printf("#"); /* We print # to signal the level of this bone. */
     
-	printf(" %4.4f %4.4f %4.4f %4.4f %s \n", root->x, root->y, root->a, root->l, root->name.c_str());
+	printf("Name:%s X: %4.4f Y: %4.4f JX: %4.4f JY: %4.4f Ang: %4.4f \n",root->name.c_str(), root->x, root->y, root->jx, root->jy, root->a);
     
 	/* Now print animation info */
 	/*for (int i = 0; i < root->keyFrameCount; i++)

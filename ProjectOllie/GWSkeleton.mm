@@ -18,7 +18,7 @@ using namespace std;
     
 }
 -(void)buildSkeletonFromFile:(NSString*)fileName;
--(void)assembleSkeleton:(NSDictionary*)currentBone;
+-(void)assembleSkeleton:(NSArray*)currentBoneArray parentBone:(Bone*)parent;
 @end
 
 @implementation GWSkeleton
@@ -36,13 +36,6 @@ using namespace std;
 
 -(void)buildSkeletonFromFile:(NSString*)fileName{
     
-    CGPoint absoluteLocation = ccp(100.0,200.0);
-    float jointAngleMax = DEG2RAD(180.0);
-    float jointAngleMin = 0.0;
-    CGPoint headLoc;
-    CGPoint tailLoc;
-    CGPoint averageLoc;
-    
     /* Load the data and check for error */
     NSError* error = nil;
     NSData* skelData = [NSData dataWithContentsOfFile:fileName options:kNilOptions error:&error];
@@ -54,33 +47,57 @@ using namespace std;
         DebugLog(@"Error creating dictionary from file (%@): %@", [self class], error);
     }
     
-    
-    // Must be done for every bone until proper tree is sent
-    Bone* head = new Bone;
-    NSDictionary* currentBone  = [skeletonArray objectAtIndex:0];
-    head->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
-    head->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-    head->w                    = 1.0 * BTM_RATIO;
-    NSDictionary* headDict     = [currentBone objectForKey:@"head"];
-    headLoc.x                  = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
-    headLoc.y                  = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
-    NSDictionary* tailDict     = [currentBone objectForKey:@"tail"];
-    tailLoc.x                  = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
-    tailLoc.y                  = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
-    
-    tailLoc                    = ccpAdd(tailLoc,absoluteLocation);
-    headLoc                    = ccpAdd(headLoc,absoluteLocation);
-    averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
-    head->x                    = averageLoc.x;
-    head->y                    = averageLoc.y;
-    head->jointAngleMax        = jointAngleMax;
-    head->jointAngleMin        = jointAngleMin;
-    head->jx                   = headLoc.x;
-    head->jy                   = headLoc.y;
-    head->name                 = "head";
-    _skeleton->boneAddChild(0, head);
-    _skeleton->setRoot(head);
+    [self assembleSkeleton:skeletonArray parentBone:nil];
 }
+
+-(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
+    
+    CGPoint absoluteLocation = ccp(100.0,200.0);
+    float jointAngleMax = DEG2RAD(180.0);
+    float jointAngleMin = -DEG2RAD(90.0);
+    CGPoint headLoc;
+    CGPoint tailLoc;
+    CGPoint averageLoc;
+    
+    for (NSDictionary* currentBone in currentBoneArray) {
+        //make new bone
+        Bone* bone                 = new Bone;
+        
+        //perform type conversions
+        NSDictionary* headDict     = [currentBone objectForKey:@"head"];
+        headLoc.x                  = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
+        headLoc.y                  = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
+        NSDictionary* tailDict     = [currentBone objectForKey:@"tail"];
+        tailLoc.x                  = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
+        tailLoc.y                  = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
+        
+        //transform to screen coordinates
+        headLoc                    = ccpMult(headLoc,BTM_RATIO);
+        tailLoc                    = ccpMult(tailLoc,BTM_RATIO);
+        tailLoc                    = ccpAdd(tailLoc,absoluteLocation);
+        headLoc                    = ccpAdd(headLoc,absoluteLocation);
+        averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
+        
+        //assign values to bone
+        bone->x                    = averageLoc.x;
+        bone->y                    = averageLoc.y;
+        bone->jointAngleMax        = jointAngleMax;
+        bone->jointAngleMin        = jointAngleMin;
+        bone->jx                   = headLoc.x;
+        bone->jy                   = headLoc.y;
+        bone->name                 = [[currentBone objectForKey:@"name"] UTF8String];
+        bone->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
+        bone->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
+        bone->w                    = 2.0;
+        
+        _skeleton->boneAddChild(parent, bone);
+        
+        NSArray* children          = [currentBone objectForKey:@"children"];
+        [self assembleSkeleton:children parentBone:bone];
+        
+    }
+}
+
 -(Bone*)getBoneByName:(NSString*)bName{
     
     return nil;
