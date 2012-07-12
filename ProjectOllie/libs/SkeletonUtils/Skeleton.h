@@ -16,8 +16,8 @@
 #include <map>
 #include <string>
 
-#define MAX_CHCOUNT				8  //max amount of children for bone
-#define MAX_KFCOUNT				60 //max amount of key frames per bone per animation
+#define MAX_CHCOUNT 8  //max amount of children for bone
+#define MAX_KFCOUNT 60 //max amount of key frames per bone per animation
 
 class b2Body;
 class b2World;
@@ -53,7 +53,7 @@ struct Bone{
 };
 
 struct Animation{
-    vector<KeyFrame*> frames;
+    std::vector<KeyFrame*> frames;
 };
 
 // Holds a collection of Bone trees
@@ -65,9 +65,9 @@ private:
     //root of skeletal tree. The head of the body in this case
     Bone* root;
     //Box2D world to put the skeleton in
-    b2World* world;	
+    b2World* world;     
     //Map of animations we loaded from file. Will have string keys
-    map<string, map<string,Animation*> > animations;
+    std::map<string, std::map<string,Animation*> > animations;
     
     /* Free the tree of bones, for use with destructor */
     Bone* boneFreeTree(Bone* root);

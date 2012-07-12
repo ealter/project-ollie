@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CCNode.h"
+#include <string>
 
 class Skeleton;
 struct Bone;
@@ -20,6 +21,6 @@ class b2World;
 -(Bone*)getBoneByName:(NSString*)bName;
 -(Skeleton*)getSkeleton;
 -(void)update:(float)dt;
--(void)loadAnimation:(string)animationName;
+-(void)loadAnimation:(std::string)animationName;
 
 @end
