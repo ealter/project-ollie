@@ -24,8 +24,8 @@ bl_info = {
     "author": "hi ku studios",
     "version": (0, 1),
     "blender": (2, 5, 7),
-    "location": "File > Export > Skeletons (.skel)",
-    "description": "Export Skeletons (.skel)",
+    "location": "File > Export > Skeletons (.anim)",
+    "description": "Export Skeletons (.anim)",
     "warning": "",
     "support": 'OFFICIAL',
     "category": "Import-Export"}
@@ -74,8 +74,8 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
     '''Save a python script which re-creates cameras and markers elsewhere'''
     bl_idname = "skeleton_animation.cameras"
     bl_label = "Export Skeleton Animation Properties"
-    filename_ext = ".skel"
-    filter_glob = StringProperty(default="*.skel", options={'HIDDEN'})
+    filename_ext = ".anim"
+    filter_glob = StringProperty(default="*.anim", options={'HIDDEN'})
 
     def execute(self, context):
         filepath = self.filepath
@@ -93,8 +93,8 @@ class SkeletonExporter(bpy.types.Operator, ExportHelper):
 
 def menu_export(self, context):
     import os
-    default_path = os.path.splitext(bpy.data.filepath)[0] + ".skel"
-    self.layout.operator(SkeletonExporter.bl_idname, text="Skeleton Animation (.skel)").filepath = default_path
+    default_path = os.path.splitext(bpy.data.filepath)[0] + ".anim"
+    self.layout.operator(SkeletonExporter.bl_idname, text="Skeleton Animation (.anim)").filepath = default_path
 
 
 def register():
