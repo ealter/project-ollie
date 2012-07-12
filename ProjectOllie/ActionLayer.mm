@@ -14,6 +14,8 @@
 #import "RippleEffect.h"
 #import "GameConstants.h"
 #import "GWSkeleton.h"
+#import "Skeleton.h"
+
 #define kTagPoly 10
 #define kTagBox 20
 

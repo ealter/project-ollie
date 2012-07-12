@@ -7,7 +7,9 @@
 //
 
 #import "GWSkeleton.h"
-
+#import "Skeleton.h"
+#import "GameConstants.h"
+#import "cocos2d.h"
 
 //BLENDER TO METER RATIO
 #define BTM_RATIO 6.0
