@@ -32,6 +32,8 @@ typedef struct Vertex {CGPoint vertex, texcoord;} Vertex;
 
 @implementation GWWater
 
+@synthesize waterHeight = _waterHeight;
+
 -(id)init
 {
     if (self = [super init]) {
@@ -41,20 +43,13 @@ typedef struct Vertex {CGPoint vertex, texcoord;} Vertex;
         int height = [CCDirector sharedDirector].winSize.height;
         for (int i=0; i<pointCount; i++) {
             waterPoly[i].vertex.x = pointCount/(2*width)-width/2;
-            waterPoly[i].texcoord.x = 0;
-            if (i%2)
-            {
+            waterPoly[i].texcoord = ccp(0, i%2);
+            if (i%2) {
                 waterPoly[i].vertex.y = -height/2;
-                waterPoly[i].texcoord.y = 0;
-            }
-            else 
-            {
+            } else {
                 waterPoly[i].vertex.y = height/8;
-                waterPoly[i].texcoord.y = 1;
             }
         }
-            
-        
         
         //Shader stufff
         GLchar *water_vsh = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WaterShader" ofType:@"vsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
@@ -66,9 +61,7 @@ typedef struct Vertex {CGPoint vertex, texcoord;} Vertex;
         [shader_ updateUniforms];
         
         //[self ccDrawSolidPoly:verts numPoints:4+numVertices withColor:ccc4f(0, 0, 255, 1)];
-        
     }
-    
     return self;
 }
 
@@ -81,6 +74,17 @@ typedef struct Vertex {CGPoint vertex, texcoord;} Vertex;
     glVertexAttribPointer(kCCVertexAttrib_Position, 2, GL_FLOAT, GL_FALSE, 0, waterPoly);
     
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) pointCount);
+}
+
+//TODO: fix these stubs
+- (float)getParallaxRatio
+{
+    return 1;
+}
+
+- (bool)isBounded
+{
+    return YES;
 }
 
 @end

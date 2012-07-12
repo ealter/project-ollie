@@ -20,10 +20,10 @@ using namespace std;
 
 @implementation GWSkeleton
 
--(id)initFromFile:(NSString*)fileName{
+-(id)initFromFile:(NSString*)fileName box2dWorld:(b2World *)world{
     if((self = [super init])){
         
-        _skeleton = new Skeleton(
+        _skeleton = new Skeleton(world);
         [self buildSkeletonFromFile:fileName];
     }
     return self;
@@ -31,8 +31,8 @@ using namespace std;
 
 -(void)buildSkeletonFromFile:(NSString*)fileName{
     
-    float jointAngleMax = 0;
-    float jointAngleMin = 0;
+    float jointAngleMax = DEG2RAD(180.0);
+    float jointAngleMin = 0.0;
     CGPoint headLoc;
     CGPoint tailLoc;
     CGPoint averageLoc;
@@ -65,6 +65,10 @@ using namespace std;
     head->jointAngleMin        = jointAngleMin;
     head->jx                   = headLoc.x;
     head->jy                   = headLoc.y;
+    
+    _skeleton->setRoot(head);
+    
+    
     
 }
 -(Bone*)getBoneByName:(NSString*)bName{
