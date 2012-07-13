@@ -23,7 +23,7 @@ typedef struct Vertex {CGPoint vertex, texcoord;} Vertex;
 @interface GWWater (){
     //Array of CGPoints to hold water shape
     Vertex *waterPoly;
-}	
+}
 
 @property float waterHeight;
 

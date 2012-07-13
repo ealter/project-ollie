@@ -199,7 +199,7 @@ bool Skeleton::animating(Bone *root, float time)
         }
         else // keyframe, so set it's values
         while (key->time <= time)
-		{
+        {
             anim = true;
             root->a = key->angle;
             root->x = key->x;

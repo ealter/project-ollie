@@ -391,11 +391,11 @@
                 self.isChanging = NO;
         }
     }
-    else if(self.target != nil){
+    else if(self.target != nil) {
         //adjust scale to match the desired scale
         float scaleDiff = targetScale - subject_.scale;
         float zoomMultiplier = 0;
-        if(scaleDiff < 0) 
+        if(scaleDiff < 0)
             zoomMultiplier = .9f;
         else {
             zoomMultiplier = 1.1f;
