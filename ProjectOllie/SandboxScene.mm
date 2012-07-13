@@ -13,6 +13,8 @@
 #import "RippleEffect.h"
 #import "SpriteParallax.h"
 
+#define array_length(name) (sizeof(name)/sizeof(*(name)))
+
 @implementation SandboxScene {
     RippleEffect *ripple;
 }
@@ -27,8 +29,8 @@
         
         NSString *backgroundNames[] = {@"background_layer1.png", @"background_layer1_tree.png", @"background_layer1_rocksleaves.png", @"background_layer1_middleplants.png"};
         float parallaxRatios[] = {0.2, 0.4, 0.6, 0.8};
-        assert(sizeof(backgroundNames)/sizeof(*backgroundNames) == sizeof(parallaxRatios)/sizeof(*parallaxRatios));
-        for(int i=0; i<sizeof(backgroundNames)/sizeof(*backgroundNames); i++) {
+        assert(array_length(backgroundNames) == array_length(parallaxRatios));
+        for(int i=0; i<array_length(backgroundNames); i++) {
             SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundNames[i]];
             blayer.parallaxRatio = parallaxRatios[i];
             [actionNode addChild:blayer];
