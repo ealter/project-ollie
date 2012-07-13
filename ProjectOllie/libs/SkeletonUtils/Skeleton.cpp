@@ -49,7 +49,8 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
     
 }
 
-Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
+Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
+{
     if (!root) { /* If there is no root, create a new */
         root         = child;
         root->parent = NULL;
@@ -90,8 +91,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
     
     /* Joint definition */
-    if(root->parent)
-    {
+    if(root->parent) {
         jointDef.enableLimit = true;
         jointDef.upperAngle  = root->jointAngleMax;
         jointDef.lowerAngle  = root->jointAngleMin;
@@ -100,9 +100,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
         DebugLog("The angle between these two bodies are: %4.4f", j->GetJointAngle());
     }
     
-    
     return root;
-    
 }
 
 void Skeleton::boneDumpTree(Bone *root, int level)
@@ -160,16 +158,12 @@ void Skeleton::loadAnimation(string animationName)
 {
     
     map<string, Animation*>::iterator iter;
-    for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) 
-    {
+    for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
         Bone* bone = this->getBoneByName(this->root, iter->first);
-        if(bone)
-        {
-            if(iter->second)
-            {
+        if(bone) {
+            if(iter->second) {
                 queue<KeyFrame*> newAnimation;
-                for(int i = 0; i < iter->second->frames.size(); i++)
-                {
+                for(int i = 0; i < iter->second->frames.size(); i++) {
                     newAnimation.push(iter->second->frames.at(i));
                 }
                 swap(bone->animation,newAnimation);
@@ -183,11 +177,9 @@ bool Skeleton::animating(Bone *root, float time)
     bool anim = true;
     KeyFrame* key = root->animation.front();
     /* Check for current keyframe */
-    if (!root->animation.empty()) 
-    {
+    if (!root->animation.empty()) {
         //not a key frame, so interpolation
-        if(key->time > time)
-        {
+        if(key->time > time) {
           /*  
             angleDiff /= timeDiff;
             xDiff     /= timeDiff;
@@ -198,8 +190,7 @@ bool Skeleton::animating(Bone *root, float time)
             
         }
         else // keyframe, so set it's values
-        while (key->time <= time)
-        {
+        while (key->time <= time) {
             anim = true;
             root->a = key->angle;
             root->x = key->x;
@@ -215,7 +206,7 @@ bool Skeleton::animating(Bone *root, float time)
         root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
         
     }
-    else{
+    else {
         // stop animating
         anim = false;
         
@@ -223,8 +214,7 @@ bool Skeleton::animating(Bone *root, float time)
         Bone* ll = getBoneByName(root, "ll_leg");
         Bone* rl = getBoneByName(root, "rl_leg");
 
-        if(ll && rl)
-        {
+        if(ll && rl) {
             float xpos = ll->box2DBody->GetPosition().x + rl->box2DBody->GetPosition().x;
             xpos      /= 2;
             float ypos = ll->box2DBody->GetPosition().y + rl->box2DBody->GetPosition().y;
@@ -255,10 +245,10 @@ Bone* Skeleton::getRoot()
     return root;
 }
 
-Bone* Skeleton::getBoneByName(Bone* root, string name){
+Bone* Skeleton::getBoneByName(Bone* root, string name)
+{
     
-    if(!root->name.compare(name))
-    {
+    if(!root->name.compare(name)) {
         return root;
     }
     for (int i = 0; i < root->children.size(); i++) {
@@ -270,21 +260,20 @@ Bone* Skeleton::getBoneByName(Bone* root, string name){
     return NULL;
 }
 
-void Skeleton::setPosition(Bone* root, float x, float y){
-    
+void Skeleton::setPosition(Bone* root, float x, float y)
+{
     absolutePosition = b2Vec2(x/PTM_RATIO,y/PTM_RATIO);
     adjustTreePosition(this->root);
-
 }
 
-void Skeleton::adjustTreePosition(Bone* root){
-    
+void Skeleton::adjustTreePosition(Bone* root)
+{
     root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
     for(int i = 0; i < root->children.size(); i++)
         adjustTreePosition(root->children.at(i));
-    
 }
 
-void Skeleton::update(){
-
+void Skeleton::update()
+{
 }
+

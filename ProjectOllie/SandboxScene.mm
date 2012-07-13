@@ -23,11 +23,17 @@
     if (self = [super init]) {
         /* Set up action layer (where action occurs */
         self.actionLayer = [ActionLayer node];
-        Background *blayer = [[Background node] initWithSpeed:30.0 images:[NSArray arrayWithObject:@"background.jpg"]];
-        [self.actionLayer.camera.children addObject:blayer];
+        Background *middlePlants = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_middleplants.png"]];
+        Background *rockSleaves  = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_rocksleaves.png"]];
+        Background *tree = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_tree.png"]];
+        Background *blayer = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1.png"]];
         
         CCNode* actionNode = [CCNode node];
-        [actionNode addChild:blayer];
+        NSArray *backgrounds = [NSArray arrayWithObjects:blayer, tree, middlePlants, rockSleaves, nil];
+        for(Background *background in backgrounds) {
+            [self.actionLayer.camera.children addObject:background];
+            [actionNode addChild:background];
+        }
         [actionNode addChild:self.actionLayer];
         
         [self addChild:actionNode];

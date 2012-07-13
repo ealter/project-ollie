@@ -26,7 +26,6 @@
  - ANIMATE WITH TWEENING
  */
 
-using namespace std;
 class b2Body;
 class b2World;
 
