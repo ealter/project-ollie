@@ -109,7 +109,7 @@ void Skeleton::boneDumpTree(Bone *root, int level)
         return;
     
     for (int i = 0; i < level; i++)
-        printf("#"); /* We print # to signal the level of this bone. */
+        printf("  "); /* We print to signal the level of this bone. */
     
     string pname = "none";
     if(root->parent)
