@@ -6,12 +6,12 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Background.h"
+#import "ScrollingBackground.h"
 #import "cocos2d.h"
 
 #define BACKGROUND_IMAGE_TAG 37475912 /* Kinda random integer to avoid conflicts */
 
-@interface Background ()
+@interface ScrollingBackground ()
 
 /* Each index in the array points to an NSMutableArray of identical CGSprite's.
  * Each of those CGSprite's has the same x position and are tiled vertically.
@@ -23,7 +23,7 @@
 
 @end
 
-@implementation Background
+@implementation ScrollingBackground
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
 @synthesize imageNames  = _imageNames;

@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
-#import "Background.h"
+#import "ScrollingBackground.h"
 #import "RippleEffect.h"
 
 @implementation SandboxScene {
@@ -23,14 +23,15 @@
     if (self = [super init]) {
         /* Set up action layer (where action occurs */
         self.actionLayer = [ActionLayer node];
-        Background *middlePlants = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_middleplants.png"]];
-        Background *rockSleaves  = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_rocksleaves.png"]];
-        Background *tree = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_tree.png"]];
-        Background *blayer = [[Background node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1.png"]];
+        ScrollingBackground *middlePlants = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_middleplants.png"]];
+        ScrollingBackground *rockSleaves  = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_rocksleaves.png"]];
+        ScrollingBackground *tree         = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_tree.png"]];
+        ScrollingBackground *blayer       = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1.png"]];
         
         CCNode* actionNode = [CCNode node];
-        NSArray *backgrounds = [NSArray arrayWithObjects:blayer, tree, middlePlants, rockSleaves, nil];
-        for(Background *background in backgrounds) {
+        //NSArray *backgrounds = [NSArray arrayWithObjects:blayer, tree, middlePlants, rockSleaves, nil];
+        NSArray *backgrounds = [NSArray arrayWithObject:tree];
+        for(ScrollingBackground *background in backgrounds) {
             [self.actionLayer.camera.children addObject:background];
             [actionNode addChild:background];
         }

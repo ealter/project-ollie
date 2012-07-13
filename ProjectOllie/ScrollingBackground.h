@@ -13,7 +13,7 @@
 //to determine how much to tile. The image need not be of the same size. If the scroll speed is not 0,
 //the images will scroll horizontally at that rate.
 
-@interface Background : CCLayer <CameraObject> 
+@interface ScrollingBackground : CCLayer <CameraObject> 
 
 @property (assign, nonatomic) float scrollSpeed; /* In pixels/second. Positive means left to right, negative means right to left. */
 @property (nonatomic, strong) NSArray *imageNames; //An array of NSStrings

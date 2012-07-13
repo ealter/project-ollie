@@ -9,7 +9,7 @@
 #import "ActionLayer.h"
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
-#import "Background.h"
+#import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "RippleEffect.h"
 #import "GameConstants.h"
