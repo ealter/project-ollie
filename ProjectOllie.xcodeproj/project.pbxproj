@@ -48,6 +48,7 @@
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
+		CE05967C15B0C07900735DFA /* SpriteParallax.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05967B15B0C07900735DFA /* SpriteParallax.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
@@ -400,6 +401,8 @@
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
+		CE05967A15B0C07900735DFA /* SpriteParallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteParallax.h; sourceTree = "<group>"; };
+		CE05967B15B0C07900735DFA /* SpriteParallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteParallax.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOS_Versions.h; path = Utils/IOS_Versions.h; sourceTree = "<group>"; };
@@ -1358,6 +1361,8 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE412617157FF6B8001FA126 /* ScrollingBackground.h */,
 				CE412618157FF6B8001FA126 /* ScrollingBackground.m */,
+				CE05967A15B0C07900735DFA /* SpriteParallax.h */,
+				CE05967B15B0C07900735DFA /* SpriteParallax.m */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
@@ -2349,6 +2354,7 @@
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
 				CE11B19115A68C03009B22CA /* GWWater.mm in Sources */,
 				C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */,
+				CE05967C15B0C07900735DFA /* SpriteParallax.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

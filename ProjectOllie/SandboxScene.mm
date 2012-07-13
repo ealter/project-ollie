@@ -10,8 +10,8 @@
 #import "cocos2d.h"
 #import "ActionLayer.h"
 #import "CCBReader.h"
-#import "ScrollingBackground.h"
 #import "RippleEffect.h"
+#import "SpriteParallax.h"
 
 @implementation SandboxScene {
     RippleEffect *ripple;
@@ -23,18 +23,20 @@
     if (self = [super init]) {
         /* Set up action layer (where action occurs */
         self.actionLayer = [ActionLayer node];
-        ScrollingBackground *middlePlants = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_middleplants.png"]];
-        ScrollingBackground *rockSleaves  = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_rocksleaves.png"]];
-        ScrollingBackground *tree         = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1_tree.png"]];
-        ScrollingBackground *blayer       = [[ScrollingBackground node] initWithSpeed:0 images:[NSArray arrayWithObject:@"background_layer1.png"]];
-        
         CCNode* actionNode = [CCNode node];
-        //NSArray *backgrounds = [NSArray arrayWithObjects:blayer, tree, middlePlants, rockSleaves, nil];
-        NSArray *backgrounds = [NSArray arrayWithObject:tree];
-        for(ScrollingBackground *background in backgrounds) {
-            [self.actionLayer.camera.children addObject:background];
-            [actionNode addChild:background];
+        
+        NSString *backgroundNames[] = {@"background_layer1.png", @"background_layer1_tree.png", @"background_layer1_rocksleaves.png", @"background_layer1_middleplants.png"};
+        float parallaxRatios[] = {0.2, 0.4, 0.6, 0.8};
+        assert(sizeof(backgroundNames)/sizeof(*backgroundNames) == sizeof(parallaxRatios)/sizeof(*parallaxRatios));
+        for(int i=0; i<sizeof(backgroundNames)/sizeof(*backgroundNames); i++) {
+            SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundNames[i]];
+            blayer.parallaxRatio = parallaxRatios[i];
+            [actionNode addChild:blayer];
+            blayer.anchorPoint = CGPointZero;
+            //blayer.position = ccpMult(ccpFromSize(self.contentSize), 0.5);
+            [self.actionLayer.camera.children addObject:blayer];
         }
+        
         [actionNode addChild:self.actionLayer];
         
         [self addChild:actionNode];
