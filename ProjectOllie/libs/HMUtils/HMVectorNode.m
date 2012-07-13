@@ -148,7 +148,7 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 {
 	glBindBuffer(GL_ARRAY_BUFFER, _vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex)*_bufferCapacity, _buffer, GL_STREAM_DRAW);
-		
+    
 	glBindVertexArrayOES(_vao);
 	glDrawArrays(GL_TRIANGLES, 0, _bufferCount);
 	

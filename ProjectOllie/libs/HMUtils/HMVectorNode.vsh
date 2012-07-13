@@ -32,7 +32,5 @@ uniform mat4 u_MVPMatrix;
 void main()
 {
 	frag_texcoord = texcoord;
-	
-    mediump vec4 p2 = vec4(position.x, po
     gl_Position = u_MVPMatrix*position;
 }
