@@ -45,6 +45,7 @@
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
 @synthesize children        = _children;
+@synthesize bounded         = _bounded;
 
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
     if(self = [super init]) {
@@ -62,6 +63,7 @@
         self.minimumScale    = 1.f;
         self.defaultScale    = 1.f;
         self.children        = [NSMutableArray array];
+        self.bounded         = YES;
     }
     return self;
 }
@@ -312,7 +314,7 @@
 
 -(void)updateBounds{
     
-    if(self.target == nil)
+    if(self.target == nil && self.bounded)
     {
         [self checkBounds];
     }

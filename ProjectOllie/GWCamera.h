@@ -36,6 +36,8 @@
 
 @property (assign, nonatomic) float defaultScale;       // default scale size
 
+@property (assign, nonatomic) bool bounded;             // checke the bounds?
+
 /* Inits the camera with a world and its dimensions */
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd;
 
