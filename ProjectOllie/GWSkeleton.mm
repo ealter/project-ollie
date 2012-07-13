@@ -13,7 +13,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO METER RATIO
-#define BTM_RATIO 6.0
+#define BTM_RATIO 7.0
 
 using namespace std;
 
@@ -40,7 +40,7 @@ using namespace std;
     if((self = [super init])){
         
         timeElapsed = 0;
-        absoluteLocation = ccp(100.0,200.0);
+        absoluteLocation = ccp(100.0,1.0);
         _skeleton   = new Skeleton(world);
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"];
@@ -179,7 +179,6 @@ using namespace std;
             
             //adds the animation frame to the given animation name
             _skeleton->addAnimationFrame("animation", name, key);
-            
         }
         
     }

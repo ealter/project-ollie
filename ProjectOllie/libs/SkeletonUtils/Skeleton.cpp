@@ -96,11 +96,10 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child){
         jointDef.upperAngle  = root->jointAngleMax;
         jointDef.lowerAngle  = root->jointAngleMin;
         jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx/PTM_RATIO,root->jy/PTM_RATIO));
+       // jointDef.referenceAngle = root->box2DBody->GetAngle() - root->parent->box2DBody->GetAngle();
         b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
-        DebugLog("The angle between these two bodies are: %4.4f", j->GetJointAngle());
+        DebugLog("The angle between these two bodies are: %4.4f", RAD2DEG(j->GetJointAngle()));
     }
-    
-    
     return root;
     
 }
@@ -117,12 +116,7 @@ void Skeleton::boneDumpTree(Bone *root, int level)
     if(root->parent)
         pname = root->parent->name;
     
-    printf("Name:%s X: %4.4f Y: %4.4f JX: %4.4f JY: %4.4f Ang: %4.4f %s \n",root->name.c_str(), root->x, root->y, root->jx, root->jy, root->a, pname.c_str());
-    
-    /* Now print animation info */
-    /*for (int i = 0; i < root->keyFrameCount; i++)
-     printf(" %4.4f %4.4f", root->animation[i].time, root->animation[i].angle);
-     printf("\n");*/
+    printf("Name:%s X: %4.4f Y: %4.4f JX: %4.4f JY: %4.4f Ang: %4.4f %s \n",root->name.c_str(), root->x + absolutePosition.x, root->y + absolutePosition.y, root->jx, root->jy, root->a, pname.c_str());
     
     /* Recursively call this on children */
     for (int i = 0; i < root->children.size(); i++)
@@ -187,15 +181,17 @@ bool Skeleton::animating(Bone *root, float time)
     {
         //not a key frame, so interpolation
         if(key->time > time)
-        {
-          /*  
+        {/*
+            float angleDiff = key->angle - root->a;
+            float timeDiff  = (key->time - time)*60.0;
+            float xDiff     = key->x - root->x;
+            float yDiff     = key->y - root->y;
             angleDiff /= timeDiff;
             xDiff     /= timeDiff;
             yDiff     /= timeDiff;
             root->x += xDiff;
             root->y += yDiff;
             root->a += angleDiff;*/
-            
         }
         else // keyframe, so set it's values
         while (key->time <= time)
@@ -208,7 +204,6 @@ bool Skeleton::animating(Bone *root, float time)
             root->animation.pop();
             if(root->animation.empty())break;
             key = root->animation.front();
-            
         }
         root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
         root->box2DBody->SetAngularVelocity(0);
