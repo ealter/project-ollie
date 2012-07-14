@@ -86,7 +86,7 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-        
+        	
         [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
@@ -337,7 +337,7 @@ enum {
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if([touches count] == 3)
+    if([touches count] == 1)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
@@ -363,6 +363,16 @@ enum {
         
     
 }
+
+
+-(void)setTerrain:(Terrain*)t
+{
+    //Add as a child so it draws
+    [self addChild:t];
+    //Add all of the edge shapes to the world
+    [t addToWorld:world];
+}
+
 
 //CAMERA OBJECT FUNCTIONS
 

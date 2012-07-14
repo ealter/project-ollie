@@ -10,6 +10,7 @@
 // When you import this file, you import all the cocos2d classes
 #import "GLES-Render.h"
 #import "GWCamera.h"
+#import "Terrain.h"
 
 //Action Layer is different from a regular layer in that it has a camera that follows it
 //And it keeps track of parallax brothers in a scene
@@ -27,6 +28,6 @@
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
 
-
+-(void)setTerrain:(Terrain*)t;
 
 @end

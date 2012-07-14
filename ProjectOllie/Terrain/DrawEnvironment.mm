@@ -128,7 +128,7 @@
     SandboxScene *scene = [SandboxScene node];
     
     [self removeChild:self.terrain cleanup:YES];
-    [scene.actionLayer addChild:self.terrain];
+    [scene.actionLayer setTerrain:self.terrain];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 

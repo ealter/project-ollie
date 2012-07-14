@@ -32,6 +32,5 @@ uniform mat4 u_MVPMatrix;
 void main()
 {
 	frag_texcoord = texcoord;
-	
-	gl_Position = u_MVPMatrix*position;
+    gl_Position = u_MVPMatrix*position;
 }

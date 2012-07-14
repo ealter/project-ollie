@@ -14,6 +14,7 @@
 #import "MaskedSprite.h"
 #import "HMVectorNode.h"
 #import "Box2D.h"
+#import "GameConstants.h"
 #import <set>
 
 @interface Terrain(){
@@ -48,7 +49,7 @@
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
     
     polyRenderer = [[HMVectorNode alloc] init];
-    [polyRenderer setColor:ccc4f(1.f,.4f,.8f,1)];
+    [polyRenderer setColor:ccc4f(.3f,.25f,.15f,1)];
     
     [self addChild:drawSprite];
     [self addChild:polyRenderer];
@@ -214,6 +215,38 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
                 previousRadius = radius;
             } 
         }
+    }
+}
+
+- (void) addToWorld:(b2World*)bworld
+{
+    for (PeSet::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
+    {
+        PointEdge* pe = *i;
+        PointEdge* npe = pe->next;
+        PointEdge* nnpe = npe->next;
+        PointEdge* ppe = pe->prev;
+        //Create an edge shape
+        b2EdgeShape e;
+        e.Set(b2Vec2(0, 0), b2Vec2((npe->x - pe->x)/PTM_RATIO, (npe->y - pe->y)/PTM_RATIO));
+        e.m_hasVertex0 =true;
+        e.m_hasVertex3 =true;
+        e.m_vertex0 = b2Vec2((ppe->x - pe->x)/PTM_RATIO, (ppe->y - pe->y)/PTM_RATIO);
+        e.m_vertex3 = b2Vec2((nnpe->x - pe->x)/PTM_RATIO, (nnpe->y - pe->y)/PTM_RATIO);
+        //Body def
+        b2BodyDef bd;
+        bd.type = b2_staticBody;
+        bd.position = b2Vec2(pe->x/PTM_RATIO, pe->y/PTM_RATIO);
+        bd.angle = 0;
+        bd.allowSleep = true;
+        b2Body* b = bworld->CreateBody(&bd);
+        b2FixtureDef fixtureDef;
+        fixtureDef.shape = &e;	
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.3f;
+   //     fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+   //     fixtureDef.filter.maskBits = MASK_TERRAIN;
+        b->CreateFixture(&fixtureDef);
     }
 }
 

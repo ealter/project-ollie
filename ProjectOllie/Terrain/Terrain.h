@@ -44,6 +44,8 @@ typedef enum TerrainTexture {
 //Reset to a blank terrain
 - (void) clear;
 
+- (void) addToWorld:(b2World*)bworld;
+
 + (Terrain*) generateRandomOneIsland;
 + (Terrain*) generateRandomTwoIsland;
 + (Terrain*) generateRandomBlobs;
