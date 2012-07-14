@@ -153,7 +153,6 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     //The shape is changed so we must update the stroke
 
     [polyRenderer clear];
-    printf("Terrain shape changed, new number of edges: %lu\n", shapeField_->peSet.size());
     for (std::set<PointEdge*>::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
     {
         PointEdge* pe = *i;
@@ -244,8 +243,8 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
         fixtureDef.shape = &e;	
         fixtureDef.density = 1.0f;
         fixtureDef.friction = 0.3f;
-   //     fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
-   //     fixtureDef.filter.maskBits = MASK_TERRAIN;
+        fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+        fixtureDef.filter.maskBits = MASK_TERRAIN;
         b->CreateFixture(&fixtureDef);
     }
 }

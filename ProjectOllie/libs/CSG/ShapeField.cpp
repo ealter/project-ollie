@@ -468,7 +468,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
             //If the enterence and exit are at a really close theta, then we just want to merge these points
             if (fabs(dTheta) < FLT_EPSILON)
             {
-                printf("Merging close enterence and exit\n");
+                //printf("Merging close enterence and exit\n");
                 //Bypass the "in" PointEdge
                 peSet.erase(in.intersection);
                 removeFromSpatialGrid(in.intersection->prev);
@@ -635,7 +635,7 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
         input.input.rectInput.y[i] = y[i];
     }
     shapefieldInput.push_back(input);
-    printTouchInput();
+    //printTouchInput();
 #endif
 
     //Make sure the points are counterclockwise

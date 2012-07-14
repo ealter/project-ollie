@@ -47,7 +47,7 @@ using namespace std;
     if((self = [super init])){
         
         timeElapsed = 0;
-        absoluteLocation = ccp(100.0,1.0);
+        absoluteLocation = ccp(200.0,200.0);
         _skeleton   = new Skeleton(world);
         _world      = world;
         
