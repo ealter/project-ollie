@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 
-#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fstream>
@@ -30,7 +29,6 @@ Skeleton::~Skeleton()
 
 Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin)
 {
-    
     Bone *t = new Bone;
     
     /* Set data */
@@ -46,7 +44,6 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
     t->jy            = jy;
     
     return boneAddChild(root, t);
-    
 }
 
 Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
@@ -108,7 +105,7 @@ void Skeleton::boneDumpTree(Bone *root, int level)
         return;
     
     for (int i = 0; i < level; i++)
-        printf("#"); /* We print # to signal the level of this bone. */
+        printf("  "); /* We print to signal the level of this bone. */
     
     string pname = "none";
     if(root->parent)
@@ -150,7 +147,6 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
 
 void Skeleton::loadAnimation(string animationName)
 {
-    
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
         Bone* bone = this->getBoneByName(this->root, iter->first);
@@ -221,9 +217,6 @@ bool Skeleton::animating(Bone *root, float time)
             absolutePosition = b2Vec2(xpos,ypos);
         }
     }
-    
-    
-    
     
     /* Call on other bones */
     for (int i = 0; i < root->children.size(); i++)

@@ -9,12 +9,11 @@
 #ifndef ProjectOllie_Skeleton_h
 #define ProjectOllie_Skeleton_h
 
-#include "Box2D.h"
-#include "GameConstants.h"
 #include <vector>
 #include <queue>
 #include <map>
 #include <string>
+#include "b2Math.h"
 
 #define MAX_CHCOUNT 8  //max amount of children for bone
 #define MAX_KFCOUNT 60 //max amount of key frames per bone per animation
