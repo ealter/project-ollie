@@ -20,6 +20,8 @@ using namespace std;
 @interface GWSkeleton(){
     float timeElapsed;
     CGPoint absoluteLocation; 
+    b2Body* _interactor;
+    b2World* _world;
 }
 //Master function for loading file information for skeleton (.skel) files
 -(void)buildSkeletonFromFile:(NSString*)fileName;
@@ -32,6 +34,10 @@ using namespace std;
 
 //Helper function for attaching animations to bones
 -(void)assembleAnimation:(NSArray*)frames;
+
+//Create body that interacts with world when not in ragdoll mode
+-(void)buildInteractor;
+
 @end
 
 @implementation GWSkeleton
@@ -42,6 +48,7 @@ using namespace std;
         timeElapsed = 0;
         absoluteLocation = ccp(100.0,1.0);
         _skeleton   = new Skeleton(world);
+        _world      = world;
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"];
         DebugLog(@"The filepath for filename %@ is %@", fileName, filePath);
@@ -76,13 +83,14 @@ using namespace std;
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
     _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+    [self buildInteractor];
 }
 
 /* recursively assembles the bone tree imported from blender*/
 -(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
     
     float jointAngleMax = DEG2RAD(45.0);
-    float jointAngleMin = -DEG2RAD(0.0);
+    float jointAngleMin = -DEG2RAD(30.0);
     CGPoint headLoc;
     CGPoint tailLoc;
     CGPoint averageLoc;
@@ -199,13 +207,47 @@ using namespace std;
     _skeleton->loadAnimation(animationName);
 }
 
+-(void)buildInteractor{
+    
+    /* Tie to box2d */
+    b2BodyDef bd;
+    b2CircleShape wheel;
+    b2FixtureDef fixtureDef;
+    b2RevoluteJointDef jointDef;
+    
+    /* Body definition */
+    bd.type = b2_dynamicBody;
+    bd.gravityScale = 1.;
+    bd.linearDamping = .1f;
+    bd.angularDamping = .1f;
+    
+    wheel.m_radius = .05;
+    fixtureDef.shape = &wheel;
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 1.f;
+    fixtureDef.restitution = 0.1f;
+    fixtureDef.filter.categoryBits = CATEGORY_BONES;
+    fixtureDef.filter.maskBits = MASK_BONES;
+    bd.position.Set(absoluteLocation.x/PTM_RATIO, absoluteLocation.y/PTM_RATIO);
+    b2Body *boneShape = _world->CreateBody(&bd);
+    boneShape->CreateFixture(&fixtureDef);
+    
+    _interactor = boneShape;
+    _interactor->SetTransform(b2Vec2(absoluteLocation.x/PTM_RATIO, absoluteLocation.y/PTM_RATIO),0);
+}
+
 -(void)update:(float)dt{
     
+    absoluteLocation = ccp(_interactor->GetPosition().x*PTM_RATIO, _interactor->GetPosition().y*PTM_RATIO);
     if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
+    {
         timeElapsed += dt;
+        _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+    }
     else{
         timeElapsed = 0;
         _skeleton->update();
+        _interactor->SetTransform(_skeleton->getRoot()->box2DBody->GetPosition(), _interactor->GetAngle());
     }
     
 

@@ -85,7 +85,6 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
     
-    //TURN OFF FOR RAGDOLL EFFECT
     root->box2DBody = boneShape;
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
@@ -173,6 +172,8 @@ bool Skeleton::animating(Bone *root, float time)
     KeyFrame* key = root->animation.front();
     /* Check for current keyframe */
     if (!root->animation.empty()) {
+        anim = true;
+        root->box2DBody->SetActive(false);
         //not a key frame, so interpolation
         if(key->time > time) {/*
             float angleDiff = key->angle - root->a;
@@ -188,7 +189,6 @@ bool Skeleton::animating(Bone *root, float time)
         }
         else // keyframe, so set it's values
         while (key->time <= time) {
-            anim = true;
             root->a = key->angle;
             root->x = key->x;
             root->y = key->y;
@@ -205,6 +205,8 @@ bool Skeleton::animating(Bone *root, float time)
     else {
         // stop animating
         anim = false;
+        root->box2DBody->SetAwake(true);
+        root->box2DBody->SetActive(true);
         
         // new position is torso's position
         Bone* ll = getBoneByName(root, "ll_leg");
