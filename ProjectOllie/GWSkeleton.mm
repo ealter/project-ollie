@@ -10,6 +10,7 @@
 #import "Skeleton.h"
 #import "GameConstants.h"
 #import "cocos2d.h"
+#import "Box2D.h"
 #import "NSString+SBJSON.h"
 
 //BLENDER TO METER RATIO
