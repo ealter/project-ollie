@@ -23,8 +23,10 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "CCNode.h"
+#import "CCFileUtils.h"
 
+@class CCScene;
 #define kCCBVersion 2
 
 enum {

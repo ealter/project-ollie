@@ -11,16 +11,10 @@
 #include <stdio.h>
 #include <fstream>
 #include "Skeleton.h"
+#include "Box2D.h"
+#include "GameConstants.h"
 
-#define RAD2DEG(a) (((a) * 180.0) / M_PI)
-#define DEG2RAD(a) (((a) / 180.0) * M_PI)
-
-
-Skeleton::Skeleton(b2World* world, string path)
-{
-    this->root   = loadBoneStructure(path);
-    this->world  = world;
-}
+using namespace std;
 
 Skeleton::Skeleton(b2World* world)
 {
@@ -34,44 +28,39 @@ Skeleton::~Skeleton()
     this->boneFreeTree(this->root);
 }
 
-Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin, Animation* anim)
+Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin)
 {
-    Bone *t;
-	int i;
     
-	if (!root) /* If there is no root, create a new */
-	{
-		if (!(root = (Bone *)malloc(sizeof(Bone))))
-			return NULL; // all is lost
-        
-		root->parent = NULL;
-	}
-	else if (root->childCount < MAX_CHCOUNT) /* If there is space for another child */
-	{
-		if (!(t = (Bone *)malloc(sizeof(Bone))))
-			return NULL; // Let's just give up now
-        
-		t->parent = root;
-		root->children[root->childCount] = t; /* Set the pointer */
-		root->childCount++; /* Increment the childCounter */
-		root = t; /* Change the root */
-	}
-	else /* Can't add a child */
-		return NULL;
+    Bone *t = new Bone;
     
-	/* Set data */
-	root->x             = x;
-	root->y             = y;
-	root->a             = angle;
-	root->l             = length;
-    root->w             = width;
-	root->childCount    = 0;
-    root->name          = name;
-    root->jointAngleMax = jaMax;
-    root->jointAngleMin = jaMin;
-    root->jx            = jx;
-    root->jy            = jy;
-    root->animation     = anim;
+    /* Set data */
+    t->x             = x;
+    t->y             = y;
+    t->a             = angle;
+    t->l             = length;
+    t->w             = width;
+    t->name          = name;
+    t->jointAngleMax = jaMax;
+    t->jointAngleMin = jaMin;
+    t->jx            = jx;
+    t->jy            = jy;
+    
+    return boneAddChild(root, t);
+    
+}
+
+Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
+{
+    if (!root) { /* If there is no root, create a new */
+        root         = child;
+        root->parent = NULL;
+        this->root   = root;
+    } else if (root->children.size() < MAX_CHCOUNT)  {/* If there is space for another child */
+        child->parent = root;
+        root->children.push_back(child); /* Set the pointer */
+        root = child; /* Change the root */
+    } else /* Can't add a child */
+        return NULL;
     
     /* Tie to box2d */
     b2BodyDef bd;
@@ -81,207 +70,206 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
     
     /* Body definition */
     bd.type = b2_dynamicBody;
-    box.SetAsBox(length/PTM_RATIO,width/PTM_RATIO);
+    bd.gravityScale = 1.;
+    bd.linearDamping = .1f;
+    bd.angularDamping = .1f;
+    
+    box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.4f;
     fixtureDef.restitution = 0.1f;
-    bd.position.Set(x/PTM_RATIO, y/PTM_RATIO);
+    fixtureDef.filter.categoryBits = CATEGORY_BONES;
+    fixtureDef.filter.maskBits = MASK_BONES;
+    bd.position.Set(root->x/PTM_RATIO, root->y/PTM_RATIO);
     b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
+    
+    //TURN OFF FOR RAGDOLL EFFECT
     root->box2DBody = boneShape;
     
+    boneShape->SetTransform(boneShape->GetPosition(), root->a);
+    
     /* Joint definition */
-    if(root->parent)
-    {
+    if(root->parent) {
         jointDef.enableLimit = true;
         jointDef.upperAngle  = root->jointAngleMax;
-        jointDef.upperAngle  = root->jointAngleMin;
-        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(jx,jy));
-        world->CreateJoint(&jointDef);
+        jointDef.lowerAngle  = root->jointAngleMin;
+        jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx/PTM_RATIO,root->jy/PTM_RATIO));
+       // jointDef.referenceAngle = root->box2DBody->GetAngle() - root->parent->box2DBody->GetAngle();
+        b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+        DebugLog("The angle between these two bodies are: %4.4f", RAD2DEG(j->GetJointAngle()));
     }
-    
-	for (i = 0; i < MAX_CHCOUNT; i++)
-		root->children[i] = NULL;
-    
-	return root;
+    return root;
 }
 
 void Skeleton::boneDumpTree(Bone *root, int level)
 {
-	if (!root)
-		return;
+    if (!root)
+        return;
     
-	for (int i = 0; i < level; i++)
-		printf("#"); /* We print # to signal the level of this bone. */
+    for (int i = 0; i < level; i++)
+        printf("#"); /* We print # to signal the level of this bone. */
     
-	printf(" %4.4f %4.4f %4.4f %4.4f %s", root->x, root->y, root->a, root->l, root->name.c_str());
+    string pname = "none";
+    if(root->parent)
+        pname = root->parent->name;
     
-	/* Now print animation info */
-	for (int i = 0; i < root->keyFrameCount; i++)
-		printf(" %4.4f %4.4f", root->animation->keyframes[i].time, root->animation->keyframes[i].angle);
-	printf("\n");
+    printf("Name:%s X: %4.4f Y: %4.4f JX: %4.4f JY: %4.4f Ang: %4.4f %s \n",root->name.c_str(), root->x + absolutePosition.x, root->y + absolutePosition.y, root->jx, root->jy, root->a, pname.c_str());
     
-	/* Recursively call this on children */
-	for (int i = 0; i < root->childCount; i++)
-		boneDumpTree(root->children[i], level + 1);
+    /* Recursively call this on children */
+    for (int i = 0; i < root->children.size(); i++)
+        boneDumpTree(root->children.at(i), level + 1);
 }
 
 Bone* Skeleton::boneFreeTree(Bone *root)
 {    
-	if (!root)
-		return NULL;
+    if (!root)
+        return NULL;
     
-	for (int i = 0; i < root->childCount; i++)
-		boneFreeTree(root->children[i]);
+    for (int i = 0; i < root->children.size(); i++)
+        boneFreeTree(root->children[i]);
     
-	free(root);
+    delete(root);
     
-	return NULL;
+    return NULL;
 }
 
-Bone* Skeleton::loadBoneStructure(string path)
+void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame *frame)
 {
-    /*
-    Bone *root,
-    *temp;
-    
-    FILE *file;
-    oat x,
-    y,
-    angle,
-    length,
-    width;
-    
-    int unusedChildrenCount,
-    depth,
-    actualLevel;
-    
-    float time;
-    
-    char name[20],
-    depthStr[20],
-    animBuf[1024],
-    buffer[1024],
-    *ptr,
-    *token;
-    
-    KeyFrame *k;
-    
-    if (!(file = fopen(path.c_str(), "r")))
-    {
-        fprintf(stderr, "Can't open file %s for reading\n", path.c_str());
-        return NULL;
+    //pushes the frame back for that particular bone
+    Animation* animation = animations[animationName][boneName];
+    if(animation) {
+        animation->frames.push_back(frame);
+    } else {
+        printf("Loading new animation \n");
+        animation = new Animation;
+        animation->frames.push_back(frame);
+        animations[animationName][boneName] = animation;
     }
+}
+
+void Skeleton::loadAnimation(string animationName)
+{
     
-    root = NULL;
-    temp = NULL;
-    actualLevel = 0;
-    
-    while (!feof(file))
-    {
-        memset(animBuf, 0, 1024);
-        fgets(buffer, 1024, file);
-        sscanf(buffer, "%s %f %f %f %f %f %d %s %[^\n]", depthStr, &x, &y, &angle, &length, &width, &unusedChildrenCount, name, animBuf);
-        
-        /* Avoid empty strings 
-        if (strlen(buffer) < 3)
-            continue;
-        
-        /* Calculate the depth 
-        depth = strlen(depthStr) - 1;
-        if (depth < 0 || depth > MAX_CHCOUNT)
-        {
-            fprintf(stderr, "Wrong bone depth (%s)\n", depthStr);
-            return NULL;
-        }
-        
-        for (; actualLevel > depth; actualLevel--)
-            temp = temp->parent;
-        
-        if (!root && !depth)
-        {
-            root = boneAddChild(NULL, name, x, y, angle, length, width);
-            temp = root;
-        }
-        else
-            temp = boneAddChild(temp, name, x, y, angle, length, width);
-        
-        /* Now check for animation data 
-        if (strlen(animBuf) > 3)
-        {
-            ptr = animBuf;
-            while ((token = strtok(ptr, " ")))
-            {
-                ptr = NULL;
-                sscanf(token, "%d", &time);
-                
-                token = strtok(ptr, " ");
-                sscanf(token, "%f", &angle);
-                
-                token = strtok(ptr, " ");
-                sscanf(token, "%f", &length);
-                
-                printf("Read %f %f %f\n", time, angle, length);
-                
-                if (temp->keyFrameCount >= MAX_KFCOUNT)
-                {
-                    fprintf(stderr, "Can't add more keyframes\n");
-                    continue;
+    map<string, Animation*>::iterator iter;
+    for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
+        Bone* bone = this->getBoneByName(this->root, iter->first);
+        if(bone) {
+            if(iter->second) {
+                queue<KeyFrame*> newAnimation;
+                for(int i = 0; i < iter->second->frames.size(); i++) {
+                    newAnimation.push(iter->second->frames.at(i));
                 }
-                
-                k = &(temp->keyframes[temp->keyFrameCount]);
-                
-                k->time = time;
-                k->angle = angle;
-                
-                temp->keyFrameCount++;
+                swap(bone->animation,newAnimation);
             }
         }
-        
-        actualLevel++;
     }
-    
-    return root;
-    fl*/
-    return NULL;
 }
 
 bool Skeleton::animating(Bone *root, float time)
 {
+    bool anim = true;
+    KeyFrame* key = root->animation.front();
+    /* Check for current keyframe */
+    if (!root->animation.empty()) {
+        //not a key frame, so interpolation
+        if(key->time > time) {/*
+            float angleDiff = key->angle - root->a;
+            float timeDiff  = (key->time - time)*60.0;
+            float xDiff     = key->x - root->x;
+            float yDiff     = key->y - root->y;
+            angleDiff /= timeDiff;
+            xDiff     /= timeDiff;
+            yDiff     /= timeDiff;
+            root->x += xDiff;
+            root->y += yDiff;
+            root->a += angleDiff;*/
+        }
+        else // keyframe, so set it's values
+        while (key->time <= time) {
+            anim = true;
+            root->a = key->angle;
+            root->x = key->x;
+            root->y = key->y;
+            /* Change animation */
+            root->animation.pop();
+            if(root->animation.empty())break;
+            key = root->animation.front();
+        }
+        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+        root->box2DBody->SetAngularVelocity(0);
+        root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
+        
+    }
+    else {
+        // stop animating
+        anim = false;
+        
+        // new position is torso's position
+        Bone* ll = getBoneByName(root, "ll_leg");
+        Bone* rl = getBoneByName(root, "rl_leg");
+
+        if(ll && rl) {
+            float xpos = ll->box2DBody->GetPosition().x + rl->box2DBody->GetPosition().x;
+            xpos      /= 2;
+            float ypos = ll->box2DBody->GetPosition().y + rl->box2DBody->GetPosition().y;
+            ypos      /= 2;
+            
+            absolutePosition = b2Vec2(xpos,ypos);
+        }
+    }
     
-    bool others = false;
     
-	float adiff,
-    tdiff;
     
-	/* Check for keyframes */
-	for (int i = 0; i < root->keyFrameCount; i++)
-		if (root->animation->keyframes[i].time == time)
-		{
-			/* Find the index for the interpolation */
-			if (i != root->keyFrameCount - 1)
-			{
-				tdiff = root->animation->keyframes[i + 1].time - root->animation->keyframes[i].time;
-				adiff = root->animation->keyframes[i + 1].angle - root->animation->keyframes[i].angle;
-                
-				root->offA = adiff / tdiff;
-			}
-			else
-			{
-				root->offA = 0;
-			}
-		}
-		else if (root->animation->keyframes[i].time > time)
-			others = true;
-	
-	/* Change animation */
-	root->a += root->offA;
     
-	/* Call on other bones */
-	for (int i = 0; i < root->childCount; i++)
-		if (animating(root->children[i], time))
-			others = true;
+    /* Call on other bones */
+    for (int i = 0; i < root->children.size(); i++)
+        if(animating(root->children.at(i), time))
+            anim = true;
     
-	return others;
+    return anim;
 }
+
+void Skeleton::setRoot(Bone *bone)
+{
+    root = bone;
+}
+
+Bone* Skeleton::getRoot()
+{
+    return root;
+}
+
+Bone* Skeleton::getBoneByName(Bone* root, string name)
+{
+    
+    if(!root->name.compare(name)) {
+        return root;
+    }
+    for (int i = 0; i < root->children.size(); i++) {
+        Bone* child = this->getBoneByName(root->children.at(i),name);
+        if(child)
+            return child;
+    }
+    
+    return NULL;
+}
+
+void Skeleton::setPosition(Bone* root, float x, float y)
+{
+    absolutePosition = b2Vec2(x/PTM_RATIO,y/PTM_RATIO);
+    adjustTreePosition(this->root);
+}
+
+void Skeleton::adjustTreePosition(Bone* root)
+{
+    root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+    for(int i = 0; i < root->children.size(); i++)
+        adjustTreePosition(root->children.at(i));
+}
+
+void Skeleton::update()
+{
+}
+

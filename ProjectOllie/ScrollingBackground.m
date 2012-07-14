@@ -6,12 +6,12 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Background.h"
+#import "ScrollingBackground.h"
 #import "cocos2d.h"
 
 #define BACKGROUND_IMAGE_TAG 37475912 /* Kinda random integer to avoid conflicts */
 
-@interface Background ()
+@interface ScrollingBackground ()
 
 /* Each index in the array points to an NSMutableArray of identical CGSprite's.
  * Each of those CGSprite's has the same x position and are tiled vertically.
@@ -23,14 +23,15 @@
 
 @end
 
-@implementation Background
+@implementation ScrollingBackground
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
 @synthesize imageNames  = _imageNames;
+@synthesize parallaxRatio = _parallaxRatio;
 
 - (void)initBackgrounds;
 {
-    [self setAnchorPoint:ccp(0,0)];
+    [self setAnchorPoint:CGPointZero];
     
     if(self.children.count > 0)
         [self removeChildByTag:BACKGROUND_IMAGE_TAG cleanup:YES];
@@ -43,9 +44,9 @@
         DebugLog(@"Warning: initBackgrounds was called and the content size was 0");
         return;
     }
-    self.backgrounds = [[NSMutableArray alloc]initWithCapacity:2];
+    self.backgrounds = [[NSMutableArray alloc] initWithCapacity:2];
     
-    NSMutableArray *batchNodes = [[NSMutableArray alloc]initWithCapacity:imageNames.count];
+    NSMutableArray *batchNodes = [[NSMutableArray alloc] initWithCapacity:imageNames.count];
     for(NSString *imageName in imageNames) {
         CCSpriteBatchNode *parent = [CCSpriteBatchNode batchNodeWithFile:imageName capacity:2];
         [self addChild:parent z:1 tag:BACKGROUND_IMAGE_TAG];
@@ -59,6 +60,7 @@
         float backgroundHeight;
         for(float y=0; y < self.boundingBox.size.height; y += backgroundHeight) {
             CCSprite *background = [CCSprite spriteWithFile:[imageNames objectAtIndex:imageIndex]];
+            assert(background); //Make sure that this image exists
             backgroundHeight = background.boundingBox.size.height;
             background.anchorPoint = ccp(.5f,.5f);
             background.position = ccp(offset, y);
@@ -82,6 +84,7 @@
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
         [self scheduleUpdate];
+        self.parallaxRatio = 0.3;
     }
     return self;
 }
@@ -99,7 +102,8 @@
         [self initBackgrounds];
 }
 
-- (void)update:(ccTime)dt{
+- (void)update:(ccTime)dt
+{
     if(self.scrollSpeed == 0) return;
     
     float deltaX = self.scrollSpeed * dt;
@@ -109,21 +113,19 @@
         CCSprite *background = [backgroundTiled lastObject];
         for(CCSprite *background in backgroundTiled)
             background.position = ccp(background.position.x - deltaX, background.position.y);
-            if((self.scrollSpeed > 0 && background.position.x + background.boundingBox.size.width < 0) ||
-               (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) 
-            {
-                CGFloat newX = 0;
-                if(self.scrollSpeed > 0) {
-                    int index = i-1;
-                    if(index < 0) {
-                        index += numBackgrounds;
-                        newX = -deltaX;
-                    }
-                    CCSprite *leftBackground = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
-                    assert(leftBackground);
-                    newX += leftBackground.position.x + leftBackground.boundingBox.size.width;
-            }
-            else {
+        if((self.scrollSpeed > 0 && background.position.x + background.boundingBox.size.width < 0) ||
+           (self.scrollSpeed < 0 && background.position.x > self.boundingBox.size.width)) {
+            CGFloat newX = 0;
+            if(self.scrollSpeed > 0) {
+                int index = i-1;
+                if(index < 0) {
+                    index += numBackgrounds;
+                    newX = -deltaX;
+                }
+                CCSprite *leftBackground = [(NSMutableArray *)[self.backgrounds objectAtIndex:index] lastObject];
+                assert(leftBackground);
+                newX += leftBackground.position.x + leftBackground.boundingBox.size.width;
+            } else {
                 int index = i+1;
                 if(index >= numBackgrounds) {
                     index -= numBackgrounds;
@@ -143,7 +145,7 @@
 //Camera object
 
 -(float)getParallaxRatio{
-    return .3f;
+    return self.parallaxRatio;
 }
 
 -(bool)isBounded{

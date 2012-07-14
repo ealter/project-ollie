@@ -25,7 +25,7 @@
 // Define the smallest float difference that could matter
 #define plankFloat 0.001f
 
-//Constant we 
+//Constant we
 #define radiusMargin .01
 
 //2 pi
@@ -464,7 +464,7 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                     }
                 }
             }
-                        
+
             //If the enterence and exit are at a really close theta, then we just want to merge these points
             if (fabs(dTheta) < FLT_EPSILON)
             {
@@ -536,11 +536,11 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
     }
     for (PeSet::iterator i = nearPEs.begin(); i != nearPEs.end(); i++)
         if ((*i)->tmpMark == inside) delete *i;
-    
-    
+
+
     //Make sure that the middle is inside if we're adding or outside if we're subtracting
     assert(isOutside(x, y) != add);
-    
+
 #ifdef USE_EXPENSIVE_ASSERTS
     //Check that everything makes sense in the ways we can validate
     checkConsistency();
@@ -643,10 +643,9 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
     assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
     assert(ccw(x[2], y[2], x[3], y[3], x[0], y[0]) > FLT_EPSILON);
     //Check that all four points are inside if adding and outside if subtracting
-    if(isOutside(x[0], y[0]) == add)return;
-    if(isOutside(x[1], y[1]) == add)return;
-    if(isOutside(x[2], y[2]) == add)return;
-    if(isOutside(x[3], y[3]) == add)return;
+    for(int i=0; i<4; i++) {
+        if(isOutside(x[i], y[i]) == add) return;
+    }
 
     //Find a bounding box to get near points
     float minX = min(min(x[0], x[1]), min(x[2], x[3]));
@@ -684,14 +683,14 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
     //Store intersections in a fast data structure sorted by the parametric t where the intersection is on the segment
     map<float, PointEdge*> SegIns;
     map<float, PointEdge*> SegOuts;
-    
+
     //Track the marked PE's that are outside of near PE's so we can reset them to outside at the end
     PeSet markedNotNear;
-    
+
     //Do A first
     int rightMark = rightA;
-	
-    //For both seg A and B, find intersecting PE's and create connecting paths and remember what to connect at the end 
+
+    //For both seg A and B, find intersecting PE's and create connecting paths and remember what to connect at the end
     vector<PointEdge*> perA = vector<PointEdge*>();     //Hold PE to rerout from
     vector<PointEdge*> perB = vector<PointEdge*>();     //Hold NPE to rerout to
     for (int s = 0; s < 2; s++)
@@ -702,13 +701,13 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
         float y1 = y[segi];
         float x2 = x[segi +1];
         float y2 = y[segi +1];
-        
+
         //Find all intersections
         for (PeSet::iterator i = nearPEs.begin(); i != nearPEs.end(); i++)
         {
             PointEdge* pe = *i;
             PointEdge* npe = pe->next;
-            
+
             //Make sure the next point is marked as a specific outside (in case it was off the nearPEs)
             if (npe->tmpMark == outside)
             {
@@ -718,28 +717,28 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
                 //Check right of C
                 else if (rightOf(x[2], y[2], x[3], y[3], npe->x, npe->y))
                     npe->tmpMark = rightC;
-                
+
                 //Check right of B
                 if (rightOf(x[1], y[1], x[2], y[2], npe->x, npe->y))
                     npe->tmpMark |= rightB;
                 //Check right of D
                 else if (rightOf(x[3], y[3], x[0], y[0], npe->x, npe->y))
                     npe->tmpMark |= rightD;
-                
+
                 //Make sure it wasn't left of everything (which would mean it was inside but not near)
                 assert (npe->tmpMark != outside);
-                
+
                 markedNotNear.insert(npe);
             }
-            
+
             //Bitwise flag comparing super-shortcut implying no intersection possible because both points are
             //either on the right of the same clipping segment or both on the left of every clipping segment
             if (pe->tmpMark & npe->tmpMark) continue;
-            
+
             float Xint, Yint, tA, peT;
-            
+
             //Check for IN intersection
-            if (pe->tmpMark & rightMark)            //PE is right 
+            if (pe->tmpMark & rightMark)            //PE is right
             {
                 if (!(npe->tmpMark & rightMark))    //NPE is not right
                     //PE right and NPE left, possible IN intersection
@@ -749,13 +748,13 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
                         PointEdge* intersection = new PointEdge(Xint, Yint, NULL, pe);
                         SegIns.insert(pair<float, PointEdge*>(tA, intersection));
                         peSet.insert(intersection);
-                        
+
                         //Remember to eventually reroute the PE to this intersection
                         perA.push_back(pe);
                         perB.push_back(intersection);
                     }
             }
-            
+
             //PE left check for OUT intersection
             else if (npe->tmpMark & rightMark)
             {
@@ -766,18 +765,18 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
                     PointEdge* intersection = new PointEdge(Xint, Yint, npe, NULL);
                     SegOuts.insert(pair<float, PointEdge*>(tA, intersection));
                     peSet.insert(intersection);
-                    
+
                     //Remember to eventually reroute the exit to the NPE
                     perA.push_back(intersection);
                     perB.push_back(npe);
                 }
             }
         }
-        
+
         //Get the iterators
         map<float, PointEdge*>::iterator insIterator = SegIns.begin();
         map<float, PointEdge*>::iterator outsIterator = SegOuts.begin();
-        
+
         //Since endpoints must be either both inside or both outside, we must have an equal number of ins and outs
         printq("RECT SEG ins %d outs %d\n", SegIns.size(), SegOuts.size());
         if (SegIns.size() != SegOuts.size())
@@ -791,15 +790,15 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
                 peSet.erase(insIterator->second);
             for (;outsIterator != SegOuts.end(); outsIterator++)
                 peSet.erase(outsIterator->second);
-            
+
             //Yea don't connect anything
             perA.clear();
             perB.clear();
-            
+
             //Skip the next segment if we didn't do it yet
             s = 3;
         }
-        
+
         //Construct new edges by connecting every IN to the corrosponding next OUT on this segment
         for (; insIterator != SegIns.end(); insIterator++, outsIterator++)
         {
@@ -812,16 +811,16 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
             out->prev = in;
             addToSpatialGrid(in);
         }
-        
-        //Clean up from this segment 
+
+        //Clean up from this segment
         SegIns.clear();
         SegOuts.clear();
-        
+
         //Use C for the second iteration
         rightMark = rightC;
-        
+
     }   /* Find all interections */
-    
+
     /* Reroute existing geometry to constructed geometry */
     for (int i = 0; i < perA.size(); i++)
     {
@@ -833,7 +832,7 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
         B->prev = A;
         addToSpatialGrid(A);
     }
-    
+
     /* Clear old geomtry */
     for (PeSet::iterator i = nearPEs.begin(); i != nearPEs.end(); i++)
     {
@@ -847,10 +846,10 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
     }
     for (PeSet::iterator i = nearPEs.begin(); i != nearPEs.end(); i++)
         if ((*i)->tmpMark == inside) delete *i;
-    //Reset marked PE's that were not near 
+    //Reset marked PE's that were not near
     for (PeSet::iterator i = markedNotNear.begin(); i != markedNotNear.end(); i++)
         (*i)->tmpMark = outside;
-    
+
 #ifdef USE_EXPENSIVE_ASSERTS
     checkConsistency();
 #endif
@@ -966,7 +965,7 @@ bool ShapeField::isOutside(float px, float py)
                     }
                 }
             }
-            else 
+            else
                 printq("isOutside: skipped evaluating inside pe\n");
         }
         if (yDistance > 0 && py + yDistance < (cellY+1)*cellHeight)
@@ -1001,12 +1000,12 @@ PeSet ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 
 void getGridCells(PointEdge* pe, unsigned &minCellX, unsigned &minCellY, unsigned &maxCellX, unsigned &maxCellY)
 {
-    
+
     unsigned int minX = (unsigned)(min(pe->x, pe->next->x) - .6);
     unsigned int minY = (unsigned)(min(pe->y, pe->next->y) - .6);
     unsigned int maxX = (unsigned)(max(pe->x, pe->next->x) + 1.1);
     unsigned int maxY = (unsigned)(max(pe->y, pe->next->y) + 1.1);
-    
+
     minCellX = minX/cellWidth;
     minCellY = minY/cellHeight;
     maxCellX = maxX/cellWidth;
@@ -1020,7 +1019,7 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
     //Create a slightly generous bounding box
     unsigned int minCellX, minCellY, maxCellX, maxCellY;
     getGridCells(pe,  minCellX, minCellY, maxCellX, maxCellY);
-    
+
     //Remove from all of these cells
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
@@ -1031,11 +1030,11 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
 void ShapeField::addToSpatialGrid(PointEdge* pe)
 {
     assert(pe->next);
-    
+
     //Create a slightly generous bounding box
     unsigned int minCellX, minCellY, maxCellX, maxCellY;
     getGridCells(pe,  minCellX, minCellY, maxCellX, maxCellY);
-    
+
     //Add to all of these cells
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
@@ -1073,11 +1072,11 @@ void ShapeField::checkConsistency()
         assert(pe->prev != pe);
         assert(pe->next->next != pe);   //No self looping lines
         assert(pe->prev->prev != pe);
-        
+
         //Check that this PE is correctly in the spatial grid
         unsigned int minCellX, minCellY, maxCellX, maxCellY;
         getGridCells(pe,  minCellX, minCellY, maxCellX, maxCellY);
-        
+
         //Remove from all of these cells
         for (unsigned i = minCellX; i <= maxCellX; i++)
             for (unsigned j = minCellY; j <= maxCellY; j++)
@@ -1092,7 +1091,7 @@ void ShapeField::checkConsistency()
          assert(false);
          }*/
     }
-    
+
     //Check the spatial grid to make sure everything exists
     for (int i = 0; i < gridWidth; i++)
         for (int j = 0; j < gridHeight; j++)

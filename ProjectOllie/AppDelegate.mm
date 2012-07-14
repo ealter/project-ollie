@@ -13,6 +13,7 @@
 #import "Authentication.h"
 #import "FacebookLogin.h"
 #import "Facebook.h"
+#import "GameConstants.h"
 
 @implementation AppController
 
@@ -44,7 +45,7 @@
     self.director.displayStats = YES;
 	
 	// set FPS at 60
-    self.director.animationInterval = 1.0/60;
+    self.director.animationInterval = 1.0/FPS;
 	
 	// attach the openglView to the director
     self.director.view = glView;
@@ -55,11 +56,9 @@
 	// 2D projection
     self.director.projection = kCCDirectorProjection2D;
 	//	[director setProjection:kCCDirectorProjection3D];
-	
-    
     
 	// Enables High Res mode (Retina Display) on iPhone 4 and maintains low res on all other devices
-	if( ! [director_ enableRetinaDisplay:NO] )
+	if( ! [director_ enableRetinaDisplay:YES] )
 		CCLOG(@"Retina Display Not supported");
 	
 	// Create a Navigation Controller with the Director

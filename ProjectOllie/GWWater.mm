@@ -11,7 +11,7 @@
 #import "CCShaderCache.h"
 #import "CCGLProgram.h"
 #import "CCActionCatmullRom.h"
-
+#import "cocos2d.h"
 #import "GameConstants.h"
 
 #define pointCount 256
@@ -25,8 +25,6 @@ static CCGLProgram *shader_ = nil;
     GLuint    waterVBO;
     //Location of the time parameter for the gl shader
     GLuint    timeLocation;
-    
-    
 }
 
 @property float waterHeight;
@@ -34,6 +32,8 @@ static CCGLProgram *shader_ = nil;
 
 
 @implementation GWWater
+
+@synthesize waterHeight = _waterHeight;
 
 -(id)init
 {
@@ -64,7 +64,6 @@ static CCGLProgram *shader_ = nil;
         [shader_ updateUniforms];
         
     }
-    
     return self;
 }
 
@@ -78,6 +77,17 @@ static CCGLProgram *shader_ = nil;
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) pointCount);
+}
+
+//TODO: fix these stubs
+- (float)getParallaxRatio
+{
+    return 1;
+}
+
+- (bool)isBounded
+{
+    return YES;
 }
 
 @end

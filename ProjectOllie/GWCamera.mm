@@ -45,6 +45,7 @@
 @synthesize minimumScale    = _minimumScale;
 @synthesize defaultScale    = _defaultScale;
 @synthesize children        = _children;
+@synthesize bounded         = _bounded;
 
 -(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
     if(self = [super init]) {
@@ -62,6 +63,7 @@
         self.minimumScale    = 1.f;
         self.defaultScale    = 1.f;
         self.children        = [NSMutableArray array];
+        self.bounded         = YES;
     }
     return self;
 }
@@ -312,7 +314,7 @@
 
 -(void)updateBounds{
     
-    if(self.target == nil)
+    if(self.target == nil && self.bounded)
     {
         [self checkBounds];
     }
@@ -391,11 +393,11 @@
                 self.isChanging = NO;
         }
     }
-    else if(self.target != nil){
+    else if(self.target != nil) {
         //adjust scale to match the desired scale
         float scaleDiff = targetScale - subject_.scale;
         float zoomMultiplier = 0;
-        if(scaleDiff < 0) 
+        if(scaleDiff < 0)
             zoomMultiplier = .9f;
         else {
             zoomMultiplier = 1.1f;
@@ -411,7 +413,7 @@
         CGPoint moveVec;
         CCNode *n = subject_;
         CCNode *p = [subject_ parent];
-        CGPoint halfScreenSize = ccp(subject_.contentSize.width/2.f,subject_.contentSize.height/2.f);
+        CGPoint halfScreenSize = ccpMult(ccpFromSize(subject_.contentSize), 0.5);
         CGPoint p1 = ccpMult(halfScreenSize, 1.f/p.scale);
         CGPoint p2 = ccpMult(self.target.position, n.scale);
         CGPoint destination = ccpSub(p1,p2);

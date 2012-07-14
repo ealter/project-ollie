@@ -9,10 +9,12 @@
 #import "ActionLayer.h"
 #import "AppDelegate.h"
 #import "PhysicsSprite.h"
-#import "Background.h"
+#import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "RippleEffect.h"
 #import "GameConstants.h"
+#import "GWSkeleton.h"
+#import "Skeleton.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -23,7 +25,7 @@ enum {
 
 @interface ActionLayer()
 {
-
+    GWSkeleton* gwskel;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -84,7 +86,7 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-        
+        	
         [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
@@ -128,7 +130,7 @@ enum {
 
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
-    //		flags += b2Draw::e_jointBit;
+    //   	flags += b2Draw::e_jointBit;
     //		flags += b2Draw::e_aabbBit;
     //		flags += b2Draw::e_pairBit;
     //		flags += b2Draw::e_centerOfMassBit;
@@ -157,7 +159,16 @@ enum {
     fixtureDef.shape = &dynamicBox;	
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+    fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
+    
+    
+    gwskel = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
+    Skeleton* skeleton = [gwskel getSkeleton];
+    CCLOG(@"PRINTING SKELETON TREE!");
+    skeleton->boneDumpTree(skeleton->getRoot(), 0);
+
 }
 
 -(void) draw
@@ -223,6 +234,8 @@ enum {
     fixtureDef.shape = &dynamicBox;	
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+    fixtureDef.filter.maskBits = MASK_TERRAIN;
     body->CreateFixture(&fixtureDef);
 
 }
@@ -257,6 +270,8 @@ enum {
     fixtureDef.shape = &dynamicBox;	
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
+    fixtureDef.filter.maskBits = MASK_PROJECTILES;
     body->CreateFixture(&fixtureDef);
    
     [sprite setPhysicsBody:body];
@@ -294,7 +309,7 @@ enum {
      */
     
 	[self.camera update:dt];
-    //[self updateParallax];
+    [gwskel update:dt];
 
 }
 
@@ -302,6 +317,8 @@ enum {
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.camera touchesBegan:[event allTouches]];
+    
+    [gwskel loadAnimation:"animation"];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -323,7 +340,7 @@ enum {
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if([touches count] == 3)
+    if([touches count] == 1)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
@@ -349,6 +366,16 @@ enum {
         
     
 }
+
+
+-(void)setTerrain:(Terrain*)t
+{
+    //Add as a child so it draws
+    [self addChild:t];
+    //Add all of the edge shapes to the world
+    [t addToWorld:world];
+}
+
 
 //CAMERA OBJECT FUNCTIONS
 

@@ -23,6 +23,7 @@
  */
 
 #import "CCBReader.h"
+#import "cocos2d.h"
 #import <objc/runtime.h>
 
 #ifdef CCB_ENABLE_UNZIP
