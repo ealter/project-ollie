@@ -25,7 +25,7 @@ enum {
 
 @interface ActionLayer()
 {
-    GWSkeleton* gwskel;
+    GWSkeleton* _skeleton;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -164,10 +164,7 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     
-    gwskel = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
-    Skeleton* skeleton = [gwskel getSkeleton];
-    CCLOG(@"PRINTING SKELETON TREE!");
-    skeleton->boneDumpTree(skeleton->getRoot(), 0);
+    _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
 
 }
 
@@ -309,7 +306,7 @@ enum {
      */
     
 	[self.camera update:dt];
-    [gwskel update:dt];
+    [_skeleton update:dt];
 
 }
 
@@ -318,7 +315,7 @@ enum {
 {
     [self.camera touchesBegan:[event allTouches]];
     
-    [gwskel loadAnimation:"animation"];
+    [_skeleton loadAnimation:"animation"];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

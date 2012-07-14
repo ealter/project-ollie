@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 
-#include <iostream>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fstream>
@@ -30,7 +29,6 @@ Skeleton::~Skeleton()
 
 Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float angle, float length, float width, float jx, float jy, float jaMax, float jaMin)
 {
-    
     Bone *t = new Bone;
     
     /* Set data */
@@ -46,7 +44,6 @@ Bone* Skeleton::boneAddChild(Bone *root, string name, float x, float y, float an
     t->jy            = jy;
     
     return boneAddChild(root, t);
-    
 }
 
 Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
@@ -85,7 +82,6 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     b2Body *boneShape = world->CreateBody(&bd);
     boneShape->CreateFixture(&fixtureDef);
     
-    //TURN OFF FOR RAGDOLL EFFECT
     root->box2DBody = boneShape;
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
@@ -109,7 +105,7 @@ void Skeleton::boneDumpTree(Bone *root, int level)
         return;
     
     for (int i = 0; i < level; i++)
-        printf("#"); /* We print # to signal the level of this bone. */
+        printf("  "); /* We print to signal the level of this bone. */
     
     string pname = "none";
     if(root->parent)
@@ -151,7 +147,6 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
 
 void Skeleton::loadAnimation(string animationName)
 {
-    
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
         Bone* bone = this->getBoneByName(this->root, iter->first);
@@ -173,6 +168,8 @@ bool Skeleton::animating(Bone *root, float time)
     KeyFrame* key = root->animation.front();
     /* Check for current keyframe */
     if (!root->animation.empty()) {
+        anim = true;
+        root->box2DBody->SetActive(false);
         //not a key frame, so interpolation
         if(key->time > time) {/*
             float angleDiff = key->angle - root->a;
@@ -188,7 +185,6 @@ bool Skeleton::animating(Bone *root, float time)
         }
         else // keyframe, so set it's values
         while (key->time <= time) {
-            anim = true;
             root->a = key->angle;
             root->x = key->x;
             root->y = key->y;
@@ -205,6 +201,8 @@ bool Skeleton::animating(Bone *root, float time)
     else {
         // stop animating
         anim = false;
+        root->box2DBody->SetAwake(true);
+        root->box2DBody->SetActive(true);
         
         // new position is torso's position
         Bone* ll = getBoneByName(root, "ll_leg");
@@ -219,9 +217,6 @@ bool Skeleton::animating(Bone *root, float time)
             absolutePosition = b2Vec2(xpos,ypos);
         }
     }
-    
-    
-    
     
     /* Call on other bones */
     for (int i = 0; i < root->children.size(); i++)
