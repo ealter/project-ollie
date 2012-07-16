@@ -13,8 +13,8 @@
 #import "Box2D.h"
 #import "NSString+SBJSON.h"
 
-//BLENDER TO METER RATIO
-#define BTM_RATIO 7.0
+//BLENDER TO PIXEL RATIO
+#define BTP_RATIO 7.0
 
 using namespace std;
 
@@ -102,8 +102,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         CGPoint tailLoc     = dictionaryToCGPoint([currentBone objectForKey:@"tail"]);
         
         //transform to screen coordinates
-        headLoc             = ccpMult(headLoc,BTM_RATIO);
-        tailLoc             = ccpMult(tailLoc,BTM_RATIO);
+        headLoc             = ccpMult(headLoc,BTP_RATIO);
+        tailLoc             = ccpMult(tailLoc,BTP_RATIO);
         CGPoint averageLoc  = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
         
         //assign values to bone
@@ -114,9 +114,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         bone->jx            = headLoc.x;
         bone->jy            = headLoc.y;
         bone->name          = string([[currentBone objectForKey:@"name"] UTF8String]);
-        bone->l             = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
+        bone->l             = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTP_RATIO;
         bone->a             = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-        bone->w             = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTM_RATIO;
+        bone->w             = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTP_RATIO;
         
         _skeleton->boneAddChild(parent, bone);
         
@@ -158,8 +158,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             CGPoint tailLoc = dictionaryToCGPoint([bone objectForKey:@"tail"]);
             
             //transform to screen coordinates
-            headLoc                = ccpMult(headLoc,BTM_RATIO);
-            tailLoc                = ccpMult(tailLoc,BTM_RATIO);
+            headLoc                = ccpMult(headLoc,BTP_RATIO);
+            tailLoc                = ccpMult(tailLoc,BTP_RATIO);
             CGPoint averageLoc     = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
