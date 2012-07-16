@@ -164,7 +164,6 @@ static const ccColor4F kCoveredColor = {1,0,0,1};
     glUniform1f(self.screenWidthLocation, self.contentSize.width);
     glUniform1f(self.screenHeightLocation, self.contentSize.height);
     
-    
     // 3
 #define kQuadSize sizeof(quad_.bl)
     

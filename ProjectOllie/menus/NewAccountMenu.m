@@ -80,7 +80,7 @@
 - (void)transitionToSceneWithFile:(NSString *)sceneName
 {
     [self removeUIViews:[NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil]];
-    [self transitionToSceneWithFile:sceneName];
+    [super transitionToSceneWithFile:sceneName];
 }
 
 -(void)pressedCancel:(id)sender
