@@ -141,10 +141,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(void)assembleAnimation:(NSArray *)frames{
-    
-    CGPoint headLoc;
-    CGPoint tailLoc;
-    CGPoint averageLoc;
     for (NSDictionary* frame in frames) {
         
         //get universal frame data
@@ -158,17 +154,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             KeyFrame* key   = new KeyFrame;
             string name = [(NSString*)[bone objectForKey:@"name"] UTF8String];
             float angle = [(NSNumber*)[bone objectForKey:@"angle"] floatValue];
-            NSDictionary* headDict = [bone objectForKey:@"head"];
-            headLoc.x              = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
-            headLoc.y              = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
-            NSDictionary* tailDict = [bone objectForKey:@"tail"];
-            tailLoc.x              = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
-            tailLoc.y              = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
+            CGPoint headLoc = dictionaryToCGPoint([bone objectForKey:@"head"]);
+            CGPoint tailLoc = dictionaryToCGPoint([bone objectForKey:@"tail"]);
             
             //transform to screen coordinates
             headLoc                = ccpMult(headLoc,BTM_RATIO);
             tailLoc                = ccpMult(tailLoc,BTM_RATIO);
-            averageLoc             = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
+            CGPoint averageLoc     = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
             key->angle = angle;
@@ -226,7 +218,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(void)update:(float)dt{
-    
     absoluteLocation = ccp(_interactor->GetPosition().x*PTM_RATIO, _interactor->GetPosition().y*PTM_RATIO);
     if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
     {
@@ -238,8 +229,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         _skeleton->update();
         _interactor->SetTransform(_skeleton->getRoot()->box2DBody->GetPosition(), _interactor->GetAngle());
     }
-    
-
 }
 
 @end
