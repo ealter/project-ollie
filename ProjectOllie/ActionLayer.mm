@@ -25,7 +25,7 @@ enum {
 
 @interface ActionLayer()
 {
-    GWSkeleton* gwskel;
+    GWSkeleton* _skeleton;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -86,7 +86,7 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-        
+        	
         [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
@@ -164,10 +164,7 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     
-    gwskel = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
-    Skeleton* skeleton = [gwskel getSkeleton];
-    CCLOG(@"PRINTING SKELETON TREE!");
-    skeleton->boneDumpTree(skeleton->getRoot(), 0);
+    _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
 
 }
 
@@ -309,7 +306,7 @@ enum {
      */
     
 	[self.camera update:dt];
-    [gwskel update:dt];
+    [_skeleton update:dt];
 
 }
 
@@ -318,7 +315,7 @@ enum {
 {
     [self.camera touchesBegan:[event allTouches]];
     
-    [gwskel loadAnimation:"animation"];
+    [_skeleton loadAnimation:"animation"];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -340,7 +337,7 @@ enum {
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if([touches count] == 3)
+    if([touches count] == 1)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
@@ -366,6 +363,16 @@ enum {
         
     
 }
+
+
+-(void)setTerrain:(Terrain*)t
+{
+    //Add as a child so it draws
+    [self addChild:t];
+    //Add all of the edge shapes to the world
+    [t addToWorld:world];
+}
+
 
 //CAMERA OBJECT FUNCTIONS
 
