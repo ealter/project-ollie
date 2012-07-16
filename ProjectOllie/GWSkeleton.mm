@@ -52,7 +52,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(id)initFromFile:(NSString*)fileName box2dWorld:(b2World *)world{
     if((self = [super init])){
-        
         timeElapsed = 0;
         absoluteLocation = ccp(200.0,200.0);
         _skeleton   = new Skeleton(world);
@@ -63,20 +62,17 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         [self buildSkeletonFromFile:filePath];
         
         //if the above worked...
-        if(_skeleton->getRoot()){
+        if(_skeleton->getRoot()) {
             filePath           = [[NSBundle mainBundle] pathForResource:fileName ofType:@"anim"];
             [self buildAnimationFromFile:filePath];
-        }
-        else{
+        } else {
             CCLOG(@"ERROR BUILDING SKELETONS. ABANDON ALL HOPE!");
         }
-
     }
     return self;
 }
 
 -(void)buildSkeletonFromFile:(NSString*)fileName{
-    
     /* Load the data and check for error */
     NSError* error = nil;
     DebugLog(@"The file is %@", fileName);
@@ -96,44 +92,37 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 /* recursively assembles the bone tree imported from blender*/
 -(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
-    
     float jointAngleMax = DEG2RAD(45.0);
     float jointAngleMin = -DEG2RAD(30.0);
-    CGPoint headLoc;
-    CGPoint tailLoc;
-    CGPoint averageLoc;
-
     
     for (NSDictionary* currentBone in currentBoneArray) {
-        Bone* bone                 = new Bone;
+        Bone* bone          = new Bone;
         
-        headLoc                    = dictionaryToCGPoint([currentBone objectForKey:@"head"]);
-        tailLoc                    = dictionaryToCGPoint([currentBone objectForKey:@"tail"]);
+        CGPoint headLoc     = dictionaryToCGPoint([currentBone objectForKey:@"head"]);
+        CGPoint tailLoc     = dictionaryToCGPoint([currentBone objectForKey:@"tail"]);
         
         //transform to screen coordinates
-        headLoc                    = ccpMult(headLoc,BTM_RATIO);
-        tailLoc                    = ccpMult(tailLoc,BTM_RATIO);
-        averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
+        headLoc             = ccpMult(headLoc,BTM_RATIO);
+        tailLoc             = ccpMult(tailLoc,BTM_RATIO);
+        CGPoint averageLoc  = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
         
         //assign values to bone
-        bone->x                    = averageLoc.x;
-        bone->y                    = averageLoc.y;
-        bone->jointAngleMax        = jointAngleMax;
-        bone->jointAngleMin        = jointAngleMin;
-        bone->jx                   = headLoc.x;
-        bone->jy                   = headLoc.y;
-        bone->name                 = string([[currentBone objectForKey:@"name"] UTF8String]);
-        bone->l                    = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
-        bone->a                    = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-        bone->w                    = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTM_RATIO;
+        bone->x             = averageLoc.x;
+        bone->y             = averageLoc.y;
+        bone->jointAngleMax = jointAngleMax;
+        bone->jointAngleMin = jointAngleMin;
+        bone->jx            = headLoc.x;
+        bone->jy            = headLoc.y;
+        bone->name          = string([[currentBone objectForKey:@"name"] UTF8String]);
+        bone->l             = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
+        bone->a             = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
+        bone->w             = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTM_RATIO;
         
         _skeleton->boneAddChild(parent, bone);
         
-        NSArray* children          = [currentBone objectForKey:@"children"];
+        NSArray* children   = [currentBone objectForKey:@"children"];
         [self assembleSkeleton:children parentBone:bone];
-        
     }
-    
 }
 
 -(void)buildAnimationFromFile:(NSString *)fileName{
@@ -159,9 +148,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     for (NSDictionary* frame in frames) {
         
         //get universal frame data
-        float time           = [(NSNumber*)[frame objectForKey:@"time"] floatValue];
+        float time     = [(NSNumber*)[frame objectForKey:@"time"] floatValue];
         //float frameCount     = [(NSNumber*)[frame objectForKey:@"framecount"] floatValue];
-        NSArray* bones       = [frame objectForKey:@"bones"];
+        NSArray* bones = [frame objectForKey:@"bones"];
         
         for (NSDictionary* bone in bones) {
             
@@ -169,17 +158,17 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             KeyFrame* key   = new KeyFrame;
             string name = [(NSString*)[bone objectForKey:@"name"] UTF8String];
             float angle = [(NSNumber*)[bone objectForKey:@"angle"] floatValue];
-            NSDictionary* headDict     = [bone objectForKey:@"head"];
-            headLoc.x                  = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
-            headLoc.y                  = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
-            NSDictionary* tailDict     = [bone objectForKey:@"tail"];
-            tailLoc.x                  = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
-            tailLoc.y                  = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
+            NSDictionary* headDict = [bone objectForKey:@"head"];
+            headLoc.x              = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
+            headLoc.y              = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
+            NSDictionary* tailDict = [bone objectForKey:@"tail"];
+            tailLoc.x              = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
+            tailLoc.y              = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
             
             //transform to screen coordinates
-            headLoc                    = ccpMult(headLoc,BTM_RATIO);
-            tailLoc                    = ccpMult(tailLoc,BTM_RATIO);
-            averageLoc                 = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
+            headLoc                = ccpMult(headLoc,BTM_RATIO);
+            tailLoc                = ccpMult(tailLoc,BTM_RATIO);
+            averageLoc             = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
             key->angle = angle;
@@ -190,16 +179,14 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             //adds the animation frame to the given animation name
             _skeleton->addAnimationFrame("animation", name, key);
         }
-        
     }
 }
 
 -(Bone*)getBoneByName:(NSString*)bName{
-    
     string name = string([bName UTF8String]);
     return _skeleton->getBoneByName(_skeleton->getRoot(), name);
-    
 }
+
 -(Skeleton*)getSkeleton{
     return _skeleton;
 }
