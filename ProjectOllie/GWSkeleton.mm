@@ -18,6 +18,13 @@
 
 using namespace std;
 
+static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
+    CGPoint p;
+    p.x = [(NSNumber*)[dict objectForKey:@"x"] floatValue];
+    p.y = [(NSNumber*)[dict objectForKey:@"y"] floatValue];
+    return p;
+}
+
 @interface GWSkeleton(){
     float timeElapsed;
     CGPoint absoluteLocation; 
@@ -98,16 +105,10 @@ using namespace std;
 
     
     for (NSDictionary* currentBone in currentBoneArray) {
-        //make new bone
         Bone* bone                 = new Bone;
         
-        //perform type conversions
-        NSDictionary* headDict     = [currentBone objectForKey:@"head"];
-        headLoc.x                  = [(NSNumber*)[headDict objectForKey:@"x"] floatValue];
-        headLoc.y                  = [(NSNumber*)[headDict objectForKey:@"y"] floatValue];
-        NSDictionary* tailDict     = [currentBone objectForKey:@"tail"];
-        tailLoc.x                  = [(NSNumber*)[tailDict objectForKey:@"x"] floatValue];
-        tailLoc.y                  = [(NSNumber*)[tailDict objectForKey:@"y"] floatValue];
+        headLoc                    = dictionaryToCGPoint([currentBone objectForKey:@"head"]);
+        tailLoc                    = dictionaryToCGPoint([currentBone objectForKey:@"tail"]);
         
         //transform to screen coordinates
         headLoc                    = ccpMult(headLoc,BTM_RATIO);
