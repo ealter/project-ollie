@@ -16,5 +16,5 @@
 #define DebugLog( s, ... ) do { printf( "<%s:(%d)> ", __FILE__, __LINE__); printf(s, ##__VA_ARGS__); putchar('\n'); }while(0)
 #endif /* ifdef __OBJC__ */
 #else
-#define DebugLog( s, ... )
+#define DebugLog( s, ... ) do {} while (0)
 #endif
