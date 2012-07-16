@@ -134,7 +134,7 @@ static const ccColor4F kCoveredColor = {1,0,0,1};
 }
 
 - (void)updateMask
-{    
+{
     [self.maskTexture begin];
     [self->pr visit];
     [self->pr clear];
