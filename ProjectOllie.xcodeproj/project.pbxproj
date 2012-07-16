@@ -121,6 +121,11 @@
 		CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F7159943C30065B440 /* metalbutton-dark.png */; };
 		CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F8159943C30065B440 /* silverbutton-dark.png */; };
 		CE70E1FE159943C30065B440 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F9159943C30065B440 /* silverbutton.png */; };
+		CE805F2115B0E1ED0094B3E6 /* GWWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2015B0E1ED0094B3E6 /* GWWeapon.mm */; };
+		CE805F2815B0E4C40094B3E6 /* GWGunWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2715B0E4C40094B3E6 /* GWGunWeapon.mm */; };
+		CE805F2B15B0E4FF0094B3E6 /* GWThrownWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2A15B0E4FF0094B3E6 /* GWThrownWeapon.mm */; };
+		CE805F2E15B0E5130094B3E6 /* GWSpellWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2D15B0E5130094B3E6 /* GWSpellWeapon.mm */; };
+		CE805F3115B0E5370094B3E6 /* GWBullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F3015B0E5370094B3E6 /* GWBullet.mm */; };
 		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -514,6 +519,16 @@
 		CE70E1F7159943C30065B440 /* metalbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbutton-dark.png"; path = "Resources/metalbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F8159943C30065B440 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F9159943C30065B440 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/silverbutton.png; sourceTree = "<group>"; };
+		CE805F1F15B0E1ED0094B3E6 /* GWWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWWeapon.h; path = Weapons/GWWeapon.h; sourceTree = "<group>"; };
+		CE805F2015B0E1ED0094B3E6 /* GWWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWWeapon.mm; path = Weapons/GWWeapon.mm; sourceTree = "<group>"; };
+		CE805F2615B0E4C40094B3E6 /* GWGunWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWGunWeapon.h; path = Weapons/GWGunWeapon.h; sourceTree = "<group>"; };
+		CE805F2715B0E4C40094B3E6 /* GWGunWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWGunWeapon.mm; path = Weapons/GWGunWeapon.mm; sourceTree = "<group>"; };
+		CE805F2915B0E4FF0094B3E6 /* GWThrownWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWThrownWeapon.h; path = Weapons/GWThrownWeapon.h; sourceTree = "<group>"; };
+		CE805F2A15B0E4FF0094B3E6 /* GWThrownWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWThrownWeapon.mm; path = Weapons/GWThrownWeapon.mm; sourceTree = "<group>"; };
+		CE805F2C15B0E5130094B3E6 /* GWSpellWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWSpellWeapon.h; path = Weapons/GWSpellWeapon.h; sourceTree = "<group>"; };
+		CE805F2D15B0E5130094B3E6 /* GWSpellWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWSpellWeapon.mm; path = Weapons/GWSpellWeapon.mm; sourceTree = "<group>"; };
+		CE805F2F15B0E5370094B3E6 /* GWBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWBullet.h; path = Weapons/GWBullet.h; sourceTree = "<group>"; };
+		CE805F3015B0E5370094B3E6 /* GWBullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWBullet.mm; path = Weapons/GWBullet.mm; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
@@ -1305,6 +1320,23 @@
 			name = CCTableSuite;
 			sourceTree = "<group>";
 		};
+		CE805F2215B0E1F60094B3E6 /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				CE805F1F15B0E1ED0094B3E6 /* GWWeapon.h */,
+				CE805F2015B0E1ED0094B3E6 /* GWWeapon.mm */,
+				CE805F2615B0E4C40094B3E6 /* GWGunWeapon.h */,
+				CE805F2715B0E4C40094B3E6 /* GWGunWeapon.mm */,
+				CE805F2915B0E4FF0094B3E6 /* GWThrownWeapon.h */,
+				CE805F2A15B0E4FF0094B3E6 /* GWThrownWeapon.mm */,
+				CE805F2C15B0E5130094B3E6 /* GWSpellWeapon.h */,
+				CE805F2D15B0E5130094B3E6 /* GWSpellWeapon.mm */,
+				CE805F2F15B0E5370094B3E6 /* GWBullet.h */,
+				CE805F3015B0E5370094B3E6 /* GWBullet.mm */,
+			);
+			name = Weapons;
+			sourceTree = "<group>";
+		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
@@ -1375,6 +1407,7 @@
 				CE22740115A0193100F3217E /* GWParticles.m */,
 				C589647615AD038E00F044D9 /* GWSkeleton.h */,
 				C589647715AD038E00F044D9 /* GWSkeleton.mm */,
+				CE805F2215B0E1F60094B3E6 /* Weapons */,
 				CE02DC5815AE2D1800F16FAF /* Utils */,
 				CE02DC5915AE2D3300F16FAF /* Terrain */,
 				CE30B189158FBA12009EC82B /* Menus */,
@@ -2355,6 +2388,11 @@
 				CE11B19115A68C03009B22CA /* GWWater.mm in Sources */,
 				C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */,
 				CE05967C15B0C07900735DFA /* SpriteParallax.m in Sources */,
+				CE805F2115B0E1ED0094B3E6 /* GWWeapon.mm in Sources */,
+				CE805F2815B0E4C40094B3E6 /* GWGunWeapon.mm in Sources */,
+				CE805F2B15B0E4FF0094B3E6 /* GWThrownWeapon.mm in Sources */,
+				CE805F2E15B0E5130094B3E6 /* GWSpellWeapon.mm in Sources */,
+				CE805F3115B0E5370094B3E6 /* GWBullet.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
