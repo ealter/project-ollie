@@ -44,13 +44,12 @@
 
 -(void)fireWeapon:(CGPoint)target
 {
-    GWBullet * bullet = [[GWBullet alloc]initWithBulletSize:self.bulletSize image:self.bulletImage startPosition:self.position target:target b2World:_world bulletSpeed:self.bulletSpeed];
+    GWBullet *bullet = [[GWBullet alloc] initWithBulletSize:self.bulletSize image:self.bulletImage startPosition:self.position target:target b2World:_world bulletSpeed:self.bulletSpeed];
     
     [self addChild:bullet];
     //Send the bullet towards the target
-    float forceX = (target.x - self.position.x)*self.bulletSpeed;
-    float forceY = (target.y - self.position.y)*self.bulletSpeed;
-    bullet.bulletSprite.physicsBody->ApplyForceToCenter(b2Vec2(forceX, -forceY));    
+    CGPoint force = ccpMult(ccpSub(target, self.position), self.bulletSpeed);
+    bullet.bulletSprite.physicsBody->ApplyForceToCenter(b2Vec2(force.x, -force.y));    
 }
 
 @end
