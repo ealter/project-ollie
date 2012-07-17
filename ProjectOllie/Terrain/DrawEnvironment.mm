@@ -129,7 +129,7 @@
     
     [self removeChild:self.terrain cleanup:YES];
     [scene.actionLayer setTerrain:self.terrain];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccBLACK]];
 }
 
 @end

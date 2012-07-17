@@ -12,8 +12,8 @@
 #import "HMVectorNode.h"
 #import "CCTexture2DMutable.h"
 
-#define INITIAL_COLOR ccc4f(0,0,0,1)
-#define COVERED_COLOR ccc4f(1,0,0,1)
+static const ccColor4F kInitialColor = {0,0,0,1};
+static const ccColor4F kCoveredColor = {1,0,0,1};
 
 //TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
 #define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
@@ -76,7 +76,7 @@
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
         [self.renderTexture clear:0 g:0 b:0 a:0];
         self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
-        [self.maskTexture clear:INITIAL_COLOR.r g:INITIAL_COLOR.g b:INITIAL_COLOR.b a:INITIAL_COLOR.a];
+        [self.maskTexture clear:kInitialColor.r g:kInitialColor.g b:kInitialColor.b a:kInitialColor.a];
         
         // 2
         NSError *error = nil;
@@ -164,7 +164,6 @@
     glUniform1f(self.screenWidthLocation, self.contentSize.width);
     glUniform1f(self.screenHeightLocation, self.contentSize.height);
     
-    
     // 3
 #define kQuadSize sizeof(quad_.bl)
     
@@ -191,12 +190,12 @@
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius
 {
-    [self drawCircleAt:center radius:radius color:COVERED_COLOR];
+    [self drawCircleAt:center radius:radius color:kCoveredColor];
 }
 
 - (void)removeCircleAt:(CGPoint)center radius:(float)radius
 {
-    [self drawCircleAt:center radius:radius color:INITIAL_COLOR];
+    [self drawCircleAt:center radius:radius color:kInitialColor];
 }
 
 - (void)drawCircleAt:(CGPoint)center radius:(float)radius color:(ccColor4F)color
@@ -208,12 +207,12 @@
 
 - (void)addPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self drawPolygon:poly numPoints:numberOfPoints color:COVERED_COLOR];
+    [self drawPolygon:poly numPoints:numberOfPoints color:kCoveredColor];
 }
 
 - (void)removePolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints
 {
-    [self drawPolygon:poly numPoints:numberOfPoints color:INITIAL_COLOR];
+    [self drawPolygon:poly numPoints:numberOfPoints color:kInitialColor];
 }
 
 - (void)drawPolygon:(CGPoint *)poly numPoints:(NSUInteger)numberOfPoints color:(ccColor4F)color
@@ -230,12 +229,12 @@
 
 - (void)addPoints:(NSArray *)points
 {
-    [self drawPoints:points color:COVERED_COLOR];
+    [self drawPoints:points color:kCoveredColor];
 }
 
 - (void)removePoints:(NSArray *)points
 {
-    [self drawPoints:points color:INITIAL_COLOR];
+    [self drawPoints:points color:kInitialColor];
 }
 
 - (void)drawPoints:(NSArray *)points color:(ccColor4F)color
@@ -258,7 +257,7 @@
 
 - (void)clear
 {
-    [self.maskTexture clear:INITIAL_COLOR.r g:INITIAL_COLOR.g b:INITIAL_COLOR.b a:INITIAL_COLOR.a];
+    [self.maskTexture clear:kInitialColor.r g:kInitialColor.g b:kInitialColor.b a:kInitialColor.a];
     [self.renderTexture clear:0 g:0 b:0 a:0];
 }
 

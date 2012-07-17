@@ -11,8 +11,5 @@
 #import "GWCamera.h"
 
 @interface GWWater : CCLayer <CameraObject>
-{
-    
-}
 
 @end
