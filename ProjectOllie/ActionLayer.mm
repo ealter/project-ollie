@@ -15,6 +15,7 @@
 #import "GameConstants.h"
 #import "GWSkeleton.h"
 #import "Skeleton.h"
+#import "GWGunWeapon.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -26,6 +27,7 @@ enum {
 @interface ActionLayer()
 {
     GWSkeleton* _skeleton;
+    GWGunWeapon* weapon;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -165,6 +167,8 @@ enum {
     
     
     _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
+    weapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" andPosition:CGPointMake(150, 150) andSize:CGSizeMake(30, 30) bulletSize:CGSizeMake(5, 5) bulletSpeed:40 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    [self addChild:weapon];
 
 }
 
@@ -314,7 +318,8 @@ enum {
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.camera touchesBegan:[event allTouches]];
-    
+    UITouch *touch = [touches anyObject];
+    [weapon fireWeapon:[touch locationInView:[touch view]]];
     [_skeleton loadAnimation:"animation"];
 }
 
@@ -337,7 +342,7 @@ enum {
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if([touches count] == 1)
+    if([touches count] == 2)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];

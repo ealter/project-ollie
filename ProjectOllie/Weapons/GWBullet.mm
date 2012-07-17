@@ -7,71 +7,64 @@
 //
 
 #import "GWBullet.h"
-#import "Box2D.h"
+#import "GameConstants.h"
+
+
 @interface GWBullet ()
-
-//Box2D body
-@property (assign, nonatomic) b2Body *box2DBody;
-
-//Projectile Speed
-@property (assign, nonatomic) float bulletSpeed;
-
-//Bullet Sprite
-@property (strong, nonatomic) CCSprite *bulletSprite;
-
-//Method for firing bullet
--(void)fireBullet:(CGPoint) target;
 
 @end	
 
-
-
 @implementation GWBullet
-@synthesize box2DBody       = _box2Dbody;
 @synthesize bulletSpeed     = _bulletSpeed;
+@synthesize bulletSize      = _bulletSize;
 @synthesize bulletSprite    = _bulletSprite;
 
--(id)init
+
+-(id)initWithBulletSize:(CGSize)size andImage:(NSString *)imageName andStartPosition:(CGPoint)pos andTarget:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed
 {
     if (self = [super init]) {
+        //take the world, speed, and pos
+        _world              = world;
+        self.bulletSpeed    = speed;
+        self.position       = pos;
+        self.contentSize    = size;
         
-        /* Tie to box2d 
+        //set bullet size and sprite
+        self.bulletSize     = size;
+        self.bulletSprite   = [PhysicsSprite spriteWithFile:imageName];
+        self.bulletSprite.position = ccp(pos.x, pos.y);
+        
+        //Box2D things
         b2BodyDef bd;
         b2PolygonShape box;
         b2FixtureDef fixtureDef;
-        b2RevoluteJointDef jointDef;
         
-        // Body definition 
-        bd.type = b2_dynamicBody;
-        bd.gravityScale = 1.;
-        bd.linearDamping = .1f;
-        bd.angularDamping = .1f;
+        //Set up the BodyDef
+        bd.type             = b2_dynamicBody;
+        bd.gravityScale     = 1.;
+        bd.linearDamping    = .1f;
+        bd.angularDamping   = .1f;
+        bd.bullet           = YES;
         
-        box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
-        fixtureDef.shape = &box;
-        fixtureDef.density = 1.0f;
+        box.SetAsBox(self.bulletSize.width/PTM_RATIO, self.bulletSize.height/PTM_RATIO);
+        
+        fixtureDef.shape    = &box;
+        fixtureDef.density  = 1.0f;
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 0.1f;
-        fixtureDef.filter.categoryBits = CATEGORY_BONES;
-        fixtureDef.filter.maskBits = MASK_BONES;
-        bd.position.Set(root->x/PTM_RATIO, root->y/PTM_RATIO);
-        b2Body *boneShape = world->CreateBody(&bd);
-        boneShape->CreateFixture(&fixtureDef);
+        fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
+        fixtureDef.filter.maskBits = MASK_PROJECTILES;
         
-        //TURN OFF FOR RAGDOLL EFFECT
-        root->box2DBody = boneShape;
-        
-        boneShape->SetTransform(boneShape->GetPosition(), root->a);*/
-        
-        
+        bd.position.Set(pos.x/PTM_RATIO, pos.y/PTM_RATIO);
+        b2Body *bulletShape = _world->CreateBody(&bd);
+        bulletShape->CreateFixture(&fixtureDef);
+        b2Body *box2DBody = bulletShape;
+
+        [self.bulletSprite setPhysicsBody:box2DBody];
+        [self addChild:self.bulletSprite];
     }
     
     return self;
-}
-
--(void)fireBullet:(CGPoint)target
-{
-    
 }
 
 @end

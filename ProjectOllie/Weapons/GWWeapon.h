@@ -14,4 +14,19 @@
     
 }
 
+//Weapon damage
+@property (assign, nonatomic) float damage;
+
+//Ammo/Uses for the weapon
+@property (assign, nonatomic) float ammo;
+
+//Bool for weapon availability
+@property (assign, nonatomic) BOOL unlocked;
+
+//CCSprite for onscreen representation
+@property (strong, nonatomic) CCSprite *weaponSprite;
+
+//Empty method for firing weapon, should be overwritten
+-(void)fireWeapon:(CGPoint) target;
+
 @end

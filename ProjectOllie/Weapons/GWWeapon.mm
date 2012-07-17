@@ -10,18 +10,6 @@
 
 @interface GWWeapon()
 
-//Weapon damage
-@property (assign, nonatomic) float damage;
-
-//Ammo/Uses for the weapon
-@property (assign, nonatomic) float ammo;
-
-//Bool for weapon availability
-@property (assign, nonatomic) BOOL unlocked;
-
-//CCSprite for onscreen representation
-@property (strong, nonatomic) CCSprite *weaponSprite;
-
 @end
 
 @implementation GWWeapon
@@ -29,5 +17,10 @@
 @synthesize ammo            = _ammo;
 @synthesize unlocked        = _unlocked;
 @synthesize weaponSprite    = _weaponSprite;
+
+-(void)fireWeapon:(CGPoint)target
+{
+    
+}
 
 @end

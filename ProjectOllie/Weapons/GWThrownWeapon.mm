@@ -18,4 +18,9 @@
 @implementation GWThrownWeapon
 @synthesize box2DBody       = _box2DBody;
 
+-(void)fireWeapon:(CGPoint) target
+{
+    
+}
+
 @end
