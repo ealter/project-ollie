@@ -107,7 +107,8 @@
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return interfaceOrientation == UIInterfaceOrientationLandscapeRight;
+	//return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 // getting a call, pause the game
