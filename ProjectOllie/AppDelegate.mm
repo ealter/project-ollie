@@ -14,6 +14,8 @@
 #import "FacebookLogin.h"
 #import "Facebook.h"
 #import "GameConstants.h"
+#import "SandboxScene.h"
+#import "DrawEnvironment.h"
 
 @implementation AppController
 
@@ -91,11 +93,13 @@
 	[CCTexture2D PVRImagesHavePremultipliedAlpha:YES];
 	
     //Load the CCBI file
-    CCScene *scene;
+    CCScene *scene;/*
     if([[Authentication mainAuth] isLoggedIn])
         scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
     else
-        scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];
+        scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];*/
+    scene = [DrawEnvironment scene];
+    
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [ActionLayer scene]]; 

@@ -45,9 +45,9 @@
 
         /* Set up sandbox scene properties */
         [self setAnchorPoint:ccp(.5,.5)];
-        CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
-        [self addChild:backnode];
-        [self reorderChild:backnode z:1000];
+//        CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
+//        [self addChild:backnode];
+//        [self reorderChild:backnode z:1000];
     }
     return self;
 }

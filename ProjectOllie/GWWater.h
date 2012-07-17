@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CCLayer.h"
+#import "CCSprite.h"
 #import "GWCamera.h"
 
-@interface GWWater : CCLayer <CameraObject>
+@interface GWWater : CCSprite <CameraObject>
 {
     
 }

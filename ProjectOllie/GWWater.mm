@@ -38,27 +38,19 @@ static CCGLProgram *shader_ = nil;
 -(id)init
 {
     if (self = [super init]) {
-        /* Make the water triangle strip */
         
-        int width = [CCDirector sharedDirector].winSize.width;
-        int height = [CCDirector sharedDirector].winSize.height;
-        for (int i=0; i<pointCount; i++) {
-            waterPolyPoints[i].x = i*2*width/pointCount-width/2;
-            if (i%2)
-                waterPolyPoints[i].y = -height/2;
-            else
-                waterPolyPoints[i].y = height/8;
-        }
         
-        /* Give the triangle strip to openGL */
-        glGenBuffers(1, &waterVBO);
-        glBindBuffer(GL_ARRAY_BUFFER, waterVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(waterPolyPoints), waterPolyPoints, GL_STATIC_DRAW);
         
-        /* Shader stuff */
-        GLchar *water_vsh = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WaterShader" ofType:@"vsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
         
-        shader_ = [[CCGLProgram alloc] initWithVertexShaderByteArray:water_vsh fragmentShaderByteArray:ccPositionColor_frag];
+        
+        
+        shader_ = [[CCGLProgram alloc]
+                  initWithVertexShaderFilename:@"WaterShader.vsh"
+                  fragmentShaderFilename:@"HMVectorNode.fsh"
+                  ];
+     //   GLchar *water_vsh = (GLchar *)[[NSString stringWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"WaterShader" ofType:@"vsh"] encoding:NSUTF8StringEncoding error:nil] UTF8String];
+     //   shader_ = [[CCGLProgram alloc] initWithVertexShaderByteArray:water_vsh fragmentShaderByteArray:<#(const GLchar *)#>];
+        
         [shader_ addAttribute:kCCAttributeNamePosition index:kCCVertexAttrib_Position];
         [shader_ link];
         [shader_ updateUniforms];
