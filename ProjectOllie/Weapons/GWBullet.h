@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
-#import "Box2D.h"
+#import "CCNode.h"
 #import "PhysicsSprite.h"
 
+class b2World;
 
 @interface GWBullet : CCNode {
     b2World* _world;

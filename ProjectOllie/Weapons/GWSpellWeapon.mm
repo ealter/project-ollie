@@ -8,7 +8,6 @@
 
 #import "GWSpellWeapon.h"
 
-
 @implementation GWSpellWeapon
 
 @end

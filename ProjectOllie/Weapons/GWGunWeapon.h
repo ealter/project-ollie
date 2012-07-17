@@ -7,10 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWWeapon.h"
-#import "GWBullet.h"
-#import "Box2D.h"
+
+class b2World;
 
 @interface GWGunWeapon : GWWeapon {
     b2World *_world;

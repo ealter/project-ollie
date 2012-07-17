@@ -7,6 +7,7 @@
 //
 
 #import "GWThrownWeapon.h"
+#import "Box2D.h"
 
 @interface GWThrownWeapon()
 

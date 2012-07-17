@@ -7,6 +7,9 @@
 //
 
 #import "GWGunWeapon.h"
+#import "Box2D.h"
+#import "cocos2d.h"
+#import "GWBullet.h"
 
 @interface GWGunWeapon ()
 //Gun Size
@@ -39,8 +42,6 @@
         self.bulletSize     = bSize;
         self.bulletSpeed    = bSpeed;
         _world              = world;
-        
-        
         
         [self addChild:self.weaponSprite];
     }

@@ -8,17 +8,12 @@
 
 #import "GWBullet.h"
 #import "GameConstants.h"
-
-
-@interface GWBullet ()
-
-@end	
+#import "Box2D.h"
 
 @implementation GWBullet
 @synthesize bulletSpeed     = _bulletSpeed;
 @synthesize bulletSize      = _bulletSize;
 @synthesize bulletSprite    = _bulletSprite;
-
 
 -(id)initWithBulletSize:(CGSize)size andImage:(NSString *)imageName andStartPosition:(CGPoint)pos andTarget:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed
 {

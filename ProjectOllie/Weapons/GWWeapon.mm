@@ -8,10 +8,6 @@
 
 #import "GWWeapon.h"
 
-@interface GWWeapon()
-
-@end
-
 @implementation GWWeapon
 @synthesize damage          = _damage;
 @synthesize ammo            = _ammo;

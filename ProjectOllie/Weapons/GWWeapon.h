@@ -8,11 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "Box2D.h"
 
-@interface GWWeapon : CCNode {
-    
-}
+@interface GWWeapon : CCNode
 
 //Weapon damage
 @property (assign, nonatomic) float damage;
@@ -21,7 +18,7 @@
 @property (assign, nonatomic) float ammo;
 
 //Bool for weapon availability
-@property (assign, nonatomic) BOOL unlocked;
+@property (assign, nonatomic, getter = isUnlocked) BOOL unlocked;
 
 //CCSprite for onscreen representation
 @property (strong, nonatomic) CCSprite *weaponSprite;
