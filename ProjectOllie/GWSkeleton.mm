@@ -14,7 +14,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 7.0
+#define BTP_RATIO 30.0
 
 using namespace std;
 
@@ -28,6 +28,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 @interface GWSkeleton(){
     float timeElapsed;
     CGPoint absoluteLocation; 
+    float interactorRadius;
     b2Body* _interactor;
     b2World* _world;
 }
@@ -46,6 +47,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 //Create body that interacts with world when not in ragdoll mode
 -(void)buildInteractor;
 
+-(void)setInteractorPosition;
+
 @end
 
 @implementation GWSkeleton
@@ -54,6 +57,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     if((self = [super init])){
         timeElapsed = 0;
         absoluteLocation = ccp(200.0,200.0);
+        interactorRadius = .005*BTP_RATIO;
         _skeleton   = new Skeleton(world);
         _world      = world;
         
@@ -202,7 +206,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     bd.linearDamping = .1f;
     bd.angularDamping = .1f;
     
-    wheel.m_radius = .05;
+    wheel.m_radius = interactorRadius;
     fixtureDef.shape = &wheel;
     fixtureDef.density = 1.0f;
     fixtureDef.friction = 1.f;
@@ -217,17 +221,37 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     _interactor->SetTransform(b2Vec2(absoluteLocation.x/PTM_RATIO, absoluteLocation.y/PTM_RATIO),0);
 }
 
+-(void)applyLinearImpulse:(CGPoint)impulse
+{
+    _interactor->SetAngularVelocity(0);
+    _interactor->SetLinearVelocity(b2Vec2(0,0));
+    _interactor->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), _interactor->GetPosition());
+}
+
+-(void)setInteractorPosition{
+    Bone* root     = _skeleton->getRoot();
+    Bone* torso    = _skeleton->getBoneByName(root, "Torso");
+    b2Vec2 highest = _skeleton->highestContact(root, b2Vec2(-100,-100)); 
+    float  lowest  = _skeleton->lowestY(root, 100);
+    float lowestY  = max(highest.y, lowest) + interactorRadius;
+    _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
+    
+    CCLOG(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
+}
+
 -(void)update:(float)dt{
-    absoluteLocation = ccp(_interactor->GetPosition().x*PTM_RATIO, _interactor->GetPosition().y*PTM_RATIO);
+    absoluteLocation = ccp(_interactor->GetPosition().x*PTM_RATIO, _interactor->GetPosition().y*PTM_RATIO - interactorRadius* PTM_RATIO);
     if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
-    {
+    {   
+        //_interactor->SetActive(true);
         timeElapsed += dt;
         _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
     }
     else{
+        //_interactor->SetActive(false);
         timeElapsed = 0;
         _skeleton->update();
-        _interactor->SetTransform(_skeleton->getRoot()->box2DBody->GetPosition(), _interactor->GetAngle());
+        [self setInteractorPosition];
     }
 }
 

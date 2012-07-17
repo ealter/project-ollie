@@ -316,6 +316,7 @@ enum {
     [self.camera touchesBegan:[event allTouches]];
     
     [_skeleton loadAnimation:"animation"];
+    [_skeleton applyLinearImpulse:ccp(.2,0)];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -337,7 +338,7 @@ enum {
     
     /* add box */
     CGRect bounds = CGRectMake(0, 0, self.contentSize.width, self.contentSize.height);
-    if([touches count] == 1)
+    if([touches count] == 3)
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
