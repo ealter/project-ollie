@@ -123,8 +123,7 @@
 
 -(void)update:(float)dt{
     if(self.totalTime < self.lifetime) {
-        [self.renderTexture clear:0 g:0 b:0 a:0];
-        [self.renderTexture begin];
+        [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
         [self.target visit];
         [self.renderTexture end];
         self.texture = self.renderTexture.sprite.texture;

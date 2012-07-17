@@ -43,7 +43,7 @@
 #ifdef PRINT_DEBUGGING_STATEMENTS
 #define printq(s, ...) printf(s, ##__VA_ARGS__)
 #else
-#define printq(s, ...)
+#define printq(s, ...) do {} while (0)
 #endif
 
 using namespace std;
