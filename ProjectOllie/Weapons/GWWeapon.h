@@ -17,10 +17,10 @@
 //Ammo/Uses for the weapon
 @property (assign, nonatomic) float ammo;
 
-//Bool for weapon availability
+//weapon availability
 @property (assign, nonatomic, getter = isUnlocked) BOOL unlocked;
 
-//CCSprite for onscreen representation
+//onscreen representation
 @property (strong, nonatomic) CCSprite *weaponSprite;
 
 //Empty method for firing weapon, should be overwritten

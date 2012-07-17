@@ -26,5 +26,6 @@ class b2World;
 @property (strong, nonatomic) PhysicsSprite *bulletSprite;
 
 
--(id)initWithBulletSize:(CGSize) size andImage:(NSString *)imageName andStartPosition:(CGPoint) pos andTarget:(CGPoint) target b2World: (b2World *)world bulletSpeed:(float) speed;
+-(id)initWithBulletSize:(CGSize)size image:(NSString *)imageName startPosition:(CGPoint)pos target:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed;
+
 @end

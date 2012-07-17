@@ -7,11 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWWeapon.h"
 
-@interface GWThrownWeapon : GWWeapon {
-    
-}
+@interface GWThrownWeapon : GWWeapon
 
 @end

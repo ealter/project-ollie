@@ -167,7 +167,7 @@ enum {
     
     
     _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
-    weapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" andPosition:CGPointMake(150, 150) andSize:CGSizeMake(30, 30) bulletSize:CGSizeMake(5, 5) bulletSpeed:40 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    weapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) bulletSize:CGSizeMake(5, 5) bulletSpeed:40 bulletImage:@"Icon-Small.png" box2DWorld:world];
     [self addChild:weapon];
 
 }

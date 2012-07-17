@@ -15,6 +15,6 @@ class b2World;
     b2World *_world;
 }
 
--(id)initGunWithImage: (NSString *)imageName andPosition:(CGPoint) pos andSize:(CGSize) size bulletSize:(CGSize) bSize bulletSpeed:(float)bSpeed bulletImage:(NSString *)bImage box2DWorld: (b2World *)world;
+-(id)initGunWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld: (b2World *)world;
 
 @end

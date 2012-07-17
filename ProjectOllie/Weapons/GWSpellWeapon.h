@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
 
-@interface GWSpellWeapon : GWWeapon {
-    
-}
+@interface GWSpellWeapon : GWWeapon
 
 @end

@@ -15,7 +15,7 @@
 @synthesize bulletSize      = _bulletSize;
 @synthesize bulletSprite    = _bulletSprite;
 
--(id)initWithBulletSize:(CGSize)size andImage:(NSString *)imageName andStartPosition:(CGPoint)pos andTarget:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed
+-(id)initWithBulletSize:(CGSize)size image:(NSString *)imageName startPosition:(CGPoint)pos target:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed
 {
     if (self = [super init]) {
         //take the world, speed, and pos
@@ -27,7 +27,7 @@
         //set bullet size and sprite
         self.bulletSize     = size;
         self.bulletSprite   = [PhysicsSprite spriteWithFile:imageName];
-        self.bulletSprite.position = ccp(pos.x, pos.y);
+        self.bulletSprite.position = pos;
         
         //Box2D things
         b2BodyDef bd;
