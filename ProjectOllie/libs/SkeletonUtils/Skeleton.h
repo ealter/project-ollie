@@ -120,6 +120,11 @@ public:
     /* sets absolute position. Arguments are pixels */
     void setPosition(Bone* root, float x, float y);
     
+    /* recursive function to find lowest y coordinate, give arbitrarily high number to start */
+    float lowestY(Bone* root, float currentLowest);
+    
+    b2Vec2 highestContact(Bone* root, b2Vec2 currentHighest);
+    
     float getX();
     float getY();
     

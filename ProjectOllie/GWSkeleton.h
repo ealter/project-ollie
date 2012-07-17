@@ -30,5 +30,6 @@ class b2World;
 -(Skeleton*)getSkeleton;
 -(void)update:(float)dt;
 -(void)loadAnimation:(std::string)animationName;
+-(void)applyLinearImpulse:(CGPoint)impulse;
 
 @end
