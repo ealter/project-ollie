@@ -63,7 +63,7 @@
     [self addChild:self.throwSprite];
     
     //Throw the weapon with given angle and force
-    CGPoint force = ccpMult(ccpSub(target, self.position), self.bulletSpeed);
+    CGPoint force = ccpMult(ccp(cosf(angle), sinf(angle)), strength);
     self.throwSprite.physicsBody->ApplyLinearImpulse((b2Vec2(force.x, -force.y)), self.throwSprite.physicsBody->GetPosition()) ; 
 }
 

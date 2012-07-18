@@ -16,7 +16,6 @@
 {
 
 }
-@property (assign, nonatomic) CGSize gunSize;
 @property (assign, nonatomic) CGSize bulletSize;
 @property (strong, nonatomic) NSString *bulletImage;
 @property (assign, nonatomic) float bulletSpeed;
@@ -24,7 +23,6 @@
 @end
 
 @implementation GWGunWeapon
-@synthesize gunSize         = _gunSize;
 @synthesize bulletSize      = _bulletSize;
 @synthesize bulletImage     = _bulletImage;
 @synthesize bulletSpeed     = _bulletSpeed;
@@ -33,7 +31,7 @@
 {
     if (self = [super initWithFile:imageName]) {
         self.position       = pos;
-        self.gunSize        = size;
+        self.contentSize    = size;
         self.bulletImage    = bulletImage;
         self.bulletSize     = bulletSize;
         self.bulletSpeed    = bulletSpeed;
