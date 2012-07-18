@@ -1,4 +1,4 @@
-//
+ //
 //  GWBullet.m
 //  ProjectOllie
 //
@@ -11,37 +11,23 @@
 #import "Box2D.h"
 
 @implementation GWBullet
-@synthesize bulletSpeed  = _bulletSpeed;
-@synthesize bulletSize   = _bulletSize;
-@synthesize bulletSprite = _bulletSprite;
 
--(id)initWithBulletSize:(CGSize)size image:(NSString *)imageName startPosition:(CGPoint)pos target:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed
+-(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world
 {
-    if (self = [super init]) {
+    if ((self = [self initWithFile:imageName])) {
         //take the world, speed, and pos
         _world              = world;
-        self.bulletSpeed    = speed;
-        self.position       = pos;
-        self.contentSize    = size;
-        
-        //set bullet size and sprite
-        self.bulletSize     = size;
-        self.bulletSprite   = [PhysicsSprite spriteWithFile:imageName];
-        self.bulletSprite.position = pos;
-        
-        //Box2D things
         b2BodyDef bd;
         b2PolygonShape box;
         b2FixtureDef fixtureDef;
         
         //Set up the BodyDef
         bd.type             = b2_dynamicBody;
-        bd.gravityScale     = 1.;
         bd.linearDamping    = .1f;
         bd.angularDamping   = .1f;
         bd.bullet           = YES;
         
-        box.SetAsBox(self.bulletSize.width/PTM_RATIO, self.bulletSize.height/PTM_RATIO);
+        box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         
         fixtureDef.shape    = &box;
         fixtureDef.density  = 1.0f;
@@ -49,14 +35,12 @@
         fixtureDef.restitution = 0.1f;
         fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
         fixtureDef.filter.maskBits = MASK_PROJECTILES;
-        
-        bd.position.Set(pos.x/PTM_RATIO, pos.y/PTM_RATIO);
         b2Body *bulletShape = _world->CreateBody(&bd);
         bulletShape->CreateFixture(&fixtureDef);
-        b2Body *box2DBody = bulletShape;
-
-        [self.bulletSprite setPhysicsBody:box2DBody];
-        [self addChild:self.bulletSprite];
+        bulletShape->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0); 
+        
+        self.physicsBody = bulletShape;
+        bulletShape->SetTransform(b2Vec2(self.position.x/PTM_RATIO,self.position.y/PTM_RATIO), 0);   
     }
     
     return self;

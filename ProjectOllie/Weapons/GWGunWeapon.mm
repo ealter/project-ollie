@@ -10,9 +10,12 @@
 #import "Box2D.h"
 #import "cocos2d.h"
 #import "GWBullet.h"
+#import "GameConstants.h"
 
 @interface GWGunWeapon ()
+{
 
+}
 @property (assign, nonatomic) CGSize gunSize;
 @property (assign, nonatomic) CGSize bulletSize;
 @property (strong, nonatomic) NSString *bulletImage;
@@ -28,28 +31,24 @@
 
 - (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world
 {
-    if (self = [super init]) {
-        self.weaponSprite   = [CCSprite spriteWithFile:imageName];
+    if (self = [super initWithFile:imageName]) {
         self.position       = pos;
         self.gunSize        = size;
         self.bulletImage    = bulletImage;
         self.bulletSize     = bulletSize;
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
-        
-        [self addChild:self.weaponSprite];
     }
     return self;
 }
 
 -(void)fireWeapon:(CGPoint)target
 {
-    GWBullet *bullet = [[GWBullet alloc] initWithBulletSize:self.bulletSize image:self.bulletImage startPosition:self.position target:target b2World:_world bulletSpeed:self.bulletSpeed];
-    
-    [self addChild:bullet];
-    //Send the bullet towards the target
-    CGPoint force = ccpMult(ccpSub(target, self.position), self.bulletSpeed);
-    bullet.bulletSprite.physicsBody->ApplyForceToCenter(b2Vec2(force.x, -force.y));    
+    CGPoint force = ccpMult(ccpMult(ccpSub(target, self.position), 1./ccpLength(ccpSub(target,self.position))),self.bulletSpeed);
+    GWBullet *bullet = [[GWBullet alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world];
+    b2Body* bulletShape = bullet.physicsBody;
+    [self.parent addChild:bullet];
+    bulletShape->ApplyLinearImpulse(b2Vec2(force.x, -force.y),bulletShape->GetPosition());
 }
 
 @end
