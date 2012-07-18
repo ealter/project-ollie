@@ -12,19 +12,9 @@
 
 class b2World;
 
-@interface GWBullet : CCNode {
+@interface GWBullet : PhysicsSprite {
     b2World* _world;
 }
-
-//Projectile Speed
-@property (assign, nonatomic) float bulletSpeed;
-
-//Bullet Size
-@property (assign, nonatomic) CGSize bulletSize;
-
-//Bullet Sprite
-@property (strong, nonatomic) PhysicsSprite *bulletSprite;
-
 
 -(id)initWithBulletSize:(CGSize)size image:(NSString *)imageName startPosition:(CGPoint)pos target:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed;
 
