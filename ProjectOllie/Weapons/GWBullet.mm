@@ -12,9 +12,9 @@
 
 @implementation GWBullet
 
--(id)initWithBulletSize:(CGSize)size image:(NSString *)imageName startPosition:(CGPoint)pos target:(CGPoint)target b2World:(b2World *)world bulletSpeed:(float)speed
+-(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world
 {
-    if ((self = [PhysicsSprite spriteWithFile:imageName])) {
+    if ((self = [self initWithFile:imageName])) {
         //take the world, speed, and pos
         _world              = world;
         b2BodyDef bd;
@@ -37,9 +37,9 @@
         fixtureDef.filter.maskBits = MASK_PROJECTILES;
         b2Body *bulletShape = _world->CreateBody(&bd);
         bulletShape->CreateFixture(&fixtureDef);
+        bulletShape->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0); 
         
         self.physicsBody = bulletShape;
-        self.position = pos;
         bulletShape->SetTransform(b2Vec2(self.position.x/PTM_RATIO,self.position.y/PTM_RATIO), 0);   
     }
     
