@@ -91,10 +91,10 @@ enum {
         	
         [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
-        CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
+       /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
-        label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);
+        label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);*/
         
         [self scheduleUpdate];
 
@@ -166,7 +166,7 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
-    weapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) bulletSize:CGSizeMake(5, 5) bulletSpeed:40 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    weapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
     [self addChild:weapon];
 
 }
@@ -277,7 +277,7 @@ enum {
     [sprite setPhysicsBody:body];
     [parent addChild:sprite];
    
-    [self.camera followNode:sprite];
+    //[self.camera followNode:sprite];
 }
 
 -(void) update: (ccTime) dt
@@ -319,8 +319,9 @@ enum {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
     [weapon fireWeapon:[touch locationInView:[touch view]]];
+    //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
     [_skeleton loadAnimation:"animation"];
-    [_skeleton applyLinearImpulse:ccp(.2,0)];
+  //  [_skeleton applyLinearImpulse:ccp(.2,0)];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -346,7 +347,7 @@ enum {
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
-            [self.camera addIntensity:10.f]; 
+            //[self.camera addIntensity:10.f]; 
         }
     
 }

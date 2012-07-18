@@ -163,7 +163,7 @@
 	if( newString == string_ )
 		return;
 
-	if( [newString hash] != [string_ hash] ) {
+	if([newString hash] != [string_ hash] ) {
 
 		NSUInteger len = [newString length];
 		if( len > textureAtlas_.capacity )
