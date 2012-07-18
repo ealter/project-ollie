@@ -8,7 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
+#import "PhysicsSprite.h"
+#import "Box2D.h"
 
 @interface GWThrownWeapon : GWWeapon
+
+@property (strong, nonatomic) PhysicsSprite *throwSprite;
+
+-(id)initThrownWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size box2DWorld: (b2World *)world;
 
 @end

@@ -19,4 +19,9 @@
     
 }
 
+-(void)throwWeapon:(float)angle withStrength:(float)strength
+{
+    
+}
+
 @end
