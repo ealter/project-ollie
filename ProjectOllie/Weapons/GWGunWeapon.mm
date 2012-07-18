@@ -20,7 +20,7 @@
 @property (assign, nonatomic) CGSize bulletSize;
 @property (strong, nonatomic) NSString *bulletImage;
 @property (assign, nonatomic) float bulletSpeed;
-@property (strong, nonatomic) CCNode* bulletParent;
+
 @end
 
 @implementation GWGunWeapon
@@ -28,9 +28,8 @@
 @synthesize bulletSize      = _bulletSize;
 @synthesize bulletImage     = _bulletImage;
 @synthesize bulletSpeed     = _bulletSpeed;
-@synthesize bulletParent    = _bulletParent;
 
-- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world bulletParent:(CCNode*)parent;
+- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world
 {
     if (self = [super initWithFile:imageName]) {
         self.position       = pos;
@@ -39,7 +38,6 @@
         self.bulletSize     = bulletSize;
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
-        self.bulletParent   = parent;
     }
     return self;
 }
@@ -53,7 +51,8 @@
     //Send the bullet towards the target
    
     bullet.physicsBody->ApplyLinearImpulse(b2Vec2(0, 0),bullet.physicsBody->GetPosition());    */
-    CGPoint force = ccpMult(ccpSub(target, self.position), self.bulletSpeed);
+    CGPoint force = ccpMult(ccpMult(ccpSub(target, self.position), 1./ccpLength(ccpSub(target,self.position))),self.bulletSpeed);
+    PhysicsSprite* sprite = [PhysicsSprite spriteWithFile:self.bulletImage];
     b2BodyDef bd;
     b2PolygonShape box;
     b2FixtureDef fixtureDef;
@@ -62,9 +61,9 @@
     bd.type             = b2_dynamicBody;
     bd.linearDamping    = .1f;
     bd.angularDamping   = .1f;
-    // bd.bullet           = YES;
+    bd.bullet           = YES;
     
-    box.SetAsBox(.5, .5);
+    box.SetAsBox(self.bulletSize.width/2./PTM_RATIO,self.bulletSize.height/2./PTM_RATIO);
     
     fixtureDef.shape    = &box;
     fixtureDef.density  = 1.0f;
@@ -74,7 +73,9 @@
     fixtureDef.filter.maskBits = MASK_PROJECTILES;
     b2Body *bulletShape = _world->CreateBody(&bd);
     bulletShape->CreateFixture(&fixtureDef);
-    bulletShape->SetTransform(b2Vec2(target.x/PTM_RATIO,target.y/PTM_RATIO), 0);
+    bulletShape->SetTransform(b2Vec2(self.position.x/PTM_RATIO,self.position.y/PTM_RATIO), 0);
+    sprite.physicsBody = bulletShape;
+    [self.parent addChild:sprite];
     bulletShape->ApplyLinearImpulse(b2Vec2(force.x, -force.y),bulletShape->GetPosition());
 }
 

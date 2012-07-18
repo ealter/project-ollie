@@ -17,8 +17,6 @@
     if ((self = [PhysicsSprite spriteWithFile:imageName])) {
         //take the world, speed, and pos
         _world              = world;
-        [self setAnchorPoint:ccp(.5,.5)];
-        //Box2D things
         b2BodyDef bd;
         b2PolygonShape box;
         b2FixtureDef fixtureDef;
@@ -27,9 +25,9 @@
         bd.type             = b2_dynamicBody;
         bd.linearDamping    = .1f;
         bd.angularDamping   = .1f;
-       // bd.bullet           = YES;
+        bd.bullet           = YES;
         
-        box.SetAsBox(.5, .5);
+        box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         
         fixtureDef.shape    = &box;
         fixtureDef.density  = 1.0f;
@@ -39,11 +37,10 @@
         fixtureDef.filter.maskBits = MASK_PROJECTILES;
         b2Body *bulletShape = _world->CreateBody(&bd);
         bulletShape->CreateFixture(&fixtureDef);
-        b2Body *box2DBody = bulletShape;
-        [self setPhysicsBody:box2DBody];
-
-        [self setPosition:pos];
-        self.physicsBody->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0);
+        
+        self.physicsBody = bulletShape;
+        self.position = pos;
+        bulletShape->SetTransform(b2Vec2(self.position.x/PTM_RATIO,self.position.y/PTM_RATIO), 0);   
     }
     
     return self;
