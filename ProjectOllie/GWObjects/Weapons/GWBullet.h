@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "CCNode.h"
-#import "PhysicsSprite.h"
+#import "GWPhysicsSprite.h"
 
 class b2World;
 
