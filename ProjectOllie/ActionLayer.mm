@@ -8,7 +8,7 @@
 
 #import "ActionLayer.h"
 #import "AppDelegate.h"
-#import "PhysicsSprite.h"
+#import "GWPhysicsSprite.h"
 #import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "RippleEffect.h"

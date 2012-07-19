@@ -38,9 +38,7 @@
 		C583DBAC15AF947B00FE441B /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA615AF947B00FE441B /* character.skel */; };
 		C583DBAD15AF947B00FE441B /* characternew.skel in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA715AF947B00FE441B /* characternew.skel */; };
 		C583DBAE15AF947B00FE441B /* characternewest.skel in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA815AF947B00FE441B /* characternewest.skel */; };
-		C584A88E157D969500936109 /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C584A88D157D969500936109 /* GWCamera.mm */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
-		C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = C589647715AD038E00F044D9 /* GWSkeleton.mm */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
@@ -54,6 +52,16 @@
 		C5F4308715B8CF9A00174FEE /* jungle_layer4.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307F15B8CF9A00174FEE /* jungle_layer4.png */; };
 		C5F4308D15B8D1C500174FEE /* ScrollingBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F4308A15B8D1C500174FEE /* ScrollingBackground.m */; };
 		C5F4308E15B8D1C500174FEE /* SpriteParallax.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F4308C15B8D1C500174FEE /* SpriteParallax.m */; };
+		C5F430A515B8D2EA00174FEE /* GWCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309115B8D2EA00174FEE /* GWCamera.mm */; };
+		C5F430A615B8D2EA00174FEE /* GWParticles.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309315B8D2EA00174FEE /* GWParticles.m */; };
+		C5F430A715B8D2EA00174FEE /* GWPhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309515B8D2EA00174FEE /* GWPhysicsSprite.mm */; };
+		C5F430A815B8D2EB00174FEE /* GWSkeleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */; };
+		C5F430A915B8D2EB00174FEE /* GWWater.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309915B8D2EA00174FEE /* GWWater.mm */; };
+		C5F430AA15B8D2EB00174FEE /* GWBullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309C15B8D2EA00174FEE /* GWBullet.mm */; };
+		C5F430AB15B8D2EB00174FEE /* GWGunWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */; };
+		C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */; };
+		C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */; };
+		C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A415B8D2EA00174FEE /* GWWeapon.mm */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
@@ -64,7 +72,6 @@
 		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
-		CE11B19115A68C03009B22CA /* GWWater.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE11B19015A68C03009B22CA /* GWWater.mm */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE1488AE15803D1400DEC98D /* SandboxScene.mm */; };
 		CE1BB51F1586A6BA0095A793 /* eraser-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5171586A6BA0095A793 /* eraser-hd.png */; };
@@ -77,7 +84,6 @@
 		CE1BB5261586A6BA0095A793 /* small.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB51E1586A6BA0095A793 /* small.png */; };
 		CE1F2E7C1590385800710A32 /* dottedbox-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2E7A1590385800710A32 /* dottedbox-hd.png */; };
 		CE1F2E7D1590385800710A32 /* drawframe-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1F2E7B1590385800710A32 /* drawframe-hd.png */; };
-		CE22740215A0193100F3217E /* GWParticles.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22740115A0193100F3217E /* GWParticles.m */; };
 		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
 		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
@@ -124,11 +130,6 @@
 		CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F7159943C30065B440 /* metalbutton-dark.png */; };
 		CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F8159943C30065B440 /* silverbutton-dark.png */; };
 		CE70E1FE159943C30065B440 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F9159943C30065B440 /* silverbutton.png */; };
-		CE805F2115B0E1ED0094B3E6 /* GWWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2015B0E1ED0094B3E6 /* GWWeapon.mm */; };
-		CE805F2815B0E4C40094B3E6 /* GWGunWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2715B0E4C40094B3E6 /* GWGunWeapon.mm */; };
-		CE805F2B15B0E4FF0094B3E6 /* GWThrownWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2A15B0E4FF0094B3E6 /* GWThrownWeapon.mm */; };
-		CE805F2E15B0E5130094B3E6 /* GWSpellWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F2D15B0E5130094B3E6 /* GWSpellWeapon.mm */; };
-		CE805F3115B0E5370094B3E6 /* GWBullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE805F3015B0E5370094B3E6 /* GWBullet.mm */; };
 		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -299,7 +300,6 @@
 		CE94AC6E15785F89009B35B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC6D15785F89009B35B4 /* main.m */; };
 		CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7015785F89009B35B4 /* AppDelegate.mm */; };
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
-		CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
 		CE9957D5158AB5F000B863DF /* back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9957D3158AB5F000B863DF /* back-hd.png */; };
 		CE9957D6158AB5F000B863DF /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = CE9957D4158AB5F000B863DF /* back.png */; };
@@ -392,12 +392,8 @@
 		C583DBA615AF947B00FE441B /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
 		C583DBA715AF947B00FE441B /* characternew.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = characternew.skel; sourceTree = "<group>"; };
 		C583DBA815AF947B00FE441B /* characternewest.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = characternewest.skel; sourceTree = "<group>"; };
-		C584A88C157D969500936109 /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
-		C584A88D157D969500936109 /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
-		C589647615AD038E00F044D9 /* GWSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSkeleton.h; sourceTree = "<group>"; };
-		C589647715AD038E00F044D9 /* GWSkeleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWSkeleton.mm; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
@@ -414,6 +410,26 @@
 		C5F4308A15B8D1C500174FEE /* ScrollingBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingBackground.m; sourceTree = "<group>"; };
 		C5F4308B15B8D1C500174FEE /* SpriteParallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteParallax.h; sourceTree = "<group>"; };
 		C5F4308C15B8D1C500174FEE /* SpriteParallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteParallax.m; sourceTree = "<group>"; };
+		C5F4309015B8D2EA00174FEE /* GWCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCamera.h; sourceTree = "<group>"; };
+		C5F4309115B8D2EA00174FEE /* GWCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCamera.mm; sourceTree = "<group>"; };
+		C5F4309215B8D2EA00174FEE /* GWParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWParticles.h; sourceTree = "<group>"; };
+		C5F4309315B8D2EA00174FEE /* GWParticles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWParticles.m; sourceTree = "<group>"; };
+		C5F4309415B8D2EA00174FEE /* GWPhysicsSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPhysicsSprite.h; sourceTree = "<group>"; };
+		C5F4309515B8D2EA00174FEE /* GWPhysicsSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWPhysicsSprite.mm; sourceTree = "<group>"; };
+		C5F4309615B8D2EA00174FEE /* GWSkeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSkeleton.h; sourceTree = "<group>"; };
+		C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWSkeleton.mm; sourceTree = "<group>"; };
+		C5F4309815B8D2EA00174FEE /* GWWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWater.h; sourceTree = "<group>"; };
+		C5F4309915B8D2EA00174FEE /* GWWater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWater.mm; sourceTree = "<group>"; };
+		C5F4309B15B8D2EA00174FEE /* GWBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBullet.h; sourceTree = "<group>"; };
+		C5F4309C15B8D2EA00174FEE /* GWBullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWBullet.mm; sourceTree = "<group>"; };
+		C5F4309D15B8D2EA00174FEE /* GWGunWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGunWeapon.h; sourceTree = "<group>"; };
+		C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWGunWeapon.mm; sourceTree = "<group>"; };
+		C5F4309F15B8D2EA00174FEE /* GWSpellWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSpellWeapon.h; sourceTree = "<group>"; };
+		C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWSpellWeapon.mm; sourceTree = "<group>"; };
+		C5F430A115B8D2EA00174FEE /* GWThrownWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWThrownWeapon.h; sourceTree = "<group>"; };
+		C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWThrownWeapon.mm; sourceTree = "<group>"; };
+		C5F430A315B8D2EA00174FEE /* GWWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeapon.h; sourceTree = "<group>"; };
+		C5F430A415B8D2EA00174FEE /* GWWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWeapon.mm; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -443,8 +459,6 @@
 		CE0BD605159016E600C380CA /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
 		CE0BD606159016E600C380CA /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		CE0BD607159016E600C380CA /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		CE11B18F15A68C03009B22CA /* GWWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWater.h; sourceTree = "<group>"; };
-		CE11B19015A68C03009B22CA /* GWWater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWater.mm; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
 		CE1488AE15803D1400DEC98D /* SandboxScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxScene.mm; sourceTree = "<group>"; };
@@ -458,8 +472,6 @@
 		CE1BB51E1586A6BA0095A793 /* small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = small.png; path = Resources/small.png; sourceTree = "<group>"; };
 		CE1F2E7A1590385800710A32 /* dottedbox-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dottedbox-hd.png"; path = "Resources/dottedbox-hd.png"; sourceTree = "<group>"; };
 		CE1F2E7B1590385800710A32 /* drawframe-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "drawframe-hd.png"; path = "Resources/drawframe-hd.png"; sourceTree = "<group>"; };
-		CE22740015A0193100F3217E /* GWParticles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWParticles.h; sourceTree = "<group>"; };
-		CE22740115A0193100F3217E /* GWParticles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWParticles.m; sourceTree = "<group>"; };
 		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/Miscellaneous/fire.png; sourceTree = "<group>"; };
 		CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PasswordChangeScreen.ccbi; path = "Resources/menu-objects/ccbis/PasswordChangeScreen.ccbi"; sourceTree = "<group>"; };
 		CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChangeScreen.h; path = menus/PasswordChangeScreen.h; sourceTree = "<group>"; };
@@ -525,16 +537,6 @@
 		CE70E1F7159943C30065B440 /* metalbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbutton-dark.png"; path = "Resources/metalbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F8159943C30065B440 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F9159943C30065B440 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/silverbutton.png; sourceTree = "<group>"; };
-		CE805F1F15B0E1ED0094B3E6 /* GWWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWWeapon.h; path = Weapons/GWWeapon.h; sourceTree = "<group>"; };
-		CE805F2015B0E1ED0094B3E6 /* GWWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWWeapon.mm; path = Weapons/GWWeapon.mm; sourceTree = "<group>"; };
-		CE805F2615B0E4C40094B3E6 /* GWGunWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWGunWeapon.h; path = Weapons/GWGunWeapon.h; sourceTree = "<group>"; };
-		CE805F2715B0E4C40094B3E6 /* GWGunWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWGunWeapon.mm; path = Weapons/GWGunWeapon.mm; sourceTree = "<group>"; };
-		CE805F2915B0E4FF0094B3E6 /* GWThrownWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWThrownWeapon.h; path = Weapons/GWThrownWeapon.h; sourceTree = "<group>"; };
-		CE805F2A15B0E4FF0094B3E6 /* GWThrownWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWThrownWeapon.mm; path = Weapons/GWThrownWeapon.mm; sourceTree = "<group>"; };
-		CE805F2C15B0E5130094B3E6 /* GWSpellWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWSpellWeapon.h; path = Weapons/GWSpellWeapon.h; sourceTree = "<group>"; };
-		CE805F2D15B0E5130094B3E6 /* GWSpellWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWSpellWeapon.mm; path = Weapons/GWSpellWeapon.mm; sourceTree = "<group>"; };
-		CE805F2F15B0E5370094B3E6 /* GWBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWBullet.h; path = Weapons/GWBullet.h; sourceTree = "<group>"; };
-		CE805F3015B0E5370094B3E6 /* GWBullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWBullet.mm; path = Weapons/GWBullet.mm; sourceTree = "<group>"; };
 		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
 		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
@@ -893,8 +895,6 @@
 		CE94AC7015785F89009B35B4 /* AppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; lineEnding = 0; path = AppDelegate.mm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CE94AC7515785F89009B35B4 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		CE94AC7615785F89009B35B4 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
-		CE94AC7815785F89009B35B4 /* PhysicsSprite.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhysicsSprite.h; sourceTree = "<group>"; };
-		CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PhysicsSprite.mm; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/Miscellaneous/blocks.png; sourceTree = "<group>"; };
 		CE9957D3158AB5F000B863DF /* back-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-hd.png"; path = "Resources/back-hd.png"; sourceTree = "<group>"; };
 		CE9957D4158AB5F000B863DF /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back.png; path = Resources/back.png; sourceTree = "<group>"; };
@@ -1149,6 +1149,41 @@
 			path = Backgrounds;
 			sourceTree = "<group>";
 		};
+		C5F4308F15B8D2EA00174FEE /* GWObjects */ = {
+			isa = PBXGroup;
+			children = (
+				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
+				C5F4309115B8D2EA00174FEE /* GWCamera.mm */,
+				C5F4309215B8D2EA00174FEE /* GWParticles.h */,
+				C5F4309315B8D2EA00174FEE /* GWParticles.m */,
+				C5F4309415B8D2EA00174FEE /* GWPhysicsSprite.h */,
+				C5F4309515B8D2EA00174FEE /* GWPhysicsSprite.mm */,
+				C5F4309615B8D2EA00174FEE /* GWSkeleton.h */,
+				C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */,
+				C5F4309815B8D2EA00174FEE /* GWWater.h */,
+				C5F4309915B8D2EA00174FEE /* GWWater.mm */,
+				C5F4309A15B8D2EA00174FEE /* Weapons */,
+			);
+			path = GWObjects;
+			sourceTree = "<group>";
+		};
+		C5F4309A15B8D2EA00174FEE /* Weapons */ = {
+			isa = PBXGroup;
+			children = (
+				C5F4309B15B8D2EA00174FEE /* GWBullet.h */,
+				C5F4309C15B8D2EA00174FEE /* GWBullet.mm */,
+				C5F4309D15B8D2EA00174FEE /* GWGunWeapon.h */,
+				C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */,
+				C5F4309F15B8D2EA00174FEE /* GWSpellWeapon.h */,
+				C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */,
+				C5F430A115B8D2EA00174FEE /* GWThrownWeapon.h */,
+				C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */,
+				C5F430A315B8D2EA00174FEE /* GWWeapon.h */,
+				C5F430A415B8D2EA00174FEE /* GWWeapon.mm */,
+			);
+			path = Weapons;
+			sourceTree = "<group>";
+		};
 		C5FBA726159A8B0F00C1C624 /* Menu Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1349,23 +1384,6 @@
 			name = CCTableSuite;
 			sourceTree = "<group>";
 		};
-		CE805F2215B0E1F60094B3E6 /* Weapons */ = {
-			isa = PBXGroup;
-			children = (
-				CE805F1F15B0E1ED0094B3E6 /* GWWeapon.h */,
-				CE805F2015B0E1ED0094B3E6 /* GWWeapon.mm */,
-				CE805F2615B0E4C40094B3E6 /* GWGunWeapon.h */,
-				CE805F2715B0E4C40094B3E6 /* GWGunWeapon.mm */,
-				CE805F2915B0E4FF0094B3E6 /* GWThrownWeapon.h */,
-				CE805F2A15B0E4FF0094B3E6 /* GWThrownWeapon.mm */,
-				CE805F2C15B0E5130094B3E6 /* GWSpellWeapon.h */,
-				CE805F2D15B0E5130094B3E6 /* GWSpellWeapon.mm */,
-				CE805F2F15B0E5370094B3E6 /* GWBullet.h */,
-				CE805F3015B0E5370094B3E6 /* GWBullet.mm */,
-			);
-			name = Weapons;
-			sourceTree = "<group>";
-		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
@@ -1422,18 +1440,8 @@
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
-				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
-				CE94AC7915785F89009B35B4 /* PhysicsSprite.mm */,
-				CE11B18F15A68C03009B22CA /* GWWater.h */,
-				CE11B19015A68C03009B22CA /* GWWater.mm */,
-				C584A88C157D969500936109 /* GWCamera.h */,
-				C584A88D157D969500936109 /* GWCamera.mm */,
-				CE22740015A0193100F3217E /* GWParticles.h */,
-				CE22740115A0193100F3217E /* GWParticles.m */,
-				C589647615AD038E00F044D9 /* GWSkeleton.h */,
-				C589647715AD038E00F044D9 /* GWSkeleton.mm */,
+				C5F4308F15B8D2EA00174FEE /* GWObjects */,
 				C5F4308815B8D1C500174FEE /* Backgrounds */,
-				CE805F2215B0E1F60094B3E6 /* Weapons */,
 				CE02DC5815AE2D1800F16FAF /* Utils */,
 				CE02DC5915AE2D3300F16FAF /* Terrain */,
 				CE30B189158FBA12009EC82B /* Menus */,
@@ -2353,7 +2361,6 @@
 				CE94AC6E15785F89009B35B4 /* main.m in Sources */,
 				CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */,
 				CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */,
-				CE94AC7A15785F89009B35B4 /* PhysicsSprite.mm in Sources */,
 				C52986B31578A43300656B50 /* CCControl.m in Sources */,
 				C52986B41578A43300656B50 /* CCControlButton.m in Sources */,
 				C52986B51578A43300656B50 /* CCControlColourPicker.m in Sources */,
@@ -2374,7 +2381,6 @@
 				CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
-				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
 				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
@@ -2408,20 +2414,22 @@
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
-				CE22740215A0193100F3217E /* GWParticles.m in Sources */,
 				CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */,
 				CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */,
 				CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */,
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
-				CE11B19115A68C03009B22CA /* GWWater.mm in Sources */,
-				C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */,
-				CE805F2115B0E1ED0094B3E6 /* GWWeapon.mm in Sources */,
-				CE805F2815B0E4C40094B3E6 /* GWGunWeapon.mm in Sources */,
-				CE805F2B15B0E4FF0094B3E6 /* GWThrownWeapon.mm in Sources */,
-				CE805F2E15B0E5130094B3E6 /* GWSpellWeapon.mm in Sources */,
-				CE805F3115B0E5370094B3E6 /* GWBullet.mm in Sources */,
 				C5F4308D15B8D1C500174FEE /* ScrollingBackground.m in Sources */,
 				C5F4308E15B8D1C500174FEE /* SpriteParallax.m in Sources */,
+				C5F430A515B8D2EA00174FEE /* GWCamera.mm in Sources */,
+				C5F430A615B8D2EA00174FEE /* GWParticles.m in Sources */,
+				C5F430A715B8D2EA00174FEE /* GWPhysicsSprite.mm in Sources */,
+				C5F430A815B8D2EB00174FEE /* GWSkeleton.mm in Sources */,
+				C5F430A915B8D2EB00174FEE /* GWWater.mm in Sources */,
+				C5F430AA15B8D2EB00174FEE /* GWBullet.mm in Sources */,
+				C5F430AB15B8D2EB00174FEE /* GWGunWeapon.mm in Sources */,
+				C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */,
+				C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */,
+				C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

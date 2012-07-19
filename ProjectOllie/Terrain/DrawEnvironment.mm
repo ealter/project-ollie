@@ -8,7 +8,7 @@
 
 #import "DrawEnvironment.h"
 #import "AppDelegate.h"
-#import "PhysicsSprite.h"
+#import "GWPhysicsSprite.h"
 #import "CCBReader.h"
 #import "DrawMenu.h"
 #import "Terrain.h"
