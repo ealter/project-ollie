@@ -2474,7 +2474,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDF559E1-66B2-452F-A632-2C86A0D5A2EC";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2515,7 +2514,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDF559E1-66B2-452F-A632-2C86A0D5A2EC";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
