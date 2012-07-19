@@ -430,6 +430,7 @@
 		C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWThrownWeapon.mm; sourceTree = "<group>"; };
 		C5F430A315B8D2EA00174FEE /* GWWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeapon.h; sourceTree = "<group>"; };
 		C5F430A415B8D2EA00174FEE /* GWWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWeapon.mm; sourceTree = "<group>"; };
+		C5F430AF15B8D57E00174FEE /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ccVertTypes.h; path = libs/cocos2d/Support/ccVertTypes.h; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -541,7 +542,6 @@
 		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
-		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
 		CE894EFF15829C7F00E412E1 /* PointEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PointEdge.h; path = libs/CSG/PointEdge.h; sourceTree = "<group>"; };
 		CE894F001582B30B00E412E1 /* ShapeField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeField.cpp; path = libs/CSG/ShapeField.cpp; sourceTree = "<group>"; };
@@ -1649,7 +1649,6 @@
 				CE94AB4C15785F86009B35B4 /* cocos2d.m */,
 				CE94AB4E15785F86009B35B4 /* Platforms */,
 				CE94AB7015785F86009B35B4 /* Support */,
-				CE842A06157E03420038C653 /* ccVertTypes.h */,
 			);
 			name = cocos2d;
 			sourceTree = "<group>";
@@ -1702,6 +1701,7 @@
 		CE94AB7015785F86009B35B4 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				C5F430AF15B8D57E00174FEE /* ccVertTypes.h */,
 				CE94AB7115785F86009B35B4 /* base64.c */,
 				CE94AB7315785F86009B35B4 /* base64.h */,
 				CE94AB7415785F86009B35B4 /* CCArray.h */,
