@@ -324,11 +324,12 @@
     //elastic borders
     CGPoint worldPos =  subject_.position;
     CGPoint newPos = ccp(0,0);
+    float elasticity = .25f;
     //left border
     if(worldPos.x > 0)
     {
         float offset = -worldPos.x;
-        float elasticity = .15f;
+
         newPos = ccp(offset * elasticity,0); 
         [self panBy:newPos];
 
@@ -337,7 +338,7 @@
     else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
     {
         float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
-        float elasticity = .15f;
+
         newPos = ccp(offset * elasticity,0);
         [self panBy:newPos];
 
@@ -346,7 +347,7 @@
     if(worldPos.y > 0)
     {
         float offset = -worldPos.y;
-        float elasticity = .15f;
+
         newPos = ccp(0,offset * elasticity);
         [self panBy:newPos];
 
@@ -355,7 +356,7 @@
     else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
     {
         float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
-        float elasticity = .15f;
+
         newPos = ccp(0,offset * elasticity);
         [self panBy:newPos];
 
