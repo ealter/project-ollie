@@ -52,11 +52,12 @@
 		C5F4308515B8CF9A00174FEE /* jungle_layer3.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307D15B8CF9A00174FEE /* jungle_layer3.png */; };
 		C5F4308615B8CF9A00174FEE /* jungle_layer4-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307E15B8CF9A00174FEE /* jungle_layer4-hd.png */; };
 		C5F4308715B8CF9A00174FEE /* jungle_layer4.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307F15B8CF9A00174FEE /* jungle_layer4.png */; };
+		C5F4308D15B8D1C500174FEE /* ScrollingBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F4308A15B8D1C500174FEE /* ScrollingBackground.m */; };
+		C5F4308E15B8D1C500174FEE /* SpriteParallax.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F4308C15B8D1C500174FEE /* SpriteParallax.m */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
-		CE05967C15B0C07900735DFA /* SpriteParallax.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05967B15B0C07900735DFA /* SpriteParallax.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
@@ -99,7 +100,6 @@
 		CE30B1AE158FE847009EC82B /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1AD158FE846009EC82B /* selectedoption.png */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
-		CE412619157FF6B8001FA126 /* ScrollingBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = CE412618157FF6B8001FA126 /* ScrollingBackground.m */; };
 		CE4B487F158BC40000040C1C /* LoginScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE4B487E158BC40000040C1C /* LoginScreen.ccbi */; };
 		CE4BCDA5157AD080002FD1F3 /* btn-test-0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */; };
 		CE4BCDA6157AD080002FD1F3 /* btn-test-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */; };
@@ -410,6 +410,10 @@
 		C5F4307D15B8CF9A00174FEE /* jungle_layer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jungle_layer3.png; sourceTree = "<group>"; };
 		C5F4307E15B8CF9A00174FEE /* jungle_layer4-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jungle_layer4-hd.png"; sourceTree = "<group>"; };
 		C5F4307F15B8CF9A00174FEE /* jungle_layer4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jungle_layer4.png; sourceTree = "<group>"; };
+		C5F4308915B8D1C500174FEE /* ScrollingBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingBackground.h; sourceTree = "<group>"; };
+		C5F4308A15B8D1C500174FEE /* ScrollingBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingBackground.m; sourceTree = "<group>"; };
+		C5F4308B15B8D1C500174FEE /* SpriteParallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteParallax.h; sourceTree = "<group>"; };
+		C5F4308C15B8D1C500174FEE /* SpriteParallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteParallax.m; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -417,8 +421,6 @@
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
-		CE05967A15B0C07900735DFA /* SpriteParallax.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpriteParallax.h; sourceTree = "<group>"; };
-		CE05967B15B0C07900735DFA /* SpriteParallax.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpriteParallax.m; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOS_Versions.h; path = Utils/IOS_Versions.h; sourceTree = "<group>"; };
@@ -489,8 +491,6 @@
 		CE30B1AD158FE846009EC82B /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/selectedoption.png; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = "Resources/menu-objects/ccbis/ActionMenu.ccbi"; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = "Resources/menu-objects/ccbis/MainMenu.ccbi"; sourceTree = "<group>"; };
-		CE412617157FF6B8001FA126 /* ScrollingBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollingBackground.h; sourceTree = "<group>"; };
-		CE412618157FF6B8001FA126 /* ScrollingBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollingBackground.m; sourceTree = "<group>"; };
 		CE4B487E158BC40000040C1C /* LoginScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = LoginScreen.ccbi; path = "Resources/menu-objects/ccbis/LoginScreen.ccbi"; sourceTree = "<group>"; };
 		CE4BCDA1157AD07F002FD1F3 /* btn-test-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-0.png"; path = "Resources/btn-test-0.png"; sourceTree = "<group>"; };
 		CE4BCDA2157AD07F002FD1F3 /* btn-test-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-1.png"; path = "Resources/btn-test-1.png"; sourceTree = "<group>"; };
@@ -1138,6 +1138,17 @@
 			path = Resources/backgrounds/Jungle;
 			sourceTree = "<group>";
 		};
+		C5F4308815B8D1C500174FEE /* Backgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				C5F4308915B8D1C500174FEE /* ScrollingBackground.h */,
+				C5F4308A15B8D1C500174FEE /* ScrollingBackground.m */,
+				C5F4308B15B8D1C500174FEE /* SpriteParallax.h */,
+				C5F4308C15B8D1C500174FEE /* SpriteParallax.m */,
+			);
+			path = Backgrounds;
+			sourceTree = "<group>";
+		};
 		C5FBA726159A8B0F00C1C624 /* Menu Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1409,10 +1420,6 @@
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
-				CE412617157FF6B8001FA126 /* ScrollingBackground.h */,
-				CE412618157FF6B8001FA126 /* ScrollingBackground.m */,
-				CE05967A15B0C07900735DFA /* SpriteParallax.h */,
-				CE05967B15B0C07900735DFA /* SpriteParallax.m */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
 				CE94AC7815785F89009B35B4 /* PhysicsSprite.h */,
@@ -1425,6 +1432,7 @@
 				CE22740115A0193100F3217E /* GWParticles.m */,
 				C589647615AD038E00F044D9 /* GWSkeleton.h */,
 				C589647715AD038E00F044D9 /* GWSkeleton.mm */,
+				C5F4308815B8D1C500174FEE /* Backgrounds */,
 				CE805F2215B0E1F60094B3E6 /* Weapons */,
 				CE02DC5815AE2D1800F16FAF /* Utils */,
 				CE02DC5915AE2D3300F16FAF /* Terrain */,
@@ -2367,7 +2375,6 @@
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				C584A88E157D969500936109 /* GWCamera.mm in Sources */,
-				CE412619157FF6B8001FA126 /* ScrollingBackground.m in Sources */,
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
 				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
@@ -2408,12 +2415,13 @@
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
 				CE11B19115A68C03009B22CA /* GWWater.mm in Sources */,
 				C589647815AD038E00F044D9 /* GWSkeleton.mm in Sources */,
-				CE05967C15B0C07900735DFA /* SpriteParallax.m in Sources */,
 				CE805F2115B0E1ED0094B3E6 /* GWWeapon.mm in Sources */,
 				CE805F2815B0E4C40094B3E6 /* GWGunWeapon.mm in Sources */,
 				CE805F2B15B0E4FF0094B3E6 /* GWThrownWeapon.mm in Sources */,
 				CE805F2E15B0E5130094B3E6 /* GWSpellWeapon.mm in Sources */,
 				CE805F3115B0E5370094B3E6 /* GWBullet.mm in Sources */,
+				C5F4308D15B8D1C500174FEE /* ScrollingBackground.m in Sources */,
+				C5F4308E15B8D1C500174FEE /* SpriteParallax.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
