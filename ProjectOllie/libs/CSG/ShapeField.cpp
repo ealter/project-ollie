@@ -635,7 +635,7 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
         input.input.rectInput.y[i] = y[i];
     }
     shapefieldInput.push_back(input);
-    //printTouchInput();
+    printTouchInput();
 #endif
 
     //Make sure the points are counterclockwise
