@@ -153,8 +153,8 @@ enum {
     b2Vec2 vs[4];
     vs[0].Set(0,0);
     vs[1].Set(self.contentSize.width/PTM_RATIO,0);
-    vs[2].Set(self.contentSize.width/PTM_RATIO,self.contentSize.height/PTM_RATIO);
-    vs[3].Set(0,self.contentSize.height/PTM_RATIO);
+    vs[2].Set(self.contentSize.width/PTM_RATIO,.02f);
+    vs[3].Set(0,.02f);
     dynamicBox.CreateLoop(vs, 4);
     // Define the dynamic body fixture.
     b2FixtureDef fixtureDef;

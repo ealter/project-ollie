@@ -155,7 +155,7 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
     
     glActiveTexture(GL_TEXTURE1);
     glBindTexture( GL_TEXTURE_2D,  [mask name] );
-    glUniform1i(self.maskLocation, 0);
+    glUniform1i(self.maskLocation, 1);
     
     glUniform1f(self.textureWidthLocation, self.texture.pixelsWide);
     glUniform1f(self.textureHeightLocation, self.texture.pixelsHigh);
