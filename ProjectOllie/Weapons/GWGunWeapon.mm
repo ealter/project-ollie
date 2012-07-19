@@ -27,7 +27,7 @@
 @synthesize gunSize         = _gunSize;
 @synthesize bulletSize      = _bulletSize;
 @synthesize bulletImage     = _bulletImage;
-@synthesize bulletSpeed     = _bulletSpeed;
+@synthesize bulletSpeed     = _bulletSpeed; 
 
 - (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world
 {
