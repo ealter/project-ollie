@@ -136,8 +136,8 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
 {
     [self.maskTexture begin];
     [self->pr visit];
-    [self->pr clear];
     [self.maskTexture end];
+    [self->pr clear];
     
     [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
     CCTexture2D *mask = self.maskTexture.sprite.texture;
@@ -179,7 +179,6 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
     [self.renderTexture end];
-    //[self.renderTexture visit];
 }
 
 - (void)draw
