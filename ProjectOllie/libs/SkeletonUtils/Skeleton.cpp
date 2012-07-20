@@ -194,6 +194,7 @@ bool Skeleton::animating(Bone *root, float time)
             if(root->animation.empty())break;
             key = root->animation.front();
         }
+        //DebugLog("The angle here is: %f",this->angle);
         root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a + this->angle);
         root->box2DBody->SetAngularVelocity(0);
         root->box2DBody->SetLinearVelocity(b2Vec2(0,0));

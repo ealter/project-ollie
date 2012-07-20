@@ -53,6 +53,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 //Calculate's angle for skeleton based on interactor's normal to ground body
 -(float)calculateNormalAngle;
 
+//Returns normal of interactor to ground body
+-(CGPoint)calculateGroundNormal;
+
 @end
 
 @implementation GWSkeleton
@@ -116,7 +119,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 /* recursively assembles the bone tree imported from blender*/
 -(void)assembleSkeleton:(NSArray *)currentBoneArray parentBone:(Bone *)parent{
-    float jointAngleMax = DEG2RAD(45.0);
+    float jointAngleMax =  DEG2RAD(45.0);
     float jointAngleMin = -DEG2RAD(30.0);
     
     for (NSDictionary* currentBone in currentBoneArray) {
@@ -248,6 +251,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 {
     _interactor->SetAngularVelocity(0);
     _interactor->SetLinearVelocity(b2Vec2(0,0));
+    
     _interactor->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), _interactor->GetPosition());
 }
 
@@ -274,11 +278,26 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         b2Contact* c = ce->contact;
         b2WorldManifold manifold;
         c->GetWorldManifold(&manifold);
-        b2Vec2 contactNormal = manifold.normal;
-        float angle = atan2(contactNormal.y,contactNormal.x);
+        CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
+        normal = ccpNormalize(normal);
+        DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
+        float angle = atan2(normal.y,normal.x);
         return angle;
     }
-    return M_PI/2.;
+    return 0;
+}
+
+-(CGPoint)calculateGroundNormal{
+    for (b2ContactEdge* ce = _interactor->GetContactList(); ce; ce = ce->next)
+    {
+        b2Contact* c = ce->contact;
+        b2WorldManifold manifold;
+        c->GetWorldManifold(&manifold);
+        CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
+        normal = ccpNormalize(normal);        //DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
+        return normal;
+    }
+    return CGPointZero;
 }
 
 -(void)update:(float)dt{

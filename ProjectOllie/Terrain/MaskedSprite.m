@@ -70,7 +70,7 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
         quad_.tr.texCoords.v = 1;
         
         // 1
-        self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kPixelFormat];
         ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
         [self.renderTexture clear:0 g:0 b:0 a:0];
