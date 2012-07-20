@@ -17,6 +17,7 @@ using namespace std;
 
 Skeleton::Skeleton(b2World* world)
 {
+    this->angle = 0.0;
     this->root = NULL;
     this->world = world;
 }
@@ -145,7 +146,7 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
     }
 }
 
-void Skeleton::loadAnimation(string animationName)
+void Skeleton::runAnimation(string animationName)
 {
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
@@ -193,7 +194,8 @@ bool Skeleton::animating(Bone *root, float time)
             if(root->animation.empty())break;
             key = root->animation.front();
         }
-        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+        //DebugLog("The angle here is: %f",this->angle);
+        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a + this->angle);
         root->box2DBody->SetAngularVelocity(0);
         root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
         
@@ -262,6 +264,59 @@ void Skeleton::adjustTreePosition(Bone* root)
     root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
     for(int i = 0; i < root->children.size(); i++)
         adjustTreePosition(root->children.at(i));
+}
+
+void Skeleton::setAngle(float a){
+    this->angle = a;
+}
+
+float Skeleton::getAngle(){
+    return this->angle;
+}
+
+float Skeleton::lowestY(Bone* root, float currentLowest)
+{
+    //set up values for dot product
+    float x_extent    = root->w/2./PTM_RATIO;
+    float y_extent    = root->l/2./PTM_RATIO;
+    float bodyAngle   = root->box2DBody->GetAngle();
+    b2Vec2 localXaxis = b2Vec2(cos(bodyAngle),sin(bodyAngle));
+    b2Vec2 localYaxis = b2Vec2(-localXaxis.y, localXaxis.x);
+    
+    //use dot products to get radius towards bottom
+    float radius = abs(localXaxis.y) * x_extent + abs(localYaxis.y) * y_extent;
+    float minY = root->box2DBody->GetPosition().y - radius;
+    
+    //recursively check against all the children
+    currentLowest = min(currentLowest,minY);
+    for(int i = 0; i < root->children.size(); i++)
+    {
+        currentLowest = min(currentLowest, lowestY(root->children.at(i),currentLowest));
+    }
+    
+    return currentLowest;
+}
+
+b2Vec2 Skeleton::highestContact(Bone *root, b2Vec2 currentHighest){
+    
+    b2Body* body = root->box2DBody;
+    for (b2ContactEdge* ce = body->GetContactList(); ce; ce = ce->next)
+    {
+        b2Contact* c = ce->contact;
+        b2WorldManifold manifold;
+        c->GetWorldManifold(&manifold);
+        b2Vec2 contactPoint = manifold.points[0];
+        
+        if(contactPoint.y > currentHighest.y) currentHighest = contactPoint;
+    }
+    
+    for(int i = 0; i < root->children.size(); i++)
+    {
+        b2Vec2 potential = highestContact(root->children.at(i), currentHighest);
+        if(potential.y > currentHighest.y)
+            currentHighest = potential;
+    }
+    return currentHighest;
 }
 
 void Skeleton::update()

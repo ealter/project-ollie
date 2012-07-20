@@ -8,7 +8,7 @@
 
 #import "DrawEnvironment.h"
 #import "AppDelegate.h"
-#import "PhysicsSprite.h"
+#import "GWPhysicsSprite.h"
 #import "CCBReader.h"
 #import "DrawMenu.h"
 #import "Terrain.h"
@@ -45,7 +45,7 @@
 -(id) init
 {
 	if(self=[super init]) {
-        self.terrain = [[Terrain alloc]initWithTextureType:kTerrainTexture_lava];
+        self.terrain = [[Terrain alloc]initWithTextureType:kTerrainTexture_ice];
         [self addChild:self.terrain];
         self.isTouchEnabled = YES;
         self.brushradius    = smallradius;

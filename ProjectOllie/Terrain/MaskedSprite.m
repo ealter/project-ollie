@@ -15,8 +15,7 @@
 static const ccColor4F kInitialColor = {0,0,0,1};
 static const ccColor4F kCoveredColor = {1,0,0,1};
 
-//TODO: change pixelFormat to kCCTexture2DPixelFormat_RGB5A1
-#define PIXEL_FORMAT kCCTexture2DPixelFormat_RGBA8888
+static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A1;
 #define SCALE_RATIO 1.0
 
 @interface MaskedSprite (){
@@ -71,11 +70,11 @@ static const ccColor4F kCoveredColor = {1,0,0,1};
         quad_.tr.texCoords.v = 1;
         
         // 1
-        self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        self.renderTexture = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kPixelFormat];
         ccTexParams renderParams = {GL_NICEST,GL_NICEST,GL_CLAMP_TO_EDGE,GL_CLAMP_TO_EDGE};
         [self.renderTexture.sprite.texture setTexParameters:&renderParams];
         [self.renderTexture clear:0 g:0 b:0 a:0];
-        self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:PIXEL_FORMAT];
+        self.maskTexture   = [CCRenderTexture renderTextureWithWidth:self.textureRect.size.width height:self.textureRect.size.height pixelFormat:kPixelFormat];
         [self.maskTexture clear:kInitialColor.r g:kInitialColor.g b:kInitialColor.b a:kInitialColor.a];
         
         // 2
@@ -134,11 +133,11 @@ static const ccColor4F kCoveredColor = {1,0,0,1};
 }
 
 - (void)updateMask
-{    
+{
     [self.maskTexture begin];
     [self->pr visit];
-    [self->pr clear];
     [self.maskTexture end];
+    [self->pr clear];
     
     [self.renderTexture beginWithClear:0 g:0 b:0 a:0];
     CCTexture2D *mask = self.maskTexture.sprite.texture;
@@ -180,7 +179,6 @@ static const ccColor4F kCoveredColor = {1,0,0,1};
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     glActiveTexture(GL_TEXTURE0);
     [self.renderTexture end];
-    //[self.renderTexture visit];
 }
 
 - (void)draw
@@ -250,7 +248,7 @@ static const ccColor4F kCoveredColor = {1,0,0,1};
 
 - (BOOL)saveMaskToFile:(NSString *)fileName
 {
-    if(PIXEL_FORMAT != kCCTexture2DPixelFormat_RGBA8888)
+    if(kPixelFormat != kCCTexture2DPixelFormat_RGBA8888)
         return NO;
     return [self.maskTexture saveToFile:fileName format:kCCImageFormatPNG];
 }

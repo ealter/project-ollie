@@ -256,9 +256,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float dy = y - yClosest;
                 //Calculate enterence x, y
                 float dtesq = rsq - dx*dx - dy*dy;
-                float distanceToEdge;
                 assert (dtesq >= 0);
-                distanceToEdge = sqrtf(dtesq);
+                float distanceToEdge = sqrtf(dtesq);
                 float inX = -unitX * distanceToEdge + xClosest;
                 float inY = -unitY * distanceToEdge + yClosest;
                 //Make point
@@ -310,9 +309,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float dy = y - yClosest;
                 //Calculate exit x, y
                 float dtesq = rsq - dx*dx - dy*dy;
-                float distanceToEdge;
                 assert(dtesq >= 0);
-                distanceToEdge = sqrtf(dtesq);
+                float distanceToEdge = sqrtf(dtesq);
                 float outX = unitX * distanceToEdge + xClosest;
                 float outY = unitY * distanceToEdge + yClosest;
                 printq("I-O intersection out: %f, %f, \n", outX, outY);
@@ -614,7 +612,7 @@ bool intersects(float x1,float y1,float x2,float y2,float x3,float y3,float x4,f
 }
 
 //Returns true when the point (x, y) is right of the segment from (x1, y1) to (x2, y2), false if it is left or on the segment
-bool rightOf(float x1, float y1, float x2, float y2, float x, float y)
+static inline bool rightOf(float x1, float y1, float x2, float y2, float x, float y)
 {
     //CCW winding of (x1, y1) to (x, y) to (x2, y2) implies that the point is right
     return ccw(x1, y1, x, y, x2, y2) >= 0;
@@ -635,7 +633,7 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
         input.input.rectInput.y[i] = y[i];
     }
     shapefieldInput.push_back(input);
-    //printTouchInput();
+    printTouchInput();
 #endif
 
     //Make sure the points are counterclockwise
@@ -1001,10 +999,10 @@ PeSet ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 void getGridCells(PointEdge* pe, unsigned &minCellX, unsigned &minCellY, unsigned &maxCellX, unsigned &maxCellY)
 {
 
-    unsigned int minX = (unsigned)(min(pe->x, pe->next->x) - .6);
-    unsigned int minY = (unsigned)(min(pe->y, pe->next->y) - .6);
-    unsigned int maxX = (unsigned)(max(pe->x, pe->next->x) + 1.1);
-    unsigned int maxY = (unsigned)(max(pe->y, pe->next->y) + 1.1);
+    unsigned int minX = min(pe->x, pe->next->x) - .6;
+    unsigned int minY = min(pe->y, pe->next->y) - .6;
+    unsigned int maxX = max(pe->x, pe->next->x) + 1.1;
+    unsigned int maxY = max(pe->y, pe->next->y) + 1.1;
 
     minCellX = minX/cellWidth;
     minCellY = minY/cellHeight;

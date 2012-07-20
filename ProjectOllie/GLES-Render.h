@@ -26,8 +26,6 @@
 #ifndef GLES_RENDER_H
 #define GLES_RENDER_H
 
-#import "cocos2d.h"
-
 #ifdef __CC_PLATFORM_IOS
 #import <OpenGLES/EAGL.h>
 #elif defined(__CC_PLATFORM_MAC)
@@ -37,6 +35,7 @@
 #include "Box2D.h"
 
 struct b2AABB;
+@class CCGLProgram;
 
 // This class implements debug drawing callbacks that are invoked
 // inside b2World::Step.
