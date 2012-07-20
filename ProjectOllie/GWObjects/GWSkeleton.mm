@@ -14,7 +14,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 7.0
+#define BTP_RATIO 30.0
 
 using namespace std;
 
@@ -39,7 +39,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)assembleSkeleton:(NSArray*)currentBoneArray parentBone:(Bone*)parent;
 
 //Master function for loading file information for animation (.anim) files
--(void)buildAnimationFromFile:(NSString*)fileName;
+-(void)buildAnimationFromFile:(NSString*)fileName animationName:(NSString*)animName;
 
 //Helper function for attaching animations to bones
 -(void)assembleAnimation:(NSArray*)frames;
@@ -71,7 +71,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         
         //if the above worked...
         if(_skeleton->getRoot()) {
-            filePath           = [[NSBundle mainBundle] pathForResource:fileName ofType:@"anim"];
+            filePath           = [[NSBundle mainBundle] pathForResource:@"woopwoop" ofType:@"anim"];
             [self buildAnimationFromFile:filePath];
         } else {
             CCLOG(@"ERROR BUILDING SKELETONS. ABANDON ALL HOPE!");
@@ -144,11 +144,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     if(error) {
         DebugLog(@"Error creating array from file (%@): %@", [self class], error);
     }
-    [self assembleAnimation:animArray];
+    [self assembleAnimation:animArray animationName:fileName];
 
 }
 
--(void)assembleAnimation:(NSArray *)frames{
+-(void)assembleAnimation:(NSArray *)frames animationName:(NSString*)animName{
+    
+    string animationName = [animName UTF8String];
     for (NSDictionary* frame in frames) {
         
         //get universal frame data
@@ -177,7 +179,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             key->y     = averageLoc.y;
             
             //adds the animation frame to the given animation name
-            _skeleton->addAnimationFrame("animation", name, key);
+            _skeleton->addAnimationFrame(animationName, name, key);
         }
     }
 }

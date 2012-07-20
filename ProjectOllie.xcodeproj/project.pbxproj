@@ -90,6 +90,7 @@
 		C5F430F515B8E8CA00174FEE /* ice_layer1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F215B8E8CA00174FEE /* ice_layer1.png */; };
 		C5F430F615B8E8CA00174FEE /* ice_layer2.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F315B8E8CA00174FEE /* ice_layer2.png */; };
 		C5F430F715B8E8CA00174FEE /* ice_layer3.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F415B8E8CA00174FEE /* ice_layer3.png */; };
+		C5F430FD15B9008700174FEE /* woopwoop.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5F430FC15B9008700174FEE /* woopwoop.anim */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
@@ -439,6 +440,7 @@
 		C5F430F215B8E8CA00174FEE /* ice_layer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer1.png; sourceTree = "<group>"; };
 		C5F430F315B8E8CA00174FEE /* ice_layer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer2.png; sourceTree = "<group>"; };
 		C5F430F415B8E8CA00174FEE /* ice_layer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer3.png; sourceTree = "<group>"; };
+		C5F430FC15B9008700174FEE /* woopwoop.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = woopwoop.anim; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -1035,6 +1037,7 @@
 				C583DBA215AF947B00FE441B /* character.anim */,
 				C583DBA315AF947B00FE441B /* characternew.anim */,
 				C583DBA415AF947B00FE441B /* characternewest.anim */,
+				C5F430FC15B9008700174FEE /* woopwoop.anim */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -2145,6 +2148,7 @@
 				C5F430F515B8E8CA00174FEE /* ice_layer1.png in Resources */,
 				C5F430F615B8E8CA00174FEE /* ice_layer2.png in Resources */,
 				C5F430F715B8E8CA00174FEE /* ice_layer3.png in Resources */,
+				C5F430FD15B9008700174FEE /* woopwoop.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

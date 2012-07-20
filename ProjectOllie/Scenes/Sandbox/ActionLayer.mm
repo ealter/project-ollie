@@ -269,7 +269,7 @@ enum {
     UITouch *touch = [touches anyObject];
     if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
     //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
-    [_skeleton loadAnimation:"animation"];
+    [_skeleton loadAnimation:"woopwoop"];
     [_skeleton applyLinearImpulse:ccp(.02,0)];
 }
 
