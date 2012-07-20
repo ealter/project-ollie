@@ -39,7 +39,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)assembleSkeleton:(NSArray*)currentBoneArray parentBone:(Bone*)parent;
 
 //Master function for loading file information for animation (.anim) files
--(void)buildAnimationFromFile:(NSString*)fileName;
+-(void)buildAnimationFromFile:(NSString*)filePath fileName:(NSString*)fileName;
 
 //Helper function for attaching animations to bones
 -(void)assembleAnimation:(NSArray*)frames animationName:(NSString*)animName;
@@ -72,7 +72,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         //if the above worked...
         if(_skeleton->getRoot()) {
             filePath           = [[NSBundle mainBundle] pathForResource:@"woopwoop" ofType:@"anim"];
-            [self buildAnimationFromFile:filePath];
+            [self buildAnimationFromFile:filePath fileName:@"woopwoop"];
         } else {
             CCLOG(@"ERROR BUILDING SKELETONS. ABANDON ALL HOPE!");
         }
@@ -133,10 +133,10 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
 }
 
--(void)buildAnimationFromFile:(NSString *)fileName{
+-(void)buildAnimationFromFile:(NSString *)filePath fileName:(NSString *)fileName{
     
     NSError* error = nil;
-    NSData* animData = [NSData dataWithContentsOfFile:fileName options:kNilOptions error:&error];
+    NSData* animData = [NSData dataWithContentsOfFile:filePath options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error reading animation file (%@): %@", [self class], error);
     }
