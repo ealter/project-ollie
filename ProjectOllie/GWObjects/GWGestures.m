@@ -7,6 +7,7 @@
 //
 
 #import "GWGestures.h"
+#import "cocos2d.h"
 
 @interface GWGestures ()
 {
