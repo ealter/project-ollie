@@ -45,7 +45,7 @@
 -(id) init
 {
 	if(self=[super init]) {
-        self.terrain = [[Terrain alloc]initWithTextureType:kTerrainTexture_vines];
+        self.terrain = [[Terrain alloc]initWithTextureType:kTerrainTexture_ice];
         [self addChild:self.terrain];
         self.isTouchEnabled = YES;
         self.brushradius    = smallradius;

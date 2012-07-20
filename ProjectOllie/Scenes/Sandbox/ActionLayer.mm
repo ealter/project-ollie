@@ -32,7 +32,6 @@ enum {
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
--(void) addNewStaticBodyAtPosition:(CGPoint)p;
 -(void) handleOneFingerMotion:(NSSet *)touches;
 -(void) handleTwoFingerMotion:(NSSet *)touches;
 
@@ -89,8 +88,6 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-        	
-        [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
         
        /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
@@ -167,8 +164,8 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
-    gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
-    [self addChild:gunWeapon];
+   /* gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    [self addChild:gunWeapon];*/
     gestures = [[GWGestures alloc] init];
     [self addChild:gestures z:2];
 
@@ -190,57 +187,6 @@ enum {
     world->DrawDebugData();	
 
     kmGLPopMatrix();
-}
-
--(void) addNewStaticBodyAtPosition:(CGPoint)p
-{
-    CCLOG(@"Add sprite %0.2f x %02.f",p.x,p.y);
-#if 0
-    CCNode *parent = [self getChildByTag:kTagParentNode];
-
-    //We have a 64x64 sprite sheet with 4 different 32x32 images.  The following code is
-    //just randomly picking one of the images
-    int idx = (CCRANDOM_0_1() > .5 ? 0:1);
-    int idy = (CCRANDOM_0_1() > .5 ? 0:1);
-#endif
-   // PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(16 * idx,16 * idy,16,16)];					
-	
-    /**
-     * With the debug drawing features we have, bodies draw themselves.
-     */
-    
-    // [parent addChild:sprite];
-    // Will eventually make this a piece of terrain
-
-    // sprite.position = ccp( p.x, p.y); //cocos2d point
-
-    // Define the static body.
-    // Set up a 1m squared box in the physics world
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(p.x/PTM_RATIO, p.y/PTM_RATIO);
-    b2Body *body = world->CreateBody(&bodyDef);
-
-    // Define another box shape for our static body.
-    //b2PolygonShape staticBox;
-    //dynamicBox.SetAsBox(.5f, .5f);//These are mid points for our 1m box
-    b2ChainShape dynamicBox;
-    b2Vec2 vs[4];
-    vs[0].Set(1.7f,0);
-    vs[1].Set(0,1.7f);
-    vs[2].Set(0,0);
-    vs[3].Set(.24f,.24f);
-    dynamicBox.CreateLoop(vs, 4);
-    
-    // Define the dynamic body fixture.
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;	
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
-    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
-    fixtureDef.filter.maskBits = MASK_TERRAIN;
-    body->CreateFixture(&fixtureDef);
-
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
@@ -324,7 +270,7 @@ enum {
     if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
     //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
     [_skeleton loadAnimation:"animation"];
-  //  [_skeleton applyLinearImpulse:ccp(.2,0)];
+    [_skeleton applyLinearImpulse:ccp(.02,0)];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

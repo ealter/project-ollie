@@ -111,7 +111,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
         case kTerrainTexture_rocks:
             return @"rocks.png";
         case kTerrainTexture_ice:
-            return @"ice.png";
+            return @"snow.png";
         case kTerrainTexture_vines:
             return @"rocksandvines.png";
         case kTerrainTexture_gravel:

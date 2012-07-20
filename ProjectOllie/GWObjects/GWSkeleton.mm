@@ -229,14 +229,19 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(void)setInteractorPosition{
-    Bone* root     = _skeleton->getRoot();
-    Bone* torso    = _skeleton->getBoneByName(root, "Torso");
-    b2Vec2 highest = _skeleton->highestContact(root, b2Vec2(-100,-100)); 
-    float  lowest  = _skeleton->lowestY(root, 100);
-    float lowestY  = max(highest.y, lowest) + interactorRadius;
-    _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
+    Bone* root      = _skeleton->getRoot();
+    Bone* torso     = _skeleton->getBoneByName(root, "Torso");
+    Bone* left_leg  = _skeleton->getBoneByName(root, "ll_leg");
+    Bone* right_leg = _skeleton->getBoneByName(root, "rl_leg");
+    b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
+    b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     
-    //CCLOG(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
+    float lowestY   = max(highest_left.y, highest_right.y) + interactorRadius;
+    _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
+    _interactor->SetAngularVelocity(0);
+    _interactor->SetLinearVelocity(b2Vec2(0,0));
+    
+    //DebugLog(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
 }
 
 -(void)update:(float)dt{

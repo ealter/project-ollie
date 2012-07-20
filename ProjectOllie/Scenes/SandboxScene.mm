@@ -35,7 +35,7 @@
         CCNode* actionNode = [CCNode node];
         
         /* Set up parallax */
-        [self initBackgroundsWithBasename:@"jungle" actionNode:actionNode camera:self.actionLayer.camera];
+        [self initBackgroundsWithBasename:@"ice" actionNode:actionNode camera:self.actionLayer.camera];
         [actionNode addChild:self.actionLayer];
         [self addChild:actionNode];
 
