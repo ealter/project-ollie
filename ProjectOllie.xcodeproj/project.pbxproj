@@ -304,6 +304,7 @@
 		CEA14DAF1587CA7E00735135 /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAB1587CA7E00735135 /* check.png */; };
 		CEA14DB01587CA7E00735135 /* clear-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAC1587CA7E00735135 /* clear-hd.png */; };
 		CEA14DB11587CA7E00735135 /* clear.png in Resources */ = {isa = PBXBuildFile; fileRef = CEA14DAD1587CA7E00735135 /* clear.png */; };
+		CEA3636D15B7C9B900148D3B /* GWGestures.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.m */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */; };
 		CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */; };
@@ -896,6 +897,8 @@
 		CEA14DAB1587CA7E00735135 /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = Resources/check.png; sourceTree = "<group>"; };
 		CEA14DAC1587CA7E00735135 /* clear-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "clear-hd.png"; path = "Resources/clear-hd.png"; sourceTree = "<group>"; };
 		CEA14DAD1587CA7E00735135 /* clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = clear.png; path = Resources/clear.png; sourceTree = "<group>"; };
+		CEA3636B15B7C9B700148D3B /* GWGestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGestures.h; sourceTree = "<group>"; };
+		CEA3636C15B7C9B800148D3B /* GWGestures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGestures.m; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = "Resources/menu-objects/ccbis/DrawMenu.ccbi"; sourceTree = "<group>"; };
 		CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookNormal.png; sourceTree = "<group>"; };
 		CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
@@ -1405,6 +1408,8 @@
 				C584A88D157D969500936109 /* GWCamera.mm */,
 				CE22740015A0193100F3217E /* GWParticles.h */,
 				CE22740115A0193100F3217E /* GWParticles.m */,
+				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
+				CEA3636C15B7C9B800148D3B /* GWGestures.m */,
 				C589647615AD038E00F044D9 /* GWSkeleton.h */,
 				C589647715AD038E00F044D9 /* GWSkeleton.mm */,
 				CE805F2215B0E1F60094B3E6 /* Weapons */,
@@ -2393,6 +2398,7 @@
 				CE805F2B15B0E4FF0094B3E6 /* GWThrownWeapon.mm in Sources */,
 				CE805F2E15B0E5130094B3E6 /* GWSpellWeapon.mm in Sources */,
 				CE805F3115B0E5370094B3E6 /* GWBullet.mm in Sources */,
+				CEA3636D15B7C9B900148D3B /* GWGestures.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

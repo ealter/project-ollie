@@ -8,63 +8,47 @@
 
 #import "GWThrownWeapon.h"
 #import "GameConstants.h"
+#import "GWBullet.h"
 
 @interface GWThrownWeapon()
 {
-    b2World *_world;
+    NSString *_imageName;
 }
 @end
 
 @implementation GWThrownWeapon
-@synthesize throwSprite       = _throwSprite;
 
--(id)initThrownWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size box2DWorld:(b2World *)world
+-(id)initThrownWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo box2DWorld:(b2World *)world
 {
     if (self = [super init]) {
-        self.throwSprite = [PhysicsSprite spriteWithFile:imageName];
-        self.position = pos;
-        self.contentSize = size;
+        _imageName          = imageName;
+        self.position       = pos;
+        self.contentSize    = size;
+        self.ammo           = ammo;
         _world = world;
+        
         
     }
     
     return self;
 }
 
--(void)throwWeapon:(float)angle withStrength:(float)strength
+-(void)throwWeaponWithAngle:(float)angle withStrength:(float)strength
 {
-    //Make box2D body
-    b2BodyDef bd;
-    b2PolygonShape box;
-    b2FixtureDef fixtureDef;
-    
-    //Set up the BodyDef
-    bd.type             = b2_dynamicBody;
-    bd.gravityScale     = 1.;
-    bd.linearDamping    = .1f;
-    bd.angularDamping   = .1f;
-    bd.bullet           = YES;
-    
-    box.SetAsBox(self.contentSize.width/PTM_RATIO, self.contentSize.height/PTM_RATIO);
-    
-    fixtureDef.shape    = &box;
-    fixtureDef.density  = 1.0f;
-    fixtureDef.friction = 0.4f;
-    fixtureDef.restitution = 0.1f;
-    fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
-    fixtureDef.filter.maskBits = MASK_PROJECTILES;
-    
-    bd.position.Set(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
-    b2Body *thrownShape = _world->CreateBody(&bd);
-    thrownShape->CreateFixture(&fixtureDef);
-    b2Body *box2DBody = thrownShape;
-    
-    [self.throwSprite setPhysicsBody:box2DBody];
-    [self addChild:self.throwSprite];
-    
-    //Throw the weapon with given angle and force
-    CGPoint force = ccpMult(ccp(cosf(angle), sinf(angle)), strength);
-    self.throwSprite.physicsBody->ApplyLinearImpulse((b2Vec2(force.x, -force.y)), self.throwSprite.physicsBody->GetPosition()) ; 
+    if (self.ammo >0) {
+        //Make a bullet which acts as the thrown item
+        GWBullet *thrown = [[GWBullet alloc] initWithBulletSize:self.contentSize imageName:_imageName startPosition:self.position b2World:_world];
+        b2Body* thrownShape = thrown.physicsBody;
+        [self.parent addChild:thrown];
+        
+        //Throw the weapon with given angle and force
+        CGPoint force = ccpMult(ccp(cosf(angle), sinf(angle)), strength);
+        thrownShape->ApplyLinearImpulse((b2Vec2(force.x, -force.y)), thrownShape->GetPosition()) ; 
+        
+        self.ammo--;
+    }else {
+        //no more ammo!
+    }
 }
 
 @end

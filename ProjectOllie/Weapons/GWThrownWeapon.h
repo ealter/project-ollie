@@ -11,10 +11,10 @@
 #import "PhysicsSprite.h"
 #import "Box2D.h"
 
-@interface GWThrownWeapon : GWWeapon
+@interface GWThrownWeapon : GWWeapon{
+    b2World *_world;
+}
 
-@property (strong, nonatomic) PhysicsSprite *throwSprite;
-
--(id)initThrownWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size box2DWorld: (b2World *)world;
+-(id)initThrownWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo box2DWorld: (b2World *)world;
 
 @end

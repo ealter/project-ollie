@@ -236,7 +236,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     float lowestY  = max(highest.y, lowest) + interactorRadius;
     _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
     
-    CCLOG(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
+    //CCLOG(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
 }
 
 -(void)update:(float)dt{

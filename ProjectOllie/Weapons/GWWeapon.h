@@ -27,6 +27,6 @@
 -(void)fireWeapon:(CGPoint) target;
 
 //Empty method for throwing weapon, should be overwritten
--(void)throwWeapon:(float) angle withStrength:(float) strength;
+-(void)throwWeaponWithAngle:(float) angle withStrength:(float) strength;
 
 @end
