@@ -31,6 +31,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     float interactorRadius;
     b2Body* _interactor;
     b2World* _world;
+    float angleFromGround;
 }
 //Master function for loading file information for skeleton (.skel) files
 -(void)buildSkeletonFromFile:(NSString*)fileName;
@@ -55,11 +56,12 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(id)initFromFile:(NSString*)fileName box2dWorld:(b2World *)world{
     if((self = [super init])){
-        timeElapsed = 0;
+        timeElapsed      = 0;
         absoluteLocation = ccp(200.0,200.0);
         interactorRadius = .005*BTP_RATIO;
-        _skeleton   = new Skeleton(world);
-        _world      = world;
+        _skeleton        = new Skeleton(world);
+        _world           = world;
+        angleFromGround  = 0;
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"];
         DebugLog(@"The filepath for filename %@ is %@", fileName, filePath);
@@ -167,7 +169,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             CGPoint averageLoc     = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
-            key->angle = angle;
+            key->angle = angle + angleFromGround;
             key->time  = time;
             key->x     = averageLoc.x;
             key->y     = averageLoc.y;
@@ -235,8 +237,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     Bone* right_leg = _skeleton->getBoneByName(root, "rl_leg");
     b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
     b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
-    
-    float lowestY   = max(highest_left.y, highest_right.y) + interactorRadius;
+    float totalLowest    = _skeleton->lowestY(root, 100);
+    float lowestY        = max(max(highest_left.y, highest_right.y),totalLowest) + 1.5*interactorRadius;
     _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
     _interactor->SetAngularVelocity(0);
     _interactor->SetLinearVelocity(b2Vec2(0,0));
@@ -251,6 +253,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         //_interactor->SetActive(true);
         timeElapsed += dt;
         _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+        CGPoint normalToGround = ccp(0,1);
+        angleFromGround = M_PI/2. - atan2(normalToGround.y,normalToGround.x);
     }
     else{
         //_interactor->SetActive(false);
