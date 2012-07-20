@@ -91,6 +91,8 @@
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
+		CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B115B8D6C200174FEE /* CharacterScreen.m */; };
+		CE055E4E15B8DBA400053373 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B315B8D6C200174FEE /* MyCell.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0A522A15A78E090036F103 /* WaterShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.vsh */; };
@@ -2340,6 +2342,8 @@
 				C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */,
 				C5F430BA15B8D74A00174FEE /* ActionLayer.mm in Sources */,
 				C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */,
+				CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */,
+				CE055E4E15B8DBA400053373 /* MyCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
