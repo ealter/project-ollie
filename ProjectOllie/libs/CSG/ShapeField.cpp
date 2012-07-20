@@ -256,9 +256,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float dy = y - yClosest;
                 //Calculate enterence x, y
                 float dtesq = rsq - dx*dx - dy*dy;
-                float distanceToEdge;
                 assert (dtesq >= 0);
-                distanceToEdge = sqrtf(dtesq);
+                float distanceToEdge = sqrtf(dtesq);
                 float inX = -unitX * distanceToEdge + xClosest;
                 float inY = -unitY * distanceToEdge + yClosest;
                 //Make point
@@ -310,9 +309,8 @@ void ShapeField::clipCircle(bool add, float r, float x, float y)
                 float dy = y - yClosest;
                 //Calculate exit x, y
                 float dtesq = rsq - dx*dx - dy*dy;
-                float distanceToEdge;
                 assert(dtesq >= 0);
-                distanceToEdge = sqrtf(dtesq);
+                float distanceToEdge = sqrtf(dtesq);
                 float outX = unitX * distanceToEdge + xClosest;
                 float outY = unitY * distanceToEdge + yClosest;
                 printq("I-O intersection out: %f, %f, \n", outX, outY);
