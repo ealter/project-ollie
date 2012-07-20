@@ -118,7 +118,7 @@ public:
     void addAnimationFrame(string animationName, string boneName, KeyFrame* frame);
     
     /* Loads this animation to the skeleton */
-    void loadAnimation(string animationName);
+    void runAnimation(string animationName);
     
     /* sets absolute position. Arguments are pixels */
     void setPosition(Bone* root, float x, float y);

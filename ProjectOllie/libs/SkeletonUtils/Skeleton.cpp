@@ -146,7 +146,7 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
     }
 }
 
-void Skeleton::loadAnimation(string animationName)
+void Skeleton::runAnimation(string animationName)
 {
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {

@@ -29,7 +29,7 @@ class b2World;
 -(Bone*)getBoneByName:(NSString*)bName;
 -(Skeleton*)getSkeleton;
 -(void)update:(float)dt;
--(void)loadAnimation:(std::string)animationName;
+-(void)runAnimation:(NSString*)animationName;
 -(void)applyLinearImpulse:(CGPoint)impulse;
 
 @end

@@ -193,9 +193,10 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return _skeleton;
 }
 
--(void)loadAnimation:(string)animationName{
+-(void)runAnimation:(NSString*)animationName{
     timeElapsed = 0;
-    _skeleton->loadAnimation(animationName);
+    string name = [animationName UTF8String];
+    _skeleton->runAnimation(name);
 }
 
 -(void)buildInteractor{
