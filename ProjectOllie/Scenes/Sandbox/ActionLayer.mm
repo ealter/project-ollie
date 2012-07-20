@@ -163,7 +163,8 @@ enum {
     fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
     
-    _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
+    _skeleton = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
+   
    /* gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
     [self addChild:gunWeapon];*/
     gestures = [[GWGestures alloc] init];
@@ -269,7 +270,7 @@ enum {
     UITouch *touch = [touches anyObject];
     if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
     //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
-    [_skeleton runAnimation:@"woopwoop"];
+    [_skeleton runAnimation:@"sprinting"];
     [_skeleton applyLinearImpulse:ccp(.02,0)];
 }
 

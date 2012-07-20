@@ -14,7 +14,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 30.0
+#define BTP_RATIO 6.0
 
 using namespace std;
 
@@ -33,13 +33,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     b2World* _world;
 }
 //Master function for loading file information for skeleton (.skel) files
--(void)buildSkeletonFromFile:(NSString*)fileName;
+-(void)buildSkeleton;
 
 //Recursive helper function for building tree of bones
 -(void)assembleSkeleton:(NSArray*)currentBoneArray parentBone:(Bone*)parent;
 
 //Master function for loading file information for animation (.anim) files
--(void)buildAnimationFromFile:(NSString*)filePath fileName:(NSString*)fileName;
+-(void)buildAnimationFromFile:(NSString*)filePath animationName:(NSString*)animationName;
 
 //Helper function for attaching animations to bones
 -(void)assembleAnimation:(NSArray*)frames animationName:(NSString*)animName;
@@ -64,15 +64,17 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         interactorRadius = .005*BTP_RATIO;
         _skeleton        = new Skeleton(world);
         _world           = world;
-        
-        NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"];
-        DebugLog(@"The filepath for filename %@ is %@", fileName, filePath);
-        [self buildSkeletonFromFile:filePath];
+        skeletonName     = fileName;
+    
+        [self buildSkeleton];
         
         //if the above worked...
         if(_skeleton->getRoot()) {
-            filePath           = [[NSBundle mainBundle] pathForResource:@"woopwoop" ofType:@"anim"];
-            [self buildAnimationFromFile:filePath fileName:@"woopwoop"];
+            
+            /* Load animations */
+            NSArray* animationNames = [NSArray arrayWithObjects:@"sprinting",@"woopwoop", nil];            
+            [self loadAnimations:animationNames];
+            
         } else {
             CCLOG(@"ERROR BUILDING SKELETONS. ABANDON ALL HOPE!");
         }
@@ -80,17 +82,31 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return self;
 }
 
--(void)buildSkeletonFromFile:(NSString*)fileName{
+-(void)loadAnimations:(NSArray *)animationNames{
+    
+    NSString* filePath;
+    for (NSString* animationName in animationNames) {
+        
+        NSString* pathForResource = [NSString stringWithFormat:@"%@%@%@",skeletonName,@"_",animationName];
+        filePath           = [[NSBundle mainBundle] pathForResource:pathForResource ofType:@"anim"];
+        [self buildAnimationFromFile:filePath animationName:animationName];
+    }
+}
+
+-(void)buildSkeleton{
     /* Load the data and check for error */
+    
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:skeletonName ofType:@"skel"];
+    
     NSError* error = nil;
-    DebugLog(@"The file is %@", fileName);
-    NSData* skelData = [NSData dataWithContentsOfFile:fileName options:kNilOptions error:&error];
+    DebugLog(@"The file is %@", skeletonName);
+    NSData* skelData = [NSData dataWithContentsOfFile:filePath options:kNilOptions error:&error];
     if(error) {
         DebugLog(@"Error reading character file (%@): %@", [self class], error);
     }
     NSArray *skeletonArray = [[[NSString alloc] initWithData:skelData encoding:NSUTF8StringEncoding] JSONValue];
     if(!skeletonArray) {
-        DebugLog(@"Error creating array from file (%@)", fileName);
+        DebugLog(@"Error creating array from file (%@)", skeletonName);
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
@@ -133,7 +149,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
 }
 
--(void)buildAnimationFromFile:(NSString *)filePath fileName:(NSString *)fileName{
+-(void)buildAnimationFromFile:(NSString *)filePath animationName:(NSString *)animationName{
     
     NSError* error = nil;
     NSData* animData = [NSData dataWithContentsOfFile:filePath options:kNilOptions error:&error];
@@ -144,7 +160,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     if(error) {
         DebugLog(@"Error creating array from file (%@): %@", [self class], error);
     }
-    [self assembleAnimation:animArray animationName:fileName];
+    [self assembleAnimation:animArray animationName:animationName];
 
 }
 

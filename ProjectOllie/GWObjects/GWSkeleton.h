@@ -24,12 +24,16 @@ class b2World;
  */
 @interface GWSkeleton : CCNode {
     Skeleton* _skeleton;
+    NSString* skeletonName;
 }
+
+/* Initializes skeleton with given file name. Path not necessary */
 -(id)initFromFile:(NSString*)fileName box2dWorld:(b2World*)world;
 -(Bone*)getBoneByName:(NSString*)bName;
 -(Skeleton*)getSkeleton;
 -(void)update:(float)dt;
 -(void)runAnimation:(NSString*)animationName;
 -(void)applyLinearImpulse:(CGPoint)impulse;
+-(void)loadAnimations:(NSArray*) animationNames;
 
 @end
