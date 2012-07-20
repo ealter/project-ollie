@@ -15,9 +15,16 @@
 
 #define array_length(name) (sizeof(name)/sizeof(*(name)))
 
-@implementation SandboxScene {
+@interface SandboxScene () {
     RippleEffect *ripple;
 }
+
+- (void)initBackgroundsWithBasename:(NSString *)baseImageName actionNode:(CCNode *)actionNode camera:(GWCamera *)camera;
+
+@end
+
+@implementation SandboxScene
+
 @synthesize actionLayer = _actionLayer;
 
 -(id) init
@@ -28,21 +35,8 @@
         CCNode* actionNode = [CCNode node];
         
         /* Set up parallax */
-        NSString *backgroundNames[] = {@"jungle_layer1.png", @"jungle_layer2.png", @"jungle_layer3.png", @"jungle_layer4.png"};
-        float parallaxRatios[] = {0.2, 0.4, 0.6, 0.8};
-        assert(array_length(backgroundNames) == array_length(parallaxRatios));
-        for(int i=0; i<array_length(backgroundNames); i++) {
-            SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundNames[i]];
-            blayer.parallaxRatio = parallaxRatios[i];
-            blayer.anchorPoint = CGPointZero;
-            blayer.anchorPoint = ccp(.125f,.125f);
-           // blayer.anchorPoint = blayer.position;
-            [actionNode addChild:blayer];
-            [self.actionLayer.camera.children addObject:blayer];
-        }
-        
+        [self initBackgroundsWithBasename:@"jungle" actionNode:actionNode camera:self.actionLayer.camera];
         [actionNode addChild:self.actionLayer];
-        
         [self addChild:actionNode];
 
         /* Set up sandbox scene properties */
@@ -52,6 +46,22 @@
         [self reorderChild:backnode z:1000];
     }
     return self;
+}
+
+- (void)initBackgroundsWithBasename:(NSString *)baseImageName actionNode:(CCNode *)actionNode camera:(GWCamera *)camera
+{
+    const int numBackgroundLayers = 4;
+    float parallaxRatios[] = {0.2, 0.4, 0.6, 0.8};
+    assert(numBackgroundLayers == array_length(parallaxRatios));
+    for(int i=0; i<numBackgroundLayers; i++) {
+        NSString *backgroundName = [NSString stringWithFormat:@"%@_layer%d.png", baseImageName, i+1, nil];
+        SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName];
+        blayer.parallaxRatio = parallaxRatios[i];
+        blayer.anchorPoint = CGPointZero;
+        blayer.anchorPoint = ccp(.125f,.125f);
+        [actionNode addChild:blayer];
+        [camera.children addObject:blayer];
+    }
 }
 
 @end
