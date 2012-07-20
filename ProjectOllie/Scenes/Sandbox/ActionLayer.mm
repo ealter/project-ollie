@@ -116,7 +116,7 @@ enum {
 {
 
     b2Vec2 gravity;
-    gravity.Set(0.5f, -10.0f); //Trolling...
+    gravity.Set(0, -10.0f);
     world = new b2World(gravity);
 
 
@@ -201,7 +201,7 @@ enum {
    
     PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
 
-    sprite.position = ccp( p.x, p.y); //cocos2d point
+    sprite.position = p; //cocos2d point
     
     // Define the dynamic body.
     //Set up a 1m squared box in the physics world
