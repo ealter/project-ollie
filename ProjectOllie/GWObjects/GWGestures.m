@@ -65,7 +65,6 @@
             //This is a pan, or a swipe
             if (touchTime >0.4) {
                 //This is a pan
-                NSLog(@"Panning...time is %f", touchTime);
                 isPanning = YES;
             }
         }
@@ -78,13 +77,10 @@
 {
     UITouch *touch = [touches anyObject];
     touchUp = [touch locationInView:touch.view];
-    touchTime = [touch timestamp] - touchDownTime;
-    NSLog(@"Total time of the touch: %f", touchTime);
-    
+    touchTime = [touch timestamp] - touchDownTime;    
     
     if (isPanning) {
         //That was a Pan
-        NSLog(@"Pan ended, time was %f and distance was %f", touchTime, ccpDistance(touchDown, touchUp));
     }else if (touchTime < 0.4 && ccpDistance(touchDown, touchUp) > 15) {
         //This means a swipe!
 
@@ -92,21 +88,16 @@
         CGPoint swipeVec = ccpSub(touchUp, touchDown);
         if (swipeVec.x > 10 && abs(swipeVec.x) > abs(swipeVec.y)) {
             //Swipe to the right
-            NSLog(@"Right Swipe, x: %f, y: %f", swipeVec.x, swipeVec.y);
         }else if (swipeVec.x < -10 && abs(swipeVec.x) > abs(swipeVec.y)) {
             //Swipe to the left
-            NSLog(@"Left Swipe, x: %f, y: %f", swipeVec.x, swipeVec.y);
         }else if (swipeVec.y < -10 && abs(swipeVec.y) > abs(swipeVec.x)) {
             //Swipe upwards
-            NSLog(@"Upwards Swipe, x: %f, y: %f", swipeVec.x, swipeVec.y);
         }else if (swipeVec.y > 10 && abs(swipeVec.y) > abs(swipeVec.x)) {
             //Swipe downwards
-            NSLog(@"Downwards Swipe, x: %f, y: %f", swipeVec.x, swipeVec.y);
         }
         
     }else if (touchTime < 0.3 && ccpDistance(touchDown, touchUp) < 5) {
         //This means a tap!
-        NSLog(@"Tap");
     }
 }
 
