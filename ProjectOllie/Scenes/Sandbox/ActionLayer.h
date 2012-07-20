@@ -11,6 +11,8 @@
 #import "GLES-Render.h"
 #import "GWCamera.h"
 #import "Terrain.h"
+#import "CCLayer.h"
+@class CCScene;
 
 //Action Layer is different from a regular layer in that it has a camera that follows it
 //And it keeps track of parallax brothers in a scene
