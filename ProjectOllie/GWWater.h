@@ -10,7 +10,7 @@
 #import "CCSprite.h"
 #import "GWCamera.h"
 
-@interface GWWater : CCSprite <CameraObject>
+@interface GWWater : CCNode <CameraObject>
 {
     
 }

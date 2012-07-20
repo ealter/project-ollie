@@ -15,6 +15,7 @@
 #import "GameConstants.h"
 #import "GWSkeleton.h"
 #import "Skeleton.h"
+#import "GWWater.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -66,7 +67,7 @@ enum {
         [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.camera = [[GWCamera alloc] initWithSubject:self worldDimensions:self.contentSize];
+        self.camera = [[GWCamera alloc] initWithSubject:self screenDimensions:self.contentSize];
 
         // enable events
         self.isTouchEnabled = YES;
@@ -88,6 +89,8 @@ enum {
         [self addChild:parent z:0 tag:kTagParentNode];
         	
         [self addNewStaticBodyAtPosition:ccp(self.contentSize.width/2, self.contentSize.height/2)];
+        
+        [self addChild:[GWWater node]];
         
         CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];

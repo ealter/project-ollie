@@ -45,7 +45,7 @@
         [actionNode addChild:self.actionLayer];
         
         [self addChild:actionNode];
-
+        
         /* Set up sandbox scene properties */
         [self setAnchorPoint:ccp(.5,.5)];
 //        CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];

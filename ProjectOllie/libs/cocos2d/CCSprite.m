@@ -501,8 +501,10 @@
 	NSAssert(!batchNode_, @"If CCSprite is being rendered by CCSpriteBatchNode, CCSprite#draw SHOULD NOT be called");
 
 	CC_NODE_DRAW_SETUP();
-
+    
+    CHECK_GL_ERROR_DEBUG();
 	ccGLBlendFunc( blendFunc_.src, blendFunc_.dst );
+    CHECK_GL_ERROR_DEBUG();
 
 	ccGLBindTexture2D([texture_ name]);
 
@@ -511,7 +513,10 @@
 	//
 
 	ccGLEnableVertexAttribs( kCCVertexAttribFlag_PosColorTex );
-
+    
+    //Bind null to point to vertecies in client memory
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
 #define kQuadSize sizeof(quad_.bl)
 	long offset = (long)&quad_;
 
@@ -526,8 +531,7 @@
 	// color
 	diff = offsetof( ccV3F_C4B_T2F, colors);
 	glVertexAttribPointer(kCCVertexAttrib_Color, 4, GL_UNSIGNED_BYTE, GL_TRUE, kQuadSize, (void*)(offset + diff));
-
-
+    CHECK_GL_ERROR_DEBUG();
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 	CHECK_GL_ERROR_DEBUG();

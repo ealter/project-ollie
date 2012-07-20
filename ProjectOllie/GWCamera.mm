@@ -9,10 +9,11 @@
 #import "GWCamera.h"
 #import "CGPointExtension.h"
 #import "cocos2d.h"
+#import "GameConstants.h"
 
 @interface GWCamera()
 {
-    CGSize worldDimensions; //dimensions of the world we are observing
+    CGSize screenDimensions; //dimensions of the screen we have
     float actionCount;      //helps keep track of the duration of action
     float targetScale;      //the scale we will zoom to in update
 }
@@ -47,11 +48,11 @@
 @synthesize children        = _children;
 @synthesize bounded         = _bounded;
 
--(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd{
+-(id)initWithSubject:(CCNode *)subject screenDimensions:(CGSize)sd{
     if(self = [super init]) {
         //private variables
         subject_        = subject;
-        worldDimensions = wd;
+        screenDimensions = sd;
         actionCount     = 0;
         targetScale     = 1.f;
         
@@ -60,8 +61,8 @@
         self.isChanging      = NO;
         self.actionIntensity = 0.f;
         self.maximumScale    = 6.f;
-        self.minimumScale    = 1.f;
-        self.defaultScale    = 1.f;
+        self.minimumScale    = min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
+        self.defaultScale    = self.minimumScale;
         self.children        = [NSMutableArray array];
         self.bounded         = YES;
     }

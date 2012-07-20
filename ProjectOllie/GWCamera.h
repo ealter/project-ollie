@@ -39,7 +39,7 @@
 @property (assign, nonatomic) bool bounded;             // checke the bounds?
 
 /* Inits the camera with a world and its dimensions */
--(id)initWithSubject:(CCNode *)subject worldDimensions:(CGSize)wd;
+-(id)initWithSubject:(CCNode *)subject screenDimensions:(CGSize)sd;
 
 /* sets a new subject to affect */
 -(void)setSubject:(CCNode*)sub;

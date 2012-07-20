@@ -59,6 +59,13 @@
 		CE123C4D158811DC003AD813 /* background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4C158811DC003AD813 /* background.jpg */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE1488AE15803D1400DEC98D /* SandboxScene.mm */; };
+		CE18C08715B9659F00FD2025 /* waterSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08015B9659F00FD2025 /* waterSheet2.png */; };
+		CE18C08815B9659F00FD2025 /* waterSheet3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08115B9659F00FD2025 /* waterSheet3.png */; };
+		CE18C08915B9659F00FD2025 /* waterSheet4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08215B9659F00FD2025 /* waterSheet4.png */; };
+		CE18C08A15B9659F00FD2025 /* waterSheet5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08315B9659F00FD2025 /* waterSheet5.png */; };
+		CE18C08B15B9659F00FD2025 /* waterSheet6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08415B9659F00FD2025 /* waterSheet6.png */; };
+		CE18C08C15B9659F00FD2025 /* waterSheet7.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08515B9659F00FD2025 /* waterSheet7.png */; };
+		CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08615B9659F00FD2025 /* waterSheet8.png */; };
 		CE1BB51F1586A6BA0095A793 /* eraser-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5171586A6BA0095A793 /* eraser-hd.png */; };
 		CE1BB5201586A6BA0095A793 /* eraser.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5181586A6BA0095A793 /* eraser.png */; };
 		CE1BB5211586A6BA0095A793 /* large-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5191586A6BA0095A793 /* large-hd.png */; };
@@ -323,6 +330,7 @@
 		CEF0728415ACEF1300189FCD /* orangebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF0727915ACEF1300189FCD /* orangebutton.png */; };
 		CEF0728515ACEF1300189FCD /* redbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF0727A15ACEF1300189FCD /* redbutton-dark.png */; };
 		CEF0728615ACEF1300189FCD /* redbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF0727B15ACEF1300189FCD /* redbutton.png */; };
+		CEF6A09015B95AF3001D02CC /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A08F15B95AF3001D02CC /* waterSheet1.png */; };
 		CEFA272B158D447600BC9710 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA272A158D447600BC9710 /* Login.m */; };
 		CEFA2732158D4B1A00BC9710 /* AccountCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2731158D4B1A00BC9710 /* AccountCreator.m */; };
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
@@ -431,6 +439,13 @@
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
 		CE1488AE15803D1400DEC98D /* SandboxScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxScene.mm; sourceTree = "<group>"; };
+		CE18C08015B9659F00FD2025 /* waterSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet2.png; sourceTree = "<group>"; };
+		CE18C08115B9659F00FD2025 /* waterSheet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet3.png; sourceTree = "<group>"; };
+		CE18C08215B9659F00FD2025 /* waterSheet4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet4.png; sourceTree = "<group>"; };
+		CE18C08315B9659F00FD2025 /* waterSheet5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet5.png; sourceTree = "<group>"; };
+		CE18C08415B9659F00FD2025 /* waterSheet6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet6.png; sourceTree = "<group>"; };
+		CE18C08515B9659F00FD2025 /* waterSheet7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet7.png; sourceTree = "<group>"; };
+		CE18C08615B9659F00FD2025 /* waterSheet8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet8.png; sourceTree = "<group>"; };
 		CE1BB5171586A6BA0095A793 /* eraser-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "eraser-hd.png"; path = "Resources/eraser-hd.png"; sourceTree = "<group>"; };
 		CE1BB5181586A6BA0095A793 /* eraser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eraser.png; path = Resources/eraser.png; sourceTree = "<group>"; };
 		CE1BB5191586A6BA0095A793 /* large-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "large-hd.png"; path = "Resources/large-hd.png"; sourceTree = "<group>"; };
@@ -908,6 +923,7 @@
 		CEF0727915ACEF1300189FCD /* orangebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangebutton.png; path = Resources/orangebutton.png; sourceTree = "<group>"; };
 		CEF0727A15ACEF1300189FCD /* redbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "redbutton-dark.png"; path = "Resources/redbutton-dark.png"; sourceTree = "<group>"; };
 		CEF0727B15ACEF1300189FCD /* redbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redbutton.png; path = Resources/redbutton.png; sourceTree = "<group>"; };
+		CEF6A08F15B95AF3001D02CC /* waterSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet1.png; sourceTree = "<group>"; };
 		CEFA2729158D447600BC9710 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Login.h; path = ProjectOllie/Server/Login.h; sourceTree = "<group>"; };
 		CEFA272A158D447600BC9710 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Login.m; path = ProjectOllie/Server/Login.m; sourceTree = "<group>"; };
 		CEFA2730158D4B1A00BC9710 /* AccountCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AccountCreator.h; path = ProjectOllie/Server/AccountCreator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1399,6 +1415,14 @@
 				CE94AA6F15785F83009B35B4 /* fps_images.png */,
 				CE94AA6D15785F83009B35B4 /* Default.png */,
 				CE94AA7115785F83009B35B4 /* fps_images-hd.png */,
+				CEF6A08F15B95AF3001D02CC /* waterSheet1.png */,
+				CE18C08015B9659F00FD2025 /* waterSheet2.png */,
+				CE18C08115B9659F00FD2025 /* waterSheet3.png */,
+				CE18C08215B9659F00FD2025 /* waterSheet4.png */,
+				CE18C08315B9659F00FD2025 /* waterSheet5.png */,
+				CE18C08415B9659F00FD2025 /* waterSheet6.png */,
+				CE18C08515B9659F00FD2025 /* waterSheet7.png */,
+				CE18C08615B9659F00FD2025 /* waterSheet8.png */,
 				CE94AA7315785F83009B35B4 /* fps_images-ipadhd.png */,
 				CE94AA7515785F83009B35B4 /* Icon-72.png */,
 				CE4BCDA4157AD07F002FD1F3 /* comic andy.ttf */,
@@ -2135,6 +2159,14 @@
 				CE2E841015AFABBE000372BE /* background_layer1_rocksleaves.png in Resources */,
 				CE2E841115AFABBE000372BE /* background_layer1_tree.png in Resources */,
 				CE2E841215AFABBE000372BE /* background_layer1.png in Resources */,
+				CEF6A09015B95AF3001D02CC /* waterSheet1.png in Resources */,
+				CE18C08715B9659F00FD2025 /* waterSheet2.png in Resources */,
+				CE18C08815B9659F00FD2025 /* waterSheet3.png in Resources */,
+				CE18C08915B9659F00FD2025 /* waterSheet4.png in Resources */,
+				CE18C08A15B9659F00FD2025 /* waterSheet5.png in Resources */,
+				CE18C08B15B9659F00FD2025 /* waterSheet6.png in Resources */,
+				CE18C08C15B9659F00FD2025 /* waterSheet7.png in Resources */,
+				CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2436,7 +2468,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDF559E1-66B2-452F-A632-2C86A0D5A2EC";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				WRAPPER_EXTENSION = app;
 			};
@@ -2477,7 +2508,6 @@
 					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "DDF559E1-66B2-452F-A632-2C86A0D5A2EC";
 				USER_HEADER_SEARCH_PATHS = "\"ProjectOllie/libs\"";
 				VALIDATE_PRODUCT = YES;
 				WRAPPER_EXTENSION = app;
