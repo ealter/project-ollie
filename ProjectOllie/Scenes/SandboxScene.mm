@@ -54,7 +54,11 @@
     float parallaxRatios[] = {0.2, 0.4, 0.6, 0.8};
     assert(numBackgroundLayers == array_length(parallaxRatios));
     for(int i=0; i<numBackgroundLayers; i++) {
-        NSString *backgroundName = [NSString stringWithFormat:@"%@_layer%d.png", baseImageName, i+1, nil];
+        static NSString *fileExtension = @"png";
+        NSString *backgroundNameWithoutExtension = [NSString stringWithFormat:@"%@_layer%d", baseImageName, i+1, nil];
+        if([[NSBundle mainBundle] pathForResource:backgroundNameWithoutExtension ofType:fileExtension] == nil)
+            continue; //The image doesn't exist
+        NSString *backgroundName = [backgroundNameWithoutExtension stringByAppendingPathExtension:fileExtension];
         SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName];
         blayer.parallaxRatio = parallaxRatios[i];
         blayer.anchorPoint = CGPointZero;
