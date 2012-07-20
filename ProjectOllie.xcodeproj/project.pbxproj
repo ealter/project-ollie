@@ -297,6 +297,7 @@
 		CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7015785F89009B35B4 /* AppDelegate.mm */; };
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
+		CEA3636D15B7C9B900148D3B /* GWGestures.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.m */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */; };
 		CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */; };
@@ -865,6 +866,8 @@
 		CE94AC7515785F89009B35B4 /* GLES-Render.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GLES-Render.h"; sourceTree = "<group>"; };
 		CE94AC7615785F89009B35B4 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/Miscellaneous/blocks.png; sourceTree = "<group>"; };
+		CEA3636B15B7C9B700148D3B /* GWGestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGestures.h; sourceTree = "<group>"; };
+		CEA3636C15B7C9B800148D3B /* GWGestures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGestures.m; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = "Resources/menu-objects/ccbis/DrawMenu.ccbi"; sourceTree = "<group>"; };
 		CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookNormal.png; sourceTree = "<group>"; };
 		CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
@@ -1098,6 +1101,8 @@
 		C5F4308F15B8D2EA00174FEE /* GWObjects */ = {
 			isa = PBXGroup;
 			children = (
+				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
+				CEA3636C15B7C9B800148D3B /* GWGestures.m */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
 				C5F4309115B8D2EA00174FEE /* GWCamera.mm */,
 				C5F4309215B8D2EA00174FEE /* GWParticles.h */,
@@ -2349,6 +2354,7 @@
 				CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */,
 				CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */,
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
+				CEA3636D15B7C9B900148D3B /* GWGestures.m in Sources */,
 				C5F4308D15B8D1C500174FEE /* ScrollingBackground.m in Sources */,
 				C5F4308E15B8D1C500174FEE /* SpriteParallax.m in Sources */,
 				C5F430A515B8D2EA00174FEE /* GWCamera.mm in Sources */,

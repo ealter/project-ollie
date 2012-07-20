@@ -46,4 +46,13 @@
     return self;
 }
 
+-(void)destroyBullet
+{
+    //Clean up bullet and remove from parent
+    _world->DestroyBody(self.physicsBody);
+    [[self parent] removeChild:self cleanup:YES];
+
+    
+}
+
 @end

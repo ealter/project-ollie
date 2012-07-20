@@ -11,11 +11,11 @@
 #import "GWPhysicsSprite.h"
 #import "ScrollingBackground.h"
 #import "MaskedSprite.h"
-#import "RippleEffect.h"
 #import "GameConstants.h"
 #import "GWSkeleton.h"
 #import "Skeleton.h"
 #import "GWGunWeapon.h"
+#import "GWGestures.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -27,7 +27,8 @@ enum {
 @interface ActionLayer()
 {
     GWSkeleton* _skeleton;
-    GWGunWeapon* weapon;
+    GWGunWeapon* gunWeapon;
+    GWGestures* gestures;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -166,8 +167,10 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     _skeleton = [[GWSkeleton alloc]initFromFile:@"characternewest" box2dWorld:world];
-    weapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
-    [self addChild:weapon];
+    gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    [self addChild:gunWeapon];
+    gestures = [[GWGestures alloc] init];
+    [self addChild:gestures z:2];
 
 }
 
@@ -318,7 +321,7 @@ enum {
 {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
-    [weapon fireWeapon:[touch locationInView:[touch view]]];
+    if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
     //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
     [_skeleton loadAnimation:"animation"];
   //  [_skeleton applyLinearImpulse:ccp(.2,0)];
@@ -333,9 +336,6 @@ enum {
     for( UITouch *touch in touches ) {
         location = [touch locationInView: [touch view]];
         location = [[CCDirector sharedDirector] convertToGL: location];
-        
-        //RippleEffect* ripple = [[RippleEffect alloc] initWithSubject:self.parent atOrigin:location];
-        //[self.parent.parent addChild: ripple];
         
         location = [self convertToNodeSpace:location];
         
