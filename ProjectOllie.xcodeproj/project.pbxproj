@@ -62,6 +62,8 @@
 		C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */; };
 		C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */; };
 		C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A415B8D2EA00174FEE /* GWWeapon.mm */; };
+		C5F430BA15B8D74A00174FEE /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B715B8D74A00174FEE /* ActionLayer.mm */; };
+		C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B915B8D74A00174FEE /* SandboxScene.mm */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
@@ -73,7 +75,6 @@
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
-		CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE1488AE15803D1400DEC98D /* SandboxScene.mm */; };
 		CE1BB51F1586A6BA0095A793 /* eraser-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5171586A6BA0095A793 /* eraser-hd.png */; };
 		CE1BB5201586A6BA0095A793 /* eraser.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5181586A6BA0095A793 /* eraser.png */; };
 		CE1BB5211586A6BA0095A793 /* large-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5191586A6BA0095A793 /* large-hd.png */; };
@@ -128,7 +129,6 @@
 		CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F7159943C30065B440 /* metalbutton-dark.png */; };
 		CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F8159943C30065B440 /* silverbutton-dark.png */; };
 		CE70E1FE159943C30065B440 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F9159943C30065B440 /* silverbutton.png */; };
-		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -433,6 +433,10 @@
 		C5F430B115B8D6C200174FEE /* CharacterScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CharacterScreen.m; path = menus/CharacterScreen.m; sourceTree = "<group>"; };
 		C5F430B215B8D6C200174FEE /* MyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MyCell.h; path = menus/MyCell.h; sourceTree = "<group>"; };
 		C5F430B315B8D6C200174FEE /* MyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MyCell.m; path = menus/MyCell.m; sourceTree = "<group>"; };
+		C5F430B615B8D74A00174FEE /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
+		C5F430B715B8D74A00174FEE /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
+		C5F430B815B8D74A00174FEE /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
+		C5F430B915B8D74A00174FEE /* SandboxScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxScene.mm; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -463,8 +467,6 @@
 		CE0BD606159016E600C380CA /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		CE0BD607159016E600C380CA /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
-		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
-		CE1488AE15803D1400DEC98D /* SandboxScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxScene.mm; sourceTree = "<group>"; };
 		CE1BB5171586A6BA0095A793 /* eraser-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "eraser-hd.png"; path = "Resources/eraser-hd.png"; sourceTree = "<group>"; };
 		CE1BB5181586A6BA0095A793 /* eraser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eraser.png; path = Resources/eraser.png; sourceTree = "<group>"; };
 		CE1BB5191586A6BA0095A793 /* large-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "large-hd.png"; path = "Resources/large-hd.png"; sourceTree = "<group>"; };
@@ -536,8 +538,6 @@
 		CE70E1F7159943C30065B440 /* metalbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbutton-dark.png"; path = "Resources/metalbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F8159943C30065B440 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F9159943C30065B440 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/silverbutton.png; sourceTree = "<group>"; };
-		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
-		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -1182,6 +1182,25 @@
 			path = Weapons;
 			sourceTree = "<group>";
 		};
+		C5F430B415B8D74A00174FEE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C5F430B515B8D74A00174FEE /* Sandbox */,
+				C5F430B815B8D74A00174FEE /* SandboxScene.h */,
+				C5F430B915B8D74A00174FEE /* SandboxScene.mm */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C5F430B515B8D74A00174FEE /* Sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				C5F430B615B8D74A00174FEE /* ActionLayer.h */,
+				C5F430B715B8D74A00174FEE /* ActionLayer.mm */,
+			);
+			path = Sandbox;
+			sourceTree = "<group>";
+		};
 		C5FBA726159A8B0F00C1C624 /* Menu Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1428,16 +1447,13 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
-				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
-				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
-				CE8429E4157981BB0038C653 /* ActionLayer.h */,
-				CE8429E5157981BB0038C653 /* ActionLayer.mm */,
 				C5FE5FED15796E6F008F4298 /* CCBReader.h */,
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
+				C5F430B415B8D74A00174FEE /* Scenes */,
 				C5F4308F15B8D2EA00174FEE /* GWObjects */,
 				C5F4308815B8D1C500174FEE /* Backgrounds */,
 				CE02DC5815AE2D1800F16FAF /* Utils */,
@@ -2376,11 +2392,9 @@
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
-				CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
-				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
@@ -2426,6 +2440,8 @@
 				C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */,
 				C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */,
 				C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */,
+				C5F430BA15B8D74A00174FEE /* ActionLayer.mm in Sources */,
+				C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
