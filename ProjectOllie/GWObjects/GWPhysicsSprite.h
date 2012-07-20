@@ -11,7 +11,7 @@
 class b2Body;
 
 @interface PhysicsSprite : CCSprite {
-    b2Body *body_;	// strong ref
+    b2Body *body_; // strong ref
 }
 
 - (void)setPhysicsBody:(b2Body*)body;
@@ -19,3 +19,4 @@ class b2Body;
 - (CGPoint)position;
 
 @end
+
