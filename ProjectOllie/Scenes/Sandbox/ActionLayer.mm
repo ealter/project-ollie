@@ -116,7 +116,7 @@ enum {
 {
 
     b2Vec2 gravity;
-    gravity.Set(0.5f, -10.0f); //Trolling...
+    gravity.Set(0, -10.0f); //Trolling...
     world = new b2World(gravity);
 
 
