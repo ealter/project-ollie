@@ -18,4 +18,6 @@ class b2World;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world;
 
+-(void)destroyBullet;
+
 @end
