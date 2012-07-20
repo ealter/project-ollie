@@ -84,6 +84,9 @@ private:
     /* helper to adjust position all the way through the skeleton */
     void adjustTreePosition(Bone* root);
     
+    /* Keeps track of angle of entire skeleton (essentially torso angle)*/
+    float angle;
+    
 public:
     
     //constructors with box2dworld
@@ -120,13 +123,18 @@ public:
     /* sets absolute position. Arguments are pixels */
     void setPosition(Bone* root, float x, float y);
     
+    /* sets absolute angle. Argument in radians. For use in animation */
+    void setAngle(float a);
+    
     /* recursive function to find lowest y coordinate, give arbitrarily high number to start */
     float lowestY(Bone* root, float currentLowest);
     
+    /* recursive function to find the highest point of contact from a given root */
     b2Vec2 highestContact(Bone* root, b2Vec2 currentHighest);
     
     float getX();
     float getY();
+    float getAngle();
     
     /* update values changing over time */
     void update();

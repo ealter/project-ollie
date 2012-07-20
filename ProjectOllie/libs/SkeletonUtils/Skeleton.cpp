@@ -17,6 +17,7 @@ using namespace std;
 
 Skeleton::Skeleton(b2World* world)
 {
+    this->angle = 0.0;
     this->root = NULL;
     this->world = world;
 }
@@ -193,7 +194,7 @@ bool Skeleton::animating(Bone *root, float time)
             if(root->animation.empty())break;
             key = root->animation.front();
         }
-        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a + this->angle);
         root->box2DBody->SetAngularVelocity(0);
         root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
         
@@ -262,6 +263,14 @@ void Skeleton::adjustTreePosition(Bone* root)
     root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
     for(int i = 0; i < root->children.size(); i++)
         adjustTreePosition(root->children.at(i));
+}
+
+void Skeleton::setAngle(float a){
+    this->angle = a;
+}
+
+float Skeleton::getAngle(){
+    return this->angle;
 }
 
 float Skeleton::lowestY(Bone* root, float currentLowest)

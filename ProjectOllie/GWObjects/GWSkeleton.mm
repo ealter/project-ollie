@@ -31,7 +31,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     float interactorRadius;
     b2Body* _interactor;
     b2World* _world;
-    float angleFromGround;
 }
 //Master function for loading file information for skeleton (.skel) files
 -(void)buildSkeletonFromFile:(NSString*)fileName;
@@ -48,7 +47,11 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 //Create body that interacts with world when not in ragdoll mode
 -(void)buildInteractor;
 
+//Set interactor's position
 -(void)setInteractorPosition;
+
+//Calculate's angle for skeleton based on interactor's normal to ground body
+-(float)calculateNormalAngle;
 
 @end
 
@@ -61,7 +64,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         interactorRadius = .005*BTP_RATIO;
         _skeleton        = new Skeleton(world);
         _world           = world;
-        angleFromGround  = 0;
         
         NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"skel"];
         DebugLog(@"The filepath for filename %@ is %@", fileName, filePath);
@@ -169,7 +171,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             CGPoint averageLoc     = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
-            key->angle = angle + angleFromGround;
+            key->angle = angle;
             key->time  = time;
             key->x     = averageLoc.x;
             key->y     = averageLoc.y;
@@ -246,6 +248,20 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     //DebugLog(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
 }
 
+-(float)calculateNormalAngle{
+    
+    for (b2ContactEdge* ce = _interactor->GetContactList(); ce; ce = ce->next)
+    {
+        b2Contact* c = ce->contact;
+        b2WorldManifold manifold;
+        c->GetWorldManifold(&manifold);
+        b2Vec2 contactNormal = manifold.normal;
+        float angle = atan2(contactNormal.y,contactNormal.x);
+        return angle;
+    }
+    return M_PI/2.;
+}
+
 -(void)update:(float)dt{
     absoluteLocation = ccp(_interactor->GetPosition().x*PTM_RATIO, _interactor->GetPosition().y*PTM_RATIO - interactorRadius* PTM_RATIO);
     if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
@@ -253,8 +269,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         //_interactor->SetActive(true);
         timeElapsed += dt;
         _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
-        CGPoint normalToGround = ccp(0,1);
-        angleFromGround = M_PI/2. - atan2(normalToGround.y,normalToGround.x);
+        _skeleton->setAngle([self calculateNormalAngle]);
     }
     else{
         //_interactor->SetActive(false);
