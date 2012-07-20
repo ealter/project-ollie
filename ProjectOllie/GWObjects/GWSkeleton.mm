@@ -39,10 +39,10 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)assembleSkeleton:(NSArray*)currentBoneArray parentBone:(Bone*)parent;
 
 //Master function for loading file information for animation (.anim) files
--(void)buildAnimationFromFile:(NSString*)fileName animationName:(NSString*)animName;
+-(void)buildAnimationFromFile:(NSString*)fileName;
 
 //Helper function for attaching animations to bones
--(void)assembleAnimation:(NSArray*)frames;
+-(void)assembleAnimation:(NSArray*)frames animationName:(NSString*)animName;
 
 //Create body that interacts with world when not in ragdoll mode
 -(void)buildInteractor;
