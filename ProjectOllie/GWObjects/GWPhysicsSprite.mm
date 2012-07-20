@@ -7,7 +7,7 @@
 //
 
 
-#import "PhysicsSprite.h"
+#import "GWPhysicsSprite.h"
 #import "Box2D.h"
 #import "GameConstants.h"
 

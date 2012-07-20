@@ -14,7 +14,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 30.0
+#define BTP_RATIO 7.0
 
 using namespace std;
 
