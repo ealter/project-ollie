@@ -13,7 +13,7 @@
 
 -(id)initWithFile:(NSString *)filename{
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB5A1];
-    if((self = [super init]))
+    if((self = [super initWithFile:filename]))
     {
         
     }
