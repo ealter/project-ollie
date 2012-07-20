@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
-#import "PhysicsSprite.h"
+#import "GWPhysicsSprite.h"
 #import "Box2D.h"
 
 @interface GWThrownWeapon : GWWeapon{
