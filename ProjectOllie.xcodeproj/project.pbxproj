@@ -62,6 +62,8 @@
 		C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */; };
 		C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */; };
 		C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A415B8D2EA00174FEE /* GWWeapon.mm */; };
+		C5F430BA15B8D74A00174FEE /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B715B8D74A00174FEE /* ActionLayer.mm */; };
+		C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B915B8D74A00174FEE /* SandboxScene.mm */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
@@ -73,7 +75,6 @@
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
-		CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE1488AE15803D1400DEC98D /* SandboxScene.mm */; };
 		CE1BB51F1586A6BA0095A793 /* eraser-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5171586A6BA0095A793 /* eraser-hd.png */; };
 		CE1BB5201586A6BA0095A793 /* eraser.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5181586A6BA0095A793 /* eraser.png */; };
 		CE1BB5211586A6BA0095A793 /* large-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1BB5191586A6BA0095A793 /* large-hd.png */; };
@@ -116,7 +117,6 @@
 		CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = CE5734DC159BDE5A00AEFB84 /* RippleEffect.m */; };
 		CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE5C59341597CA2800C121B4 /* RippleEffect.fsh */; };
 		CE62FC7B1593DAD300BEB3BE /* metalbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC7A1593DAD300BEB3BE /* metalbutton.png */; };
-		CE62FC7F1593E8D000BEB3BE /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */; };
 		CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */; };
 		CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9D1594085800BEB3BE /* SWScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -124,13 +124,11 @@
 		CE62FCA91594085800BEB3BE /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA11594085800BEB3BE /* SWTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA31594085800BEB3BE /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCAD15940A0200BEB3BE /* MyCell.m */; };
 		CE70E1FA159943C30065B440 /* greenbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F5159943C30065B440 /* greenbutton-dark.png */; };
 		CE70E1FB159943C30065B440 /* greenbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F6159943C30065B440 /* greenbutton.png */; };
 		CE70E1FC159943C30065B440 /* metalbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F7159943C30065B440 /* metalbutton-dark.png */; };
 		CE70E1FD159943C30065B440 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F8159943C30065B440 /* silverbutton-dark.png */; };
 		CE70E1FE159943C30065B440 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE70E1F9159943C30065B440 /* silverbutton.png */; };
-		CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429E5157981BB0038C653 /* ActionLayer.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -430,6 +428,15 @@
 		C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWThrownWeapon.mm; sourceTree = "<group>"; };
 		C5F430A315B8D2EA00174FEE /* GWWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeapon.h; sourceTree = "<group>"; };
 		C5F430A415B8D2EA00174FEE /* GWWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWeapon.mm; sourceTree = "<group>"; };
+		C5F430AF15B8D57E00174FEE /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ccVertTypes.h; path = libs/cocos2d/Support/ccVertTypes.h; sourceTree = "<group>"; };
+		C5F430B015B8D6C200174FEE /* CharacterScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = CharacterScreen.h; path = menus/CharacterScreen.h; sourceTree = "<group>"; };
+		C5F430B115B8D6C200174FEE /* CharacterScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = CharacterScreen.m; path = menus/CharacterScreen.m; sourceTree = "<group>"; };
+		C5F430B215B8D6C200174FEE /* MyCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MyCell.h; path = menus/MyCell.h; sourceTree = "<group>"; };
+		C5F430B315B8D6C200174FEE /* MyCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MyCell.m; path = menus/MyCell.m; sourceTree = "<group>"; };
+		C5F430B615B8D74A00174FEE /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
+		C5F430B715B8D74A00174FEE /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
+		C5F430B815B8D74A00174FEE /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
+		C5F430B915B8D74A00174FEE /* SandboxScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxScene.mm; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -460,8 +467,6 @@
 		CE0BD606159016E600C380CA /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		CE0BD607159016E600C380CA /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
-		CE1488AD15803D1400DEC98D /* SandboxScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SandboxScene.h; sourceTree = "<group>"; };
-		CE1488AE15803D1400DEC98D /* SandboxScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SandboxScene.mm; sourceTree = "<group>"; };
 		CE1BB5171586A6BA0095A793 /* eraser-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "eraser-hd.png"; path = "Resources/eraser-hd.png"; sourceTree = "<group>"; };
 		CE1BB5181586A6BA0095A793 /* eraser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eraser.png; path = Resources/eraser.png; sourceTree = "<group>"; };
 		CE1BB5191586A6BA0095A793 /* large-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "large-hd.png"; path = "Resources/large-hd.png"; sourceTree = "<group>"; };
@@ -515,8 +520,6 @@
 		CE5734DC159BDE5A00AEFB84 /* RippleEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RippleEffect.m; path = Shaders/RippleEffect.m; sourceTree = "<group>"; };
 		CE5C59341597CA2800C121B4 /* RippleEffect.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = RippleEffect.fsh; path = Shaders/RippleEffect.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		CE62FC7A1593DAD300BEB3BE /* metalbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = metalbutton.png; path = Resources/metalbutton.png; sourceTree = "<group>"; };
-		CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterScreen.h; sourceTree = "<group>"; };
-		CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterScreen.m; sourceTree = "<group>"; };
 		CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = CharacterScreen.ccbi; path = "Resources/menu-objects/ccbis/CharacterScreen.ccbi"; sourceTree = "<group>"; };
 		CE62FC9A1594085800BEB3BE /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWMultiColumnTableView.h; path = libs/CCTableSuite/SWMultiColumnTableView.h; sourceTree = "<group>"; };
 		CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWMultiColumnTableView.m; path = libs/CCTableSuite/SWMultiColumnTableView.m; sourceTree = "<group>"; };
@@ -530,18 +533,13 @@
 		CE62FCA31594085800BEB3BE /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = libs/CCTableSuite/SWTableViewCell.m; sourceTree = "<group>"; };
 		CE62FCA41594085800BEB3BE /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewSpriteCell.h; path = libs/CCTableSuite/SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewSpriteCell.m; path = libs/CCTableSuite/SWTableViewSpriteCell.m; sourceTree = "<group>"; };
-		CE62FCAC15940A0100BEB3BE /* MyCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCell.h; sourceTree = "<group>"; };
-		CE62FCAD15940A0200BEB3BE /* MyCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCell.m; sourceTree = "<group>"; };
 		CE70E1F5159943C30065B440 /* greenbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenbutton-dark.png"; path = "Resources/greenbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F6159943C30065B440 /* greenbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenbutton.png; path = Resources/greenbutton.png; sourceTree = "<group>"; };
 		CE70E1F7159943C30065B440 /* metalbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "metalbutton-dark.png"; path = "Resources/metalbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F8159943C30065B440 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE70E1F9159943C30065B440 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/silverbutton.png; sourceTree = "<group>"; };
-		CE8429E4157981BB0038C653 /* ActionLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionLayer.h; sourceTree = "<group>"; };
-		CE8429E5157981BB0038C653 /* ActionLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ActionLayer.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
-		CE842A06157E03420038C653 /* ccVertTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ccVertTypes.h; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
 		CE894EFF15829C7F00E412E1 /* PointEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PointEdge.h; path = libs/CSG/PointEdge.h; sourceTree = "<group>"; };
 		CE894F001582B30B00E412E1 /* ShapeField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeField.cpp; path = libs/CSG/ShapeField.cpp; sourceTree = "<group>"; };
@@ -1184,6 +1182,25 @@
 			path = Weapons;
 			sourceTree = "<group>";
 		};
+		C5F430B415B8D74A00174FEE /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				C5F430B515B8D74A00174FEE /* Sandbox */,
+				C5F430B815B8D74A00174FEE /* SandboxScene.h */,
+				C5F430B915B8D74A00174FEE /* SandboxScene.mm */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		C5F430B515B8D74A00174FEE /* Sandbox */ = {
+			isa = PBXGroup;
+			children = (
+				C5F430B615B8D74A00174FEE /* ActionLayer.h */,
+				C5F430B715B8D74A00174FEE /* ActionLayer.mm */,
+			);
+			path = Sandbox;
+			sourceTree = "<group>";
+		};
 		C5FBA726159A8B0F00C1C624 /* Menu Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1339,20 +1356,20 @@
 		CE30B189158FBA12009EC82B /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				C5F430B015B8D6C200174FEE /* CharacterScreen.h */,
+				C5F430B115B8D6C200174FEE /* CharacterScreen.m */,
+				C5F430B215B8D6C200174FEE /* MyCell.h */,
+				C5F430B315B8D6C200174FEE /* MyCell.m */,
 				CE01827F15951774003CE804 /* Menu.h */,
 				CE01828015951774003CE804 /* Menu.m */,
 				CE30B18A158FBA34009EC82B /* ActionMenu.h */,
 				CE30B18B158FBA34009EC82B /* ActionMenu.m */,
-				CE62FC7D1593E8D000BEB3BE /* CharacterScreen.h */,
-				CE62FC7E1593E8D000BEB3BE /* CharacterScreen.m */,
 				CE30B18C158FBA34009EC82B /* DrawMenu.h */,
 				CE30B18D158FBA34009EC82B /* DrawMenu.m */,
 				CE30B18E158FBA34009EC82B /* LoginScreen.h */,
 				CE30B18F158FBA34009EC82B /* LoginScreen.m */,
 				CE30B190158FBA34009EC82B /* MainMenu.h */,
 				CE30B191158FBA34009EC82B /* MainMenu.mm */,
-				CE62FCAC15940A0100BEB3BE /* MyCell.h */,
-				CE62FCAD15940A0200BEB3BE /* MyCell.m */,
 				CE30B192158FBA34009EC82B /* NewAccountMenu.h */,
 				CE30B193158FBA34009EC82B /* NewAccountMenu.m */,
 				CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */,
@@ -1430,16 +1447,13 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
-				CE1488AD15803D1400DEC98D /* SandboxScene.h */,
-				CE1488AE15803D1400DEC98D /* SandboxScene.mm */,
-				CE8429E4157981BB0038C653 /* ActionLayer.h */,
-				CE8429E5157981BB0038C653 /* ActionLayer.mm */,
 				C5FE5FED15796E6F008F4298 /* CCBReader.h */,
 				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
 				CE94AC7615785F89009B35B4 /* GLES-Render.mm */,
+				C5F430B415B8D74A00174FEE /* Scenes */,
 				C5F4308F15B8D2EA00174FEE /* GWObjects */,
 				C5F4308815B8D1C500174FEE /* Backgrounds */,
 				CE02DC5815AE2D1800F16FAF /* Utils */,
@@ -1649,7 +1663,6 @@
 				CE94AB4C15785F86009B35B4 /* cocos2d.m */,
 				CE94AB4E15785F86009B35B4 /* Platforms */,
 				CE94AB7015785F86009B35B4 /* Support */,
-				CE842A06157E03420038C653 /* ccVertTypes.h */,
 			);
 			name = cocos2d;
 			sourceTree = "<group>";
@@ -1702,6 +1715,7 @@
 		CE94AB7015785F86009B35B4 /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				C5F430AF15B8D57E00174FEE /* ccVertTypes.h */,
 				CE94AB7115785F86009B35B4 /* base64.c */,
 				CE94AB7315785F86009B35B4 /* base64.h */,
 				CE94AB7415785F86009B35B4 /* CCArray.h */,
@@ -2378,11 +2392,9 @@
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
 				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
-				CE8429E6157981BB0038C653 /* ActionLayer.mm in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
-				CE1488AF15803D1400DEC98D /* SandboxScene.mm in Sources */,
 				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
@@ -2403,14 +2415,12 @@
 				CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */,
 				CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */,
 				CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */,
-				CE62FC7F1593E8D000BEB3BE /* CharacterScreen.m in Sources */,
 				CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */,
 				CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */,
 				CE62FCA81594085800BEB3BE /* SWSorting.m in Sources */,
 				CE62FCA91594085800BEB3BE /* SWTableView.m in Sources */,
 				CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */,
 				CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */,
-				CE62FCAE15940A0300BEB3BE /* MyCell.m in Sources */,
 				CE01828115951774003CE804 /* Menu.m in Sources */,
 				CE5734DD159BDE5B00AEFB84 /* RippleEffect.m in Sources */,
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
@@ -2430,6 +2440,8 @@
 				C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */,
 				C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */,
 				C5F430AE15B8D2EB00174FEE /* GWWeapon.mm in Sources */,
+				C5F430BA15B8D74A00174FEE /* ActionLayer.mm in Sources */,
+				C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
