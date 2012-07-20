@@ -87,6 +87,9 @@
 		C5F430E915B8D97E00174FEE /* terrainbutton-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430D215B8D97E00174FEE /* terrainbutton-hd.png */; };
 		C5F430EA15B8D97E00174FEE /* terrainbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430D315B8D97E00174FEE /* terrainbutton.png */; };
 		C5F430EB15B8D97E00174FEE /* treez.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430D415B8D97E00174FEE /* treez.png */; };
+		C5F430F515B8E8CA00174FEE /* ice_layer1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F215B8E8CA00174FEE /* ice_layer1.png */; };
+		C5F430F615B8E8CA00174FEE /* ice_layer2.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F315B8E8CA00174FEE /* ice_layer2.png */; };
+		C5F430F715B8E8CA00174FEE /* ice_layer3.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F415B8E8CA00174FEE /* ice_layer3.png */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
@@ -432,6 +435,9 @@
 		C5F430D215B8D97E00174FEE /* terrainbutton-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "terrainbutton-hd.png"; sourceTree = "<group>"; };
 		C5F430D315B8D97E00174FEE /* terrainbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = terrainbutton.png; sourceTree = "<group>"; };
 		C5F430D415B8D97E00174FEE /* treez.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = treez.png; sourceTree = "<group>"; };
+		C5F430F215B8E8CA00174FEE /* ice_layer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer1.png; sourceTree = "<group>"; };
+		C5F430F315B8E8CA00174FEE /* ice_layer2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer2.png; sourceTree = "<group>"; };
+		C5F430F415B8E8CA00174FEE /* ice_layer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer3.png; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
@@ -1182,6 +1188,17 @@
 			path = "Resources/Main menu";
 			sourceTree = "<group>";
 		};
+		C5F430F115B8E8CA00174FEE /* Ice */ = {
+			isa = PBXGroup;
+			children = (
+				C5F430F215B8E8CA00174FEE /* ice_layer1.png */,
+				C5F430F315B8E8CA00174FEE /* ice_layer2.png */,
+				C5F430F415B8E8CA00174FEE /* ice_layer3.png */,
+			);
+			name = Ice;
+			path = Resources/backgrounds/Ice;
+			sourceTree = "<group>";
+		};
 		C5FBA726159A8B0F00C1C624 /* Menu Objects */ = {
 			isa = PBXGroup;
 			children = (
@@ -1280,6 +1297,7 @@
 		CE2E83F615AF76F1000372BE /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
+				C5F430F115B8E8CA00174FEE /* Ice */,
 				C5F4307715B8CF9A00174FEE /* Jungle */,
 			);
 			name = Backgrounds;
@@ -2119,6 +2137,9 @@
 				C5F430E915B8D97E00174FEE /* terrainbutton-hd.png in Resources */,
 				C5F430EA15B8D97E00174FEE /* terrainbutton.png in Resources */,
 				C5F430EB15B8D97E00174FEE /* treez.png in Resources */,
+				C5F430F515B8E8CA00174FEE /* ice_layer1.png in Resources */,
+				C5F430F615B8E8CA00174FEE /* ice_layer2.png in Resources */,
+				C5F430F715B8E8CA00174FEE /* ice_layer3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

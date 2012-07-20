@@ -98,7 +98,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType
 {
 #ifdef DEBUG
-    static const NSString *lands[] = {@"lava"};
+    static const NSString *lands[] = {@"lava",@"rocks",@"rocks2",@"rocksandvines",@"snow"};
     assert(sizeof(lands)/sizeof(*lands) == kTerrainTexture_numTextures);
     for(unsigned i=0; i<sizeof(lands)/sizeof(lands[i]); i++) {
         NSString *path = [[NSBundle mainBundle] pathForResource:(NSString *)lands[i] ofType:@"png"];
@@ -108,6 +108,14 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     switch(textureType) {
         case kTerrainTexture_lava:
             return @"lava.png";
+        case kTerrainTexture_rocks:
+            return @"rocks.png";
+        case kTerrainTexture_ice:
+            return @"ice.png";
+        case kTerrainTexture_vines:
+            return @"rocksandvines.png";
+        case kTerrainTexture_gravel:
+            return @"rocks2.png";
         default:
             return nil;
     }
