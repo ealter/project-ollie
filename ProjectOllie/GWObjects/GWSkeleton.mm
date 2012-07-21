@@ -14,7 +14,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 6.0
+#define BTP_RATIO 20.0
 
 using namespace std;
 
@@ -29,6 +29,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     float timeElapsed;
     CGPoint absoluteLocation; 
     float interactorRadius;
+    float destinationAngle;
     b2Body* _interactor;
     b2World* _world;
 }
@@ -51,10 +52,10 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)setInteractorPosition;
 
 //Calculate's angle for skeleton based on interactor's normal to ground body
--(float)calculateNormalAngle;
+-(void)calculateNormalAngle;
 
-//Returns normal of interactor to ground body
--(CGPoint)calculateGroundNormal;
+//Adjusts skeleton's angle to ground body
+-(void)orientToGround;
 
 @end
 
@@ -64,7 +65,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     if((self = [super init])){
         timeElapsed      = 0;
         absoluteLocation = ccp(200.0,200.0);
-        interactorRadius = .005*BTP_RATIO;
+        interactorRadius = .01*BTP_RATIO;
         _skeleton        = new Skeleton(world);
         _world           = world;
         skeletonName     = fileName;
@@ -249,9 +250,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(void)applyLinearImpulse:(CGPoint)impulse
 {
-    _interactor->SetAngularVelocity(0);
-    _interactor->SetLinearVelocity(b2Vec2(0,0));
-    
     _interactor->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), _interactor->GetPosition());
 }
 
@@ -263,55 +261,61 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
     b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     float totalLowest    = _skeleton->lowestY(root, 100);
-    float lowestY        = max(max(highest_left.y, highest_right.y),totalLowest) + 1.5*interactorRadius;
+    float lowestY        = max(totalLowest+interactorRadius,_interactor->GetPosition().y);
     _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
-    _interactor->SetAngularVelocity(0);
-    _interactor->SetLinearVelocity(b2Vec2(0,0));
-    
     //DebugLog(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
 }
 
--(float)calculateNormalAngle{
+-(void)calculateNormalAngle{
     
     for (b2ContactEdge* ce = _interactor->GetContactList(); ce; ce = ce->next)
     {
         b2Contact* c = ce->contact;
         b2WorldManifold manifold;
         c->GetWorldManifold(&manifold);
-        CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
-        normal = ccpNormalize(normal);
-        DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
-        float angle = atan2(normal.y,normal.x);
-        return angle;
+        if(c->IsTouching())
+        {
+            CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
+            normal = ccpNormalize(normal);
+            //DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
+            float angle = atan2(normal.y,normal.x);
+            //DebugLog(@"The contact normal has an angle of: %f",RAD2DEG(angle));
+            destinationAngle = angle - M_PI/2.0;
+        }
+        //else destinationAngle = 0;
     }
-    return 0;
 }
 
--(CGPoint)calculateGroundNormal{
-    for (b2ContactEdge* ce = _interactor->GetContactList(); ce; ce = ce->next)
-    {
-        b2Contact* c = ce->contact;
-        b2WorldManifold manifold;
-        c->GetWorldManifold(&manifold);
-        CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
-        normal = ccpNormalize(normal);        //DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
-        return normal;
-    }
-    return CGPointZero;
+-(void)orientToGround{
+    float angle = _skeleton->getAngle();
+    [self calculateNormalAngle];
+    if(angle > destinationAngle)
+        angle -= (angle - destinationAngle)*.15f;
+    else if(angle < destinationAngle)
+        angle += (destinationAngle - angle)*.15f;
+    _skeleton->setAngle(angle);
 }
 
 -(void)update:(float)dt{
     absoluteLocation = ccp(_interactor->GetPosition().x*PTM_RATIO, _interactor->GetPosition().y*PTM_RATIO - interactorRadius* PTM_RATIO);
     if(_skeleton->animating(_skeleton->getRoot(), timeElapsed))
     {   
-        //_interactor->SetActive(true);
+        b2Vec2 velocity = _interactor->GetLinearVelocity();
+        float vlengthsq = velocity.x*velocity.x + velocity.y*velocity.y;
+        if(vlengthsq < 1)
+            [self applyLinearImpulse:ccp(.02,0)];
         timeElapsed += dt;
         _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
-        _skeleton->setAngle([self calculateNormalAngle]);
+        [self orientToGround];
     }
     else{
-        //_interactor->SetActive(false);
-        timeElapsed = 0;
+        //[self runAnimation:@"sprinting"];
+        if(timeElapsed!=0)
+        {
+            _interactor->SetLinearVelocity(b2Vec2(0,0));
+            _interactor->SetAngularVelocity(0);
+            timeElapsed = 0;
+        }
         _skeleton->update();
         [self setInteractorPosition];
     }

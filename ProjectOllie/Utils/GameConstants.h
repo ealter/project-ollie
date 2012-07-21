@@ -1,7 +1,7 @@
 #ifndef ProjectOllie_GameContants_h
 #define ProjectOllie_GameContants_h
 
-#define PTM_RATIO 64    //Pixels to meters at a zoom level of 1
+#define PTM_RATIO 32    //Pixels to meters at a zoom level of 1
 #define FPS 60
 
 //Width and height of the world in meters
@@ -19,9 +19,9 @@
 #define CATEGORY_TERRAIN     0x0002 // 0000000000000010 in binary
 #define CATEGORY_PROJECTILES 0x0004 // 0000000000000100 in binary
 
-#define MASK_BONES  (CATEGORY_TERRAIN | CATEGORY_PROJECTILES) // or ~CATEGORY_PLAYER
-#define MASK_TERRAIN (CATEGORY_BONES | CATEGORY_PROJECTILES) // or ~CATEGORY_MONSTER
-#define MASK_PROJECTILES  -1
+#define MASK_BONES  (CATEGORY_TERRAIN | CATEGORY_PROJECTILES) // Collides with terrain and projectiles 
+#define MASK_TERRAIN (CATEGORY_BONES | CATEGORY_PROJECTILES)  // Collides with bones and projectiles
+#define MASK_PROJECTILES  -1                                  // Collides with everything
 
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)

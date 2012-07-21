@@ -274,7 +274,7 @@ enum {
     if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
     //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
     [_skeleton runAnimation:@"sprinting"];
-    [_skeleton applyLinearImpulse:ccp(.02,0)];
+    //[_skeleton applyLinearImpulse:ccp(.02,0)];
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event

@@ -155,6 +155,7 @@ void Skeleton::runAnimation(string animationName)
             if(iter->second) {
                 queue<KeyFrame*> newAnimation;
                 for(int i = 0; i < iter->second->frames.size(); i++) {
+                    bone->animation.push(iter->second->frames.at(i));
                     newAnimation.push(iter->second->frames.at(i));
                 }
                 swap(bone->animation,newAnimation);
@@ -172,7 +173,8 @@ bool Skeleton::animating(Bone *root, float time)
         anim = true;
         root->box2DBody->SetActive(false);
         //not a key frame, so interpolation
-        if(key->time > time) {/*
+        if(key->time > time) {
+            /*
             float angleDiff = key->angle - root->a;
             float timeDiff  = (key->time - time)*60.0;
             float xDiff     = key->x - root->x;
@@ -186,19 +188,19 @@ bool Skeleton::animating(Bone *root, float time)
         }
         else // keyframe, so set it's values
         while (key->time <= time) {
-            root->a = key->angle;
-            root->x = key->x;
-            root->y = key->y;
+            /*Transform according to skeleton's angle */
+            root->a = key->angle+this->angle;
+            root->x = key->x*cos(this->angle) - key->y*sin(this->angle);
+            root->y = key->x*sin(this->angle) + key->y*cos(this->angle);
             /* Change animation */
             root->animation.pop();
             if(root->animation.empty())break;
             key = root->animation.front();
         }
-        //DebugLog("The angle here is: %f",this->angle);
-        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a + this->angle);
+        DebugLog("The angle here is: %f",RAD2DEG(this->angle));
+        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
         root->box2DBody->SetAngularVelocity(0);
         root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
-        
     }
     else {
         // stop animating
@@ -321,5 +323,6 @@ b2Vec2 Skeleton::highestContact(Bone *root, b2Vec2 currentHighest){
 
 void Skeleton::update()
 {
+    
 }
 
