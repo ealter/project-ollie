@@ -286,4 +286,6 @@
 -(void) setDisplayFrameWithAnimationName:(NSString*)animationName index:(int) frameIndex;
 
 
+-(void) setTextureCoords:(CGRect)rect;
+
 @end

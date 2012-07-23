@@ -1,7 +1,7 @@
 #ifndef ProjectOllie_GameContants_h
 #define ProjectOllie_GameContants_h
 
-#define PTM_RATIO 64    //Pixels to meters at a zoom level of 1
+#define PTM_RATIO 256    //Pixels to meters at a zoom level of 1, the max zoomed in
 #define FPS 60
 
 //Width and height of the world in meters
@@ -14,6 +14,8 @@
 #define MIN_VIEWABLE_Y (-WORLD_HEIGHT*PTM_RATIO/2)
 #define MAX_VIEWABLE_Y (WORLD_HEIGHT*PTM_RATIO*3/2)
 
+#define MAX_WIDTH_PX (MAX_VIEWABLE_X - MIN_VIEWABLE_X)
+#define MAX_HEIGHT_PX (MAX_VIEWABLE_Y - MIN_VIEWABLE_Y)
 
 #define CATEGORY_BONES       0x0001 // 0000000000000001 in binary
 #define CATEGORY_TERRAIN     0x0002 // 0000000000000010 in binary

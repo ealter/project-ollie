@@ -60,11 +60,12 @@
         self.target          = nil;
         self.isChanging      = NO;
         self.actionIntensity = 0.f;
-        self.maximumScale    = 6.f;
+        self.maximumScale    = 1.f;
         self.minimumScale    = min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
         self.defaultScale    = self.minimumScale;
         self.children        = [NSMutableArray array];
         self.bounded         = YES;
+        
     }
     return self;
 }
@@ -180,7 +181,7 @@
 -(void)update:(float)dt{
     //updates camera qualities
     [self updateZoom];
-    [self updateBounds];
+    //[self updateBounds];
     [self handleShakeEffect:dt];
     [self followTarget];
 }
@@ -324,7 +325,7 @@
 -(void)checkBounds{
     //elastic borders
     CGPoint worldPos =  subject_.position;
-    CGPoint newPos = ccp(0,0);
+    CGPoint newPos;
     float elasticity = .25f;
     //left border
     if(worldPos.x > 0)
