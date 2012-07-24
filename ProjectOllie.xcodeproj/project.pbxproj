@@ -112,6 +112,8 @@
 		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
 		CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E915A6779E00A087F6 /* PasswordChanger.m */; };
+		CE26B7D715BE46D1001100A1 /* GWMove.m in Sources */ = {isa = PBXBuildFile; fileRef = CE26B7D615BE46D1001100A1 /* GWMove.m */; };
+		CE26B7DC15BE48D1001100A1 /* GWMoveFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CE26B7DB15BE48D1001100A1 /* GWMoveFrame.m */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
@@ -486,6 +488,10 @@
 		CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChangeScreen.m; path = menus/PasswordChangeScreen.m; sourceTree = "<group>"; };
 		CE2544E815A6779D00A087F6 /* PasswordChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChanger.h; path = ProjectOllie/Server/PasswordChanger.h; sourceTree = "<group>"; };
 		CE2544E915A6779E00A087F6 /* PasswordChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChanger.m; path = ProjectOllie/Server/PasswordChanger.m; sourceTree = "<group>"; };
+		CE26B7D515BE46D1001100A1 /* GWMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWMove.h; path = GWObjects/Moves/GWMove.h; sourceTree = "<group>"; };
+		CE26B7D615BE46D1001100A1 /* GWMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWMove.m; path = GWObjects/Moves/GWMove.m; sourceTree = "<group>"; };
+		CE26B7DA15BE48D1001100A1 /* GWMoveFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; name = GWMoveFrame.h; path = GWObjects/Moves/GWMoveFrame.h; sourceTree = "<group>"; };
+		CE26B7DB15BE48D1001100A1 /* GWMoveFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWMoveFrame.m; path = GWObjects/Moves/GWMoveFrame.m; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = "Resources/menu-objects/ccbis/NewAccountMenu.ccbi"; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
@@ -1123,6 +1129,7 @@
 				C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */,
 				C5F4309815B8D2EA00174FEE /* GWWater.h */,
 				C5F4309915B8D2EA00174FEE /* GWWater.mm */,
+				CE26B7D915BE46E0001100A1 /* Moves */,
 				C5F4309A15B8D2EA00174FEE /* Weapons */,
 			);
 			path = GWObjects;
@@ -1307,6 +1314,18 @@
 			);
 			name = "facebook-ios-sdk";
 			path = "libs/facebook-ios-sdk";
+			sourceTree = "<group>";
+		};
+		CE26B7D915BE46E0001100A1 /* Moves */ = {
+			isa = PBXGroup;
+			children = (
+				CE26B7DA15BE48D1001100A1 /* GWMoveFrame.h */,
+				CE26B7DB15BE48D1001100A1 /* GWMoveFrame.m */,
+				CE26B7D515BE46D1001100A1 /* GWMove.h */,
+				CE26B7D615BE46D1001100A1 /* GWMove.m */,
+			);
+			name = Moves;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		CE2E83F615AF76F1000372BE /* Backgrounds */ = {
@@ -2395,6 +2414,8 @@
 				C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */,
 				CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */,
 				CE055E4E15B8DBA400053373 /* MyCell.m in Sources */,
+				CE26B7D715BE46D1001100A1 /* GWMove.m in Sources */,
+				CE26B7DC15BE48D1001100A1 /* GWMoveFrame.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
