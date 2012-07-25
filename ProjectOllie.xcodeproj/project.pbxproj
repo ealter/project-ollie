@@ -38,8 +38,8 @@
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
-		C5ECA6B315BFA8410021D285 /* idleanimation1.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5ECA6B115BFA8410021D285 /* idleanimation1.anim */; };
-		C5ECA6B415BFA8410021D285 /* idleanimation2.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5ECA6B215BFA8410021D285 /* idleanimation2.anim */; };
+		C5ECA6C115BFA8CF0021D285 /* idleanimation1.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5ECA6BF15BFA8CF0021D285 /* idleanimation1.anim */; };
+		C5ECA6C215BFA8CF0021D285 /* idleanimation2.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5ECA6C015BFA8CF0021D285 /* idleanimation2.anim */; };
 		C5F4308015B8CF9A00174FEE /* jungle_layer1-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307815B8CF9A00174FEE /* jungle_layer1-hd.png */; };
 		C5F4308115B8CF9A00174FEE /* jungle_layer1.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307915B8CF9A00174FEE /* jungle_layer1.png */; };
 		C5F4308215B8CF9A00174FEE /* jungle_layer2-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F4307A15B8CF9A00174FEE /* jungle_layer2-hd.png */; };
@@ -379,8 +379,8 @@
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
 		C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
-		C5ECA6B115BFA8410021D285 /* idleanimation1.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idleanimation1.anim; sourceTree = "<group>"; };
-		C5ECA6B215BFA8410021D285 /* idleanimation2.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idleanimation2.anim; sourceTree = "<group>"; };
+		C5ECA6BF15BFA8CF0021D285 /* idleanimation1.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idleanimation1.anim; sourceTree = "<group>"; };
+		C5ECA6C015BFA8CF0021D285 /* idleanimation2.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = idleanimation2.anim; sourceTree = "<group>"; };
 		C5F4307815B8CF9A00174FEE /* jungle_layer1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jungle_layer1-hd.png"; sourceTree = "<group>"; };
 		C5F4307915B8CF9A00174FEE /* jungle_layer1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jungle_layer1.png; sourceTree = "<group>"; };
 		C5F4307A15B8CF9A00174FEE /* jungle_layer2-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jungle_layer2-hd.png"; sourceTree = "<group>"; };
@@ -1057,8 +1057,8 @@
 		C583DBA115AF947B00FE441B /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				C5ECA6B115BFA8410021D285 /* idleanimation1.anim */,
-				C5ECA6B215BFA8410021D285 /* idleanimation2.anim */,
+				C5ECA6BF15BFA8CF0021D285 /* idleanimation1.anim */,
+				C5ECA6C015BFA8CF0021D285 /* idleanimation2.anim */,
 				C583DBA415AF947B00FE441B /* character.anim */,
 				C5F430FC15B9008700174FEE /* character_woopwoop.anim */,
 				C5F430FF15B9054300174FEE /* character_sprinting.anim */,
@@ -2199,8 +2199,8 @@
 				C5F430F715B8E8CA00174FEE /* ice_layer3.png in Resources */,
 				C5F430FD15B9008700174FEE /* character_woopwoop.anim in Resources */,
 				C5F4310015B9054300174FEE /* character_sprinting.anim in Resources */,
-				C5ECA6B315BFA8410021D285 /* idleanimation1.anim in Resources */,
-				C5ECA6B415BFA8410021D285 /* idleanimation2.anim in Resources */,
+				C5ECA6C115BFA8CF0021D285 /* idleanimation1.anim in Resources */,
+				C5ECA6C215BFA8CF0021D285 /* idleanimation2.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
