@@ -1120,7 +1120,6 @@
 		C5F4308F15B8D2EA00174FEE /* GWObjects */ = {
 			isa = PBXGroup;
 			children = (
-				C5F4309A15B8D2EA00174FEE /* Weapons */,
 				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
 				CEA3636C15B7C9B800148D3B /* GWGestures.m */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
