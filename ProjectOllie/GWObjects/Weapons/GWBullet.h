@@ -12,7 +12,7 @@
 
 class b2World;
 
-@interface GWBullet : PhysicsSprite {
+@interface GWBullet : GWPhysicsSprite {
     b2World* _world;
 }
 

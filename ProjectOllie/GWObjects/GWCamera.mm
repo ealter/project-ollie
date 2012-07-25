@@ -61,10 +61,10 @@
         self.isChanging      = NO;
         self.actionIntensity = 0.f;
         self.maximumScale    = 6.f;
-        self.minimumScale    = min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
+        self.minimumScale    = 1.;//min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
         self.defaultScale    = self.minimumScale;
         self.children        = [NSMutableArray array];
-        self.bounded         = YES;
+        self.bounded         = NO;
     }
     return self;
 }
@@ -130,10 +130,12 @@
     CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
 
     // Now adjust the layer by the delta.
-    //[self panBy:centerPointDelta];
-    [subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
     
-    for (CCNode<CameraObject> *child in self.children) {
+    [subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
+   // [self panBy:centerPointDelta];
+    
+    for (CCNode<CameraObject> *child in self.children) 
+    {
         if(![[self class] isCCNodeCameraObject:child]) continue;
         
         CGPoint tempPosition = [subject_ convertToNodeSpace:utCurrentPosition];

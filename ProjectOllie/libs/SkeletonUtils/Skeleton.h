@@ -126,11 +126,17 @@ public:
     /* sets absolute angle. Argument in radians. For use in animation */
     void setAngle(float a);
     
+    /* sets linear velocity of each bone recursively */
+    void setLinearVelocity(Bone* root, b2Vec2 velocity);
+    
     /* recursive function to find lowest y coordinate, give arbitrarily high number to start */
     float lowestY(Bone* root, float currentLowest);
     
     /* recursive function to find the highest point of contact from a given root */
     b2Vec2 highestContact(Bone* root, b2Vec2 currentHighest);
+    
+    /* clears out the animation queue */
+    void clearAnimationQueue(Bone* root);
     
     float getX();
     float getY();

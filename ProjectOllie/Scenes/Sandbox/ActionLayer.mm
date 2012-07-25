@@ -122,7 +122,6 @@ enum {
     gravity.Set(0, -10.0f);
     world = new b2World(gravity);
 
-
     // Do we want to let bodies sleep?
     world->SetAllowSleeping(true);
 
@@ -203,7 +202,7 @@ enum {
     int idx = (CCRANDOM_0_1() > .5 ? 0:1);
     int idy = (CCRANDOM_0_1() > .5 ? 0:1);
    
-    PhysicsSprite *sprite = [PhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
+    GWPhysicsSprite *sprite = [GWPhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
 
     sprite.position = p; //cocos2d point
     
@@ -240,7 +239,7 @@ enum {
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
    
-    PhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
+    GWPhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
     if(lastChild != nil)
     {
         if(![lastChild physicsBody]->IsAwake() && self.camera.target != nil)

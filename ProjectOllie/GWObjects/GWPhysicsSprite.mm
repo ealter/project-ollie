@@ -11,8 +11,7 @@
 #import "Box2D.h"
 #import "GameConstants.h"
 
-#pragma mark - PhysicsSprite
-@implementation PhysicsSprite
+@implementation GWPhysicsSprite
 
 -(void) setPhysicsBody:(b2Body *)body
 {

@@ -14,7 +14,7 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 20.0
+#define BTP_RATIO 30.0
 
 using namespace std;
 
@@ -175,7 +175,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         
         //get universal frame data
         float time     = [(NSNumber*)[frame objectForKey:@"time"] floatValue];
-        //float frameCount     = [(NSNumber*)[frame objectForKey:@"framecount"] floatValue];
         NSArray* bones = [frame objectForKey:@"bones"];
         
         for (NSDictionary* bone in bones) {
@@ -193,11 +192,11 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             CGPoint averageLoc     = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
-            key->angle = angle;
-            key->time  = time;
-            key->x     = averageLoc.x;
-            key->y     = averageLoc.y;
-            
+            key->angle      = angle;
+            key->time       = time;
+            key->x          = averageLoc.x;
+            key->y          = averageLoc.y;
+
             //adds the animation frame to the given animation name
             _skeleton->addAnimationFrame(animationName, name, key);
         }
@@ -209,14 +208,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return _skeleton->getBoneByName(_skeleton->getRoot(), name);
 }
 
--(Skeleton*)getSkeleton{
-    return _skeleton;
-}
-
 -(void)runAnimation:(NSString*)animationName{
-    timeElapsed = 0;
     string name = [animationName UTF8String];
     _skeleton->runAnimation(name);
+}
+
+-(void)clearAnimation{
+    _skeleton->clearAnimationQueue(_skeleton->getRoot());
 }
 
 -(void)buildInteractor{
@@ -235,7 +233,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     
     wheel.m_radius = interactorRadius;
     fixtureDef.shape = &wheel;
-    fixtureDef.density = 1.0f;
+    fixtureDef.density = .20f;
     fixtureDef.friction = 1.f;
     fixtureDef.restitution = 0.1f;
     fixtureDef.filter.categoryBits = CATEGORY_BONES;
@@ -250,6 +248,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(void)applyLinearImpulse:(CGPoint)impulse
 {
+    _interactor->SetAngularVelocity(0);
     _interactor->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), _interactor->GetPosition());
 }
 
@@ -262,6 +261,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     float totalLowest    = _skeleton->lowestY(root, 100);
     float lowestY        = max(totalLowest+interactorRadius,_interactor->GetPosition().y);
+    _interactor->SetAngularVelocity(0);
     _interactor->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), _interactor->GetAngle());
     //DebugLog(@"The interactor position is X: %f, Y: %f", _interactor->GetPosition().x, _interactor->GetPosition().y);
 }
@@ -303,7 +303,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         b2Vec2 velocity = _interactor->GetLinearVelocity();
         float vlengthsq = velocity.x*velocity.x + velocity.y*velocity.y;
         if(vlengthsq < 1)
-            [self applyLinearImpulse:ccp(.02,0)];
+            [self applyLinearImpulse:ccp(.002,0)];
         timeElapsed += dt;
         _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
         [self orientToGround];
@@ -312,8 +312,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         //[self runAnimation:@"sprinting"];
         if(timeElapsed!=0)
         {
-            _interactor->SetLinearVelocity(b2Vec2(0,0));
-            _interactor->SetAngularVelocity(0);
+            _skeleton->setLinearVelocity(_skeleton->getRoot(), _interactor->GetLinearVelocity());
+           // _interactor->SetLinearVelocity(b2Vec2(0,0));
+           // _interactor->SetAngularVelocity(0);
             timeElapsed = 0;
         }
         _skeleton->update();

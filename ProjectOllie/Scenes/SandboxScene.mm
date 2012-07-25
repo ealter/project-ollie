@@ -62,7 +62,7 @@
         SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName];
         blayer.parallaxRatio = parallaxRatios[i];
         blayer.anchorPoint = CGPointZero;
-        blayer.anchorPoint = ccp(.125f,.125f);
+        blayer.position = ccp(-.125f * blayer.contentSize.width,-.125f*blayer.contentSize.height);
         [actionNode addChild:blayer];
         [camera.children addObject:blayer];
     }

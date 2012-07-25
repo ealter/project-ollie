@@ -10,7 +10,7 @@
 
 class b2Body;
 
-@interface PhysicsSprite : CCSprite {
+@interface GWPhysicsSprite : CCSprite {
     b2Body *body_; // strong ref
 }
 

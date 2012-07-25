@@ -29,11 +29,23 @@ class b2World;
 
 /* Initializes skeleton with given file name. Path not necessary */
 -(id)initFromFile:(NSString*)fileName box2dWorld:(b2World*)world;
+
+/* Gets a given bone by NSString representation of its name */
 -(Bone*)getBoneByName:(NSString*)bName;
--(Skeleton*)getSkeleton;
+
+/* Updates the GWSkeleton */
 -(void)update:(float)dt;
+
+/* Puts the animation into the skeleton's animation queue */
 -(void)runAnimation:(NSString*)animationName;
+
+/* Applies a linear impulse to the skeleton's interactor */
 -(void)applyLinearImpulse:(CGPoint)impulse;
+
+/* Loads an animation into the animation dictionary */
 -(void)loadAnimations:(NSArray*) animationNames;
+
+/* Clears the animation queue of the skeleton */
+-(void)clearAnimation;
 
 @end

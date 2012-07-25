@@ -153,15 +153,44 @@ void Skeleton::runAnimation(string animationName)
         Bone* bone = this->getBoneByName(this->root, iter->first);
         if(bone) {
             if(iter->second) {
-                queue<KeyFrame*> newAnimation;
-                for(int i = 0; i < iter->second->frames.size(); i++) {
-                    bone->animation.push(iter->second->frames.at(i));
-                    newAnimation.push(iter->second->frames.at(i));
+                // queue<KeyFrame*> newAnimation;
+                
+                /* Get the last frame of the previous animation */
+                KeyFrame* last;
+                float extraTime = 0;
+                if(!bone->animation.empty())
+                {
+                    last = bone->animation.back();
+                    extraTime    = last->time;
                 }
-                swap(bone->animation,newAnimation);
+                
+                /* Iterate through new animation queue and push it to the back of current animation queue */
+                for(int i = 0; i < iter->second->frames.size(); i++) {
+                    
+                    /* Create a deep copy to adjust time of frame */
+                    KeyFrame* deep = new KeyFrame;
+                    KeyFrame* shallow = iter->second->frames.at(i);
+                    deep->x           = shallow->x;
+                    deep->y           = shallow->y;
+                    deep->angle       = shallow->angle;
+                    deep->time        = shallow->time + extraTime;
+                    
+                    /* Push it to back of animation queue */
+                    bone->animation.push(deep);
+                }
+                //swap(bone->animation,newAnimation);
             }
         }
     }
+}
+
+void Skeleton::clearAnimationQueue(Bone* root)
+{
+    queue<KeyFrame*> cleanQueue;
+    swap(root->animation, cleanQueue);
+    for(int i = 0; i < root->children.size(); i++)
+        clearAnimationQueue(root->children.at(i));
+    
 }
 
 bool Skeleton::animating(Bone *root, float time)
@@ -193,14 +222,13 @@ bool Skeleton::animating(Bone *root, float time)
             root->x = key->x*cos(this->angle) - key->y*sin(this->angle);
             root->y = key->x*sin(this->angle) + key->y*cos(this->angle);
             /* Change animation */
+            delete key;
             root->animation.pop();
             if(root->animation.empty())break;
             key = root->animation.front();
         }
-        DebugLog("The angle here is: %f",RAD2DEG(this->angle));
+        //DebugLog("The angle here is: %f",RAD2DEG(this->angle));
         root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
-        root->box2DBody->SetAngularVelocity(0);
-        root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
     }
     else {
         // stop animating
@@ -259,6 +287,13 @@ void Skeleton::setPosition(Bone* root, float x, float y)
 {
     absolutePosition = b2Vec2(x/PTM_RATIO,y/PTM_RATIO);
     adjustTreePosition(this->root);
+}
+
+void Skeleton::setLinearVelocity(Bone *root, b2Vec2 velocity)
+{
+    root->box2DBody->SetLinearVelocity(velocity);
+    for(int i = 0; i < root->children.size(); i++)
+        setLinearVelocity(root->children.at(i),velocity);
 }
 
 void Skeleton::adjustTreePosition(Bone* root)
