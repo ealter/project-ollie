@@ -15,7 +15,7 @@
 #import "GameConstants.h"
 #import "HMVectorNode.h"
 
-#define metersPerWaterTile 5.f
+#define metersPerWaterTile 2.5f
 #define MAX_FRAME 232
 #define FRAMES_PER_SHEET 32
 #define SHEETS 8
@@ -108,6 +108,7 @@ static const float frameHeight = 32.0f;
         CHECK_GL_ERROR_DEBUG();
         
         
+        
         //Load frame sheet textures
         CCTexture2DPixelFormat oldDefault = [CCTexture2D defaultAlphaPixelFormat];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_A8];
@@ -158,8 +159,8 @@ static const float frameHeight = 32.0f;
 	[shaderProgram_ use];																	
 	[shaderProgram_ setUniformForModelViewProjectionMatrix];		
     
-	//ccGLBlendFunc(CC_BLEND_DST, CC_BLEND_DST);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	ccGLBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     //Update the frame
     frame = (frame+1)%MAX_FRAME;

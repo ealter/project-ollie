@@ -204,7 +204,7 @@ enum {
    
     GWPhysicsSprite *sprite = [GWPhysicsSprite spriteWithTexture:spriteTexture_ rect:CGRectMake(32 * idx,32 * idy,32,32)];
 
-    sprite.position = p; //cocos2d point
+    sprite.position = p;
     
     // Define the dynamic body.
     //Set up a 1m squared box in the physics world

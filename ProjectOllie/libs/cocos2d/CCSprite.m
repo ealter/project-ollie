@@ -56,7 +56,6 @@
 
 
 @interface CCSprite ()
--(void) setTextureCoords:(CGRect)rect;
 -(void) updateBlendFunc;
 -(void) setReorderChildDirtyRecursively;
 @end
@@ -71,6 +70,7 @@
 @synthesize blendFunc = blendFunc_;
 @synthesize textureAtlas = textureAtlas_;
 @synthesize offsetPosition = offsetPosition_;
+
 
 
 +(id)spriteWithTexture:(CCTexture2D*)texture

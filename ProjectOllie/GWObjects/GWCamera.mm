@@ -60,6 +60,7 @@
         self.target          = nil;
         self.isChanging      = NO;
         self.actionIntensity = 0.f;
+
         self.maximumScale    = 6.f;
         self.minimumScale    = 1.;//min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
         self.defaultScale    = self.minimumScale;
@@ -182,7 +183,7 @@
 -(void)update:(float)dt{
     //updates camera qualities
     [self updateZoom];
-    [self updateBounds];
+    //[self updateBounds];
     [self handleShakeEffect:dt];
     [self followTarget];
 }
@@ -326,7 +327,7 @@
 -(void)checkBounds{
     //elastic borders
     CGPoint worldPos =  subject_.position;
-    CGPoint newPos = ccp(0,0);
+    CGPoint newPos;
     float elasticity = .25f;
     //left border
     if(worldPos.x > 0)
