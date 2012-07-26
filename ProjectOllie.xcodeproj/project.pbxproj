@@ -140,6 +140,25 @@
 		CE62FCA91594085800BEB3BE /* SWTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA11594085800BEB3BE /* SWTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FCAA1594085800BEB3BE /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA31594085800BEB3BE /* SWTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FCAB1594085800BEB3BE /* SWTableViewSpriteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE6B51D715C0E33100F51BE6 /* back-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51C415C0E33100F51BE6 /* back-hd.png */; };
+		CE6B51D815C0E33100F51BE6 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51C515C0E33100F51BE6 /* back.png */; };
+		CE6B51D915C0E33100F51BE6 /* btn-test-0.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51C615C0E33100F51BE6 /* btn-test-0.png */; };
+		CE6B51DA15C0E33100F51BE6 /* btn-test-1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51C715C0E33100F51BE6 /* btn-test-1.png */; };
+		CE6B51DB15C0E33100F51BE6 /* btn-test-2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51C815C0E33100F51BE6 /* btn-test-2.png */; };
+		CE6B51DC15C0E33100F51BE6 /* fps_images-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51C915C0E33100F51BE6 /* fps_images-hd.png */; };
+		CE6B51DD15C0E33100F51BE6 /* fps_images-ipadhd.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51CA15C0E33100F51BE6 /* fps_images-ipadhd.png */; };
+		CE6B51DE15C0E33100F51BE6 /* fps_images.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51CB15C0E33100F51BE6 /* fps_images.png */; };
+		CE6B51DF15C0E33100F51BE6 /* greenbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51CC15C0E33100F51BE6 /* greenbutton-dark.png */; };
+		CE6B51E015C0E33100F51BE6 /* greenbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51CD15C0E33100F51BE6 /* greenbutton.png */; };
+		CE6B51E115C0E33100F51BE6 /* greybutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51CE15C0E33100F51BE6 /* greybutton-dark.png */; };
+		CE6B51E215C0E33100F51BE6 /* greybutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51CF15C0E33100F51BE6 /* greybutton.png */; };
+		CE6B51E315C0E33100F51BE6 /* orangebutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D015C0E33100F51BE6 /* orangebutton-dark.png */; };
+		CE6B51E415C0E33100F51BE6 /* orangebutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D115C0E33100F51BE6 /* orangebutton.png */; };
+		CE6B51E515C0E33100F51BE6 /* redbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D215C0E33100F51BE6 /* redbutton-dark.png */; };
+		CE6B51E615C0E33100F51BE6 /* redbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D315C0E33100F51BE6 /* redbutton.png */; };
+		CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D415C0E33100F51BE6 /* selectedoption.png */; };
+		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
+		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -537,6 +556,25 @@
 		CE62FCA31594085800BEB3BE /* SWTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = libs/CCTableSuite/SWTableViewCell.m; sourceTree = "<group>"; };
 		CE62FCA41594085800BEB3BE /* SWTableViewSpriteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWTableViewSpriteCell.h; path = libs/CCTableSuite/SWTableViewSpriteCell.h; sourceTree = "<group>"; };
 		CE62FCA51594085800BEB3BE /* SWTableViewSpriteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWTableViewSpriteCell.m; path = libs/CCTableSuite/SWTableViewSpriteCell.m; sourceTree = "<group>"; };
+		CE6B51C415C0E33100F51BE6 /* back-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "back-hd.png"; path = "Resources/Miscellaneous/back-hd.png"; sourceTree = "<group>"; };
+		CE6B51C515C0E33100F51BE6 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = back.png; path = Resources/Miscellaneous/back.png; sourceTree = "<group>"; };
+		CE6B51C615C0E33100F51BE6 /* btn-test-0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-0.png"; path = "Resources/Miscellaneous/btn-test-0.png"; sourceTree = "<group>"; };
+		CE6B51C715C0E33100F51BE6 /* btn-test-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-1.png"; path = "Resources/Miscellaneous/btn-test-1.png"; sourceTree = "<group>"; };
+		CE6B51C815C0E33100F51BE6 /* btn-test-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "btn-test-2.png"; path = "Resources/Miscellaneous/btn-test-2.png"; sourceTree = "<group>"; };
+		CE6B51C915C0E33100F51BE6 /* fps_images-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-hd.png"; path = "Resources/Miscellaneous/fps_images-hd.png"; sourceTree = "<group>"; };
+		CE6B51CA15C0E33100F51BE6 /* fps_images-ipadhd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fps_images-ipadhd.png"; path = "Resources/Miscellaneous/fps_images-ipadhd.png"; sourceTree = "<group>"; };
+		CE6B51CB15C0E33100F51BE6 /* fps_images.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fps_images.png; path = Resources/Miscellaneous/fps_images.png; sourceTree = "<group>"; };
+		CE6B51CC15C0E33100F51BE6 /* greenbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greenbutton-dark.png"; path = "Resources/Miscellaneous/greenbutton-dark.png"; sourceTree = "<group>"; };
+		CE6B51CD15C0E33100F51BE6 /* greenbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenbutton.png; path = Resources/Miscellaneous/greenbutton.png; sourceTree = "<group>"; };
+		CE6B51CE15C0E33100F51BE6 /* greybutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "greybutton-dark.png"; path = "Resources/Miscellaneous/greybutton-dark.png"; sourceTree = "<group>"; };
+		CE6B51CF15C0E33100F51BE6 /* greybutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greybutton.png; path = Resources/Miscellaneous/greybutton.png; sourceTree = "<group>"; };
+		CE6B51D015C0E33100F51BE6 /* orangebutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "orangebutton-dark.png"; path = "Resources/Miscellaneous/orangebutton-dark.png"; sourceTree = "<group>"; };
+		CE6B51D115C0E33100F51BE6 /* orangebutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = orangebutton.png; path = Resources/Miscellaneous/orangebutton.png; sourceTree = "<group>"; };
+		CE6B51D215C0E33100F51BE6 /* redbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "redbutton-dark.png"; path = "Resources/Miscellaneous/redbutton-dark.png"; sourceTree = "<group>"; };
+		CE6B51D315C0E33100F51BE6 /* redbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = redbutton.png; path = Resources/Miscellaneous/redbutton.png; sourceTree = "<group>"; };
+		CE6B51D415C0E33100F51BE6 /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/Miscellaneous/selectedoption.png; sourceTree = "<group>"; };
+		CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/Miscellaneous/silverbutton-dark.png"; sourceTree = "<group>"; };
+		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -1259,6 +1297,25 @@
 		C5FBA729159A8BCB00C1C624 /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
+				CE6B51C415C0E33100F51BE6 /* back-hd.png */,
+				CE6B51C515C0E33100F51BE6 /* back.png */,
+				CE6B51C615C0E33100F51BE6 /* btn-test-0.png */,
+				CE6B51C715C0E33100F51BE6 /* btn-test-1.png */,
+				CE6B51C815C0E33100F51BE6 /* btn-test-2.png */,
+				CE6B51C915C0E33100F51BE6 /* fps_images-hd.png */,
+				CE6B51CA15C0E33100F51BE6 /* fps_images-ipadhd.png */,
+				CE6B51CB15C0E33100F51BE6 /* fps_images.png */,
+				CE6B51CC15C0E33100F51BE6 /* greenbutton-dark.png */,
+				CE6B51CD15C0E33100F51BE6 /* greenbutton.png */,
+				CE6B51CE15C0E33100F51BE6 /* greybutton-dark.png */,
+				CE6B51CF15C0E33100F51BE6 /* greybutton.png */,
+				CE6B51D015C0E33100F51BE6 /* orangebutton-dark.png */,
+				CE6B51D115C0E33100F51BE6 /* orangebutton.png */,
+				CE6B51D215C0E33100F51BE6 /* redbutton-dark.png */,
+				CE6B51D315C0E33100F51BE6 /* redbutton.png */,
+				CE6B51D415C0E33100F51BE6 /* selectedoption.png */,
+				CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */,
+				CE6B51D615C0E33100F51BE6 /* silverbutton.png */,
 				CE22740815A01D6D00F3217E /* fire.png */,
 				C578B3E5158B051F0049FE58 /* white_clouds.jpeg */,
 				C54A05F5158151A100D7B369 /* blocks-hd.png */,
@@ -2201,6 +2258,25 @@
 				C5F4310015B9054300174FEE /* character_sprinting.anim in Resources */,
 				C5ECA6C115BFA8CF0021D285 /* idleanimation1.anim in Resources */,
 				C5ECA6C215BFA8CF0021D285 /* idleanimation2.anim in Resources */,
+				CE6B51D715C0E33100F51BE6 /* back-hd.png in Resources */,
+				CE6B51D815C0E33100F51BE6 /* back.png in Resources */,
+				CE6B51D915C0E33100F51BE6 /* btn-test-0.png in Resources */,
+				CE6B51DA15C0E33100F51BE6 /* btn-test-1.png in Resources */,
+				CE6B51DB15C0E33100F51BE6 /* btn-test-2.png in Resources */,
+				CE6B51DC15C0E33100F51BE6 /* fps_images-hd.png in Resources */,
+				CE6B51DD15C0E33100F51BE6 /* fps_images-ipadhd.png in Resources */,
+				CE6B51DE15C0E33100F51BE6 /* fps_images.png in Resources */,
+				CE6B51DF15C0E33100F51BE6 /* greenbutton-dark.png in Resources */,
+				CE6B51E015C0E33100F51BE6 /* greenbutton.png in Resources */,
+				CE6B51E115C0E33100F51BE6 /* greybutton-dark.png in Resources */,
+				CE6B51E215C0E33100F51BE6 /* greybutton.png in Resources */,
+				CE6B51E315C0E33100F51BE6 /* orangebutton-dark.png in Resources */,
+				CE6B51E415C0E33100F51BE6 /* orangebutton.png in Resources */,
+				CE6B51E515C0E33100F51BE6 /* redbutton-dark.png in Resources */,
+				CE6B51E615C0E33100F51BE6 /* redbutton.png in Resources */,
+				CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */,
+				CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */,
+				CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
