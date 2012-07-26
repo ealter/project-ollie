@@ -7,23 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CCNode.h" //Needs to inherit from CCNode so that we can use scheduleUpdate
 
-enum {
-    kGWMovesFPS = 20
-};
-
-@interface GWMove : NSObject {
-    NSTimer *updateTimer_;
+@interface GWMove : CCNode {
     float currentTime_;
+    NSMutableArray *moves_;
 }
-
-@property (nonatomic, strong) NSMutableArray *moves;
 
 - (NSString *)serialize;
 - (void)deserialize:(NSString *)data;
 
 //Timer stuff (for key framing automatically)
-- (void)startMove;
-- (void)stopMove;
+- (void)startMove; //Start recording the move
+- (void)stopMove;  //Stop  recording the move
 
 @end

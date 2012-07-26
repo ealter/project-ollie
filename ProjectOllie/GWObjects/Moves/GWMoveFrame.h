@@ -18,4 +18,7 @@
 
 @property (nonatomic) float time; //In seconds relative to the start of the move
 
+- (id)serializableData; //Must be NSNumbers, NSArrays, and/or NSDictionaries
+- (id)initWithSerializedData:(id)data; //The data is of the format returned by serializeableData. Data is allowed to be nil
+
 @end
