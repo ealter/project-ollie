@@ -10,11 +10,14 @@
 #import "GWWeapon.h"
 #import "GWPhysicsSprite.h"
 #import "Box2D.h"
+#import "GWGestures.h"
 
-@interface GWThrownWeapon : GWWeapon{
+@interface GWThrownWeapon : GWWeapon <GestureChild>{
     b2World *_world;
 }
 
 -(id)initThrownWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo box2DWorld: (b2World *)world;
+
+-(CGPoint)calculateVelocityFromWep:(CGPoint) startPoint toFinger:(CGPoint) endPoint;
 
 @end
