@@ -9,15 +9,15 @@
 #import "GWMove.h"
 #import "NSString+SBJSON.h"
 
-@interface GWMove ()
-
-- (void)updateTimerFired:(NSTimer *)timer;
-
-@end
-
 @implementation GWMove
-@synthesize moves = _moves;
 
+- (id)init
+{
+    if(self = [super init]) {
+        moves_ = [NSMutableArray array];
+    }
+    return self;
+}
 - (void)deserialize:(NSString *)data
 {
     
@@ -30,17 +30,15 @@
 
 - (void)startMove
 {
-    if(![updateTimer_ isValid]) {
-        updateTimer_ = [NSTimer timerWithTimeInterval:1.0/kGWMovesFPS target:self selector:@selector(updateTimerFired:) userInfo:nil repeats:YES];
-    }
+    [self scheduleUpdate];
 }
 
 - (void)stopMove
 {
-    [updateTimer_ invalidate];
+    [self unscheduleUpdate];
 }
 
-- (void)updateTimerFired:(NSTimer *)timer
+- (void)update:(ccTime)dt
 {
     
 }

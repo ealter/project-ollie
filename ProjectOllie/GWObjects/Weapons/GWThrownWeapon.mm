@@ -9,10 +9,12 @@
 #import "GWThrownWeapon.h"
 #import "GameConstants.h"
 #import "GWBullet.h"
+#import "HMVectorNode.h"
 
 @interface GWThrownWeapon()
 {
     NSString *_imageName;
+    HMVectorNode *drawNode;
 }
 @end
 
@@ -25,8 +27,9 @@
         self.position       = pos;
         self.contentSize    = size;
         self.ammo           = ammo;
-        _world = world;
-        
+        _world              = world;
+        drawNode            = [HMVectorNode node];
+        [self addChild:drawNode];
         
     }
     
@@ -48,6 +51,53 @@
         self.ammo--;
     }else {
         //no more ammo!
+    }
+}
+
+-(CGPoint)calculateVelocityFromWep:(CGPoint) startPoint toFinger:(CGPoint) endPoint
+{
+    CGPoint vel;
+    //Calculate velocity using distance between character and finger.  set a max distance as well
+    float dist = ccpDistance(startPoint, endPoint);
+    if (dist > 30) dist = 30;
+    dist = dist /2;//Ensures that max speed is 15 m/s
+    float angle = atan2f(startPoint.y-endPoint.y, startPoint.x - endPoint.x);
+    float vx = cosf(angle)*dist;
+    float vy = sinf(angle)*dist;
+    vel = CGPointMake(vx, vy);
+    
+    return vel;
+}
+
+//Gesture Methods//
+
+-(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
+{
+    if (ccpDistance(startPoint, self.position) < 10) {
+        [drawNode clear];
+        
+        float dt = 1/60;
+        CGPoint velocity = [self calculateVelocityFromWep:startPoint toFinger:currPoint];
+        CGPoint stepVelocity = ccpMult(velocity, dt);
+        CGPoint gravPoint = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
+        CGPoint stepGravity = ccpMult(ccpMult(gravPoint, dt), dt);
+        
+        //Simulate 1 second of trajectory;
+        for (int i = 0; i < 60 ; i++) {
+            CGPoint drawPoint = ccpAdd(ccpAdd(startPoint, ccpMult(stepGravity, 0.5f * (i*i+i))), ccpMult(stepVelocity, i));
+            ccDrawPoint(drawPoint);
+            [drawNode drawDot:drawPoint radius:1];
+        }
+    }
+}
+
+-(void)handlePanFinishedWithStart:(CGPoint) startPoint andEnd:(CGPoint)endPoint andTime:(float)time
+{
+    [drawNode clear];
+    
+    if (ccpDistance(startPoint, self.position) < 10) {
+        float angle = atan2f(endPoint.x - startPoint.x, endPoint.y - startPoint.y);
+        [self throwWeaponWithAngle:angle withStrength:ccpDistance(startPoint, endPoint)];
     }
 }
 
