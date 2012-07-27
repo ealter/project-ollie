@@ -17,6 +17,7 @@
 #import "GWWater.h"
 #import "GWGunWeapon.h"
 #import "GWGestures.h"
+#import "GWThrownWeapon.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -30,6 +31,7 @@ enum {
     GWSkeleton* _skeleton;
     GWGunWeapon* gunWeapon;
     GWGestures* gestures;
+    GWThrownWeapon* thrownWeapon;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -167,9 +169,12 @@ enum {
     
     _skeleton = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
    
-   /* gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
-    [self addChild:gunWeapon];*/
+    //gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    //[self addChild:gunWeapon];
+    thrownWeapon = [[GWThrownWeapon alloc] initThrownWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo:10 box2DWorld:world];
+    [self addChild:thrownWeapon];
     gestures = [[GWGestures alloc] init];
+    [[gestures children] addObject:thrownWeapon];
     [self addChild:gestures z:2];
 
 }

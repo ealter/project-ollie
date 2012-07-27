@@ -19,7 +19,7 @@
     
 }
 
--(void)throwWeaponWithAngle:(float)angle withStrength:(float)strength
+-(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {
     
 }

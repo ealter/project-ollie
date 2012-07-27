@@ -10,7 +10,6 @@
 #import "CCLayer.h"
 
 @protocol GestureChild <NSObject>
-@optional
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity;
 
 -(void)handleSwipeLeftWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity;

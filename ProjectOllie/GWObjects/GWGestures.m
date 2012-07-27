@@ -45,43 +45,54 @@
     return self;
 }
 
--(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {    
     //Get the first touch's location and time
-    UITouch *touch = [touches anyObject];
     touchDown = [touch locationInView: touch.view];
     touchDownTime = [touch timestamp];
+    touchDown = [[CCDirector sharedDirector] convertToGL:touchDown];
+    touchDown = [self convertToNodeSpace:touchDown];
     isPanning = NO;
+    
+    for (CCNode<GestureChild> *child in self.children) {
+        if (ccpDistance(touchDown, child.position) < child.contentSize.width) {
+            return YES;
+        }
+    }
+    return NO;
 }
 
--(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+
+-(void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event
 {    
-    UITouch *touch = [touches anyObject];
     touchMove = [touch locationInView:touch.view];
+    touchMove = [[CCDirector sharedDirector] convertToGL:touchMove];
+    touchMove = [self convertToNodeSpace:touchMove];
     touchTime = [touch timestamp] - touchDownTime;
     
     if (isPanning) {
         //Handle a pan
         for (CCNode<GestureChild> *child in self.children) {
+            
             [child handlePanWithStart:touchDown andCurrent:touchMove andTime:touchTime];
         }
     }else {
-        if (ccpDistance(touchDown, touchMove) > 10) {
+        if (ccpDistance(touchDown, touchMove) > 5) {
             //This is a pan, or a swipe
-            if (touchTime >0.3) {
+            if (touchTime >0.2) {
                 //This is a pan
                 isPanning = YES;
             }
         }
     }
     
-    
 }
 
--(void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event
 {
-    UITouch *touch = [touches anyObject];
     touchUp = [touch locationInView:touch.view];
+    touchUp = [[CCDirector sharedDirector] convertToGL:touchUp];
+    touchUp = [self convertToNodeSpace:touchUp];
     touchTime = [touch timestamp] - touchDownTime;    
     
     if (isPanning) {
@@ -89,7 +100,7 @@
         for (CCNode<GestureChild> *child in self.children) {
             [child handlePanFinishedWithStart:touchDown andEnd:touchMove andTime:touchTime];
         }
-    }else if (touchTime < 0.4 && ccpDistance(touchDown, touchUp) > 15) {
+    }else if (touchTime < 0.2 && ccpDistance(touchDown, touchUp) > 15) {
         //This means a swipe!
         
         //Calculate swipe direction: left, right, up down
@@ -119,12 +130,18 @@
             }
         }
         
-    }else if (touchTime < 0.3 && ccpDistance(touchDown, touchUp) < 5) {
+    }else if (touchTime < 0.2 && ccpDistance(touchDown, touchUp) < 5) {
         //This means a tap!
         for (CCNode<GestureChild> *child in self.children) {
             [child handleTap:touchUp];
         }
     }
+}
+
+- (void) registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];
+
 }
 
 @end
