@@ -1,13 +1,15 @@
 #ifndef ProjectOllie_GameContants_h
 #define ProjectOllie_GameContants_h
 
-#define PTM_RATIO 32    //Pixels to meters at a zoom level of 1
+#define PTM_RATIO 256    //Pixels to meters at a zoom level of 1
 
 #define FPS 60
 
 //Width and height of the world in meters
 #define WORLD_WIDTH 10
-#define WORLD_HEIGHT 5
+#define WORLD_HEIGHT 6
+#define WORLD_WIDTH_PX (WORLD_WIDTH*PTM_RATIO);
+#define WORLD_HEIGHT_PX (WORLD_HEIGHT*PTM_RATIO);
 
 //For things that must go to the edges of all possible screens
 #define MIN_VIEWABLE_X (-WORLD_WIDTH*PTM_RATIO/2)
