@@ -12,8 +12,7 @@
 #import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "GameConstants.h"
-#import "GWSkeleton.h"
-#import "Skeleton.h"
+#import "GWCharacter.h"
 #import "GWWater.h"
 #import "GWGunWeapon.h"
 #import "GWGestures.h"
@@ -27,7 +26,7 @@ enum {
 
 @interface ActionLayer()
 {
-    GWSkeleton* _skeleton;
+    GWCharacter* _character;
     GWGunWeapon* gunWeapon;
     GWGestures* gestures;
 }
@@ -119,7 +118,7 @@ enum {
 {
 
     b2Vec2 gravity;
-    gravity.Set(0, -10.0f);
+    gravity.Set(0, -5.0f);
     world = new b2World(gravity);
 
     // Do we want to let bodies sleep?
@@ -165,8 +164,8 @@ enum {
     fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
     
-    _skeleton = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
-   
+    _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
+    
    /* gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
     [self addChild:gunWeapon];*/
     gestures = [[GWGestures alloc] init];
@@ -261,7 +260,7 @@ enum {
      */
     
 	[self.camera update:dt];
-    [_skeleton update:dt];
+    [_character update:dt];
 
 }
 
@@ -271,21 +270,23 @@ enum {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
     if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
-    //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
-    [_skeleton runAnimation:@"sprinting"];
-    //[_skeleton applyLinearImpulse:ccp(.02,0)];
+    CGPoint tl = [touch locationInView:[touch view]];
+    if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
+        [_character walkRight];
+    else [_character walkLeft];
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.camera touchesEnded:touches];
-
+    [_character stopWalking];
     //Add a new body/atlas sprite at the touched location
     CGPoint location;
     for( UITouch *touch in touches ) {
         location = [touch locationInView: [touch view]];
         location = [[CCDirector sharedDirector] convertToGL: location];
-        
+
         location = [self convertToNodeSpace:location];
         
     }
