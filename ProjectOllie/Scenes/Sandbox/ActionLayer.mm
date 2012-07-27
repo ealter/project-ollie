@@ -17,6 +17,7 @@
 #import "GWWater.h"
 #import "GWGunWeapon.h"
 #import "GWGestures.h"
+#import "HMVectorNode.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -90,16 +91,28 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
-        [self addChild:[GWWater node]];
+        [self addChild:[GWWater node] z:8];
         
        /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
         label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);*/
         
-        [self scheduleUpdate];
-
+        /* Make a border rectangle for debug drawing */
         
+        
+        CGPoint worldRectPx[4];
+        worldRectPx[0].x = 0;                 worldRectPx[0].y = 0;
+        worldRectPx[1].x = 0;                 worldRectPx[1].y = WORLD_HEIGHT_PX;
+        worldRectPx[2].x = WORLD_WIDTH_PX;    worldRectPx[2].y = WORLD_HEIGHT_PX;
+        worldRectPx[3].x = WORLD_WIDTH_PX;    worldRectPx[3].y = 0;
+        HMVectorNode* worldBounds = [HMVectorNode node];
+        [worldBounds setColor:ccc4f(1, 0, 0, 1)];
+        for (int i = 0; i < 4; i++)
+            [worldBounds drawSegmentFrom:worldRectPx[i] to:worldRectPx[(i+1)%4] radius:4];
+        [self addChild:worldBounds z:256];
+        
+        [self scheduleUpdate];
         
     }
     return self;
@@ -176,20 +189,15 @@ enum {
 
 -(void) draw
 {
-    //
-    // IMPORTANT:
-    // This is only for debug purposes
-    // It is recommend to disable it
-    //
     [super draw];
     
+    /* Box2d debug drawing */
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
-
     kmGLPushMatrix();
-
     world->DrawDebugData();	
-
     kmGLPopMatrix();
+    
+    
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p

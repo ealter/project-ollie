@@ -43,7 +43,7 @@
 static BOOL initialized = NO;
 static CCGLProgram *shader_ = nil;  //For solid colored things
 static int colorLocation_ = -1;
-static ccColor4F color_ = {1,1,1,1};
+static ccColor4F color_ = {1,0,1,1};
 static int pointSizeLocation_ = -1;
 static GLfloat pointSize_ = 1;
 
