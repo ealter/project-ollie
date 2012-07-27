@@ -75,7 +75,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.4f;
+    fixtureDef.friction = 2.f;
     fixtureDef.restitution = 0.1f;
     fixtureDef.filter.categoryBits = CATEGORY_BONES;
     fixtureDef.filter.maskBits = MASK_BONES;
@@ -146,7 +146,7 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
     }
 }
 
-void Skeleton::runAnimation(string animationName)
+void Skeleton::runAnimation(string animationName, bool flipped)
 {
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
@@ -170,10 +170,17 @@ void Skeleton::runAnimation(string animationName)
                     /* Create a deep copy to adjust time of frame */
                     KeyFrame* deep = new KeyFrame;
                     KeyFrame* shallow = iter->second->frames.at(i);
+                    
                     deep->x           = shallow->x;
                     deep->y           = shallow->y;
                     deep->angle       = shallow->angle;
                     deep->time        = shallow->time + extraTime;
+                    
+                    if(flipped)
+                    {
+                        deep->x     = -deep->x;
+                        deep->angle = M_PI - deep->angle; 
+                    }
                     
                     /* Push it to back of animation queue */
                     bone->animation.push(deep);
