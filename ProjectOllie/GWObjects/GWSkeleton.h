@@ -107,4 +107,7 @@ typedef enum InteractorState{
 /* Sets the skeleton's position relative to interactor's */
 -(void)tieSkeletonToInteractor;
 
+/* Sets the skeleton to active or inactive of physics */
+-(void)setActive:(bool)active;
+
 @end

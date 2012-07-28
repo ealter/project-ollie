@@ -263,8 +263,6 @@ bool Skeleton::animating(Bone *root, float time)
     else {
         // stop animating
         anim = false;
-        root->box2DBody->SetAwake(true);
-        root->box2DBody->SetActive(true);
         
         // new position is torso's position
         Bone* ll = getBoneByName(root, "ll_leg");
@@ -384,6 +382,16 @@ b2Vec2 Skeleton::highestContact(Bone *root, b2Vec2 currentHighest){
             currentHighest = potential;
     }
     return currentHighest;
+}
+
+void Skeleton::setActive(Bone *root, bool active)
+{
+    b2Body* body = root->box2DBody;
+    body->SetAwake(active);
+    body->SetActive(active);
+    
+    for(int i = 0; i<root->children.size();i++)
+        setActive(root->children.at(i),active);
 }
 
 std::map<string, std::map<string,Animation*> > Skeleton::getAnimationMap()

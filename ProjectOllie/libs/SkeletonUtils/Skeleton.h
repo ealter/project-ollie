@@ -141,6 +141,9 @@ public:
     /* clears out the animation queue */
     void clearAnimationQueue(Bone* root);
     
+    /* Sets whether or not the bones are active */
+    void setActive(Bone* root, bool active);
+    
     float getX();
     float getY();
     float getAngle();

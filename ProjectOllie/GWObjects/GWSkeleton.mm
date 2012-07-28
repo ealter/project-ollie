@@ -153,8 +153,8 @@ using namespace std;
     boxShape.SetAsBox(radius, radius);
     fixtureDefBox.shape = &boxShape;
     
-    fixtureDefBox.density = 1.f;
-    fixtureDefBox.friction = 10.f;
+    fixtureDefBox.density = 5.f;
+    fixtureDefBox.friction = 40.f;
     fixtureDefBox.restitution = 0.1f;
     fixtureDefBox.filter.categoryBits = CATEGORY_BONES;
     fixtureDefBox.filter.maskBits = MASK_BONES;
@@ -260,11 +260,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)runAnimation:(NSString*)animationName WithTweenTime:(float)duration flipped:(bool)flipped
 {
     string name = [animationName UTF8String];
-    _skeleton->deleteAnimation("tween");
-    
-    [self tweenBonesToAnimation:name forBone:_skeleton->getRoot() withDuration:duration];
-    [self runAnimation:@"tween" flipped:flipped];
-    [self runAnimation:animationName flipped:flipped];
+    if(duration > 0)
+    {
+        _skeleton->deleteAnimation("tween");
+        [self tweenBonesToAnimation:name forBone:_skeleton->getRoot() withDuration:duration];
+        _skeleton->runAnimation("tween", NO);
+    }
+    _skeleton->runAnimation(name, flipped);
 }
 
 -(void)clearAnimation{
@@ -285,12 +287,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)update:(float)dt{
     [self.interactor update];
     absoluteLocation = [self.interactor getAbsolutePosition];
-    if((self.animating = _skeleton->animating(_skeleton->getRoot(), timeElapsed)))
+    if(self.animating = (_skeleton->animating(_skeleton->getRoot(), timeElapsed)))
     {   
         timeElapsed += dt;
         [self orientToGround];
     }
-    else{
+    else
+    {
         if(timeElapsed!=0)
         {
             timeElapsed = 0;
@@ -310,16 +313,17 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(CGPoint)getVelocity{
     
-    b2Vec2 velocity = _skeleton->getRoot()->box2DBody->GetLinearVelocity();
-    CGPoint toRet   = ccp(velocity.x,velocity.y);
-    if(self.animating)
-        toRet = [self.interactor getLinearVelocity];
+    CGPoint toRet = [self.interactor getLinearVelocity];
     
     return toRet;
 }
 
 -(void)tieSkeletonToInteractor{
     _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+}
+
+-(void)setActive:(bool)active{
+    _skeleton->setActive(_skeleton->getRoot(), active);
 }
 
 /*****************************
@@ -343,7 +347,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
-    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+    [self tieSkeletonToInteractor];
 }
 
 /* recursively assembles the bone tree imported from blender*/
@@ -434,63 +438,55 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)tweenBonesToAnimation:(string)name forBone:(Bone *)root withDuration:(float)duration
 {
     std::map<string, std::map<string,Animation*> > animations = _skeleton->getAnimationMap();
-    std::map<string, std::map<string,Animation*> >::iterator it;
-    
-    it = animations.find(name);
-    if(it != animations.end())
+    Animation* animation = animations[name][root->name];
+    if(animation)
     {
-        std::map<string,Animation*> boneMap = it->second;
-        std::map<string,Animation*>::iterator it2;
+        KeyFrame* initialFrame = animation->frames[0];
+        float destinationX     = initialFrame->x;
+        float destinationY     = initialFrame->y;
+        float destinationA     = initialFrame->angle;
         
-        it2 = boneMap.find(root->name);
-        
-        if(it2 != boneMap.end())
-        {
-            // finally have the first frame of the animation to which we are tweening
-            KeyFrame* initialFrame = it2->second->frames[0];
-            float destinationX     = initialFrame->x;
-            float destinationY     = initialFrame->y;
-            float destinationA     = initialFrame->angle;
-            
-            float currentX         = root->box2DBody->GetPosition().x*PTM_RATIO - _skeleton->getX()*PTM_RATIO;
-            float currentY         = root->box2DBody->GetPosition().y*PTM_RATIO - _skeleton->getY()*PTM_RATIO;
-            float currentA         = root->box2DBody->GetAngle();
-        
-            while(currentA <= 0 || currentA >= M_PI * 2.)
-            {
-                if(currentA > M_PI * 2.)
-                    currentA -= M_PI * 2.;
-                else currentA += M_PI * 2.;
-            }
-            while(destinationA <= 0 || destinationA >= M_PI * 2.)
-            {
-                if(destinationA > M_PI * 2.)
-                    destinationA -= M_PI * 2.;
-                else destinationA += M_PI * 2.;
-            }
-            
-            float numFrames        = duration*FPS;
-            float tweenX           = (destinationX - currentX)/numFrames;
-            float tweenY           = (destinationY - currentY)/numFrames;
-            float tweenA           = (destinationA - currentA)/numFrames;
-            
-            for(int i = 0; i < (int)numFrames; i++)
-            {
-                KeyFrame* tweenFrame = new KeyFrame;
-                tweenFrame->x        = currentX + tweenX*(i+1);
-                tweenFrame->y        = currentY + tweenY*(i+1);
-                tweenFrame->angle    = currentA + tweenA*(i+1);
-                tweenFrame->time     = duration/numFrames * (float)i;
-                _skeleton->addAnimationFrame("tween", root->name, tweenFrame);
-            }
+        float currentX         = root->box2DBody->GetPosition().x*PTM_RATIO - _skeleton->getX()*PTM_RATIO;
+        float currentY         = root->box2DBody->GetPosition().y*PTM_RATIO - _skeleton->getY()*PTM_RATIO;
+        float currentA         = root->box2DBody->GetAngle();
 
+        while(currentA <= 0 || currentA >= M_PI * 2.)
+        {
+            if(currentA > M_PI * 2.)
+                currentA -= M_PI * 2.;
+            else currentA += M_PI * 2.;
+        }
+        while(destinationA <= 0 || destinationA >= M_PI * 2.)
+        {
+            if(destinationA > M_PI * 2.)
+                destinationA -= M_PI * 2.;
+            else destinationA += M_PI * 2.;
         }
         
+        
+        float numFrames        = duration*FPS;
+        float diffA            = (destinationA - currentA);
+        if(diffA > M_PI)
+            diffA = M_PI * 2. - diffA;
+        
+        float tweenX           = (destinationX - currentX)/numFrames;
+        float tweenY           = (destinationY - currentY)/numFrames;
+        float tweenA           = diffA/numFrames;
+        
+        for(int i = 0; i < (int)numFrames; i++)
+        {
+            KeyFrame* tweenFrame = new KeyFrame;
+            tweenFrame->x        = currentX + tweenX*(i+1);
+            tweenFrame->y        = currentY + tweenY*(i+1);
+            tweenFrame->angle    = currentA + tweenA*(i+1);
+            tweenFrame->time     = duration/numFrames * (float)i;
+            _skeleton->addAnimationFrame("tween", root->name, tweenFrame);
+        }
+
+        //For every bone!
+        for(int i = 0; i < root->children.size(); i++)
+            [self tweenBonesToAnimation:name forBone:root->children.at(i) withDuration:duration];
     }
-    //For every bone!
-    for(int i = 0; i < root->children.size(); i++)
-        [self tweenBonesToAnimation:name forBone:root->children.at(i) withDuration:duration];
-    
 }
 
 -(bool)calculateNormalAngle{
