@@ -8,13 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
+#import "GWGestures.h"
 
 class b2World;
 
-@interface GWGunWeapon : GWWeapon {
+@interface GWGunWeapon : GWWeapon<GestureChild> {
     b2World *_world;
 }
 
 -(id)initGunWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld: (b2World *)world;
+
+-(CGPoint)calculateGunVelocityWithAimPoint:(CGPoint) aimPoint;
 
 @end

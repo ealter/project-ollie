@@ -181,12 +181,12 @@ enum {
     
     _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
     
-   /* gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
-    [self addChild:gunWeapon];*/
-    thrownWeapon = [[GWThrownWeapon alloc] initThrownWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo:10 box2DWorld:world];
-    [self addChild:thrownWeapon];
+    gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
+    [self addChild:gunWeapon];
+    //thrownWeapon = [[GWThrownWeapon alloc] initThrownWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo:10 box2DWorld:world fuseTime:1];
+    //[self addChild:thrownWeapon];
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:thrownWeapon];
+    [[gestures children] addObject:gunWeapon];
     [self addChild:gestures z:2];
 
 }
@@ -282,7 +282,6 @@ enum {
 {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
-    if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
     CGPoint tl = [touch locationInView:[touch view]];
     if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
         [_character walkRight];
