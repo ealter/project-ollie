@@ -16,7 +16,7 @@ class b2World;
     b2World* _world;
 }
 
--(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world;
+-(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL) isBullet;
 
 -(void)destroyBullet;
 

@@ -16,7 +16,7 @@
     b2World *_world;
 }
 
--(id)initThrownWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo box2DWorld: (b2World *)world;
+-(id)initThrownWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo box2DWorld: (b2World *)world fuseTime:(float) fuseTime;
 
 -(CGPoint)calculateVelocityFromWep:(CGPoint) startPoint toFinger:(CGPoint) endPoint;
 

@@ -130,7 +130,7 @@
             }
         }
         
-    }else if (touchTime < 0.2 && ccpDistance(touchDown, touchUp) < 5) {
+    }else if (touchTime < 0.2 && ccpDistance(touchDown, touchUp) <= 15) {
         //This means a tap!
         for (CCNode<GestureChild> *child in self.children) {
             [child handleTap:touchUp];
