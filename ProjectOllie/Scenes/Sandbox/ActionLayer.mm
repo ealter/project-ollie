@@ -133,7 +133,7 @@ enum {
 {
 
     b2Vec2 gravity;
-    gravity.Set(0, -5.0f);
+    gravity.Set(0, -2.f);
     world = new b2World(gravity);
 
     // Do we want to let bodies sleep?

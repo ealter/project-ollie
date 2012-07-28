@@ -55,6 +55,7 @@ typedef enum InteractorState{
 -(void)applyLinearImpulse:(CGPoint)impulse;
 -(void)setPositionInSkeleton:(Skeleton*)_skeleton;
 -(void)update;
+-(float)getRadius;
 
 
 @end
@@ -97,6 +98,13 @@ typedef enum InteractorState{
 /* Gets the interactor velocity */
 -(CGPoint)getVelocity;
 
+/* Sets the interactor's position to the lowest point of a ragdoll */
 -(void)setInteractorPositionInRagdoll;
+
+/* Puts the animation into the skeleton's animation queue */
+-(void)runAnimation:(NSString*)animationName WithTweenTime:(float)duration flipped:(bool)flipped;
+
+/* Sets the skeleton's position relative to interactor's */
+-(void)tieSkeletonToInteractor;
 
 @end

@@ -35,6 +35,8 @@
 		C583DBAB15AF947B00FE441B /* character_idle3.anim in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA415AF947B00FE441B /* character_idle3.anim */; };
 		C583DBAE15AF947B00FE441B /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA815AF947B00FE441B /* character.skel */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
+		C59ACC1115C24ACF0030A862 /* character_idle4.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC0F15C24ACF0030A862 /* character_idle4.anim */; };
+		C59ACC1215C24ACF0030A862 /* character_idle5.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC1015C24ACF0030A862 /* character_idle5.anim */; };
 		C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */ = {isa = PBXBuildFile; fileRef = C5B4C58D159023AC000FD99F /* HMVectorNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C5B4C593159023F6000FD99F /* HMVectorNode.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */; };
 		C5B4C596159023F6000FD99F /* HMVectorNode.vsh in Resources */ = {isa = PBXBuildFile; fileRef = C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */; };
@@ -394,6 +396,8 @@
 		C583DBA815AF947B00FE441B /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
+		C59ACC0F15C24ACF0030A862 /* character_idle4.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle4.anim; sourceTree = "<group>"; };
+		C59ACC1015C24ACF0030A862 /* character_idle5.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle5.anim; sourceTree = "<group>"; };
 		C5B4C58B159023AC000FD99F /* HMVectorNode.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.fsh; sourceTree = "<group>"; };
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
@@ -1098,6 +1102,8 @@
 				C5ECA6BF15BFA8CF0021D285 /* character_idle1.anim */,
 				C5ECA6C015BFA8CF0021D285 /* character_idle2.anim */,
 				C583DBA415AF947B00FE441B /* character_idle3.anim */,
+				C59ACC0F15C24ACF0030A862 /* character_idle4.anim */,
+				C59ACC1015C24ACF0030A862 /* character_idle5.anim */,
 				C5F430FC15B9008700174FEE /* character_woopwoop.anim */,
 				C5F430FF15B9054300174FEE /* character_sprinting.anim */,
 			);
@@ -2277,6 +2283,8 @@
 				CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */,
 				CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */,
 				CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */,
+				C59ACC1115C24ACF0030A862 /* character_idle4.anim in Resources */,
+				C59ACC1215C24ACF0030A862 /* character_idle5.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

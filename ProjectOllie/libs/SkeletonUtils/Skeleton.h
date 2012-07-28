@@ -117,6 +117,9 @@ public:
     /* Adds this animation frame to the map */
     void addAnimationFrame(string animationName, string boneName, KeyFrame* frame);
     
+    /* Removes animation from anim dictionary */
+    void deleteAnimation(string animationName);
+    
     /* Loads this animation to the skeleton */
     void runAnimation(string animationName, bool flipped);
     
@@ -141,6 +144,9 @@ public:
     float getX();
     float getY();
     float getAngle();
+    
+    /* Returns the map of animations */
+    std::map<string, std::map<string,Animation*> > getAnimationMap();
     
     /* update values changing over time */
     void update();

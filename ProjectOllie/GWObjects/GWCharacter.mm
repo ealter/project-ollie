@@ -13,6 +13,9 @@
 #include "Skeleton.h"
 #include "GameConstants.h"
 
+#define MAX_SPEED .01f
+#define IMPULSE_MAG .0001
+
 @interface GWCharacter()
 {
     
@@ -60,7 +63,7 @@
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"sprinting",@"woopwoop",@"idle1",@"idle2",@"idle3", nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"sprinting",@"woopwoop",@"idle1",@"idle2",@"idle3",@"idle4",@"idle5", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
@@ -96,9 +99,12 @@
 {
     //update skeleton's physics
     [self.skeleton update:dt];
+    if(self.state != kStateRagdoll)
+        [self.skeleton tieSkeletonToInteractor];
+    
     
     float speedSQ = ccpLengthSQ([self.skeleton getVelocity]);
-    if([self.skeleton calculateNormalAngle] && self.state != kStateWalking && speedSQ < .9)
+    if([self.skeleton calculateNormalAngle] && self.state != kStateWalking && speedSQ < MAX_SPEED)
         self.state = kStateIdle;
     
     switch(self.state) {
@@ -107,28 +113,37 @@
             {
                 float rand     = CCRANDOM_0_1();
                 NSString* anim = @"idle1"; 
-                if(rand > .8f)
+                if(rand < .2f)
                     anim = @"idle2";
+                else if (rand < .4f)
+                    anim = @"idle3";
+                else if (rand < .6f)
+                    anim = @"idle4";
+                else if (rand < .8f)
+                    anim = @"idle5";
                 
-                [self.skeleton runAnimation:anim flipped:NO];
+                [self.skeleton runAnimation:anim WithTweenTime:.4 flipped:self.orientation];
             }
             
             return;
         case kStateWalking:
+        {
             if(self.orientation == kOrientationLeft)
             {
                 if(![self.skeleton animating])
                     [self.skeleton runAnimation:@"sprinting" flipped:YES];
-                if(ccpLengthSQ([self.skeleton getVelocity]) < 1.)
-                    [self.skeleton applyLinearImpulse:ccp(-.01,0)];
+                if(ccpLengthSQ([self.skeleton getVelocity]) <.1)
+                    [self.skeleton applyLinearImpulse:ccp(-IMPULSE_MAG,0)];
             }
-            else{
+            else
+            {
                 if(![self.skeleton animating])
                     [self.skeleton runAnimation:@"sprinting" flipped:NO];
-                if(ccpLengthSQ([self.skeleton getVelocity]) < 1.)
-                    [self.skeleton applyLinearImpulse:ccp(.01,0)];
+                if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
+                    [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG,0)];
             }
             return;
+        }
         case kStateArming:
             return;
         case kStateManeuvering:
@@ -142,16 +157,27 @@
 }
 
 -(void)walkLeft{
-    self.orientation = kOrientationLeft;
-    self.state       = kStateWalking;
-    [self.skeleton clearAnimation];
+    
+    // If it is making contact with some ground body
+    if([self.skeleton calculateNormalAngle])
+    {
+        self.orientation = kOrientationLeft;
+        self.state       = kStateWalking;
+        [self.skeleton clearAnimation];
+    }
 
 }
 
 -(void)walkRight{
-    self.orientation = kOrientationRight;
-    self.state       = kStateWalking;
-    [self.skeleton clearAnimation];
+    
+    // If it is making contact with some ground body
+    if([self.skeleton calculateNormalAngle])
+    {
+        self.orientation = kOrientationRight;
+        self.state       = kStateWalking;
+        [self.skeleton clearAnimation];
+    }
+    
 }
 
 -(void)stopWalking{
@@ -164,9 +190,9 @@
     if(state == kStateWalking)
     {
         self.skeleton.interactor.state = kInteractorStateActive;
-        CGPoint velocity = [self.skeleton getVelocity];
-        [self.skeleton.interactor setLinearVelocity:velocity];
-        [self.skeleton.interactor setAngularVelocity:0];
+        //CGPoint velocity = [self.skeleton getVelocity];
+        //[self.skeleton.interactor setLinearVelocity:velocity];
+        //[self.skeleton.interactor setAngularVelocity:0];
     }
     else if (state == kStateRagdoll)
     {
