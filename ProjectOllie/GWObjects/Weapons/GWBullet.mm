@@ -25,7 +25,7 @@
         bd.type             = b2_dynamicBody;
         bd.linearDamping    = .1f;
         bd.angularDamping   = .1f;
-        bd.bullet           = isBullet;
+        bd.bullet           = YES;//isBullet;
         
         box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         

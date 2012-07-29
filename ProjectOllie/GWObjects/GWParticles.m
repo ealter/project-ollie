@@ -129,11 +129,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         endSize = 1.f;
         
         //Change the GL blend function
-        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
-        //ccGLBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];        
         
-        
-        //Get the particle texture0
+        //Get the particle texture
         self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
         
         // additive

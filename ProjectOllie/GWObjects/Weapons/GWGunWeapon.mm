@@ -16,15 +16,7 @@
 #define MAXSPEED 15. //Maximum speed of the weapon's projectile
 
 @interface GWGunWeapon ()
-{
-    HMVectorNode    *drawNode;
-    CGPoint         rearPoint;//Used to track where the rotation was last set to
-}
-@property (assign, nonatomic) CGSize bulletSize;
-@property (strong, nonatomic) NSString *bulletImage;
-@property (assign, nonatomic) float bulletSpeed;
-@property (strong, nonatomic) CCSprite *aimOverlay;
-@property (strong, nonatomic) CCSprite *gunImage;
+
 @end
 
 @implementation GWGunWeapon
@@ -52,9 +44,9 @@
         self.gunImage       = [CCSprite spriteWithFile:imageName];
         self.gunImage.position= ccpAdd(self.gunImage.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
         
-        //self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
-        //self.aimOverlay     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
-        //[self addChild:self.aimOverlay];
+        self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
+        self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+        [self addChild:self.aimOverlay];
         [self addChild:self.gunImage];
         [self addChild:drawNode];    
         [drawNode setColor:c];
@@ -114,21 +106,18 @@
         float angle             = CC_RADIANS_TO_DEGREES(atan2f(self.position.y - currPoint.y, self.position.x - currPoint.x));
         angle += 180;
         angle = angle * -1;
-        //self.aimOverlay.rotation= angle;
+        self.aimOverlay.rotation= angle;
         self.gunImage.rotation = angle;
         
         //Simulate trajectory;
         for (int i = 0; i < 20 ; i++) {
-            CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * i*i*PTM_RATIO));
+            CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
             
-            
-            //Calculate alpha, and draw the point
-            double alphaValue   = 1-(i/20);
-            ccColor4F c         = ccc4f(1.f, 1.f, 0.f, alphaValue);
-            [drawNode setColor:c];
-            [drawNode drawDot:drawPoint radius:4];
+            float dotSize = (6. - 6.*(i/30.));
+            //draw the point
+            [drawNode drawDot:drawPoint radius:dotSize];
         }
-        rearPoint = currPoint;
+        aimPoint = currPoint;
     }
 }
 
@@ -139,7 +128,7 @@
 
 -(void)handleTap:(CGPoint) tapPoint
 {
-    [self fireWeapon: rearPoint];
+    [self fireWeapon: aimPoint];
 }
 
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity

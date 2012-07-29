@@ -8,21 +8,10 @@
 
 #import "GWThrownWeapon.h"
 #import "GameConstants.h"
-#import "GWBullet.h"
-#import "HMVectorNode.h"
 #import "ccTypes.h"
 
 #define MAXSPEED 160. //Max speed of the weapon's projectile
 
-@interface GWThrownWeapon()
-{
-    NSString *_imageName;
-    HMVectorNode *drawNode;
-    GWBullet *thrown;
-    float fuseTimer;
-    float countDown;
-}
-@end
 
 @implementation GWThrownWeapon
 
@@ -47,6 +36,8 @@
     return self;
 }
 
+
+//Override This to throw a custom bullet!
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {
     if (self.ammo >0) {
@@ -70,7 +61,7 @@
     //Calculate velocity using distance between character and finger.  set a max distance as well
     float dist              = ccpDistance(startPoint, endPoint);
     if (dist > MAXSPEED)dist= MAXSPEED;
-    dist                    = dist / 32;
+    dist                    = dist / 64;
     float angle             = atan2f(startPoint.y-endPoint.y, startPoint.x - endPoint.x);
     float vx                = cosf(angle)*dist;
     float vy                = sinf(angle)*dist;
@@ -109,12 +100,12 @@
             CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
             
             //Simulate trajectory;
-            for (int i = 0; i < 120 ; i++) {
-                CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * i*i*PTM_RATIO));
+            for (int i = 0; i < 60 ; i++) {
+                CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
                 
-                
+                float dotSize = (6. - 6.*(i/90.));
                 //draw the point
-                [drawNode drawDot:drawPoint radius:4];
+                [drawNode drawDot:drawPoint radius:dotSize];
             }
         }
     }

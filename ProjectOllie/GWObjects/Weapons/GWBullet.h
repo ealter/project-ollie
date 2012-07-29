@@ -10,6 +10,7 @@
 #import "CCNode.h"
 #import "GWPhysicsSprite.h"
 
+
 class b2World;
 
 @interface GWBullet : GWPhysicsSprite {
