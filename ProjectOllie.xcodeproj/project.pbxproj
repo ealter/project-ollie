@@ -1453,6 +1453,21 @@
 			name = CCTableSuite;
 			sourceTree = "<group>";
 		};
+		CE6B51EF15C35DA900F51BE6 /* Water */ = {
+			isa = PBXGroup;
+			children = (
+				CEF6A08F15B95AF3001D02CC /* waterSheet1.png */,
+				CE18C08015B9659F00FD2025 /* waterSheet2.png */,
+				CE18C08115B9659F00FD2025 /* waterSheet3.png */,
+				CE18C08215B9659F00FD2025 /* waterSheet4.png */,
+				CE18C08315B9659F00FD2025 /* waterSheet5.png */,
+				CE18C08415B9659F00FD2025 /* waterSheet6.png */,
+				CE18C08515B9659F00FD2025 /* waterSheet7.png */,
+				CE18C08615B9659F00FD2025 /* waterSheet8.png */,
+			);
+			name = Water;
+			sourceTree = "<group>";
+		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
@@ -1523,6 +1538,7 @@
 		CE94AA6C15785F83009B35B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CE6B51EF15C35DA900F51BE6 /* Water */,
 				C583DBA015AF947B00FE441B /* Skeletons */,
 				C5F430BC15B8D97E00174FEE /* Drawing Menu */,
 				C5F430CB15B8D97E00174FEE /* Main menu */,
@@ -1532,14 +1548,6 @@
 				C5FBA726159A8B0F00C1C624 /* Menu Objects */,
 				C5FBA729159A8BCB00C1C624 /* Miscellaneous */,
 				CE94AA6D15785F83009B35B4 /* Default.png */,
-				CEF6A08F15B95AF3001D02CC /* waterSheet1.png */,
-				CE18C08015B9659F00FD2025 /* waterSheet2.png */,
-				CE18C08115B9659F00FD2025 /* waterSheet3.png */,
-				CE18C08215B9659F00FD2025 /* waterSheet4.png */,
-				CE18C08315B9659F00FD2025 /* waterSheet5.png */,
-				CE18C08415B9659F00FD2025 /* waterSheet6.png */,
-				CE18C08515B9659F00FD2025 /* waterSheet7.png */,
-				CE18C08615B9659F00FD2025 /* waterSheet8.png */,
 				CE94AA7515785F83009B35B4 /* Icon-72.png */,
 				CE94AA7715785F83009B35B4 /* Icon-Small-50.png */,
 				CE94AA7915785F83009B35B4 /* Icon-Small.png */,
