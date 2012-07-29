@@ -20,8 +20,8 @@ typedef enum characterState {
 } characterState;
 
 typedef enum Orientation {
-    kOrientationLeft = 0,
-    kOrientationRight
+    kOrientationRight = 0,
+    kOrientationLeft
 }Orientation;
 
 @interface GWCharacter : CCNode {

@@ -14,7 +14,9 @@
 #import "NSString+SBJSON.h"
 
 //BLENDER TO PIXEL RATIO
-#define BTP_RATIO 7.0
+#define BTM_RATIO .08 * PTM_RATIO
+#define MIN_ANGLE -M_PI/5.0
+#define MAX_ANGLE M_PI/5.0
 
 using namespace std;
 
@@ -37,7 +39,7 @@ using namespace std;
 
 -(id)initAsBoxAt:(CGPoint)location inWorld:(b2World *)world{
     if((self = [super init])){
-        radius = .01*BTP_RATIO;
+        radius = .0001*PTM_RATIO;
         _world = world;
         [self createPhysicsBodiesAt:ccp(200,200)];
         self.state = kInteractorStateInactive;
@@ -47,12 +49,16 @@ using namespace std;
 
 -(id)initAsCircleAt:(CGPoint)location inWorld:(b2World *)world{
     if((self = [super init])){
-        radius =  .01*BTP_RATIO;
+        radius =  .0001*PTM_RATIO;
         _world = world;
         [self createPhysicsBodiesAt:ccp(200,200)];
         self.state = kInteractorStateActive;
     }
     return self;
+}
+
+-(float)getRadius{
+    return radius;
 }
 
 -(CGPoint)getLinearVelocity{
@@ -147,8 +153,8 @@ using namespace std;
     boxShape.SetAsBox(radius, radius);
     fixtureDefBox.shape = &boxShape;
     
-    fixtureDefBox.density = 1.f;
-    fixtureDefBox.friction = 10.f;
+    fixtureDefBox.density = 5.f;
+    fixtureDefBox.friction = 40.f;
     fixtureDefBox.restitution = 0.1f;
     fixtureDefBox.filter.categoryBits = CATEGORY_BONES;
     fixtureDefBox.filter.maskBits = MASK_BONES;
@@ -184,7 +190,6 @@ using namespace std;
         box->SetTransform(wheel->GetPosition(), box->GetAngle());
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
-        
 }
 
 @end
@@ -218,6 +223,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 //Adjusts skeleton's angle to ground body
 -(void)orientToGround;
 
+-(void)tweenBonesToAnimation:(string)name forBone:(Bone*)root withDuration:(float)duration;
+
 @end
 
 @implementation GWSkeleton
@@ -250,6 +257,18 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     _skeleton->runAnimation(name,flipped);
 }
 
+-(void)runAnimation:(NSString*)animationName WithTweenTime:(float)duration flipped:(bool)flipped
+{
+    string name = [animationName UTF8String];
+    if(duration > 0)
+    {
+        _skeleton->deleteAnimation("tween");
+        [self tweenBonesToAnimation:name forBone:_skeleton->getRoot() withDuration:duration];
+        _skeleton->runAnimation("tween", NO);
+    }
+    _skeleton->runAnimation(name, flipped);
+}
+
 -(void)clearAnimation{
     _skeleton->clearAnimationQueue(_skeleton->getRoot());
 }
@@ -268,13 +287,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)update:(float)dt{
     [self.interactor update];
     absoluteLocation = [self.interactor getAbsolutePosition];
-    if((self.animating = _skeleton->animating(_skeleton->getRoot(), timeElapsed)))
+    if(self.animating = (_skeleton->animating(_skeleton->getRoot(), timeElapsed)))
     {   
         timeElapsed += dt;
-        _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
         [self orientToGround];
     }
-    else{
+    else
+    {
         if(timeElapsed!=0)
         {
             timeElapsed = 0;
@@ -294,12 +313,17 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(CGPoint)getVelocity{
     
-    b2Vec2 velocity = _skeleton->getRoot()->box2DBody->GetLinearVelocity();
-    CGPoint toRet   = ccp(velocity.x,velocity.y);
-    if(self.animating)
-        toRet = [self.interactor getLinearVelocity];
+    CGPoint toRet = [self.interactor getLinearVelocity];
     
     return toRet;
+}
+
+-(void)tieSkeletonToInteractor{
+    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+}
+
+-(void)setActive:(bool)active{
+    _skeleton->setActive(_skeleton->getRoot(), active);
 }
 
 /*****************************
@@ -323,7 +347,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
-    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+    [self tieSkeletonToInteractor];
 }
 
 /* recursively assembles the bone tree imported from blender*/
@@ -338,8 +362,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         CGPoint tailLoc     = dictionaryToCGPoint([currentBone objectForKey:@"tail"]);
         
         //transform to screen coordinates
-        headLoc             = ccpMult(headLoc,BTP_RATIO);
-        tailLoc             = ccpMult(tailLoc,BTP_RATIO);
+        headLoc             = ccpMult(headLoc,BTM_RATIO);
+        tailLoc             = ccpMult(tailLoc,BTM_RATIO);
         CGPoint averageLoc  = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
         
         //assign values to bone
@@ -350,9 +374,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         bone->jx            = headLoc.x;
         bone->jy            = headLoc.y;
         bone->name          = string([[currentBone objectForKey:@"name"] UTF8String]);
-        bone->l             = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTP_RATIO;
+        bone->l             = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
         bone->a             = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
-        bone->w             = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTP_RATIO;
+        bone->w             = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTM_RATIO;
         
         _skeleton->boneAddChild(parent, bone);
         
@@ -395,8 +419,8 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             CGPoint tailLoc = dictionaryToCGPoint([bone objectForKey:@"tail"]);
             
             //transform to screen coordinates
-            headLoc                = ccpMult(headLoc,BTP_RATIO);
-            tailLoc                = ccpMult(tailLoc,BTP_RATIO);
+            headLoc                = ccpMult(headLoc,BTM_RATIO);
+            tailLoc                = ccpMult(tailLoc,BTM_RATIO);
             CGPoint averageLoc     = ccpMult(ccpAdd(tailLoc,headLoc),.5f);
             
             //assign bone specific values
@@ -411,6 +435,60 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
 }
 
+-(void)tweenBonesToAnimation:(string)name forBone:(Bone *)root withDuration:(float)duration
+{
+    std::map<string, std::map<string,Animation*> > animations = _skeleton->getAnimationMap();
+    Animation* animation = animations[name][root->name];
+    if(animation)
+    {
+        KeyFrame* initialFrame = animation->frames[0];
+        float destinationX     = initialFrame->x;
+        float destinationY     = initialFrame->y;
+        float destinationA     = initialFrame->angle;
+        
+        float currentX         = root->box2DBody->GetPosition().x*PTM_RATIO - _skeleton->getX()*PTM_RATIO;
+        float currentY         = root->box2DBody->GetPosition().y*PTM_RATIO - _skeleton->getY()*PTM_RATIO;
+        float currentA         = root->box2DBody->GetAngle();
+
+        while(currentA <= 0 || currentA >= M_PI * 2.)
+        {
+            if(currentA > M_PI * 2.)
+                currentA -= M_PI * 2.;
+            else currentA += M_PI * 2.;
+        }
+        while(destinationA <= 0 || destinationA >= M_PI * 2.)
+        {
+            if(destinationA > M_PI * 2.)
+                destinationA -= M_PI * 2.;
+            else destinationA += M_PI * 2.;
+        }
+        
+        
+        float numFrames        = duration*FPS;
+        float diffA            = (destinationA - currentA);
+        if(diffA > M_PI)
+            diffA = M_PI * 2. - diffA;
+        
+        float tweenX           = (destinationX - currentX)/numFrames;
+        float tweenY           = (destinationY - currentY)/numFrames;
+        float tweenA           = diffA/numFrames;
+        
+        for(int i = 0; i < (int)numFrames; i++)
+        {
+            KeyFrame* tweenFrame = new KeyFrame;
+            tweenFrame->x        = currentX + tweenX*(i+1);
+            tweenFrame->y        = currentY + tweenY*(i+1);
+            tweenFrame->angle    = currentA + tweenA*(i+1);
+            tweenFrame->time     = duration/numFrames * (float)i;
+            _skeleton->addAnimationFrame("tween", root->name, tweenFrame);
+        }
+
+        //For every bone!
+        for(int i = 0; i < root->children.size(); i++)
+            [self tweenBonesToAnimation:name forBone:root->children.at(i) withDuration:duration];
+    }
+}
+
 -(bool)calculateNormalAngle{
 
     for (b2ContactEdge* ce = self.interactor.interactingBody->GetContactList(); ce; ce = ce->next)
@@ -420,12 +498,14 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         c->GetWorldManifold(&manifold);
         if(c->IsTouching())
         {
+            
             CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
             normal = ccpNormalize(normal);
             //DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
             float angle = atan2(normal.y,normal.x);
             //DebugLog(@"The contact normal has an angle of: %f",RAD2DEG(angle));
-            destinationAngle = angle - M_PI/2.0;
+            float potentialDestination = angle - M_PI/2.0;
+            destinationAngle = min(max(potentialDestination,MIN_ANGLE),MAX_ANGLE);
             return YES;
         }
 

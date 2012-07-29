@@ -75,7 +75,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
     fixtureDef.density = 1.0f;
-    fixtureDef.friction = 2.f;
+    fixtureDef.friction = 8.f;
     fixtureDef.restitution = 0.1f;
     fixtureDef.filter.categoryBits = CATEGORY_BONES;
     fixtureDef.filter.maskBits = MASK_BONES;
@@ -146,11 +146,34 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
     }
 }
 
+void Skeleton::deleteAnimation(string animationName)
+{
+
+    std::map<string, Animation*> animation = animations[animationName];
+    std::map<string, Animation*>::iterator it;
+    for(it = animation.begin(); it != animation.end(); it++)
+    {
+        it->second->frames.clear();
+    }
+}
+
 void Skeleton::runAnimation(string animationName, bool flipped)
 {
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
-        Bone* bone = this->getBoneByName(this->root, iter->first);
+        
+        /* if flipped, it should adjust the symmetric limb */
+        string name = iter->first;
+        char prefix = iter->first.at(0);
+        if(flipped)
+        {
+            if(prefix == 'r')
+                name = 'l'+name.substr(1);
+            else if (prefix == 'l')
+                name = 'r'+name.substr(1);
+        }
+            
+        Bone* bone = this->getBoneByName(this->root, name);
         if(bone) {
             if(iter->second) {
                 // queue<KeyFrame*> newAnimation;
@@ -240,8 +263,6 @@ bool Skeleton::animating(Bone *root, float time)
     else {
         // stop animating
         anim = false;
-        root->box2DBody->SetAwake(true);
-        root->box2DBody->SetActive(true);
         
         // new position is torso's position
         Bone* ll = getBoneByName(root, "ll_leg");
@@ -363,8 +384,30 @@ b2Vec2 Skeleton::highestContact(Bone *root, b2Vec2 currentHighest){
     return currentHighest;
 }
 
+void Skeleton::setActive(Bone *root, bool active)
+{
+    b2Body* body = root->box2DBody;
+    body->SetAwake(active);
+    body->SetActive(active);
+    
+    for(int i = 0; i<root->children.size();i++)
+        setActive(root->children.at(i),active);
+}
+
+std::map<string, std::map<string,Animation*> > Skeleton::getAnimationMap()
+{
+    return animations;
+}
+
+float Skeleton::getX(){
+    return absolutePosition.x;
+}
+float Skeleton::getY(){
+    return absolutePosition.y;
+}
+
 void Skeleton::update()
 {
-    
+
 }
 

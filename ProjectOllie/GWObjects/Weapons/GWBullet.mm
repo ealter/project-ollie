@@ -12,7 +12,7 @@
 
 @implementation GWBullet
 
--(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world
+-(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet
 {
     if ((self = [self initWithFile:imageName])) {
         //take the world, speed, and pos
@@ -25,7 +25,7 @@
         bd.type             = b2_dynamicBody;
         bd.linearDamping    = .1f;
         bd.angularDamping   = .1f;
-        bd.bullet           = YES;
+        bd.bullet           = isBullet;
         
         box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         
