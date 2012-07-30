@@ -16,8 +16,8 @@
 #import "GWWater.h"
 #import "GWGunWeapon.h"
 #import "GWGestures.h"
-#import "GWThrownWeapon.h"
 #import "HMVectorNode.h"
+#import "Grenade.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -31,7 +31,6 @@ enum {
     GWCharacter* _character;
     GWGunWeapon* gunWeapon;
     GWGestures* gestures;
-    GWThrownWeapon* thrownWeapon;
 }
 -(void) initPhysics;
 -(void) addNewSpriteAtPosition:(CGPoint)p;
@@ -44,6 +43,7 @@ enum {
 @implementation ActionLayer
 
 @synthesize camera           = _camera;
+@synthesize terrain          = _terrain;
 
 
 +(CCScene *) scene
@@ -183,8 +183,8 @@ enum {
     
     gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
     [self addChild:gunWeapon];
-    //thrownWeapon = [[GWThrownWeapon alloc] initThrownWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo:10 box2DWorld:world fuseTime:1];
-    //[self addChild:thrownWeapon];
+    //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world];
+    //[self addChild:grenade];
     gestures = [[GWGestures alloc] init];
     [[gestures children] addObject:gunWeapon];
     [self addChild:gestures z:2];
@@ -329,7 +329,6 @@ enum {
 {
 
         
-    
 }
 
 
@@ -337,6 +336,7 @@ enum {
 {
     //Add as a child so it draws
     [self addChild:t];
+    
     //Add all of the edge shapes to the world
     [t addToWorld:world];
 }

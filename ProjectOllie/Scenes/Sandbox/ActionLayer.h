@@ -26,6 +26,7 @@
 
 @property (strong, nonatomic) GWCamera* camera;//camera that watches the action
 
+@property (strong, nonatomic) Terrain* terrain;//terrain in the game world;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
