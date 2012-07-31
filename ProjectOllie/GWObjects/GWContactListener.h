@@ -35,6 +35,8 @@ public:
     
 private:
     void handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse);
+    void handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse);
+
     
 };
 

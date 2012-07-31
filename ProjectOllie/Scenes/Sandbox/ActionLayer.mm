@@ -18,6 +18,7 @@
 #import "GWGestures.h"
 #import "HMVectorNode.h"
 #import "Grenade.h"
+#import "GWContactListener.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -139,6 +140,11 @@ enum {
     world->SetAllowSleeping(true);
 
     world->SetContinuousPhysics(true);
+    
+    //Set up the Contact Listener
+    GWContactListener *_contactListener = new GWContactListener();
+    
+    world->SetContactListener(_contactListener);
 
     m_debugDraw = new GLESDebugDraw( PTM_RATIO );
     world->SetDebugDraw(m_debugDraw);
@@ -180,12 +186,12 @@ enum {
     
     _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
     
-    //gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world gameWorld:self];
-    //[self addChild:gunWeapon];
-    Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
-    [self addChild:grenade];
+    gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world gameWorld:self];
+    [self addChild:gunWeapon];
+    //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
+    //[self addChild:grenade];
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:grenade];
+    [[gestures children] addObject:gunWeapon];
     [self addChild:gestures z:2];
 
 }

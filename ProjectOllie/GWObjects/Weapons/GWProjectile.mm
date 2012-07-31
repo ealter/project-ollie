@@ -43,6 +43,9 @@
         bulletShape->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0); 
         
         self.physicsBody = bulletShape;
+        if (isBullet) {
+            self.physicsBody->SetUserData((__bridge void*)self);
+        }
         bulletShape->SetTransform(b2Vec2(self.position.x/PTM_RATIO,self.position.y/PTM_RATIO), 0);   
     }
     
@@ -93,6 +96,14 @@
     //Clean up bullet and remove from parent
     _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
+}
+
+
+//This method is called by the contact listener, and should be overrode by and bullets inheriting from the 
+//class (but not by thrown weapons, which will use a fuse time)
+-(void)bulletContact
+{
+    DebugLog(@"Bullet has made contact with something!");
 }
 
 @end

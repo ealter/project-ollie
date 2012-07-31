@@ -9,6 +9,7 @@
 #import "GWContactListener.h"
 #import "GWCharacter.h"
 #import "GameConstants.h"
+#import "GWProjectile.h"
 
 GWContactListener::GWContactListener() {
 
@@ -31,6 +32,7 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 
 void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
     handleCharacterContacts(contact, impulse);
+    //handleProjectileContacts(contact, impulse);
     
     
 }
@@ -59,5 +61,34 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2Con
         if(charFixture->GetBody()->GetLinearVelocity().LengthSquared() > 1.)
             character.state = kStateRagdoll;
     }
+}
+
+void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+
+    /*********************
+     * Bullet Collisions *
+     *********************
+    
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    
+    b2Filter filterA = fixtureA->GetFilterData();
+    b2Filter filterB = fixtureB->GetFilterData();
+    
+    GWProjectile* projectile;
+    b2Fixture* projFixture;
+    
+    if (filterA.maskBits == MASK_PROJECTILES) {
+        projFixture = fixtureA;
+    }else if (filterB.maskBits == MASK_PROJECTILES)
+    {
+        projFixture = fixtureB;
+    }
+    if (projFixture) {
+        projectile = (__bridge GWProjectile*)projFixture->GetBody()->GetUserData();
+        if (projectile) {
+            [projectile bulletContact];
+        }
+    }*/
 }
 

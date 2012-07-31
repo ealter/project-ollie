@@ -26,4 +26,7 @@ class b2World;
 
 -(void)applyb2ForceInRadius:(float) maxDistance withStrength:(float)str isOutwards:(BOOL)outwards;
 
+-(void)bulletContact;
+
+
 @end

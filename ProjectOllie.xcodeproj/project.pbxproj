@@ -432,7 +432,7 @@
 		C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWSkeleton.mm; sourceTree = "<group>"; };
 		C5F4309815B8D2EA00174FEE /* GWWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWater.h; sourceTree = "<group>"; };
 		C5F4309915B8D2EA00174FEE /* GWWater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWater.mm; sourceTree = "<group>"; };
-		C5F4309B15B8D2EA00174FEE /* GWProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GWProjectile.h; sourceTree = "<group>"; };
+		C5F4309B15B8D2EA00174FEE /* GWProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWProjectile.h; sourceTree = "<group>"; };
 		C5F4309C15B8D2EA00174FEE /* GWProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWProjectile.mm; sourceTree = "<group>"; };
 		C5F4309D15B8D2EA00174FEE /* GWGunWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGunWeapon.h; sourceTree = "<group>"; };
 		C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWGunWeapon.mm; sourceTree = "<group>"; };
@@ -1195,8 +1195,8 @@
 				C5F4309915B8D2EA00174FEE /* GWWater.mm */,
 				C5F4310915BE224B00174FEE /* GWCharacter.h */,
 				C5F4310A15BE224C00174FEE /* GWCharacter.mm */,
-				C586F8F415C6321A00573B6E /* GWContactListener.mm */,
 				C586F8F715C6324800573B6E /* GWContactListener.h */,
+				C586F8F415C6321A00573B6E /* GWContactListener.mm */,
 				CE26B7D915BE46E0001100A1 /* Moves */,
 				C5F4309A15B8D2EA00174FEE /* Weapons */,
 			);
