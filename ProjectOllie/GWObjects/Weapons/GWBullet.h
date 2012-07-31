@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 7/13/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 hi ku llc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -23,5 +23,7 @@ class b2World;
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL) isBullet gameWorld:(ActionLayer *) gWorld;
 
 -(void)destroyBullet;
+
+-(void)applyb2ForceInRadius:(float) maxDistance withStrength:(float)str isOutwards:(BOOL)outwards;
 
 @end

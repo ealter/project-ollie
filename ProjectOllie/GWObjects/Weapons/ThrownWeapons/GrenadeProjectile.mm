@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 7/28/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 hi ku llc. All rights reserved.
 //
 
 #import "GrenadeProjectile.h"
@@ -33,6 +33,8 @@
         //do stuff to the world
         [self.gameWorld.gameTerrain clipCircle:NO WithRadius:100 x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
+        
+        [self applyb2ForceInRadius:100./PTM_RATIO withStrength:.05 isOutwards:YES];
         
         CCParticleSystem *emitter = [GWParticleExplosion node];
         emitter.position = self.position;

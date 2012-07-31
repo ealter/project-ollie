@@ -3,12 +3,13 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 7/13/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 hi ku llc. All rights reserved.
 //
 
 #import "GWBullet.h"
 #import "GameConstants.h"
 #import "Box2D.h"
+#import "GWCharacter.h"
 
 @implementation GWBullet
 @synthesize  gameWorld      = _gameWorld;
@@ -48,6 +49,36 @@
     return self;
 }
 
+-(void)applyb2ForceInRadius:(float)maxDistance withStrength:(float)str isOutwards:(BOOL)outwards
+{
+    b2Vec2 b2ExplosionPosition = b2Vec2(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
+    
+    for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext())
+	{
+		b2Vec2 b2BodyPosition = b->GetPosition();
+        if (b->GetFixtureList()->GetFilterData().maskBits == MASK_BONES) {
+            //Its part of a skeleton, set it to ragdoll for cool explosions
+            GWCharacter *tempChar = ((__bridge GWCharacter *)b->GetUserData());
+            tempChar.state = kStateRagdoll;
+        }
+        
+        //See if the body is close enough to apply a force
+        float dist = b2Distance(b2ExplosionPosition, b2BodyPosition);
+        if (dist > maxDistance) {
+            //Too far away! Don't bother.
+        }else {
+            //Force is away from the center, calculate it and apply to the body
+            float strength = (maxDistance - dist) / maxDistance;
+            float force = strength * str;
+            float angle = atan2f(b2ExplosionPosition.y - b2BodyPosition.y, b2ExplosionPosition.x - b2BodyPosition.x);
+            if (outwards) {
+                angle = angle + M_PI;
+            }
+            // Apply an impulse to the body, using the angle
+            b->ApplyLinearImpulse(b2Vec2(cosf(angle) * force, sinf(angle) * force), b2BodyPosition);
+        }
+	}
+}
 
 //YOU SHOULD OVERRIDE THIS OR AT LEAST CALL IT FROM THE CHILD!
 -(void)destroyBullet
