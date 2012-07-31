@@ -34,7 +34,7 @@
 		C578B3E6158B051F0049FE58 /* white_clouds.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = C578B3E5158B051F0049FE58 /* white_clouds.jpeg */; };
 		C583DBAB15AF947B00FE441B /* character_idle3.anim in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA415AF947B00FE441B /* character_idle3.anim */; };
 		C583DBAE15AF947B00FE441B /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA815AF947B00FE441B /* character.skel */; };
-		C586F8F515C6321A00573B6E /* GWCharacterContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = C586F8F415C6321A00573B6E /* GWCharacterContactListener.mm */; };
+		C586F8F515C6321A00573B6E /* GWContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = C586F8F415C6321A00573B6E /* GWContactListener.mm */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C59ACC1115C24ACF0030A862 /* character_idle4.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC0F15C24ACF0030A862 /* character_idle4.anim */; };
 		C59ACC1215C24ACF0030A862 /* character_idle5.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC1015C24ACF0030A862 /* character_idle5.anim */; };
@@ -398,8 +398,8 @@
 		C578B3E5158B051F0049FE58 /* white_clouds.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = white_clouds.jpeg; path = Resources/Miscellaneous/white_clouds.jpeg; sourceTree = "<group>"; };
 		C583DBA415AF947B00FE441B /* character_idle3.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle3.anim; sourceTree = "<group>"; };
 		C583DBA815AF947B00FE441B /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
-		C586F8F415C6321A00573B6E /* GWCharacterContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCharacterContactListener.mm; sourceTree = "<group>"; };
-		C586F8F715C6324800573B6E /* GWCharacterContactListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWCharacterContactListener.h; sourceTree = "<group>"; };
+		C586F8F415C6321A00573B6E /* GWContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWContactListener.mm; sourceTree = "<group>"; };
+		C586F8F715C6324800573B6E /* GWContactListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWContactListener.h; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C59ACC0F15C24ACF0030A862 /* character_idle4.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle4.anim; sourceTree = "<group>"; };
@@ -1195,8 +1195,8 @@
 				C5F4309915B8D2EA00174FEE /* GWWater.mm */,
 				C5F4310915BE224B00174FEE /* GWCharacter.h */,
 				C5F4310A15BE224C00174FEE /* GWCharacter.mm */,
-				C586F8F415C6321A00573B6E /* GWCharacterContactListener.mm */,
-				C586F8F715C6324800573B6E /* GWCharacterContactListener.h */,
+				C586F8F415C6321A00573B6E /* GWContactListener.mm */,
+				C586F8F715C6324800573B6E /* GWContactListener.h */,
 				CE26B7D915BE46E0001100A1 /* Moves */,
 				C5F4309A15B8D2EA00174FEE /* Weapons */,
 			);
@@ -2566,7 +2566,7 @@
 				C5F4310B15BE224D00174FEE /* GWCharacter.mm in Sources */,
 				CE26B7D715BE46D1001100A1 /* GWMove.m in Sources */,
 				CE26B7DC15BE48D1001100A1 /* GWMoveFrame.m in Sources */,
-				C586F8F515C6321A00573B6E /* GWCharacterContactListener.mm in Sources */,
+				C586F8F515C6321A00573B6E /* GWContactListener.mm in Sources */,
 				CE59CA5015C4D65200B68745 /* Grenade.mm in Sources */,
 				CE59CA5315C4D69400B68745 /* GrenadeProjectile.mm in Sources */,
 			);

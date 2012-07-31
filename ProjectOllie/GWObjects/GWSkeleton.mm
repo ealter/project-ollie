@@ -195,6 +195,8 @@ using namespace std;
     else if(self.state == kInteractorStateRagdoll)
     {
         wheel->SetAngularVelocity(0);
+        box->SetTransform(wheel->GetPosition(), [self calculateNormalAngle]);
+        box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
 }
 
@@ -360,7 +362,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(bool)resting{
     
     return !self.interactor.interactingBody->IsAwake();
-    //return !_skeleton->getRoot()->box2DBody->IsAwake();
+
 }
 
 /*****************************

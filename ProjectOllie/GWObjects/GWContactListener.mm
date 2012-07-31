@@ -37,7 +37,6 @@ void GWCharacterContactListener::PreSolve(b2Contact* contact, const b2Manifold* 
     {
        // printf("THERE IS SOME CONTAC");
         character = (__bridge GWCharacter*)fixtureA->GetBody()->GetUserData();
-        float impactImpulse = oldManifold->points[0].normalImpulse;
         if(fixtureB->GetBody()->GetLinearVelocity().LengthSquared() > 2.)
             character.state = kStateRagdoll;
     }
@@ -45,7 +44,6 @@ void GWCharacterContactListener::PreSolve(b2Contact* contact, const b2Manifold* 
     {
         //printf("THERE IS SOME CONTAC");
         character = (__bridge GWCharacter*)fixtureB->GetBody()->GetUserData();
-        float impactImpulse = oldManifold->points[0].normalImpulse;
         if(fixtureB->GetBody()->GetLinearVelocity().LengthSquared() > 2.)
             character.state = kStateRagdoll;
         
