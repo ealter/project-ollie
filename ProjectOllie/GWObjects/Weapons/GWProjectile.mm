@@ -13,6 +13,7 @@
 
 @implementation GWProjectile
 @synthesize  gameWorld      = _gameWorld;
+@synthesize bulletCollided  = _bulletCollided;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
 {
@@ -20,6 +21,11 @@
         //take the world, speed, and pos
         _world              = world;
         self.gameWorld      = gWorld;
+        self.bulletCollided = FALSE;
+        
+        //Schedule updates
+        [self scheduleUpdate];
+        
         b2BodyDef bd;
         b2PolygonShape box;
         b2FixtureDef fixtureDef;
@@ -85,6 +91,14 @@
 	}
 }
 
+-(void)update:(ccTime)dt
+{
+    if (self.bulletCollided) {
+        [self destroyBullet];
+    }
+}
+
+
 //YOU SHOULD OVERRIDE THIS OR AT LEAST CALL IT FROM THE CHILD!
 -(void)destroyBullet
 {
@@ -99,11 +113,11 @@
 }
 
 
-//This method is called by the contact listener, and should be overrode by and bullets inheriting from the 
+//This method is called by the contact listener, and should be overridden by any bullets inheriting from the 
 //class (but not by thrown weapons, which will use a fuse time)
 -(void)bulletContact
 {
-    DebugLog(@"Bullet has made contact with something!");
+    self.bulletCollided = TRUE;
 }
 
 @end

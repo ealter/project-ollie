@@ -19,6 +19,7 @@ class b2World;
 }
 
 @property (strong, nonatomic) ActionLayer *gameWorld;
+@property (assign, nonatomic) BOOL bulletCollided;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL) isBullet gameWorld:(ActionLayer *) gWorld;
 

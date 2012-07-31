@@ -13,7 +13,7 @@
 #import "GameConstants.h"
 #import "HMVectorNode.h"
 
-#define MAXSPEED 15. //Maximum speed of the weapon's projectile
+#define MAXSPEED 10. //Maximum speed of the weapon's projectile
 
 @interface GWGunWeapon ()
 
