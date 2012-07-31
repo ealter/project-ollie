@@ -27,6 +27,15 @@ void GWContactListener::EndContact(b2Contact* contact) {
 
 void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
 
+}
+
+void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
+    handleCharacterContacts(contact, impulse);
+    
+    
+}
+
+void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
     /************************
      * Character Collisions *
      ************************/
@@ -50,10 +59,5 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
         if(charFixture->GetBody()->GetLinearVelocity().LengthSquared() > 1.)
             character.state = kStateRagdoll;
     }
-    
-
-}
-
-void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
 }
 
