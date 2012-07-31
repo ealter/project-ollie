@@ -12,7 +12,7 @@
 #import "GWPhysicsSprite.h"
 #include "Skeleton.h"
 #include "GameConstants.h"
-#include "GWCharacterContactListener.h"
+#include "GWContactListener.h"
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .0001
@@ -68,7 +68,7 @@
         
         /* prepare contact listener */
         [self.skeleton setOwner:self];
-        GWCharacterContactListener* contactListener = new GWCharacterContactListener();
+        GWContactListener* contactListener = new GWContactListener();
         world->SetContactListener(contactListener);
 
     }

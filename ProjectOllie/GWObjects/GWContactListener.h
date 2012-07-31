@@ -22,20 +22,11 @@
 
 @class GWCharacter;
 
-struct CharacterContact {
-    b2Fixture *fixtureA;
-    b2Fixture *fixtureB;
-    bool operator==(const CharacterContact& other) const
-    {
-        return (fixtureA == other.fixtureA) && (fixtureB == other.fixtureB);
-    }
-};
-
-class GWCharacterContactListener : public b2ContactListener {
+class GWContactListener : public b2ContactListener {
     
 public:
-    GWCharacterContactListener();
-    ~GWCharacterContactListener();
+    GWContactListener();
+    ~GWContactListener();
     
 	virtual void BeginContact(b2Contact* contact);
 	virtual void EndContact(b2Contact* contact);

@@ -1,37 +1,38 @@
 //
-//  GWCharacterContactListener.cpp
+//  GWContactListener.cpp
 //  ProjectOllie
 //
 //  Created by Sam Zeckendorf on 7/29/12.
 //  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 
-#import "GWCharacterContactListener.h"
+#import "GWContactListener.h"
 #import "GWCharacter.h"
 #import "GameConstants.h"
 
-GWCharacterContactListener::GWCharacterContactListener() {
+GWContactListener::GWContactListener() {
 
 }
 
-GWCharacterContactListener::~GWCharacterContactListener() {
+GWContactListener::~GWContactListener() {
 }
 
-void GWCharacterContactListener::BeginContact(b2Contact* contact) {
+void GWContactListener::BeginContact(b2Contact* contact) {
     
 }
 
-void GWCharacterContactListener::EndContact(b2Contact* contact) {
+void GWContactListener::EndContact(b2Contact* contact) {
 
 }
 
-void GWCharacterContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
+void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
 
     b2Fixture* fixtureA = contact->GetFixtureA();
     b2Fixture* fixtureB = contact->GetFixtureB();
     
     b2Filter filterA = fixtureA->GetFilterData();
     b2Filter filterB = fixtureB->GetFilterData();
+    
     GWCharacter* character;
     if(filterA.maskBits == MASK_BONES && filterB.maskBits != MASK_TERRAIN)
     {
@@ -52,6 +53,6 @@ void GWCharacterContactListener::PreSolve(b2Contact* contact, const b2Manifold* 
 
 }
 
-void GWCharacterContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
+void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
 }
 
