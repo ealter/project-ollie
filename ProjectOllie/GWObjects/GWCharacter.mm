@@ -100,13 +100,14 @@
 {
     //update skeleton's physics
     [self.skeleton update:dt];
-    
-    if(!self.skeleton.interactor.interactingBody->IsAwake())
-        self.state = kStateIdle;
-
     if(self.state != kStateRagdoll)
         [self.skeleton tieSkeletonToInteractor];
-    
+    if([self.skeleton resting] && self.state == kStateRagdoll)
+    {
+        self.state = kStateIdle;
+    }
+
+
    
     switch(self.state) {
         case kStateIdle:
@@ -193,10 +194,9 @@
 
 -(void)setState:(characterState)state{
     //after switching from old state
-    tweenDuration = 0;
-    if(self.state == kStateRagdoll)
+    if(self.state == kStateRagdoll && state == kStateIdle)
     {
-        tweenDuration = .4;
+        tweenDuration = 1.1;
     }
     
     
@@ -206,16 +206,12 @@
     if(state == kStateWalking)
     {
         self.skeleton.interactor.state = kInteractorStateActive;
-        //CGPoint velocity = [self.skeleton getVelocity];
-        //[self.skeleton.interactor setLinearVelocity:velocity];
-        //[self.skeleton.interactor setAngularVelocity:0];
         
     }
     else if (state == kStateRagdoll)
     {
         self.skeleton.interactor.state = kInteractorStateRagdoll;
         CGPoint velocity = [self.skeleton.interactor getLinearVelocity];
-        //[self.skeleton setActive:YES];
         [self.skeleton setVelocity:velocity];
         [self.skeleton clearAnimation];
     }

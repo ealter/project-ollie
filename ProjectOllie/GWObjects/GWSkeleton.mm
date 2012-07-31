@@ -93,6 +93,14 @@ using namespace std;
     self.interactingBody->SetTransform(b2Vec2(position.x,position.y), self.interactingBody->GetAngle());
 }
 
+-(b2Body*)getBox{
+    return box;
+}
+
+-(b2Body*)getWheel{
+    return wheel;
+}
+
 -(void)setState:(InteractorState)state{
     _state = state;
     if(state == kInteractorStateActive)
@@ -115,15 +123,18 @@ using namespace std;
 
 -(void)setPositionInSkeleton:(Skeleton *)_skeleton{
     Bone* root      = _skeleton->getRoot();
-    Bone* torso     = _skeleton->getBoneByName(root, "Torso");
+    //Bone* torso     = _skeleton->getBoneByName(root, "Torso");
     Bone* left_leg  = _skeleton->getBoneByName(root, "ll_leg");
     Bone* right_leg = _skeleton->getBoneByName(root, "rl_leg");
     b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
     b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     float totalLowest    = _skeleton->lowestY(root, 100);
-    float lowestY        = max(totalLowest+radius,self.interactingBody->GetPosition().y);
+    //float lowestY        = max(totalLowest+radius,self.interactingBody->GetPosition().y);
     [self setAngularVelocity:0];
-    self.interactingBody->SetTransform(b2Vec2(torso->box2DBody->GetPosition().x,lowestY), self.interactingBody->GetAngle());
+    b2Vec2 averageLeg    = left_leg->box2DBody->GetPosition() + right_leg->box2DBody->GetPosition();
+    averageLeg.x /= 2.;
+    averageLeg.y /= 2.;
+    self.interactingBody->SetTransform(averageLeg, self.interactingBody->GetAngle());
 }
 
 -(void)createPhysicsBodiesAt:(CGPoint)position{
@@ -183,8 +194,7 @@ using namespace std;
     }
     else if(self.state == kInteractorStateRagdoll)
     {
-        box->SetTransform(wheel->GetPosition(), box->GetAngle());
-        box->SetLinearVelocity(wheel->GetLinearVelocity());
+        wheel->SetAngularVelocity(0);
     }
 }
 
@@ -345,6 +355,11 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(void)setActive:(bool)active{
     _skeleton->setActive(_skeleton->getRoot(), active);
+}
+
+-(bool)resting{
+    b2Body* box = [self.interactor getBox];
+    return box->IsAwake();
 }
 
 /*****************************
@@ -516,7 +531,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             float angle = atan2(normal.y,normal.x);
             //DebugLog(@"The contact normal has an angle of: %f",RAD2DEG(angle));
             float potentialDestination = angle - M_PI/2.0;
-            destinationAngle = potentialDestination;
+            destinationAngle =  min(max(potentialDestination,MIN_ANGLE),MAX_ANGLE);
             return YES;
         }
 

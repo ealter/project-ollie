@@ -140,7 +140,6 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
     if(animation) {
         animation->frames.push_back(frame);
     } else {
-        printf("Loading new animation \n");
         animation = new Animation;
         animation->frames.push_back(frame);
         animations[animationName][boneName] = animation;

@@ -57,7 +57,8 @@ typedef enum InteractorState{
 -(void)update;
 -(float)getRadius;
 -(float)calculateNormalAngle;
-
+-(b2Body*)getBox;
+-(b2Body*)getWheel;
 
 @end
 
@@ -111,6 +112,10 @@ typedef enum InteractorState{
 /* Sets the skeleton to active or inactive */
 -(void)setActive:(bool)active;
 
+/* Tells the skeleton which character owns it */
 -(void)setOwner:(id)owner;
+
+-(bool)resting;
+
 
 @end
