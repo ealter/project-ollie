@@ -15,11 +15,11 @@
 #include "GWContactListener.h"
 
 #define MAX_SPEED .01f
-#define IMPULSE_MAG .0001
+#define IMPULSE_MAG .001
 
 @interface GWCharacter()
 {
-    float tweenDuration;
+
 }
 
 -(void)generateSprites:(Bone*)root index:(int)index;
@@ -51,7 +51,6 @@
         self.skeleton    = [[GWSkeleton alloc]initFromFile:type box2dWorld:world];
         self.state       = kStateIdle;
         self.orientation = kOrientationLeft;
-        tweenDuration    = 0;
         
         Bone* root       = [self.skeleton getBoneByName:@"head"];
         [self generateSprites:root index:0];
@@ -119,8 +118,7 @@
                 else if (rand < .6f)
                     anim = @"idle5";
                 
-                [self.skeleton runAnimation:anim WithTweenTime:tweenDuration flipped:self.orientation];
-                tweenDuration = 0.;
+                [self.skeleton runAnimation:anim flipped:self.orientation];
             }
             
             return;
@@ -191,7 +189,7 @@
     //after switching from old state
     if(self.state == kStateRagdoll && state == kStateIdle)
     {
-        tweenDuration = 1.1;
+        [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
     }
     
     
