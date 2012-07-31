@@ -115,7 +115,7 @@ typedef enum InteractorState{
 /* Tells the skeleton which character owns it */
 -(void)setOwner:(id)owner;
 
--(bool)resting;
+-(bool)resting:(float)dt;
 
 
 @end

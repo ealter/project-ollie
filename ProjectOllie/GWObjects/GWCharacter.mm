@@ -53,7 +53,7 @@
         self.orientation = kOrientationLeft;
         tweenDuration    = 0;
         
-        Bone* root    = [self.skeleton getBoneByName:@"head"];
+        Bone* root       = [self.skeleton getBoneByName:@"head"];
         [self generateSprites:root index:0];
         
         //if the above worked...
@@ -102,13 +102,10 @@
     [self.skeleton update:dt];
     if(self.state != kStateRagdoll)
         [self.skeleton tieSkeletonToInteractor];
-    if([self.skeleton resting] && self.state == kStateRagdoll)
-    {
+    else if([self.skeleton resting:dt])
         self.state = kStateIdle;
-    }
-
-
-   
+    
+    
     switch(self.state) {
         case kStateIdle:
             if(![self.skeleton animating])

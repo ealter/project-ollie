@@ -27,6 +27,10 @@ void GWContactListener::EndContact(b2Contact* contact) {
 
 void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
 
+    /************************
+     * Character Collisions *
+     ************************/
+    
     b2Fixture* fixtureA = contact->GetFixtureA();
     b2Fixture* fixtureB = contact->GetFixtureB();
     
@@ -34,20 +38,17 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
     b2Filter filterB = fixtureB->GetFilterData();
     
     GWCharacter* character;
+    b2Fixture* charFixture;
+    
     if(filterA.maskBits == MASK_BONES && filterB.maskBits != MASK_TERRAIN)
-    {
-       // printf("THERE IS SOME CONTAC");
-        character = (__bridge GWCharacter*)fixtureA->GetBody()->GetUserData();
-        if(fixtureB->GetBody()->GetLinearVelocity().LengthSquared() > 2.)
-            character.state = kStateRagdoll;
-    }
+        charFixture = fixtureA;
     else if (filterA.maskBits != MASK_TERRAIN && filterB.maskBits == MASK_BONES)
+        charFixture = fixtureB;
+    if(charFixture)
     {
-        //printf("THERE IS SOME CONTAC");
-        character = (__bridge GWCharacter*)fixtureB->GetBody()->GetUserData();
-        if(fixtureB->GetBody()->GetLinearVelocity().LengthSquared() > 2.)
+        character = (__bridge GWCharacter*)charFixture->GetBody()->GetUserData();
+        if(charFixture->GetBody()->GetLinearVelocity().LengthSquared() > 1.)
             character.state = kStateRagdoll;
-        
     }
     
 

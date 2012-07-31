@@ -189,6 +189,7 @@ using namespace std;
     }
     else if (self.state == kInteractorStateInactive)
     {
+        box->SetAwake(YES);
         wheel->SetTransform(box->GetPosition(), wheel->GetAngle());
         wheel->SetLinearVelocity(box->GetLinearVelocity());
     }
@@ -239,6 +240,11 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     float destinationAngle;
     b2Fixture* _shape;
     b2World* _world;
+    
+    //to check resting state
+    float restingCounter;
+    float restingUpdates;
+    float rollingAvgSpeed;
 }
 //Master function for loading file information for skeleton (.skel) files
 -(void)buildSkeleton;
@@ -276,6 +282,11 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         [self buildSkeleton];
         self.animating   = false;
         self.interactor  = [[Interactor alloc]initAsBoxAt:absoluteLocation inWorld:world];
+        
+        // check resting state
+        restingCounter   = 0;
+        restingUpdates   = 0;
+        rollingAvgSpeed  = 0;
     }
     return self;
 }
@@ -346,7 +357,14 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(CGPoint)getVelocity{
     
-    CGPoint toRet = [self.interactor getLinearVelocity];
+    CGPoint toRet = CGPointZero;
+    if(self.interactor.state != kInteractorStateRagdoll)
+        toRet = [self.interactor getLinearVelocity];
+    else 
+    {
+        b2Vec2 vel = _skeleton->getRoot()->box2DBody->GetLinearVelocity();
+        toRet      = ccp(vel.x,vel.y); 
+    }
     
     return toRet;
 }
@@ -359,10 +377,26 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     _skeleton->setActive(_skeleton->getRoot(), active);
 }
 
--(bool)resting{
+-(bool)resting:(float)dt{
     
-    return !self.interactor.interactingBody->IsAwake() || !_skeleton->getRoot()->box2DBody->IsAwake();
-
+    if(self.interactor.state == kInteractorStateRagdoll)
+    {
+        restingCounter  += dt;
+        restingUpdates  ++;
+        rollingAvgSpeed += ccpLength([self getVelocity]);
+        
+        if(restingCounter >= 1)
+        {
+            float avg = rollingAvgSpeed/restingUpdates;
+            if(avg <= .01)
+                return true;
+            
+            restingCounter  = 0;
+            restingUpdates  = 0;
+            rollingAvgSpeed = 0;
+        }
+    }
+    return false;
 }
 
 /*****************************
