@@ -16,6 +16,6 @@
     
 }
 
--(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world;
+-(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld;
 
 @end

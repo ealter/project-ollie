@@ -11,12 +11,14 @@
 #import "Box2D.h"
 
 @implementation GWBullet
+@synthesize  gameWorld      = _gameWorld;
 
--(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet
+-(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
 {
     if ((self = [self initWithFile:imageName])) {
         //take the world, speed, and pos
         _world              = world;
+        self.gameWorld      = gWorld;
         b2BodyDef bd;
         b2PolygonShape box;
         b2FixtureDef fixtureDef;
@@ -46,13 +48,18 @@
     return self;
 }
 
+
+//YOU SHOULD OVERRIDE THIS OR AT LEAST CALL IT FROM THE CHILD!
 -(void)destroyBullet
 {
+    if(self.gameWorld != NULL)
+    {
+        //do stuff to the world
+    }
+    
     //Clean up bullet and remove from parent
     _world->DestroyBody(self.physicsBody);
-    [[self parent] removeChild:self cleanup:YES];
-
-    
+    [[self parent] removeChild:self cleanup:YES];    
 }
 
 @end

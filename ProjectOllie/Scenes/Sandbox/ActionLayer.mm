@@ -43,7 +43,7 @@ enum {
 @implementation ActionLayer
 
 @synthesize camera           = _camera;
-@synthesize terrain          = _terrain;
+@synthesize gameTerrain          = _gameTerrain;
 
 
 +(CCScene *) scene
@@ -112,7 +112,6 @@ enum {
         for (int i = 0; i < 4; i++)
             [worldBounds drawSegmentFrom:worldRectPx[i] to:worldRectPx[(i+1)%4] radius:4];
         [self addChild:worldBounds z:256];
-        
         [self scheduleUpdate];
         
     }
@@ -181,12 +180,12 @@ enum {
     
     _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
     
-    gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
-    [self addChild:gunWeapon];
-    //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world];
-    //[self addChild:grenade];
+    //gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world gameWorld:self];
+    //[self addChild:gunWeapon];
+    Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
+    [self addChild:grenade];
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:gunWeapon];
+    [[gestures children] addObject:grenade];
     [self addChild:gestures z:2];
 
 }
@@ -333,9 +332,13 @@ enum {
 
 
 -(void)setTerrain:(Terrain*)t
-{
+{    
     //Add as a child so it draws
     [self addChild:t];
+    
+    if (t != NULL) {
+        self.gameTerrain = t;
+    }
     
     //Add all of the edge shapes to the world
     [t addToWorld:world];

@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
+#import "GWGestures.h"
 
-@interface GWSpellWeapon : GWWeapon
+
+@interface GWSpellWeapon : GWWeapon<GestureChild>
 
 @end

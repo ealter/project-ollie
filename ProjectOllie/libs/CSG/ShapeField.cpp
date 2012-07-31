@@ -911,6 +911,9 @@ bool ShapeField::isOutside(float px, float py)
     //Hold the current cell that we are in
     int cellX = (int)(px/cellWidth);
     int cellY = (int)(py/cellHeight);
+    if (cellX < 0 || cellY < 0 || cellX >= gridWidth || cellY >= gridHeight) {
+        return true;
+    }
 
     float yDistance = -1.0f;    //Negative implies that no intersections have been found yet
     bool isOutside;
@@ -1032,6 +1035,8 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
             spatialGrid[i][j].erase(pe);
+    
+    removed.insert(pe);
 
 }
 
@@ -1047,6 +1052,7 @@ void ShapeField::addToSpatialGrid(PointEdge* pe)
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
             spatialGrid[i][j].insert(pe);
+    added.insert(pe);
 }
 
 void ShapeField::checkConsistency()

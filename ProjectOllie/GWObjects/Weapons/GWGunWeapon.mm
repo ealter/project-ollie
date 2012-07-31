@@ -26,7 +26,7 @@
 @synthesize aimOverlay      = _aimOverlay;
 @synthesize gunImage        = _gunImage;
 
-- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world
+- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
     if (self = [super init]) {
         self.position       = ccpMult(pos, PTM_RATIO);
@@ -36,6 +36,7 @@
         self.bulletSize     = CGSizeMake(bulletSize.width * PTM_RATIO, bulletSize.height * PTM_RATIO);
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
+        self.gameWorld      = gWorld;
         drawNode            = [HMVectorNode node];
         drawNode.position   = ccpSub(drawNode.position, self.position);
         ccColor4F c         = ccc4f(1.f,1.f,0.f,1.f);
@@ -50,6 +51,7 @@
         [self addChild:self.gunImage];
         [self addChild:drawNode];    
         [drawNode setColor:c];
+        shootPoint = CGPointMake(0, 0);
     }
     return self;
 }
@@ -59,7 +61,7 @@
     if (self.ammo >0) {
         //Calculate force, make bullet, apply force
         CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
-        GWBullet *bullet    = [[GWBullet alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES];
+        GWBullet *bullet    = [[GWBullet alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         [self.parent addChild:bullet];
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
@@ -90,7 +92,7 @@
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
-    if (ccpDistance(startPoint, self.position) < self.contentSize.width) {
+    if (ccpDistance(startPoint, self.position) < self.contentSize.width && self.ammo >0) {
         //Clear HMVectorNode
         [drawNode clear];
         
@@ -117,7 +119,7 @@
             //draw the point
             [drawNode drawDot:drawPoint radius:dotSize];
         }
-        aimPoint = currPoint;
+        shootPoint = currPoint;
     }
 }
 
@@ -128,7 +130,9 @@
 
 -(void)handleTap:(CGPoint) tapPoint
 {
-    [self fireWeapon: aimPoint];
+    if (shootPoint.x != 0 && shootPoint.y != 0) {
+        [self fireWeapon:shootPoint];
+    }
 }
 
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity
