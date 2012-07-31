@@ -50,9 +50,9 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2Con
     GWCharacter* character;
     b2Fixture* charFixture;
     
-    if(filterA.maskBits == MASK_BONES && filterB.maskBits != MASK_TERRAIN)
+    if(filterA.categoryBits == CATEGORY_BONES && filterB.categoryBits != CATEGORY_TERRAIN)
         charFixture = fixtureA;
-    else if (filterA.maskBits != MASK_TERRAIN && filterB.maskBits == MASK_BONES)
+    else if (filterA.categoryBits != CATEGORY_TERRAIN && filterB.categoryBits == CATEGORY_BONES)
         charFixture = fixtureB;
     else return;
     
@@ -70,11 +70,11 @@ bool GWContactListener::handleOneWayLand(b2Contact *contact)
     //check if one of the fixtures is the platform
     b2Fixture* platformFixture = NULL;
     b2Fixture* otherFixture = NULL;
-    if ( fixtureA->GetFilterData().maskBits == MASK_TERRAIN ) {
+    if ( fixtureA->GetFilterData().categoryBits == CATEGORY_TERRAIN ) {
         platformFixture = fixtureA;
         otherFixture = fixtureB;
     }
-    else if ( fixtureB->GetFilterData().maskBits == MASK_TERRAIN  ) {
+    else if ( fixtureB->GetFilterData().categoryBits == CATEGORY_TERRAIN  ) {
         platformFixture = fixtureB;
         otherFixture = fixtureA;
     }

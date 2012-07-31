@@ -23,11 +23,12 @@
 #define CATEGORY_BONES       0x0001 // 0000000000000001 in binary
 #define CATEGORY_TERRAIN     0x0002 // 0000000000000010 in binary
 #define CATEGORY_PROJECTILES 0x0004 // 0000000000000100 in binary
+#define CATEGORY_INTERACTOR  0x0008 // 0000000000001000 in binary
 
-#define MASK_BONES  (CATEGORY_TERRAIN | CATEGORY_PROJECTILES) // Collides with terrain and projectiles 
-#define MASK_TERRAIN (CATEGORY_BONES | CATEGORY_PROJECTILES)  // Collides with bones and projectiles
-#define MASK_PROJECTILES  -1                                  // Collides with everything
-#define TAG_BONE (void*)8093
+#define MASK_BONES  (CATEGORY_TERRAIN | CATEGORY_PROJECTILES)                       // Collides with terrain and projectiles 
+#define MASK_TERRAIN (CATEGORY_BONES | CATEGORY_PROJECTILES | CATEGORY_INTERACTOR)  // Collides with bones and projectiles
+#define MASK_PROJECTILES  -1                                                        // Collides with everything
+#define MASK_INTERACTOR (CATEGORY_TERRAIN)                                          // Collides with terrain only
 
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)

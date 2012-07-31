@@ -17,15 +17,18 @@
 #define BTM_RATIO .08 * PTM_RATIO
 #define MIN_ANGLE -M_PI/5.0
 #define MAX_ANGLE M_PI/5.0
+#define INTERACTOR_FLAT_RADIUS .0004*PTM_RATIO;
 
 using namespace std;
 
 @interface Interactor()
 {
-    float radius;
     b2Body* box;
     b2Body* wheel;
     b2World* _world;
+    float box_radius;
+    float wheel_radius;
+    float interactor_radius;
 }
 
 -(void)createPhysicsBodiesAt:(CGPoint)position;
@@ -39,8 +42,12 @@ using namespace std;
 
 -(id)initAsBoxAt:(CGPoint)location inWorld:(b2World *)world{
     if((self = [super init])){
-        radius = .0004*PTM_RATIO;
-        _world = world;
+        
+        _world            = world;
+        wheel_radius      = INTERACTOR_FLAT_RADIUS;
+        box_radius        = .5 * wheel_radius;
+        interactor_radius = box_radius;
+        
         [self createPhysicsBodiesAt:ccp(200,200)];
         self.state = kInteractorStateInactive;
     }
@@ -49,8 +56,12 @@ using namespace std;
 
 -(id)initAsCircleAt:(CGPoint)location inWorld:(b2World *)world{
     if((self = [super init])){
-        radius =  .0004*PTM_RATIO;
-        _world = world;
+
+        _world            = world;
+        wheel_radius      = INTERACTOR_FLAT_RADIUS;
+        box_radius        = .5 * wheel_radius;
+        interactor_radius = wheel_radius;
+        
         [self createPhysicsBodiesAt:ccp(200,200)];
         self.state = kInteractorStateActive;
     }
@@ -58,11 +69,7 @@ using namespace std;
 }
 
 -(float)getRadius{
-
-    if(self.state != kInteractorStateActive)
-    return radius*.5f;
-    else return radius;
-    
+    return interactor_radius;
 }
 
 -(CGPoint)getLinearVelocity{
@@ -109,15 +116,18 @@ using namespace std;
     _state = state;
     if(state == kInteractorStateActive)
     {
-        _interactingBody = wheel;
+        _interactingBody  = wheel;
+        interactor_radius = wheel_radius;
     }
     else if (state == kInteractorStateInactive)
     {
-        _interactingBody = box;
+        _interactingBody  = box;
+        interactor_radius = box_radius;
     }
     else if (state == kInteractorStateRagdoll)
     {
-        _interactingBody = wheel;
+        _interactingBody  = wheel;
+        interactor_radius = wheel_radius;
     }
 }
 
@@ -155,26 +165,26 @@ using namespace std;
     bd.angularDamping = .1f;
     
     b2CircleShape wheelShape;
-    wheelShape.m_radius = radius;
+    wheelShape.m_radius = wheel_radius;
     fixtureDefWheel.shape = &wheelShape;
 
     b2PolygonShape  boxShape;
-    boxShape.SetAsBox(radius * .5f, radius *.5f);
+    boxShape.SetAsBox(box_radius,box_radius);
     fixtureDefBox.shape = &boxShape;
     
     //The box data
     fixtureDefBox.density = 5.f;
     fixtureDefBox.friction = 10.f;
     fixtureDefBox.restitution = 0.1f;
-    fixtureDefBox.filter.categoryBits = CATEGORY_BONES;
-    fixtureDefBox.filter.maskBits = MASK_BONES;
+    fixtureDefBox.filter.categoryBits = CATEGORY_INTERACTOR;
+    fixtureDefBox.filter.maskBits = MASK_INTERACTOR;
     
     //The wheel data
     fixtureDefWheel.density = 1.f;
     fixtureDefWheel.friction = 10.f;
     fixtureDefWheel.restitution = 0.1f;
-    fixtureDefWheel.filter.categoryBits = CATEGORY_BONES;
-    fixtureDefWheel.filter.maskBits = MASK_BONES;
+    fixtureDefWheel.filter.categoryBits = CATEGORY_INTERACTOR;
+    fixtureDefWheel.filter.maskBits = MASK_INTERACTOR;
     
     bd.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO);
     wheel = _world->CreateBody(&bd);
@@ -188,7 +198,7 @@ using namespace std;
 -(void)update{
     if(self.state == kInteractorStateActive)
     {
-        box->SetTransform(wheel->GetPosition()-b2Vec2(0,.5*radius), [self calculateNormalAngle]);
+        box->SetTransform(wheel->GetPosition()-b2Vec2(0,box_radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
     else if (self.state == kInteractorStateInactive)
@@ -200,7 +210,7 @@ using namespace std;
     else if(self.state == kInteractorStateRagdoll)
     {
         wheel->SetAngularVelocity(0);
-        box->SetTransform(wheel->GetPosition()-b2Vec2(0,.5*radius), [self calculateNormalAngle]);
+        box->SetTransform(wheel->GetPosition()-b2Vec2(0,box_radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
 }
