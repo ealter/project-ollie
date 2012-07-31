@@ -15,7 +15,7 @@
 #include "GWContactListener.h"
 
 #define MAX_SPEED .01f
-#define IMPULSE_MAG .001
+#define IMPULSE_MAG .005
 
 @interface GWCharacter()
 {

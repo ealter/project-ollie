@@ -45,7 +45,7 @@ using namespace std;
         
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
-        box_radius        = .5 * wheel_radius;
+        box_radius        = .2 * wheel_radius;
         interactor_radius = box_radius;
         
         [self createPhysicsBodiesAt:ccp(200,200)];
@@ -59,7 +59,7 @@ using namespace std;
 
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
-        box_radius        = .5 * wheel_radius;
+        box_radius        = .2 * wheel_radius;
         interactor_radius = wheel_radius;
         
         [self createPhysicsBodiesAt:ccp(200,200)];
@@ -169,7 +169,7 @@ using namespace std;
     fixtureDefWheel.shape = &wheelShape;
 
     b2PolygonShape  boxShape;
-    boxShape.SetAsBox(box_radius,box_radius);
+    boxShape.SetAsBox(box_radius*2.5f,box_radius);
     fixtureDefBox.shape = &boxShape;
     
     //The box data
@@ -198,7 +198,7 @@ using namespace std;
 -(void)update{
     if(self.state == kInteractorStateActive)
     {
-        box->SetTransform(wheel->GetPosition()-b2Vec2(0,box_radius), [self calculateNormalAngle]);
+        box->SetTransform(wheel->GetPosition()-b2Vec2(0,wheel_radius-box_radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
     else if (self.state == kInteractorStateInactive)
@@ -210,7 +210,7 @@ using namespace std;
     else if(self.state == kInteractorStateRagdoll)
     {
         wheel->SetAngularVelocity(0);
-        box->SetTransform(wheel->GetPosition()-b2Vec2(0,box_radius), [self calculateNormalAngle]);
+        box->SetTransform(wheel->GetPosition()-b2Vec2(0,wheel_radius-box_radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
 }

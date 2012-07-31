@@ -95,6 +95,8 @@
 {
     if (self.bulletCollided) {
         [self destroyBullet];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:40. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain shapeChanged];
     }
 }
 
@@ -118,6 +120,7 @@
 -(void)bulletContact
 {
     self.bulletCollided = TRUE;
+    
 }
 
 @end
