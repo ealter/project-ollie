@@ -385,7 +385,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // life of particles
         life = 0.f;
-        lifeVar = 1.;
+        lifeVar = 2.;
         
         // emits per frame
         emissionRate = totalParticles/life;
@@ -397,8 +397,8 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         endColorVar   = kColor4fZero;
         
         // size, in pixels
-        startSize = 20.0f;
-        startSizeVar = 6.0f;
+        startSize = 40.0f;
+        startSizeVar = 12.0f;
         endSize = 2.f;
         endSizeVar = 0.0f;
         

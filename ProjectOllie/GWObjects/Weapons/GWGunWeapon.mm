@@ -13,7 +13,7 @@
 #import "GameConstants.h"
 #import "HMVectorNode.h"
 
-#define MAXSPEED 15. //Maximum speed of the weapon's projectile
+#define MAXSPEED 10. //Maximum speed of the weapon's projectile
 
 @interface GWGunWeapon ()
 
@@ -39,7 +39,7 @@
         self.gameWorld      = gWorld;
         drawNode            = [HMVectorNode node];
         drawNode.position   = ccpSub(drawNode.position, self.position);
-        ccColor4F c         = ccc4f(1.f,1.f,0.f,1.f);
+        ccColor4F c         = ccc4f(.5f,.5f,0.f,.5f);
         
         //Make the gun image and overlay image in the middle of the gun object, for easy rotation
         self.gunImage       = [CCSprite spriteWithFile:imageName];
@@ -115,9 +115,8 @@
         for (int i = 0; i < 20 ; i++) {
             CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
             
-            float dotSize = (6. - 6.*(i/30.));
             //draw the point
-            [drawNode drawDot:drawPoint radius:dotSize];
+            [drawNode drawDot:drawPoint radius:6];
         }
         shootPoint = currPoint;
     }

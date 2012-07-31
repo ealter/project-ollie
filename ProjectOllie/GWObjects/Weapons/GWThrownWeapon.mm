@@ -26,7 +26,7 @@
         countDown           = 0;
         _world              = world;
         drawNode            = [HMVectorNode node];
-        ccColor4F c         = ccc4f(1.f,1.f,0.f,1.f);
+        ccColor4F c         = ccc4f(.5f,.5f,0.f,.5f);
         drawNode.position   = ccpSub(drawNode.position, self.position);
         self.gameWorld      = gWorld;
         [self scheduleUpdate];
@@ -114,9 +114,8 @@
             for (int i = 0; i < 60 ; i++) {
                 CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
                 
-                float dotSize = (6. - 6.*(i/90.));
                 //draw the point
-                [drawNode drawDot:drawPoint radius:dotSize];
+                [drawNode drawDot:drawPoint radius:6];
             }
         }
     }

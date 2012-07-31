@@ -67,8 +67,6 @@
         
         /* prepare contact listener */
         [self.skeleton setOwner:self];
-        GWContactListener* contactListener = new GWContactListener();
-        world->SetContactListener(contactListener);
 
     }
     

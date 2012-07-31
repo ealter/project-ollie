@@ -9,6 +9,7 @@
 #import "GWContactListener.h"
 #import "GWCharacter.h"
 #import "GameConstants.h"
+#import "GWProjectile.h"
 
 GWContactListener::GWContactListener() {
 
@@ -32,8 +33,8 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
 
     handleCharacterContacts(contact, impulse);
-   // contact->SetEnabled(handleOneWayLand(contact));
-
+    handleProjectileContacts(contact, impulse);
+    // contact->SetEnabled(handleOneWayLand(contact));
 }
 
 void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
@@ -99,5 +100,35 @@ bool GWContactListener::handleOneWayLand(b2Contact *contact)
     }
     
     return false;
+}
+
+void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+
+    /*********************
+     * Bullet Collisions *
+     *********************/
+    
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+    
+    b2Filter filterA = fixtureA->GetFilterData();
+    b2Filter filterB = fixtureB->GetFilterData();
+    
+    GWProjectile* projectile;
+    b2Fixture* projFixture;
+    if (filterA.categoryBits== CATEGORY_PROJECTILES) {
+        projFixture = fixtureA;
+    }else if (filterB.categoryBits== CATEGORY_PROJECTILES)
+    {
+        projFixture = fixtureB;
+    }else {
+        return;
+    }
+    if (projFixture) {
+        projectile = (__bridge GWProjectile*)projFixture->GetBody()->GetUserData();
+        if (projectile) {
+            [projectile bulletContact];
+        }
+    }
 }
 
