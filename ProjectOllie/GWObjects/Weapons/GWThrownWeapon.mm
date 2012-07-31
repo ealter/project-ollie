@@ -43,7 +43,7 @@
 {
     if (self.ammo >0) {
         //Make a bullet which acts as the thrown item
-        thrown              = [[GWBullet alloc] initWithBulletSize:self.contentSize imageName:_imageName startPosition:self.position b2World:_world b2Bullet:NO gameWorld:self.gameWorld];
+        thrown              = [[GWProjectile alloc] initWithBulletSize:self.contentSize imageName:_imageName startPosition:self.position b2World:_world b2Bullet:NO gameWorld:self.gameWorld];
         b2Body* thrownShape = thrown.physicsBody;
         [self.parent addChild:thrown];
         

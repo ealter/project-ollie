@@ -1,17 +1,17 @@
  //
-//  GWBullet.m
+//  GWProjectile.m
 //  ProjectOllie
 //
 //  Created by Lion User on 7/13/12.
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "GWBullet.h"
+#import "GWProjectile.h"
 #import "GameConstants.h"
 #import "Box2D.h"
 #import "GWCharacter.h"
 
-@implementation GWBullet
+@implementation GWProjectile
 @synthesize  gameWorld      = _gameWorld;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
@@ -56,17 +56,18 @@
     for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext())
 	{
 		b2Vec2 b2BodyPosition = b->GetPosition();
-        if (b->GetFixtureList()->GetFilterData().maskBits == MASK_BONES) {
-            //Its part of a skeleton, set it to ragdoll for cool explosions
-            GWCharacter *tempChar = ((__bridge GWCharacter *)b->GetUserData());
-            tempChar.state = kStateRagdoll;
-        }
         
         //See if the body is close enough to apply a force
         float dist = b2Distance(b2ExplosionPosition, b2BodyPosition);
         if (dist > maxDistance) {
             //Too far away! Don't bother.
         }else {
+            if (b->GetFixtureList()->GetFilterData().maskBits == MASK_BONES) {
+                //Its part of a skeleton, set it to ragdoll for cool explosions
+                GWCharacter *tempChar = ((__bridge GWCharacter *)b->GetUserData());
+                tempChar.state = kStateRagdoll;
+            }
+            
             //Force is away from the center, calculate it and apply to the body
             float strength = (maxDistance - dist) / maxDistance;
             float force = strength * str;

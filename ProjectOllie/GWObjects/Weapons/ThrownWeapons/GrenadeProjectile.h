@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "GWBullet.h"
+#import "GWProjectile.h"
 #import "Box2D.h"
 
 
-@interface GrenadeProjectile : GWBullet {
+@interface GrenadeProjectile : GWProjectile {
     
 }
 

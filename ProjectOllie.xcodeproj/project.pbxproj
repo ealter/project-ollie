@@ -58,7 +58,7 @@
 		C5F430A715B8D2EA00174FEE /* GWPhysicsSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309515B8D2EA00174FEE /* GWPhysicsSprite.mm */; };
 		C5F430A815B8D2EB00174FEE /* GWSkeleton.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */; };
 		C5F430A915B8D2EB00174FEE /* GWWater.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309915B8D2EA00174FEE /* GWWater.mm */; };
-		C5F430AA15B8D2EB00174FEE /* GWBullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309C15B8D2EA00174FEE /* GWBullet.mm */; };
+		C5F430AA15B8D2EB00174FEE /* GWProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309C15B8D2EA00174FEE /* GWProjectile.mm */; };
 		C5F430AB15B8D2EB00174FEE /* GWGunWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */; };
 		C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */; };
 		C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F430A215B8D2EA00174FEE /* GWThrownWeapon.mm */; };
@@ -432,8 +432,8 @@
 		C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWSkeleton.mm; sourceTree = "<group>"; };
 		C5F4309815B8D2EA00174FEE /* GWWater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWater.h; sourceTree = "<group>"; };
 		C5F4309915B8D2EA00174FEE /* GWWater.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWater.mm; sourceTree = "<group>"; };
-		C5F4309B15B8D2EA00174FEE /* GWBullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWBullet.h; sourceTree = "<group>"; };
-		C5F4309C15B8D2EA00174FEE /* GWBullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWBullet.mm; sourceTree = "<group>"; };
+		C5F4309B15B8D2EA00174FEE /* GWProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GWProjectile.h; sourceTree = "<group>"; };
+		C5F4309C15B8D2EA00174FEE /* GWProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWProjectile.mm; sourceTree = "<group>"; };
 		C5F4309D15B8D2EA00174FEE /* GWGunWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGunWeapon.h; sourceTree = "<group>"; };
 		C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWGunWeapon.mm; sourceTree = "<group>"; };
 		C5F4309F15B8D2EA00174FEE /* GWSpellWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWSpellWeapon.h; sourceTree = "<group>"; };
@@ -1208,8 +1208,8 @@
 			children = (
 				CE59CA4C15C4D61500B68745 /* GunWeapons */,
 				CE59CA4D15C4D61500B68745 /* ThrownWeapons */,
-				C5F4309B15B8D2EA00174FEE /* GWBullet.h */,
-				C5F4309C15B8D2EA00174FEE /* GWBullet.mm */,
+				C5F4309B15B8D2EA00174FEE /* GWProjectile.h */,
+				C5F4309C15B8D2EA00174FEE /* GWProjectile.mm */,
 				C5F4309D15B8D2EA00174FEE /* GWGunWeapon.h */,
 				C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */,
 				C5F4309F15B8D2EA00174FEE /* GWSpellWeapon.h */,
@@ -2554,7 +2554,7 @@
 				C5F430A715B8D2EA00174FEE /* GWPhysicsSprite.mm in Sources */,
 				C5F430A815B8D2EB00174FEE /* GWSkeleton.mm in Sources */,
 				C5F430A915B8D2EB00174FEE /* GWWater.mm in Sources */,
-				C5F430AA15B8D2EB00174FEE /* GWBullet.mm in Sources */,
+				C5F430AA15B8D2EB00174FEE /* GWProjectile.mm in Sources */,
 				C5F430AB15B8D2EB00174FEE /* GWGunWeapon.mm in Sources */,
 				C5F430AC15B8D2EB00174FEE /* GWSpellWeapon.mm in Sources */,
 				C5F430AD15B8D2EB00174FEE /* GWThrownWeapon.mm in Sources */,

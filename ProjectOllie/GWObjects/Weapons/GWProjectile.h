@@ -1,5 +1,5 @@
 //
-//  GWBullet.h
+//  GWProjectile.h
 //  ProjectOllie
 //
 //  Created by Lion User on 7/13/12.
@@ -14,7 +14,7 @@
 
 class b2World;
 
-@interface GWBullet : GWPhysicsSprite {
+@interface GWProjectile : GWPhysicsSprite {
     b2World* _world;
 }
 
