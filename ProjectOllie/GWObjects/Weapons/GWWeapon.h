@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "ActionLayer.h"
 
 @interface GWWeapon : CCSprite
 
@@ -22,6 +23,8 @@
 
 //onscreen representation
 @property (strong, nonatomic) CCSprite *weaponSprite;
+
+@property (strong, nonatomic) ActionLayer *gameWorld;
 
 //Empty method for firing weapon, should be overwritten
 -(void)fireWeapon:(CGPoint) target;

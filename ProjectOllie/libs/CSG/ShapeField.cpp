@@ -911,6 +911,9 @@ bool ShapeField::isOutside(float px, float py)
     //Hold the current cell that we are in
     int cellX = (int)(px/cellWidth);
     int cellY = (int)(py/cellHeight);
+    if (cellX < 0 || cellY < 0 || cellX >= gridWidth || cellY >= gridHeight) {
+        return true;
+    }
 
     float yDistance = -1.0f;    //Negative implies that no intersections have been found yet
     bool isOutside;
@@ -988,7 +991,18 @@ PeSet ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 
     PeSet nearPEs;
 //    nearPEs.insert(peSet.begin(), peSet.end());
-
+    
+    //Check bounds
+    if (minCellX >= gridWidth || minCellY >= gridHeight || maxX < 0 || maxY < 0 )
+        return nearPEs;
+    
+    //Clamp
+    if (minX < 0) minCellX = 0;
+    if (minY < 0) minCellY = 0;
+    if (maxCellX >= gridWidth) maxCellX = gridWidth-1;
+    if (maxCellY >= gridHeight) maxCellY = gridHeight-1;
+    
+    //Add everything in near cells
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
             nearPEs.insert(spatialGrid[i][j].begin(), spatialGrid[i][j].end());
@@ -998,7 +1012,6 @@ PeSet ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 
 void getGridCells(PointEdge* pe, unsigned &minCellX, unsigned &minCellY, unsigned &maxCellX, unsigned &maxCellY)
 {
-
     unsigned int minX = min(pe->x, pe->next->x) - .6;
     unsigned int minY = min(pe->y, pe->next->y) - .6;
     unsigned int maxX = max(pe->x, pe->next->x) + 1.1;
@@ -1022,6 +1035,8 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
             spatialGrid[i][j].erase(pe);
+    
+    removed.insert(pe);
 
 }
 
@@ -1037,6 +1052,7 @@ void ShapeField::addToSpatialGrid(PointEdge* pe)
     for (unsigned i = minCellX; i <= maxCellX; i++)
         for (unsigned j = minCellY; j <= maxCellY; j++)
             spatialGrid[i][j].insert(pe);
+    added.insert(pe);
 }
 
 void ShapeField::checkConsistency()

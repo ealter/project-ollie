@@ -40,14 +40,20 @@
 }
 @end
 
-// An blue ring particle system
+// A blue ring particle system
 @interface GWParticleBlueFountain: ARCH_OPTIMAL_PARTICLE_SYSTEM
 {
 }
 @end
 
-// An blue ring particle system
+// A muzzle flash particle system
 @interface GWParticleMuzzleFlash: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+
+// An explosion particle system
+@interface GWParticleExplosion: ARCH_OPTIMAL_PARTICLE_SYSTEM
 {
 }
 @end

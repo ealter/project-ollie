@@ -13,6 +13,7 @@
 @synthesize ammo            = _ammo;
 @synthesize unlocked        = _unlocked;
 @synthesize weaponSprite    = _weaponSprite;
+@synthesize gameWorld       = _gameWorld;
 
 -(void)fireWeapon:(CGPoint)target
 {

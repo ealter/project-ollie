@@ -129,11 +129,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         endSize = 1.f;
         
         //Change the GL blend function
-        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
-        //ccGLBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];        
         
-        
-        //Get the particle texture0
+        //Get the particle texture
         self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
         
         // additive
@@ -344,6 +342,74 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // additive
         self.blendAdditive = YES;
+    }
+    
+    return self;
+}
+@end
+
+@implementation GWParticleExplosion
+-(id) init
+{
+    return [self initWithTotalParticles:300];
+}
+
+-(id) initWithTotalParticles:(NSUInteger)p
+{
+    if( (self=[super initWithTotalParticles:p]) ) {
+        // duration
+        duration = 0.15;
+        
+        // Gravity Mode
+        self.emitterMode = kCCParticleModeGravity;
+        
+        // Gravity Mode: gravity
+        self.gravity = ccp(0, 0);
+        
+        // Gravity Mode:  radial
+        self.radialAccel = 0;
+        self.radialAccelVar = 0;
+        
+        //  Gravity Mode: speed of particles
+        self.speed = 112;
+        self.speedVar = 380;
+        
+        // emitter position
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
+        
+        // angle
+        angle = 0;
+        angleVar = 360;
+        
+        // life of particles
+        life = 0.4f;
+        lifeVar = 0.3;
+        
+        // emits per frame
+        emissionRate = totalParticles/life;
+        
+        // color of particles
+        startColor    = ccc4f(1., 0.09, 0., 0.);
+        startColorVar = kColor4fZero;
+        endColor      = ccc4f(1.,  1.,  0.0,  0.);
+        endColorVar   = kColor4fZero;
+        
+        // size, in pixels
+        startSize = 21.0f;
+        startSizeVar = 34.0f;
+        endSize = 0.f;
+        endSizeVar = 0.0f;
+        
+        //Change the GL blend function
+        [self setBlendFunc:(ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_ALPHA }];        
+        
+        //Get the particle texture0
+        self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+        
+        // additive
+        self.blendAdditive = NO;
     }
     
     return self;

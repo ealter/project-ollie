@@ -16,15 +16,7 @@
 #define MAXSPEED 15. //Maximum speed of the weapon's projectile
 
 @interface GWGunWeapon ()
-{
-    HMVectorNode    *drawNode;
-    CGPoint         rearPoint;//Used to track where the rotation was last set to
-}
-@property (assign, nonatomic) CGSize bulletSize;
-@property (strong, nonatomic) NSString *bulletImage;
-@property (assign, nonatomic) float bulletSpeed;
-@property (strong, nonatomic) CCSprite *aimOverlay;
-@property (strong, nonatomic) CCSprite *gunImage;
+
 @end
 
 @implementation GWGunWeapon
@@ -34,7 +26,7 @@
 @synthesize aimOverlay      = _aimOverlay;
 @synthesize gunImage        = _gunImage;
 
-- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world
+- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
     if (self = [super init]) {
         self.position       = ccpMult(pos, PTM_RATIO);
@@ -44,6 +36,7 @@
         self.bulletSize     = CGSizeMake(bulletSize.width * PTM_RATIO, bulletSize.height * PTM_RATIO);
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
+        self.gameWorld      = gWorld;
         drawNode            = [HMVectorNode node];
         drawNode.position   = ccpSub(drawNode.position, self.position);
         ccColor4F c         = ccc4f(1.f,1.f,0.f,1.f);
@@ -52,12 +45,13 @@
         self.gunImage       = [CCSprite spriteWithFile:imageName];
         self.gunImage.position= ccpAdd(self.gunImage.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
         
-        //self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
-        //self.aimOverlay     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
-        //[self addChild:self.aimOverlay];
+        self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
+        self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+        [self addChild:self.aimOverlay];
         [self addChild:self.gunImage];
         [self addChild:drawNode];    
         [drawNode setColor:c];
+        shootPoint = CGPointMake(0, 0);
     }
     return self;
 }
@@ -67,7 +61,7 @@
     if (self.ammo >0) {
         //Calculate force, make bullet, apply force
         CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
-        GWBullet *bullet    = [[GWBullet alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES];
+        GWBullet *bullet    = [[GWBullet alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         [self.parent addChild:bullet];
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
@@ -98,7 +92,7 @@
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
-    if (ccpDistance(startPoint, self.position) < self.contentSize.width) {
+    if (ccpDistance(startPoint, self.position) < self.contentSize.width && self.ammo >0) {
         //Clear HMVectorNode
         [drawNode clear];
         
@@ -114,21 +108,18 @@
         float angle             = CC_RADIANS_TO_DEGREES(atan2f(self.position.y - currPoint.y, self.position.x - currPoint.x));
         angle += 180;
         angle = angle * -1;
-        //self.aimOverlay.rotation= angle;
+        self.aimOverlay.rotation= angle;
         self.gunImage.rotation = angle;
         
         //Simulate trajectory;
         for (int i = 0; i < 20 ; i++) {
-            CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * i*i*PTM_RATIO));
+            CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
             
-            
-            //Calculate alpha, and draw the point
-            double alphaValue   = 1-(i/20);
-            ccColor4F c         = ccc4f(1.f, 1.f, 0.f, alphaValue);
-            [drawNode setColor:c];
-            [drawNode drawDot:drawPoint radius:4];
+            float dotSize = (6. - 6.*(i/30.));
+            //draw the point
+            [drawNode drawDot:drawPoint radius:dotSize];
         }
-        rearPoint = currPoint;
+        shootPoint = currPoint;
     }
 }
 
@@ -139,7 +130,9 @@
 
 -(void)handleTap:(CGPoint) tapPoint
 {
-    [self fireWeapon: rearPoint];
+    if (shootPoint.x != 0 && shootPoint.y != 0) {
+        [self fireWeapon:shootPoint];
+    }
 }
 
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity

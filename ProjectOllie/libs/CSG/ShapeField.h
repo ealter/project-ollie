@@ -27,6 +27,8 @@ class ShapeField
 {
 public:
     PeSet peSet;
+    PeSet removed;
+    PeSet added;
     
     ShapeField(float meterWidth, float meterHeight);
     ~ShapeField();

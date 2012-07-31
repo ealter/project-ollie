@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CCNode.h"
 #import "GWPhysicsSprite.h"
+#import "ActionLayer.h"
+
 
 class b2World;
 
@@ -16,7 +18,9 @@ class b2World;
     b2World* _world;
 }
 
--(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL) isBullet;
+@property (strong, nonatomic) ActionLayer *gameWorld;
+
+-(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL) isBullet gameWorld:(ActionLayer *) gWorld;
 
 -(void)destroyBullet;
 
