@@ -358,8 +358,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(bool)resting{
-    b2Body* box = [self.interactor getBox];
-    return box->IsAwake();
+    
+    return !self.interactor.interactingBody->IsAwake();
+    //return !_skeleton->getRoot()->box2DBody->IsAwake();
 }
 
 /*****************************
