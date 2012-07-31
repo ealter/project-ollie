@@ -12,6 +12,7 @@
 #import "GWPhysicsSprite.h"
 #include "Skeleton.h"
 #include "GameConstants.h"
+#include "GWCharacterContactListener.h"
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .0001
@@ -25,17 +26,11 @@
 
 //private properties endemic to a character
 
-/* The GWSkeleton that acts as a ragdoll/animates the character */
-@property (strong, nonatomic) GWSkeleton* skeleton;
-
 /* The string identifier that makes this character unique to the other classes */
 @property (strong, nonatomic) NSString* type;
 
 /* An array of length 10 that holds the indices for each body part */
 @property (strong, nonatomic) NSArray* spriteIndices;
-
-/* The current state of the GWCharacter */
-@property (assign, nonatomic) characterState state;
 
 /* The current orientation of the character (facing left or right normal to flat earth */
 @property (assign, nonatomic) Orientation orientation;
@@ -70,6 +65,11 @@
         } else {
             CCLOG(@"ERROR BUILDING SKELETONS. ABANDON ALL HOPE!");
         }
+        
+        /* prepare contact listener */
+        [self.skeleton setOwner:self];
+        GWCharacterContactListener* contactListener = new GWCharacterContactListener();
+        world->SetContactListener(contactListener);
 
     }
     
@@ -100,14 +100,14 @@
 {
     //update skeleton's physics
     [self.skeleton update:dt];
+    
+    if(!self.skeleton.interactor.interactingBody->IsAwake())
+        self.state = kStateIdle;
+
     if(self.state != kStateRagdoll)
         [self.skeleton tieSkeletonToInteractor];
     
-    
-    float speedSQ = ccpLengthSQ([self.skeleton getVelocity]);
-    if([self.skeleton calculateNormalAngle] && self.state != kStateWalking && speedSQ < MAX_SPEED)
-        self.state = kStateIdle;
-    
+   
     switch(self.state) {
         case kStateIdle:
             if(![self.skeleton animating])
@@ -158,6 +158,8 @@
             return;
     }
     
+
+    
 }
 
 -(void)walkLeft{
@@ -185,14 +187,14 @@
 }
 
 -(void)stopWalking{
-    self.state = kStateRagdoll;
+    self.state = kStateIdle;
     [self.skeleton clearAnimation];
 }
 
 -(void)setState:(characterState)state{
     //after switching from old state
     tweenDuration = 0;
-    if(state == kStateRagdoll)
+    if(self.state == kStateRagdoll)
     {
         tweenDuration = .4;
     }
@@ -200,7 +202,7 @@
     
     //upon switching to new state
     _state = state;
-    [self.skeleton setActive:NO];
+    //[self.skeleton setActive:NO];
     if(state == kStateWalking)
     {
         self.skeleton.interactor.state = kInteractorStateActive;
@@ -213,7 +215,7 @@
     {
         self.skeleton.interactor.state = kInteractorStateRagdoll;
         CGPoint velocity = [self.skeleton.interactor getLinearVelocity];
-        [self.skeleton setActive:YES];
+        //[self.skeleton setActive:YES];
         [self.skeleton setVelocity:velocity];
         [self.skeleton clearAnimation];
     }

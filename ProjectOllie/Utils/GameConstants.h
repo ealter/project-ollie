@@ -27,6 +27,7 @@
 #define MASK_BONES  (CATEGORY_TERRAIN | CATEGORY_PROJECTILES) // Collides with terrain and projectiles 
 #define MASK_TERRAIN (CATEGORY_BONES | CATEGORY_PROJECTILES)  // Collides with bones and projectiles
 #define MASK_PROJECTILES  -1                                  // Collides with everything
+#define TAG_BONE (void*)8093
 
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)

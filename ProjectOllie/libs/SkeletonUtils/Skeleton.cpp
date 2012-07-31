@@ -74,7 +74,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     
     box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
-    fixtureDef.density = 1.0f;
+    fixtureDef.density = 1.f;
     fixtureDef.friction = 8.f;
     fixtureDef.restitution = 0.1f;
     fixtureDef.filter.categoryBits = CATEGORY_BONES;
@@ -84,6 +84,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     boneShape->CreateFixture(&fixtureDef);
     
     root->box2DBody = boneShape;
+    root->box2DBody->SetUserData(root);
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
     
@@ -159,6 +160,7 @@ void Skeleton::deleteAnimation(string animationName)
 
 void Skeleton::runAnimation(string animationName, bool flipped)
 {
+    setActive(root, true);
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
         
@@ -230,22 +232,6 @@ bool Skeleton::animating(Bone *root, float time)
     /* Check for current keyframe */
     if (!root->animation.empty()) {
         anim = true;
-        root->box2DBody->SetActive(false);
-        //not a key frame, so interpolation
-        if(key->time > time) {
-            /*
-            float angleDiff = key->angle - root->a;
-            float timeDiff  = (key->time - time)*60.0;
-            float xDiff     = key->x - root->x;
-            float yDiff     = key->y - root->y;
-            angleDiff /= timeDiff;
-            xDiff     /= timeDiff;
-            yDiff     /= timeDiff;
-            root->x += xDiff;
-            root->y += yDiff;
-            root->a += angleDiff;*/
-        }
-        else // keyframe, so set it's values
         while (key->time <= time) {
             /*Transform according to skeleton's angle */
             root->a = key->angle+this->angle;
@@ -258,7 +244,7 @@ bool Skeleton::animating(Bone *root, float time)
             key = root->animation.front();
         }
         //DebugLog("The angle here is: %f",RAD2DEG(this->angle));
-        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+        //root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
     }
     else {
         // stop animating
@@ -404,6 +390,14 @@ float Skeleton::getX(){
 }
 float Skeleton::getY(){
     return absolutePosition.y;
+}
+
+void Skeleton::setUserData(Bone *root, void *userData)
+{
+    root->box2DBody->SetUserData(userData);
+    for (int i = 0; i < root->children.size(); i++) {
+        setUserData(root->children.at(i), userData);
+    }
 }
 
 void Skeleton::update()

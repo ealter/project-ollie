@@ -98,20 +98,14 @@ using namespace std;
     if(state == kInteractorStateActive)
     {
         _interactingBody = wheel;
-        box->SetActive(NO);
-        wheel->SetActive(YES);
     }
     else if (state == kInteractorStateInactive)
     {
         _interactingBody = box;
-        box->SetActive(YES);
-        wheel->SetActive(NO);
     }
     else if (state == kInteractorStateRagdoll)
     {
         _interactingBody = wheel;
-        wheel->SetActive(YES);
-        box->SetActive(NO);
     }
 }
 
@@ -150,15 +144,17 @@ using namespace std;
     fixtureDefWheel.shape = &wheelShape;
 
     b2PolygonShape  boxShape;
-    boxShape.SetAsBox(radius, radius);
+    boxShape.SetAsBox(radius*1.5f, radius);
     fixtureDefBox.shape = &boxShape;
     
+    //The box data
     fixtureDefBox.density = 5.f;
-    fixtureDefBox.friction = 40.f;
+    fixtureDefBox.friction = 10.f;
     fixtureDefBox.restitution = 0.1f;
     fixtureDefBox.filter.categoryBits = CATEGORY_BONES;
     fixtureDefBox.filter.maskBits = MASK_BONES;
     
+    //The wheel data
     fixtureDefWheel.density = 1.f;
     fixtureDefWheel.friction = 10.f;
     fixtureDefWheel.restitution = 0.1f;
@@ -177,7 +173,7 @@ using namespace std;
 -(void)update{
     if(self.state == kInteractorStateActive)
     {
-        box->SetTransform(wheel->GetPosition(), box->GetAngle());
+        box->SetTransform(wheel->GetPosition(), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
     else if (self.state == kInteractorStateInactive)
@@ -190,6 +186,30 @@ using namespace std;
         box->SetTransform(wheel->GetPosition(), box->GetAngle());
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
+}
+
+-(float)calculateNormalAngle{
+    
+    for (b2ContactEdge* ce = self.interactingBody->GetContactList(); ce; ce = ce->next)
+    {
+        b2Contact* c = ce->contact;
+        b2WorldManifold manifold;
+        c->GetWorldManifold(&manifold);
+        if(c->IsTouching())
+        {
+            
+            CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
+            normal = ccpNormalize(normal);
+            //DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
+            float angle = atan2(normal.y,normal.x);
+            //DebugLog(@"The contact normal has an angle of: %f",RAD2DEG(angle));
+            float potentialDestination = angle - M_PI/2.0;
+            return min(max(potentialDestination,MIN_ANGLE),MAX_ANGLE);
+        }
+        
+    }
+    return 0;
+
 }
 
 @end
@@ -223,6 +243,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 //Adjusts skeleton's angle to ground body
 -(void)orientToGround;
 
+//Creates linear animation tween for starting animations
 -(void)tweenBonesToAnimation:(string)name forBone:(Bone*)root withDuration:(float)duration;
 
 @end
@@ -449,25 +470,16 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         float currentX         = root->box2DBody->GetPosition().x*PTM_RATIO - _skeleton->getX()*PTM_RATIO;
         float currentY         = root->box2DBody->GetPosition().y*PTM_RATIO - _skeleton->getY()*PTM_RATIO;
         float currentA         = root->box2DBody->GetAngle();
-
-        while(currentA <= 0 || currentA >= M_PI * 2.)
-        {
-            if(currentA > M_PI * 2.)
-                currentA -= M_PI * 2.;
-            else currentA += M_PI * 2.;
-        }
-        while(destinationA <= 0 || destinationA >= M_PI * 2.)
-        {
-            if(destinationA > M_PI * 2.)
-                destinationA -= M_PI * 2.;
-            else destinationA += M_PI * 2.;
-        }
-        
-        
         float numFrames        = duration*FPS;
         float diffA            = (destinationA - currentA);
-        if(diffA > M_PI)
-            diffA = M_PI * 2. - diffA;
+        
+        while(abs(diffA) > M_PI)
+        {
+            if(diffA > 0)
+                diffA = M_PI * 2. - diffA;
+            else
+                diffA = M_PI * 2. + diffA;
+        }
         
         float tweenX           = (destinationX - currentX)/numFrames;
         float tweenY           = (destinationY - currentY)/numFrames;
@@ -498,14 +510,13 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         c->GetWorldManifold(&manifold);
         if(c->IsTouching())
         {
-            
             CGPoint normal = ccp(manifold.normal.x, manifold.normal.y);
             normal = ccpNormalize(normal);
             //DebugLog(@"The contact normal has an x: %f and a y: %f",normal.x,normal.y);
             float angle = atan2(normal.y,normal.x);
             //DebugLog(@"The contact normal has an angle of: %f",RAD2DEG(angle));
             float potentialDestination = angle - M_PI/2.0;
-            destinationAngle = min(max(potentialDestination,MIN_ANGLE),MAX_ANGLE);
+            destinationAngle = potentialDestination;
             return YES;
         }
 
@@ -525,6 +536,11 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(void)setInteractorPositionInRagdoll{
     [self.interactor setPositionInSkeleton:_skeleton];
+}
+
+-(void)setOwner:(id)owner{
+    // set user data for collisions
+    _skeleton->setUserData(_skeleton->getRoot(), (__bridge void*)owner);
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 
 class b2World;
+@class GWSkeleton;
 
 typedef enum characterState {
     kStateIdle = 0,   // when just standing around
@@ -34,5 +35,9 @@ typedef enum Orientation {
 -(void)stopWalking;
 
 //Properties endemic to character
+@property (strong, nonatomic) GWSkeleton* skeleton;
+
+/* The current state of the GWCharacter */
+@property (assign, nonatomic) characterState state;
 
 @end

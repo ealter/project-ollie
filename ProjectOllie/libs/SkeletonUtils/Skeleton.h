@@ -151,6 +151,8 @@ public:
     /* Returns the map of animations */
     std::map<string, std::map<string,Animation*> > getAnimationMap();
     
+    void setUserData(Bone* root, void* userData);
+    
     /* update values changing over time */
     void update();
 };
