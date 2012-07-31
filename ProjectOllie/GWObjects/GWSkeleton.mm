@@ -39,7 +39,7 @@ using namespace std;
 
 -(id)initAsBoxAt:(CGPoint)location inWorld:(b2World *)world{
     if((self = [super init])){
-        radius = .0001*PTM_RATIO;
+        radius = .0004*PTM_RATIO;
         _world = world;
         [self createPhysicsBodiesAt:ccp(200,200)];
         self.state = kInteractorStateInactive;
@@ -49,7 +49,7 @@ using namespace std;
 
 -(id)initAsCircleAt:(CGPoint)location inWorld:(b2World *)world{
     if((self = [super init])){
-        radius =  .0001*PTM_RATIO;
+        radius =  .0004*PTM_RATIO;
         _world = world;
         [self createPhysicsBodiesAt:ccp(200,200)];
         self.state = kInteractorStateActive;
@@ -58,7 +58,11 @@ using namespace std;
 }
 
 -(float)getRadius{
-    return radius;
+
+    if(self.state == kInteractorStateRagdoll)
+       return radius * .5f;
+    else return radius;
+    
 }
 
 -(CGPoint)getLinearVelocity{
@@ -81,7 +85,7 @@ using namespace std;
 -(CGPoint)getAbsolutePosition{
     
     CGPoint positionInPixels = ccpMult([self getPosition],PTM_RATIO);
-    return ccp(positionInPixels.x,positionInPixels.y - radius*PTM_RATIO);
+    return ccp(positionInPixels.x,positionInPixels.y - [self getRadius]*PTM_RATIO);
 }
 
 -(CGPoint)getPosition{
@@ -155,7 +159,7 @@ using namespace std;
     fixtureDefWheel.shape = &wheelShape;
 
     b2PolygonShape  boxShape;
-    boxShape.SetAsBox(radius*1.5f, radius);
+    boxShape.SetAsBox(radius * .5f, radius *.5f);
     fixtureDefBox.shape = &boxShape;
     
     //The box data
