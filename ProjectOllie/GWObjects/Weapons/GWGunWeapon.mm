@@ -9,7 +9,7 @@
 #import "GWGunWeapon.h"
 #import "Box2D.h"
 #import "cocos2d.h"
-#import "GWBullet.h"
+#import "GWProjectile.h"
 #import "GameConstants.h"
 #import "HMVectorNode.h"
 
@@ -61,7 +61,7 @@
     if (self.ammo >0) {
         //Calculate force, make bullet, apply force
         CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
-        GWBullet *bullet    = [[GWBullet alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
+        GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         [self.parent addChild:bullet];
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));

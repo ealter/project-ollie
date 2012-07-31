@@ -11,14 +11,14 @@
 #import "GWPhysicsSprite.h"
 #import "Box2D.h"
 #import "GWGestures.h"
-#import "GWBullet.h"
+#import "GWProjectile.h"
 #import "HMVectorNode.h"
 
 @interface GWThrownWeapon : GWWeapon <GestureChild>{
     b2World *_world;
     NSString *_imageName;
     HMVectorNode *drawNode;
-    GWBullet *thrown;
+    GWProjectile *thrown;
     float fuseTimer;
     float countDown;
 }

@@ -1,17 +1,17 @@
  //
-//  GWBullet.m
+//  GWProjectile.m
 //  ProjectOllie
 //
 //  Created by Lion User on 7/13/12.
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "GWBullet.h"
+#import "GWProjectile.h"
 #import "GameConstants.h"
 #import "Box2D.h"
 #import "GWCharacter.h"
 
-@implementation GWBullet
+@implementation GWProjectile
 @synthesize  gameWorld      = _gameWorld;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
