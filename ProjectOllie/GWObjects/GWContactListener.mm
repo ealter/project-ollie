@@ -27,6 +27,19 @@ void GWContactListener::EndContact(b2Contact* contact) {
 
 void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifold) {
 
+}
+
+void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
+    handleCharacterContacts(contact, impulse);
+    
+    
+}
+
+void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+    /************************
+     * Character Collisions *
+     ************************/
+    
     b2Fixture* fixtureA = contact->GetFixtureA();
     b2Fixture* fixtureB = contact->GetFixtureB();
     
@@ -34,25 +47,17 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
     b2Filter filterB = fixtureB->GetFilterData();
     
     GWCharacter* character;
-    if(filterA.maskBits == MASK_BONES && filterB.maskBits != MASK_TERRAIN)
-    {
-       // printf("THERE IS SOME CONTAC");
-        character = (__bridge GWCharacter*)fixtureA->GetBody()->GetUserData();
-        if(fixtureB->GetBody()->GetLinearVelocity().LengthSquared() > 2.)
-            character.state = kStateRagdoll;
-    }
-    else if (filterA.maskBits != MASK_TERRAIN && filterB.maskBits == MASK_BONES)
-    {
-        //printf("THERE IS SOME CONTAC");
-        character = (__bridge GWCharacter*)fixtureB->GetBody()->GetUserData();
-        if(fixtureB->GetBody()->GetLinearVelocity().LengthSquared() > 2.)
-            character.state = kStateRagdoll;
-        
-    }
+    b2Fixture* charFixture;
     
-
-}
-
-void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
+    if(filterA.maskBits == MASK_BONES && filterB.maskBits != MASK_TERRAIN)
+        charFixture = fixtureA;
+    else if (filterA.maskBits != MASK_TERRAIN && filterB.maskBits == MASK_BONES)
+        charFixture = fixtureB;
+    if(charFixture)
+    {
+        character = (__bridge GWCharacter*)charFixture->GetBody()->GetUserData();
+        if(charFixture->GetBody()->GetLinearVelocity().LengthSquared() > 1.)
+            character.state = kStateRagdoll;
+    }
 }
 

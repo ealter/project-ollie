@@ -62,6 +62,7 @@
         if (dist > maxDistance) {
             //Too far away! Don't bother.
         }else {
+            
             if (b->GetFixtureList()->GetFilterData().maskBits == MASK_BONES) {
                 //Its part of a skeleton, set it to ragdoll for cool explosions
                 GWCharacter *tempChar = ((__bridge GWCharacter *)b->GetUserData());
