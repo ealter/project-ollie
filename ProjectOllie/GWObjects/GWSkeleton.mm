@@ -59,8 +59,8 @@ using namespace std;
 
 -(float)getRadius{
 
-    if(self.state == kInteractorStateRagdoll)
-       return radius * .5f;
+    if(self.state != kInteractorStateActive)
+    return radius*.5f;
     else return radius;
     
 }
@@ -188,7 +188,7 @@ using namespace std;
 -(void)update{
     if(self.state == kInteractorStateActive)
     {
-        box->SetTransform(wheel->GetPosition(), [self calculateNormalAngle]);
+        box->SetTransform(wheel->GetPosition()-b2Vec2(0,.5*radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
     else if (self.state == kInteractorStateInactive)
@@ -200,7 +200,7 @@ using namespace std;
     else if(self.state == kInteractorStateRagdoll)
     {
         wheel->SetAngularVelocity(0);
-        box->SetTransform(wheel->GetPosition(), [self calculateNormalAngle]);
+        box->SetTransform(wheel->GetPosition()-b2Vec2(0,.5*radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
 }
