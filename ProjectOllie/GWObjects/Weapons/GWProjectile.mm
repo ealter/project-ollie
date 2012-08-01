@@ -95,8 +95,6 @@
 {
     if (self.bulletCollided) {
         [self destroyBullet];
-        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:40. x:self.position.x y:self.position.y];
-        [self.gameWorld.gameTerrain shapeChanged];
     }
 }
 
@@ -119,7 +117,7 @@
 //class (but not by thrown weapons, which will use a fuse time)
 -(void)bulletContact
 {
-    self.bulletCollided = TRUE;
+    self.bulletCollided = TRUE;//Destroy at the next opportunity
     
 }
 

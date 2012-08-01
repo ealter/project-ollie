@@ -13,7 +13,6 @@
 #import "GameConstants.h"
 #import "HMVectorNode.h"
 
-#define MAXSPEED 10. //Maximum speed of the weapon's projectile
 
 @interface GWGunWeapon ()
 
@@ -44,6 +43,7 @@
         //Make the gun image and overlay image in the middle of the gun object, for easy rotation
         self.gunImage       = [CCSprite spriteWithFile:imageName];
         self.gunImage.position= ccpAdd(self.gunImage.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+        self.gunImage.flipX = YES;
         
         self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
         self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
@@ -63,6 +63,10 @@
         CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
         GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
+        float angle             = CC_RADIANS_TO_DEGREES(atan2f(self.position.y - aimPoint.y, self.position.x - aimPoint.x));
+        angle += 180;
+        angle = angle * -1;
+        bullet.rotation = angle;
         [self.parent addChild:bullet];
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
         
@@ -87,37 +91,48 @@
     return vel;
 }
 
+-(void)simulateTrajectoryWithStart:(CGPoint)startPoint Finger:(CGPoint)currPoint
+{
+    //Clear HMVectorNode
+    [drawNode clear];
+    
+    //Calculate values to be used for trajectory simulation
+    float dt                = 1/60.0f;
+    CGPoint velocity        = [self calculateGunVelocityWithAimPoint:currPoint];
+    CGPoint stepVelocity    = ccpMult(velocity, dt);
+    CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
+    CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
+    CGPoint beginPoint      = ccpAdd(self.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+    
+    for (int i = 0; i < 20 ; i++) {
+        CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
+        
+        //draw the point
+        [drawNode drawDot:drawPoint radius:6];
+    }
+}
 
 ///Gesture Methods///
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
     if (ccpDistance(startPoint, self.position) < self.contentSize.width && self.ammo >0) {
-        //Clear HMVectorNode
-        [drawNode clear];
-        
-        //Calculate values to be used for trajectory simulation
-        float dt                = 1/60.0f;
-        CGPoint velocity        = [self calculateGunVelocityWithAimPoint:currPoint];
-        CGPoint stepVelocity    = ccpMult(velocity, dt);
-        CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
-        CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
-        CGPoint beginPoint      = ccpAdd(self.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
-        
         //Rotate gun overlay
         float angle             = CC_RADIANS_TO_DEGREES(atan2f(self.position.y - currPoint.y, self.position.x - currPoint.x));
+        if (abs(angle) > 90) {
+            self.gunImage.flipY = NO;
+        }else {
+            self.gunImage.flipY = YES;
+        }
         angle += 180;
         angle = angle * -1;
         self.aimOverlay.rotation= angle;
         self.gunImage.rotation = angle;
         
+        
         //Simulate trajectory;
-        for (int i = 0; i < 20 ; i++) {
-            CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
-            
-            //draw the point
-            [drawNode drawDot:drawPoint radius:6];
-        }
+        [self simulateTrajectoryWithStart:startPoint Finger:currPoint];
+        
         shootPoint = currPoint;
     }
 }

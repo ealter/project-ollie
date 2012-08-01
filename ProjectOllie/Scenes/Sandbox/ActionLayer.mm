@@ -14,10 +14,10 @@
 #import "GameConstants.h"
 #import "GWCharacter.h"
 #import "GWWater.h"
-#import "GWGunWeapon.h"
 #import "GWGestures.h"
 #import "HMVectorNode.h"
 #import "Grenade.h"
+#import "GaussRifle.h"
 #import "GWContactListener.h"
 
 #define kTagPoly 10
@@ -30,7 +30,6 @@ enum {
 @interface ActionLayer()
 {
     GWCharacter* _character;
-    GWGunWeapon* gunWeapon;
     GWGestures* gestures;
 }
 -(void) initPhysics;
@@ -186,12 +185,12 @@ enum {
     
     _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
     
-    gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(1, 1) size:CGSizeMake(0.3, 0.3) ammo: 10 bulletSize:CGSizeMake(0.1, 0.1) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world gameWorld:self];
-    [self addChild:gunWeapon];
+    GaussRifle* gaussWeapon = [[GaussRifle alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
+    [self addChild:gaussWeapon];
     //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
     //[self addChild:grenade];
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:gunWeapon];
+    [[gestures children] addObject:gaussWeapon];
     [self addChild:gestures z:2];
 
 }
