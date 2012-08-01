@@ -166,6 +166,50 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
         PointEdge* pe = *i;
         [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:.01f*PTM_RATIO];
     }
+    
+    //Update the box2d edge shapes
+    if (world) {
+        for (std::set<PointEdge*>::iterator i = shapeField_->removed.begin(); i != shapeField_->removed.end(); i++)
+        {
+            PointEdge* pe = *i;
+            if (pe->userData) {
+                world->DestroyBody((b2Body *)pe->userData);
+            }
+        }
+        shapeField_->removed.clear();
+        
+        for (std::set<PointEdge*>::iterator i = shapeField_->added.begin(); i != shapeField_->added.end(); i++)
+        {
+            PointEdge* pe = *i;
+            PointEdge* npe = pe->next;
+            PointEdge* nnpe = npe->next;
+            PointEdge* ppe = pe->prev;
+            //Create an edge shape
+            b2EdgeShape e;
+            e.Set(b2Vec2(0, 0), b2Vec2((npe->x - pe->x)/PTM_RATIO, (npe->y - pe->y)/PTM_RATIO));
+            e.m_hasVertex0 =true;
+            e.m_hasVertex3 =true;
+            e.m_vertex0 = b2Vec2((ppe->x - pe->x)/PTM_RATIO, (ppe->y - pe->y)/PTM_RATIO);
+            e.m_vertex3 = b2Vec2((nnpe->x - pe->x)/PTM_RATIO, (nnpe->y - pe->y)/PTM_RATIO);
+            //Body def
+            b2BodyDef bd;
+            bd.type = b2_staticBody;
+            bd.position = b2Vec2(pe->x/PTM_RATIO, pe->y/PTM_RATIO);
+            bd.angle = 0;
+            bd.allowSleep = true;
+            b2Body* b = world->CreateBody(&bd);
+            b2FixtureDef fixtureDef;
+            fixtureDef.shape = &e;	
+            fixtureDef.density = 1.0f;
+            fixtureDef.friction = 0.3f;
+            fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+            fixtureDef.filter.maskBits = MASK_TERRAIN;
+            b->CreateFixture(&fixtureDef);
+            pe->userData = b;
+            
+        }
+        shapeField_->added.clear();
+    }
 }
 
 - (void)clear
@@ -227,6 +271,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 
 - (void) addToWorld:(b2World*)bworld
 {
+    world = bworld;
     for (PeSet::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
     {
         PointEdge* pe = *i;
@@ -254,7 +299,11 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
         fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
         fixtureDef.filter.maskBits = MASK_TERRAIN;
         b->CreateFixture(&fixtureDef);
+        pe->userData = b;
     }
+    
+    shapeField_->added.clear();
+    shapeField_->removed.clear();
 }
 
 /* Random Land Generators */

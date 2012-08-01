@@ -3,11 +3,12 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 7/13/12.
-//  Copyright 2012 __MyCompanyName__. All rights reserved.
+//  Copyright 2012 hi ku llc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "ActionLayer.h"
 
 @interface GWWeapon : CCSprite
 
@@ -23,10 +24,12 @@
 //onscreen representation
 @property (strong, nonatomic) CCSprite *weaponSprite;
 
+@property (strong, nonatomic) ActionLayer *gameWorld;
+
 //Empty method for firing weapon, should be overwritten
 -(void)fireWeapon:(CGPoint) target;
 
 //Empty method for throwing weapon, should be overwritten
--(void)throwWeaponWithAngle:(float) angle withStrength:(float) strength;
+-(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint;
 
 @end

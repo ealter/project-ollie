@@ -12,11 +12,13 @@
 #import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "GameConstants.h"
-#import "GWSkeleton.h"
-#import "Skeleton.h"
+#import "GWCharacter.h"
 #import "GWWater.h"
-#import "GWGunWeapon.h"
 #import "GWGestures.h"
+#import "HMVectorNode.h"
+#import "Grenade.h"
+#import "GaussRifle.h"
+#import "GWContactListener.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -27,8 +29,7 @@ enum {
 
 @interface ActionLayer()
 {
-    GWSkeleton* _skeleton;
-    GWGunWeapon* gunWeapon;
+    GWCharacter* _character;
     GWGestures* gestures;
 }
 -(void) initPhysics;
@@ -42,6 +43,7 @@ enum {
 @implementation ActionLayer
 
 @synthesize camera           = _camera;
+@synthesize gameTerrain          = _gameTerrain;
 
 
 +(CCScene *) scene
@@ -90,16 +92,27 @@ enum {
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
         
-        [self addChild:[GWWater node]];
+        [self addChild:[GWWater node] z:8];
         
        /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
         label.position = ccp( self.contentSize.width/2, self.contentSize.height-50);*/
         
-        [self scheduleUpdate];
-
+        /* Make a border rectangle for debug drawing */
         
+        
+        CGPoint worldRectPx[4];
+        worldRectPx[0].x = 0;                 worldRectPx[0].y = 0;
+        worldRectPx[1].x = 0;                 worldRectPx[1].y = WORLD_HEIGHT_PX;
+        worldRectPx[2].x = WORLD_WIDTH_PX;    worldRectPx[2].y = WORLD_HEIGHT_PX;
+        worldRectPx[3].x = WORLD_WIDTH_PX;    worldRectPx[3].y = 0;
+        HMVectorNode* worldBounds = [HMVectorNode node];
+        [worldBounds setColor:ccc4f(1, 0, 0, 1)];
+        for (int i = 0; i < 4; i++)
+            [worldBounds drawSegmentFrom:worldRectPx[i] to:worldRectPx[(i+1)%4] radius:4];
+        [self addChild:worldBounds z:256];
+        [self scheduleUpdate];
         
     }
     return self;
@@ -119,13 +132,18 @@ enum {
 {
 
     b2Vec2 gravity;
-    gravity.Set(0, -10.0f);
+    gravity.Set(0, -2.f);
     world = new b2World(gravity);
 
     // Do we want to let bodies sleep?
     world->SetAllowSleeping(true);
 
     world->SetContinuousPhysics(true);
+    
+    //Set up the Contact Listener
+    GWContactListener *_contactListener = new GWContactListener();
+    
+    world->SetContactListener(_contactListener);
 
     m_debugDraw = new GLESDebugDraw( PTM_RATIO );
     world->SetDebugDraw(m_debugDraw);
@@ -165,31 +183,29 @@ enum {
     fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
     
-    _skeleton = [[GWSkeleton alloc]initFromFile:@"character" box2dWorld:world];
-   
-   /* gunWeapon = [[GWGunWeapon alloc] initGunWithImage:@"Icon-Small.png" position:CGPointMake(150, 150) size:CGSizeMake(30, 30) ammo: 10 bulletSize:CGSizeMake(10, 10) bulletSpeed:1 bulletImage:@"Icon-Small.png" box2DWorld:world];
-    [self addChild:gunWeapon];*/
+    _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
+    
+    GaussRifle* gaussWeapon = [[GaussRifle alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
+    [self addChild:gaussWeapon];
+    //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
+    //[self addChild:grenade];
     gestures = [[GWGestures alloc] init];
+    [[gestures children] addObject:gaussWeapon];
     [self addChild:gestures z:2];
 
 }
 
 -(void) draw
 {
-    //
-    // IMPORTANT:
-    // This is only for debug purposes
-    // It is recommend to disable it
-    //
     [super draw];
     
+    /* Box2d debug drawing */
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
-
     kmGLPushMatrix();
-
     world->DrawDebugData();	
-
     kmGLPopMatrix();
+    
+    
 }
 
 -(void) addNewSpriteAtPosition:(CGPoint)p
@@ -261,7 +277,7 @@ enum {
      */
     
 	[self.camera update:dt];
-    [_skeleton update:dt];
+    [_character update:dt];
 
 }
 
@@ -270,22 +286,23 @@ enum {
 {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
-    if (gunWeapon != 0) [gunWeapon fireWeapon:[touch locationInView:[touch view]]];
-    //[self addNewSpriteAtPosition: [touch locationInView:[touch view]]];
-    [_skeleton runAnimation:@"sprinting"];
-    //[_skeleton applyLinearImpulse:ccp(.02,0)];
+    CGPoint tl = [touch locationInView:[touch view]];
+    if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
+        [_character walkRight];
+    else [_character walkLeft];
+    
 }
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.camera touchesEnded:touches];
-
+    [_character stopWalking];
     //Add a new body/atlas sprite at the touched location
     CGPoint location;
     for( UITouch *touch in touches ) {
         location = [touch locationInView: [touch view]];
         location = [[CCDirector sharedDirector] convertToGL: location];
-        
+
         location = [self convertToNodeSpace:location];
         
     }
@@ -316,14 +333,18 @@ enum {
 {
 
         
-    
 }
 
 
 -(void)setTerrain:(Terrain*)t
-{
+{    
     //Add as a child so it draws
     [self addChild:t];
+    
+    if (t != NULL) {
+        self.gameTerrain = t;
+    }
+    
     //Add all of the edge shapes to the world
     [t addToWorld:world];
 }

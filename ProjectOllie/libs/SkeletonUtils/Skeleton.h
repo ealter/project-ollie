@@ -117,8 +117,11 @@ public:
     /* Adds this animation frame to the map */
     void addAnimationFrame(string animationName, string boneName, KeyFrame* frame);
     
+    /* Removes animation from anim dictionary */
+    void deleteAnimation(string animationName);
+    
     /* Loads this animation to the skeleton */
-    void runAnimation(string animationName);
+    void runAnimation(string animationName, bool flipped);
     
     /* sets absolute position. Arguments are pixels */
     void setPosition(Bone* root, float x, float y);
@@ -138,9 +141,17 @@ public:
     /* clears out the animation queue */
     void clearAnimationQueue(Bone* root);
     
+    /* Sets whether or not the bones are active */
+    void setActive(Bone* root, bool active);
+    
     float getX();
     float getY();
     float getAngle();
+    
+    /* Returns the map of animations */
+    std::map<string, std::map<string,Animation*> > getAnimationMap();
+    
+    void setUserData(Bone* root, void* userData);
     
     /* update values changing over time */
     void update();

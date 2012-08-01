@@ -61,8 +61,8 @@
         self.isChanging      = NO;
         self.actionIntensity = 0.f;
 
-        self.maximumScale    = 6.f;
-        self.minimumScale    = 1.;//min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
+        self.maximumScale    = 1.f;
+        self.minimumScale    = min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
         self.defaultScale    = self.minimumScale;
         self.children        = [NSMutableArray array];
         self.bounded         = NO;

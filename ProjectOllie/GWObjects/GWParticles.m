@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 
 #import "GWParticles.h"
@@ -129,11 +129,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         endSize = 1.f;
         
         //Change the GL blend function
-        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];
-        //ccGLBlendFunc(GL_SRC_ALPHA, GL_ONE);
+        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];        
         
-        
-        //Get the particle texture0
+        //Get the particle texture
         self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
         
         // additive
@@ -338,6 +336,74 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         //Change the GL blend function
         [self setBlendFunc:(ccBlendFunc) { GL_ONE, GL_ONE }];        
+        
+        //Get the particle texture0
+        self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+        
+        // additive
+        self.blendAdditive = YES;
+    }
+    
+    return self;
+}
+@end
+
+@implementation GWParticleExplosion
+-(id) init
+{
+    return [self initWithTotalParticles:300];
+}
+
+-(id) initWithTotalParticles:(NSUInteger)p
+{
+    if( (self=[super initWithTotalParticles:p]) ) {
+        // duration
+        duration = 0.01;
+        
+        // Gravity Mode
+        self.emitterMode = kCCParticleModeGravity;
+        
+        // Gravity Mode: gravity
+        self.gravity = ccp(0, -500);
+        
+        // Gravity Mode:  radial
+        self.radialAccel = 0;
+        self.radialAccelVar = 0;
+        
+        //  Gravity Mode: speed of particles
+        self.speed = 0;
+        self.speedVar = 500;
+        
+        // emitter position
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
+        
+        // angle
+        angle = 0;
+        angleVar = 360;
+        
+        // life of particles
+        life = 0.f;
+        lifeVar = 2.;
+        
+        // emits per frame
+        emissionRate = totalParticles/life;
+        
+        // color of particles
+        startColor    = ccc4f(1., 0.0, 0., 1.);
+        startColorVar = ccc4f(1., .22, 0., 0.5);
+        endColor      = ccc4f(0.,  0.,  0.0,  0.31);
+        endColorVar   = kColor4fZero;
+        
+        // size, in pixels
+        startSize = 40.0f;
+        startSizeVar = 12.0f;
+        endSize = 2.f;
+        endSizeVar = 0.0f;
+        
+        //Change the GL blend function
+        [self setBlendFunc:(ccBlendFunc) { GL_SRC_ALPHA, GL_ONE }];        
         
         //Get the particle texture0
         self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];

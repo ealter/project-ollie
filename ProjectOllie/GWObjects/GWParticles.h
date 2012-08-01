@@ -3,7 +3,7 @@
 //  ProjectOllie
 //
 //  Created by Lion User on 6/30/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012 hi ku llc. All rights reserved.
 //
 #import "ccMacros.h"
 #import "CCParticleSystemQuad.h"
@@ -40,14 +40,20 @@
 }
 @end
 
-// An blue ring particle system
+// A blue ring particle system
 @interface GWParticleBlueFountain: ARCH_OPTIMAL_PARTICLE_SYSTEM
 {
 }
 @end
 
-// An blue ring particle system
+// A muzzle flash particle system
 @interface GWParticleMuzzleFlash: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+
+// An explosion particle system
+@interface GWParticleExplosion: ARCH_OPTIMAL_PARTICLE_SYSTEM
 {
 }
 @end

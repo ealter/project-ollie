@@ -11,4 +11,22 @@
 @implementation GWMoveFrame
 @synthesize time = _time;
 
+- (id)init
+{
+    return [self initWithSerializedData:nil];
+}
+
+- (id)initWithSerializedData:(id)data
+{
+    if(self = [super init]) {
+        
+    }
+    return self;
+}
+
+- (id)serializableData
+{
+    return nil; //TODO
+}
+
 @end

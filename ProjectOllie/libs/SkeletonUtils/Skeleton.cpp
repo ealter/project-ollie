@@ -74,8 +74,8 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     
     box.SetAsBox(root->l/PTM_RATIO/2.f,root->w/PTM_RATIO/2.);
     fixtureDef.shape = &box;
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.4f;
+    fixtureDef.density = 1.f;
+    fixtureDef.friction = 8.f;
     fixtureDef.restitution = 0.1f;
     fixtureDef.filter.categoryBits = CATEGORY_BONES;
     fixtureDef.filter.maskBits = MASK_BONES;
@@ -84,6 +84,7 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
     boneShape->CreateFixture(&fixtureDef);
     
     root->box2DBody = boneShape;
+    root->box2DBody->SetUserData(root);
     
     boneShape->SetTransform(boneShape->GetPosition(), root->a);
     
@@ -139,18 +140,41 @@ void Skeleton::addAnimationFrame(string animationName, string boneName, KeyFrame
     if(animation) {
         animation->frames.push_back(frame);
     } else {
-        printf("Loading new animation \n");
         animation = new Animation;
         animation->frames.push_back(frame);
         animations[animationName][boneName] = animation;
     }
 }
 
-void Skeleton::runAnimation(string animationName)
+void Skeleton::deleteAnimation(string animationName)
 {
+
+    std::map<string, Animation*> animation = animations[animationName];
+    std::map<string, Animation*>::iterator it;
+    for(it = animation.begin(); it != animation.end(); it++)
+    {
+        it->second->frames.clear();
+    }
+}
+
+void Skeleton::runAnimation(string animationName, bool flipped)
+{
+    setActive(root, true);
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
-        Bone* bone = this->getBoneByName(this->root, iter->first);
+        
+        /* if flipped, it should adjust the symmetric limb */
+        string name = iter->first;
+        char prefix = iter->first.at(0);
+        if(flipped)
+        {
+            if(prefix == 'r')
+                name = 'l'+name.substr(1);
+            else if (prefix == 'l')
+                name = 'r'+name.substr(1);
+        }
+            
+        Bone* bone = this->getBoneByName(this->root, name);
         if(bone) {
             if(iter->second) {
                 // queue<KeyFrame*> newAnimation;
@@ -170,10 +194,17 @@ void Skeleton::runAnimation(string animationName)
                     /* Create a deep copy to adjust time of frame */
                     KeyFrame* deep = new KeyFrame;
                     KeyFrame* shallow = iter->second->frames.at(i);
+                    
                     deep->x           = shallow->x;
                     deep->y           = shallow->y;
                     deep->angle       = shallow->angle;
                     deep->time        = shallow->time + extraTime;
+                    
+                    if(flipped)
+                    {
+                        deep->x     = -deep->x;
+                        deep->angle = M_PI - deep->angle; 
+                    }
                     
                     /* Push it to back of animation queue */
                     bone->animation.push(deep);
@@ -200,22 +231,6 @@ bool Skeleton::animating(Bone *root, float time)
     /* Check for current keyframe */
     if (!root->animation.empty()) {
         anim = true;
-        root->box2DBody->SetActive(false);
-        //not a key frame, so interpolation
-        if(key->time > time) {
-            /*
-            float angleDiff = key->angle - root->a;
-            float timeDiff  = (key->time - time)*60.0;
-            float xDiff     = key->x - root->x;
-            float yDiff     = key->y - root->y;
-            angleDiff /= timeDiff;
-            xDiff     /= timeDiff;
-            yDiff     /= timeDiff;
-            root->x += xDiff;
-            root->y += yDiff;
-            root->a += angleDiff;*/
-        }
-        else // keyframe, so set it's values
         while (key->time <= time) {
             /*Transform according to skeleton's angle */
             root->a = key->angle+this->angle;
@@ -228,13 +243,11 @@ bool Skeleton::animating(Bone *root, float time)
             key = root->animation.front();
         }
         //DebugLog("The angle here is: %f",RAD2DEG(this->angle));
-        root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+        //root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
     }
     else {
         // stop animating
         anim = false;
-        root->box2DBody->SetAwake(true);
-        root->box2DBody->SetActive(true);
         
         // new position is torso's position
         Bone* ll = getBoneByName(root, "ll_leg");
@@ -356,8 +369,38 @@ b2Vec2 Skeleton::highestContact(Bone *root, b2Vec2 currentHighest){
     return currentHighest;
 }
 
+void Skeleton::setActive(Bone *root, bool active)
+{
+    b2Body* body = root->box2DBody;
+    body->SetAwake(active);
+    body->SetActive(active);
+    
+    for(int i = 0; i<root->children.size();i++)
+        setActive(root->children.at(i),active);
+}
+
+std::map<string, std::map<string,Animation*> > Skeleton::getAnimationMap()
+{
+    return animations;
+}
+
+float Skeleton::getX(){
+    return absolutePosition.x;
+}
+float Skeleton::getY(){
+    return absolutePosition.y;
+}
+
+void Skeleton::setUserData(Bone *root, void *userData)
+{
+    root->box2DBody->SetUserData(userData);
+    for (int i = 0; i < root->children.size(); i++) {
+        setUserData(root->children.at(i), userData);
+    }
+}
+
 void Skeleton::update()
 {
-    
+
 }
 
