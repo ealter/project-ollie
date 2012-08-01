@@ -249,7 +249,7 @@ bool Skeleton::animating(Bone *root, float time)
         // stop animating
         anim = false;
         
-        // new position is torso's position
+        // new position is avg left and right leg position
         Bone* ll = getBoneByName(root, "ll_leg");
         Bone* rl = getBoneByName(root, "rl_leg");
 

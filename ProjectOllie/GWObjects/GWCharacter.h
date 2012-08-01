@@ -30,14 +30,28 @@ typedef enum Orientation {
 }
 -(id)initWithIdentifier:(NSString*)type spriteIndices:(NSArray*)indices box2DWorld:(b2World*)world;
 -(void)update:(float)dt;
+
+/* Event for walking left */
 -(void)walkLeft;
+
+/* Event for walking right */
 -(void)walkRight;
+
+/* Event for stopping walking */
 -(void)stopWalking;
 
+/* Adds weapons to the weapon pool */
+-(void)loadWeapons:(NSArray*)weapons;
+
 //Properties endemic to character
+
+/* The skeleton belonging to the character */
 @property (strong, nonatomic) GWSkeleton* skeleton;
 
 /* The current state of the GWCharacter */
 @property (assign, nonatomic) characterState state;
+
+/* The weapons available to the character */
+@property (readonly, nonatomic) NSMutableArray* weapons;
 
 @end
