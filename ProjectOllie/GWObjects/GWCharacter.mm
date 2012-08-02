@@ -49,17 +49,17 @@
     
     if((self = [super init]))
     {
-        self.skeleton    = [[GWSkeleton alloc]initFromFile:type box2dWorld:world];
-        self.state       = kStateIdle;
-        self.orientation = kOrientationLeft;
+        self.skeleton     = [[GWSkeleton alloc]initFromFile:type box2dWorld:world];
+        self.state        = kStateIdle;
+        self.orientation  = kOrientationLeft;
+        self.type         = type;
         
-        Bone* root       = [self.skeleton getBoneByName:@"head"];
+        Bone* root       = [self.skeleton getBoneByName:@"Head"];
         [self generateSprites:root index:0];
-        
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"sprinting",@"woopwoop",@"idle1",@"idle2",@"idle3",@"idle4",@"idle5", nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"aim", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
@@ -78,20 +78,45 @@
 {
     if(root)
     {
-        NSString* spriteFrameCache = [NSString stringWithFormat:@"%@%@",self.type,@".plist"];
+        NSString* spriteFrameCache = [NSString stringWithFormat:@"%@%@",self.type,@"_test.plist"];
         [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:spriteFrameCache];
         
-        NSString* spriteBatchNode  = [NSString stringWithFormat:@"%@%@",self.type,@".png"];
+        NSString* spriteBatchNode  = [NSString stringWithFormat:@"%@%@",self.type,@"_test.png"];
         CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:spriteBatchNode];
         [self addChild:spriteSheet];
         
-        NSString* name = [NSString stringWithCString:root->name.c_str() 
+        
+        //set name to be independent of lower/upper
+        //
+        //
+        string b_name  = root->name;
+        b_name[0] = (char)tolower(b_name[0]);
+        char prefix    = b_name.at(0);
+        bool flipped   = false;
+        if(prefix == 'r')
+            b_name = b_name.substr(1);
+        else if (prefix == 'l')
+        {
+            b_name = b_name.substr(1); 
+            flipped = true;
+        }
+        CCLOG(@"The b_name is: %s", b_name.c_str());
+        NSString* name = [NSString stringWithCString:b_name.c_str() 
                                             encoding:[NSString defaultCStringEncoding]];
-        NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@%d%@",self.type,@"_",name,@"_",index,@".png"];
+        NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@",self.type,@"_",name,@".png"];
         
         GWPhysicsSprite *part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
-        [self addChild:part];
+        part.physicsBody      = root->box2DBody;
+        part.flipY = flipped;
+        [self addChild:part z:index];
+        
+        for(int i = 0; i < root->children.size(); i++)
+            [self generateSprites:root->children.at(i) index:index+1];
     }
+}
+
+-(void)loadWeapons:(NSArray *)weapons{
+    
 }
 
 -(void)update:(float)dt
@@ -110,14 +135,15 @@
             {
                 float rand     = CCRANDOM_0_1();
                 NSString* anim = @"idle1"; 
-                if(rand < .1f)
+                
+              /*  if(rand < .1f)
                     anim = @"idle2";
                 else if (rand < .25f)
                     anim = @"idle3";
                 else if (rand < .4f)
                     anim = @"idle4";
                 else if (rand < .6f)
-                    anim = @"idle5";
+                    anim = @"idle5";*/
                 
                 [self.skeleton runAnimation:anim flipped:self.orientation];
             }

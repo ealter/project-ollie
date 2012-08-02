@@ -184,6 +184,7 @@ enum {
     groundBody->CreateFixture(&fixtureDef);
     
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
+    [self addChild:_character];
     
     GaussRifle* gaussWeapon = [[GaussRifle alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
     [self addChild:gaussWeapon];
