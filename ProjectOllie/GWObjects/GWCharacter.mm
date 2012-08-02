@@ -16,6 +16,7 @@
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .005
+#define kTagParentNode 111
 
 @interface GWCharacter()
 {
@@ -38,12 +39,13 @@
 @end
 @implementation GWCharacter
 
-@synthesize skeleton      = _skeleton;
-@synthesize spriteIndices = _spriteIndices;
-@synthesize type          = _type;
-@synthesize state         = _state;
-@synthesize orientation   = _orientation;
-@synthesize weapons       = _weapons;
+@synthesize skeleton       = _skeleton;
+@synthesize spriteIndices  = _spriteIndices;
+@synthesize type           = _type;
+@synthesize state          = _state;
+@synthesize orientation    = _orientation;
+@synthesize weapons        = _weapons;
+@synthesize selectedWeapon = _selectedWeapon;
 
 -(id)initWithIdentifier:(NSString *)type spriteIndices:(NSArray *)indices box2DWorld:(b2World *)world{
     
@@ -54,8 +56,11 @@
         self.orientation  = kOrientationLeft;
         self.type         = type;
         
+        /* Add physics sprites */
         Bone* root       = [self.skeleton getBoneByName:@"Head"];
+        [self addChild:[CCNode node] z:kTagParentNode tag:kTagParentNode];
         [self generateSprites:root index:0];
+        
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
@@ -68,6 +73,7 @@
         
         /* prepare contact listener */
         [self.skeleton setOwner:self];
+        
 
     }
     
@@ -98,7 +104,7 @@
         else if (prefix == 'l')
         {
             b_name = b_name.substr(1); 
-            flipped = true;
+            //flipped = true;
         }
         CCLOG(@"The b_name is: %s", b_name.c_str());
         NSString* name = [NSString stringWithCString:b_name.c_str() 
@@ -108,7 +114,7 @@
         GWPhysicsSprite *part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
         part.physicsBody      = root->box2DBody;
         part.flipY = flipped;
-        [self addChild:part z:index];
+        [[self getChildByTag:kTagParentNode ]addChild:part z:10+index];
         
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i) index:index+1];
@@ -134,7 +140,7 @@
             if(![self.skeleton animating])
             {
                 float rand     = CCRANDOM_0_1();
-                NSString* anim = @"idle1"; 
+                NSString* anim = @"aim"; 
                 
               /*  if(rand < .1f)
                     anim = @"idle2";
@@ -170,6 +176,10 @@
             return;
         }
         case kStateArming:
+            /**
+             float angle = RAD2DEG([self.selectedWeapon getAngle]);
+             [self.skeleton runFrame:angle ofAnimation:@"aim"];
+             */
             return;
         case kStateManeuvering:
             return;
@@ -240,6 +250,23 @@
         self.skeleton.interactor.state = kInteractorStateInactive;
     }
     
+}
+
+-(void)setOrientation:(Orientation)orientation{
+    _orientation = orientation;
+    
+    if(orientation == kOrientationLeft)
+    {
+        for (GWPhysicsSprite* sprite in [self getChildByTag:kTagParentNode].children) {
+            sprite.flipY = YES;
+        }
+    }
+    else if(orientation == kOrientationRight)
+    {
+        for (GWPhysicsSprite* sprite in [self getChildByTag:kTagParentNode].children) {
+            sprite.flipY = NO;
+        }
+    }
 }
 
 @end

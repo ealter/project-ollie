@@ -402,12 +402,12 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         if(restingCounter >= 1)
         {
             float avg = rollingAvgSpeed/restingUpdates;
-            if(avg <= .01)
-                return true;
-            
             restingCounter  = 0;
             restingUpdates  = 0;
             rollingAvgSpeed = 0;
+            if(avg <= .01)
+                return true;
+
         }
     }
     return false;
