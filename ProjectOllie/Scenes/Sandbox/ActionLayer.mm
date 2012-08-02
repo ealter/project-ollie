@@ -184,7 +184,7 @@ enum {
     fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
     
-    _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
+    _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     
     Shotgun* gunWeapon = [[Shotgun alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
     [self addChild:gunWeapon];
