@@ -43,6 +43,7 @@
 @synthesize type          = _type;
 @synthesize state         = _state;
 @synthesize orientation   = _orientation;
+@synthesize weapons       = _weapons;
 
 -(id)initWithIdentifier:(NSString *)type spriteIndices:(NSArray *)indices box2DWorld:(b2World *)world{
     

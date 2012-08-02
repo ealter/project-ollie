@@ -16,6 +16,7 @@ class b2World;
 
 @interface GWProjectile : GWPhysicsSprite {
     b2World* _world;
+    float destroyTimer;
 }
 
 @property (strong, nonatomic) ActionLayer *gameWorld;

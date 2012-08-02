@@ -1,19 +1,25 @@
- //
-//  GWProjectile.m
+//
+//  ShotgunProjectile.m
 //  ProjectOllie
 //
-//  Created by Lion User on 7/13/12.
-//  Copyright 2012 hi ku llc. All rights reserved.
+//  Created by Lion User on 7/31/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GWProjectile.h"
-#import "GameConstants.h"
-#import "Box2D.h"
-#import "GWCharacter.h"
+#import "ShotgunProjectile.h"
+#import "Shotgun.h"
 
-@implementation GWProjectile
-@synthesize  gameWorld      = _gameWorld;
-@synthesize bulletCollided  = _bulletCollided;
+
+@implementation ShotgunProjectile
+
+-(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *)gWorld
+{
+    if (self = [self initWithBulletSize:CGSizeMake(SHOTGUN_B_WIDTH, SHOTGUN_B_HEIGHT) imageName:SHOTGUN_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
+        
+    }
+                
+    return self;
+}
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
 {
@@ -22,7 +28,6 @@
         _world              = world;
         self.gameWorld      = gWorld;
         self.bulletCollided = FALSE;
-        destroyTimer        = 0.;
         
         //Schedule updates
         [self scheduleUpdate];
@@ -43,8 +48,8 @@
         fixtureDef.density  = 1.0f;
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 0.1f;
-        fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
-        fixtureDef.filter.maskBits = MASK_PROJECTILES;
+        fixtureDef.filter.categoryBits = CATEGORY_PELLETS;
+        fixtureDef.filter.maskBits = MASK_PELLETS;
         b2Body *bulletShape = _world->CreateBody(&bd);
         bulletShape->CreateFixture(&fixtureDef);
         bulletShape->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0); 
@@ -59,42 +64,11 @@
     return self;
 }
 
--(void)applyb2ForceInRadius:(float)maxDistance withStrength:(float)str isOutwards:(BOOL)outwards
-{
-    b2Vec2 b2ExplosionPosition = b2Vec2(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
-    
-    for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext())
-	{
-		b2Vec2 b2BodyPosition = b->GetPosition();
-        
-        //See if the body is close enough to apply a force
-        float dist = b2Distance(b2ExplosionPosition, b2BodyPosition);
-        if (dist > maxDistance) {
-            //Too far away! Don't bother.
-        }else {
-            
-            if (b->GetFixtureList()->GetFilterData().maskBits == MASK_BONES) {
-                //Its part of a skeleton, set it to ragdoll for cool explosions
-                GWCharacter *tempChar = ((__bridge GWCharacter *)b->GetUserData());
-                tempChar.state = kStateRagdoll;
-            }
-            
-            //Force is away from the center, calculate it and apply to the body
-            float strength = (maxDistance - dist) / maxDistance;
-            float force = strength * str;
-            float angle = atan2f(b2ExplosionPosition.y - b2BodyPosition.y, b2ExplosionPosition.x - b2BodyPosition.x);
-            if (outwards) {
-                angle = angle + M_PI;
-            }
-            // Apply an impulse to the body, using the angle
-            b->ApplyLinearImpulse(b2Vec2(cosf(angle) * force, sinf(angle) * force), b2BodyPosition);
-        }
-	}
-}
 
 -(void)update:(ccTime)dt
 {
-    if (self.bulletCollided) {
+    destroyTimer += dt;
+    if (self.bulletCollided || destroyTimer > SHOTGUN_B_LIFE) {
         [self destroyBullet];
     }
 }
@@ -106,6 +80,8 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:10. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain shapeChanged];
     }
     
     //Clean up bullet and remove from parent

@@ -95,8 +95,8 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
         jointDef.lowerAngle  = root->jointAngleMin;
         jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx/PTM_RATIO,root->jy/PTM_RATIO));
        // jointDef.referenceAngle = root->box2DBody->GetAngle() - root->parent->box2DBody->GetAngle();
-        b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
-        DebugLog("The angle between these two bodies are: %4.4f", RAD2DEG(j->GetJointAngle()));
+        //b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+        //DebugLog("The angle between these two bodies are: %4.4f", RAD2DEG(j->GetJointAngle()));
     }
     return root;
 }
@@ -249,7 +249,7 @@ bool Skeleton::animating(Bone *root, float time)
         // stop animating
         anim = false;
         
-        // new position is torso's position
+        // new position is avg left and right leg position
         Bone* ll = getBoneByName(root, "ll_leg");
         Bone* rl = getBoneByName(root, "rl_leg");
 

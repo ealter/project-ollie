@@ -121,6 +121,12 @@ void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2Co
     }else if (filterB.categoryBits== CATEGORY_PROJECTILES)
     {
         projFixture = fixtureB;
+    }else if (filterA.categoryBits == CATEGORY_PELLETS && filterB.categoryBits != CATEGORY_PELLETS)
+    {
+        projFixture = fixtureA;
+    }else if (filterB.categoryBits == CATEGORY_PELLETS && filterA.categoryBits != CATEGORY_PELLETS)
+    {
+        projFixture = fixtureB;
     }else {
         return;
     }

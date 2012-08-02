@@ -1036,7 +1036,7 @@ void ShapeField::removeFromSpatialGrid(PointEdge* pe)
         for (unsigned j = minCellY; j <= maxCellY; j++)
             spatialGrid[i][j].erase(pe);
     
-    removed.insert(pe);
+    removed.insert(pe->userData);
 
 }
 

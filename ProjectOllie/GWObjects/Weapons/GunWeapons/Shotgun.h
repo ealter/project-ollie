@@ -1,5 +1,5 @@
 //
-//  GaussRifle.h
+//  Shotgun.h
 //  ProjectOllie
 //
 //  Created by Lion User on 7/31/12.
@@ -9,18 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GWGunWeapon.h"
-#import "GameConstants.h"
+#include "GameConstants.h"
 
-#define GAUSS_WIDTH 100./PTM_RATIO
-#define GAUSS_HEIGHT 90./PTM_RATIO
-#define GAUSS_IMAGE @"gauss_rifle.png"
-#define GAUSS_B_WIDTH 10.
-#define GAUSS_B_HEIGHT 6.
-#define GAUSS_B_IMAGE @"bullet.png"
+#define SHOTGUN_WIDTH 100./PTM_RATIO
+#define SHOTGUN_HEIGHT 90./PTM_RATIO
+#define SHOTGUN_IMAGE @"shotgun.png"
+#define SHOTGUN_B_WIDTH 5.
+#define SHOTGUN_B_HEIGHT 5.
+#define SHOTGUN_B_IMAGE @"pellet.png"
+#define SHOTGUN_B_LIFE 2.
+#define NUM_PELLETS 6
 
-@interface GaussRifle : GWGunWeapon {
+@interface Shotgun : GWGunWeapon {
     
 }
+
 -(id)initGunWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
 
 @end

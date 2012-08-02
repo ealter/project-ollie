@@ -17,6 +17,7 @@
 #import "GWGestures.h"
 #import "HMVectorNode.h"
 #import "Grenade.h"
+#import "Shotgun.h"
 #import "GaussRifle.h"
 #import "GWContactListener.h"
 
@@ -183,14 +184,14 @@ enum {
     fixtureDef.filter.maskBits = MASK_TERRAIN;
     groundBody->CreateFixture(&fixtureDef);
     
-    _character = [[GWCharacter alloc]initWithIdentifier:@"character" spriteIndices:[NSArray array] box2DWorld:world];
+    _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     
-    GaussRifle* gaussWeapon = [[GaussRifle alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
-    [self addChild:gaussWeapon];
+    Shotgun* gunWeapon = [[Shotgun alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
+    [self addChild:gunWeapon];
     //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
     //[self addChild:grenade];
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:gaussWeapon];
+    [[gestures children] addObject:gunWeapon];
     [self addChild:gestures z:2];
 
 }
