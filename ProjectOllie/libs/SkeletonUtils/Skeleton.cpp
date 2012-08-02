@@ -243,7 +243,7 @@ bool Skeleton::animating(Bone *root, float time)
             key = root->animation.front();
         }
         //DebugLog("The angle here is: %f",RAD2DEG(this->angle));
-        //root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
+        root->box2DBody->SetLinearVelocity(b2Vec2(0,0));
     }
     else {
         // stop animating
