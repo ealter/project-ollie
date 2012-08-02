@@ -100,6 +100,79 @@
     CGPoint newPos = ccpAdd(oldPos,diff);
     [subject_ setPosition:newPos];
     
+    float cs = subject_.scale;
+    
+    for (CCNode<CameraObject> *child in self.children) {
+        if(![[self class] isCCNodeCameraObject:child]) continue;
+        float prp = cs/(cs+(1/[child getParallaxRatio])-1);
+        CGPoint tdiff = ccpMult(diff, prp*(child.scale/cs));
+        CGPoint oldPos = child.position;
+        [child setPosition:ccpAdd(oldPos,tdiff)];
+    }
+}
+
+-(void)panTo:(CGPoint)dest{
+    [subject_ setPosition:dest];
+}
+
+-(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition {
+    CGPoint utCurrentPosition = currentPosition;
+    currentPosition = [subject_ convertToNodeSpace:currentPosition];
+    
+    //calculate the old centerpoint
+    CGPoint oldCenterPoint = ccpMult(currentPosition,subject_.scale);
+    
+    //Pan to 0, 0 (the scaling origin)
+    CGPoint oldPos = subject_.position;
+    [self panBy:ccpNeg(subject_.position)];
+    
+    // Set the scale.
+    float scale = subject_.scale;
+    float newScale = clampf(scale * diff, self.minimumScale, self.maximumScale);
+    [subject_ setScale: newScale];
+    
+    // Get the new center point.
+    CGPoint newCenterPoint = ccpMult(currentPosition, subject_.scale);
+    
+    // Then calculate the delta.
+    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
+    
+    
+    //[subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
+    
+    for (CCNode<CameraObject> *child in self.children) {
+        if(![[self class] isCCNodeCameraObject:child]) continue;
+        float pr = [child getParallaxRatio];
+        float Sx = 1/(pr/newScale+1-pr);
+        [child setScale:Sx];
+        /*
+         CGPoint tempPosition = [subject_ convertToNodeSpace:utCurrentPosition];
+         
+         CGPoint oldCenterPoint = ccpMult(tempPosition,child.scale);
+         float scaleDiff = (newScale - scale)*([child getParallaxRatio]);
+         float tempNewScale = child.scale+scaleDiff;
+         
+         child.scale = tempNewScale;
+         
+         // Get the new center point.
+         CGPoint newCenterPoint = ccpMult(tempPosition,child.scale);
+         
+         // Then calculate the delta.
+         CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);*/
+        //[child setPosition:ccpAdd(child.position, centerPointDelta)];
+    }
+    
+    // Now adjust the layer by the delta.
+    [self panBy:ccpAdd(oldPos, centerPointDelta)];
+}
+
+
+/*
+-(void)panBy:(CGPoint)diff{
+    CGPoint oldPos = subject_.position;
+    CGPoint newPos = ccpAdd(oldPos,diff);
+    [subject_ setPosition:newPos];
+    
     for (CCNode<CameraObject> *child in self.children) {
         if(![[self class] isCCNodeCameraObject:child]) continue;
         CGPoint tdiff = ccpMult(diff, [child getParallaxRatio]);
@@ -154,7 +227,7 @@
         CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
         [child setPosition:ccpAdd(child.position, centerPointDelta)];
     }
-}
+}*/
 
 -(void)createShakeEffect:(float)dt{
     //the shakeRate will determine the weight given to dt
