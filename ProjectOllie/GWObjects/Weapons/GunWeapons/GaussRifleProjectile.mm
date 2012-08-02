@@ -26,10 +26,11 @@
     [self.gameWorld.gameTerrain clipCircle:NO WithRadius:30. x:self.position.x y:self.position.y];
     [self.gameWorld.gameTerrain shapeChanged];
     gaussTimer += dt;
-    if (self.bulletCollided) {
-        if (gaussTimer >= 2.) {
-            [self destroyBullet];
-        }
+    if (gaussTimer >= 4.) {
+        [self destroyBullet];
+    }
+    if (self.bulletCollided && gaussTimer >.05) {
+        [self destroyBullet];
     }
 }
 
@@ -53,7 +54,7 @@
 -(void)bulletContact
 {
     self.bulletCollided = TRUE;
-    
+    gaussTimer = 0;
 }
 
 @end

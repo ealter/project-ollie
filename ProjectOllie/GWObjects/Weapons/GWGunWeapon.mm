@@ -43,10 +43,11 @@
         //Make the gun image and overlay image in the middle of the gun object, for easy rotation
         self.gunImage       = [CCSprite spriteWithFile:imageName];
         self.gunImage.position= ccpAdd(self.gunImage.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
-        self.gunImage.flipX = YES;
+        self.gunImage.flipX = NO;
         
         self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
         self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+        self.aimOverlay.flipX = YES;
         [self addChild:self.aimOverlay];
         [self addChild:self.gunImage];
         [self addChild:drawNode];    
@@ -59,17 +60,19 @@
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {
-        //Calculate force, make bullet, apply force
+        //Calculate force
         CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
+        
+        //Make bullet
         GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
-        float angle             = CC_RADIANS_TO_DEGREES(atan2f(self.position.y - aimPoint.y, self.position.x - aimPoint.x));
-        angle += 180;
-        angle = angle * -1;
-        bullet.rotation = angle;
+        bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.parent addChild:bullet];
+        
+        //Apply force
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
         
+        //Clear drawNode, decrement ammo
         [drawNode clear];
         self.ammo--;
     }else {
@@ -84,6 +87,7 @@
     float dist                      = MAXSPEED * self.bulletSpeed;
     if (dist > MAXSPEED)        dist= MAXSPEED;   //ensures that max speed is capped
     float angle                     = atan2f(aimPoint.y - self.position.y, aimPoint.x - self.position.x);
+    self.wepAngle                   = angle;
     float vx                        = cosf(angle)*dist;
     float vy                        = sinf(angle)*dist;
     vel                             = CGPointMake(vx, vy);
@@ -118,7 +122,7 @@
 {
     if (ccpDistance(startPoint, self.position) < self.contentSize.width && self.ammo >0) {
         //Rotate gun overlay
-        float angle             = CC_RADIANS_TO_DEGREES(atan2f(self.position.y - currPoint.y, self.position.x - currPoint.x));
+        float angle             = CC_RADIANS_TO_DEGREES(self.wepAngle);
         if (abs(angle) > 90) {
             self.gunImage.flipY = NO;
         }else {

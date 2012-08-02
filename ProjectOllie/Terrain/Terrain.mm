@@ -169,12 +169,10 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     
     //Update the box2d edge shapes
     if (world) {
-        for (std::set<PointEdge*>::iterator i = shapeField_->removed.begin(); i != shapeField_->removed.end(); i++)
+        for (std::set<void*>::iterator i = shapeField_->removed.begin(); i != shapeField_->removed.end(); i++)
         {
-            PointEdge* pe = *i;
-            if (pe->userData) {
-                world->DestroyBody((b2Body *)pe->userData);
-            }
+            b2Body* b = (b2Body*)*i;
+            world->DestroyBody(b);
         }
         shapeField_->removed.clear();
         

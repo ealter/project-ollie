@@ -344,6 +344,10 @@
 		CEDEE34D15C8A72A00C0BB1C /* shotgun.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34915C8A72A00C0BB1C /* shotgun.png */; };
 		CEDEE35115C8A87B00C0BB1C /* GaussRifle.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */; };
 		CEDEE35415C8A8A000C0BB1C /* GaussRifleProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */; };
+		CEDEE35615C8BDB600C0BB1C /* bullet.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE35515C8BDB600C0BB1C /* bullet.png */; };
+		CEDEE35915C8D2F900C0BB1C /* ShotgunProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */; };
+		CEDEE35C15C8D30600C0BB1C /* Shotgun.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */; };
+		CEDEE35E15C8D4F100C0BB1C /* pellet.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE35D15C8D4F000C0BB1C /* pellet.png */; };
 		CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00100158BDCE100F7F1A8 /* Authentication.m */; };
 		CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */; };
 		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
@@ -964,6 +968,12 @@
 		CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GaussRifle.mm; sourceTree = "<group>"; };
 		CEDEE35215C8A8A000C0BB1C /* GaussRifleProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaussRifleProjectile.h; sourceTree = "<group>"; };
 		CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GaussRifleProjectile.mm; sourceTree = "<group>"; };
+		CEDEE35515C8BDB600C0BB1C /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
+		CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotgunProjectile.h; sourceTree = "<group>"; };
+		CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShotgunProjectile.mm; sourceTree = "<group>"; };
+		CEDEE35A15C8D30600C0BB1C /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shotgun.h; sourceTree = "<group>"; };
+		CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shotgun.mm; sourceTree = "<group>"; };
+		CEDEE35D15C8D4F000C0BB1C /* pellet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pellet.png; sourceTree = "<group>"; };
 		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		CEF00100158BDCE100F7F1A8 /* Authentication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = Authentication.m; path = ProjectOllie/Server/Authentication.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+URLEncoding.h"; path = "ProjectOllie/libs/categories/NSDictionary+URLEncoding.h"; sourceTree = "<group>"; };
@@ -1476,6 +1486,10 @@
 				CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */,
 				CEDEE35215C8A8A000C0BB1C /* GaussRifleProjectile.h */,
 				CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */,
+				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
+				CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */,
+				CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */,
+				CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */,
 			);
 			path = GunWeapons;
 			sourceTree = "<group>";
@@ -2130,6 +2144,8 @@
 		CE99465615C4F19700D46E1E /* WeaponImages */ = {
 			isa = PBXGroup;
 			children = (
+				CEDEE35D15C8D4F000C0BB1C /* pellet.png */,
+				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
 				CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */,
 				CEDEE34815C8A72A00C0BB1C /* rocket.png */,
@@ -2363,6 +2379,8 @@
 				CEDEE34B15C8A72A00C0BB1C /* gauss_rifle.png in Resources */,
 				CEDEE34C15C8A72A00C0BB1C /* rocket.png in Resources */,
 				CEDEE34D15C8A72A00C0BB1C /* shotgun.png in Resources */,
+				CEDEE35615C8BDB600C0BB1C /* bullet.png in Resources */,
+				CEDEE35E15C8D4F100C0BB1C /* pellet.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2597,6 +2615,8 @@
 				CE59CA5315C4D69400B68745 /* GrenadeProjectile.mm in Sources */,
 				CEDEE35115C8A87B00C0BB1C /* GaussRifle.mm in Sources */,
 				CEDEE35415C8A8A000C0BB1C /* GaussRifleProjectile.mm in Sources */,
+				CEDEE35915C8D2F900C0BB1C /* ShotgunProjectile.mm in Sources */,
+				CEDEE35C15C8D30600C0BB1C /* Shotgun.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
