@@ -73,6 +73,7 @@
     if (dist > MAXSPEED)dist= MAXSPEED;
     dist                    = dist / 64;
     float angle             = atan2f(startPoint.y-endPoint.y, startPoint.x - endPoint.x);
+    self.wepAngle           = angle;
     float vx                = cosf(angle)*dist;
     float vy                = sinf(angle)*dist;
     vel                     = CGPointMake(vx, vy);

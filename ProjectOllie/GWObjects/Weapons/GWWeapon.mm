@@ -14,6 +14,7 @@
 @synthesize unlocked        = _unlocked;
 @synthesize weaponSprite    = _weaponSprite;
 @synthesize gameWorld       = _gameWorld;
+@synthesize wepAngle        = _wepAngle;
 
 -(void)fireWeapon:(CGPoint)target
 {

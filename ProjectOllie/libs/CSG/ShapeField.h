@@ -27,7 +27,7 @@ class ShapeField
 {
 public:
     PeSet peSet;
-    PeSet removed;
+    std::set<void*> removed;
     PeSet added;
     
     ShapeField(float meterWidth, float meterHeight);

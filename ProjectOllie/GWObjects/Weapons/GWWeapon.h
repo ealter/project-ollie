@@ -24,6 +24,8 @@
 //onscreen representation
 @property (strong, nonatomic) CCSprite *weaponSprite;
 
+@property (assign, nonatomic) float wepAngle;
+
 @property (strong, nonatomic) ActionLayer *gameWorld;
 
 //Empty method for firing weapon, should be overwritten
