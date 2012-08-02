@@ -38,13 +38,6 @@
     return self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
-}
-
 - (Login *)login
 {
     if(!_login) {
@@ -70,10 +63,9 @@
     //TODO: maybe release login?
 }
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName
+- (NSArray *)textFields
 {
-    [self removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
-    [super transitionToSceneWithFile:sceneName];
+    return [NSArray arrayWithObjects:nameField, pwField, nil];
 }
 
 //Called when login succeeds

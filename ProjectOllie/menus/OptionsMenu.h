@@ -6,11 +6,11 @@
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "Menu.h"
+#import "MenuWithTextFields.h"
 
 @class CCLabelTTF;
 
-@interface OptionsMenu : Menu <UITextFieldDelegate>{
+@interface OptionsMenu : MenuWithTextFields {
     CCLabelTTF *userName;
     UITextField *nameField;
 }

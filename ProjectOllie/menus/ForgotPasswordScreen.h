@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import "Menu.h"
+#import "MenuWithTextFields.h"
 
-@interface ForgotPasswordScreen : Menu <UITextFieldDelegate> {
+@interface ForgotPasswordScreen : MenuWithTextFields {
     UITextField *emailAddressField_;
 }
 

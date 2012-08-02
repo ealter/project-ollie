@@ -120,6 +120,7 @@
 		CE18C08C15B9659F00FD2025 /* waterSheet7.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08515B9659F00FD2025 /* waterSheet7.png */; };
 		CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08615B9659F00FD2025 /* waterSheet8.png */; };
 		CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */; };
+		CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */; };
 		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
 		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
@@ -543,6 +544,8 @@
 		CE18C08615B9659F00FD2025 /* waterSheet8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet8.png; sourceTree = "<group>"; };
 		CE19DF5615CB443700CC392D /* ForgotPasswordScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordScreen.h; path = menus/ForgotPasswordScreen.h; sourceTree = "<group>"; };
 		CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordScreen.m; path = menus/ForgotPasswordScreen.m; sourceTree = "<group>"; };
+		CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWithTextFields.h; path = menus/MenuWithTextFields.h; sourceTree = "<group>"; };
+		CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuWithTextFields.m; path = menus/MenuWithTextFields.m; sourceTree = "<group>"; };
 		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/Miscellaneous/fire.png; sourceTree = "<group>"; };
 		CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PasswordChangeScreen.ccbi; path = "Resources/menu-objects/ccbis/PasswordChangeScreen.ccbi"; sourceTree = "<group>"; };
 		CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChangeScreen.h; path = menus/PasswordChangeScreen.h; sourceTree = "<group>"; };
@@ -1499,6 +1502,8 @@
 				CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */,
 				C5F430B215B8D6C200174FEE /* MyCell.h */,
 				C5F430B315B8D6C200174FEE /* MyCell.m */,
+				CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */,
+				CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */,
 				CE01827F15951774003CE804 /* Menu.h */,
 				CE01828015951774003CE804 /* Menu.m */,
 				CE30B18A158FBA34009EC82B /* ActionMenu.h */,
@@ -2668,6 +2673,7 @@
 				CEDEE35915C8D2F900C0BB1C /* ShotgunProjectile.mm in Sources */,
 				CEDEE35C15C8D30600C0BB1C /* Shotgun.mm in Sources */,
 				CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */,
+				CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

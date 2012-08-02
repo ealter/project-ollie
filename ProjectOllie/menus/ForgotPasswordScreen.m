@@ -21,11 +21,9 @@
     return self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (NSArray *)textFields
 {
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
+    return [NSArray arrayWithObject:emailAddressField_];
 }
 
 - (void)pressedResetPassword:(id)sender

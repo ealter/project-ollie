@@ -6,9 +6,9 @@
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "Menu.h"
+#import "MenuWithTextFields.h"
 
-@interface LoginScreen : Menu <UITextFieldDelegate>
+@interface LoginScreen : MenuWithTextFields
 
 @property (nonatomic, strong) UITextField *nameField;
 @property (nonatomic, strong) UITextField *pwField;
