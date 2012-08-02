@@ -371,7 +371,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>Miscellaneous/btn-test-0.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -394,7 +394,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>Miscellaneous/btn-test-1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -417,7 +417,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>Miscellaneous/btn-test-2.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -621,7 +621,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>Miscellaneous/btn-test-0.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -644,7 +644,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>Miscellaneous/btn-test-1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -667,7 +667,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>Miscellaneous/btn-test-2.png</string>
 						</array>
 					</dict>
 					<dict>

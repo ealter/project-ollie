@@ -860,7 +860,7 @@
 						<key>type</key>
 						<string>Texture</string>
 						<key>value</key>
-						<string>leaf5.png</string>
+						<string>Main menu/leaf.png</string>
 					</dict>
 				</array>
 			</dict>
@@ -1301,7 +1301,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>Miscellaneous/btn-test-0.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1324,7 +1324,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>Miscellaneous/btn-test-1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1347,7 +1347,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>Miscellaneous/btn-test-2.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1551,7 +1551,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>terrainbutton.png</string>
+							<string>Main Menu/terrainbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1574,7 +1574,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>terrainbutton.png</string>
+							<string>Main Menu/terrainbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1597,7 +1597,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>terrainbutton.png</string>
+							<string>Main Menu/terrainbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1801,7 +1801,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>Miscellaneous/btn-test-0.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1824,7 +1824,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>Miscellaneous/btn-test-1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -1847,7 +1847,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>Miscellaneous/btn-test-2.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2051,7 +2051,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>optionsbutton.png</string>
+							<string>Main Menu/optionsbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2074,7 +2074,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>optionsbutton.png</string>
+							<string>Main Menu/optionsbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2097,7 +2097,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>optionsbutton.png</string>
+							<string>Main Menu/optionsbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2301,7 +2301,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-0.png</string>
+							<string>Miscellaneous/btn-test-0.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2324,7 +2324,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-1.png</string>
+							<string>Miscellaneous/btn-test-1.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2347,7 +2347,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>btn-test-2.png</string>
+							<string>Miscellaneous/btn-test-2.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2551,7 +2551,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>metalbutton.png</string>
+							<string>Main menu/metalbutton.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2574,7 +2574,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>metalbutton-dark.png</string>
+							<string>Main menu/metalbutton-dark.png</string>
 						</array>
 					</dict>
 					<dict>
@@ -2597,7 +2597,7 @@
 						<key>value</key>
 						<array>
 							<string></string>
-							<string>metalbutton-dark.png</string>
+							<string>Main menu/metalbutton-dark.png</string>
 						</array>
 					</dict>
 					<dict>
