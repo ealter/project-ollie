@@ -142,7 +142,7 @@ using namespace std;
     Bone* right_leg = _skeleton->getBoneByName(root, "rl_leg");
     b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
     b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
-    float totalLowest    = _skeleton->lowestY(root, 100);
+    //float totalLowest    = _skeleton->lowestY(root, 100);
     //float lowestY        = max(totalLowest+radius,self.interactingBody->GetPosition().y);
     [self setAngularVelocity:0];
     b2Vec2 averageLeg    = left_leg->box2DBody->GetPosition() + right_leg->box2DBody->GetPosition();
