@@ -2413,7 +2413,6 @@
 				C57BFA0B15C90D8800CBC091 /* construction_idle5.anim in Resources */,
 				C57BFA0C15C90D8800CBC091 /* construction_sprinting.anim in Resources */,
 				C57BFA0D15C90D8800CBC091 /* construction_woopwoop.anim in Resources */,
->>>>>>> 0b4583e15be4caae441634f15b61602d95874776
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
