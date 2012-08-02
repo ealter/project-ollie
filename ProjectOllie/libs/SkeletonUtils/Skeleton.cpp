@@ -94,8 +94,8 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
         jointDef.upperAngle  = root->jointAngleMax;
         jointDef.lowerAngle  = root->jointAngleMin;
         jointDef.Initialize(root->box2DBody, root->parent->box2DBody, b2Vec2(root->jx/PTM_RATIO,root->jy/PTM_RATIO));
-       // jointDef.referenceAngle = root->box2DBody->GetAngle() - root->parent->box2DBody->GetAngle();
-        //b2RevoluteJoint* j = (b2RevoluteJoint*)world->CreateJoint(&jointDef);
+        //jointDef.referenceAngle = root->box2DBody->GetAngle() - root->parent->box2DBody->GetAngle();
+        world->CreateJoint(&jointDef);
         //DebugLog("The angle between these two bodies are: %4.4f", RAD2DEG(j->GetJointAngle()));
     }
     return root;
