@@ -74,6 +74,7 @@
         
         /* prepare contact listener */
         [self.skeleton setOwner:self];
+        self.selectedWeapon.holder = self;
         
 
     }
