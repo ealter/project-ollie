@@ -71,6 +71,26 @@
     if (self.bulletCollided || destroyTimer > SHOTGUN_B_LIFE) {
         [self destroyBullet];
     }
+    
+    //Check collisions, since the listener is a piece of poop
+    for (b2ContactEdge *edge = self.physicsBody->GetContactList(); edge; edge = edge ->next) {
+        if (edge) {
+            b2Fixture* fixtureA = edge->contact->GetFixtureA();
+            b2Fixture* fixtureB = edge->contact->GetFixtureB();
+            
+            b2Filter filterA = fixtureA->GetFilterData();
+            b2Filter filterB = fixtureB->GetFilterData();
+            
+            if (filterA.categoryBits == CATEGORY_PELLETS || filterB.categoryBits == CATEGORY_PELLETS)
+            {
+                
+            }else {
+                continue;
+            }
+            
+            [self bulletContact];
+        }
+    }
 }
 
 
@@ -85,7 +105,7 @@
     }
     
     //Clean up bullet and remove from parent
-    [[self parent] removeChild:self cleanup:YES];    
+    [[self parent] removeChild:self cleanup:YES];  
     _world->DestroyBody(self.physicsBody);
 }
 
