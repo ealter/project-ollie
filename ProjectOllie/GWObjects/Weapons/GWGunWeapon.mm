@@ -37,7 +37,7 @@
         _world              = world;
         self.gameWorld      = gWorld;
         drawNode            = [HMVectorNode node];
-        drawNode.position   = ccpSub(drawNode.position, self.position);
+        drawNode.position   = ccpAdd(drawNode.position, CGPointMake(self.contentSize.width/4, self.contentSize.height/4));
         ccColor4F c         = ccc4f(.5f,.5f,0.f,.5f);
         
         //Make the gun image and overlay image in the middle of the gun object, for easy rotation
@@ -57,11 +57,6 @@
     return self;
 }
 
--(void)setPosition:(CGPoint)position
-{
-    [super setPosition:position];
-    drawNode.position = ccpSub(drawNode.position, self.position);
-}
 
 -(void)fireWeapon:(CGPoint)aimPoint
 {
@@ -112,7 +107,7 @@
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
-    CGPoint beginPoint      = ccpAdd(self.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+    CGPoint beginPoint      = drawNode.position;
     
     for (int i = 0; i < 20 ; i++) {
         CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));

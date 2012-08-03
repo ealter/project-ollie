@@ -29,7 +29,7 @@
         
         for (int i = -(NUM_PELLETS/2); i<(NUM_PELLETS/2); i++) {
             //Make Bullet
-            ShotgunProjectile *bullet   = [[ShotgunProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * SHOTGUN_WIDTH/2), self.position.y + (sinf(self.wepAngle) *SHOTGUN_HEIGHT/2)) b2World:_world gameWorld:self.gameWorld];
+            ShotgunProjectile *bullet   = [[ShotgunProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * SHOTGUN_WIDTH/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *SHOTGUN_HEIGHT/2*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
             b2Body* bulletShape = bullet.physicsBody;
             [self.parent addChild:bullet];
             
