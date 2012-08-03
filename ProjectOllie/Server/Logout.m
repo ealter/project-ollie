@@ -25,7 +25,7 @@
 
 - (void)serverReturnedResult:(NSDictionary *)result
 {
-    [self broadcastServerOperationSucceeded];
+    [self broadcastServerOperationSucceededWithData:nil];
 }
 
 @end

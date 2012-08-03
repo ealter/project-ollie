@@ -42,7 +42,7 @@
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }

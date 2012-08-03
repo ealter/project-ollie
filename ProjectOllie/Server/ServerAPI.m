@@ -31,10 +31,10 @@
     return _auth;
 }
 
-- (void)broadcastServerOperationSucceeded
+- (void)broadcastServerOperationSucceededWithData:(id)data
 {
-    if([self.delegate respondsToSelector:@selector(serverOperationSucceeded)])
-        [self.delegate serverOperationSucceeded];
+    if([self.delegate respondsToSelector:@selector(serverOperationSucceededWithData:)])
+        [self.delegate serverOperationSucceededWithData:data];
 }
 
 - (void)broadcastServerOperationFailedWithError:(NSString *)error

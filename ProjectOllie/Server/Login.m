@@ -27,7 +27,7 @@
 {
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     if(self.auth.authToken)
-        [self broadcastServerOperationSucceeded];
+        [self broadcastServerOperationSucceededWithData:nil];
     else
         [self broadcastServerOperationFailedWithError:nil];
 }

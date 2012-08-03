@@ -69,7 +69,7 @@ static NSString *kAppId               = @"395624167150736";
     self.auth.authToken = [result objectForKey:SERVER_AUTH_TOKEN_KEY];
     self.auth.username  = [result objectForKey:@"username"];
     if(self.auth.authToken)
-        [self broadcastServerOperationSucceeded];
+        [self broadcastServerOperationSucceededWithData:nil];
     else
         [self broadcastServerOperationFailedWithError:nil];
 }

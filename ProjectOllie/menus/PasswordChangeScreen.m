@@ -39,7 +39,7 @@
     return self;
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self pressedBack:self];
 }

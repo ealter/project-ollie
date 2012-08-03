@@ -40,7 +40,7 @@
 {
     assert(self.changedUsername);
     self.auth.username = self.changedUsername;
-    [self broadcastServerOperationSucceeded];
+    [self broadcastServerOperationSucceededWithData:nil];
 }
 
 @end
