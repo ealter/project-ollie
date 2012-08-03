@@ -25,7 +25,7 @@
 {
     if (self.ammo >0) {
         //Calculate force
-        CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
+        CGPoint force       = [self calculateGunVelocityFromStart:self.position toAimPoint:aimPoint];
         
         //Make bullet
         GaussRifleProjectile *bullet= [[GaussRifleProjectile alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
@@ -50,7 +50,7 @@
     
     //Calculate values to be used for trajectory simulation
     float dt                = 1/60.0f;
-    CGPoint velocity        = [self calculateGunVelocityWithAimPoint:currPoint];
+    CGPoint velocity        = [self calculateGunVelocityFromStart:self.position toAimPoint:currPoint];
     velocity                = ccpMult(velocity, MAXSPEED);
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);

@@ -62,7 +62,7 @@
 {
     if (self.ammo >0) {
         //Calculate force
-        CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
+        CGPoint force       = [self calculateGunVelocityFromStart:self.position toAimPoint:aimPoint];
         
         //Make bullet
         GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
@@ -81,13 +81,13 @@
     }
 }
 
--(CGPoint)calculateGunVelocityWithAimPoint:(CGPoint)aimPoint
+-(CGPoint)calculateGunVelocityFromStart:(CGPoint) startPoint toAimPoint:(CGPoint) aimPoint
 {
     CGPoint vel;
     //Calculate velocity using gun's speed and the angle of the weapon.  set a max distance as well
     float dist                      = MAXSPEED * self.bulletSpeed;
     if (dist > MAXSPEED)        dist= MAXSPEED;   //ensures that max speed is capped
-    float angle                     = atan2f(aimPoint.y - self.position.y, aimPoint.x - self.position.x);
+    float angle                     = atan2f(aimPoint.y - startPoint.y, aimPoint.x - startPoint.x);
     self.wepAngle                   = angle;
     float vx                        = cosf(angle)*dist;
     float vy                        = sinf(angle)*dist;
@@ -103,7 +103,7 @@
     
     //Calculate values to be used for trajectory simulation
     float dt                = 1/60.0f;
-    CGPoint velocity        = [self calculateGunVelocityWithAimPoint:currPoint];
+    CGPoint velocity        = [self calculateGunVelocityFromStart:self.position toAimPoint:currPoint];
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
