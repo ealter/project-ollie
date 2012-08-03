@@ -9,7 +9,7 @@
 #import "PlayerSearchScreen.h"
 #import "PlayerSearch.h"
 
-@interface PlayerSearchScreen () <ServerAPI_delegate>\
+@interface PlayerSearchScreen () <ServerAPI_delegate>
 @end
 
 @implementation PlayerSearchScreen
