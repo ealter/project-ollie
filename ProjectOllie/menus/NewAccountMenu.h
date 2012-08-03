@@ -6,9 +6,9 @@
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "Menu.h"
+#import "MenuWithTextFields.h"
 
-@interface NewAccountMenu : Menu <UITextFieldDelegate>
+@interface NewAccountMenu : MenuWithTextFields
 
 @property (nonatomic, strong) UITextField *emailField;
 @property (nonatomic, strong) UITextField *nameField;

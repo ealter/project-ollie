@@ -82,6 +82,12 @@ typedef enum InteractorState{
 /* Puts the animation into the skeleton's animation queue */
 -(void)runAnimation:(NSString*)animationName flipped:(bool)flipped;
 
+/* Puts the animation into the skeleton's animation queue */
+-(void)runAnimation:(NSString*)animationName WithTweenTime:(float)duration flipped:(bool)flipped;
+
+/* Puts the animation into the skeleton's animation queue */
+-(void)runFrame:(int)frameNum ofAnimation:(NSString*)animName flipped:(bool)flipped;
+
 /* Applies a linear impulse to the skeleton's interactor */
 -(void)applyLinearImpulse:(CGPoint)impulse;
 
@@ -103,8 +109,6 @@ typedef enum InteractorState{
 /* Sets the interactor's position to the lowest point of a ragdoll */
 -(void)setInteractorPositionInRagdoll;
 
-/* Puts the animation into the skeleton's animation queue */
--(void)runAnimation:(NSString*)animationName WithTweenTime:(float)duration flipped:(bool)flipped;
 
 /* Sets the skeleton's position relative to interactor's */
 -(void)tieSkeletonToInteractor;

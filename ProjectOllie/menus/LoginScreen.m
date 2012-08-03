@@ -38,13 +38,6 @@
     return self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
-}
-
 - (Login *)login
 {
     if(!_login) {
@@ -67,13 +60,17 @@
     FacebookLogin *login = [Authentication mainAuth].facebookLogin;
     login.delegate = self;
     [login login];
-    //TODO: maybe release login?
 }
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName
+- (void)pressedForgotPassword:(id)sender
 {
-    [self removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
-    [super transitionToSceneWithFile:sceneName];
+    [self transitionToSceneWithFile:@"ForgotPassword.ccbi"];
+    DebugLog(@"I forgot my password!");
+}
+
+- (NSArray *)textFields
+{
+    return [NSArray arrayWithObjects:nameField, pwField, nil];
 }
 
 //Called when login succeeds
