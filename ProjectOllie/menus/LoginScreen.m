@@ -60,7 +60,12 @@
     FacebookLogin *login = [Authentication mainAuth].facebookLogin;
     login.delegate = self;
     [login login];
-    //TODO: maybe release login?
+}
+
+- (void)pressedForgotPassword:(id)sender
+{
+    [self transitionToSceneWithFile:@"ForgotPassword.ccbi"];
+    DebugLog(@"I forgot my password!");
 }
 
 - (NSArray *)textFields

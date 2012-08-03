@@ -121,6 +121,7 @@
 		CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08615B9659F00FD2025 /* waterSheet8.png */; };
 		CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */; };
 		CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */; };
+		CE19DF5F15CB498C00CC392D /* ResetPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5E15CB498C00CC392D /* ResetPassword.m */; };
 		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
 		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
@@ -546,6 +547,8 @@
 		CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordScreen.m; path = menus/ForgotPasswordScreen.m; sourceTree = "<group>"; };
 		CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWithTextFields.h; path = menus/MenuWithTextFields.h; sourceTree = "<group>"; };
 		CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuWithTextFields.m; path = menus/MenuWithTextFields.m; sourceTree = "<group>"; };
+		CE19DF5D15CB498C00CC392D /* ResetPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResetPassword.h; path = ProjectOllie/Server/ResetPassword.h; sourceTree = "<group>"; };
+		CE19DF5E15CB498C00CC392D /* ResetPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResetPassword.m; path = ProjectOllie/Server/ResetPassword.m; sourceTree = "<group>"; };
 		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/Miscellaneous/fire.png; sourceTree = "<group>"; };
 		CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PasswordChangeScreen.ccbi; path = "Resources/menu-objects/ccbis/PasswordChangeScreen.ccbi"; sourceTree = "<group>"; };
 		CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChangeScreen.h; path = menus/PasswordChangeScreen.h; sourceTree = "<group>"; };
@@ -2219,24 +2222,26 @@
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				CE000618159130D000A1B0CC /* FacebookLogin.h */,
-				CE000619159130D000A1B0CC /* FacebookLogin.m */,
 				CEFA2730158D4B1A00BC9710 /* AccountCreator.h */,
 				CEFA2731158D4B1A00BC9710 /* AccountCreator.m */,
 				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
 				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
+				CEFD6FDE1592A750005A233E /* ChangeUserName.h */,
+				CEFD6FDF1592A750005A233E /* ChangeUserName.m */,
+				CE000618159130D000A1B0CC /* FacebookLogin.h */,
+				CE000619159130D000A1B0CC /* FacebookLogin.m */,
 				CEFA2729158D447600BC9710 /* Login.h */,
 				CEFA272A158D447600BC9710 /* Login.m */,
 				CE0BD5F3158FFA2500C380CA /* Logout.h */,
 				CE0BD5F4158FFA2500C380CA /* Logout.m */,
-				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
-				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
-				CEFD6FE21592B5CB005A233E /* ServerAccountsAPI.h */,
-				CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */,
-				CEFD6FDE1592A750005A233E /* ChangeUserName.h */,
-				CEFD6FDF1592A750005A233E /* ChangeUserName.m */,
 				CE2544E815A6779D00A087F6 /* PasswordChanger.h */,
 				CE2544E915A6779E00A087F6 /* PasswordChanger.m */,
+				CE19DF5D15CB498C00CC392D /* ResetPassword.h */,
+				CE19DF5E15CB498C00CC392D /* ResetPassword.m */,
+				CEFD6FE21592B5CB005A233E /* ServerAccountsAPI.h */,
+				CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */,
+				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
+				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
 			);
 			name = Server;
 			path = ..;
@@ -2674,6 +2679,7 @@
 				CEDEE35C15C8D30600C0BB1C /* Shotgun.mm in Sources */,
 				CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */,
 				CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */,
+				CE19DF5F15CB498C00CC392D /* ResetPassword.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

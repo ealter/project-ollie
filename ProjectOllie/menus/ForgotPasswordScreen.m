@@ -7,6 +7,10 @@
 //
 
 #import "ForgotPasswordScreen.h"
+#import "ResetPassword.h"
+
+@interface ForgotPasswordScreen () <ServerAPI_delegate>
+@end
 
 @implementation ForgotPasswordScreen
 
@@ -28,7 +32,13 @@
 
 - (void)pressedResetPassword:(id)sender
 {
-    //TODO
+    ResetPassword *passwordResetter = [[ResetPassword alloc] init];
+    [passwordResetter resetPasswordForEmail:emailAddressField_.text];
+}
+
+- (void)pressedBack:(id)sender
+{
+    [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
 - (void)serverOperationSucceeded
