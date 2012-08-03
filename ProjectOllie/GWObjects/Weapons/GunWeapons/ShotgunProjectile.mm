@@ -40,7 +40,7 @@
         bd.type             = b2_dynamicBody;
         bd.linearDamping    = .1f;
         bd.angularDamping   = .1f;
-        bd.bullet           = YES;//isBullet;
+        //bd.bullet           = true;//isBullet;
         
         box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         
@@ -80,13 +80,13 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
-        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:10. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:15. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
     }
     
     //Clean up bullet and remove from parent
-    _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
+    _world->DestroyBody(self.physicsBody);
 }
 
 
@@ -94,6 +94,9 @@
 //class (but not by thrown weapons, which will use a fuse time)
 -(void)bulletContact
 {
+    if (!self.bulletCollided) {
+        DebugLog(@"I am set to be deleted!");
+    }
     self.bulletCollided = TRUE;//Destroy at the next opportunity
     
 }

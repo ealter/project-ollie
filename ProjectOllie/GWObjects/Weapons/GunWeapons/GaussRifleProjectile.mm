@@ -17,6 +17,9 @@
     if (self = [super initWithBulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) imageName:GAUSS_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         gaussTimer = 0;
         self.physicsBody->SetGravityScale(0);
+        self.emitter = [GWParticleMagicMissile node];
+        //self.emitter.position = self.position;
+        [self.parent addChild:self.emitter];
     }
     
     return self;
@@ -25,6 +28,7 @@
 {
     [self.gameWorld.gameTerrain clipCircle:NO WithRadius:30. x:self.position.x y:self.position.y];
     [self.gameWorld.gameTerrain shapeChanged];
+    self.emitter.position = self.position;
     gaussTimer += dt;
     if (gaussTimer >= 4.) {
         [self destroyBullet];

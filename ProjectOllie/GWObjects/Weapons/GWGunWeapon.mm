@@ -25,7 +25,7 @@
 @synthesize aimOverlay      = _aimOverlay;
 @synthesize gunImage        = _gunImage;
 
-- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
+- (id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
     if (self = [super init]) {
         self.position       = ccpMult(pos, PTM_RATIO);

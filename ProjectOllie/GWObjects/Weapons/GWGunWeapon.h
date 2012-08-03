@@ -28,7 +28,7 @@ class b2World;
 @property (strong, nonatomic) CCSprite  *aimOverlay;
 @property (strong, nonatomic) CCSprite  *gunImage;
 
--(id)initGunWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
+-(id)initWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
 
 -(CGPoint)calculateGunVelocityWithAimPoint:(CGPoint) aimPoint;
 

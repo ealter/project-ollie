@@ -35,7 +35,7 @@ public:
     
 private:
     void handleCharacterContacts(b2Contact* contact);
-    void handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse);
+    void handleProjectileContacts(b2Contact* contact);
     bool handleOneWayLand(b2Contact* contact);
     
 };

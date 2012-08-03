@@ -14,6 +14,7 @@
 @implementation GWProjectile
 @synthesize  gameWorld      = _gameWorld;
 @synthesize bulletCollided  = _bulletCollided;
+@synthesize emitter         = _emitter;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
 {
@@ -22,6 +23,7 @@
         _world              = world;
         self.gameWorld      = gWorld;
         self.bulletCollided = FALSE;
+        self.emitter        = nil;
         destroyTimer        = 0.;
         
         //Schedule updates

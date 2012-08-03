@@ -12,9 +12,9 @@
 
 @implementation GaussRifle
 
--(id)initGunWithPosition:(CGPoint)pos ammo:(float)ammo box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
+-(id)initWithPosition:(CGPoint)pos ammo:(float)ammo box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initGunWithImage:GAUSS_IMAGE position:pos size:CGSizeMake(GAUSS_WIDTH, GAUSS_HEIGHT) ammo:ammo bulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) bulletSpeed:.15 bulletImage:GAUSS_B_IMAGE box2DWorld:world gameWorld:gWorld]){
+    if (self = [super initWithImage:GAUSS_IMAGE position:pos size:CGSizeMake(GAUSS_WIDTH, GAUSS_HEIGHT) ammo:ammo bulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) bulletSpeed:.15 bulletImage:GAUSS_B_IMAGE box2DWorld:world gameWorld:gWorld]){
         
     }
         

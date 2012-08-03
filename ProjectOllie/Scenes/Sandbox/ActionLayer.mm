@@ -187,12 +187,10 @@ enum {
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
-    Shotgun* gunWeapon = [[Shotgun alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
-    [self addChild:gunWeapon];
-    //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
-    //[self addChild:grenade];
+    Shotgun* weapon = [[Shotgun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
+    [self addChild:weapon];
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:gunWeapon];
+    [[gestures children] addObject:weapon];
     [self addChild:gestures z:2];
 
 }

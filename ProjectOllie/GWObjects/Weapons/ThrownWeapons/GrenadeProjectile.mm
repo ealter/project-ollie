@@ -38,9 +38,9 @@
         
         [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.02 isOutwards:YES];
         
-        CCParticleSystem *emitter = [GWParticleExplosion node];
-        emitter.position = self.position;
-        [self.parent addChild:emitter];
+        self.emitter = [GWParticleExplosion node];
+        self.emitter.position = self.position;
+        [self.parent addChild:self.emitter];
     }
     
     [super destroyBullet];

@@ -19,7 +19,7 @@ GWContactListener::~GWContactListener() {
 }
 
 void GWContactListener::BeginContact(b2Contact* contact) {
-    
+    handleProjectileContacts(contact);
 }
 
 void GWContactListener::EndContact(b2Contact* contact) {
@@ -32,7 +32,6 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 
 void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
     handleCharacterContacts(contact);
-    handleProjectileContacts(contact, impulse);
     // contact->SetEnabled(handleOneWayLand(contact));
 }
 
@@ -108,7 +107,7 @@ bool GWContactListener::handleOneWayLand(b2Contact *contact)
     return false;
 }
 
-void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+void GWContactListener::handleProjectileContacts(b2Contact* contact){
 
     /*********************
      * Bullet Collisions *
@@ -136,11 +135,9 @@ void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2Co
     }else {
         return;
     }
-    if (projFixture) {
-        projectile = (__bridge GWProjectile*)projFixture->GetBody()->GetUserData();
-        if (projectile) {
-            [projectile bulletContact];
-        }
+    projectile = (__bridge GWProjectile*)projFixture->GetBody()->GetUserData();
+    if (projectile) {
+        [projectile bulletContact];
     }
 }
 
