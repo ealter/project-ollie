@@ -46,8 +46,8 @@
         
         fixtureDef.shape    = &box;
         fixtureDef.density  = 1.0f;
-        fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.1f;
+        fixtureDef.friction = 0.0f;
+        fixtureDef.restitution = 1.0f;
         fixtureDef.filter.categoryBits = CATEGORY_PELLETS;
         fixtureDef.filter.maskBits = MASK_PELLETS;
         b2Body *bulletShape = _world->CreateBody(&bd);
@@ -70,26 +70,6 @@
     destroyTimer += dt;
     if (self.bulletCollided || destroyTimer > SHOTGUN_B_LIFE) {
         [self destroyBullet];
-    }
-    
-    //Check collisions, since the listener is a piece of poop
-    for (b2ContactEdge *edge = self.physicsBody->GetContactList(); edge; edge = edge ->next) {
-        if (edge) {
-            b2Fixture* fixtureA = edge->contact->GetFixtureA();
-            b2Fixture* fixtureB = edge->contact->GetFixtureB();
-            
-            b2Filter filterA = fixtureA->GetFilterData();
-            b2Filter filterB = fixtureB->GetFilterData();
-            
-            if (filterA.categoryBits == CATEGORY_PELLETS || filterB.categoryBits == CATEGORY_PELLETS)
-            {
-                
-            }else {
-                continue;
-            }
-            
-            [self bulletContact];
-        }
     }
 }
 
@@ -114,11 +94,7 @@
 //class (but not by thrown weapons, which will use a fuse time)
 -(void)bulletContact
 {
-    if (!self.bulletCollided) {
-        DebugLog(@"I am set to be deleted!");
-    }
     self.bulletCollided = TRUE;//Destroy at the next opportunity
-    
 }
 
 @end
