@@ -100,7 +100,6 @@
 		C5F4310015B9054300174FEE /* character_sprinting.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5F430FF15B9054300174FEE /* character_sprinting.anim */; };
 		C5F4310B15BE224D00174FEE /* GWCharacter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4310A15BE224C00174FEE /* GWCharacter.mm */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE000619159130D000A1B0CC /* FacebookLogin.m */; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
 		CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B115B8D6C200174FEE /* CharacterScreen.m */; };
@@ -108,12 +107,20 @@
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0A522A15A78E090036F103 /* WaterShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.frag */; };
-		CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0BD5F4158FFA2500C380CA /* Logout.m */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
 		CE0C324015CC86C00004E932 /* PlayerSearchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C323F15CC86C00004E932 /* PlayerSearchScreen.m */; };
 		CE0C324315CC88780004E932 /* PlayerSearchScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE0C324215CC88780004E932 /* PlayerSearchScreen.ccbi */; };
-		CE0C324615CC8AD50004E932 /* PlayerSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C324515CC8AD50004E932 /* PlayerSearch.m */; };
+		CE0C325915CC987F0004E932 /* AccountCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C324A15CC987F0004E932 /* AccountCreator.m */; };
+		CE0C325A15CC987F0004E932 /* ChangeUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C324C15CC987F0004E932 /* ChangeUserName.m */; };
+		CE0C325B15CC987F0004E932 /* FacebookLogin.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C324E15CC987F0004E932 /* FacebookLogin.m */; };
+		CE0C325C15CC987F0004E932 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C325015CC987F0004E932 /* Login.m */; };
+		CE0C325D15CC987F0004E932 /* Logout.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C325215CC987F0004E932 /* Logout.m */; };
+		CE0C325E15CC987F0004E932 /* PasswordChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C325415CC987F0004E932 /* PasswordChanger.m */; };
+		CE0C325F15CC987F0004E932 /* ResetPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C325615CC987F0004E932 /* ResetPassword.m */; };
+		CE0C326015CC987F0004E932 /* ServerAccountsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C325815CC987F0004E932 /* ServerAccountsAPI.m */; };
+		CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C326215CC98940004E932 /* PlayerSearch.m */; };
+		CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE18C08715B9659F00FD2025 /* waterSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08015B9659F00FD2025 /* waterSheet2.png */; };
 		CE18C08815B9659F00FD2025 /* waterSheet3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08115B9659F00FD2025 /* waterSheet3.png */; };
@@ -124,12 +131,9 @@
 		CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08615B9659F00FD2025 /* waterSheet8.png */; };
 		CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */; };
 		CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */; };
-		CE19DF5F15CB498C00CC392D /* ResetPassword.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5E15CB498C00CC392D /* ResetPassword.m */; };
-		CE19DF6215CB6A6A00CC392D /* ServerMatchmakingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF6115CB6A6A00CC392D /* ServerMatchmakingAPI.m */; };
 		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
 		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
-		CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E915A6779E00A087F6 /* PasswordChanger.m */; };
 		CE26B7D715BE46D1001100A1 /* GWMove.m in Sources */ = {isa = PBXBuildFile; fileRef = CE26B7D615BE46D1001100A1 /* GWMove.m */; };
 		CE26B7DC15BE48D1001100A1 /* GWMoveFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CE26B7DB15BE48D1001100A1 /* GWMoveFrame.m */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
@@ -366,13 +370,9 @@
 		CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */; };
 		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
 		CEF6A09015B95AF3001D02CC /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A08F15B95AF3001D02CC /* waterSheet1.png */; };
-		CEFA272B158D447600BC9710 /* Login.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA272A158D447600BC9710 /* Login.m */; };
-		CEFA2732158D4B1A00BC9710 /* AccountCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2731158D4B1A00BC9710 /* AccountCreator.m */; };
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
 		CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */; };
-		CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FDF1592A750005A233E /* ChangeUserName.m */; };
-		CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -512,8 +512,6 @@
 		C5F4310A15BE224C00174FEE /* GWCharacter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCharacter.mm; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
-		CE000618159130D000A1B0CC /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/FacebookLogin.h; sourceTree = "<group>"; };
-		CE000619159130D000A1B0CC /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLogin.m; path = ProjectOllie/Server/FacebookLogin.m; sourceTree = "<group>"; };
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
@@ -522,8 +520,6 @@
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOS_Versions.h; path = Utils/IOS_Versions.h; sourceTree = "<group>"; };
 		CE081665159BE73600064E04 /* IOS_Versions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IOS_Versions.m; path = Utils/IOS_Versions.m; sourceTree = "<group>"; };
 		CE0A522715A78DE10036F103 /* WaterShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WaterShader.frag; path = Shaders/WaterShader.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
-		CE0BD5F3158FFA2500C380CA /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Logout.h; sourceTree = "<group>"; };
-		CE0BD5F4158FFA2500C380CA /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ProjectOllie/Server/Logout.m; sourceTree = "<group>"; };
 		CE0BD5F9159016E600C380CA /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		CE0BD5FA159016E600C380CA /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
 		CE0BD5FB159016E600C380CA /* FBDialog.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FBDialog.bundle; sourceTree = "<group>"; };
@@ -542,8 +538,26 @@
 		CE0C323E15CC86C00004E932 /* PlayerSearchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerSearchScreen.h; path = menus/PlayerSearchScreen.h; sourceTree = "<group>"; };
 		CE0C323F15CC86C00004E932 /* PlayerSearchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerSearchScreen.m; path = menus/PlayerSearchScreen.m; sourceTree = "<group>"; };
 		CE0C324215CC88780004E932 /* PlayerSearchScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PlayerSearchScreen.ccbi; path = "Resources/menu-objects/ccbis/PlayerSearchScreen.ccbi"; sourceTree = "<group>"; };
-		CE0C324415CC8AD50004E932 /* PlayerSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerSearch.h; path = ProjectOllie/Server/PlayerSearch.h; sourceTree = "<group>"; };
-		CE0C324515CC8AD50004E932 /* PlayerSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerSearch.m; path = ProjectOllie/Server/PlayerSearch.m; sourceTree = "<group>"; };
+		CE0C324915CC987F0004E932 /* AccountCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountCreator.h; path = ProjectOllie/Server/Accounts/AccountCreator.h; sourceTree = "<group>"; };
+		CE0C324A15CC987F0004E932 /* AccountCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountCreator.m; path = ProjectOllie/Server/Accounts/AccountCreator.m; sourceTree = "<group>"; };
+		CE0C324B15CC987F0004E932 /* ChangeUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeUserName.h; path = ProjectOllie/Server/Accounts/ChangeUserName.h; sourceTree = "<group>"; };
+		CE0C324C15CC987F0004E932 /* ChangeUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeUserName.m; path = ProjectOllie/Server/Accounts/ChangeUserName.m; sourceTree = "<group>"; };
+		CE0C324D15CC987F0004E932 /* FacebookLogin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FacebookLogin.h; path = ProjectOllie/Server/Accounts/FacebookLogin.h; sourceTree = "<group>"; };
+		CE0C324E15CC987F0004E932 /* FacebookLogin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FacebookLogin.m; path = ProjectOllie/Server/Accounts/FacebookLogin.m; sourceTree = "<group>"; };
+		CE0C324F15CC987F0004E932 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Login.h; path = ProjectOllie/Server/Accounts/Login.h; sourceTree = "<group>"; };
+		CE0C325015CC987F0004E932 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Login.m; path = ProjectOllie/Server/Accounts/Login.m; sourceTree = "<group>"; };
+		CE0C325115CC987F0004E932 /* Logout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Logout.h; path = ProjectOllie/Server/Accounts/Logout.h; sourceTree = "<group>"; };
+		CE0C325215CC987F0004E932 /* Logout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Logout.m; path = ProjectOllie/Server/Accounts/Logout.m; sourceTree = "<group>"; };
+		CE0C325315CC987F0004E932 /* PasswordChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChanger.h; path = ProjectOllie/Server/Accounts/PasswordChanger.h; sourceTree = "<group>"; };
+		CE0C325415CC987F0004E932 /* PasswordChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChanger.m; path = ProjectOllie/Server/Accounts/PasswordChanger.m; sourceTree = "<group>"; };
+		CE0C325515CC987F0004E932 /* ResetPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResetPassword.h; path = ProjectOllie/Server/Accounts/ResetPassword.h; sourceTree = "<group>"; };
+		CE0C325615CC987F0004E932 /* ResetPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResetPassword.m; path = ProjectOllie/Server/Accounts/ResetPassword.m; sourceTree = "<group>"; };
+		CE0C325715CC987F0004E932 /* ServerAccountsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAccountsAPI.h; path = ProjectOllie/Server/Accounts/ServerAccountsAPI.h; sourceTree = "<group>"; };
+		CE0C325815CC987F0004E932 /* ServerAccountsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerAccountsAPI.m; path = ProjectOllie/Server/Accounts/ServerAccountsAPI.m; sourceTree = "<group>"; };
+		CE0C326115CC98940004E932 /* PlayerSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerSearch.h; path = ProjectOllie/Server/Matchmaking/PlayerSearch.h; sourceTree = "<group>"; };
+		CE0C326215CC98940004E932 /* PlayerSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerSearch.m; path = ProjectOllie/Server/Matchmaking/PlayerSearch.m; sourceTree = "<group>"; };
+		CE0C326315CC98940004E932 /* ServerMatchmakingAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerMatchmakingAPI.h; path = ProjectOllie/Server/Matchmaking/ServerMatchmakingAPI.h; sourceTree = "<group>"; };
+		CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerMatchmakingAPI.m; path = ProjectOllie/Server/Matchmaking/ServerMatchmakingAPI.m; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE18C08015B9659F00FD2025 /* waterSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet2.png; sourceTree = "<group>"; };
 		CE18C08115B9659F00FD2025 /* waterSheet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet3.png; sourceTree = "<group>"; };
@@ -556,16 +570,10 @@
 		CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordScreen.m; path = menus/ForgotPasswordScreen.m; sourceTree = "<group>"; };
 		CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWithTextFields.h; path = menus/MenuWithTextFields.h; sourceTree = "<group>"; };
 		CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuWithTextFields.m; path = menus/MenuWithTextFields.m; sourceTree = "<group>"; };
-		CE19DF5D15CB498C00CC392D /* ResetPassword.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ResetPassword.h; path = ProjectOllie/Server/ResetPassword.h; sourceTree = "<group>"; };
-		CE19DF5E15CB498C00CC392D /* ResetPassword.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ResetPassword.m; path = ProjectOllie/Server/ResetPassword.m; sourceTree = "<group>"; };
-		CE19DF6015CB6A6A00CC392D /* ServerMatchmakingAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerMatchmakingAPI.h; path = ProjectOllie/Server/ServerMatchmakingAPI.h; sourceTree = "<group>"; };
-		CE19DF6115CB6A6A00CC392D /* ServerMatchmakingAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerMatchmakingAPI.m; path = ProjectOllie/Server/ServerMatchmakingAPI.m; sourceTree = "<group>"; };
 		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/Miscellaneous/fire.png; sourceTree = "<group>"; };
 		CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PasswordChangeScreen.ccbi; path = "Resources/menu-objects/ccbis/PasswordChangeScreen.ccbi"; sourceTree = "<group>"; };
 		CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChangeScreen.h; path = menus/PasswordChangeScreen.h; sourceTree = "<group>"; };
 		CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChangeScreen.m; path = menus/PasswordChangeScreen.m; sourceTree = "<group>"; };
-		CE2544E815A6779D00A087F6 /* PasswordChanger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChanger.h; path = ProjectOllie/Server/PasswordChanger.h; sourceTree = "<group>"; };
-		CE2544E915A6779E00A087F6 /* PasswordChanger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PasswordChanger.m; path = ProjectOllie/Server/PasswordChanger.m; sourceTree = "<group>"; };
 		CE26B7D515BE46D1001100A1 /* GWMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWMove.h; path = GWObjects/Moves/GWMove.h; sourceTree = "<group>"; };
 		CE26B7D615BE46D1001100A1 /* GWMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWMove.m; path = GWObjects/Moves/GWMove.m; sourceTree = "<group>"; };
 		CE26B7DA15BE48D1001100A1 /* GWMoveFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWMoveFrame.h; path = GWObjects/Moves/GWMoveFrame.h; sourceTree = "<group>"; };
@@ -1015,20 +1023,12 @@
 		CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "ProjectOllie/libs/categories/NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "ProjectOllie/libs/categories/NSString+URLEncoding.m"; sourceTree = "<group>"; };
 		CEF6A08F15B95AF3001D02CC /* waterSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet1.png; sourceTree = "<group>"; };
-		CEFA2729158D447600BC9710 /* Login.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Login.h; path = ProjectOllie/Server/Login.h; sourceTree = "<group>"; };
-		CEFA272A158D447600BC9710 /* Login.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Login.m; path = ProjectOllie/Server/Login.m; sourceTree = "<group>"; };
-		CEFA2730158D4B1A00BC9710 /* AccountCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = AccountCreator.h; path = ProjectOllie/Server/AccountCreator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		CEFA2731158D4B1A00BC9710 /* AccountCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; name = AccountCreator.m; path = ProjectOllie/Server/AccountCreator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		CEFA2734158D4C0000BC9710 /* ServerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAPI.h; path = ProjectOllie/Server/ServerAPI.h; sourceTree = "<group>"; };
 		CEFA2735158D4C0000BC9710 /* ServerAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerAPI.m; path = ProjectOllie/Server/ServerAPI.m; sourceTree = "<group>"; };
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaskedSprite.h; path = Terrain/MaskedSprite.h; sourceTree = "<group>"; };
 		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MaskedSprite.m; path = Terrain/MaskedSprite.m; sourceTree = "<group>"; };
 		CEFBC9BF159EA1E3001C1FD1 /* CCTexture2DMutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCTexture2DMutable.h; path = libs/CCTexture2DMutable/CCTexture2DMutable.h; sourceTree = "<group>"; };
 		CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCTexture2DMutable.m; path = libs/CCTexture2DMutable/CCTexture2DMutable.m; sourceTree = "<group>"; };
-		CEFD6FDE1592A750005A233E /* ChangeUserName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeUserName.h; path = ProjectOllie/Server/ChangeUserName.h; sourceTree = "<group>"; };
-		CEFD6FDF1592A750005A233E /* ChangeUserName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChangeUserName.m; path = ProjectOllie/Server/ChangeUserName.m; sourceTree = "<group>"; };
-		CEFD6FE21592B5CB005A233E /* ServerAccountsAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAccountsAPI.h; path = ProjectOllie/Server/ServerAccountsAPI.h; sourceTree = "<group>"; };
-		CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerAccountsAPI.m; path = ProjectOllie/Server/ServerAccountsAPI.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1485,6 +1485,40 @@
 			);
 			name = "facebook-ios-sdk";
 			path = "libs/facebook-ios-sdk";
+			sourceTree = "<group>";
+		};
+		CE0C324715CC97A60004E932 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C324915CC987F0004E932 /* AccountCreator.h */,
+				CE0C324A15CC987F0004E932 /* AccountCreator.m */,
+				CE0C324B15CC987F0004E932 /* ChangeUserName.h */,
+				CE0C324C15CC987F0004E932 /* ChangeUserName.m */,
+				CE0C324D15CC987F0004E932 /* FacebookLogin.h */,
+				CE0C324E15CC987F0004E932 /* FacebookLogin.m */,
+				CE0C324F15CC987F0004E932 /* Login.h */,
+				CE0C325015CC987F0004E932 /* Login.m */,
+				CE0C325115CC987F0004E932 /* Logout.h */,
+				CE0C325215CC987F0004E932 /* Logout.m */,
+				CE0C325315CC987F0004E932 /* PasswordChanger.h */,
+				CE0C325415CC987F0004E932 /* PasswordChanger.m */,
+				CE0C325515CC987F0004E932 /* ResetPassword.h */,
+				CE0C325615CC987F0004E932 /* ResetPassword.m */,
+				CE0C325715CC987F0004E932 /* ServerAccountsAPI.h */,
+				CE0C325815CC987F0004E932 /* ServerAccountsAPI.m */,
+			);
+			name = Accounts;
+			sourceTree = "<group>";
+		};
+		CE0C324815CC97EC0004E932 /* Matchmaking */ = {
+			isa = PBXGroup;
+			children = (
+				CE0C326115CC98940004E932 /* PlayerSearch.h */,
+				CE0C326215CC98940004E932 /* PlayerSearch.m */,
+				CE0C326315CC98940004E932 /* ServerMatchmakingAPI.h */,
+				CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */,
+			);
+			name = Matchmaking;
 			sourceTree = "<group>";
 		};
 		CE26B7D915BE46E0001100A1 /* Moves */ = {
@@ -2236,30 +2270,12 @@
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
-				CEFA2730158D4B1A00BC9710 /* AccountCreator.h */,
-				CEFA2731158D4B1A00BC9710 /* AccountCreator.m */,
 				CEF000FF158BDCE100F7F1A8 /* Authentication.h */,
 				CEF00100158BDCE100F7F1A8 /* Authentication.m */,
-				CEFD6FDE1592A750005A233E /* ChangeUserName.h */,
-				CEFD6FDF1592A750005A233E /* ChangeUserName.m */,
-				CE000618159130D000A1B0CC /* FacebookLogin.h */,
-				CE000619159130D000A1B0CC /* FacebookLogin.m */,
-				CEFA2729158D447600BC9710 /* Login.h */,
-				CEFA272A158D447600BC9710 /* Login.m */,
-				CE0BD5F3158FFA2500C380CA /* Logout.h */,
-				CE0BD5F4158FFA2500C380CA /* Logout.m */,
-				CE2544E815A6779D00A087F6 /* PasswordChanger.h */,
-				CE2544E915A6779E00A087F6 /* PasswordChanger.m */,
-				CE19DF5D15CB498C00CC392D /* ResetPassword.h */,
-				CE19DF5E15CB498C00CC392D /* ResetPassword.m */,
-				CEFD6FE21592B5CB005A233E /* ServerAccountsAPI.h */,
-				CEFD6FE31592B5CC005A233E /* ServerAccountsAPI.m */,
-				CE19DF6015CB6A6A00CC392D /* ServerMatchmakingAPI.h */,
-				CE19DF6115CB6A6A00CC392D /* ServerMatchmakingAPI.m */,
 				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
-				CE0C324415CC8AD50004E932 /* PlayerSearch.h */,
-				CE0C324515CC8AD50004E932 /* PlayerSearch.m */,
+				CE0C324715CC97A60004E932 /* Accounts */,
+				CE0C324815CC97EC0004E932 /* Matchmaking */,
 			);
 			name = Server;
 			path = ..;
@@ -2640,8 +2656,6 @@
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
 				CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */,
-				CEFA272B158D447600BC9710 /* Login.m in Sources */,
-				CEFA2732158D4B1A00BC9710 /* AccountCreator.m in Sources */,
 				CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */,
 				CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */,
 				CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */,
@@ -2651,11 +2665,7 @@
 				CE30B198158FBA34009EC82B /* NewAccountMenu.m in Sources */,
 				CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */,
 				CE30B1A8158FD030009EC82B /* NewGameOverlay.m in Sources */,
-				CE0BD5F5158FFA2500C380CA /* Logout.m in Sources */,
 				C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */,
-				CE00061A159130D000A1B0CC /* FacebookLogin.m in Sources */,
-				CEFD6FE01592A750005A233E /* ChangeUserName.m in Sources */,
-				CEFD6FE41592B5CC005A233E /* ServerAccountsAPI.m in Sources */,
 				CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */,
 				CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */,
 				CE62FCA81594085800BEB3BE /* SWSorting.m in Sources */,
@@ -2667,7 +2677,6 @@
 				CE081666159BE73900064E04 /* IOS_Versions.m in Sources */,
 				CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */,
 				CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */,
-				CE2544EA15A6779F00A087F6 /* PasswordChanger.m in Sources */,
 				C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */,
 				CEA3636D15B7C9B900148D3B /* GWGestures.m in Sources */,
 				C5F4308D15B8D1C500174FEE /* ScrollingBackground.m in Sources */,
@@ -2698,10 +2707,17 @@
 				CEDEE35C15C8D30600C0BB1C /* Shotgun.mm in Sources */,
 				CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */,
 				CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */,
-				CE19DF5F15CB498C00CC392D /* ResetPassword.m in Sources */,
-				CE19DF6215CB6A6A00CC392D /* ServerMatchmakingAPI.m in Sources */,
 				CE0C324015CC86C00004E932 /* PlayerSearchScreen.m in Sources */,
-				CE0C324615CC8AD50004E932 /* PlayerSearch.m in Sources */,
+				CE0C325915CC987F0004E932 /* AccountCreator.m in Sources */,
+				CE0C325A15CC987F0004E932 /* ChangeUserName.m in Sources */,
+				CE0C325B15CC987F0004E932 /* FacebookLogin.m in Sources */,
+				CE0C325C15CC987F0004E932 /* Login.m in Sources */,
+				CE0C325D15CC987F0004E932 /* Logout.m in Sources */,
+				CE0C325E15CC987F0004E932 /* PasswordChanger.m in Sources */,
+				CE0C325F15CC987F0004E932 /* ResetPassword.m in Sources */,
+				CE0C326015CC987F0004E932 /* ServerAccountsAPI.m in Sources */,
+				CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */,
+				CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
