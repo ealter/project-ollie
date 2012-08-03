@@ -57,6 +57,12 @@
     return self;
 }
 
+-(void)setPosition:(CGPoint)position
+{
+    position_ = position;
+    drawNode.position = ccpSub(drawNode.position, self.position);
+}
+
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {
