@@ -33,6 +33,7 @@
 - (void)pressedResetPassword:(id)sender
 {
     ResetPassword *passwordResetter = [[ResetPassword alloc] init];
+    passwordResetter.delegate = self;
     [passwordResetter resetPasswordForEmail:emailAddressField_.text];
 }
 

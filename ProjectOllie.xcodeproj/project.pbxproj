@@ -113,6 +113,7 @@
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
 		CE0C324015CC86C00004E932 /* PlayerSearchScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C323F15CC86C00004E932 /* PlayerSearchScreen.m */; };
 		CE0C324315CC88780004E932 /* PlayerSearchScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE0C324215CC88780004E932 /* PlayerSearchScreen.ccbi */; };
+		CE0C324615CC8AD50004E932 /* PlayerSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C324515CC8AD50004E932 /* PlayerSearch.m */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE18C08715B9659F00FD2025 /* waterSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08015B9659F00FD2025 /* waterSheet2.png */; };
 		CE18C08815B9659F00FD2025 /* waterSheet3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08115B9659F00FD2025 /* waterSheet3.png */; };
@@ -541,6 +542,8 @@
 		CE0C323E15CC86C00004E932 /* PlayerSearchScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerSearchScreen.h; path = menus/PlayerSearchScreen.h; sourceTree = "<group>"; };
 		CE0C323F15CC86C00004E932 /* PlayerSearchScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerSearchScreen.m; path = menus/PlayerSearchScreen.m; sourceTree = "<group>"; };
 		CE0C324215CC88780004E932 /* PlayerSearchScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PlayerSearchScreen.ccbi; path = "Resources/menu-objects/ccbis/PlayerSearchScreen.ccbi"; sourceTree = "<group>"; };
+		CE0C324415CC8AD50004E932 /* PlayerSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerSearch.h; path = ProjectOllie/Server/PlayerSearch.h; sourceTree = "<group>"; };
+		CE0C324515CC8AD50004E932 /* PlayerSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerSearch.m; path = ProjectOllie/Server/PlayerSearch.m; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
 		CE18C08015B9659F00FD2025 /* waterSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet2.png; sourceTree = "<group>"; };
 		CE18C08115B9659F00FD2025 /* waterSheet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet3.png; sourceTree = "<group>"; };
@@ -2255,6 +2258,8 @@
 				CE19DF6115CB6A6A00CC392D /* ServerMatchmakingAPI.m */,
 				CEFA2734158D4C0000BC9710 /* ServerAPI.h */,
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
+				CE0C324415CC8AD50004E932 /* PlayerSearch.h */,
+				CE0C324515CC8AD50004E932 /* PlayerSearch.m */,
 			);
 			name = Server;
 			path = ..;
@@ -2696,6 +2701,7 @@
 				CE19DF5F15CB498C00CC392D /* ResetPassword.m in Sources */,
 				CE19DF6215CB6A6A00CC392D /* ServerMatchmakingAPI.m in Sources */,
 				CE0C324015CC86C00004E932 /* PlayerSearchScreen.m in Sources */,
+				CE0C324615CC8AD50004E932 /* PlayerSearch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
