@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "ActionLayer.h"
+#import "GWCharacter.h"
 
 @interface GWWeapon : CCSprite
 
@@ -17,6 +18,9 @@
 
 //Ammo/Uses for the weapon
 @property (assign, nonatomic) float ammo;
+
+//Gun's owner/user
+@property (strong, nonatomic) GWCharacter *holder;
 
 //weapon availability
 @property (assign, nonatomic, getter = isUnlocked) BOOL unlocked;

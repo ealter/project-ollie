@@ -15,6 +15,7 @@
 @synthesize weaponSprite    = _weaponSprite;
 @synthesize gameWorld       = _gameWorld;
 @synthesize wepAngle        = _wepAngle;
+@synthesize holder          = _holder;
 
 -(void)fireWeapon:(CGPoint)target
 {
