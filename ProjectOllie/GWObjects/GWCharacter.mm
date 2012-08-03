@@ -201,15 +201,17 @@
             {
                 angle += M_PI*2;
             }
-            if(angle < M_PI_2)
+            if(angle < M_PI)
                 self.orientation  = kOrientationRight;
             else self.orientation = kOrientationLeft;
             
-            if(angle > M_PI_2)
+            if(angle > M_PI)
                 angle = M_PI*2 - angle;
             
             angle = RAD2DEG(angle);
             /* Finished converting angle to frames */
+            
+            printf("angle is: %f \n",angle);
             
             [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             return;
