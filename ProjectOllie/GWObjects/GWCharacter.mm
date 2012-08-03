@@ -252,6 +252,10 @@
 
 -(void)setState:(characterState)state{
     //after switching from old state
+    if(self.state == kStateArming)
+    {
+        self.selectedWeapon.visible = NO;
+    }
     if(self.state == kStateRagdoll && state == kStateIdle)
     {
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
@@ -279,6 +283,7 @@
     }
     else if (state == kStateArming)
     {
+        self.selectedWeapon.visible = YES;
         self.skeleton.interactor.state = kInteractorStateInactive;
     }
 }
