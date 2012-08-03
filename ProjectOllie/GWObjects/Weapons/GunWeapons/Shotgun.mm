@@ -36,8 +36,8 @@
             bullet.physicsBody->SetGravityScale(0.);
             
             //Fan out the bullets in a cone
-            float changeX               = sinf(self.wepAngle) * i / NUM_PELLETS / 60;
-            float changeY               = cosf(self.wepAngle) * i / NUM_PELLETS / 60;
+            float changeX               = sinf(self.wepAngle) * i / NUM_PELLETS / (10 * NUM_PELLETS);
+            float changeY               = cosf(self.wepAngle) * i / NUM_PELLETS / (10 * NUM_PELLETS);
             
                         
             //Apply the force
