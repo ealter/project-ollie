@@ -140,8 +140,8 @@ using namespace std;
     //Bone* torso     = _skeleton->getBoneByName(root, "Torso");
     Bone* left_leg  = _skeleton->getBoneByName(root, "ll_leg");
     Bone* right_leg = _skeleton->getBoneByName(root, "rl_leg");
-    b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
-    b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
+    //b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
+    //b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     //float totalLowest    = _skeleton->lowestY(root, 100);
     //float lowestY        = max(totalLowest+radius,self.interactingBody->GetPosition().y);
     [self setAngularVelocity:0];
@@ -278,6 +278,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 //Creates linear animation tween for starting animations
 -(void)tweenBonesToAnimation:(string)name forBone:(Bone*)root withDuration:(float)duration;
 
+//Creates single frame for animating to aim position
+-(void)createFrameAnimation:(string)name forBone:(Bone*)root atFrame:(int)frameNum;
+
 @end
 
 @implementation GWSkeleton
@@ -325,6 +328,14 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         _skeleton->runAnimation("tween", NO);
     }
     _skeleton->runAnimation(name, flipped);
+}
+
+-(void)runFrame:(int)frameNum ofAnimation:(NSString *)animName flipped:(bool)flipped{
+    string name = [animName UTF8String];
+    [self clearAnimation];
+    _skeleton->deleteAnimation("aim_position");
+    [self createFrameAnimation:name forBone:_skeleton->getRoot() atFrame:frameNum];
+    _skeleton->runAnimation("aim_position", flipped);
 }
 
 -(void)clearAnimation{
@@ -402,12 +413,12 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         if(restingCounter >= 1)
         {
             float avg = rollingAvgSpeed/restingUpdates;
-            if(avg <= .01)
-                return true;
-            
             restingCounter  = 0;
             restingUpdates  = 0;
             rollingAvgSpeed = 0;
+            if(avg <= .06)
+                return true;
+
         }
     }
     return false;
@@ -565,6 +576,26 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         for(int i = 0; i < root->children.size(); i++)
             [self tweenBonesToAnimation:name forBone:root->children.at(i) withDuration:duration];
     }
+}
+
+-(void)createFrameAnimation:(string)name forBone:(Bone *)root atFrame:(int)frameNum{
+    std::map<string, std::map<string,Animation*> > animations = _skeleton->getAnimationMap();
+    Animation* animation = animations[name][root->name];
+    if(animation)
+    {
+        KeyFrame* target_frame = animation->frames[frameNum];
+        KeyFrame* angle_frame  = new KeyFrame;
+        angle_frame->x     = target_frame->x;
+        angle_frame->y     = target_frame->y;
+        angle_frame->angle = target_frame->angle;
+        angle_frame->time  = 0;
+        _skeleton->addAnimationFrame("aim_position", root->name, angle_frame);
+        
+        //For every bone!
+        for(int i = 0; i < root->children.size(); i++)
+            [self createFrameAnimation:name forBone:root->children.at(i) atFrame:frameNum];
+    }
+
 }
 
 -(bool)calculateNormalAngle{

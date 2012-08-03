@@ -31,13 +31,12 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 }
 
 void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
-
-    handleCharacterContacts(contact, impulse);
+    handleCharacterContacts(contact);
     handleProjectileContacts(contact, impulse);
     // contact->SetEnabled(handleOneWayLand(contact));
 }
 
-void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+void GWContactListener::handleCharacterContacts(b2Contact* contact){
     /************************
      * Character Collisions *
      ************************/
@@ -50,15 +49,22 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2Con
     
     GWCharacter* character;
     b2Fixture* charFixture;
+    b2Fixture* otherFixture;
     
     if(filterA.categoryBits == CATEGORY_BONES && filterB.categoryBits != CATEGORY_TERRAIN)
-        charFixture = fixtureA;
+    {
+        charFixture  = fixtureA;
+        otherFixture = fixtureB;
+    }
     else if (filterA.categoryBits != CATEGORY_TERRAIN && filterB.categoryBits == CATEGORY_BONES)
-        charFixture = fixtureB;
+    {
+        charFixture  = fixtureB;
+        otherFixture = fixtureA;
+    }
     else return;
     
     character = (__bridge GWCharacter*)charFixture->GetBody()->GetUserData();
-    if(charFixture->GetBody()->GetLinearVelocity().LengthSquared() > 1.)
+    if(otherFixture->GetBody()->GetLinearVelocity().LengthSquared()> .8)
         character.state = kStateRagdoll;
     
 }

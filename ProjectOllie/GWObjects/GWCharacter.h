@@ -11,6 +11,7 @@
 
 class b2World;
 @class GWSkeleton;
+@class GWWeapon;
 
 typedef enum characterState {
     kStateIdle = 0,   // when just standing around
@@ -53,5 +54,8 @@ typedef enum Orientation {
 
 /* The weapons available to the character */
 @property (readonly, nonatomic) NSMutableArray* weapons;
+
+/* The currently active weapon, visible if state == arming */
+@property (strong, nonatomic) GWWeapon* selectedWeapon;
 
 @end
