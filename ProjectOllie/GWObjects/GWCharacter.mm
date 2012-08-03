@@ -13,6 +13,7 @@
 #include "Skeleton.h"
 #include "GameConstants.h"
 #include "GWContactListener.h"
+#include "GWWeapon.h"
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .005
@@ -52,7 +53,7 @@
     if((self = [super init]))
     {
         self.skeleton     = [[GWSkeleton alloc]initFromFile:type box2dWorld:world];
-        self.state        = kStateIdle;
+        self.state        = kStateArming;
         self.orientation  = kOrientationLeft;
         self.type         = type;
         
@@ -132,7 +133,7 @@
     if(self.state != kStateRagdoll)
         [self.skeleton tieSkeletonToInteractor];
     else if([self.skeleton resting:dt])
-        self.state = kStateIdle;
+        self.state = kStateArming;
     
     
     switch(self.state) {
@@ -162,14 +163,14 @@
             if(self.orientation == kOrientationLeft)
             {
                 if(![self.skeleton animating])
-                    [self.skeleton runAnimation:@"sprinting" flipped:YES];
+                    [self.skeleton runAnimation:@"idle1" flipped:YES];
                 if(ccpLengthSQ([self.skeleton getVelocity]) <.1)
                     [self.skeleton applyLinearImpulse:ccp(-IMPULSE_MAG,0)];
             }
             else
             {
                 if(![self.skeleton animating])
-                    [self.skeleton runAnimation:@"sprinting" flipped:NO];
+                    [self.skeleton runAnimation:@"idle1" flipped:NO];
                 if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
                     [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG,0)];
                 
@@ -178,11 +179,36 @@
             return;
         }
         case kStateArming:
-            /**
-             float angle = RAD2DEG([self.selectedWeapon getAngle]);
-             [self.skeleton runFrame:angle ofAnimation:@"aim"];
-             */
+        {
+            Bone* targetBone;
+            if(self.orientation == kOrientationLeft)
+                targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+            else
+                targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+        
+            CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+            [self.selectedWeapon setPosition:position];
+            
+            float angle = RAD2DEG(self.selectedWeapon.wepAngle) + 90;
+            while(angle > 360)
+            {
+                angle -= 360;
+            }
+            while(angle < 0)
+            {
+                angle += 360;
+            }
+            if(angle < 180)
+                self.orientation  = kOrientationRight;
+            else self.orientation = kOrientationLeft;
+            
+            if(angle > 180)
+                angle = 360 - angle;
+            
+            printf("angle is: %f \n",angle);
+            [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             return;
+        }
         case kStateManeuvering:
             return;
         case kStateRagdoll:
@@ -220,7 +246,7 @@
 }
 
 -(void)stopWalking{
-    self.state = kStateIdle;
+    self.state = kStateArming;
     [self.skeleton clearAnimation];
 }
 
@@ -251,7 +277,10 @@
     {
         self.skeleton.interactor.state = kInteractorStateInactive;
     }
-    
+    else if (state == kStateArming)
+    {
+        self.skeleton.interactor.state = kInteractorStateInactive;
+    }
 }
 
 -(void)setOrientation:(Orientation)orientation{

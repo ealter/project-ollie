@@ -394,6 +394,10 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return toRet;
 }
 
+-(float)getAngle{
+    return destinationAngle;
+}
+
 -(void)tieSkeletonToInteractor{
     _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
 }
@@ -583,6 +587,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     Animation* animation = animations[name][root->name];
     if(animation)
     {
+        frameNum = min(frameNum,animation->frames.size()-1);
         KeyFrame* target_frame = animation->frames[frameNum];
         KeyFrame* angle_frame  = new KeyFrame;
         angle_frame->x     = target_frame->x;

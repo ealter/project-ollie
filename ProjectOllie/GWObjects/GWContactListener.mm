@@ -63,7 +63,7 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact){
     else return;
     
     character = (__bridge GWCharacter*)charFixture->GetBody()->GetUserData();
-    if(otherFixture->GetBody()->GetLinearVelocity().LengthSquared()> .8)
+    if(otherFixture->GetBody()->GetLinearVelocity().LengthSquared() * otherFixture->GetBody()->GetMass() > .0001)
         character.state = kStateRagdoll;
     
 }

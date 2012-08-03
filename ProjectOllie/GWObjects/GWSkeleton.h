@@ -106,9 +106,11 @@ typedef enum InteractorState{
 /* Gets the interactor velocity */
 -(CGPoint)getVelocity;
 
+/* Returns the destination angle */
+-(float)getAngle;
+
 /* Sets the interactor's position to the lowest point of a ragdoll */
 -(void)setInteractorPositionInRagdoll;
-
 
 /* Sets the skeleton's position relative to interactor's */
 -(void)tieSkeletonToInteractor;

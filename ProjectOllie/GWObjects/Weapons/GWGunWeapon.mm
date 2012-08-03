@@ -59,7 +59,7 @@
 
 -(void)setPosition:(CGPoint)position
 {
-    position_ = position;
+    [super setPosition:position];
     drawNode.position = ccpSub(drawNode.position, self.position);
 }
 
