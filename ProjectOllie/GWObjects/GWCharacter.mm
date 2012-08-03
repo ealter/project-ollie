@@ -312,4 +312,10 @@
     }
 }
 
+-(CGPoint)position{
+    Bone* torso = [self.skeleton getBoneByName:@"Torso"];
+    CGPoint pos = ccpMult(ccp(torso->box2DBody->GetPosition().x,torso->box2DBody->GetPosition().y),PTM_RATIO);
+    return pos;
+}
+
 @end
