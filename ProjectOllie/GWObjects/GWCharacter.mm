@@ -180,6 +180,7 @@
         }
         case kStateArming:
         {
+            /* Place gun on correct bone in body */
             Bone* targetBone;
             if(self.orientation == kOrientationLeft)
                 targetBone = [self.skeleton getBoneByName:@"ll_arm"];
@@ -188,24 +189,28 @@
         
             CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
             [self.selectedWeapon setPosition:position];
+            /* Finished correct placement */
             
-            float angle = RAD2DEG(self.selectedWeapon.wepAngle) + 90;
-            while(angle > 360)
+            /* Convert the angle to frames*/
+            float angle = (self.selectedWeapon.wepAngle) + M_PI_2;
+            while(angle > M_PI*2)
             {
-                angle -= 360;
+                angle -= M_PI*2;
             }
             while(angle < 0)
             {
-                angle += 360;
+                angle += M_PI*2;
             }
-            if(angle < 180)
+            if(angle < M_PI_2)
                 self.orientation  = kOrientationRight;
             else self.orientation = kOrientationLeft;
             
-            if(angle > 180)
-                angle = 360 - angle;
+            if(angle > M_PI_2)
+                angle = M_PI*2 - angle;
             
-            printf("angle is: %f \n",angle);
+            angle = RAD2DEG(angle);
+            /* Finished converting angle to frames */
+            
             [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             return;
         }
