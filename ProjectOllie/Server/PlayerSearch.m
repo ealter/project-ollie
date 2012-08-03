@@ -23,7 +23,7 @@
 - (void)serverReturnedResult:(NSDictionary *)result
 {
     NSArray *usernames = [result objectForKey:@"usernames"];
-    
+    [self broadcastServerOperationSucceededWithData:usernames];
 }
 
 @end

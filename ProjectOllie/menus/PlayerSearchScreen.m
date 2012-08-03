@@ -7,6 +7,10 @@
 //
 
 #import "PlayerSearchScreen.h"
+#import "PlayerSearch.h"
+
+@interface PlayerSearchScreen () <ServerAPI_delegate>\
+@end
 
 @implementation PlayerSearchScreen
 
@@ -29,7 +33,34 @@
 
 - (void)pressedSearch:(id)sender
 {
-    DebugLog(@"Time to search");
+    PlayerSearch *search = [[PlayerSearch alloc] init];
+    search.delegate = self;
+    [search searchForPlayerWithUsername:searchField_.text];
+}
+
+- (void)serverOperationSucceededWithData:(NSArray *)data
+{
+    if(![data isKindOfClass:[NSArray class]]) {
+        DebugLog(@"The data I received is not an NSArray!");
+        [self serverOperationFailedWithError:nil];
+        return;
+    }
+    //TODO: show the usernames in some sort of table
+    NSString *message = data.count > 0 ? @"The player exists" : @"The player was not found";
+    [[[UIAlertView alloc]initWithTitle:@"Search Results" message:message delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
+}
+
+- (void)serverOperationFailedWithError:(NSString *)error
+{
+    if(!error) error = @"unknown error";
+    [[[UIAlertView alloc]initWithTitle:@"Error when searching for player" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    [self transitionToSceneWithFile:@"MainMenu.ccbi"];
+}
+
+- (NSArray *)textFields
+{
+    return [NSArray arrayWithObject:searchField_];
 }
 
 @end
