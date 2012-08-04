@@ -62,7 +62,7 @@
 {
     if (self.ammo >0) {
         //Calculate force
-        CGPoint force       = [self calculateGunVelocityFromStart:self.position toAimPoint:aimPoint];
+        CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
         GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
@@ -103,7 +103,7 @@
     
     //Calculate values to be used for trajectory simulation
     float dt                = 1/60.0f;
-    CGPoint velocity        = [self calculateGunVelocityFromStart:self.position toAimPoint:currPoint];
+    CGPoint velocity        = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:currPoint];
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
