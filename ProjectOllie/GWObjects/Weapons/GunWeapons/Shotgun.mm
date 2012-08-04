@@ -25,7 +25,7 @@
 {
     if (self.ammo >0) {
         //Calculate force
-        CGPoint velocity            = [self calculateGunVelocityWithAimPoint:aimPoint];
+        CGPoint velocity            = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         for (int i = -(NUM_PELLETS/2); i<(NUM_PELLETS/2); i++) {
             //Make Bullet
