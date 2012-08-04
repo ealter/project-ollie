@@ -212,8 +212,6 @@
             angle = RAD2DEG(angle);
             /* Finished converting angle to frames */
             
-            printf("angle is: %f \n",angle);
-            
             [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             return;
         }
@@ -314,9 +312,9 @@
 }
 //override methods
 -(CGPoint)position{
+    
     Bone* torso = [self.skeleton getBoneByName:@"Torso"];
-    CGPoint pos = ccpMult(ccp(torso->box2DBody->GetPosition().x,torso->box2DBody->GetPosition().y),PTM_RATIO);
-    printf("The position is X: %f Y: %f \n",pos.x,pos.y);
+    CGPoint pos = ccpMult(ccp(self.skeleton.interactor.interactingBody->GetPosition().x,self.skeleton.interactor.interactingBody->GetPosition().y + torso->w/PTM_RATIO),PTM_RATIO);
     return pos;
 }
 -(void)setSelectedWeapon:(GWWeapon *)selectedWeapon{
