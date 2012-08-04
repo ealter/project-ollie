@@ -94,8 +94,8 @@
         [self addChild:spriteSheet];
         
         
-        //set name to be independent of lower/upper
-        //
+        //set name to be independent of left/right
+        //also adjust z order for drawing
         //
         string b_name  = root->name;
         b_name[0] = (char)tolower(b_name[0]);
@@ -106,7 +106,7 @@
         else if (prefix == 'l')
         {
             b_name = b_name.substr(1); 
-            //flipped = true;
+            index++;
         }
         CCLOG(@"The b_name is: %s", b_name.c_str());
         NSString* name = [NSString stringWithCString:b_name.c_str() 
@@ -116,7 +116,7 @@
         GWPhysicsSprite *part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
         part.physicsBody      = root->box2DBody;
         part.flipY = flipped;
-        [[self getChildByTag:kTagParentNode ]addChild:part z:10+index];
+        [[self getChildByTag:kTagParentNode ]addChild:part z:index*2];
         
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i) index:index+1];
@@ -212,8 +212,6 @@
             angle = RAD2DEG(angle);
             /* Finished converting angle to frames */
             
-            printf("angle is: %f \n",angle);
-            
             [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             return;
         }
@@ -301,27 +299,28 @@
     
     if(orientation == kOrientationLeft)
     {
-        for (GWPhysicsSprite* sprite in [self getChildByTag:kTagParentNode].children) {
+        for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
             sprite.flipY = YES;
         }
     }
     else if(orientation == kOrientationRight)
     {
-        for (GWPhysicsSprite* sprite in [self getChildByTag:kTagParentNode].children) {
+        for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
             sprite.flipY = NO;
         }
     }
 }
 //override methods
 -(CGPoint)position{
+    
     Bone* torso = [self.skeleton getBoneByName:@"Torso"];
-    CGPoint pos = ccpMult(ccp(torso->box2DBody->GetPosition().x,torso->box2DBody->GetPosition().y),PTM_RATIO);
-    printf("The position is X: %f Y: %f \n",pos.x,pos.y);
+    CGPoint pos = ccpMult(ccp(self.skeleton.interactor.interactingBody->GetPosition().x,self.skeleton.interactor.interactingBody->GetPosition().y + torso->w/PTM_RATIO),PTM_RATIO);
     return pos;
 }
 -(void)setSelectedWeapon:(GWWeapon *)selectedWeapon{
     _selectedWeapon = selectedWeapon;
     selectedWeapon.holder = self;
+    [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:8];
 }
 
 @end
