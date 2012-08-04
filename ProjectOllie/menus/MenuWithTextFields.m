@@ -7,12 +7,38 @@
 //
 
 #import "MenuWithTextFields.h"
+#import "CCDirector.h"
 
 @implementation MenuWithTextFields
 
 - (NSArray *)textFields
 {
     return [NSArray array];
+}
+
+- (UITextField *)addTextFieldWithFrame:(CGRect)frame
+{
+    UITextField *field = [[UITextField alloc]initWithFrame:frame];
+    field.clearsOnBeginEditing = NO;
+    field.returnKeyType = UIReturnKeyDone;
+    field.autocorrectionType = UITextAutocorrectionTypeNo;
+    field.adjustsFontSizeToFitWidth = YES;
+    [field setFont:[UIFont fontWithName:@"Arial" size:14]];
+    field.backgroundColor = [UIColor whiteColor];
+    field.borderStyle = UITextBorderStyleRoundedRect;
+    field.transform = CGAffineTransformMakeRotation(M_PI/2);
+    field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
+    [[CCDirector sharedDirector].view.window addSubview:field];
+    return field;
+}
+
+- (void)removeUIViews:(NSArray *)uiviews
+{
+    for(UIView *view in uiviews) {
+        if([view isKindOfClass:[UIView class]]) {
+            [view removeFromSuperview];
+        }
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

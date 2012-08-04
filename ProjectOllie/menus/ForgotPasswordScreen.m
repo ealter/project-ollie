@@ -33,6 +33,7 @@
 - (void)pressedResetPassword:(id)sender
 {
     ResetPassword *passwordResetter = [[ResetPassword alloc] init];
+    passwordResetter.delegate = self;
     [passwordResetter resetPasswordForEmail:emailAddressField_.text];
 }
 
@@ -41,7 +42,7 @@
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }

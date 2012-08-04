@@ -22,7 +22,7 @@
 
 -(void)pressedWithSearch:(id)sender
 {
-    
+    [self transitionToSceneWithFile:@"PlayerSearchScreen.ccbi"];
 }
 
 -(void)pressedWithLocal:(id)sender

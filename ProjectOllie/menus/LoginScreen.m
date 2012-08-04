@@ -74,7 +74,7 @@
 }
 
 //Called when login succeeds
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
@@ -84,7 +84,7 @@
 {
     if(!error) error = @"unknown error";
     [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-    [self serverOperationSucceeded]; //TODO: Make the person log in again
+    [self serverOperationSucceededWithData:nil]; //TODO: Make the person log in again
 }
 
 -(void)pressedMakeNew:(id)sender
