@@ -10,7 +10,13 @@
 
 @interface MenuWithTextFields : Menu <UITextFieldDelegate>
 
-//Subclasses should override this
+//If uiviews is not nil, it calls removeFromSuperview and release on each element.
+- (void)removeUIViews:(NSArray *)uiviews;
+
+//Adds a text field setting a bunch of common parameters
+- (UITextField *)addTextFieldWithFrame:(CGRect)frame;
+
+//Subclasses should override this. Returns an array of textfields that are subviews of this menu
 - (NSArray *)textFields;
 
 @end

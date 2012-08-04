@@ -60,7 +60,7 @@
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self pressedBack:self];
 }

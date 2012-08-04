@@ -27,7 +27,7 @@
 
 @protocol ServerAPI_delegate <NSObject>
 
-- (void)serverOperationSucceeded;
+- (void)serverOperationSucceededWithData:(id)data;
 - (void)serverOperationFailedWithError:(NSString *)error;
 
 @end
@@ -42,7 +42,7 @@
 @property (nonatomic, assign) id<ServerAPI_delegate> delegate;
 
 //Protected methods
-- (void)broadcastServerOperationSucceeded;
+- (void)broadcastServerOperationSucceededWithData:(id)data;
 - (void)broadcastServerOperationFailedWithError:(NSString *)error;
 - (void)serverReturnedResult:(NSDictionary *)result; //Called only if the server did not return an error. Subclasses must override this
 - (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url;
