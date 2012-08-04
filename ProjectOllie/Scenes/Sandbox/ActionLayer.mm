@@ -188,7 +188,6 @@ enum {
     [self addChild:_character];
     
     Shotgun* weapon = [[Shotgun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
-    [self addChild:weapon];
     _character.selectedWeapon = weapon;
     gestures = [[GWGestures alloc] init];
     [[gestures children] addObject:weapon];
