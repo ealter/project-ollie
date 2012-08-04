@@ -41,7 +41,7 @@
             
                         
             //Apply the force
-            bulletShape->SetLinearVelocity(b2Vec2(velocity.x*0.35, velocity.y*0.35));
+            bulletShape->SetLinearVelocity(b2Vec2(velocity.x*0.6, velocity.y*0.6));
             bulletShape->ApplyForceToCenter(b2Vec2(changeX, changeY));
         }
         

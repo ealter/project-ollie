@@ -17,8 +17,9 @@
     if (self = [super initWithBulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) imageName:GAUSS_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         gaussTimer = 0;
         self.physicsBody->SetGravityScale(0);
-        self.emitter = [GWParticleMagicMissile node];
-        //self.emitter.position = self.position;
+        
+        self.emitter = [GWParticleExplosion node];
+        self.emitter.position = self.position;
         [self.parent addChild:self.emitter];
     }
     
@@ -48,6 +49,8 @@
     }
     
     //Clean up bullet and remove from parent
+    
+    [[self parent] removeChild:self.emitter cleanup:YES];
     _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
 }

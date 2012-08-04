@@ -65,7 +65,7 @@
         CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
-        GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
+        GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * self.contentSize.width/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *self.contentSize.height/2*PTM_RATIO)) b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.parent addChild:bullet];

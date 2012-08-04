@@ -14,7 +14,7 @@
 
 -(id)initWithPosition:(CGPoint)pos ammo:(float)ammo box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithImage:GAUSS_IMAGE position:pos size:CGSizeMake(GAUSS_WIDTH, GAUSS_HEIGHT) ammo:ammo bulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) bulletSpeed:.15 bulletImage:GAUSS_B_IMAGE box2DWorld:world gameWorld:gWorld]){
+    if (self = [super initWithImage:GAUSS_IMAGE position:pos size:CGSizeMake(GAUSS_WIDTH, GAUSS_HEIGHT) ammo:ammo bulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) bulletSpeed:.2 bulletImage:GAUSS_B_IMAGE box2DWorld:world gameWorld:gWorld]){
         
     }
         
@@ -28,7 +28,7 @@
         CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
-        GaussRifleProjectile *bullet= [[GaussRifleProjectile alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
+        GaussRifleProjectile *bullet= [[GaussRifleProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * GAUSS_WIDTH/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *GAUSS_HEIGHT/2*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.parent addChild:bullet];
@@ -55,7 +55,7 @@
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), 0);
-    CGPoint beginPoint      = ccpAdd(self.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+    CGPoint beginPoint      = drawNode.position;
     
     for (int i = 0; i < 20 ; i++) {
         CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
