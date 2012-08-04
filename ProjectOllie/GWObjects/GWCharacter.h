@@ -44,9 +44,6 @@ typedef enum Orientation {
 /* Adds weapons to the weapon pool */
 -(void)loadWeapons:(NSArray*)weapons;
 
-/* Returns the center of the torso */
--(CGPoint)getCenter;
-
 //Properties endemic to character
 
 /* The skeleton belonging to the character */
