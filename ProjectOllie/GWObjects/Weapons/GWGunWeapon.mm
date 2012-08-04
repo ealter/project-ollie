@@ -57,7 +57,7 @@
     return self;
 }
 
-
+//You should override this!  Use a different projectile for each weapon, and make sure to use the right sizes for the gun to ensure that the bullets fire from the right spot.
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {
@@ -121,7 +121,7 @@
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
-    if (ccpDistance(startPoint, self.position) < self.contentSize.width && self.ammo >0) {
+    if (self.ammo >0) {
         //Rotate gun overlay
         float angle             = CC_RADIANS_TO_DEGREES(self.wepAngle);
         if (abs(angle) > 90) {

@@ -31,7 +31,7 @@
         [self.parent addChild:thrown];
         
         //Throw the weapon with calculated velocity
-        CGPoint vel         = [self calculateVelocityFromWep:startPoint toFinger:endPoint];
+        CGPoint vel         = [self calculateVelocityFromWep:self.holder.position toFinger:endPoint];
         thrownShape->SetLinearVelocity(b2Vec2(vel.x, vel.y));
         
         //Calculate some spin so throw looks better
