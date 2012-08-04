@@ -83,7 +83,6 @@
 
 -(CGPoint)calculateGunVelocityFromStart:(CGPoint) startPoint toAimPoint:(CGPoint) aimPoint
 {
-    DebugLog(@"start point x: %f, y: %f", startPoint.x, startPoint.y);
     CGPoint vel;
     //Calculate velocity using gun's speed and the angle of the weapon.  set a max distance as well
     float dist                      = MAXSPEED * self.bulletSpeed;

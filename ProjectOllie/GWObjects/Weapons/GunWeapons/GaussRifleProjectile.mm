@@ -18,9 +18,9 @@
         gaussTimer = 0;
         self.physicsBody->SetGravityScale(0);
         
-        self.emitter = [GWParticleExplosion node];
+        self.emitter = [GWParticleMagicMissile node];
         self.emitter.position = self.position;
-        [self.parent addChild:self.emitter];
+        [self.gameWorld addChild:self.emitter];
     }
     
     return self;
@@ -50,7 +50,7 @@
     
     //Clean up bullet and remove from parent
     
-    [[self parent] removeChild:self.emitter cleanup:YES];
+    [[self gameWorld] removeChild:self.emitter cleanup:YES];
     _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
 }

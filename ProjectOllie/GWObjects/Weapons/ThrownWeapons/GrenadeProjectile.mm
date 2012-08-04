@@ -40,7 +40,7 @@
         
         self.emitter = [GWParticleExplosion node];
         self.emitter.position = self.position;
-        [self.parent addChild:self.emitter];
+        [self.gameWorld addChild:self.emitter];
     }
     
     [super destroyBullet];
