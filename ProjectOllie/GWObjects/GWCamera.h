@@ -7,42 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ccTypes.h"
 
 @class CCNode;
 
-@protocol CameraObject <NSObject>
-
--(float)getParallaxRatio;
--(bool)isBounded;
-
-@end
-
 @interface GWCamera : NSObject
-{
-    CCNode* subject_; //The world we are observing
-}
-@property (assign, nonatomic) bool isChanging;          // Tells whether or not camera is transitioning
 
-@property (strong, nonatomic) CCNode* target;           // The target in the world we are following
+@property (assign, nonatomic) ccVertex3F location;      // Authoritative location of the camera in untransformed pixel space
 
-@property (strong, nonatomic) NSMutableArray* children; // The other nodes that move in relation to the subject
+@property (assign, nonatomic) float z0;                 // Camera angle descriptor: distance to the projection panel at which
+                                                        // things are scaled to 1
 
-@property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing,
-                                                        // used for shaking effects currently.
+@property (assign, nonatomic) float zOut;               // The farthest back the camera can go, most zoomed out it can be
 
-@property (assign, nonatomic) float maximumScale;       // maximum scale size
+@property (assign, nonatomic) bool track;               // When true, the camera automatically moves to see everything it's tracking
 
-@property (assign, nonatomic) float minimumScale;       // minimum scale size
+@property (strong, nonatomic) CCNode* target;           // The thing we're currently tracking... if we are
 
-@property (assign, nonatomic) float defaultScale;       // default scale size
+@property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing
 
-@property (assign, nonatomic) bool bounded;             // check the bounds?
+@property (assign, nonatomic) ccVertex2F center;        // The screen coord centerpoint on the projection plane relative to (0, 0)
+
+@property (assign, nonatomic) float angle;              // Angle of the camera in radians
 
 /* Inits the camera with a world and its dimensions */
--(id)initWithSubject:(CCNode *)subject screenDimensions:(CGSize)sd;
-
-/* sets a new subject to affect */
--(void)setSubject:(CCNode*)sub;
+-(id)initWithScreenDimensions:(CGSize)sd;
 
 /* Starts following the given node with realistic motion */
 -(void)followNode:(CCNode*)focused;
@@ -50,14 +39,8 @@
 /* Moves the camera to a given location directly */
 -(void)panBy:(CGPoint)diff;
 
-/* Pans to a given destination */
--(void)panTo:(CGPoint)dest;
-
 /* Changes zoom by given amount */
 -(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition;
-
-/* Reverts camera to default zoom settings at a given location */
--(void)revert;
 
 /* Adds intensity to the camera, lets it know how crazy what it's viewing is */
 -(void)addIntensity:(float)intensity;

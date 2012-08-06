@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "CCSprite.h"
 #import "GWCamera.h"
+#import "GWPerspectiveLayer.h"
 
-@interface GWWater : CCNode <CameraObject>
-{
-    
-}
+@interface GWWater : GWPerspectiveLayer
+
+- (id) initWithCamera:(GWCamera*)camera z:(float)z;
 
 @end

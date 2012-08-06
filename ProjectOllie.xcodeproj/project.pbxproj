@@ -339,6 +339,7 @@
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
 		CE99465815C4F19700D46E1E /* aimOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = CE99465715C4F19700D46E1E /* aimOverlay.png */; };
 		CEA3636D15B7C9B900148D3B /* GWGestures.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.m */; };
+		CEAFB05C15CBA47900BA62A0 /* GWPerspectiveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */; };
 		CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */; };
@@ -967,6 +968,8 @@
 		CE99465715C4F19700D46E1E /* aimOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aimOverlay.png; sourceTree = "<group>"; };
 		CEA3636B15B7C9B700148D3B /* GWGestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGestures.h; sourceTree = "<group>"; };
 		CEA3636C15B7C9B800148D3B /* GWGestures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWGestures.m; sourceTree = "<group>"; };
+		CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPerspectiveLayer.h; sourceTree = "<group>"; };
+		CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWPerspectiveLayer.m; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = "Resources/menu-objects/ccbis/DrawMenu.ccbi"; sourceTree = "<group>"; };
 		CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookNormal.png; sourceTree = "<group>"; };
 		CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
@@ -1238,6 +1241,8 @@
 		C5F4308F15B8D2EA00174FEE /* GWObjects */ = {
 			isa = PBXGroup;
 			children = (
+				CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */,
+				CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */,
 				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
 				CEA3636C15B7C9B800148D3B /* GWGestures.m */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
@@ -2658,6 +2663,7 @@
 				CEDEE35415C8A8A000C0BB1C /* GaussRifleProjectile.mm in Sources */,
 				CEDEE35915C8D2F900C0BB1C /* ShotgunProjectile.mm in Sources */,
 				CEDEE35C15C8D30600C0BB1C /* Shotgun.mm in Sources */,
+				CEAFB05C15CBA47900BA62A0 /* GWPerspectiveLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,8 @@
 #import "CCBReader.h"
 #import "RippleEffect.h"
 #import "SpriteParallax.h"
+#import "GWWater.h"
+#import "GameConstants.h"
 
 #define array_length(name) (sizeof(name)/sizeof(*(name)))
 
@@ -31,19 +33,26 @@
 {
     if (self = [super init]) {
         /* Set up action layer (where action occurs */
-        self.actionLayer = [ActionLayer node];
+        GWCamera* camera = [[GWCamera alloc] initWithScreenDimensions:[[CCDirector sharedDirector]winSizeInPixels]];
+        self.actionLayer = [[ActionLayer alloc] initWithCamera:camera];
         CCNode* actionNode = [CCNode node];
         
         /* Set up parallax */
         [self initBackgroundsWithBasename:@"ice" actionNode:actionNode camera:self.actionLayer.camera];
-        [actionNode addChild:self.actionLayer];
-        [self addChild:actionNode];
-
+        
+        GWWater* waterFront = [[GWWater alloc] initWithCamera:camera z:(-.25*PTM_RATIO)];
+        GWWater* waterBack = [[GWWater alloc] initWithCamera:camera z:(.25*PTM_RATIO)];
+        
         /* Set up sandbox scene properties */
-        [self setAnchorPoint:ccp(.5,.5)];
+        //[self setAnchorPoint:ccp(.5,.5)];
         CCNode *backnode = [CCBReader nodeGraphFromFile:@"ActionMenu.ccbi"];
-        [self addChild:backnode];
-        [self reorderChild:backnode z:1000];
+        
+        //Add all of the layers in the order we would like them to render
+        [actionNode addChild:backnode];
+        [actionNode addChild:waterBack];
+        [actionNode addChild:self.actionLayer];
+        [actionNode addChild:waterFront];
+        [self addChild:actionNode];
     }
     return self;
 }
@@ -56,16 +65,14 @@
     for(int i=0; i<numBackgroundLayers; i++) {
         static NSString *fileExtension = @"png";
         NSString *backgroundNameWithoutExtension = [NSString stringWithFormat:@"%@_layer%d", baseImageName, i+1, nil];
-        if([[NSBundle mainBundle] pathForResource:backgroundNameWithoutExtension ofType:fileExtension] == nil)
-            continue; //The image doesn't exist
+        if (!([[NSBundle mainBundle] pathForResource:backgroundNameWithoutExtension ofType:fileExtension])) continue;
         NSString *backgroundName = [backgroundNameWithoutExtension stringByAppendingPathExtension:fileExtension];
-        SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName];
-        blayer.parallaxRatio = parallaxRatios[i];
+        SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName camera:camera];
+        blayer.z = PTM_RATIO/parallaxRatios[i];
         blayer.anchorPoint = CGPointZero;
-        //blayer.position = ccp(-.125f * blayer.contentSize.width,-.125f*blayer.contentSize.height);
         blayer.position = CGPointZero;
+        blayer.scale = 10;
         [actionNode addChild:blayer];
-        [camera.children addObject:blayer];
     }
 }
 

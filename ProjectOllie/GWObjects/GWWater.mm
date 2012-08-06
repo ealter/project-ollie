@@ -20,7 +20,8 @@
 #define FRAMES_PER_SHEET 32
 #define SHEETS 8
 
-static CCGLProgram *shader_ = nil;
+//static CCGLProgram *shader_ = nil;
+static CCTexture2D *texture [SHEETS];
 
 @interface GWWater (){
     ccColor4F topColor;            //Wave and top of solid are this color
@@ -36,7 +37,6 @@ static CCGLProgram *shader_ = nil;
     ccV2F_C4F_T2F_Quad solid;
     GLuint solidVbo;
     
-    CCTexture2D *texture [SHEETS];
 }
 
 @property float waterHeight;
@@ -50,9 +50,9 @@ static CCGLProgram *shader_ = nil;
 static const float frameWidth = 512.0f;
 static const float frameHeight = 32.0f;
 
--(id)init
+-(id)initWithCamera:(GWCamera*)camera z:(float)z
 {
-    if (self = [super init]) {
+    if (self = [super initWithCamera:camera z:z]) {
         
         topColor.r = 0.1f;
         topColor.g = 0.2f;
@@ -62,6 +62,11 @@ static const float frameHeight = 32.0f;
         bottomColor.g =  0.0f;
         bottomColor.b = 0.0f;
         bottomColor.a = 1.0f;
+        if (z > 0)
+        {
+            topColor.b = 0.7f;
+            //frame = MAX_FRAME/2;
+        }
         
         /* Wave */
         
@@ -102,11 +107,10 @@ static const float frameHeight = 32.0f;
         glBufferData(GL_ARRAY_BUFFER, sizeof(wave), &wave, GL_DYNAMIC_DRAW);	
         
         //Shader
-		self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureA8Color];
-        
+        self.shaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionTextureA8Color];
+    
         
         CHECK_GL_ERROR_DEBUG();
-        
         
         
         //Load frame sheet textures
@@ -122,6 +126,7 @@ static const float frameHeight = 32.0f;
         [CCTexture2D setDefaultAlphaPixelFormat:oldDefault];
         
         CHECK_GL_ERROR_DEBUG();
+        
         
         /* Solid */
         
@@ -152,7 +157,7 @@ static const float frameHeight = 32.0f;
 }
 
 -(void) draw
-{   
+{
     //Equivelant for CC_NODE_DRAW_SETUP()
     ccGLEnable( glServerState_ );														
     NSAssert(shaderProgram_, @"No shader program set for node: %@");                      
@@ -218,17 +223,6 @@ static const float frameHeight = 32.0f;
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
     CC_INCREMENT_GL_DRAWS(2);
-}
-
-//TODO: fix these stubs
-- (float)getParallaxRatio
-{
-    return 1;
-}
-
-- (bool)isBounded
-{
-    return YES;
 }
 
 @end

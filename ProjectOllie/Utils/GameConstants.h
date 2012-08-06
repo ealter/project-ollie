@@ -8,8 +8,8 @@
 //Width and height of the world in meters
 #define WORLD_WIDTH 10
 #define WORLD_HEIGHT 6
-#define WORLD_WIDTH_PX (WORLD_WIDTH*PTM_RATIO);
-#define WORLD_HEIGHT_PX (WORLD_HEIGHT*PTM_RATIO);
+#define WORLD_WIDTH_PX (WORLD_WIDTH*PTM_RATIO)
+#define WORLD_HEIGHT_PX (WORLD_HEIGHT*PTM_RATIO)
 
 //For things that must go to the edges of all possible screens
 #define MIN_VIEWABLE_X (-WORLD_WIDTH*PTM_RATIO/2)
@@ -34,5 +34,12 @@
 
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)
+
+#define yup true
+#define yea true
+#define sure true
+
+#define nope false
+#define nah false
 
 #endif

@@ -2,7 +2,7 @@
 //  GWCamera.m
 //  ProjectOllie
 //
-//  Created by Sam Zeckendorf on 6/4/12.
+//  Created by the loudest lion, Sam Zeckendorf, on 6/4/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
@@ -14,22 +14,18 @@
 @interface GWCamera()
 {
     CGSize screenDimensions; //dimensions of the screen we have
-    float actionCount;      //helps keep track of the duration of action
-    float targetScale;      //the scale we will zoom to in update
+    float actionCount;       //helps keep track of the duration of action
 }
-
-+ (BOOL)isCCNodeCameraObject:(id)obj;
 
 /*private functions for callfunc delegate*/
 -(void)handleOneFingerMotion:(NSSet*)touches;
 -(void)handleTwoFingerMotion:(NSSet*)touches;
 -(void)twoFingerPan:(NSSet*)touches;
 -(void)twoFingerZoom:(NSSet*)touches;
--(void)updateBounds;
 -(void)checkBounds;
--(void)updateZoom;
--(void)followTarget;
+-(void)stepTracking;
 -(void)handleShakeEffect:(float)dt;
+-(void)boundXY;
 
 /*private helper functions*/
 -(void)createShakeEffect:(float)dt;
@@ -39,195 +35,84 @@
 @implementation GWCamera
 
 //properties for everyone to see/change
-@synthesize isChanging      = _isChanging;
+@synthesize location        = _location;
+@synthesize z0              = _z0;
+@synthesize zOut            = _zOut;
+@synthesize track           = _track;
 @synthesize target          = _target;
 @synthesize actionIntensity = _actionIntensity;
-@synthesize maximumScale    = _maximumScale;
-@synthesize minimumScale    = _minimumScale;
-@synthesize defaultScale    = _defaultScale;
-@synthesize children        = _children;
-@synthesize bounded         = _bounded;
+@synthesize center          = _center;
+@synthesize angle           = _angle;
 
--(id)initWithSubject:(CCNode *)subject screenDimensions:(CGSize)sd{
+-(id)initWithScreenDimensions:(CGSize)sd{
     if(self = [super init]) {
-        //private variables
-        subject_        = subject;
+        // Private variables
         screenDimensions = sd;
         actionCount     = 0;
-        targetScale     = 1.f;
         
-        //public properties
+        // Caclulate the scale that the layers at z=0 should be when we are zoomed out
+        float scaleOut = min(sd.width/(WORLD_WIDTH_PX), sd.height/(WORLD_HEIGHT_PX));
+        
+        // Public properties
+        _location.x          = WORLD_WIDTH_PX/2;
+        _location.y          = WORLD_HEIGHT_PX/2;
+        self.z0              = -2.5*PTM_RATIO;
+        self.zOut            = _z0/scaleOut;
+        _location.z          = self.zOut;
+        self.track           = nope;
         self.target          = nil;
-        self.isChanging      = NO;
         self.actionIntensity = 0.f;
-
-        self.maximumScale    = 1.f;
-        self.minimumScale    = min(sd.width/(WORLD_WIDTH*PTM_RATIO), sd.height/(WORLD_HEIGHT*PTM_RATIO));
-        self.defaultScale    = self.minimumScale;
-        self.children        = [NSMutableArray array];
-        self.bounded         = NO;
+        _center.x            = sd.width/2;
+        _center.y            = sd.height/2;
+        _angle               = 0;
+        
     }
     return self;
-}
-
-+ (BOOL)isCCNodeCameraObject:(id)obj
-{
-    return [obj conformsToProtocol:@protocol(CameraObject)] && [obj isKindOfClass:[CCNode class]];
 }
 
 -(void)followNode:(CCNode *)focused{
     //creates a sequence of events that signals change
     //starts following a new node
     //and signals an end of change once the new node is followed
-    targetScale = 3.f;
-    self.isChanging = YES;
     self.target = focused;
-}
-
--(void)setSubject:(CCNode *)sub{
-    subject_ = sub;
-}
-
--(void)revert{
-    //sets specific case of changing, but with no target
-    targetScale = self.defaultScale;
-    self.target = nil;
-    self.isChanging = YES; 
+    //_track = true;
 }
 
 -(void)panBy:(CGPoint)diff{
-    CGPoint oldPos = subject_.position;
-    CGPoint newPos = ccpAdd(oldPos,diff);
-    [subject_ setPosition:newPos];
     
-    float cs = subject_.scale;
+    //Simply move the camera point
+    float scale = _location.z/_z0;
+    _location.x -= diff.x*scale;
+    _location.y -= diff.y*scale;
     
-    for (CCNode<CameraObject> *child in self.children) {
-        if(![[self class] isCCNodeCameraObject:child]) continue;
-        float prp = cs/(cs+(1/[child getParallaxRatio])-1);
-        CGPoint tdiff = ccpMult(diff, prp*(child.scale/cs));
-        CGPoint oldPos = child.position;
-        [child setPosition:ccpAdd(oldPos,tdiff)];
-    }
+    _location.x = clampf(_location.x, PTM_RATIO, PTM_RATIO*9);
+    _location.y = clampf(_location.y, PTM_RATIO, PTM_RATIO*5);
+    
+    [self boundXY];
 }
-
--(void)panTo:(CGPoint)dest{
-    [subject_ setPosition:dest];
-}
-
+	
 -(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition {
-    CGPoint utCurrentPosition = currentPosition;
-    currentPosition = [subject_ convertToNodeSpace:currentPosition];
+    //Remember the current scale
+    float scale = _location.z/_z0;
     
-    //calculate the old centerpoint
-    CGPoint oldCenterPoint = ccpMult(currentPosition,subject_.scale);
+    //Clamp the diff so we can't zoom in more than z0 or out more than zOut
+    diff = clampf(diff, _location.z/_z0, _location.z/_zOut);
     
-    //Pan to 0, 0 (the scaling origin)
-    CGPoint oldPos = subject_.position;
-    [self panBy:ccpNeg(subject_.position)];
+    // Move the thing farther from the layers at z=0 by 1/diff
+    _location.z /= diff;
     
-    // Set the scale.
-    float scale = subject_.scale;
-    float newScale = clampf(scale * diff, self.minimumScale, self.maximumScale);
-    [subject_ setScale: newScale];
+    // Lerp the herp towards the center of that zoom
+    _location.x += (currentPosition.x-_center.x)*(1-1/diff)*scale;
+    _location.y += (currentPosition.y-_center.y)*(1-1/diff)*scale;
     
-    // Get the new center point.
-    CGPoint newCenterPoint = ccpMult(currentPosition, subject_.scale);
-    
-    // Then calculate the delta.
-    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
-    
-    
-    //[subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
-    
-    for (CCNode<CameraObject> *child in self.children) {
-        if(![[self class] isCCNodeCameraObject:child]) continue;
-        float pr = [child getParallaxRatio];
-        float Sx = 1/(pr/newScale+1-pr);
-        [child setScale:Sx];
-        /*
-         CGPoint tempPosition = [subject_ convertToNodeSpace:utCurrentPosition];
-         
-         CGPoint oldCenterPoint = ccpMult(tempPosition,child.scale);
-         float scaleDiff = (newScale - scale)*([child getParallaxRatio]);
-         float tempNewScale = child.scale+scaleDiff;
-         
-         child.scale = tempNewScale;
-         
-         // Get the new center point.
-         CGPoint newCenterPoint = ccpMult(tempPosition,child.scale);
-         
-         // Then calculate the delta.
-         CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);*/
-        //[child setPosition:ccpAdd(child.position, centerPointDelta)];
-    }
-    
-    // Now adjust the layer by the delta.
-    [self panBy:ccpAdd(oldPos, centerPointDelta)];
+    [self boundXY];
 }
 
-
-/*
--(void)panBy:(CGPoint)diff{
-    CGPoint oldPos = subject_.position;
-    CGPoint newPos = ccpAdd(oldPos,diff);
-    [subject_ setPosition:newPos];
-    
-    for (CCNode<CameraObject> *child in self.children) {
-        if(![[self class] isCCNodeCameraObject:child]) continue;
-        CGPoint tdiff = ccpMult(diff, [child getParallaxRatio]);
-        CGPoint oldPos = child.position;
-        [child setPosition:ccpAdd(oldPos,tdiff)];
-    }
+-(void)boundXY
+{
+    _location.x = clampf(_location.x, PTM_RATIO, PTM_RATIO*(WORLD_WIDTH-1));
+    _location.y = clampf(_location.y, PTM_RATIO, PTM_RATIO*(WORLD_HEIGHT-1));
 }
-
--(void)panTo:(CGPoint)dest{
-    [subject_ setPosition:dest];
-}
-
--(void)zoomBy:(float)diff withAverageCurrentPosition:(CGPoint)currentPosition {
-    CGPoint utCurrentPosition = currentPosition;
-    currentPosition = [subject_ convertToNodeSpace:currentPosition];
-    
-    //calculate the old centerpoint
-    CGPoint oldCenterPoint = ccpMult(currentPosition,subject_.scale);
-    
-    // Set the scale.
-    float scale = subject_.scale;
-    float newScale = clampf(scale * diff, self.minimumScale, self.maximumScale);
-    [subject_ setScale: newScale];
-
-    // Get the new center point.
-    CGPoint newCenterPoint = ccpMult(currentPosition, subject_.scale);
-
-    // Then calculate the delta.
-    CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
-
-    // Now adjust the layer by the delta.
-    
-    [subject_ setPosition:ccpAdd(subject_.position,centerPointDelta)];
-   // [self panBy:centerPointDelta];
-    
-    for (CCNode<CameraObject> *child in self.children) 
-    {
-        if(![[self class] isCCNodeCameraObject:child]) continue;
-        
-        CGPoint tempPosition = [subject_ convertToNodeSpace:utCurrentPosition];
-        
-        CGPoint oldCenterPoint = ccpMult(tempPosition,child.scale);
-        float scaleDiff = (newScale - scale)*([child getParallaxRatio]);
-        float tempNewScale = child.scale+scaleDiff;
-        
-        child.scale = tempNewScale;
-        
-        // Get the new center point.
-        CGPoint newCenterPoint = ccpMult(tempPosition,child.scale);
-        
-        // Then calculate the delta.
-        CGPoint centerPointDelta  = ccpSub(oldCenterPoint, newCenterPoint);
-        [child setPosition:ccpAdd(child.position, centerPointDelta)];
-    }
-}*/
 
 -(void)createShakeEffect:(float)dt{
     //the shakeRate will determine the weight given to dt
@@ -237,11 +122,7 @@
     //modulo the total action count around 360 degrees
     actionCount = fmod(actionCount, 360.f);
 
-    float currentDegree = self.actionIntensity * sin(actionCount);
-    
-    //set rotation
-    CCNode* parent = [subject_ parent];
-    parent.rotation = currentDegree;
+    _angle = self.actionIntensity * sin(actionCount);
 }
 
 -(void)addIntensity:(float)intensity{
@@ -255,13 +136,12 @@
 
 -(void)update:(float)dt{
     //updates camera qualities
-    [self updateZoom];
-    //[self updateBounds];
+    [self stepTracking];
+    [self checkBounds];
     [self handleShakeEffect:dt];
-    [self followTarget];
 }
 
--(void)touchesBegan:(NSSet *)touches{
+-(void)touchesBegan:(NSSet *)touches{/*
     if([touches count] == 2) {
         UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
         UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
@@ -273,7 +153,7 @@
         CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];
         touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
         touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
-    }
+    }*/
 }
 
 -(void)touchesMoved:(NSSet *)touches{
@@ -387,20 +267,10 @@
     [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
 }
 
-/*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA*/
+/*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA FUCK YEA AMERICA*/
 
--(void)updateBounds{
-    
-    if(self.target == nil && self.bounded)
-    {
-        [self checkBounds];
-    }
-}
-
--(void)checkBounds{
+-(void)checkBounds{/*
     //elastic borders
-    CGPoint worldPos =  subject_.position;
-    CGPoint newPos;
     float elasticity = .25f;
     //left border
     if(worldPos.x > 0)
@@ -438,15 +308,14 @@
         [self panBy:newPos];
 
     }
-
+*/
 }
 
 -(void)handleShakeEffect:(float)dt{
     //shake effect
     if(self.actionIntensity < .1f) {
         self.actionIntensity = 0;
-        CCNode* parent = [subject_ parent];
-        parent.rotation = 0;
+        _angle = 0;
         actionCount = 0;
     }
     else {
@@ -457,51 +326,37 @@
     }
 }
 
--(void)updateZoom{
+-(void)stepTracking{
     
-    //adjust zoom to be at target scale
-    //if in process of reverting, only time it is changing without a target
-    if(self.isChanging && self.target == nil)
+    // If we are in automatic tracking mode, automatically move camera based on tracked objects
+    if(_track)
     {
-        if(subject_.scale > self.defaultScale)
+        //The location the camera really wants to be deep down inside of its heart
+        ccVertex3F targetLocation;
+        
+        // Nothing being tracked, revert to default camera location
+        if (self.target == nil)
         {
-            float diff = subject_.scale - self.defaultScale;
-            [self zoomBy:.9f withAverageCurrentPosition:[subject_ convertToNodeSpace:ccp(subject_.contentSize.width/2,subject_.contentSize.height/2)]];
-            if(diff*diff < .01)
-                self.isChanging = NO;
+            targetLocation.x = WORLD_WIDTH_PX /2;
+            targetLocation.y = WORLD_HEIGHT_PX /2;
+            targetLocation.z = _zOut;
         }
-    }
-    else if(self.target != nil) {
-        //adjust scale to match the desired scale
-        float scaleDiff = targetScale - subject_.scale;
-        float zoomMultiplier = 0;
-        if(scaleDiff < 0)
-            zoomMultiplier = .9f;
-        else {
-            zoomMultiplier = 1.1f;
+        
+        //Something is being tracked, center it
+        else
+        {
+            targetLocation.x = _target.position.x;
+            targetLocation.y = _target.position.y;
+            targetLocation.z = _z0;
         }
-        if(scaleDiff*scaleDiff > .01f)
-            [self zoomBy:zoomMultiplier withAverageCurrentPosition: self.target.position];
+        
+        //Lerpy derpy 4% of the distance towards the target
+        _location.x += 0.4f*(targetLocation.x - _location.x);
+        _location.y += 0.4f*(targetLocation.y - _location.y);
+        _location.z += 0.4f*(targetLocation.z - _location.z);
     }
+    
 }
 
--(void)followTarget{
-    if(self.target != nil)
-    {
-        CGPoint moveVec;
-        CCNode *n = subject_;
-        CCNode *p = [subject_ parent];
-        CGPoint halfScreenSize = ccpMult(ccpFromSize(subject_.contentSize), 0.5);
-        CGPoint p1 = ccpMult(halfScreenSize, 1.f/p.scale);
-        CGPoint p2 = ccpMult(self.target.position, n.scale);
-        CGPoint destination = ccpSub(p1,p2);
-        
-        //using correctly calculated destination, normalize distance
-        //and move a given percentage of that distance per update
-        //until the distance is subpixel
-        moveVec = ccpSub(destination, n.position);
-        moveVec = ccpMult(moveVec,.1f);
-        [self panBy:moveVec];
-    }
-}
+
 @end
