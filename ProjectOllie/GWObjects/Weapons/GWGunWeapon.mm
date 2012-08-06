@@ -28,6 +28,7 @@
 - (id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
     if (self = [super init]) {
+        //Set weapon position and properties
         self.position       = ccpMult(pos, PTM_RATIO);
         self.contentSize    = CGSizeMake(size.width * PTM_RATIO, size.height * PTM_RATIO);
         self.ammo           = ammo;
@@ -36,9 +37,12 @@
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
         self.gameWorld      = gWorld;
+        
+        //Make the drawnode and set the color
         drawNode            = [HMVectorNode node];
         drawNode.position   = ccpAdd(drawNode.position, CGPointMake(self.contentSize.width/4, self.contentSize.height/4));
         ccColor4F c         = ccc4f(.5f,.5f,0.f,.5f);
+        [drawNode setColor:c];
         
         //Make the gun image and overlay image in the middle of the gun object, for easy rotation
         self.gunImage       = [CCSprite spriteWithFile:imageName];
@@ -48,10 +52,11 @@
         self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
         self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
         self.aimOverlay.flipX = YES;
+        
+        //Add children
         [self addChild:self.aimOverlay];
         [self addChild:self.gunImage];
         [self addChild:drawNode];    
-        [drawNode setColor:c];
         shootPoint = CGPointMake(0, 0);
     }
     return self;
@@ -86,7 +91,7 @@
     CGPoint vel;
     //Calculate velocity using gun's speed and the angle of the weapon.  set a max distance as well
     float dist                      = MAXSPEED * self.bulletSpeed;
-    if (dist > MAXSPEED)        dist= MAXSPEED;   //ensures that max speed is capped
+    if (dist > MAXSPEED)dist        = MAXSPEED;   //ensures that max speed is capped
     float angle                     = atan2f(aimPoint.y - startPoint.y, aimPoint.x - startPoint.x);
     self.wepAngle                   = angle;
     float vx                        = cosf(angle)*dist;
