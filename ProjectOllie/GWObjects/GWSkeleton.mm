@@ -479,6 +479,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         bone->l             = [(NSNumber*)[currentBone objectForKey:@"length"] floatValue]*BTM_RATIO;
         bone->a             = [(NSNumber*)[currentBone objectForKey:@"angle"]  floatValue];
         bone->w             = [(NSNumber*)[currentBone objectForKey:@"width"]  floatValue]*BTM_RATIO;
+        bone->z             = [(NSNumber*)[currentBone objectForKey:@"z"] intValue];
         
         _skeleton->boneAddChild(parent, bone);
         

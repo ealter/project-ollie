@@ -165,9 +165,12 @@ void Skeleton::runAnimation(string animationName, bool flipped)
         
         /* if flipped, it should adjust the symmetric limb */
         string name = iter->first;
+        string initial_name;
         char prefix = iter->first.at(0);
         if(flipped)
         {
+            initial_name = name;
+            
             if(prefix == 'r')
                 name = 'l'+name.substr(1);
             else if (prefix == 'l')
@@ -175,6 +178,7 @@ void Skeleton::runAnimation(string animationName, bool flipped)
         }
             
         Bone* bone = this->getBoneByName(this->root, name);
+        Bone* alternate = this->getBoneByName(this->root, initial_name);
         if(bone) {
             if(iter->second) {
                 // queue<KeyFrame*> newAnimation;
@@ -202,8 +206,14 @@ void Skeleton::runAnimation(string animationName, bool flipped)
                     
                     if(flipped)
                     {
-                        deep->x     = -deep->x;
-                        deep->angle = M_PI - deep->angle; 
+                        if(alternate)
+                        {
+                            int tempz    = bone->z;
+                            bone->z      = alternate->z;
+                            alternate->z = tempz;
+                        }
+                        deep->x      = -deep->x;
+                        deep->angle  = M_PI - deep->angle; 
                     }
                     
                     /* Push it to back of animation queue */
