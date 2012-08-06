@@ -40,14 +40,14 @@
         bd.type             = b2_dynamicBody;
         bd.linearDamping    = .1f;
         bd.angularDamping   = .1f;
-        bd.bullet           = YES;//isBullet;
+        //bd.bullet           = true;//isBullet;
         
         box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         
         fixtureDef.shape    = &box;
         fixtureDef.density  = 1.0f;
-        fixtureDef.friction = 0.4f;
-        fixtureDef.restitution = 0.1f;
+        fixtureDef.friction = 0.0f;
+        fixtureDef.restitution = 1.0f;
         fixtureDef.filter.categoryBits = CATEGORY_PELLETS;
         fixtureDef.filter.maskBits = MASK_PELLETS;
         b2Body *bulletShape = _world->CreateBody(&bd);
@@ -80,13 +80,13 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
-        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:10. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:15. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
     }
     
     //Clean up bullet and remove from parent
+    [[self parent] removeChild:self cleanup:YES];  
     _world->DestroyBody(self.physicsBody);
-    [[self parent] removeChild:self cleanup:YES];    
 }
 
 
@@ -95,7 +95,6 @@
 -(void)bulletContact
 {
     self.bulletCollided = TRUE;//Destroy at the next opportunity
-    
 }
 
 @end

@@ -17,7 +17,7 @@
 
 @implementation OptionsMenu
 
--(id)init
+- (id)init
 {
     if (self = [super init]) {     
         CGRect nameframe = CGRectMake(self.contentSize.height*4/5, self.contentSize.width/2, 150, 30);
@@ -34,7 +34,7 @@
     return self;
 }
 
--(void)pressedConfirm:(id)sender
+- (void)pressedConfirm:(id)sender
 {
     NSString *newUsername = nameField.text;
     if(![newUsername isEqualToString:[Authentication mainAuth].username]) {
@@ -45,10 +45,9 @@
     }
 }
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName
+- (NSArray *)textFields
 {
-    [self removeUIViews:[NSArray arrayWithObject:nameField]];
-    [super transitionToSceneWithFile:sceneName];
+    return [NSArray arrayWithObject:nameField];
 }
 
 - (void)pressedChangePassword:(id)sender
@@ -56,19 +55,12 @@
     [self transitionToSceneWithFile:@"PasswordChangeScreen.ccbi"];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
-}
-
 -(void)pressedBack:(id)sender
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self pressedBack:self];
 }

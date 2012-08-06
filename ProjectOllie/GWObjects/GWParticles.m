@@ -99,7 +99,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         self.radialAccelVar = 0;
         
         //  Gravity Mode: speed of particles
-        self.speed = 50;
+        self.speed = 0;
         self.speedVar = 0;
         
         // emitter position

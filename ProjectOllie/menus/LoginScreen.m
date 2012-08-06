@@ -38,13 +38,6 @@
     return self;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
-}
-
 - (Login *)login
 {
     if(!_login) {
@@ -67,17 +60,21 @@
     FacebookLogin *login = [Authentication mainAuth].facebookLogin;
     login.delegate = self;
     [login login];
-    //TODO: maybe release login?
 }
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName
+- (void)pressedForgotPassword:(id)sender
 {
-    [self removeUIViews:[NSArray arrayWithObjects:nameField, pwField, nil]];
-    [super transitionToSceneWithFile:sceneName];
+    [self transitionToSceneWithFile:@"ForgotPassword.ccbi"];
+    DebugLog(@"I forgot my password!");
+}
+
+- (NSArray *)textFields
+{
+    return [NSArray arrayWithObjects:nameField, pwField, nil];
 }
 
 //Called when login succeeds
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
@@ -87,7 +84,7 @@
 {
     if(!error) error = @"unknown error";
     [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-    [self serverOperationSucceeded]; //TODO: Make the person log in again
+    [self serverOperationSucceededWithData:nil]; //TODO: Make the person log in again
 }
 
 -(void)pressedMakeNew:(id)sender

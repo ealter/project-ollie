@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 hi ku LLC. All rights reserved.
 //
 
-#import "Menu.h"
+#import "MenuWithTextFields.h"
 
-@interface PasswordChangeScreen : Menu <UITextFieldDelegate> {
+@interface PasswordChangeScreen : MenuWithTextFields {
     UITextField *oldPasswordField_;
     UITextField *newPasswordField_;
     UITextField *confirmPasswordField_;

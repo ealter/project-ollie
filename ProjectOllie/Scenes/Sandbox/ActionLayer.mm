@@ -146,7 +146,7 @@ enum {
     world->SetContactListener(_contactListener);
 
     m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-    world->SetDebugDraw(m_debugDraw);
+    //world->SetDebugDraw(m_debugDraw);
 
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
@@ -164,12 +164,10 @@ enum {
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
-    Shotgun* gunWeapon = [[Shotgun alloc] initGunWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
-    [self addChild:gunWeapon];
-    //Grenade *grenade = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:10 box2DWorld:world gameWorld:self];
-    //[self addChild:grenade];
+    GaussRifle* weapon = [[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
+    _character.selectedWeapon = weapon;
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:gunWeapon];
+    [[gestures children] addObject:weapon];
     [self addChild:gestures z:2];
 
 }

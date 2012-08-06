@@ -60,13 +60,6 @@
     return _accountCreator;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
-}
-
 //TODO: make user repeat password?
 -(void)pressedMake:(id)sender
 {
@@ -77,10 +70,9 @@
     [self.accountCreator createAccountWithUsername:username password:password email:email];
 }
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName
+- (NSArray *)textFields
 {
-    [self removeUIViews:[NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil]];
-    [super transitionToSceneWithFile:sceneName];
+    return [NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil];
 }
 
 -(void)pressedCancel:(id)sender
@@ -88,7 +80,7 @@
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }

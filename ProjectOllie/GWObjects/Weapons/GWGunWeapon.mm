@@ -25,9 +25,10 @@
 @synthesize aimOverlay      = _aimOverlay;
 @synthesize gunImage        = _gunImage;
 
-- (id)initGunWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
+- (id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
     if (self = [super init]) {
+        //Set weapon position and properties
         self.position       = ccpMult(pos, PTM_RATIO);
         self.contentSize    = CGSizeMake(size.width * PTM_RATIO, size.height * PTM_RATIO);
         self.ammo           = ammo;
@@ -36,9 +37,12 @@
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
         self.gameWorld      = gWorld;
+        
+        //Make the drawnode and set the color
         drawNode            = [HMVectorNode node];
-        drawNode.position   = ccpSub(drawNode.position, self.position);
+        drawNode.position   = ccpAdd(drawNode.position, CGPointMake(self.contentSize.width/4, self.contentSize.height/4));
         ccColor4F c         = ccc4f(.5f,.5f,0.f,.5f);
+        [drawNode setColor:c];
         
         //Make the gun image and overlay image in the middle of the gun object, for easy rotation
         self.gunImage       = [CCSprite spriteWithFile:imageName];
@@ -48,23 +52,25 @@
         self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
         self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
         self.aimOverlay.flipX = YES;
+        
+        //Add children
         [self addChild:self.aimOverlay];
         [self addChild:self.gunImage];
         [self addChild:drawNode];    
-        [drawNode setColor:c];
         shootPoint = CGPointMake(0, 0);
     }
     return self;
 }
 
+//You should override this!  Use a different projectile for each weapon, and make sure to use the right sizes for the gun to ensure that the bullets fire from the right spot.
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {
         //Calculate force
-        CGPoint force       = [self calculateGunVelocityWithAimPoint:aimPoint];
+        CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
-        GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:self.position b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
+        GWProjectile *bullet    = [[GWProjectile alloc] initWithBulletSize:self.bulletSize imageName:self.bulletImage startPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * self.contentSize.width/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *self.contentSize.height/2*PTM_RATIO)) b2World:_world b2Bullet:YES gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.parent addChild:bullet];
@@ -80,13 +86,13 @@
     }
 }
 
--(CGPoint)calculateGunVelocityWithAimPoint:(CGPoint)aimPoint
+-(CGPoint)calculateGunVelocityFromStart:(CGPoint) startPoint toAimPoint:(CGPoint) aimPoint
 {
     CGPoint vel;
     //Calculate velocity using gun's speed and the angle of the weapon.  set a max distance as well
     float dist                      = MAXSPEED * self.bulletSpeed;
-    if (dist > MAXSPEED)        dist= MAXSPEED;   //ensures that max speed is capped
-    float angle                     = atan2f(aimPoint.y - self.position.y, aimPoint.x - self.position.x);
+    if (dist > MAXSPEED)dist        = MAXSPEED;   //ensures that max speed is capped
+    float angle                     = atan2f(aimPoint.y - startPoint.y, aimPoint.x - startPoint.x);
     self.wepAngle                   = angle;
     float vx                        = cosf(angle)*dist;
     float vy                        = sinf(angle)*dist;
@@ -102,11 +108,11 @@
     
     //Calculate values to be used for trajectory simulation
     float dt                = 1/60.0f;
-    CGPoint velocity        = [self calculateGunVelocityWithAimPoint:currPoint];
+    CGPoint velocity        = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:currPoint];
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
-    CGPoint beginPoint      = ccpAdd(self.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+    CGPoint beginPoint      = drawNode.position;
     
     for (int i = 0; i < 20 ; i++) {
         CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
@@ -120,7 +126,7 @@
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
-    if (ccpDistance(startPoint, self.position) < self.contentSize.width && self.ammo >0) {
+    if (self.ammo >0) {
         //Rotate gun overlay
         float angle             = CC_RADIANS_TO_DEGREES(self.wepAngle);
         if (abs(angle) > 90) {

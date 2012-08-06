@@ -14,7 +14,7 @@
 
 -(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initThrownWithImage:GRENADE_IMAGE position:pos size:CGSizeMake(GRENADE_WIDTH, GRENADE_HEIGHT) ammo:ammo box2DWorld:world fuseTime:4 gameWorld:gWorld]) {
+    if (self = [super initWithImage:GRENADE_IMAGE position:pos size:CGSizeMake(GRENADE_WIDTH, GRENADE_HEIGHT) ammo:ammo box2DWorld:world fuseTime:4 gameWorld:gWorld]) {
         
     }
     
@@ -31,7 +31,7 @@
         [self.parent addChild:thrown];
         
         //Throw the weapon with calculated velocity
-        CGPoint vel         = [self calculateVelocityFromWep:startPoint toFinger:endPoint];
+        CGPoint vel         = [self calculateVelocityFromWep:self.holder.position toFinger:endPoint];
         thrownShape->SetLinearVelocity(b2Vec2(vel.x, vel.y));
         
         //Calculate some spin so throw looks better

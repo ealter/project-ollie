@@ -34,8 +34,8 @@ public:
 	virtual void PostSolve(b2Contact* contact, const b2ContactImpulse* impulse);
     
 private:
-    void handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse);
-    void handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse);
+    void handleCharacterContacts(b2Contact* contact);
+    void handleProjectileContacts(b2Contact* contact);
     bool handleOneWayLand(b2Contact* contact);
     
 };

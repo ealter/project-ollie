@@ -223,6 +223,9 @@ static const float frameHeight = 32.0f;
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
     
     CC_INCREMENT_GL_DRAWS(2);
+    
+    //Reset to client memory because other things sometimes assume this is the case
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 @end

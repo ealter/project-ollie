@@ -38,7 +38,7 @@
         //[self addChild:water];
         
         //Particle stuffs
-        CCParticleSystem *emitter = [GWParticleMuzzleFlash node];
+        CCParticleSystem *emitter = [GWParticleMagicMissile node];
         [self addChild:emitter];
         
     }

@@ -39,7 +39,7 @@
     return self;
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
     [self pressedBack:self];
 }
@@ -50,10 +50,9 @@
     [[[UIAlertView alloc]initWithTitle:@"Error when changing password" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
-- (void)transitionToSceneWithFile:(NSString *)sceneName
+- (NSArray *)textFields
 {
-    [self removeUIViews:[NSArray arrayWithObjects:oldPasswordField_, newPasswordField_, confirmPasswordField_, nil]];
-    [super transitionToSceneWithFile:sceneName];
+    return [NSArray arrayWithObjects:oldPasswordField_, newPasswordField_, confirmPasswordField_, nil];
 }
 
 - (void)pressedChangePassword:(id)sender
@@ -71,13 +70,6 @@
 - (void)pressedBack:(id)sender
 {
     [self transitionToSceneWithFile:@"OptionsMenu.ccbi"];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    // the user pressed the "Done" button, so dismiss the keyboard
-    [textField resignFirstResponder];
-    return YES;
 }
 
 @end

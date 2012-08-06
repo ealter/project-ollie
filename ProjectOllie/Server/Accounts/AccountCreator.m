@@ -49,9 +49,9 @@
     [login loginWithUsername:self.username password:self.password];
 }
 
-- (void)serverOperationSucceeded
+- (void)serverOperationSucceededWithData:(id)data
 {
-    [self broadcastServerOperationSucceeded];
+    [self broadcastServerOperationSucceededWithData:nil];
 }
 
 - (void)serverOperationFailedWithError:(NSString *)error

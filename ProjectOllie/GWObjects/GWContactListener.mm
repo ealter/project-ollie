@@ -19,7 +19,7 @@ GWContactListener::~GWContactListener() {
 }
 
 void GWContactListener::BeginContact(b2Contact* contact) {
-    
+    handleProjectileContacts(contact);
 }
 
 void GWContactListener::EndContact(b2Contact* contact) {
@@ -31,13 +31,11 @@ void GWContactListener::PreSolve(b2Contact* contact, const b2Manifold* oldManifo
 }
 
 void GWContactListener::PostSolve(b2Contact* contact, const b2ContactImpulse* impulse) {
-
-    handleCharacterContacts(contact, impulse);
-    handleProjectileContacts(contact, impulse);
+    handleCharacterContacts(contact);
     // contact->SetEnabled(handleOneWayLand(contact));
 }
 
-void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+void GWContactListener::handleCharacterContacts(b2Contact* contact){
     /************************
      * Character Collisions *
      ************************/
@@ -50,15 +48,22 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact,  const b2Con
     
     GWCharacter* character;
     b2Fixture* charFixture;
+    b2Fixture* otherFixture;
     
     if(filterA.categoryBits == CATEGORY_BONES && filterB.categoryBits != CATEGORY_TERRAIN)
-        charFixture = fixtureA;
+    {
+        charFixture  = fixtureA;
+        otherFixture = fixtureB;
+    }
     else if (filterA.categoryBits != CATEGORY_TERRAIN && filterB.categoryBits == CATEGORY_BONES)
-        charFixture = fixtureB;
+    {
+        charFixture  = fixtureB;
+        otherFixture = fixtureA;
+    }
     else return;
     
     character = (__bridge GWCharacter*)charFixture->GetBody()->GetUserData();
-    if(charFixture->GetBody()->GetLinearVelocity().LengthSquared() > 1.)
+    if(otherFixture->GetBody()->GetLinearVelocity().LengthSquared() * otherFixture->GetBody()->GetMass() > .0001)
         character.state = kStateRagdoll;
     
 }
@@ -102,7 +107,7 @@ bool GWContactListener::handleOneWayLand(b2Contact *contact)
     return false;
 }
 
-void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2ContactImpulse* impulse){
+void GWContactListener::handleProjectileContacts(b2Contact* contact){
 
     /*********************
      * Bullet Collisions *
@@ -130,11 +135,9 @@ void GWContactListener::handleProjectileContacts(b2Contact* contact,  const b2Co
     }else {
         return;
     }
-    if (projFixture) {
-        projectile = (__bridge GWProjectile*)projFixture->GetBody()->GetUserData();
-        if (projectile) {
-            [projectile bulletContact];
-        }
+    projectile = (__bridge GWProjectile*)projFixture->GetBody()->GetUserData();
+    if (projectile) {
+        [projectile bulletContact];
     }
 }
 
