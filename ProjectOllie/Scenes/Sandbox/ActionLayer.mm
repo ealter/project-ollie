@@ -164,7 +164,7 @@ enum {
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
-    GaussRifle* weapon = [[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
+    Grenade* weapon = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
     _character.selectedWeapon = weapon;
     gestures = [[GWGestures alloc] init];
     [[gestures children] addObject:weapon];
@@ -323,7 +323,7 @@ enum {
     }
     
     //Add all of the edge shapes to the world
-    //[t addToWorld:world];
+    [t addToWorld:world];
 }
 
 

@@ -40,6 +40,9 @@
 		C583DBAB15AF947B00FE441B /* character_idle3.anim in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA415AF947B00FE441B /* character_idle3.anim */; };
 		C583DBAE15AF947B00FE441B /* character.skel in Resources */ = {isa = PBXBuildFile; fileRef = C583DBA815AF947B00FE441B /* character.skel */; };
 		C586F8F515C6321A00573B6E /* GWContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = C586F8F415C6321A00573B6E /* GWContactListener.mm */; };
+		C587E2C215D09F4E00528573 /* construction_idle2.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2BF15D09F4E00528573 /* construction_idle2.anim */; };
+		C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2C015D09F4E00528573 /* construction_idle3.anim */; };
+		C587E2C415D09F4E00528573 /* construction_walk.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2C115D09F4E00528573 /* construction_walk.anim */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C59ACC1115C24ACF0030A862 /* character_idle4.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC0F15C24ACF0030A862 /* character_idle4.anim */; };
 		C59ACC1215C24ACF0030A862 /* character_idle5.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC1015C24ACF0030A862 /* character_idle5.anim */; };
@@ -431,6 +434,9 @@
 		C583DBA815AF947B00FE441B /* character.skel */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character.skel; sourceTree = "<group>"; };
 		C586F8F415C6321A00573B6E /* GWContactListener.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWContactListener.mm; sourceTree = "<group>"; };
 		C586F8F715C6324800573B6E /* GWContactListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWContactListener.h; sourceTree = "<group>"; };
+		C587E2BF15D09F4E00528573 /* construction_idle2.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_idle2.anim; sourceTree = "<group>"; };
+		C587E2C015D09F4E00528573 /* construction_idle3.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_idle3.anim; sourceTree = "<group>"; };
+		C587E2C115D09F4E00528573 /* construction_walk.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_walk.anim; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C59ACC0F15C24ACF0030A862 /* character_idle4.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle4.anim; sourceTree = "<group>"; };
@@ -1199,8 +1205,11 @@
 				C59ACC1015C24ACF0030A862 /* character_idle5.anim */,
 				C5F430FC15B9008700174FEE /* character_woopwoop.anim */,
 				C5F430FF15B9054300174FEE /* character_sprinting.anim */,
-				C57BFA0015C90D8700CBC091 /* construction_idle1.anim */,
 				C57BFA0E15C9DAAA00CBC091 /* construction_aim.anim */,
+				C57BFA0015C90D8700CBC091 /* construction_idle1.anim */,
+				C587E2BF15D09F4E00528573 /* construction_idle2.anim */,
+				C587E2C015D09F4E00528573 /* construction_idle3.anim */,
+				C587E2C115D09F4E00528573 /* construction_walk.anim */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -2494,6 +2503,9 @@
 				CE4545FD15CB3ACD00AA5437 /* leaf.png in Resources */,
 				CE45460015CB42F100AA5437 /* ForgotPassword.ccbi in Resources */,
 				CE0C324315CC88780004E932 /* PlayerSearchScreen.ccbi in Resources */,
+				C587E2C215D09F4E00528573 /* construction_idle2.anim in Resources */,
+				C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */,
+				C587E2C415D09F4E00528573 /* construction_walk.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
