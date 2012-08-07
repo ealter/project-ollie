@@ -323,7 +323,7 @@ enum {
     }
     
     //Add all of the edge shapes to the world
-    //[t addToWorld:world];
+    [t addToWorld:world];
 }
 
 
