@@ -83,7 +83,6 @@
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
         [self scheduleUpdate];
-//        self.parallaxRatio = 0.3;
     }
     return self;
 }
