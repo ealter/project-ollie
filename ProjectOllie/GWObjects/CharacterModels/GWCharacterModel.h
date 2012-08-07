@@ -19,6 +19,10 @@ typedef int weaponType; //Subclasses should probably use some kind of enum for t
 @property (nonatomic) weaponType selectedWeapon;
 @property (nonatomic) CGPoint position; //in meters
 
+//jsonData is nsdecimalnumbers, nsnumbers, nsdictionaries, and nsarrays
+- (id)initWithJsonData:(id)jsonData;
+- (id)serializeToJsonData;
+
 - (NSArray *)availableWeapons; //The weapons that have been unlocked
 
 //Subclasses should override these methods:
