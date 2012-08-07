@@ -7,7 +7,6 @@
 //
 
 #import "MyCell.h"
-#import "CCNode.h"
 
 @implementation MyCell
 

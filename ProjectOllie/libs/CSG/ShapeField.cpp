@@ -26,7 +26,7 @@
 #define plankFloat 0.001f
 
 //Constant we
-#define radiusMargin .01
+#define radiusMargin 0.001f
 
 //2 pi
 #define TAU (M_PI*2)

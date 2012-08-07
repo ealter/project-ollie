@@ -43,7 +43,6 @@ enum {
 
 @implementation ActionLayer
 
-@synthesize camera           = _camera;
 @synthesize gameTerrain          = _gameTerrain;
 
 
@@ -62,22 +61,24 @@ enum {
     return scene;
 }
 
--(id) init
+-(id) initWithCamera:(GWCamera*)camera
 {
     if( (self=[super init])) {
-
-        self.contentSize = CGSizeMake(self.contentSize.width,self.contentSize.height);
+        
+        //Action layer is at z of 0
+        super.z = 0;
+        
         //set up screen parameters
         self.anchorPoint = ccp(0,0);
         [self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.camera = [[GWCamera alloc] initWithSubject:self screenDimensions:self.contentSize];
+        self.camera = camera;
 
         // enable events
         self.isTouchEnabled = YES;
         self.isAccelerometerEnabled = NO;
-
+        
         // init physics
         [self initPhysics];
         
@@ -92,8 +93,6 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-        
-        [self addChild:[GWWater node] z:8];
         
        /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
@@ -161,28 +160,6 @@ enum {
     // Define the ground body.
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0, 0); // bottom-left corner
-
-    // Call the body factory which allocates memory for the ground body
-    // from a pool and creates the ground box shape (also from a pool).
-    // The body is also added to the world.
-    b2Body* groundBody = world->CreateBody(&groundBodyDef);
-    
-    // Define the shape for our static body.
-    b2ChainShape dynamicBox;
-    b2Vec2 vs[4];
-    vs[0].Set(0,0);
-    vs[1].Set(self.contentSize.width/PTM_RATIO,0);
-    vs[2].Set(self.contentSize.width/PTM_RATIO,.02f);
-    vs[3].Set(0,.02f);
-    dynamicBox.CreateLoop(vs, 4);
-    // Define the dynamic body fixture.
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &dynamicBox;	
-    fixtureDef.density = 1.0f;
-    fixtureDef.friction = 0.3f;
-    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
-    fixtureDef.filter.maskBits = MASK_TERRAIN;
-    groundBody->CreateFixture(&fixtureDef);
     
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
@@ -199,12 +176,12 @@ enum {
 {
     [super draw];
     
-    /* Box2d debug drawing */
+    /* Box2d debug drawing 
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
     kmGLPopMatrix();
-    
+    */
     
 }
 
@@ -260,7 +237,7 @@ enum {
     {
         if(![lastChild physicsBody]->IsAwake() && self.camera.target != nil)
         {   
-            [self.camera revert];
+            // pffft wat
         }
     }
     
@@ -347,17 +324,6 @@ enum {
     
     //Add all of the edge shapes to the world
     [t addToWorld:world];
-}
-
-
-//CAMERA OBJECT FUNCTIONS
-
--(float) getParallaxRatio{
-    return 1.f;
-}
-
--(bool) isBounded{
-    return YES;
 }
 
 
