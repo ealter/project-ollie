@@ -159,21 +159,15 @@
             return;
         case kStateWalking:
         {
-            if(self.orientation == kOrientationRight)
+
+            if(![self.skeleton animating])
+                [self.skeleton runAnimation:@"walk" flipped:!self.orientation];
+            if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
             {
-                if(![self.skeleton animating])
-                    [self.skeleton runAnimation:@"walk" flipped:YES];
-                if(ccpLengthSQ([self.skeleton getVelocity]) <.1)
-                    [self.skeleton applyLinearImpulse:ccp(-IMPULSE_MAG,0)];
+                [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
             }
-            else
-            {
-                if(![self.skeleton animating])
-                    [self.skeleton runAnimation:@"walk" flipped:NO];
-                if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
-                    [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG,0)];
-                
-            }
+            
+        
             [self.skeleton tieSkeletonToInteractor];
             return;
         }
