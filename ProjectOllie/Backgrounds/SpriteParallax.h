@@ -8,9 +8,10 @@
 
 #import "CCSprite.h"
 #import "GWCamera.h"
+#import "GWPerspectiveLayer.h"
 
-@interface SpriteParallax : CCSprite <CameraObject>
+@interface SpriteParallax : GWPerspectiveLayer
 
-@property (nonatomic) float parallaxRatio;
+-(id)initWithFile:(NSString *)filename camera:(GWCamera*)camera;
 
 @end

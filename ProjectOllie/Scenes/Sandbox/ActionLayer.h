@@ -12,11 +12,13 @@
 #import "GWCamera.h"
 #import "Terrain.h"
 #import "CCLayer.h"
+#import "GWPerspectiveLayer.h"
+
 @class CCScene;
 
 //Action Layer is different from a regular layer in that it has a camera that follows it
 //And it keeps track of parallax brothers in a scene
-@interface ActionLayer : CCLayer <CameraObject>
+@interface ActionLayer : GWPerspectiveLayer
 {
 
 	CCTexture2D *spriteTexture_;	// weak ref
@@ -24,12 +26,12 @@
 	GLESDebugDraw *m_debugDraw;		// strong ref
 }
 
-@property (strong, nonatomic) GWCamera* camera;//camera that watches the action
-
 @property (strong, nonatomic) Terrain* gameTerrain;//terrain in the game world;
 
 // returns a CCScene that contains the HelloWorldLayer as the only child
 +(CCScene *) scene;
+
+-(id) initWithCamera:(GWCamera*)camera;
 
 -(void)setTerrain:(Terrain*)t;
 
