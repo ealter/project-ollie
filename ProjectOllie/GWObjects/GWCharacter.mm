@@ -163,9 +163,7 @@
             if(![self.skeleton animating])
                 [self.skeleton runAnimation:@"walk" flipped:!self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
-            {
                 [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
-            }
             
         
             [self.skeleton tieSkeletonToInteractor];
