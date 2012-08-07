@@ -297,7 +297,11 @@
     _orientation = orientation;
     for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
         sprite.flipY  = self.orientation;
-        sprite.zOrder = -sprite.zOrder;
+        
+        if(!self.orientation)
+            sprite.zOrder = -abs(sprite.zOrder);
+        else
+            sprite.zOrder = abs(sprite.zOrder);
     }
 }
 //override methods
