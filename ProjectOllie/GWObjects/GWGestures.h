@@ -26,11 +26,8 @@
 
 @end
 
-@interface GWGestures : CCLayer {
-    
-}
+@interface GWGestures : CCLayer
 
 @property (strong, nonatomic) NSMutableArray* children; // Nodes that need gesture activation
-
 
 @end

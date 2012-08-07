@@ -11,8 +11,7 @@
 
 @class CCScrollView;
 
-@interface CharacterScreen : Menu <SWTableViewDataSource, SWTableViewDelegate>
-{
+@interface CharacterScreen : Menu <SWTableViewDataSource, SWTableViewDelegate> {
     SWTableView * tableView;
 }
 

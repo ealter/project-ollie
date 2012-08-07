@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CCSprite.h"
+#import "CCNode.h"
 #import "GWCamera.h"
 #import "GWPerspectiveLayer.h"
 

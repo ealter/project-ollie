@@ -14,9 +14,6 @@ class Skeleton;
 struct Bone;
 class b2World;
 
-
-
-
 /********
  * TODO *
  ********
@@ -122,6 +119,5 @@ typedef enum InteractorState{
 -(void)setOwner:(id)owner;
 
 -(bool)resting:(float)dt;
-
 
 @end
