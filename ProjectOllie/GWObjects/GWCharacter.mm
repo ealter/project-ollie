@@ -18,13 +18,14 @@
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .005
 #define kTagParentNode 111
+#define zPivot 3
 
 @interface GWCharacter()
 {
 
 }
 
--(void)generateSprites:(Bone*)root index:(int)index;
+-(void)generateSprites:(Bone*)root;
 
 //private properties endemic to a character
 
@@ -60,7 +61,7 @@
         /* Add physics sprites */
         Bone* root       = [self.skeleton getBoneByName:@"Head"];
         [self addChild:[CCNode node] z:kTagParentNode tag:kTagParentNode];
-        [self generateSprites:root index:0];
+        [self generateSprites:root];
         
         //if the above worked...
         if(self.skeleton) {
@@ -82,7 +83,7 @@
     return self;
 }
 
--(void)generateSprites:(Bone*)root index:(int)index
+-(void)generateSprites:(Bone*)root
 {
     if(root)
     {
@@ -104,11 +105,8 @@
         if(prefix == 'r')
             b_name = b_name.substr(1);
         else if (prefix == 'l')
-        {
             b_name = b_name.substr(1); 
-            index++;
-        }
-        CCLOG(@"The b_name is: %s", b_name.c_str());
+        CCLOG(@"The b_name is: %s and it has a z order of: %d", root->name.c_str(),index);
         NSString* name = [NSString stringWithCString:b_name.c_str() 
                                             encoding:[NSString defaultCStringEncoding]];
         NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@",self.type,@"_",name,@".png"];
@@ -116,10 +114,10 @@
         GWPhysicsSprite *part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
         part.physicsBody      = root->box2DBody;
         part.flipY = flipped;
-        [[self getChildByTag:kTagParentNode ]addChild:part z:index*2];
+        [[self getChildByTag:kTagParentNode ]addChild:part z:root->z];
         
         for(int i = 0; i < root->children.size(); i++)
-            [self generateSprites:root->children.at(i) index:index+1];
+            [self generateSprites:root->children.at(i)];
     }
 }
 
@@ -193,7 +191,7 @@
             /* Finished correct placement */
             
             /* Convert the angle to frames*/
-            float angle = (self.selectedWeapon.wepAngle) + M_PI_2;
+            float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
             while(angle > M_PI*2)
             {
                 angle -= M_PI*2;
@@ -202,9 +200,10 @@
             {
                 angle += M_PI*2;
             }
-            if(angle < M_PI)
+            if(angle < M_PI && self.orientation != kOrientationRight)
                 self.orientation  = kOrientationRight;
-            else self.orientation = kOrientationLeft;
+            else if(angle > M_PI && self.orientation != kOrientationLeft)
+                self.orientation = kOrientationLeft;
             
             if(angle > M_PI)
                 angle = M_PI*2 - angle;
@@ -296,18 +295,9 @@
 
 -(void)setOrientation:(Orientation)orientation{
     _orientation = orientation;
-    
-    if(orientation == kOrientationLeft)
-    {
-        for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
-            sprite.flipY = YES;
-        }
-    }
-    else if(orientation == kOrientationRight)
-    {
-        for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
-            sprite.flipY = NO;
-        }
+    for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
+        sprite.flipY  = self.orientation;
+        sprite.zOrder = -sprite.zOrder;
     }
 }
 //override methods
@@ -320,7 +310,7 @@
 -(void)setSelectedWeapon:(GWWeapon *)selectedWeapon{
     _selectedWeapon = selectedWeapon;
     selectedWeapon.holder = self;
-    [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:8];
+    [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:zPivot];
 }
 
 @end

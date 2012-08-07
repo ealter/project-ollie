@@ -27,7 +27,6 @@
 @synthesize scrollSpeed = _scrollSpeed;
 @synthesize backgrounds = _backgrounds;
 @synthesize imageNames  = _imageNames;
-@synthesize parallaxRatio = _parallaxRatio;
 
 - (void)initBackgrounds;
 {
@@ -84,7 +83,7 @@
         self.scrollSpeed = speed;
         self.imageNames = imageNames;
         [self scheduleUpdate];
-        self.parallaxRatio = 0.3;
+//        self.parallaxRatio = 0.3;
     }
     return self;
 }
@@ -142,13 +141,4 @@
     }
 }
 
-//Camera object
-
--(float)getParallaxRatio{
-    return self.parallaxRatio;
-}
-
--(bool)isBounded{
-    return NO;
-}
 @end
