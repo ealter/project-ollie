@@ -8,7 +8,7 @@
 
 #import "GaussRifle.h"
 #import "GaussRifleProjectile.h"
-
+#import "HMVectorNode.h"
 
 @implementation GaussRifle
 

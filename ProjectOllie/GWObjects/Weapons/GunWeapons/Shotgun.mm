@@ -8,7 +8,7 @@
 
 #import "Shotgun.h"
 #import "ShotgunProjectile.h"
-
+#import "HMVectorNode.h"
 
 @implementation Shotgun
 

@@ -12,7 +12,8 @@
 //
 
 #import "CCLayer.h"
-#import "GWCamera.h"
+
+@class GWCamera;
 
 @interface GWPerspectiveLayer : CCLayer
 

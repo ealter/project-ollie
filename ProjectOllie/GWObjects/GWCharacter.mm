@@ -10,6 +10,7 @@
 #import "GWSkeleton.h"
 #import "Box2D.h"
 #import "GWPhysicsSprite.h"
+#import "cocos2d.h"
 #include "Skeleton.h"
 #include "GameConstants.h"
 #include "GWContactListener.h"
@@ -216,13 +217,9 @@
             [self.skeleton setInteractorPositionInRagdoll];
             return;
     }
-    
-
-    
 }
 
 -(void)walkLeft{
-    
     // If it is making contact with some ground body
     if([self.skeleton calculateNormalAngle])
     {

@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
 #import "GWPhysicsSprite.h"
-#import "Box2D.h"
 #import "GWGestures.h"
 #import "GWProjectile.h"
 #import "HMVectorNode.h"
+
+class b2World;
 
 @interface GWThrownWeapon : GWWeapon <GestureChild>{
     b2World *_world;

@@ -9,12 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "GWWeapon.h"
 #import "GWGestures.h"
-#import "HMVectorNode.h"
 
 class b2World;
+@class HMVectorNode;
 
 #define MAXSPEED 10. //Maximum speed of the weapon's projectile
-
 
 @interface GWGunWeapon : GWWeapon<GestureChild> {
     b2World         *_world;

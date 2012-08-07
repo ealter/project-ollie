@@ -10,7 +10,6 @@
 #import "GWWeapon.h"
 #import "GWGestures.h"
 
-
 @interface GWSpellWeapon : GWWeapon<GestureChild>
 
 @end

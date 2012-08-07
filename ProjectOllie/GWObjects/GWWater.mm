@@ -14,6 +14,7 @@
 #import "cocos2d.h"
 #import "GameConstants.h"
 #import "HMVectorNode.h"
+#import "GWCamera.h"
 
 #define metersPerWaterTile 2.5f
 #define MAX_FRAME 232
