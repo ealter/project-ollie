@@ -159,7 +159,7 @@
             return;
         case kStateWalking:
         {
-            if(self.orientation == kOrientationLeft)
+            if(self.orientation == kOrientationRight)
             {
                 if(![self.skeleton animating])
                     [self.skeleton runAnimation:@"walk" flipped:YES];
