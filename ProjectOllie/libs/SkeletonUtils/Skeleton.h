@@ -45,6 +45,7 @@ struct Bone{
            offA, // offset angle (for interpolation)
              jx, // joint x coordinate
              jy, // joint y coordinate
+              z, // the bone's z value
   jointAngleMax, // joint angle maximum limit
   jointAngleMin; // joint angle minimum limit
         
