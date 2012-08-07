@@ -35,11 +35,4 @@
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)
 
-#define yup true
-#define yea true
-#define sure true
-
-#define nope false
-#define nah false
-
 #endif
