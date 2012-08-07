@@ -102,19 +102,31 @@
         b_name[0] = (char)tolower(b_name[0]);
         char prefix    = b_name.at(0);
         bool flipped   = false;
-        if(prefix == 'r')
+        if(prefix == 'r' || prefix == 'l')
             b_name = b_name.substr(1);
-        else if (prefix == 'l')
-            b_name = b_name.substr(1); 
-        CCLOG(@"The b_name is: %s and it has a z order of: %d", root->name.c_str(),index);
-        NSString* name = [NSString stringWithCString:b_name.c_str() 
-                                            encoding:[NSString defaultCStringEncoding]];
-        NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@",self.type,@"_",name,@".png"];
         
-        GWPhysicsSprite *part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
+        //Determine if the bone needs an image
+        prefix = b_name.at(0);
+        GWPhysicsSprite *part;
+        //If it isn't an upper body part, we need to get the correct image
+        if(prefix != 'u')
+        {
+            NSString* name = [NSString stringWithCString:b_name.c_str() 
+                                                encoding:[NSString defaultCStringEncoding]];
+            NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@",self.type,@"_",name,@".png"];
+            
+            part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
+            part.flipY = flipped;
+        }
+        //If it is an upper body part, we don't need to show it
+        else
+        {
+            part = [GWPhysicsSprite node];
+        }
+        //set its physics body correctly
         part.physicsBody      = root->box2DBody;
-        part.flipY = flipped;
-        [[self getChildByTag:kTagParentNode ]addChild:part z:root->z];
+        [[self getChildByTag:kTagParentNode]addChild:part z:root->z];
+        
         
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i)];
