@@ -7,8 +7,9 @@
 //
 
 #import "CCSprite.h"
-#import "GWCamera.h"
 #import "GWPerspectiveLayer.h"
+
+@class GWCamera;
 
 @interface SpriteParallax : GWPerspectiveLayer
 

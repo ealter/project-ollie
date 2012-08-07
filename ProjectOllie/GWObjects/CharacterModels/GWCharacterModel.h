@@ -13,15 +13,15 @@
 typedef int weaponType; //Subclasses should probably use some kind of enum for this
 
 @interface GWCharacterModel : NSObject {
-    NSMutableArray *availableWeapons_; //TODO: should this be an NSArray?
+    NSMutableArray *availableWeapons_; //Subclasses should initialize this
 }
 
 @property (nonatomic) weaponType selectedWeapon;
 @property (nonatomic) CGPoint position; //in meters
 
 //jsonData is nsdecimalnumbers, nsnumbers, nsdictionaries, and nsarrays
-- (id)initWithJsonData:(id)jsonData;
-- (id)serializeToJsonData;
+- (id)initWithJsonData:(NSDictionary *)jsonData;
+- (NSDictionary *)serializeToJsonData;
 
 - (NSArray *)availableWeapons; //The weapons that have been unlocked
 
