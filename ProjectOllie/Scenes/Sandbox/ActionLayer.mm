@@ -146,7 +146,7 @@ enum {
     world->SetContactListener(_contactListener);
 
     m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-    //world->SetDebugDraw(m_debugDraw);
+    world->SetDebugDraw(m_debugDraw);
 
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;
@@ -176,12 +176,12 @@ enum {
 {
     [super draw];
     
-    /* Box2d debug drawing 
+    // Box2d debug drawing 
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
     kmGLPopMatrix();
-    */
+
     
 }
 
