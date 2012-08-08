@@ -26,7 +26,7 @@ typedef int weaponType; //Subclasses should probably use some kind of enum for t
 - (NSArray *)availableWeapons; //The weapons that have been unlocked
 
 //Subclasses should override these methods:
-+ (NSString *)imageNameForWeaponType:(weaponType)weaponType;
++ (NSString *)imageNameForWeaponType:(weaponType)weaponType; //TODO: Maybe return a weapon class?
 + (NSArray *)weaponTypes; //All weapons available to this character class
 
 @end

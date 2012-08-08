@@ -7,14 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWProjectile.h"
-#import "Box2D.h"
 
+class b2World;
+@class ActionLayer;
 
-@interface GrenadeProjectile : GWProjectile {
-    
-}
+@interface GrenadeProjectile : GWProjectile
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld;
 

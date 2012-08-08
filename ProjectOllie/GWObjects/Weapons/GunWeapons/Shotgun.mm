@@ -9,6 +9,7 @@
 #import "Shotgun.h"
 #import "ShotgunProjectile.h"
 #import "HMVectorNode.h"
+#include "GameConstants.h"
 
 @implementation Shotgun
 
