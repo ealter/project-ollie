@@ -33,10 +33,7 @@
         
         [self addChild:tableView];
         [tableView reloadData];
-        
-        //GWWater *water = [GWWater node];
-        //[self addChild:water];
-        
+                
         //Particle stuffs
         CCParticleSystem *emitter = [GWParticleMagicMissile node];
         [self addChild:emitter];
