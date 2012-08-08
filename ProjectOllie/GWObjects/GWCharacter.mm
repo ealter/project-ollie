@@ -103,19 +103,31 @@
         b_name[0] = (char)tolower(b_name[0]);
         char prefix    = b_name.at(0);
         bool flipped   = false;
-        if(prefix == 'r')
+        if(prefix == 'r' || prefix == 'l')
             b_name = b_name.substr(1);
-        else if (prefix == 'l')
-            b_name = b_name.substr(1); 
-        CCLOG(@"The b_name is: %s and it has a z order of: %d", root->name.c_str(),index);
-        NSString* name = [NSString stringWithCString:b_name.c_str() 
-                                            encoding:[NSString defaultCStringEncoding]];
-        NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@",self.type,@"_",name,@".png"];
         
-        GWPhysicsSprite *part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
+        //Determine if the bone needs an image
+        prefix = b_name.at(0);
+        GWPhysicsSprite *part;
+        //If it isn't an upper body part, we need to get the correct image
+        if(prefix != 'u')
+        {
+            NSString* name = [NSString stringWithCString:b_name.c_str() 
+                                                encoding:[NSString defaultCStringEncoding]];
+            NSString* spriteFrameName = [NSString stringWithFormat:@"%@%@%@%@",self.type,@"_",name,@".png"];
+            
+            part = [GWPhysicsSprite spriteWithSpriteFrameName:spriteFrameName];
+            part.flipY = flipped;
+        }
+        //If it is an upper body part, we don't need to show it
+        else
+        {
+            part = [GWPhysicsSprite node];
+        }
+        //set its physics body correctly
         part.physicsBody      = root->box2DBody;
-        part.flipY = flipped;
-        [[self getChildByTag:kTagParentNode ]addChild:part z:root->z];
+        [[self getChildByTag:kTagParentNode]addChild:part z:root->z];
+        
         
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i)];
@@ -133,27 +145,26 @@
     if(self.state != kStateRagdoll)
         [self.skeleton tieSkeletonToInteractor];
     else if([self.skeleton resting:dt])
-        self.state = kStateArming;
+        self.state = kStateIdle;
     
     
     switch(self.state) {
         case kStateIdle:
             if(![self.skeleton animating])
             {
-               /* float rand     = CCRANDOM_0_1();
+                float rand     = CCRANDOM_0_1();
                 NSString* anim = @"idle1"; 
                 
-                if(rand < .1f)
+                if(rand < .25f)
                     anim = @"idle2";
-                else if (rand < .25f)
-                    anim = @"idle3";
                 else if (rand < .4f)
+                    anim = @"idle3";
+                /*else if (rand < .4f)
                     anim = @"idle4";
                 else if (rand < .6f)
-                    anim = @"idle5";
+                    anim = @"idle5";*/
                 
-                [self.skeleton runAnimation:anim flipped:self.orientation];*/
-                [self.skeleton runFrame:135 ofAnimation:@"aim" flipped:self.orientation];
+                [self.skeleton runAnimation:anim flipped:self.orientation];
                 
             }
             
@@ -243,7 +254,7 @@
 }
 
 -(void)stopWalking{
-    self.state = kStateArming;
+    self.state = kStateIdle;
     [self.skeleton clearAnimation];
 }
 
