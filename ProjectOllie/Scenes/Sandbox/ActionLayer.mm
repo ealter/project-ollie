@@ -2,7 +2,7 @@
 //  ActionLayer.m
 //  ProjectOllie
 //
-//  Created by Sam Zeckendorf on 6/1/12.
+//  Created by a young lion named Sam Zeckendorf on 6/1/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
@@ -177,12 +177,11 @@ enum {
 {
     [super draw];
     
-    // Box2d debug drawing 
+    /* Box2d debug drawing */
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
     kmGLPopMatrix();
-
     
 }
 

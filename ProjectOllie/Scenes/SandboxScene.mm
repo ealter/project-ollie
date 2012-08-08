@@ -2,7 +2,7 @@
 //  SandboxScene.m
 //  ProjectOllie
 //
-//  Created by Sam Zeckendorf on 6/6/12.
+//  Created by Lion Sam Zeckendorf on 6/6/12.
 //  Copyright 2012 hi ku llc All rights reserved.
 //
 
