@@ -1,18 +1,18 @@
 //
-//  GWUiLayer.m
+//  GWUILayer.m
 //  ProjectOllie
 //
 //  Created by Lion User on 8/8/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GWUiLayer.h"
+#import "GWUILayer.h"
 #import "MyCell.h"
 #import "GWCharacter.h"
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
-@implementation GWUiLayer
+@implementation GWUILayer
 @synthesize weaponTable         = _weaponTable;
 @synthesize activeCharacter     = _activeCharacter;
 @synthesize emitter             = _emitter;
