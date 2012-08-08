@@ -176,12 +176,12 @@ enum {
 {
     [super draw];
     
-    /* Box2d debug drawing 
+    /* Box2d debug drawing */
     ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
     kmGLPopMatrix();
-    */
+    
     
 }
 
