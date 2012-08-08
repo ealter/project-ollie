@@ -46,7 +46,7 @@
 }
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
-{  
+{
 }
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
@@ -56,7 +56,6 @@
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
 {
-    
     NSString *string = [NSString stringWithFormat:@"%d", idx];
     
     SWTableViewCell *cell = [table dequeueCell];

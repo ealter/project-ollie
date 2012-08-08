@@ -59,7 +59,7 @@
         self.z0              = -2.5*PTM_RATIO;
         self.zOut            = _z0/scaleOut;
         _location.z          = self.zOut;
-        self.track           = nope;
+        self.track           = NO;
         self.target          = nil;
         self.actionIntensity = 0.f;
         _center.x            = sd.width/2;

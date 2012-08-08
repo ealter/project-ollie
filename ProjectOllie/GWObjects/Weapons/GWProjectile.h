@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CCNode.h"
 #import "GWPhysicsSprite.h"
 #import "ActionLayer.h"
-#import "GWParticles.h"
-
 
 class b2World;
+@class CCParticleSystem;
 
 @interface GWProjectile : GWPhysicsSprite {
     b2World* _world;

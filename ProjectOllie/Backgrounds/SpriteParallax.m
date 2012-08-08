@@ -8,6 +8,7 @@
 
 #import "SpriteParallax.h"
 #import "GameConstants.h"
+#import "GWCamera.h"
 
 @implementation SpriteParallax
 

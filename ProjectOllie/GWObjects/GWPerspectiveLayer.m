@@ -7,6 +7,7 @@
 //
 
 #import "GWPerspectiveLayer.h"
+#import "GWCamera.h"
 
 @implementation GWPerspectiveLayer
 

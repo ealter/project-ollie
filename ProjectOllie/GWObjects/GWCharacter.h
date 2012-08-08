@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "CCNode.h"
 
 class b2World;
 @class GWSkeleton;

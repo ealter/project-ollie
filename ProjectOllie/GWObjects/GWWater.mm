@@ -14,14 +14,17 @@
 #import "cocos2d.h"
 #import "GameConstants.h"
 #import "HMVectorNode.h"
+#import "GWCamera.h"
 
-#define metersPerWaterTile 2.5f
-#define MAX_FRAME 232
-#define FRAMES_PER_SHEET 32
-#define SHEETS 8
+const float kMetersPerWaterTile = 2.5;
+enum {
+    kMaxFrame = 232,
+    kFramesPerSheet = 32,
+    kSheets = 8
+};
 
 //static CCGLProgram *shader_ = nil;
-static CCTexture2D *texture [SHEETS];
+static CCTexture2D *texture[kSheets];
 
 @interface GWWater (){
     ccColor4F topColor;            //Wave and top of solid are this color
@@ -36,12 +39,10 @@ static CCTexture2D *texture [SHEETS];
     CCGLProgram *solidShaderProgram;
     ccV2F_C4F_T2F_Quad solid;
     GLuint solidVbo;
-    
 }
 
 @property float waterHeight;
 @end
-
 
 @implementation GWWater
 
@@ -73,7 +74,7 @@ static const float frameHeight = 32.0f;
         _waterHeight = 0.5f;
         
         //Find how high the wave is in meters based on the meters per water tile
-        float waveHeight = metersPerWaterTile*frameHeight/frameWidth;
+        float waveHeight = kMetersPerWaterTile*frameHeight/frameWidth;
         printf("\n\nwaveheight %f\n\n\n", waveHeight);
         
         //Initialize wave quad
@@ -89,7 +90,7 @@ static const float frameHeight = 32.0f;
         //The x for the texcoords are constant (variable y's are calculated when drawing)
         wave.bl.texCoords.u = 0.f;
         wave.tl.texCoords.u = 0.f;
-        wave.tr.texCoords.u = (MAX_VIEWABLE_X - MIN_VIEWABLE_X)/metersPerWaterTile/PTM_RATIO;
+        wave.tr.texCoords.u = (MAX_VIEWABLE_X - MIN_VIEWABLE_X)/kMetersPerWaterTile/PTM_RATIO;
         wave.br.texCoords.u = wave.tr.texCoords.u;
         wave.bl.texCoords.v = 0.f;
         wave.tl.texCoords.v = 1.f;
@@ -117,7 +118,7 @@ static const float frameHeight = 32.0f;
         CCTexture2DPixelFormat oldDefault = [CCTexture2D defaultAlphaPixelFormat];
         [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_A8];
         ccTexParams params = {GL_NICEST, GL_NICEST, GL_REPEAT, GL_REPEAT};
-        for (int i = 0; i < SHEETS; i++)
+        for (int i = 0; i < kSheets; i++)
         {
             texture[i] = [[CCTextureCache sharedTextureCache] addImage: [NSString stringWithFormat:@"waterSheet%d.png", (i+1)]];
             [texture[i] setTexParameters: &params];
@@ -168,12 +169,12 @@ static const float frameHeight = 32.0f;
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     //Update the frame
-    frame = (frame+1)%MAX_FRAME;
+    frame = (frame+1)%kMaxFrame;
     
     //Calculate vertex coords for the current frame
     float h = frameHeight/1024.0f;
-    int frameOnTexture = FRAMES_PER_SHEET - frame%FRAMES_PER_SHEET - 1;
-    int sheet = frame/FRAMES_PER_SHEET;
+    int frameOnTexture = kFramesPerSheet - frame%kFramesPerSheet - 1;
+    int sheet = frame/kFramesPerSheet;
     wave.tl.texCoords.v = frameOnTexture*h+1/1024.0f;
     wave.bl.texCoords.v = (frameOnTexture+1)*h-1/1024.0f;
     wave.tr.texCoords.v = wave.tl.texCoords.v;

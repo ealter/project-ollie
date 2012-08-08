@@ -15,6 +15,7 @@
 #import "SandboxScene.h"
 #import "ActionLayer.h"
 #import "MaskedSprite.h"
+#import "cocos2d.h"
 
 @interface DrawEnvironment () <DrawMenu_delegate>
 

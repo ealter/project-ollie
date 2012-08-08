@@ -12,7 +12,6 @@
 
 #define MAXSPEED 160. //Max speed of the weapon's projectile
 
-
 @implementation GWThrownWeapon
 
 -(id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo box2DWorld:(b2World *)world fuseTime:(float)fuseTime gameWorld:(ActionLayer *)gWorld

@@ -10,6 +10,7 @@
 #import "GWSkeleton.h"
 #import "Box2D.h"
 #import "GWPhysicsSprite.h"
+#import "cocos2d.h"
 #include "Skeleton.h"
 #include "GameConstants.h"
 #include "GWContactListener.h"
@@ -66,7 +67,7 @@
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"aim", nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"aim", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
@@ -159,59 +160,54 @@
             return;
         case kStateWalking:
         {
-            if(self.orientation == kOrientationLeft)
-            {
-                if(![self.skeleton animating])
-                    [self.skeleton runAnimation:@"idle1" flipped:YES];
-                if(ccpLengthSQ([self.skeleton getVelocity]) <.1)
-                    [self.skeleton applyLinearImpulse:ccp(-IMPULSE_MAG,0)];
-            }
-            else
-            {
-                if(![self.skeleton animating])
-                    [self.skeleton runAnimation:@"idle1" flipped:NO];
-                if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
-                    [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG,0)];
-                
-            }
+
+            if(![self.skeleton animating])
+                [self.skeleton runAnimation:@"walk" flipped:!self.orientation];
+            if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
+                [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
+            
+        
             [self.skeleton tieSkeletonToInteractor];
             return;
         }
         case kStateArming:
         {
             /* Place gun on correct bone in body */
-            Bone* targetBone;
-            if(self.orientation == kOrientationLeft)
-                targetBone = [self.skeleton getBoneByName:@"ll_arm"];
-            else
-                targetBone = [self.skeleton getBoneByName:@"rl_arm"];
-        
-            CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
-            [self.selectedWeapon setPosition:position];
-            /* Finished correct placement */
-            
-            /* Convert the angle to frames*/
-            float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
-            while(angle > M_PI*2)
+            if(self.selectedWeapon)
             {
-                angle -= M_PI*2;
+                Bone* targetBone;
+                if(self.orientation == kOrientationLeft)
+                    targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+                else
+                    targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+            
+                CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+                [self.selectedWeapon setPosition:position];
+                /* Finished correct placement */
+                
+                /* Convert the angle to frames*/
+                float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
+                while(angle > M_PI*2)
+                {
+                    angle -= M_PI*2;
+                }
+                while(angle < 0)
+                {
+                    angle += M_PI*2;
+                }
+                if(angle < M_PI && self.orientation != kOrientationRight)
+                    self.orientation  = kOrientationRight;
+                else if(angle > M_PI && self.orientation != kOrientationLeft)
+                    self.orientation = kOrientationLeft;
+                
+                if(angle > M_PI)
+                    angle = M_PI*2 - angle;
+                
+                angle = RAD2DEG(angle);
+                /* Finished converting angle to frames */
+                
+                [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             }
-            while(angle < 0)
-            {
-                angle += M_PI*2;
-            }
-            if(angle < M_PI && self.orientation != kOrientationRight)
-                self.orientation  = kOrientationRight;
-            else if(angle > M_PI && self.orientation != kOrientationLeft)
-                self.orientation = kOrientationLeft;
-            
-            if(angle > M_PI)
-                angle = M_PI*2 - angle;
-            
-            angle = RAD2DEG(angle);
-            /* Finished converting angle to frames */
-            
-            [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             return;
         }
         case kStateManeuvering:
@@ -221,13 +217,9 @@
             [self.skeleton setInteractorPositionInRagdoll];
             return;
     }
-    
-
-    
 }
 
 -(void)walkLeft{
-    
     // If it is making contact with some ground body
     if([self.skeleton calculateNormalAngle])
     {
@@ -297,7 +289,11 @@
     _orientation = orientation;
     for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
         sprite.flipY  = self.orientation;
-        sprite.zOrder = -sprite.zOrder;
+        
+        if(!self.orientation)
+            sprite.zOrder = -abs(sprite.zOrder);
+        else
+            sprite.zOrder = abs(sprite.zOrder);
     }
 }
 //override methods
