@@ -57,3 +57,15 @@
 {
 }
 @end
+
+// A cool sound-like circle particle system
+@interface GWParticleSoundCircle: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+
+// An explosion particle system
+@interface GWParticleExplosion2: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end

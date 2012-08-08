@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
+#import "GWGestures.h"
 
 class b2World;
 @class GWSkeleton;
@@ -26,7 +27,7 @@ typedef enum Orientation {
     kOrientationLeft
 }Orientation;
 
-@interface GWCharacter : CCNode {
+@interface GWCharacter : CCNode <GestureChild>{
     
 }
 -(id)initWithIdentifier:(NSString*)type spriteIndices:(NSArray*)indices box2DWorld:(b2World*)world;
@@ -57,5 +58,8 @@ typedef enum Orientation {
 
 /* The currently active weapon, visible if state == arming */
 @property (strong, nonatomic) GWWeapon* selectedWeapon;
+
+/* The UI layer that contains the character*/
+@property (strong, nonatomic) GWGestures* uiLayer;
 
 @end

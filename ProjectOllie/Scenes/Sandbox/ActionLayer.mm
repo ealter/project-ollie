@@ -167,7 +167,8 @@ enum {
     Grenade* weapon = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
     _character.selectedWeapon = weapon;
     gestures = [[GWGestures alloc] init];
-    [[gestures children] addObject:weapon];
+    [[gestures children] addObject:_character];
+    _character.uiLayer = gestures;
     [self addChild:gestures z:2];
 
 }
