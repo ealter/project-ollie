@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWProjectile.h"
 
 @interface ShotgunProjectile : GWProjectile {
