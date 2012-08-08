@@ -15,7 +15,7 @@
 #include "GameConstants.h"
 #include "GWContactListener.h"
 #include "GWWeapon.h"
-#include "GWUiLayer.h"
+#include "GWUILayer.h"
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .005
@@ -137,7 +137,7 @@
 }
 
 -(void)loadWeapons:(NSArray *)weapons{
-    
+    [self.weapons addObjectsFromArray:weapons];
 }
 
 -(void)update:(float)dt

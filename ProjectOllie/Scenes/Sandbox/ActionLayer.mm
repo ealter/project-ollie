@@ -166,12 +166,16 @@ enum {
     [self addChild:_character];
     
     //ui layer
-    GWUiLayer *uiLayer = [[GWUiLayer alloc] init];
+    GWUILayer *uiLayer = [[GWUILayer alloc] init];
     _character.uiLayer = uiLayer;
     [self addChild:uiLayer z:PTM_RATIO];
     
-    GaussRifle* weapon = [[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
-    _character.selectedWeapon = weapon;
+    //weapons loading
+    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],nil];
+    
+    [_character loadWeapons:weaponArray];
+    _character.selectedWeapon = [weaponArray objectAtIndex:0];
+
     
     //gesture layer
     gestures = [[GWGestures alloc] init];

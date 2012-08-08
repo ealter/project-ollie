@@ -14,7 +14,7 @@
 class b2World;
 @class GWSkeleton;
 @class GWWeapon;
-@class GWUiLayer;
+@class GWUILayer;
 
 typedef enum characterState {
     kStateIdle = 0,   // when just standing around
@@ -62,6 +62,6 @@ typedef enum Orientation {
 @property (strong, nonatomic) GWWeapon* selectedWeapon;
 
 /* The UI layer that contains the character*/
-@property (strong, nonatomic) GWUiLayer* uiLayer;
+@property (strong, nonatomic) GWUILayer* uiLayer;
 
 @end

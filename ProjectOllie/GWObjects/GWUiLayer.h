@@ -1,5 +1,6 @@
+
 //
-//  GWUiLayer.h
+//  GWUILayer.h
 //  ProjectOllie
 //
 //  Created by Lion User on 8/8/12.
@@ -12,7 +13,7 @@
 
 @class GWCharacter;
 
-@interface GWUiLayer : CCLayer <SWTableViewDataSource, SWTableViewDelegate> {
+@interface GWUILayer : CCLayer <SWTableViewDataSource, SWTableViewDelegate> {
     NSUInteger numCells;
     int wepIterator;
 }
@@ -24,7 +25,7 @@
 @property (strong, nonatomic) CCParticleSystem* emitter; //Particle emitter
 
 
--(void)buildWeaponTableFrom:(GWCharacter *)character;   // Build a weapon table from a character
+-(void)buildWeaponTableFrom:(GWCharacter *)character;   // BUIld a weapon table from a character
 
 
 @end
