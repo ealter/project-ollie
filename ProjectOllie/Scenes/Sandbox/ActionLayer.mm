@@ -2,7 +2,7 @@
 //  ActionLayer.m
 //  ProjectOllie
 //
-//  Created by Sam Zeckendorf on 6/1/12.
+//  Created by a young lion named Sam Zeckendorf on 6/1/12.
 //  Copyright (c) 2012 hi ku llc All rights reserved.
 //
 
@@ -164,7 +164,7 @@ enum {
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
-    GaussRifle* weapon = [[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
+    Grenade* weapon = [[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
     _character.selectedWeapon = weapon;
     gestures = [[GWGestures alloc] init];
     [[gestures children] addObject:weapon];
