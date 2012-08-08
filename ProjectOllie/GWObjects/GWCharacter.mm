@@ -270,7 +270,6 @@
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
     }
     
-    
     //upon switching to new state
     _state = state;
     //[self.skeleton setActive:NO];
