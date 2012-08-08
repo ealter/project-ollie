@@ -67,7 +67,7 @@
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"aim", nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"moonwalk",@"aim", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
@@ -173,7 +173,7 @@
         {
 
             if(![self.skeleton animating])
-                [self.skeleton runAnimation:@"walk" flipped:!self.orientation];
+                [self.skeleton runAnimation:@"moonwalk" flipped:!self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
                 [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
             
