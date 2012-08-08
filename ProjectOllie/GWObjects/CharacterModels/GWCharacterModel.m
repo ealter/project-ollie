@@ -10,7 +10,6 @@
 
 //Serialization constants
 static const NSString *kSelectedWeaponTypeKey = @"Current weapon";
-static const NSString *kPositionKey           = @"Position";
 
 static NSDictionary *CGPointToDictionary(CGPoint p) {
     NSNumber *x = [NSNumber numberWithFloat:p.x];
@@ -25,7 +24,6 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 @implementation GWCharacterModel
-@synthesize position = _position;
 @synthesize selectedWeapon = _selectedWeapon;
 
 - (id)initWithJsonData:(NSDictionary *)jsonData
@@ -35,7 +33,6 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             DebugLog(@"I received data that should have been a dictionary, but was not");
             return nil;
         }
-        _position = dictionaryToCGPoint([jsonData objectForKey:kPositionKey]);
         _selectedWeapon = [(NSDecimalNumber *)[jsonData objectForKey:kSelectedWeaponTypeKey] intValue];
     }
     return self;
@@ -45,7 +42,6 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:2];
     [data setObject:[NSNumber numberWithInt:self.selectedWeapon] forKey:kSelectedWeaponTypeKey];
-    [data setObject:CGPointToDictionary(self.position) forKey:kPositionKey];
     return data;
 }
 
