@@ -8,7 +8,7 @@
 
 #import "ShotgunProjectile.h"
 #import "Shotgun.h"
-
+#include "GameConstants.h"
 
 @implementation ShotgunProjectile
 

@@ -28,7 +28,7 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 @synthesize position = _position;
 @synthesize selectedWeapon = _selectedWeapon;
 
-- (id)initWithJsonData:(id)jsonData
+- (id)initWithJsonData:(NSDictionary *)jsonData
 {
     if(self = [self init]) {
         if(![jsonData isKindOfClass:[NSDictionary class]]) {
@@ -41,7 +41,7 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return self;
 }
 
-- (id)serializeToJsonData
+- (NSDictionary *)serializeToJsonData
 {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:2];
     [data setObject:[NSNumber numberWithInt:self.selectedWeapon] forKey:kSelectedWeaponTypeKey];

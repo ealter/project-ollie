@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 Zynga. All rights reserved.
 //
 
-#import "cocos2d.h"
+#import "CCSprite.h"
 
 class b2Body;
 

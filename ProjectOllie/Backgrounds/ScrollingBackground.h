@@ -7,7 +7,6 @@
 //
 
 #import "CCLayer.h"
-#import "GWCamera.h"
 #import "GWPerspectiveLayer.h"
 
 //This class provides a tiled background. It uses the contentSize property and the size of each image

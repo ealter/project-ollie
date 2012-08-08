@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CCNode.h"
-#import "GWCamera.h"
 #import "GWPerspectiveLayer.h"
+
+@class GWCamera;
 
 @interface GWWater : GWPerspectiveLayer
 

@@ -8,7 +8,7 @@
 
 #import "GaussRifleProjectile.h"
 #import "GaussRifle.h"
-
+#import "GWParticles.h"
 
 @implementation GaussRifleProjectile
 

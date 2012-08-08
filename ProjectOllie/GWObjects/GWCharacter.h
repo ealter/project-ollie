@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "GWGestures.h"
+#import "CCNode.h"
 
 class b2World;
 @class GWSkeleton;
