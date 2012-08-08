@@ -60,6 +60,7 @@
         self.state        = kStateArming;
         self.orientation  = kOrientationLeft;
         self.type         = type;
+        _weapons          = [NSMutableArray array];
         
         /* Add physics sprites */
         Bone* root       = [self.skeleton getBoneByName:@"Head"];
