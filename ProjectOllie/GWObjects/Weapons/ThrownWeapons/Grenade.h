@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWThrownWeapon.h"
 
 #define GRENADE_WIDTH 0.1
 #define GRENADE_HEIGHT 0.1
 #define GRENADE_IMAGE @"Icon-Small.png"
 
+class b2World;
+@class ActionLayer;
 
 @interface Grenade : GWThrownWeapon {
     

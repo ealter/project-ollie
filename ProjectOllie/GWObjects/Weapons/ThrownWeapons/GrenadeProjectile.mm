@@ -12,7 +12,6 @@
 #import "GameConstants.h"
 #import "GWParticles.h"
 
-
 @implementation GrenadeProjectile
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *)gWorld
@@ -24,7 +23,6 @@
     
     return self;
 }
-
 
 -(void)destroyBullet
 {

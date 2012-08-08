@@ -9,6 +9,7 @@
 #import "GaussRifle.h"
 #import "GaussRifleProjectile.h"
 #import "HMVectorNode.h"
+#import "GameConstants.h"
 
 @implementation GaussRifle
 

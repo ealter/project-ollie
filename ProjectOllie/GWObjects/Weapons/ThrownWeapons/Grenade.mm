@@ -9,6 +9,7 @@
 #import "Grenade.h"
 #import "GameConstants.h"
 #import "GrenadeProjectile.h"
+#import "cocos2d.h"
 
 @implementation Grenade
 
