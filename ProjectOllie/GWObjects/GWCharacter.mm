@@ -49,6 +49,7 @@
 @synthesize orientation    = _orientation;
 @synthesize weapons        = _weapons;
 @synthesize selectedWeapon = _selectedWeapon;
+@synthesize uiLayer        = _uiLayer;
 
 -(id)initWithIdentifier:(NSString *)type spriteIndices:(NSArray *)indices box2DWorld:(b2World *)world{
     
@@ -318,6 +319,50 @@
     _selectedWeapon = selectedWeapon;
     selectedWeapon.holder = self;
     [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:zPivot];
+}
+
+//Gesture Methods
+-(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity
+{
+    
+}
+
+-(void)handleSwipeLeftWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity
+{
+    
+}
+
+-(void)handleSwipeUpWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity
+{
+    
+}
+
+-(void)handleSwipeDownWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity
+{
+    
+}
+
+-(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
+{
+    if (self.state == kStateArming) {
+        [((GWWeapon <GestureChild>*) self.selectedWeapon) handlePanWithStart:startPoint andCurrent:currPoint andTime:time];
+    }
+}
+
+-(void)handlePanFinishedWithStart:(CGPoint) startPoint andEnd:(CGPoint) endPoint andTime:(float) time
+{
+    if (self.state == kStateArming) {
+        [((GWWeapon <GestureChild>*) self.selectedWeapon) handlePanFinishedWithStart:startPoint andEnd:endPoint andTime:time];
+    }
+}
+
+-(void)handleTap:(CGPoint) tapPoint
+{
+    if (self.state == kStateArming) {
+        [((GWWeapon <GestureChild>*) self.selectedWeapon) handleTap:tapPoint];
+    }else {
+        [self.uiLayer buildWeaponTableFrom:self];
+    }
 }
 
 @end
