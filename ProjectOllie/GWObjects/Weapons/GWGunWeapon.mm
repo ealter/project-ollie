@@ -37,6 +37,7 @@
         self.bulletSpeed    = bulletSpeed;
         _world              = world;
         self.gameWorld      = gWorld;
+        self.weaponImage    = imageName;
         
         //Make the drawnode and set the color
         drawNode            = [HMVectorNode node];

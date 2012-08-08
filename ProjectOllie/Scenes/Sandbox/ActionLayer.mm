@@ -20,6 +20,7 @@
 #import "Shotgun.h"
 #import "GaussRifle.h"
 #import "GWContactListener.h"
+#import "GWUiLayer.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -164,11 +165,17 @@ enum {
     _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
+    //ui layer
+    GWUiLayer *uiLayer = [[GWUiLayer alloc] init];
+    _character.uiLayer = uiLayer;
+    [self addChild:uiLayer z:PTM_RATIO];
+    
     GaussRifle* weapon = [[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
     _character.selectedWeapon = weapon;
+    
+    //gesture layer
     gestures = [[GWGestures alloc] init];
     [[gestures children] addObject:_character];
-    _character.uiLayer = gestures;
     [self addChild:gestures z:2];
 
 }

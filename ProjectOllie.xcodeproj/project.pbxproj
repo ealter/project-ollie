@@ -150,6 +150,7 @@
 		CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */; };
 		CE30B1A8158FD030009EC82B /* NewGameOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */; };
 		CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */; };
+		CE36E0C315D3054300C4610A /* GWUiLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE36E0C215D3054300C4610A /* GWUiLayer.mm */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE4545FD15CB3ACD00AA5437 /* leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4545FC15CB3ACD00AA5437 /* leaf.png */; };
@@ -605,6 +606,8 @@
 		CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewGameOverlay.h; path = menus/NewGameOverlay.h; sourceTree = "<group>"; };
 		CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewGameOverlay.m; path = menus/NewGameOverlay.m; sourceTree = "<group>"; };
 		CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewGameOverlay.ccbi; path = "Resources/menu-objects/ccbis/NewGameOverlay.ccbi"; sourceTree = "<group>"; };
+		CE36E0C115D3054300C4610A /* GWUiLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWUiLayer.h; sourceTree = "<group>"; };
+		CE36E0C215D3054300C4610A /* GWUiLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWUiLayer.mm; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = "Resources/menu-objects/ccbis/ActionMenu.ccbi"; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = "Resources/menu-objects/ccbis/MainMenu.ccbi"; sourceTree = "<group>"; };
 		CE4545FC15CB3ACD00AA5437 /* leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaf.png; sourceTree = "<group>"; };
@@ -1277,6 +1280,8 @@
 			children = (
 				CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */,
 				CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */,
+				CE36E0C115D3054300C4610A /* GWUiLayer.h */,
+				CE36E0C215D3054300C4610A /* GWUiLayer.mm */,
 				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
 				CEA3636C15B7C9B800148D3B /* GWGestures.mm */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
@@ -2750,6 +2755,7 @@
 				CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */,
 				CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */,
 				CE05C35615D09F9B007F8ED3 /* GWCharacterModel.m in Sources */,
+				CE36E0C315D3054300C4610A /* GWUiLayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

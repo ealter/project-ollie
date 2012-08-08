@@ -40,52 +40,18 @@
 
 @implementation GWGestures
 @synthesize children        = _children;
-@synthesize activeCharacter = _activeCharacter;
-@synthesize emitter         = _emitter;
 @synthesize touchTarget     = _touchTarget;
-@synthesize weaponView      = _weaponView;
     
 -(id)init
 {
     if (self = [super init]) {
         self.isTouchEnabled               = YES;
         self.children                     = [NSMutableArray array];
-        numCells                          = 0;
-        CGSize winSize                    = [CCDirector sharedDirector].winSize;
-        CGSize tableViewSize              = CGSizeMake(winSize.width, 100);
-        self.weaponView                   = [SWTableView viewWithDataSource:self size:tableViewSize];
-        
-        self.weaponView.direction         = SWScrollViewDirectionHorizontal;
-        self.weaponView.anchorPoint       = CGPointMake(0, 0);
-        self.weaponView.position          = CGPointMake(0, 0);
-        self.weaponView.contentOffset     = CGPointZero;
-        self.weaponView.delegate          = self;
-        self.weaponView.verticalFillOrder = SWTableViewFillTopDown;
-        self.weaponView.visible           = NO;
-        
-        [self addChild:self.weaponView];
     }
     
     return self;
 }
 
--(void)buildWeaponTableFrom:(GWCharacter *)character
-{
-    if (self.activeCharacter != character) {
-        self.activeCharacter    = character;
-        numCells                = 0;
-        
-        //Count the number of unlocked weapons, for the table size
-        for (int  i = 0; i < [[character weapons] count]; i++) {
-            GWWeapon * wep = [[character weapons] objectAtIndex:i];
-            if (wep.unlocked) {
-                numCells ++;
-            }
-        }
-        self.weaponView.visible = YES;
-        [self.weaponView reloadData];
-    }
-}
 
 -(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
 {    
@@ -170,60 +136,6 @@
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
     [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];
 
-}
-
-//Table methods
--(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
-{
-    
-}
-
--(CGSize)cellSizeForTable:(SWTableView *)table
-{
-    return CGSizeMake(300, 100);
-}
-
--(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
-{
-    NSString *string = [NSString stringWithFormat:@"%d", idx];
-    
-    SWTableViewCell *cell = [table dequeueCell];
-    if (!cell) {
-        cell = [MyCell new];
-		CCSprite *sprite = [CCSprite spriteWithFile:@"back-hd.png"];
-		sprite.anchorPoint = CGPointZero;
-        
-		[cell addChild:sprite];
-		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:20.0];
-		label.position = ccp(20, 20);
-		label.tag = 123;
-		[cell addChild:label];
-	}
-	else {
-		CCLabelTTF *label = (CCLabelTTF*)[cell getChildByTag:123];
-		[label setString:string];
-	}
-    
-    return cell;
-}
-
--(NSUInteger)numberOfCellsInTableView:(SWTableView *)table
-{
-    if (numCells == 0) {
-        return 1;
-    }else {
-        return numCells;
-    }
-}
-
-//Override methods
--(void)setActiveCharacter:(GWCharacter *)activeCharacter
-{
-    _activeCharacter        = activeCharacter;
-    self.emitter            = [GWParticleExplodingRing node];
-    self.emitter.position   = activeCharacter.position;
-    [self.parent addChild:self.emitter];
-    
 }
 
 @end

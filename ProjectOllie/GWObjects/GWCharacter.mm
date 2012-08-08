@@ -15,6 +15,7 @@
 #include "GameConstants.h"
 #include "GWContactListener.h"
 #include "GWWeapon.h"
+#include "GWUiLayer.h"
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .005

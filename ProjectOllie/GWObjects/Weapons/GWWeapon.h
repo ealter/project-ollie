@@ -22,6 +22,9 @@
 //Gun's owner/user
 @property (strong, nonatomic) GWCharacter *holder;
 
+//Gun's image
+@property (assign, nonatomic) NSString* weaponImage;
+
 //weapon availability
 @property (assign, nonatomic, getter = isUnlocked) BOOL unlocked;
 
