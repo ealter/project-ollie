@@ -20,6 +20,15 @@
 -(id) init
 {
 	if(self = [super init]) {
+        numCells                            = 0;
+        self.weaponTable                    = NULL;
+    }
+	return self;
+}
+
+-(void)buildWeaponTableFrom:(GWCharacter *)character
+{
+    if (self.weaponTable == NULL) {
         CGSize winSize                      = [CCDirector sharedDirector].winSize;
         CGSize tableViewSize                = CGSizeMake(winSize.width, 100);
         self.weaponTable                    = [SWTableView viewWithDataSource:self size:tableViewSize];
@@ -29,27 +38,19 @@
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
-        
-        numCells                            = 0;
-        
         [self addChild:self.weaponTable];
-        [self.weaponTable reloadData];        
-    }
-	return self;
-}
-
--(void)buildWeaponTableFrom:(GWCharacter *)character
-{
-    if (self.activeCharacter != character) {
-        self.activeCharacter    = character;
-        numCells                = 0;
-        wepIterator             = 0;
-        
-        //Count the number of unlocked weapons, for the table size
-        numCells = [[character weapons] count];
-        
-        self.weaponTable.visible = YES;
-        [self.weaponTable reloadData];
+    }else {
+        if (self.activeCharacter != character) {
+            self.activeCharacter    = character;
+            numCells                = 0;
+            wepIterator             = 0;
+            
+            //Count the number of unlocked weapons, for the table size
+            numCells = [[character weapons] count];
+            
+            self.weaponTable.visible = YES;
+            [self.weaponTable reloadData];
+        }
     }
 }
 
@@ -65,12 +66,13 @@
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
 {
-    NSString *string = [NSString stringWithFormat:@"%d", idx];
+    GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:wepIterator];
+
+    NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
     
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
         cell = [MyCell new];
-        GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:wepIterator];
         
 		CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
 		sprite.anchorPoint = CGPointZero;
@@ -86,6 +88,7 @@
 		[label setString:string];
 	}
     
+    wepIterator ++;
     return cell;
 }
 
