@@ -74,6 +74,7 @@
     if (!cell) {
         cell = [MyCell new];
         
+        DebugLog(loadWep.weaponImage);
 		CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
 		sprite.anchorPoint = CGPointZero;
         
