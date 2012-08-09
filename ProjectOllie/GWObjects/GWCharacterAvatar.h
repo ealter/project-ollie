@@ -1,5 +1,5 @@
 //
-//  GWCharacter.h
+//  GWCharacterAvatar.h
 //  ProjectOllie
 //
 //  Created by Sam Zeckendorf on 7/23/12.
@@ -29,7 +29,7 @@ typedef enum Orientation {
     kOrientationLeft
 }Orientation;
 
-@interface GWCharacter : CCNode <GestureChild>{
+@interface GWCharacterAvatar : CCNode <GestureChild>{
     
 }
 -(id)initWithIdentifier:(NSString*)type spriteIndices:(NSArray*)indices box2DWorld:(b2World*)world;
@@ -52,7 +52,7 @@ typedef enum Orientation {
 /* The skeleton belonging to the character */
 @property (strong, nonatomic) GWSkeleton* skeleton;
 
-/* The current state of the GWCharacter */
+/* The current state of the GWCharacterAvatar */
 @property (assign, nonatomic) characterState state;
 
 /* The weapons available to the character */

@@ -1,12 +1,12 @@
 //
-//  GWCharacter.m
+//  GWCharacterAvatar.m
 //  ProjectOllie
 //
 //  Created by Sam Zeckendorf on 7/23/12.
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 #import "GWSkeleton.h"
 #import "Box2D.h"
 #import "GWPhysicsSprite.h"
@@ -22,7 +22,7 @@
 #define kTagParentNode 111
 #define zPivot 3
 
-@interface GWCharacter()
+@interface GWCharacterAvatar()
 {
 
 }
@@ -41,7 +41,7 @@
 @property (assign, nonatomic) Orientation orientation;
 
 @end
-@implementation GWCharacter
+@implementation GWCharacterAvatar
 
 @synthesize skeleton       = _skeleton;
 @synthesize spriteIndices  = _spriteIndices;

@@ -8,7 +8,7 @@
 
 #import "GWUILayer.h"
 #import "MyCell.h"
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
@@ -26,7 +26,7 @@
 	return self;
 }
 
--(void)buildWeaponTableFrom:(GWCharacter *)character
+-(void)buildWeaponTableFrom:(GWCharacterAvatar *)character
 {
     if (self.weaponTable == NULL) {
         CGSize winSize                      = [CCDirector sharedDirector].winSize;
@@ -67,6 +67,7 @@
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
 {
     GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:wepIterator];
+    DebugLog(@"The pointer of activecharacter is: %p",self.activeCharacter);
 
     NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
     
@@ -103,7 +104,7 @@
 }
 
 //Override methods
--(void)setActiveCharacter:(GWCharacter *)activeCharacter
+-(void)setActiveCharacter:(GWCharacterAvatar *)activeCharacter
 {
     _activeCharacter        = activeCharacter;
     self.emitter            = [GWParticleExplodingRing node];

@@ -12,7 +12,7 @@
 #import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "GameConstants.h"
-#import "GWCharacter.h"
+#import "ConstructionAvatar.h"
 #import "GWWater.h"
 #import "GWGestures.h"
 #import "HMVectorNode.h"
@@ -31,7 +31,7 @@ enum {
 
 @interface ActionLayer()
 {
-    GWCharacter* _character;
+    GWCharacterAvatar* _character;
     GWGestures* gestures;
 }
 -(void) initPhysics;
@@ -162,7 +162,7 @@ enum {
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0, 0); // bottom-left corner
     
-    _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
+    _character = [[ConstructionAvatar alloc]initWithSpriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
     //ui layer
