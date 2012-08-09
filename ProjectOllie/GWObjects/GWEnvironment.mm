@@ -9,5 +9,11 @@
 #import "GWEnvironment.h"
 
 @implementation GWEnvironment
+@synthesize setting     = _setting;
+@synthesize actionLayer = _actionLayer;
+@synthesize backWater   = _backWater;
+@synthesize frontWater  = _frontWater;
+@synthesize terrain     = _terrain;
+@synthesize backdrop    = _backdrop;
 
 @end
