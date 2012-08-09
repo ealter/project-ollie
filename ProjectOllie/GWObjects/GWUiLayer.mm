@@ -33,18 +33,17 @@
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
             numCells                = 0;
-            wepIterator             = 0;
             
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];
         }
         
-        CGSize winSize                      = [CCDirector sharedDirector].winSize;
-        CGSize tableViewSize                = CGSizeMake(winSize.width, 100);
+        CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
         self.weaponTable                    = [SWTableView viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
-        self.weaponTable.position           = CGPointZero;
+        CGPoint tablePos                    = [self convertToWorldSpace:self.activeCharacter.position];
+        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 10));
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
@@ -57,7 +56,10 @@
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];
             
-            self.weaponTable.visible = YES;
+            //Position of the table should be moved around to new character!
+            CGPoint tablePos                = [self convertToWorldSpace:self.activeCharacter.position];
+            self.weaponTable.position       = ccpAdd(tablePos, CGPointMake(0, 10));  
+            
             [self.weaponTable reloadData];
         }
     }
@@ -70,7 +72,7 @@
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
 {
-    return CGSizeMake(300, 100);
+    return CGSizeMake(100, 100);
 }
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
@@ -86,7 +88,7 @@
 		sprite.anchorPoint = CGPointZero;
         
 		[cell addChild:sprite];
-		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:20.0];
+		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
 		label.position = ccp(20, 20);
 		label.tag = 123;
 		[cell addChild:label];
@@ -111,7 +113,6 @@
     self.emitter            = [GWParticleExplodingRing node];
     self.emitter.position   = activeCharacter.position;
     [self addChild:self.emitter];
-    
 }
 
 @end

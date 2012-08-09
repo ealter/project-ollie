@@ -189,6 +189,7 @@
 		CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D415C0E33100F51BE6 /* selectedoption.png */; };
 		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
 		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
+		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -659,6 +660,8 @@
 		CE6B51D415C0E33100F51BE6 /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/Miscellaneous/selectedoption.png; sourceTree = "<group>"; };
 		CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/Miscellaneous/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
+		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
+		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -1299,6 +1302,8 @@
 				CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */,
 				C587E2D615D3114400528573 /* GWUILayer.h */,
 				C587E2D715D3114400528573 /* GWUILayer.mm */,
+				CE79027B15D4681300958D04 /* GWWeaponTable.h */,
+				CE79027C15D4681300958D04 /* GWWeaponTable.m */,
 				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
 				CEA3636C15B7C9B800148D3B /* GWGestures.mm */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
@@ -2774,6 +2779,7 @@
 				CE05C35615D09F9B007F8ED3 /* GWCharacterModel.m in Sources */,
 				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
 				C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */,
+				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

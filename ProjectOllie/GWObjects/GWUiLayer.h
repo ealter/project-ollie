@@ -9,7 +9,7 @@
 
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
-#import "SWTableView.h"
+#import "GWWeaponTable.h"
 
 @class GWCharacterAvatar;
 
@@ -18,7 +18,7 @@
     int wepIterator;
 }
 
-@property (strong, nonatomic) SWTableView* weaponTable;
+@property (strong, nonatomic) GWWeaponTable* weaponTable;
 
 @property (strong, nonatomic) GWCharacterAvatar* activeCharacter; // Character currently selected
 
