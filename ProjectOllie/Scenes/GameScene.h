@@ -9,13 +9,15 @@
 #import "EnvironmentScene.h"
 #import "Box2D.h"
 
+class GLESDebugDraw;
+
 @interface GameScene : EnvironmentScene
 
 /* Properties */
 
-@property (strong, nonatomic) b2World* world;                   // Realistically simulates fun
+@property (nonatomic) b2World* world;                   // Realistically simulates fun
 
-@property (strong, nonatomic) GLESDebugDraw *m_debugDraw;		// For debugging box2d
+@property (nonatomic) GLESDebugDraw *m_debugDraw;		// For debugging box2d
 
 //Array of characters in this game
 
@@ -25,6 +27,6 @@
 
 /* Methods */
 
--(id) initWithEnvironment(GWEnvironment*)environment;
+-(id) initWithEnvironment:(GWEnvironment *)environment;
 
 @end

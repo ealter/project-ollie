@@ -12,19 +12,19 @@
 
 typedef enum settingTypes
 {
-    dirt = 0;   //Dirt, leaves, jungle
-    rocks = 1;  //Rocks, rain, jungle
-    ice = 2;    //Ice, snow, mountains
-    lava = 3;   //Lava, dust, volcanoes
+    dirt = 0,   //Dirt, leaves, jungle
+    rocks = 1,  //Rocks, rain, jungle
+    ice = 2,    //Ice, snow, mountains
+    lava = 3   //Lava, dust, volcanoes
 } Setting;
 
 @interface GWEnvironment : CCLayer
 
 /* Properties */
 
-@property (strong, nonatomic) Setting setting;
+@property (nonatomic) Setting setting;
 
-@property (strong, nonatomic) GWTerrain* terrain;
+@property (strong, nonatomic) Terrain* terrain;
 
 @property (strong, nonatomic) GWWater* frontWater;
 

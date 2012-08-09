@@ -17,5 +17,8 @@
 @implementation GameScene
 
 -(id)initWithEnvironment
+{
+    
+}
 
 @end
