@@ -17,7 +17,7 @@
 @property (assign, nonatomic) float damage;
 
 //Ammo/Uses for the weapon
-@property (assign, nonatomic) float ammo;
+@property (assign, nonatomic) int ammo;
 
 //Gun's owner/user
 @property (strong, nonatomic) GWCharacterAvatar *holder;
