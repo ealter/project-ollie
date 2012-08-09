@@ -20,7 +20,7 @@
 #import "Shotgun.h"
 #import "GaussRifle.h"
 #import "GWContactListener.h"
-#import "GWUiLayer.h"
+#import "GWUILayer.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -94,7 +94,7 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-        
+
        /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
@@ -168,7 +168,7 @@ enum {
     //ui layer
     GWUILayer *uiLayer = [[GWUILayer alloc] init];
     _character.uiLayer = uiLayer;
-    [self addChild:uiLayer z:PTM_RATIO];
+    [self addChild:uiLayer z:3];
     
     //weapons loading
     NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],nil];

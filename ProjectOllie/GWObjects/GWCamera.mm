@@ -85,9 +85,6 @@
     _location.x -= diff.x*scale;
     _location.y -= diff.y*scale;
     
-    _location.x = clampf(_location.x, PTM_RATIO, PTM_RATIO*9);
-    _location.y = clampf(_location.y, PTM_RATIO, PTM_RATIO*5);
-    
     [self boundXY];
 }
 	

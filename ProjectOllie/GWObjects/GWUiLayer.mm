@@ -39,7 +39,7 @@
         }
         
         CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
-        self.weaponTable                    = [SWTableView viewWithDataSource:self size:tableViewSize];
+        self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
         CGPoint tablePos                    = [self convertToWorldSpace:self.activeCharacter.position];
@@ -47,7 +47,7 @@
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
-        [self.parent.parent addChild:self.weaponTable];
+        [self.parent.parent addChild:self.weaponTable z:100];
     }else {
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
@@ -86,6 +86,7 @@
         
 		CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
 		sprite.anchorPoint = CGPointZero;
+        //[self addChild:sprite z:20000];
         
 		[cell addChild:sprite];
 		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
