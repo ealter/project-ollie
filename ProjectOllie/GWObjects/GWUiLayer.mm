@@ -8,7 +8,7 @@
 
 #import "GWUILayer.h"
 #import "MyCell.h"
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
@@ -26,7 +26,7 @@
 	return self;
 }
 
--(void)buildWeaponTableFrom:(GWCharacter *)character
+-(void)buildWeaponTableFrom:(GWCharacterAvatar *)character
 {
     if (self.weaponTable == NULL) {
         
@@ -105,7 +105,7 @@
 }
 
 //Override methods
--(void)setActiveCharacter:(GWCharacter *)activeCharacter
+-(void)setActiveCharacter:(GWCharacterAvatar *)activeCharacter
 {
     _activeCharacter        = activeCharacter;
     self.emitter            = [GWParticleExplodingRing node];

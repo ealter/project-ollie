@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "ActionLayer.h"
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 
 @interface GWWeapon : CCSprite
 
@@ -20,7 +20,7 @@
 @property (assign, nonatomic) int ammo;
 
 //Gun's owner/user
-@property (strong, nonatomic) GWCharacter *holder;
+@property (strong, nonatomic) GWCharacterAvatar *holder;
 
 //Gun's image
 @property (assign, nonatomic) NSString* weaponImage;

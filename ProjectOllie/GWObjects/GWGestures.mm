@@ -9,7 +9,7 @@
 #import "GWGestures.h"
 #import "cocos2d.h"
 #import "GWParticles.h"
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 #import "MyCell.h"
 #import "GWWeapon.h"
 
