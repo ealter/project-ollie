@@ -32,11 +32,12 @@
         tableView.verticalFillOrder = SWTableViewFillTopDown;
         
         [self addChild:tableView];
-        [tableView reloadData];
                 
         //Particle stuffs
         CCParticleSystem *emitter = [GWParticleMagicMissile node];
         [self addChild:emitter];
+        
+        
         
     }
 	return self;
@@ -58,7 +59,7 @@
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
         cell = [MyCell new];
-		CCSprite *sprite = [CCSprite spriteWithFile:@"back-hd.png"];
+		CCSprite *sprite = [CCSprite spriteWithFile:@"shotgun.png"];
 		sprite.anchorPoint = CGPointZero;
         
 		[cell addChild:sprite];
