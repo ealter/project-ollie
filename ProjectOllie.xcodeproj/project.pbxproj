@@ -675,10 +675,10 @@
 		CE6B51D415C0E33100F51BE6 /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/Miscellaneous/selectedoption.png; sourceTree = "<group>"; };
 		CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/Miscellaneous/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
-		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
-		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
 		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
+		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
+		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
 		CE894EFF15829C7F00E412E1 /* PointEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PointEdge.h; path = libs/CSG/PointEdge.h; sourceTree = "<group>"; };
 		CE894F001582B30B00E412E1 /* ShapeField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeField.cpp; path = libs/CSG/ShapeField.cpp; sourceTree = "<group>"; };
@@ -2872,8 +2872,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ProjectOllie/Prefix.pch;
 				GCC_SHORT_ENUMS = YES;
-				GCC_THUMB_SUPPORT = NO;
-				"GCC_THUMB_SUPPORT[arch=*]" = "";
 				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
@@ -2914,7 +2912,6 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ProjectOllie/Prefix.pch;
 				GCC_SHORT_ENUMS = YES;
-				GCC_THUMB_SUPPORT = NO;
 				GCC_UNROLL_LOOPS = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
 				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
