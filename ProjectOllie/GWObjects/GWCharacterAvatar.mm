@@ -113,7 +113,7 @@
         prefix = b_name.at(0);
         GWPhysicsSprite *part;
         //If it isn't an upper body part, we need to get the correct image
-        if(prefix != 'u')
+       // if(prefix != 'u')
         {
             NSString* name = [NSString stringWithCString:b_name.c_str() 
                                                 encoding:[NSString defaultCStringEncoding]];
@@ -123,10 +123,10 @@
             part.flipY = flipped;
         }
         //If it is an upper body part, we don't need to show it
-        else
+        /*else
         {
             part = [GWPhysicsSprite node];
-        }
+        }*/
         //set its physics body correctly
         part.physicsBody      = root->box2DBody;
         [[self getChildByTag:kTagParentNode]addChild:part z:root->z];
@@ -176,7 +176,7 @@
         {
 
             if(![self.skeleton animating])
-                [self.skeleton runAnimation:@"moonwalk" flipped:!self.orientation];
+                [self.skeleton runAnimation:@"walk" flipped:self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
                 [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
             
@@ -301,7 +301,7 @@
 -(void)setOrientation:(Orientation)orientation{
     _orientation = orientation;
     for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
-        sprite.flipY  = self.orientation;
+        sprite.flipY  = !self.orientation;
         
         if(!self.orientation)
             sprite.zOrder = -abs(sprite.zOrder);
