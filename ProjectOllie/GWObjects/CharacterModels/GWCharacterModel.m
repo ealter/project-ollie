@@ -10,6 +10,7 @@
 
 //Serialization constants
 static const NSString *kSelectedWeaponTypeKey = @"Current weapon";
+static const NSString *kBodyIndexesKey        = @"Body types";
 
 static NSDictionary *CGPointToDictionary(CGPoint p) {
     NSNumber *x = [NSNumber numberWithFloat:p.x];
@@ -34,6 +35,7 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             return nil;
         }
         _selectedWeapon = [(NSDecimalNumber *)[jsonData objectForKey:kSelectedWeaponTypeKey] intValue];
+        bodyTypesIndexes_ = [jsonData objectForKey:kBodyIndexesKey];
     }
     return self;
 }
@@ -42,6 +44,7 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:2];
     [data setObject:[NSNumber numberWithInt:self.selectedWeapon] forKey:kSelectedWeaponTypeKey];
+    [data setObject:bodyTypesIndexes_ forKey:kBodyIndexesKey];
     return data;
 }
 
@@ -58,6 +61,27 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 - (NSArray *)availableWeapons
 {
     return availableWeapons_;
+}
+
+- (void)setBodyType:(int)bodyType atIndex:(int)index
+{
+    if(index < 0) {
+        @throw NSRangeException;
+    }
+    for(int i=bodyTypesIndexes_.count; i<=index; i++) {
+        [bodyTypesIndexes_ addObject:[NSNumber numberWithInt:kUnusedBone]];
+    }
+    [bodyTypesIndexes_ replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:bodyType]];
+}
+
+- (int)bodyTypeAtIndex:(int)index
+{
+    return [(NSNumber *)[bodyTypesIndexes_ objectAtIndex:index] intValue];
+}
+
+- (int)numBodyParts
+{
+    return bodyTypesIndexes_.count;
 }
 
 @end
