@@ -20,6 +20,11 @@
     return self;
 }
 
+-(void)draw{
+    CCLOG(@"Drawing at: (%f,%f)",self.position.x,self.position.y);
+    [super draw];
+}
+
 -(void)update:(ccTime) dt
 {
     
