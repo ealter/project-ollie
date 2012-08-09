@@ -17,10 +17,13 @@
 -(id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo box2DWorld:(b2World *)world fuseTime:(float)fuseTime gameWorld:(ActionLayer *)gWorld
 {
     if (self = [super initWithFile:imageName]) {
+        //Set properties
         _imageName          = imageName;
         self.position       = ccpMult(pos, PTM_RATIO);
         self.contentSize    = CGSizeMake(size.width * PTM_RATIO, size.height * PTM_RATIO);
         self.ammo           = ammo;
+        self.weaponImage    = imageName;
+        
         fuseTimer           = fuseTime;
         countDown           = 0;
         _world              = world;

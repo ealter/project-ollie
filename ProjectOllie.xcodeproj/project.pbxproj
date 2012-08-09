@@ -42,7 +42,10 @@
 		C586F8F515C6321A00573B6E /* GWContactListener.mm in Sources */ = {isa = PBXBuildFile; fileRef = C586F8F415C6321A00573B6E /* GWContactListener.mm */; };
 		C587E2C215D09F4E00528573 /* construction_idle2.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2BF15D09F4E00528573 /* construction_idle2.anim */; };
 		C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2C015D09F4E00528573 /* construction_idle3.anim */; };
-		C587E2C415D09F4E00528573 /* construction_walk.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2C115D09F4E00528573 /* construction_walk.anim */; };
+		C587E2C415D09F4E00528573 /* construction_moonwalk.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2C115D09F4E00528573 /* construction_moonwalk.anim */; };
+		C587E2CB15D1F22800528573 /* construction_walk.anim in Resources */ = {isa = PBXBuildFile; fileRef = C587E2CA15D1F22800528573 /* construction_walk.anim */; };
+		C587E2D815D3123900528573 /* GWUILayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C587E2D715D3114400528573 /* GWUILayer.mm */; };
+		C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C587E2DB15D3352B00528573 /* ConstructionAvatar.mm */; };
 		C589043215A67DE000E0EB70 /* Skeleton.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C589043015A67DE000E0EB70 /* Skeleton.cpp */; };
 		C59ACC1115C24ACF0030A862 /* character_idle4.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC0F15C24ACF0030A862 /* character_idle4.anim */; };
 		C59ACC1215C24ACF0030A862 /* character_idle5.anim in Resources */ = {isa = PBXBuildFile; fileRef = C59ACC1015C24ACF0030A862 /* character_idle5.anim */; };
@@ -101,7 +104,7 @@
 		C5F430F715B8E8CA00174FEE /* ice_layer3.png in Resources */ = {isa = PBXBuildFile; fileRef = C5F430F415B8E8CA00174FEE /* ice_layer3.png */; };
 		C5F430FD15B9008700174FEE /* character_woopwoop.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5F430FC15B9008700174FEE /* character_woopwoop.anim */; };
 		C5F4310015B9054300174FEE /* character_sprinting.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5F430FF15B9054300174FEE /* character_sprinting.anim */; };
-		C5F4310B15BE224D00174FEE /* GWCharacter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4310A15BE224C00174FEE /* GWCharacter.mm */; };
+		C5F4310B15BE224D00174FEE /* GWCharacterAvatar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */; };
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
@@ -191,6 +194,7 @@
 		CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D415C0E33100F51BE6 /* selectedoption.png */; };
 		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
 		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
+		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -441,7 +445,12 @@
 		C586F8F715C6324800573B6E /* GWContactListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWContactListener.h; sourceTree = "<group>"; };
 		C587E2BF15D09F4E00528573 /* construction_idle2.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_idle2.anim; sourceTree = "<group>"; };
 		C587E2C015D09F4E00528573 /* construction_idle3.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_idle3.anim; sourceTree = "<group>"; };
-		C587E2C115D09F4E00528573 /* construction_walk.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_walk.anim; sourceTree = "<group>"; };
+		C587E2C115D09F4E00528573 /* construction_moonwalk.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_moonwalk.anim; sourceTree = "<group>"; };
+		C587E2CA15D1F22800528573 /* construction_walk.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = construction_walk.anim; sourceTree = "<group>"; };
+		C587E2D615D3114400528573 /* GWUILayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWUILayer.h; sourceTree = "<group>"; };
+		C587E2D715D3114400528573 /* GWUILayer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GWUILayer.mm; sourceTree = "<group>"; };
+		C587E2DA15D3352B00528573 /* ConstructionAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructionAvatar.h; sourceTree = "<group>"; };
+		C587E2DB15D3352B00528573 /* ConstructionAvatar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ConstructionAvatar.mm; sourceTree = "<group>"; };
 		C589043015A67DE000E0EB70 /* Skeleton.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skeleton.cpp; sourceTree = "<group>"; };
 		C589043115A67DE000E0EB70 /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Skeleton.h; sourceTree = "<group>"; };
 		C59ACC0F15C24ACF0030A862 /* character_idle4.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle4.anim; sourceTree = "<group>"; };
@@ -521,8 +530,8 @@
 		C5F430F415B8E8CA00174FEE /* ice_layer3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ice_layer3.png; sourceTree = "<group>"; };
 		C5F430FC15B9008700174FEE /* character_woopwoop.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_woopwoop.anim; sourceTree = "<group>"; };
 		C5F430FF15B9054300174FEE /* character_sprinting.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_sprinting.anim; sourceTree = "<group>"; };
-		C5F4310915BE224B00174FEE /* GWCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWCharacter.h; sourceTree = "<group>"; };
-		C5F4310A15BE224C00174FEE /* GWCharacter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWCharacter.mm; sourceTree = "<group>"; };
+		C5F4310915BE224B00174FEE /* GWCharacterAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWCharacterAvatar.h; path = ../GWCharacterAvatar.h; sourceTree = "<group>"; };
+		C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWCharacterAvatar.mm; path = ../GWCharacterAvatar.mm; sourceTree = "<group>"; };
 		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
 		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
@@ -668,6 +677,8 @@
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
+		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
+		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
 		CE894EFF15829C7F00E412E1 /* PointEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PointEdge.h; path = libs/CSG/PointEdge.h; sourceTree = "<group>"; };
 		CE894F001582B30B00E412E1 /* ShapeField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeField.cpp; path = libs/CSG/ShapeField.cpp; sourceTree = "<group>"; };
@@ -1224,7 +1235,8 @@
 				C57BFA0015C90D8700CBC091 /* construction_idle1.anim */,
 				C587E2BF15D09F4E00528573 /* construction_idle2.anim */,
 				C587E2C015D09F4E00528573 /* construction_idle3.anim */,
-				C587E2C115D09F4E00528573 /* construction_walk.anim */,
+				C587E2C115D09F4E00528573 /* construction_moonwalk.anim */,
+				C587E2CA15D1F22800528573 /* construction_walk.anim */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -1236,6 +1248,17 @@
 				C57BF9FD15C90D0A00CBC091 /* construction.skel */,
 			);
 			path = Armatures;
+			sourceTree = "<group>";
+		};
+		C587E2D915D334FB00528573 /* Character Avatars */ = {
+			isa = PBXGroup;
+			children = (
+				C5F4310915BE224B00174FEE /* GWCharacterAvatar.h */,
+				C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */,
+				C587E2DA15D3352B00528573 /* ConstructionAvatar.h */,
+				C587E2DB15D3352B00528573 /* ConstructionAvatar.mm */,
+			);
+			path = "Character Avatars";
 			sourceTree = "<group>";
 		};
 		C589042315A4FD2500E0EB70 /* SkeletonUtils */ = {
@@ -1292,6 +1315,10 @@
 			children = (
 				CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */,
 				CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */,
+				C587E2D615D3114400528573 /* GWUILayer.h */,
+				C587E2D715D3114400528573 /* GWUILayer.mm */,
+				CE79027B15D4681300958D04 /* GWWeaponTable.h */,
+				CE79027C15D4681300958D04 /* GWWeaponTable.m */,
 				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
 				CEA3636C15B7C9B800148D3B /* GWGestures.mm */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
@@ -1304,8 +1331,6 @@
 				C5F4309715B8D2EA00174FEE /* GWSkeleton.mm */,
 				C5F4309815B8D2EA00174FEE /* GWWater.h */,
 				C5F4309915B8D2EA00174FEE /* GWWater.mm */,
-				C5F4310915BE224B00174FEE /* GWCharacter.h */,
-				C5F4310A15BE224C00174FEE /* GWCharacter.mm */,
 				C586F8F715C6324800573B6E /* GWContactListener.h */,
 				C586F8F415C6321A00573B6E /* GWContactListener.mm */,
 				CE26F7A315D30D0200088E16 /* GWEnvironment.h */,
@@ -1314,6 +1339,7 @@
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.mm */,
 				CE8429F5157BD0E50038C653 /* Terrain.h */,
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
+				C587E2D915D334FB00528573 /* Character Avatars */,
 				CE05C35715D0A467007F8ED3 /* Character Models */,
 				CE26B7D915BE46E0001100A1 /* Moves */,
 				C5F4309A15B8D2EA00174FEE /* Weapons */,
@@ -2530,7 +2556,8 @@
 				CE0C324315CC88780004E932 /* PlayerSearchScreen.ccbi in Resources */,
 				C587E2C215D09F4E00528573 /* construction_idle2.anim in Resources */,
 				C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */,
-				C587E2C415D09F4E00528573 /* construction_walk.anim in Resources */,
+				C587E2C415D09F4E00528573 /* construction_moonwalk.anim in Resources */,
+				C587E2CB15D1F22800528573 /* construction_walk.anim in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2750,7 +2777,7 @@
 				C5F430BB15B8D74A00174FEE /* SandboxScene.mm in Sources */,
 				CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */,
 				CE055E4E15B8DBA400053373 /* MyCell.m in Sources */,
-				C5F4310B15BE224D00174FEE /* GWCharacter.mm in Sources */,
+				C5F4310B15BE224D00174FEE /* GWCharacterAvatar.mm in Sources */,
 				CE26B7D715BE46D1001100A1 /* GWMove.m in Sources */,
 				CE26B7DC15BE48D1001100A1 /* GWMoveFrame.m in Sources */,
 				C586F8F515C6321A00573B6E /* GWContactListener.mm in Sources */,
@@ -2780,6 +2807,9 @@
 				CE26F7AC15D3121C00088E16 /* DrawEnvironmentScene.mm in Sources */,
 				CE26F7AF15D3125000088E16 /* GameScene.mm in Sources */,
 				CE26F7B215D3126700088E16 /* BattleScene.mm in Sources */,
+				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
+				C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */,
+				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

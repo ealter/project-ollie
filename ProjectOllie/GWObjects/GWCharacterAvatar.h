@@ -1,5 +1,5 @@
 //
-//  GWCharacter.h
+//  GWCharacterAvatar.h
 //  ProjectOllie
 //
 //  Created by Sam Zeckendorf on 7/23/12.
@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "CCNode.h"
 #import "GWGestures.h"
 #import "CCNode.h"
 
 class b2World;
 @class GWSkeleton;
 @class GWWeapon;
+@class GWUILayer;
+@class GWCharacterModel;
 
 typedef enum characterState {
     kStateIdle = 0,   // when just standing around
@@ -28,9 +30,8 @@ typedef enum Orientation {
     kOrientationLeft
 }Orientation;
 
-@interface GWCharacter : CCNode <GestureChild>{
-    
-}
+@interface GWCharacterAvatar : CCNode <GestureChild>
+
 -(id)initWithIdentifier:(NSString*)type spriteIndices:(NSArray*)indices box2DWorld:(b2World*)world;
 -(void)update:(float)dt;
 
@@ -48,19 +49,21 @@ typedef enum Orientation {
 
 //Properties endemic to character
 
+- (GWCharacterModel *)model; //Subclasses MUST override this
+
+/* The weapons available to the character */
+- (NSArray *)weapons;
+
 /* The skeleton belonging to the character */
 @property (strong, nonatomic) GWSkeleton* skeleton;
 
-/* The current state of the GWCharacter */
+/* The current state of the GWCharacterAvatar */
 @property (assign, nonatomic) characterState state;
-
-/* The weapons available to the character */
-@property (readonly, nonatomic) NSMutableArray* weapons;
 
 /* The currently active weapon, visible if state == arming */
 @property (strong, nonatomic) GWWeapon* selectedWeapon;
 
 /* The UI layer that contains the character*/
-@property (strong, nonatomic) GWGestures* uiLayer;
+@property (strong, nonatomic) GWUILayer* uiLayer;
 
 @end

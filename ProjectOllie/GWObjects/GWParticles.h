@@ -69,3 +69,9 @@
 {
 }
 @end
+
+// A Bloom particle system
+@interface GWParticleBloom: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end

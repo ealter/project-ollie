@@ -12,7 +12,7 @@
 #import "ScrollingBackground.h"
 #import "MaskedSprite.h"
 #import "GameConstants.h"
-#import "GWCharacter.h"
+#import "ConstructionAvatar.h"
 #import "GWWater.h"
 #import "GWGestures.h"
 #import "HMVectorNode.h"
@@ -20,6 +20,7 @@
 #import "Shotgun.h"
 #import "GaussRifle.h"
 #import "GWContactListener.h"
+#import "GWUiLayer.h"
 
 #define kTagPoly 10
 #define kTagBox 20
@@ -30,7 +31,7 @@ enum {
 
 @interface ActionLayer()
 {
-    GWCharacter* _character;
+    GWCharacterAvatar* _character;
     GWGestures* gestures;
 }
 -(void) initPhysics;
@@ -161,14 +162,24 @@ enum {
     b2BodyDef groundBodyDef;
     groundBodyDef.position.Set(0, 0); // bottom-left corner
     
-    _character = [[GWCharacter alloc]initWithIdentifier:@"construction" spriteIndices:[NSArray array] box2DWorld:world];
+    _character = [[ConstructionAvatar alloc]initWithSpriteIndices:[NSArray array] box2DWorld:world];
     [self addChild:_character];
     
-    GaussRifle* weapon = [[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self];
-    _character.selectedWeapon = weapon;
+    //ui layer
+    GWUILayer *uiLayer = [[GWUILayer alloc] init];
+    _character.uiLayer = uiLayer;
+    [self addChild:uiLayer z:PTM_RATIO];
+    
+    //weapons loading
+    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],nil];
+    
+    [_character loadWeapons:weaponArray];
+    _character.selectedWeapon = [weaponArray objectAtIndex:0];
+
+    
+    //gesture layer
     gestures = [[GWGestures alloc] init];
     [[gestures children] addObject:_character];
-    _character.uiLayer = gestures;
     [self addChild:gestures z:2];
 
 }
@@ -178,10 +189,10 @@ enum {
     [super draw];
     
     /* Box2d debug drawing */
-    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    /*ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
-    kmGLPopMatrix();
+    kmGLPopMatrix();*/
     
 }
 

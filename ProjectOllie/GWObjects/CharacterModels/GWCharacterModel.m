@@ -10,7 +10,7 @@
 
 //Serialization constants
 static const NSString *kSelectedWeaponTypeKey = @"Current weapon";
-static const NSString *kPositionKey           = @"Position";
+static const NSString *kBodyIndexesKey        = @"Body types";
 
 static NSDictionary *CGPointToDictionary(CGPoint p) {
     NSNumber *x = [NSNumber numberWithFloat:p.x];
@@ -25,8 +25,14 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 @implementation GWCharacterModel
-@synthesize position = _position;
 @synthesize selectedWeapon = _selectedWeapon;
+
+- (id)init {
+    if(self = [super init]) {
+        bodyTypesIndexes_ = [NSMutableArray array];
+    }
+    return self;
+}
 
 - (id)initWithJsonData:(NSDictionary *)jsonData
 {
@@ -35,8 +41,8 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
             DebugLog(@"I received data that should have been a dictionary, but was not");
             return nil;
         }
-        _position = dictionaryToCGPoint([jsonData objectForKey:kPositionKey]);
         _selectedWeapon = [(NSDecimalNumber *)[jsonData objectForKey:kSelectedWeaponTypeKey] intValue];
+        bodyTypesIndexes_ = [jsonData objectForKey:kBodyIndexesKey];
     }
     return self;
 }
@@ -45,7 +51,7 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 {
     NSMutableDictionary *data = [NSMutableDictionary dictionaryWithCapacity:2];
     [data setObject:[NSNumber numberWithInt:self.selectedWeapon] forKey:kSelectedWeaponTypeKey];
-    [data setObject:CGPointToDictionary(self.position) forKey:kPositionKey];
+    [data setObject:bodyTypesIndexes_ forKey:kBodyIndexesKey];
     return data;
 }
 
@@ -59,9 +65,30 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return nil;
 }
 
-- (NSArray *)availableWeapons
+- (NSMutableArray *)availableWeapons
 {
     return availableWeapons_;
+}
+
+- (void)setBodyType:(int)bodyType atIndex:(int)index
+{
+    if(index < 0) {
+        @throw NSRangeException;
+    }
+    for(int i=bodyTypesIndexes_.count; i<=index; i++) {
+        [bodyTypesIndexes_ addObject:[NSNumber numberWithInt:kUnusedBone]];
+    }
+    [bodyTypesIndexes_ replaceObjectAtIndex:index withObject:[NSNumber numberWithInt:bodyType]];
+}
+
+- (int)bodyTypeAtIndex:(int)index
+{
+    return [(NSNumber *)[bodyTypesIndexes_ objectAtIndex:index] intValue];
+}
+
+- (int)numBodyParts
+{
+    return bodyTypesIndexes_.count;
 }
 
 @end

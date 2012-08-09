@@ -1,13 +1,14 @@
 //
-//  GWCharacter.m
+//  GWCharacterAvatar.m
 //  ProjectOllie
 //
 //  Created by Sam Zeckendorf on 7/23/12.
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 #import "GWSkeleton.h"
+#import "GWCharacterModel.h"
 #import "Box2D.h"
 #import "GWPhysicsSprite.h"
 #import "cocos2d.h"
@@ -15,16 +16,14 @@
 #include "GameConstants.h"
 #include "GWContactListener.h"
 #include "GWWeapon.h"
+#include "GWUILayer.h"
 
 #define MAX_SPEED .01f
 #define IMPULSE_MAG .005
 #define kTagParentNode 111
 #define zPivot 3
 
-@interface GWCharacter()
-{
-
-}
+@interface GWCharacterAvatar()
 
 -(void)generateSprites:(Bone*)root;
 
@@ -40,14 +39,14 @@
 @property (assign, nonatomic) Orientation orientation;
 
 @end
-@implementation GWCharacter
+
+@implementation GWCharacterAvatar
 
 @synthesize skeleton       = _skeleton;
 @synthesize spriteIndices  = _spriteIndices;
 @synthesize type           = _type;
 @synthesize state          = _state;
 @synthesize orientation    = _orientation;
-@synthesize weapons        = _weapons;
 @synthesize selectedWeapon = _selectedWeapon;
 @synthesize uiLayer        = _uiLayer;
 
@@ -68,7 +67,7 @@
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"aim", nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"moonwalk",@"aim", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
@@ -76,10 +75,7 @@
         }
         
         /* prepare contact listener */
-        [self.skeleton setOwner:self];
-
-        
-
+        [self.skeleton setOwner:self]; 
     }
     
     return self;
@@ -111,7 +107,7 @@
         prefix = b_name.at(0);
         GWPhysicsSprite *part;
         //If it isn't an upper body part, we need to get the correct image
-        if(prefix != 'u')
+       // if(prefix != 'u')
         {
             NSString* name = [NSString stringWithCString:b_name.c_str() 
                                                 encoding:[NSString defaultCStringEncoding]];
@@ -121,22 +117,33 @@
             part.flipY = flipped;
         }
         //If it is an upper body part, we don't need to show it
-        else
+        /*else
         {
             part = [GWPhysicsSprite node];
-        }
+        }*/
         //set its physics body correctly
         part.physicsBody      = root->box2DBody;
         [[self getChildByTag:kTagParentNode]addChild:part z:root->z];
-        
         
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i)];
     }
 }
 
--(void)loadWeapons:(NSArray *)weapons{
-    
+- (NSArray *)weapons
+{
+    return self.model.copy;
+}
+
+-(void)loadWeapons:(NSArray *)weapons
+{
+    [self.model.availableWeapons addObjectsFromArray:weapons];
+}
+
+- (GWCharacterModel *)model
+{
+    DebugLog(@"Subclasses should override this!!!");
+    return nil;
 }
 
 -(void)update:(float)dt
@@ -148,11 +155,9 @@
     else if([self.skeleton resting:dt])
         self.state = kStateIdle;
     
-    
     switch(self.state) {
         case kStateIdle:
-            if(![self.skeleton animating])
-            {
+            if(![self.skeleton animating]) {
                 float rand     = CCRANDOM_0_1();
                 NSString* anim = @"idle1"; 
                 
@@ -166,24 +171,18 @@
                     anim = @"idle5";*/
                 
                 [self.skeleton runAnimation:anim flipped:self.orientation];
-                
             }
-            
             return;
         case kStateWalking:
-        {
-
             if(![self.skeleton animating])
-                [self.skeleton runAnimation:@"walk" flipped:!self.orientation];
+                [self.skeleton runAnimation:@"walk" flipped:self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
                 [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
             
         
             [self.skeleton tieSkeletonToInteractor];
             return;
-        }
         case kStateArming:
-        {
             /* Place gun on correct bone in body */
             if(self.selectedWeapon)
             {
@@ -221,7 +220,6 @@
                 [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             }
             return;
-        }
         case kStateManeuvering:
             return;
         case kStateRagdoll:
@@ -270,7 +268,6 @@
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
     }
     
-    
     //upon switching to new state
     _state = state;
     //[self.skeleton setActive:NO];
@@ -300,7 +297,7 @@
 -(void)setOrientation:(Orientation)orientation{
     _orientation = orientation;
     for (CCSprite* sprite in [self getChildByTag:kTagParentNode].children) {
-        sprite.flipY  = self.orientation;
+        sprite.flipY  = !self.orientation;
         
         if(!self.orientation)
             sprite.zOrder = -abs(sprite.zOrder);

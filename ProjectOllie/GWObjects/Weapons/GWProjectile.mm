@@ -9,7 +9,7 @@
 #import "GWProjectile.h"
 #import "GameConstants.h"
 #import "Box2D.h"
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 
 @implementation GWProjectile
 @synthesize  gameWorld      = _gameWorld;
@@ -77,7 +77,7 @@
             
             if (b->GetFixtureList()->GetFilterData().maskBits == MASK_BONES) {
                 //Its part of a skeleton, set it to ragdoll for cool explosions
-                GWCharacter *tempChar = ((__bridge GWCharacter *)b->GetUserData());
+                GWCharacterAvatar *tempChar = ((__bridge GWCharacterAvatar *)b->GetUserData());
                 tempChar.state = kStateRagdoll;
             }
             
