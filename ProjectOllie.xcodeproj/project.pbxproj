@@ -109,7 +109,7 @@
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
 		CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B115B8D6C200174FEE /* CharacterScreen.m */; };
 		CE055E4E15B8DBA400053373 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B315B8D6C200174FEE /* MyCell.m */; };
-		CE05C35615D09F9B007F8ED3 /* GWCharacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05C35515D09F9B007F8ED3 /* GWCharacterModel.m */; };
+		CE05C35615D09F9B007F8ED3 /* GWCharacterModel.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE05C35515D09F9B007F8ED3 /* GWCharacterModel.mm */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
 		CE0A522A15A78E090036F103 /* WaterShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.frag */; };
@@ -529,7 +529,7 @@
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
 		CE05C35415D09F9B007F8ED3 /* GWCharacterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWCharacterModel.h; path = CharacterModels/GWCharacterModel.h; sourceTree = "<group>"; };
-		CE05C35515D09F9B007F8ED3 /* GWCharacterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWCharacterModel.m; path = CharacterModels/GWCharacterModel.m; sourceTree = "<group>"; };
+		CE05C35515D09F9B007F8ED3 /* GWCharacterModel.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWCharacterModel.mm; path = CharacterModels/GWCharacterModel.mm; sourceTree = "<group>"; };
 		CE07D219158EFBE400CDF8F3 /* NSString+whitespace_check.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+whitespace_check.h"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.h"; sourceTree = "<group>"; };
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOS_Versions.h; path = Utils/IOS_Versions.h; sourceTree = "<group>"; };
@@ -1480,7 +1480,7 @@
 			isa = PBXGroup;
 			children = (
 				CE05C35415D09F9B007F8ED3 /* GWCharacterModel.h */,
-				CE05C35515D09F9B007F8ED3 /* GWCharacterModel.m */,
+				CE05C35515D09F9B007F8ED3 /* GWCharacterModel.mm */,
 			);
 			name = "Character Models";
 			sourceTree = "<group>";
@@ -2758,7 +2758,7 @@
 				CE0C326015CC987F0004E932 /* ServerAccountsAPI.m in Sources */,
 				CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */,
 				CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */,
-				CE05C35615D09F9B007F8ED3 /* GWCharacterModel.m in Sources */,
+				CE05C35615D09F9B007F8ED3 /* GWCharacterModel.mm in Sources */,
 				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
