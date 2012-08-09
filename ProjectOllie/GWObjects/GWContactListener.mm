@@ -7,7 +7,7 @@
 //
 
 #import "GWContactListener.h"
-#import "GWCharacter.h"
+#import "GWCharacterAvatar.h"
 #import "GameConstants.h"
 #import "GWProjectile.h"
 
@@ -46,7 +46,7 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact){
     b2Filter filterA = fixtureA->GetFilterData();
     b2Filter filterB = fixtureB->GetFilterData();
     
-    GWCharacter* character;
+    GWCharacterAvatar* character;
     b2Fixture* charFixture;
     b2Fixture* otherFixture;
     
@@ -62,7 +62,7 @@ void GWContactListener::handleCharacterContacts(b2Contact* contact){
     }
     else return;
     
-    character = (__bridge GWCharacter*)charFixture->GetBody()->GetUserData();
+    character = (__bridge GWCharacterAvatar*)charFixture->GetBody()->GetUserData();
     if(otherFixture->GetBody()->GetLinearVelocity().LengthSquared() * otherFixture->GetBody()->GetMass() > .0001)
         character.state = kStateRagdoll;
     

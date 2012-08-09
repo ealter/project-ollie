@@ -11,7 +11,7 @@
 #import "cocos2d.h"
 #import "SWTableView.h"
 
-@class GWCharacter;
+@class GWCharacterAvatar;
 
 @interface GWUILayer : CCLayer <SWTableViewDataSource, SWTableViewDelegate> {
     NSUInteger numCells;
@@ -20,12 +20,12 @@
 
 @property (strong, nonatomic) SWTableView* weaponTable;
 
-@property (strong, nonatomic) GWCharacter* activeCharacter; // Character currently selected
+@property (strong, nonatomic) GWCharacterAvatar* activeCharacter; // Character currently selected
 
 @property (strong, nonatomic) CCParticleSystem* emitter; //Particle emitter
 
 
--(void)buildWeaponTableFrom:(GWCharacter *)character;   // BUIld a weapon table from a character
+-(void)buildWeaponTableFrom:(GWCharacterAvatar *)character;   // BUIld a weapon table from a character
 
 
 @end
