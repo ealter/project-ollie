@@ -27,6 +27,13 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 @implementation GWCharacterModel
 @synthesize selectedWeapon = _selectedWeapon;
 
+- (id)init {
+    if(self = [super init]) {
+        bodyTypesIndexes_ = [NSMutableArray array];
+    }
+    return self;
+}
+
 - (id)initWithJsonData:(NSDictionary *)jsonData
 {
     if(self = [self init]) {

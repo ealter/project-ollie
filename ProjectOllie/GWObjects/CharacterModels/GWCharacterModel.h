@@ -29,7 +29,7 @@ enum {
 
 - (NSArray *)availableWeapons; //The weapons that have been unlocked
 
-//Accessor methods for bodyTypesIndexes_
+//Accessor methods for bodyTypesIndexes_. I use this wrapper so that we can set a value at any index (even if the array isn't big enough yet)
 - (void)setBodyType:(int)bodyType atIndex:(int)index;
 - (int)bodyTypeAtIndex:(int)index;
 - (int)numBodyParts;
