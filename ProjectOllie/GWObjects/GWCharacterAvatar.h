@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "CCNode.h"
 #import "GWGestures.h"
 #import "CCNode.h"
 
@@ -29,9 +29,8 @@ typedef enum Orientation {
     kOrientationLeft
 }Orientation;
 
-@interface GWCharacterAvatar : CCNode <GestureChild>{
-    
-}
+@interface GWCharacterAvatar : CCNode <GestureChild>
+
 -(id)initWithIdentifier:(NSString*)type spriteIndices:(NSArray*)indices box2DWorld:(b2World*)world;
 -(void)update:(float)dt;
 

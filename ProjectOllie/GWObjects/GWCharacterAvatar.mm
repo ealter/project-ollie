@@ -23,9 +23,6 @@
 #define zPivot 3
 
 @interface GWCharacterAvatar()
-{
-
-}
 
 -(void)generateSprites:(Bone*)root;
 
@@ -41,6 +38,7 @@
 @property (assign, nonatomic) Orientation orientation;
 
 @end
+
 @implementation GWCharacterAvatar
 
 @synthesize skeleton       = _skeleton;
@@ -78,10 +76,7 @@
         }
         
         /* prepare contact listener */
-        [self.skeleton setOwner:self];
-
-        
-
+        [self.skeleton setOwner:self]; 
     }
     
     return self;
@@ -130,7 +125,6 @@
         //set its physics body correctly
         part.physicsBody      = root->box2DBody;
         [[self getChildByTag:kTagParentNode]addChild:part z:root->z];
-        
         
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i)];
