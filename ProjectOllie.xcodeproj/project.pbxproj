@@ -143,6 +143,11 @@
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
 		CE26B7D715BE46D1001100A1 /* GWMove.m in Sources */ = {isa = PBXBuildFile; fileRef = CE26B7D615BE46D1001100A1 /* GWMove.m */; };
 		CE26B7DC15BE48D1001100A1 /* GWMoveFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = CE26B7DB15BE48D1001100A1 /* GWMoveFrame.m */; };
+		CE26F7A515D30D0200088E16 /* GWEnvironment.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7A415D30D0200088E16 /* GWEnvironment.mm */; };
+		CE26F7A915D30DF700088E16 /* EnvironmentScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7A815D30DF700088E16 /* EnvironmentScene.mm */; };
+		CE26F7AC15D3121C00088E16 /* DrawEnvironmentScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7AB15D3121C00088E16 /* DrawEnvironmentScene.mm */; };
+		CE26F7AF15D3125000088E16 /* GameScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7AE15D3125000088E16 /* GameScene.mm */; };
+		CE26F7B215D3126700088E16 /* BattleScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7B115D3126700088E16 /* BattleScene.mm */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
@@ -380,7 +385,7 @@
 		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
 		CEF6A09015B95AF3001D02CC /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A08F15B95AF3001D02CC /* waterSheet1.png */; };
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
-		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */; };
+		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.mm */; };
 		CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */; };
 /* End PBXBuildFile section */
 
@@ -597,6 +602,16 @@
 		CE26B7D615BE46D1001100A1 /* GWMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWMove.m; path = GWObjects/Moves/GWMove.m; sourceTree = "<group>"; };
 		CE26B7DA15BE48D1001100A1 /* GWMoveFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWMoveFrame.h; path = GWObjects/Moves/GWMoveFrame.h; sourceTree = "<group>"; };
 		CE26B7DB15BE48D1001100A1 /* GWMoveFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWMoveFrame.m; path = GWObjects/Moves/GWMoveFrame.m; sourceTree = "<group>"; };
+		CE26F7A315D30D0200088E16 /* GWEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWEnvironment.h; sourceTree = "<group>"; };
+		CE26F7A415D30D0200088E16 /* GWEnvironment.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWEnvironment.mm; sourceTree = "<group>"; };
+		CE26F7A715D30DF700088E16 /* EnvironmentScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentScene.h; sourceTree = "<group>"; };
+		CE26F7A815D30DF700088E16 /* EnvironmentScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = EnvironmentScene.mm; sourceTree = "<group>"; };
+		CE26F7AA15D3121C00088E16 /* DrawEnvironmentScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawEnvironmentScene.h; path = Sandbox/DrawEnvironmentScene.h; sourceTree = "<group>"; };
+		CE26F7AB15D3121C00088E16 /* DrawEnvironmentScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = DrawEnvironmentScene.mm; path = Sandbox/DrawEnvironmentScene.mm; sourceTree = "<group>"; };
+		CE26F7AD15D3125000088E16 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
+		CE26F7AE15D3125000088E16 /* GameScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameScene.mm; sourceTree = "<group>"; };
+		CE26F7B015D3126600088E16 /* BattleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleScene.h; sourceTree = "<group>"; };
+		CE26F7B115D3126700088E16 /* BattleScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BattleScene.mm; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = "Resources/menu-objects/ccbis/NewAccountMenu.ccbi"; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
@@ -660,10 +675,10 @@
 		CE6B51D415C0E33100F51BE6 /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/Miscellaneous/selectedoption.png; sourceTree = "<group>"; };
 		CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/Miscellaneous/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
+		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
+		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
 		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
-		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
-		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
 		CE894EFF15829C7F00E412E1 /* PointEdge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PointEdge.h; path = libs/CSG/PointEdge.h; sourceTree = "<group>"; };
 		CE894F001582B30B00E412E1 /* ShapeField.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeField.cpp; path = libs/CSG/ShapeField.cpp; sourceTree = "<group>"; };
@@ -1048,8 +1063,8 @@
 		CEF6A08F15B95AF3001D02CC /* waterSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet1.png; sourceTree = "<group>"; };
 		CEFA2734158D4C0000BC9710 /* ServerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAPI.h; path = ProjectOllie/Server/ServerAPI.h; sourceTree = "<group>"; };
 		CEFA2735158D4C0000BC9710 /* ServerAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerAPI.m; path = ProjectOllie/Server/ServerAPI.m; sourceTree = "<group>"; };
-		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaskedSprite.h; path = Terrain/MaskedSprite.h; sourceTree = "<group>"; };
-		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MaskedSprite.m; path = Terrain/MaskedSprite.m; sourceTree = "<group>"; };
+		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaskedSprite.h; path = ../Terrain/MaskedSprite.h; sourceTree = "<group>"; };
+		CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = MaskedSprite.mm; path = ../Terrain/MaskedSprite.mm; sourceTree = "<group>"; };
 		CEFBC9BF159EA1E3001C1FD1 /* CCTexture2DMutable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CCTexture2DMutable.h; path = libs/CCTexture2DMutable/CCTexture2DMutable.h; sourceTree = "<group>"; };
 		CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CCTexture2DMutable.m; path = libs/CCTexture2DMutable/CCTexture2DMutable.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1318,6 +1333,12 @@
 				C5F4309915B8D2EA00174FEE /* GWWater.mm */,
 				C586F8F715C6324800573B6E /* GWContactListener.h */,
 				C586F8F415C6321A00573B6E /* GWContactListener.mm */,
+				CE26F7A315D30D0200088E16 /* GWEnvironment.h */,
+				CE26F7A415D30D0200088E16 /* GWEnvironment.mm */,
+				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
+				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.mm */,
+				CE8429F5157BD0E50038C653 /* Terrain.h */,
+				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 				C587E2D915D334FB00528573 /* Character Avatars */,
 				CE05C35715D0A467007F8ED3 /* Character Models */,
 				CE26B7D915BE46E0001100A1 /* Moves */,
@@ -1349,6 +1370,14 @@
 			isa = PBXGroup;
 			children = (
 				C5F430B515B8D74A00174FEE /* Sandbox */,
+				CE26F7A715D30DF700088E16 /* EnvironmentScene.h */,
+				CE26F7A815D30DF700088E16 /* EnvironmentScene.mm */,
+				CE26F7AA15D3121C00088E16 /* DrawEnvironmentScene.h */,
+				CE26F7AB15D3121C00088E16 /* DrawEnvironmentScene.mm */,
+				CE26F7AD15D3125000088E16 /* GameScene.h */,
+				CE26F7AE15D3125000088E16 /* GameScene.mm */,
+				CE26F7B015D3126600088E16 /* BattleScene.h */,
+				CE26F7B115D3126700088E16 /* BattleScene.mm */,
 				C5F430B815B8D74A00174FEE /* SandboxScene.h */,
 				C5F430B915B8D74A00174FEE /* SandboxScene.mm */,
 			);
@@ -1486,10 +1515,6 @@
 			children = (
 				CE53DF6D157ACBA90078FD73 /* DrawEnvironment.h */,
 				CE53DF6E157ACBA90078FD73 /* DrawEnvironment.mm */,
-				CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */,
-				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.m */,
-				CE8429F5157BD0E50038C653 /* Terrain.h */,
-				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
 			);
 			name = Terrain;
 			sourceTree = "<group>";
@@ -2709,7 +2734,7 @@
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
-				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.m in Sources */,
+				CEFAF0701586B72E00F6DDF9 /* MaskedSprite.mm in Sources */,
 				CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */,
 				CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */,
 				CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */,
@@ -2777,6 +2802,11 @@
 				CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */,
 				CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */,
 				CE05C35615D09F9B007F8ED3 /* GWCharacterModel.m in Sources */,
+				CE26F7A515D30D0200088E16 /* GWEnvironment.mm in Sources */,
+				CE26F7A915D30DF700088E16 /* EnvironmentScene.mm in Sources */,
+				CE26F7AC15D3121C00088E16 /* DrawEnvironmentScene.mm in Sources */,
+				CE26F7AF15D3125000088E16 /* GameScene.mm in Sources */,
+				CE26F7B215D3126700088E16 /* BattleScene.mm in Sources */,
 				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
 				C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */,
 				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,

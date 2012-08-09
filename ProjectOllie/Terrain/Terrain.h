@@ -6,12 +6,13 @@
 //  Copyright 2012 hi ku. All rights reserved.
 //
 
-#import "CCNode.h"
+#include <stdlib.h>
 #include <vector>
+#import "CCNode.h"
 
 class ShapeField;
 class b2World;
-class b2Body;
+class b2Body;	
 @class CCTexture2D;
 
 //An enum for the different possible images to use with the texture.
@@ -25,9 +26,8 @@ typedef enum TerrainTexture {
 } TerrainTexture;
 
 /*   Terrain class  */
-// Manages pieces of land: adds, removes, draws, generates
+// Manages land: adds, removes, draws, generates
 @interface Terrain : CCNode <NSCoding> {
-    std::vector<b2Body*> b2Bodies;   //Bodies of chain shapes currently in the world
     b2World             *world;      //Physical world this land is in
     ShapeField          *shapeField_;
 }

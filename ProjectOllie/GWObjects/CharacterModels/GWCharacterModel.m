@@ -65,7 +65,7 @@ static CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return nil;
 }
 
-- (NSArray *)availableWeapons
+- (NSMutableArray *)availableWeapons
 {
     return availableWeapons_;
 }
