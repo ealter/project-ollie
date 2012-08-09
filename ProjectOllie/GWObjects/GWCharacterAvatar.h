@@ -15,6 +15,7 @@ class b2World;
 @class GWSkeleton;
 @class GWWeapon;
 @class GWUILayer;
+@class GWCharacterModel;
 
 typedef enum characterState {
     kStateIdle = 0,   // when just standing around
@@ -48,14 +49,16 @@ typedef enum Orientation {
 
 //Properties endemic to character
 
+- (GWCharacterModel *)model; //Subclasses MUST override this
+
+/* The weapons available to the character */
+- (NSArray *)weapons;
+
 /* The skeleton belonging to the character */
 @property (strong, nonatomic) GWSkeleton* skeleton;
 
 /* The current state of the GWCharacterAvatar */
 @property (assign, nonatomic) characterState state;
-
-/* The weapons available to the character */
-@property (readonly, nonatomic) NSMutableArray* weapons;
 
 /* The currently active weapon, visible if state == arming */
 @property (strong, nonatomic) GWWeapon* selectedWeapon;
