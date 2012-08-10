@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWGunWeapon.h"
 
 #define BAZOOKA_WIDTH (100./PTM_RATIO)
@@ -17,8 +16,11 @@
 #define BAZOOKA_B_HEIGHT 6.
 #define BAZOOKA_B_IMAGE @"bullet.png"
 
-@interface Bazooka : GWGunWeapon {
-    
-}
+class b2World;
+@class ActionLayer;
+
+@interface Bazooka : GWGunWeapon 
+
+-(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
 
 @end

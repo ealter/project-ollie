@@ -201,6 +201,12 @@
 		CE79028615D486C300958D04 /* taser.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028215D486C300958D04 /* taser.png */; };
 		CE79028915D487E700958D04 /* Bazooka.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79028815D487E700958D04 /* Bazooka.mm */; };
 		CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79028B15D4880300958D04 /* BazookaProjectile.mm */; };
+		CE79029715D4990100958D04 /* nail_gun.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029215D4990000958D04 /* nail_gun.png */; };
+		CE79029815D4990100958D04 /* nail.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029315D4990000958D04 /* nail.png */; };
+		CE79029915D4990100958D04 /* railgun.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029415D4990100958D04 /* railgun.png */; };
+		CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029515D4990100958D04 /* rocket_launcher.png */; };
+		CE79029B15D4990100958D04 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029615D4990100958D04 /* rocket.png */; };
+		CE79029D15D4AA5300958D04 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029C15D4AA5100958D04 /* banana.png */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -691,6 +697,12 @@
 		CE79028815D487E700958D04 /* Bazooka.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bazooka.mm; sourceTree = "<group>"; };
 		CE79028A15D4880300958D04 /* BazookaProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BazookaProjectile.h; sourceTree = "<group>"; };
 		CE79028B15D4880300958D04 /* BazookaProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BazookaProjectile.mm; sourceTree = "<group>"; };
+		CE79029215D4990000958D04 /* nail_gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nail_gun.png; sourceTree = "<group>"; };
+		CE79029315D4990000958D04 /* nail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nail.png; sourceTree = "<group>"; };
+		CE79029415D4990100958D04 /* railgun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = railgun.png; sourceTree = "<group>"; };
+		CE79029515D4990100958D04 /* rocket_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket_launcher.png; sourceTree = "<group>"; };
+		CE79029615D4990100958D04 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
+		CE79029C15D4AA5100958D04 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -1065,7 +1077,7 @@
 		CEDEE35515C8BDB600C0BB1C /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotgunProjectile.h; sourceTree = "<group>"; };
 		CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShotgunProjectile.mm; sourceTree = "<group>"; };
-		CEDEE35A15C8D30600C0BB1C /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shotgun.h; path = ../Weapons/GunWeapons/Shotgun.h; sourceTree = "<group>"; };
+		CEDEE35A15C8D30600C0BB1C /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shotgun.h; sourceTree = "<group>"; };
 		CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shotgun.mm; sourceTree = "<group>"; };
 		CEDEE35D15C8D4F000C0BB1C /* pellet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pellet.png; sourceTree = "<group>"; };
 		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1267,7 +1279,6 @@
 		C587E2D915D334FB00528573 /* Character Avatars */ = {
 			isa = PBXGroup;
 			children = (
-				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
 				C5F4310915BE224B00174FEE /* GWCharacterAvatar.h */,
 				C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */,
 				C587E2DA15D3352B00528573 /* ConstructionAvatar.h */,
@@ -1681,6 +1692,7 @@
 				CE79028815D487E700958D04 /* Bazooka.mm */,
 				CE79028A15D4880300958D04 /* BazookaProjectile.h */,
 				CE79028B15D4880300958D04 /* BazookaProjectile.mm */,
+				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
 				CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */,
 				CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */,
 				CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */,
@@ -2342,8 +2354,14 @@
 				CEDEE35D15C8D4F000C0BB1C /* pellet.png */,
 				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
+				CE79029C15D4AA5100958D04 /* banana.png */,
 				CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */,
 				CEDEE34815C8A72A00C0BB1C /* rocket.png */,
+				CE79029215D4990000958D04 /* nail_gun.png */,
+				CE79029315D4990000958D04 /* nail.png */,
+				CE79029415D4990100958D04 /* railgun.png */,
+				CE79029515D4990100958D04 /* rocket_launcher.png */,
+				CE79029615D4990100958D04 /* rocket.png */,
 				CE79027F15D486C200958D04 /* bazooka.png */,
 				CE79028015D486C200958D04 /* grenade.png */,
 				CE79028115D486C200958D04 /* pistol.png */,
@@ -2584,6 +2602,12 @@
 				CE79028415D486C300958D04 /* grenade.png in Resources */,
 				CE79028515D486C300958D04 /* pistol.png in Resources */,
 				CE79028615D486C300958D04 /* taser.png in Resources */,
+				CE79029715D4990100958D04 /* nail_gun.png in Resources */,
+				CE79029815D4990100958D04 /* nail.png in Resources */,
+				CE79029915D4990100958D04 /* railgun.png in Resources */,
+				CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */,
+				CE79029B15D4990100958D04 /* rocket.png in Resources */,
+				CE79029D15D4AA5300958D04 /* banana.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

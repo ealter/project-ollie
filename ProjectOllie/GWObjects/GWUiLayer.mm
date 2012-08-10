@@ -37,7 +37,6 @@
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];
         }
-        
         CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
@@ -47,7 +46,7 @@
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
-        [self.parent.parent addChild:self.weaponTable z:100];
+        [self.parent.parent addChild:self.weaponTable];
     }else {
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
@@ -79,13 +78,14 @@
     GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
     NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
+    
+    
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
         cell = [MyCell new];
         
 		CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
 		sprite.anchorPoint = CGPointZero;
-        //[self addChild:sprite z:20000];
         
 		[cell addChild:sprite];
 		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];

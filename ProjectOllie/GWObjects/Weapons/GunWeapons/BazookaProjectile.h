@@ -14,4 +14,11 @@
     
 }
 
+@property (assign, nonatomic) float accX;
+
+@property (assign, nonatomic) float accY;
+
+-(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld;
+
+
 @end
