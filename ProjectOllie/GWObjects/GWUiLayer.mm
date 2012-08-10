@@ -43,11 +43,11 @@
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
         CGPoint tablePos                    = self.activeCharacter.position;
-        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
+        self.weaponTable.position           = ccpAdd(ccp(0,0), CGPointMake(0, 0));
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
-        [self addChild:self.weaponTable z:2000];
+        [self addChild:self.weaponTable];
         
     }else {
         if (self.activeCharacter != character) {
@@ -69,7 +69,7 @@
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
 {
-    
+    printf("!!!!");
 }
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
