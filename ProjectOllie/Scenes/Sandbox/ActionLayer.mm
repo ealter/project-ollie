@@ -276,9 +276,9 @@ enum {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
     CGPoint tl = [touch locationInView:[touch view]];
-   // if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
-     //   [_character walkRight];
-    //else [_character walkLeft];
+    if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
+        [_character walkRight];
+    else [_character walkLeft];
     
 }
 
