@@ -129,15 +129,16 @@
 		CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C326215CC98940004E932 /* PlayerSearch.m */; };
 		CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
-		CE18C08715B9659F00FD2025 /* waterSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08015B9659F00FD2025 /* waterSheet2.png */; };
-		CE18C08815B9659F00FD2025 /* waterSheet3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08115B9659F00FD2025 /* waterSheet3.png */; };
-		CE18C08915B9659F00FD2025 /* waterSheet4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08215B9659F00FD2025 /* waterSheet4.png */; };
-		CE18C08A15B9659F00FD2025 /* waterSheet5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08315B9659F00FD2025 /* waterSheet5.png */; };
-		CE18C08B15B9659F00FD2025 /* waterSheet6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08415B9659F00FD2025 /* waterSheet6.png */; };
-		CE18C08C15B9659F00FD2025 /* waterSheet7.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08515B9659F00FD2025 /* waterSheet7.png */; };
-		CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */ = {isa = PBXBuildFile; fileRef = CE18C08615B9659F00FD2025 /* waterSheet8.png */; };
 		CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */; };
 		CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */; };
+		CE1FDF2915D4A7C300C2B532 /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2115D4A7C300C2B532 /* waterSheet1.png */; };
+		CE1FDF2A15D4A7C300C2B532 /* waterSheet2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2215D4A7C300C2B532 /* waterSheet2.png */; };
+		CE1FDF2B15D4A7C300C2B532 /* waterSheet3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2315D4A7C300C2B532 /* waterSheet3.png */; };
+		CE1FDF2C15D4A7C300C2B532 /* waterSheet4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2415D4A7C300C2B532 /* waterSheet4.png */; };
+		CE1FDF2D15D4A7C300C2B532 /* waterSheet5.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2515D4A7C300C2B532 /* waterSheet5.png */; };
+		CE1FDF2E15D4A7C300C2B532 /* waterSheet6.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2615D4A7C300C2B532 /* waterSheet6.png */; };
+		CE1FDF2F15D4A7C300C2B532 /* waterSheet7.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2715D4A7C300C2B532 /* waterSheet7.png */; };
+		CE1FDF3015D4A7C300C2B532 /* waterSheet8.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2815D4A7C300C2B532 /* waterSheet8.png */; };
 		CE22740915A01D6D00F3217E /* fire.png in Resources */ = {isa = PBXBuildFile; fileRef = CE22740815A01D6D00F3217E /* fire.png */; };
 		CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */; };
 		CE2544E715A6725B00A087F6 /* PasswordChangeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */; };
@@ -383,7 +384,6 @@
 		CEF00101158BDCE100F7F1A8 /* Authentication.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00100158BDCE100F7F1A8 /* Authentication.m */; };
 		CEF00105158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */; };
 		CEF00108158BF42000F7F1A8 /* NSString+URLEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */; };
-		CEF6A09015B95AF3001D02CC /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CEF6A08F15B95AF3001D02CC /* waterSheet1.png */; };
 		CEFA2736158D4C0000BC9710 /* ServerAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFA2735158D4C0000BC9710 /* ServerAPI.m */; };
 		CEFAF0701586B72E00F6DDF9 /* MaskedSprite.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.mm */; };
 		CEFBC9C1159EA1E4001C1FD1 /* CCTexture2DMutable.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFBC9C0159EA1E3001C1FD1 /* CCTexture2DMutable.m */; };
@@ -583,17 +583,18 @@
 		CE0C326315CC98940004E932 /* ServerMatchmakingAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerMatchmakingAPI.h; path = ProjectOllie/Server/Matchmaking/ServerMatchmakingAPI.h; sourceTree = "<group>"; };
 		CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerMatchmakingAPI.m; path = ProjectOllie/Server/Matchmaking/ServerMatchmakingAPI.m; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
-		CE18C08015B9659F00FD2025 /* waterSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet2.png; sourceTree = "<group>"; };
-		CE18C08115B9659F00FD2025 /* waterSheet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet3.png; sourceTree = "<group>"; };
-		CE18C08215B9659F00FD2025 /* waterSheet4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet4.png; sourceTree = "<group>"; };
-		CE18C08315B9659F00FD2025 /* waterSheet5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet5.png; sourceTree = "<group>"; };
-		CE18C08415B9659F00FD2025 /* waterSheet6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet6.png; sourceTree = "<group>"; };
-		CE18C08515B9659F00FD2025 /* waterSheet7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet7.png; sourceTree = "<group>"; };
-		CE18C08615B9659F00FD2025 /* waterSheet8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet8.png; sourceTree = "<group>"; };
 		CE19DF5615CB443700CC392D /* ForgotPasswordScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordScreen.h; path = menus/ForgotPasswordScreen.h; sourceTree = "<group>"; };
 		CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordScreen.m; path = menus/ForgotPasswordScreen.m; sourceTree = "<group>"; };
 		CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWithTextFields.h; path = menus/MenuWithTextFields.h; sourceTree = "<group>"; };
 		CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuWithTextFields.m; path = menus/MenuWithTextFields.m; sourceTree = "<group>"; };
+		CE1FDF2115D4A7C300C2B532 /* waterSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet1.png; path = Resources/water/waterSheet1.png; sourceTree = "<group>"; };
+		CE1FDF2215D4A7C300C2B532 /* waterSheet2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet2.png; path = Resources/water/waterSheet2.png; sourceTree = "<group>"; };
+		CE1FDF2315D4A7C300C2B532 /* waterSheet3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet3.png; path = Resources/water/waterSheet3.png; sourceTree = "<group>"; };
+		CE1FDF2415D4A7C300C2B532 /* waterSheet4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet4.png; path = Resources/water/waterSheet4.png; sourceTree = "<group>"; };
+		CE1FDF2515D4A7C300C2B532 /* waterSheet5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet5.png; path = Resources/water/waterSheet5.png; sourceTree = "<group>"; };
+		CE1FDF2615D4A7C300C2B532 /* waterSheet6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet6.png; path = Resources/water/waterSheet6.png; sourceTree = "<group>"; };
+		CE1FDF2715D4A7C300C2B532 /* waterSheet7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet7.png; path = Resources/water/waterSheet7.png; sourceTree = "<group>"; };
+		CE1FDF2815D4A7C300C2B532 /* waterSheet8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = waterSheet8.png; path = Resources/water/waterSheet8.png; sourceTree = "<group>"; };
 		CE22740815A01D6D00F3217E /* fire.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = fire.png; path = Resources/Miscellaneous/fire.png; sourceTree = "<group>"; };
 		CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = PasswordChangeScreen.ccbi; path = "Resources/menu-objects/ccbis/PasswordChangeScreen.ccbi"; sourceTree = "<group>"; };
 		CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PasswordChangeScreen.h; path = menus/PasswordChangeScreen.h; sourceTree = "<group>"; };
@@ -1060,7 +1061,6 @@
 		CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+URLEncoding.m"; path = "ProjectOllie/libs/categories/NSDictionary+URLEncoding.m"; sourceTree = "<group>"; };
 		CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+URLEncoding.h"; path = "ProjectOllie/libs/categories/NSString+URLEncoding.h"; sourceTree = "<group>"; };
 		CEF00107158BF42000F7F1A8 /* NSString+URLEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+URLEncoding.m"; path = "ProjectOllie/libs/categories/NSString+URLEncoding.m"; sourceTree = "<group>"; };
-		CEF6A08F15B95AF3001D02CC /* waterSheet1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = waterSheet1.png; sourceTree = "<group>"; };
 		CEFA2734158D4C0000BC9710 /* ServerAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerAPI.h; path = ProjectOllie/Server/ServerAPI.h; sourceTree = "<group>"; };
 		CEFA2735158D4C0000BC9710 /* ServerAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerAPI.m; path = ProjectOllie/Server/ServerAPI.m; sourceTree = "<group>"; };
 		CEFAF06E1586B72D00F6DDF9 /* MaskedSprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaskedSprite.h; path = ../Terrain/MaskedSprite.h; sourceTree = "<group>"; };
@@ -1703,14 +1703,14 @@
 		CE6B51EF15C35DA900F51BE6 /* Water */ = {
 			isa = PBXGroup;
 			children = (
-				CEF6A08F15B95AF3001D02CC /* waterSheet1.png */,
-				CE18C08015B9659F00FD2025 /* waterSheet2.png */,
-				CE18C08115B9659F00FD2025 /* waterSheet3.png */,
-				CE18C08215B9659F00FD2025 /* waterSheet4.png */,
-				CE18C08315B9659F00FD2025 /* waterSheet5.png */,
-				CE18C08415B9659F00FD2025 /* waterSheet6.png */,
-				CE18C08515B9659F00FD2025 /* waterSheet7.png */,
-				CE18C08615B9659F00FD2025 /* waterSheet8.png */,
+				CE1FDF2115D4A7C300C2B532 /* waterSheet1.png */,
+				CE1FDF2215D4A7C300C2B532 /* waterSheet2.png */,
+				CE1FDF2315D4A7C300C2B532 /* waterSheet3.png */,
+				CE1FDF2415D4A7C300C2B532 /* waterSheet4.png */,
+				CE1FDF2515D4A7C300C2B532 /* waterSheet5.png */,
+				CE1FDF2615D4A7C300C2B532 /* waterSheet6.png */,
+				CE1FDF2715D4A7C300C2B532 /* waterSheet7.png */,
+				CE1FDF2815D4A7C300C2B532 /* waterSheet8.png */,
 			);
 			name = Water;
 			sourceTree = "<group>";
@@ -2470,14 +2470,6 @@
 				CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */,
 				CE22740915A01D6D00F3217E /* fire.png in Resources */,
 				CE2544E315A671FC00A087F6 /* PasswordChangeScreen.ccbi in Resources */,
-				CEF6A09015B95AF3001D02CC /* waterSheet1.png in Resources */,
-				CE18C08715B9659F00FD2025 /* waterSheet2.png in Resources */,
-				CE18C08815B9659F00FD2025 /* waterSheet3.png in Resources */,
-				CE18C08915B9659F00FD2025 /* waterSheet4.png in Resources */,
-				CE18C08A15B9659F00FD2025 /* waterSheet5.png in Resources */,
-				CE18C08B15B9659F00FD2025 /* waterSheet6.png in Resources */,
-				CE18C08C15B9659F00FD2025 /* waterSheet7.png in Resources */,
-				CE18C08D15B9659F00FD2025 /* waterSheet8.png in Resources */,
 				C583DBAB15AF947B00FE441B /* character_idle3.anim in Resources */,
 				C583DBAE15AF947B00FE441B /* character.skel in Resources */,
 				C5F4308015B8CF9A00174FEE /* jungle_layer1-hd.png in Resources */,
@@ -2558,6 +2550,14 @@
 				C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */,
 				C587E2C415D09F4E00528573 /* construction_moonwalk.anim in Resources */,
 				C587E2CB15D1F22800528573 /* construction_walk.anim in Resources */,
+				CE1FDF2915D4A7C300C2B532 /* waterSheet1.png in Resources */,
+				CE1FDF2A15D4A7C300C2B532 /* waterSheet2.png in Resources */,
+				CE1FDF2B15D4A7C300C2B532 /* waterSheet3.png in Resources */,
+				CE1FDF2C15D4A7C300C2B532 /* waterSheet4.png in Resources */,
+				CE1FDF2D15D4A7C300C2B532 /* waterSheet5.png in Resources */,
+				CE1FDF2E15D4A7C300C2B532 /* waterSheet6.png in Resources */,
+				CE1FDF2F15D4A7C300C2B532 /* waterSheet7.png in Resources */,
+				CE1FDF3015D4A7C300C2B532 /* waterSheet8.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

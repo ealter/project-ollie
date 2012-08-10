@@ -16,9 +16,9 @@ extern const NSString *kUsernameChangedBroadcast;
 
 @interface Authentication : NSObject
 
-@property (nonatomic, retain) NSString *authToken;
-@property (nonatomic, retain) NSString *username;
-@property (nonatomic, retain) FacebookLogin *facebookLogin;
+@property (nonatomic, strong) NSString *authToken;
+@property (nonatomic, strong) NSString *username;
+@property (nonatomic, strong) FacebookLogin *facebookLogin;
 @property (nonatomic, readonly) BOOL isLoggedIn;
 
 + (Authentication *)mainAuth;

@@ -49,9 +49,9 @@
         
         //Add all of the layers in the order we would like them to render
         [actionNode addChild:backnode];
-        [actionNode addChild:waterBack];
+        //[actionNode addChild:waterBack];
         [actionNode addChild:self.actionLayer];
-        [actionNode addChild:waterFront];
+        //[actionNode addChild:waterFront];
         [self addChild:actionNode];
     }
     return self;

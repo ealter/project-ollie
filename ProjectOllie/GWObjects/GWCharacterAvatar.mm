@@ -49,6 +49,7 @@
 @synthesize orientation    = _orientation;
 @synthesize selectedWeapon = _selectedWeapon;
 @synthesize uiLayer        = _uiLayer;
+@synthesize weapons        = _weapons;
 
 -(id)initWithIdentifier:(NSString *)type spriteIndices:(NSArray *)indices box2DWorld:(b2World *)world{
     
@@ -58,6 +59,7 @@
         self.state        = kStateArming;
         self.orientation  = kOrientationLeft;
         self.type         = type;
+        self.weapons      = [NSMutableArray array];
         
         /* Add physics sprites */
         Bone* root       = [self.skeleton getBoneByName:@"Head"];
@@ -92,6 +94,7 @@
         CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:spriteBatchNode];
         [self addChild:spriteSheet];
         
+
         
         //set name to be independent of left/right
         //also adjust z order for drawing
@@ -130,14 +133,15 @@
     }
 }
 
-- (NSArray *)weapons
+/*- (NSArray *)weapons
 {
     return self.model.copy;
-}
+}*/
 
 -(void)loadWeapons:(NSArray *)weapons
 {
-    [self.model.availableWeapons addObjectsFromArray:weapons];
+    [self.weapons addObjectsFromArray:weapons];
+    //[self.model.availableWeapons addObjectsFromArray:weapons];
 }
 
 - (GWCharacterModel *)model
@@ -230,6 +234,7 @@
 }
 
 -(void)walkLeft{
+
     // If it is making contact with some ground body
     if([self.skeleton calculateNormalAngle])
     {

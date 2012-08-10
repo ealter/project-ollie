@@ -11,7 +11,8 @@
 
 static Authentication *auth_ = nil;
 NSString *kUsernameChangedBroadcast = @"hi";
-#define USERNAME_KEY @"username"
+//Defines for the local storage preferences
+#define USERNAME_KEY   @"username"
 #define AUTH_TOKEN_KEY @"auth_token"
 
 @implementation Authentication
