@@ -12,22 +12,27 @@
 
 @implementation GWWeaponTable
 
+<<<<<<< HEAD
 -(id)init{
     if (self = [super init]) {
         [self scheduleUpdate];
         self.isTouchEnabled = YES;
     }
+=======
++(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
     
-    return self;
-}
-
--(void)draw{
-    CCLOG(@"Drawing at: (%f,%f)",self.position.x,self.position.y);
-    [super draw];
+    GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
+    /* init values */
+    tv.clipsToBounds = NO;
+    [tv scheduleUpdate];
+    return tv;
+>>>>>>> fffff7237fc7b28cf33b0c3d15fe676df77b1b68
+    
 }
 
 -(void)update:(ccTime) dt
 {
+<<<<<<< HEAD
     for (SWTableViewCell* cell in self->cellsUsed_) {
         
     }
@@ -37,6 +42,9 @@
 {
     DebugLog(@"GALKDFJ");
     return YES;
+=======
+
+>>>>>>> fffff7237fc7b28cf33b0c3d15fe676df77b1b68
 }
 
 - (void) registerWithTouchDispatcher {

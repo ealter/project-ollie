@@ -22,9 +22,7 @@
     return body_;
 }
 
-// this method will only get called if the sprite is batched.
-// return YES if the physics values (angles, position ) changed
-// If you return NO, then nodeToParentTransform won't be called.
+// Return yes so that the transform is calculated every frame based on box2d
 -(BOOL) dirty
 {
     return YES;

@@ -27,6 +27,7 @@
 
 enum {
 	kTagParentNode = 1,
+    
 };
 
 @interface ActionLayer()
@@ -94,7 +95,7 @@ enum {
         CCNode *parent = [CCNode node];
 #endif
         [self addChild:parent z:0 tag:kTagParentNode];
-
+        
        /* CCLabelTTF *label = [CCLabelTTF labelWithString:@"Tap screen" fontName:@"Marker Felt" fontSize:32];
         [self addChild:label z:0];
         [label setColor:ccc3(0,0,255)];
@@ -275,9 +276,9 @@ enum {
     [self.camera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
     CGPoint tl = [touch locationInView:[touch view]];
-    if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
-        [_character walkRight];
-    else [_character walkLeft];
+   // if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
+     //   [_character walkRight];
+    //else [_character walkLeft];
     
 }
 

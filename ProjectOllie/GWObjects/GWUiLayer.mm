@@ -37,18 +37,29 @@
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];
         }
+<<<<<<< HEAD
+=======
+        
+        
+>>>>>>> fffff7237fc7b28cf33b0c3d15fe676df77b1b68
         CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
-        CGPoint tablePos                    = [self convertToWorldSpace:self.activeCharacter.position];
-        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 10));
+        CGPoint tablePos                    = self.activeCharacter.position;
+        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
+<<<<<<< HEAD
         [self.parent.parent addChild:self.weaponTable];
+=======
+        [self addChild:self.weaponTable z:2000];
+        
+>>>>>>> fffff7237fc7b28cf33b0c3d15fe676df77b1b68
     }else {
         if (self.activeCharacter != character) {
+            
             self.activeCharacter    = character;
             
             //Count the number of weapons, for the table size

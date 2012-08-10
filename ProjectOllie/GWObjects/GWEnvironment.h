@@ -20,19 +20,23 @@ typedef enum settingTypes
 
 @interface GWEnvironment : CCLayer
 
-/* Properties */
+/* Properties (layers are in order of greater Z from camera) */
 
 @property (nonatomic) Setting setting;
 
-@property (strong, nonatomic) Terrain* terrain;
+@property (strong, nonatomic) GWWater* frontWater;      // Water that is in front of everything else
 
-@property (strong, nonatomic) GWWater* frontWater;
+@property (strong, nonatomic) GWPerspectiveLayer* actionLayer;     // Layer at z=0 where action should happen in the environment, owning class adds to this, contains terrain
 
-@property (strong, nonatomic) GWWater* backWater;
+@property (strong, nonatomic) Terrain* terrain;         // Contains everything you need for your very own terrain with features like rectangles
 
-@property (strong, nonatomic) CCLayer* actionLayer;     // Layer at z=0 above land but behind front water and particles, where action happens
+@property (strong, nonatomic) GWWater* backWater;       // That other water
 
-@property (strong, nonatomic) CCLayer* backdrop;        // The farthest back layer at the max z we care about
+@property (strong, nonatomic) GWPerspectiveLayer* backgroundNear;  // Closest background layer
+
+@property (strong, nonatomic) GWPerspectiveLayer* backgroundFar;   // Farther background layer
+
+@property (strong, nonatomic) GWPerspectiveLayer* backdrop;        // The farthest back layer at the max z we care about
 
 //Other background layers
 
@@ -43,9 +47,12 @@ typedef enum settingTypes
 //Load all of the textures
 +(void) initialize;
 
--(id) initWithSetting:(Setting)setting;
+//Blank terrain with the default setting
+-(id) init;
 
--(id) initWithSetting:(Setting)setting terrain:(Terrain*)terrain;
+-(id) initWithSetting:(Setting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera;
+
+-(id) setCamera:(GWCamera*)camera;
 
 
 
