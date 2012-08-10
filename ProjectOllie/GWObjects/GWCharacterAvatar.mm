@@ -309,7 +309,7 @@
 -(CGPoint)position{
     
     Bone* torso = [self.skeleton getBoneByName:@"Torso"];
-    CGPoint pos = ccpMult(ccp(self.skeleton.interactor.interactingBody->GetPosition().x,self.skeleton.interactor.interactingBody->GetPosition().y + torso->w/PTM_RATIO),PTM_RATIO);
+    CGPoint pos = ccpMult(ccp(torso->box2DBody->GetPosition().x,torso->box2DBody->GetPosition().y),PTM_RATIO);
     return pos;
 }
 -(void)setSelectedWeapon:(GWWeapon *)selectedWeapon{

@@ -22,6 +22,7 @@
 	if(self = [super init]) {
         numCells                            = 0;
         self.weaponTable                    = NULL;
+        [self scheduleUpdate];
     }
 	return self;
 }
@@ -43,7 +44,7 @@
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
         CGPoint tablePos                    = self.activeCharacter.position;
-        self.weaponTable.position           = ccpAdd(ccp(0,0), CGPointMake(0, 0));
+        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
@@ -68,7 +69,7 @@
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
 {
-    printf("!!!!");
+    printf("!!!! \n");
 }
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
@@ -116,6 +117,12 @@
     self.emitter            = [GWParticleExplodingRing node];
     self.emitter.position   = activeCharacter.position;
     [self addChild:self.emitter];
+}
+
+-(void)update:(float)dt{
+    CGPoint tablePos                    = self.activeCharacter.position;
+    self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
+
 }
 
 @end
