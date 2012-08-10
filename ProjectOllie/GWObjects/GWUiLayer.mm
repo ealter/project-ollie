@@ -38,7 +38,6 @@
             numCells = [[character weapons] count];
         }
         
-        
         CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
