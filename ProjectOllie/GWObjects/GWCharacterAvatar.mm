@@ -160,7 +160,7 @@
     if(self.state != kStateRagdoll)
     {
         
-        if(ccpLengthSQ(self.skeleton.getVelocity) > 10)
+        if(ccpLengthSQ(self.skeleton.getVelocity) > 5)
         {
             self.state = kStateRagdoll;
         }
@@ -276,17 +276,17 @@
 -(void)setState:(characterState)state{
     //after switching from old state
     
+    // from ragdoll to idle
     if(_state == kStateRagdoll && state == kStateIdle)
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
+    
+    // from arming to not arming
     else if (_state == kStateArming && state != kStateArming)
     {
         [[self getChildByTag:kTagParentNode]removeChild:self.selectedWeapon cleanup:YES];
         self.selectedWeapon   = nil;
     }
     
-    //upon switching to new state
-    _state = state;
-    //[self.skeleton setActive:NO];
     if(state == kStateWalking)
     {
         self.skeleton.interactor.state = kInteractorStateActive;
@@ -306,6 +306,10 @@
     {
         self.skeleton.interactor.state = kInteractorStateInactive;
     }
+    
+    
+    //upon switching to new state
+    _state = state;
 }
 
 -(void)setOrientation:(Orientation)orientation{

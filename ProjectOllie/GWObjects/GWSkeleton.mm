@@ -377,7 +377,10 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(void)setVelocity:(CGPoint)vel{
-    [self.interactor setLinearVelocity:vel];
+    if(self.interactor.state != kInteractorStateRagdoll)
+        [self.interactor setLinearVelocity:vel];
+    else 
+        _skeleton->setLinearVelocity(_skeleton->getRoot(), b2Vec2(vel.x,vel.y));
 }
 
 -(CGPoint)getVelocity{
