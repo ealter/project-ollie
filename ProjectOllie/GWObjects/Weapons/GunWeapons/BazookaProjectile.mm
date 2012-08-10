@@ -19,8 +19,9 @@
 {
     if (self = [super initWithBulletSize:CGSizeMake(BAZOOKA_B_WIDTH, BAZOOKA_B_HEIGHT) imageName:BAZOOKA_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         self.physicsBody->SetGravityScale(0);
+        bazookaTimer = 0;
         
-        self.emitter = [GWParticleMagicMissile node];
+        self.emitter = [GWParticleSmokeTrail node];
         self.emitter.position = self.position;
         [self.gameWorld addChild:self.emitter];
     }
@@ -29,9 +30,11 @@
 }
 
 -(void)update:(ccTime)dt
-{
-    self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/60, self.accY/60));
-    
+{    
+    bazookaTimer += dt;
+    if (bazookaTimer < 2.) {
+        self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/60, self.accY/60));
+    }
     self.emitter.position = self.position;
     if (self.bulletCollided) {
         [self destroyBullet];

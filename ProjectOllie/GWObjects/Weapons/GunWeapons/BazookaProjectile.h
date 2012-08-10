@@ -11,7 +11,7 @@
 #import "GWProjectile.h"
 
 @interface BazookaProjectile : GWProjectile {
-    
+    float bazookaTimer;
 }
 
 @property (assign, nonatomic) float accX;
