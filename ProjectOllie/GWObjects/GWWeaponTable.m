@@ -21,7 +21,7 @@
 }
 
 -(void)draw{
-    CCLOG(@"Drawing at: (%f,%f)",self.position.x,self.position.y);
+    CCLOG(@"Drawing at position: (%f,%f)",self.position.x,self.position.y);
     [super draw];
 }
 

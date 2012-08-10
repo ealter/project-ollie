@@ -107,8 +107,8 @@
 
 -(void)boundXY
 {
-    _location.x = clampf(_location.x, PTM_RATIO, PTM_RATIO*(WORLD_WIDTH-1));
-    _location.y = clampf(_location.y, PTM_RATIO, PTM_RATIO*(WORLD_HEIGHT-1));
+    //_location.x = clampf(_location.x, PTM_RATIO, PTM_RATIO*(WORLD_WIDTH-1));
+    //_location.y = clampf(_location.y, PTM_RATIO, PTM_RATIO*(WORLD_HEIGHT-1));
 }
 
 -(void)createShakeEffect:(float)dt{

@@ -52,7 +52,7 @@ typedef enum Orientation {
 - (GWCharacterModel *)model; //Subclasses MUST override this
 
 /* The weapons available to the character */
-- (NSArray *)weapons;
+@property (strong, nonatomic) NSMutableArray* weapons;
 
 /* The skeleton belonging to the character */
 @property (strong, nonatomic) GWSkeleton* skeleton;
