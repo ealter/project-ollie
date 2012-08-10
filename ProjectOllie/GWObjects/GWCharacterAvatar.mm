@@ -276,8 +276,6 @@
 -(void)setState:(characterState)state{
     //after switching from old state
     
-    DebugLog(@"! \n");
-    
     if(_state == kStateRagdoll && state == kStateIdle)
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
     else if (_state == kStateArming && state != kStateArming)
@@ -321,6 +319,7 @@
             sprite.zOrder = abs(sprite.zOrder);
     }
 }
+
 //override methods
 -(CGPoint)position{
     
@@ -328,6 +327,7 @@
     CGPoint pos = ccpMult(ccp(torso->box2DBody->GetPosition().x,torso->box2DBody->GetPosition().y),PTM_RATIO);
     return pos;
 }
+
 -(void)setSelectedWeapon:(GWWeapon *)selectedWeapon{
     if(selectedWeapon != nil)
     {

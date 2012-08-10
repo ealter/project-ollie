@@ -91,6 +91,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = CGPointZero;
         
@@ -156,6 +159,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
+        
+        //position type
+        self.positionType = kCCPositionTypeRelative;
         
         // Gravity Mode: gravity
         self.gravity = ccp(1.15, 1.58);
@@ -224,6 +230,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
         
         // Gravity Mode: gravity
         self.gravity = ccp(0,-750);

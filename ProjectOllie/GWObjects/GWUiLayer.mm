@@ -121,7 +121,7 @@
         _activeCharacter        = activeCharacter;
         self.emitter            = [GWParticleExplodingRing node];
         self.emitter.position   = activeCharacter.position;
-        [self addChild:self.emitter];
+        [self.parent addChild:self.emitter];
     }
 }
 
