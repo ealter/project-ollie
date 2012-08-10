@@ -15,6 +15,7 @@
 -(id)init{
     if (self = [super init]) {
         [self scheduleUpdate];
+        self.isTouchEnabled = YES;
     }
     
     return self;
@@ -22,8 +23,20 @@
 
 -(void)update:(ccTime) dt
 {
-    
+    for (SWTableViewCell* cell in self->cellsUsed_) {
+        
+    }
 }
 
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    DebugLog(@"GALKDFJ");
+    return YES;
+}
+
+- (void) registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];    
+}
 
 @end

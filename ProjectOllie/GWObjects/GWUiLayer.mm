@@ -51,7 +51,6 @@
     }else {
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
-            numCells                = 0;
             
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];

@@ -190,6 +190,12 @@
 		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
 		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
 		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
+		CE79028315D486C300958D04 /* bazooka.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79027F15D486C200958D04 /* bazooka.png */; };
+		CE79028415D486C300958D04 /* grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028015D486C200958D04 /* grenade.png */; };
+		CE79028515D486C300958D04 /* pistol.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028115D486C200958D04 /* pistol.png */; };
+		CE79028615D486C300958D04 /* taser.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028215D486C300958D04 /* taser.png */; };
+		CE79028915D487E700958D04 /* Bazooka.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79028815D487E700958D04 /* Bazooka.mm */; };
+		CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79028B15D4880300958D04 /* BazookaProjectile.mm */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -662,6 +668,14 @@
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
 		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
+		CE79027F15D486C200958D04 /* bazooka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazooka.png; sourceTree = "<group>"; };
+		CE79028015D486C200958D04 /* grenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grenade.png; sourceTree = "<group>"; };
+		CE79028115D486C200958D04 /* pistol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pistol.png; sourceTree = "<group>"; };
+		CE79028215D486C300958D04 /* taser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taser.png; sourceTree = "<group>"; };
+		CE79028715D487E700958D04 /* Bazooka.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bazooka.h; sourceTree = "<group>"; };
+		CE79028815D487E700958D04 /* Bazooka.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bazooka.mm; sourceTree = "<group>"; };
+		CE79028A15D4880300958D04 /* BazookaProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BazookaProjectile.h; sourceTree = "<group>"; };
+		CE79028B15D4880300958D04 /* BazookaProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BazookaProjectile.mm; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -1036,7 +1050,7 @@
 		CEDEE35515C8BDB600C0BB1C /* bullet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bullet.png; sourceTree = "<group>"; };
 		CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShotgunProjectile.h; sourceTree = "<group>"; };
 		CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ShotgunProjectile.mm; sourceTree = "<group>"; };
-		CEDEE35A15C8D30600C0BB1C /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shotgun.h; sourceTree = "<group>"; };
+		CEDEE35A15C8D30600C0BB1C /* Shotgun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Shotgun.h; path = ../Weapons/GunWeapons/Shotgun.h; sourceTree = "<group>"; };
 		CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shotgun.mm; sourceTree = "<group>"; };
 		CEDEE35D15C8D4F000C0BB1C /* pellet.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pellet.png; sourceTree = "<group>"; };
 		CEF000FF158BDCE100F7F1A8 /* Authentication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; name = Authentication.h; path = ProjectOllie/Server/Authentication.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -1238,6 +1252,7 @@
 		C587E2D915D334FB00528573 /* Character Avatars */ = {
 			isa = PBXGroup;
 			children = (
+				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
 				C5F4310915BE224B00174FEE /* GWCharacterAvatar.h */,
 				C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */,
 				C587E2DA15D3352B00528573 /* ConstructionAvatar.h */,
@@ -1637,7 +1652,10 @@
 				CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */,
 				CEDEE35215C8A8A000C0BB1C /* GaussRifleProjectile.h */,
 				CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */,
-				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
+				CE79028715D487E700958D04 /* Bazooka.h */,
+				CE79028815D487E700958D04 /* Bazooka.mm */,
+				CE79028A15D4880300958D04 /* BazookaProjectile.h */,
+				CE79028B15D4880300958D04 /* BazookaProjectile.mm */,
 				CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */,
 				CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */,
 				CEDEE35815C8D2F900C0BB1C /* ShotgunProjectile.mm */,
@@ -2301,6 +2319,10 @@
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
 				CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */,
 				CEDEE34815C8A72A00C0BB1C /* rocket.png */,
+				CE79027F15D486C200958D04 /* bazooka.png */,
+				CE79028015D486C200958D04 /* grenade.png */,
+				CE79028115D486C200958D04 /* pistol.png */,
+				CE79028215D486C300958D04 /* taser.png */,
 				CEDEE34915C8A72A00C0BB1C /* shotgun.png */,
 				CE99465715C4F19700D46E1E /* aimOverlay.png */,
 			);
@@ -2533,6 +2555,10 @@
 				C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */,
 				C587E2C415D09F4E00528573 /* construction_moonwalk.anim in Resources */,
 				C587E2CB15D1F22800528573 /* construction_walk.anim in Resources */,
+				CE79028315D486C300958D04 /* bazooka.png in Resources */,
+				CE79028415D486C300958D04 /* grenade.png in Resources */,
+				CE79028515D486C300958D04 /* pistol.png in Resources */,
+				CE79028615D486C300958D04 /* taser.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2780,6 +2806,8 @@
 				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
 				C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */,
 				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,
+				CE79028915D487E700958D04 /* Bazooka.mm in Sources */,
+				CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
