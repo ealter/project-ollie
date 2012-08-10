@@ -37,7 +37,7 @@
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];
         }
-        
+
         CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
@@ -53,7 +53,6 @@
         if (self.activeCharacter != character) {
             
             self.activeCharacter    = character;
-            numCells                = 0;
             
             //Count the number of weapons, for the table size
             numCells = [[character weapons] count];
@@ -82,6 +81,8 @@
     GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
     NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
+    
+    
     SWTableViewCell *cell = [table dequeueCell];
     if (!cell) {
         cell = [MyCell new];

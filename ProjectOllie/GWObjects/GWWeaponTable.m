@@ -12,6 +12,7 @@
 
 @implementation GWWeaponTable
 
+
 +(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
     
     GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
@@ -24,8 +25,20 @@
 
 -(void)update:(ccTime) dt
 {
+    for (SWTableViewCell* cell in self->cellsUsed_) {
+        
+    }
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    return NO;
 
 }
 
+- (void) registerWithTouchDispatcher {
+    [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
+    [[[CCDirector sharedDirector] touchDispatcher] addStandardDelegate:self priority:0];    
+}
 
 @end

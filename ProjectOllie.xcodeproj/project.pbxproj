@@ -196,6 +196,18 @@
 		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
 		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
 		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
+		CE79028315D486C300958D04 /* bazooka.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79027F15D486C200958D04 /* bazooka.png */; };
+		CE79028415D486C300958D04 /* grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028015D486C200958D04 /* grenade.png */; };
+		CE79028515D486C300958D04 /* pistol.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028115D486C200958D04 /* pistol.png */; };
+		CE79028615D486C300958D04 /* taser.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028215D486C300958D04 /* taser.png */; };
+		CE79028915D487E700958D04 /* Bazooka.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79028815D487E700958D04 /* Bazooka.mm */; };
+		CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79028B15D4880300958D04 /* BazookaProjectile.mm */; };
+		CE79029715D4990100958D04 /* nail_gun.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029215D4990000958D04 /* nail_gun.png */; };
+		CE79029815D4990100958D04 /* nail.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029315D4990000958D04 /* nail.png */; };
+		CE79029915D4990100958D04 /* railgun.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029415D4990100958D04 /* railgun.png */; };
+		CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029515D4990100958D04 /* rocket_launcher.png */; };
+		CE79029B15D4990100958D04 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029615D4990100958D04 /* rocket.png */; };
+		CE79029D15D4AA5300958D04 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029C15D4AA5100958D04 /* banana.png */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -678,6 +690,20 @@
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
 		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
+		CE79027F15D486C200958D04 /* bazooka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazooka.png; sourceTree = "<group>"; };
+		CE79028015D486C200958D04 /* grenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grenade.png; sourceTree = "<group>"; };
+		CE79028115D486C200958D04 /* pistol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pistol.png; sourceTree = "<group>"; };
+		CE79028215D486C300958D04 /* taser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = taser.png; sourceTree = "<group>"; };
+		CE79028715D487E700958D04 /* Bazooka.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bazooka.h; sourceTree = "<group>"; };
+		CE79028815D487E700958D04 /* Bazooka.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bazooka.mm; sourceTree = "<group>"; };
+		CE79028A15D4880300958D04 /* BazookaProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BazookaProjectile.h; sourceTree = "<group>"; };
+		CE79028B15D4880300958D04 /* BazookaProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BazookaProjectile.mm; sourceTree = "<group>"; };
+		CE79029215D4990000958D04 /* nail_gun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nail_gun.png; sourceTree = "<group>"; };
+		CE79029315D4990000958D04 /* nail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nail.png; sourceTree = "<group>"; };
+		CE79029415D4990100958D04 /* railgun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = railgun.png; sourceTree = "<group>"; };
+		CE79029515D4990100958D04 /* rocket_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket_launcher.png; sourceTree = "<group>"; };
+		CE79029615D4990100958D04 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
+		CE79029C15D4AA5100958D04 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -1662,6 +1688,10 @@
 				CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */,
 				CEDEE35215C8A8A000C0BB1C /* GaussRifleProjectile.h */,
 				CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */,
+				CE79028715D487E700958D04 /* Bazooka.h */,
+				CE79028815D487E700958D04 /* Bazooka.mm */,
+				CE79028A15D4880300958D04 /* BazookaProjectile.h */,
+				CE79028B15D4880300958D04 /* BazookaProjectile.mm */,
 				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
 				CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */,
 				CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */,
@@ -2324,8 +2354,18 @@
 				CEDEE35D15C8D4F000C0BB1C /* pellet.png */,
 				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
+				CE79029C15D4AA5100958D04 /* banana.png */,
 				CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */,
 				CEDEE34815C8A72A00C0BB1C /* rocket.png */,
+				CE79029215D4990000958D04 /* nail_gun.png */,
+				CE79029315D4990000958D04 /* nail.png */,
+				CE79029415D4990100958D04 /* railgun.png */,
+				CE79029515D4990100958D04 /* rocket_launcher.png */,
+				CE79029615D4990100958D04 /* rocket.png */,
+				CE79027F15D486C200958D04 /* bazooka.png */,
+				CE79028015D486C200958D04 /* grenade.png */,
+				CE79028115D486C200958D04 /* pistol.png */,
+				CE79028215D486C300958D04 /* taser.png */,
 				CEDEE34915C8A72A00C0BB1C /* shotgun.png */,
 				CE99465715C4F19700D46E1E /* aimOverlay.png */,
 			);
@@ -2550,6 +2590,16 @@
 				C587E2C315D09F4E00528573 /* construction_idle3.anim in Resources */,
 				C587E2C415D09F4E00528573 /* construction_moonwalk.anim in Resources */,
 				C587E2CB15D1F22800528573 /* construction_walk.anim in Resources */,
+				CE79028315D486C300958D04 /* bazooka.png in Resources */,
+				CE79028415D486C300958D04 /* grenade.png in Resources */,
+				CE79028515D486C300958D04 /* pistol.png in Resources */,
+				CE79028615D486C300958D04 /* taser.png in Resources */,
+				CE79029715D4990100958D04 /* nail_gun.png in Resources */,
+				CE79029815D4990100958D04 /* nail.png in Resources */,
+				CE79029915D4990100958D04 /* railgun.png in Resources */,
+				CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */,
+				CE79029B15D4990100958D04 /* rocket.png in Resources */,
+				CE79029D15D4AA5300958D04 /* banana.png in Resources */,
 				CE1FDF2915D4A7C300C2B532 /* waterSheet1.png in Resources */,
 				CE1FDF2A15D4A7C300C2B532 /* waterSheet2.png in Resources */,
 				CE1FDF2B15D4A7C300C2B532 /* waterSheet3.png in Resources */,
@@ -2810,6 +2860,8 @@
 				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
 				C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */,
 				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,
+				CE79028915D487E700958D04 /* Bazooka.mm in Sources */,
+				CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "GWThrownWeapon.h"
 
-#define GRENADE_WIDTH 0.1
-#define GRENADE_HEIGHT 0.1
-#define GRENADE_IMAGE @"Icon-Small.png"
+#define GRENADE_WIDTH (30./PTM_RATIO)
+#define GRENADE_HEIGHT (30./PTM_RATIO)
+#define GRENADE_IMAGE @"grenade.png"
 
 class b2World;
 @class ActionLayer;
