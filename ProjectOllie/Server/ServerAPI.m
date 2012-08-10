@@ -13,7 +13,6 @@
 
 @implementation ServerAPI
 
-@synthesize auth = _auth;
 @synthesize delegate = _delegate;
 
 - (id)init
@@ -26,9 +25,7 @@
 
 - (Authentication *)auth
 {
-    if(!_auth)
-        _auth = [Authentication mainAuth];
-    return _auth;
+    return [Authentication mainAuth];
 }
 
 - (void)broadcastServerOperationSucceededWithData:(id)data
