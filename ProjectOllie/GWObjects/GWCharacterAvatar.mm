@@ -8,6 +8,7 @@
 
 #import "GWCharacterAvatar.h"
 #import "GWSkeleton.h"
+#import "GWCharacterModel.h"
 #import "Box2D.h"
 #import "GWPhysicsSprite.h"
 #import "cocos2d.h"
@@ -23,9 +24,6 @@
 #define zPivot 3
 
 @interface GWCharacterAvatar()
-{
-
-}
 
 -(void)generateSprites:(Bone*)root;
 
@@ -41,6 +39,7 @@
 @property (assign, nonatomic) Orientation orientation;
 
 @end
+
 @implementation GWCharacterAvatar
 
 @synthesize skeleton       = _skeleton;
@@ -48,7 +47,6 @@
 @synthesize type           = _type;
 @synthesize state          = _state;
 @synthesize orientation    = _orientation;
-@synthesize weapons        = _weapons;
 @synthesize selectedWeapon = _selectedWeapon;
 @synthesize uiLayer        = _uiLayer;
 
@@ -60,7 +58,6 @@
         self.state        = kStateArming;
         self.orientation  = kOrientationLeft;
         self.type         = type;
-        _weapons          = [NSMutableArray array];
         
         /* Add physics sprites */
         Bone* root       = [self.skeleton getBoneByName:@"Head"];
@@ -78,10 +75,7 @@
         }
         
         /* prepare contact listener */
-        [self.skeleton setOwner:self];
-
-        
-
+        [self.skeleton setOwner:self]; 
     }
     
     return self;
@@ -131,14 +125,25 @@
         part.physicsBody      = root->box2DBody;
         [[self getChildByTag:kTagParentNode]addChild:part z:root->z];
         
-        
         for(int i = 0; i < root->children.size(); i++)
             [self generateSprites:root->children.at(i)];
     }
 }
 
--(void)loadWeapons:(NSArray *)weapons{
-    [self.weapons addObjectsFromArray:weapons];
+- (NSArray *)weapons
+{
+    return self.model.copy;
+}
+
+-(void)loadWeapons:(NSArray *)weapons
+{
+    [self.model.availableWeapons addObjectsFromArray:weapons];
+}
+
+- (GWCharacterModel *)model
+{
+    DebugLog(@"Subclasses should override this!!!");
+    return nil;
 }
 
 -(void)update:(float)dt
@@ -150,11 +155,9 @@
     else if([self.skeleton resting:dt])
         self.state = kStateIdle;
     
-    
     switch(self.state) {
         case kStateIdle:
-            if(![self.skeleton animating])
-            {
+            if(![self.skeleton animating]) {
                 float rand     = CCRANDOM_0_1();
                 NSString* anim = @"idle1"; 
                 
@@ -168,13 +171,9 @@
                     anim = @"idle5";*/
                 
                 [self.skeleton runAnimation:anim flipped:self.orientation];
-                
             }
-            
             return;
         case kStateWalking:
-        {
-
             if(![self.skeleton animating])
                 [self.skeleton runAnimation:@"walk" flipped:self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
@@ -183,9 +182,7 @@
         
             [self.skeleton tieSkeletonToInteractor];
             return;
-        }
         case kStateArming:
-        {
             /* Place gun on correct bone in body */
             if(self.selectedWeapon)
             {
@@ -223,7 +220,6 @@
                 [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             }
             return;
-        }
         case kStateManeuvering:
             return;
         case kStateRagdoll:
@@ -263,14 +259,10 @@
 
 -(void)setState:(characterState)state{
     //after switching from old state
-    if(self.state == kStateArming)
-    {
+    if(_state == kStateArming)
         self.selectedWeapon.visible = NO;
-    }
-    if(self.state == kStateRagdoll && state == kStateIdle)
-    {
+    else if(_state == kStateRagdoll && state == kStateIdle)
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
-    }
     
     //upon switching to new state
     _state = state;
@@ -278,7 +270,6 @@
     if(state == kStateWalking)
     {
         self.skeleton.interactor.state = kInteractorStateActive;
-        
     }
     else if (state == kStateRagdoll)
     {

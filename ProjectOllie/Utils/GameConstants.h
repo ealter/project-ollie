@@ -1,7 +1,7 @@
 #ifndef ProjectOllie_GameContants_h
 #define ProjectOllie_GameContants_h
 
-#define PTM_RATIO 256 //Pixels to meters at a zoom level of 1
+#define PTM_RATIO 256               //Pixels to meters at a zoom level of 1 (camera at z0)
 
 #define FPS 60
 
