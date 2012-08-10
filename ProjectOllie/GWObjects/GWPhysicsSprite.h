@@ -2,9 +2,10 @@
 //  PhysicsSprite.h
 //  cocos2d-ios
 //
-//  Created by Ricardo Quesada on 1/4/12.
-//  Copyright (c) 2012 Zynga. All rights reserved.
+//  Created by the lion den on 5/31/12.
+//  Copyright (c) 2012 hi ku. All rights reserved.
 //
+//  Defines trackable physics sprites
 
 #import "CCSprite.h"
 
