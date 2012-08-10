@@ -1,32 +1,33 @@
 //
-//  Grenade_Projectile.m
+//  BananaSingle.m
 //  ProjectOllie
 //
-//  Created by Lion User on 7/28/12.
-//  Copyright 2012 hi ku llc. All rights reserved.
+//  Created by Lion User on 8/10/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "GrenadeProjectile.h"
-#import "Grenade.h"
+#import "BananaSingle.h"
+#import "BananaGrenade.h"
 #import "GameConstants.h"
 #import "GWParticles.h"
 
-@implementation GrenadeProjectile
+
+@implementation BananaSingle
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithBulletSize:CGSizeMake(GRENADE_WIDTH*PTM_RATIO, GRENADE_HEIGHT*PTM_RATIO) imageName:GRENADE_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
-        destroyTimer = 0;
+    if (self = [super initWithBulletSize:CGSizeMake(SINGLE_WIDTH*PTM_RATIO, SINGLE_HEIGHT*PTM_RATIO) imageName:SINGLE_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
+        
         
     }
     
     return self;
 }
 
--(void)update:(ccTime)dt
+-(void)update:(ccTime) dt
 {
     destroyTimer += dt;
-    if (destroyTimer >= self.fuseTimer) {
+    if (destroyTimer > self.fuseTimer) {
         [self destroyBullet];
     }
 }

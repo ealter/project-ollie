@@ -1,33 +1,33 @@
 //
-//  Grenade.m
+//  BananaGrenade.m
 //  ProjectOllie
 //
-//  Created by Lion User on 7/28/12.
-//  Copyright 2012 hi ku llc. All rights reserved.
+//  Created by Lion User on 8/9/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Grenade.h"
+#import "BananaGrenade.h"
 #import "GameConstants.h"
-#import "GrenadeProjectile.h"
+#import "BananaCluster.h"
 #import "cocos2d.h"
 
-@implementation Grenade
+
+@implementation BananaGrenade
 
 -(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithImage:GRENADE_IMAGE position:pos size:CGSizeMake(GRENADE_WIDTH, GRENADE_HEIGHT) ammo:ammo box2DWorld:world fuseTime:4 gameWorld:gWorld]) {
+    if (self = [super initWithImage:CLUSTER_IMAGE position:pos size:CGSizeMake(CLUSTER_WIDTH, CLUSTER_HEIGHT) ammo:ammo box2DWorld:world fuseTime:4 gameWorld:gWorld]) {
         
     }
     
     return self;
 }
 
-
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {
     if (self.ammo >0) {
         //Make a bullet which acts as the thrown item
-        thrown              = [[GrenadeProjectile alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
+        thrown              = [[BananaCluster alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
         b2Body* thrownShape = thrown.physicsBody;
         [self.gameWorld addChild:thrown];
         thrown.fuseTimer    = fuseTimer;
@@ -49,6 +49,5 @@
         //no more ammo!
     }
 }
-
 
 @end

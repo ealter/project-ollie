@@ -28,6 +28,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = CGPointMake(0,-120);
         
@@ -303,6 +306,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         //This is where you would change the angle of the muzzle flash
         self.gravity = ccp(1000,0);
@@ -372,6 +378,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = ccp(0, -500);
         
@@ -439,6 +448,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
         
         // Gravity Mode: gravity
         self.gravity = ccp(0, 0);
@@ -508,6 +520,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = ccp(0, 0);
         
@@ -576,6 +591,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = ccp(0, 0);
         
@@ -643,6 +661,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
         
         // Gravity Mode: gravity
         self.gravity = CGPointZero;

@@ -1,5 +1,5 @@
 //
-//  BananaCluster.h
+//  BananaSingle.h
 //  ProjectOllie
 //
 //  Created by Lion User on 8/10/12.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "GWProjectile.h"
 
-@interface BananaCluster : GWProjectile<CCTargetedTouchDelegate> {
+@interface BananaSingle : GWProjectile {
     
 }
 

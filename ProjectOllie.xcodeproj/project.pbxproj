@@ -159,7 +159,7 @@
 		CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */; };
 		CE30B1A8158FD030009EC82B /* NewGameOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */; };
 		CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */; };
-		CE3598DB15D4F402000AA61C /* BananaGrenade.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3598DA15D4F402000AA61C /* BananaGrenade.m */; };
+		CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3598DA15D4F402000AA61C /* BananaGrenade.mm */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE4545FD15CB3ACD00AA5437 /* leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4545FC15CB3ACD00AA5437 /* leaf.png */; };
@@ -376,7 +376,8 @@
 		CE94AC7115785F89009B35B4 /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7015785F89009B35B4 /* AppDelegate.mm */; };
 		CE94AC7715785F89009B35B4 /* GLES-Render.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE94AC7615785F89009B35B4 /* GLES-Render.mm */; };
 		CE94AC7C15785F89009B35B4 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = CE94AC7B15785F89009B35B4 /* blocks.png */; };
-		CE98070915D5B76600D843DC /* BananaCluster.m in Sources */ = {isa = PBXBuildFile; fileRef = CE98070815D5B76600D843DC /* BananaCluster.m */; };
+		CE98070915D5B76600D843DC /* BananaCluster.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE98070815D5B76600D843DC /* BananaCluster.mm */; };
+		CE98070D15D5B8AD00D843DC /* BananaSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE98070C15D5B8AC00D843DC /* BananaSingle.mm */; };
 		CE99465815C4F19700D46E1E /* aimOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = CE99465715C4F19700D46E1E /* aimOverlay.png */; };
 		CEA3636D15B7C9B900148D3B /* GWGestures.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.mm */; };
 		CEAFB05C15CBA47900BA62A0 /* GWPerspectiveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */; };
@@ -645,7 +646,7 @@
 		CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewGameOverlay.m; path = menus/NewGameOverlay.m; sourceTree = "<group>"; };
 		CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewGameOverlay.ccbi; path = "Resources/menu-objects/ccbis/NewGameOverlay.ccbi"; sourceTree = "<group>"; };
 		CE3598D915D4F402000AA61C /* BananaGrenade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaGrenade.h; sourceTree = "<group>"; };
-		CE3598DA15D4F402000AA61C /* BananaGrenade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaGrenade.m; sourceTree = "<group>"; };
+		CE3598DA15D4F402000AA61C /* BananaGrenade.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BananaGrenade.mm; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = "Resources/menu-objects/ccbis/ActionMenu.ccbi"; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = "Resources/menu-objects/ccbis/MainMenu.ccbi"; sourceTree = "<group>"; };
 		CE4545FC15CB3ACD00AA5437 /* leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaf.png; sourceTree = "<group>"; };
@@ -1062,7 +1063,9 @@
 		CE94AC7615785F89009B35B4 /* GLES-Render.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = "GLES-Render.mm"; sourceTree = "<group>"; };
 		CE94AC7B15785F89009B35B4 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/Miscellaneous/blocks.png; sourceTree = "<group>"; };
 		CE98070715D5B76600D843DC /* BananaCluster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaCluster.h; sourceTree = "<group>"; };
-		CE98070815D5B76600D843DC /* BananaCluster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BananaCluster.m; sourceTree = "<group>"; };
+		CE98070815D5B76600D843DC /* BananaCluster.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BananaCluster.mm; sourceTree = "<group>"; };
+		CE98070B15D5B8AC00D843DC /* BananaSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaSingle.h; sourceTree = "<group>"; };
+		CE98070C15D5B8AC00D843DC /* BananaSingle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BananaSingle.mm; sourceTree = "<group>"; };
 		CE99465715C4F19700D46E1E /* aimOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aimOverlay.png; sourceTree = "<group>"; };
 		CEA3636B15B7C9B700148D3B /* GWGestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGestures.h; sourceTree = "<group>"; };
 		CEA3636C15B7C9B800148D3B /* GWGestures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWGestures.mm; sourceTree = "<group>"; };
@@ -1714,9 +1717,11 @@
 				CE59CA5115C4D69400B68745 /* GrenadeProjectile.h */,
 				CE59CA5215C4D69400B68745 /* GrenadeProjectile.mm */,
 				CE3598D915D4F402000AA61C /* BananaGrenade.h */,
-				CE3598DA15D4F402000AA61C /* BananaGrenade.m */,
+				CE3598DA15D4F402000AA61C /* BananaGrenade.mm */,
 				CE98070715D5B76600D843DC /* BananaCluster.h */,
-				CE98070815D5B76600D843DC /* BananaCluster.m */,
+				CE98070815D5B76600D843DC /* BananaCluster.mm */,
+				CE98070B15D5B8AC00D843DC /* BananaSingle.h */,
+				CE98070C15D5B8AC00D843DC /* BananaSingle.mm */,
 			);
 			path = ThrownWeapons;
 			sourceTree = "<group>";
@@ -2872,8 +2877,9 @@
 				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,
 				CE79028915D487E700958D04 /* Bazooka.mm in Sources */,
 				CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */,
-				CE3598DB15D4F402000AA61C /* BananaGrenade.m in Sources */,
-				CE98070915D5B76600D843DC /* BananaCluster.m in Sources */,
+				CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */,
+				CE98070915D5B76600D843DC /* BananaCluster.mm in Sources */,
+				CE98070D15D5B8AD00D843DC /* BananaSingle.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

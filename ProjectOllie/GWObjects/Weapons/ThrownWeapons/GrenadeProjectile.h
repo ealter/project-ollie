@@ -9,9 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "GWProjectile.h"
 
-class b2World;
-@class ActionLayer;
-
 @interface GrenadeProjectile : GWProjectile
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld;

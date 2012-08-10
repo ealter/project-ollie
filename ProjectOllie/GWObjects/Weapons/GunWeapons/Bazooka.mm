@@ -31,7 +31,7 @@
         //Make bullet
         BazookaProjectile *bullet= [[BazookaProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * BAZOOKA_WIDTH/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *BAZOOKA_HEIGHT/2*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
-        [self.parent addChild:bullet];
+        [self.gameWorld addChild:bullet];
         
         //NO FORCE APPLIED- BAZOOKA ACCELERATES AWAY. GIVE THE BULLET THE ACC VALUES
         bullet.accX = force.x;
