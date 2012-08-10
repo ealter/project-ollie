@@ -12,22 +12,19 @@
 
 @implementation GWWeaponTable
 
--(id)init{
-    if (self = [super init]) {
-        [self scheduleUpdate];
-    }
++(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
     
-    return self;
-}
-
--(void)draw{
-    CCLOG(@"Drawing at position: (%f,%f)",self.position.x,self.position.y);
-    [super draw];
+    GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
+    /* init values */
+    tv.clipsToBounds = NO;
+    [tv scheduleUpdate];
+    return tv;
+    
 }
 
 -(void)update:(ccTime) dt
 {
-    
+
 }
 
 

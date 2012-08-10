@@ -94,6 +94,7 @@
         CCSpriteBatchNode *spriteSheet = [CCSpriteBatchNode batchNodeWithFile:spriteBatchNode];
         [self addChild:spriteSheet];
         
+
         
         //set name to be independent of left/right
         //also adjust z order for drawing

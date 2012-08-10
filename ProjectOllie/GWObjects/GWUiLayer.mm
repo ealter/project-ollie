@@ -42,12 +42,13 @@
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
-        CGPoint tablePos                    = [self.parent convertToWorldSpace:self.activeCharacter.position];
-        self.weaponTable.position           = ccpAdd(ccp(0,0), CGPointMake(0, 0));
+        CGPoint tablePos                    = self.activeCharacter.position;
+        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
         [self addChild:self.weaponTable z:2000];
+        
     }else {
         if (self.activeCharacter != character) {
             
