@@ -175,7 +175,6 @@ enum {
     NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],nil];
     
     [_character loadWeapons:weaponArray];
-    _character.selectedWeapon = [weaponArray objectAtIndex:0];
 
     
     //gesture layer

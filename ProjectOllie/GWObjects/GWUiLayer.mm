@@ -29,7 +29,7 @@
 
 -(void)buildWeaponTableFrom:(GWCharacterAvatar *)character
 {
-    if (self.weaponTable == NULL) {
+    if (!self.weaponTable) {
         
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
@@ -49,8 +49,8 @@
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
         [self addChild:self.weaponTable];
-        
-    }else {
+    }
+    else {
         if (self.activeCharacter != character) {
             
             self.activeCharacter    = character;
@@ -69,7 +69,10 @@
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
 {
-    printf("!!!! \n");
+    [self.weaponTable.parent removeChild:self.weaponTable cleanup:YES];
+    self.weaponTable                = nil;
+    _activeCharacter.selectedWeapon = [_activeCharacter.weapons objectAtIndex:cell.idx];
+    _activeCharacter                = nil;
 }
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
@@ -113,10 +116,13 @@
 //Override methods
 -(void)setActiveCharacter:(GWCharacterAvatar *)activeCharacter
 {
-    _activeCharacter        = activeCharacter;
-    self.emitter            = [GWParticleExplodingRing node];
-    self.emitter.position   = activeCharacter.position;
-    [self addChild:self.emitter];
+    if(activeCharacter)
+    {
+        _activeCharacter        = activeCharacter;
+        self.emitter            = [GWParticleExplodingRing node];
+        self.emitter.position   = activeCharacter.position;
+        [self addChild:self.emitter];
+    }
 }
 
 -(void)update:(float)dt{

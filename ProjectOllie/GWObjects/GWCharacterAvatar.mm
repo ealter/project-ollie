@@ -55,16 +55,19 @@
     
     if((self = [super init]))
     {
-        self.skeleton     = [[GWSkeleton alloc]initFromFile:type box2dWorld:world];
-        self.state        = kStateArming;
-        self.orientation  = kOrientationLeft;
-        self.type         = type;
-        self.weapons      = [NSMutableArray array];
+        self.skeleton       = [[GWSkeleton alloc]initFromFile:type box2dWorld:world];
+        self.state          = kStateIdle;
+        self.orientation    = kOrientationLeft;
+        self.type           = type;
+        self.weapons        = [NSMutableArray array];
+        self.selectedWeapon = nil;
+        
         
         /* Add physics sprites */
         Bone* root       = [self.skeleton getBoneByName:@"Head"];
         [self addChild:[CCNode node] z:kTagParentNode tag:kTagParentNode];
         [self generateSprites:root];
+
         
         //if the above worked...
         if(self.skeleton) {
@@ -155,7 +158,15 @@
     //update skeleton's physics
     [self.skeleton update:dt];
     if(self.state != kStateRagdoll)
-        [self.skeleton tieSkeletonToInteractor];
+    {
+        
+        if(ccpLengthSQ(self.skeleton.getVelocity) > 10)
+        {
+            self.state = kStateRagdoll;
+        }
+        else
+            [self.skeleton tieSkeletonToInteractor];
+    }
     else if([self.skeleton resting:dt])
         self.state = kStateIdle;
     
@@ -264,10 +275,16 @@
 
 -(void)setState:(characterState)state{
     //after switching from old state
-    if(_state == kStateArming)
-        self.selectedWeapon.visible = NO;
-    else if(_state == kStateRagdoll && state == kStateIdle)
+    
+    DebugLog(@"! \n");
+    
+    if(_state == kStateRagdoll && state == kStateIdle)
         [self.skeleton runAnimation:@"idle1" WithTweenTime:1.1f flipped:self.orientation];
+    else if (_state == kStateArming && state != kStateArming)
+    {
+        [[self getChildByTag:kTagParentNode]removeChild:self.selectedWeapon cleanup:YES];
+        self.selectedWeapon   = nil;
+    }
     
     //upon switching to new state
     _state = state;
@@ -289,7 +306,6 @@
     }
     else if (state == kStateArming)
     {
-        self.selectedWeapon.visible = YES;
         self.skeleton.interactor.state = kInteractorStateInactive;
     }
 }
@@ -313,9 +329,13 @@
     return pos;
 }
 -(void)setSelectedWeapon:(GWWeapon *)selectedWeapon{
-    _selectedWeapon = selectedWeapon;
-    selectedWeapon.holder = self;
-    [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:zPivot];
+    if(selectedWeapon != nil)
+    {
+        _selectedWeapon = selectedWeapon;
+        selectedWeapon.holder = self;
+        [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:zPivot];
+        self.state = kStateArming;
+    }
 }
 
 //Gesture Methods
@@ -356,7 +376,9 @@
 -(void)handleTap:(CGPoint) tapPoint
 {
     if (self.state == kStateArming) {
-        [((GWWeapon <GestureChild>*) self.selectedWeapon) handleTap:tapPoint];
+        {
+           [((GWWeapon <GestureChild>*) self.selectedWeapon) handleTap:tapPoint]; 
+        }
     }else {
         [self.uiLayer buildWeaponTableFrom:self];
     }
