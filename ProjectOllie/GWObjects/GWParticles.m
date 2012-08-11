@@ -685,7 +685,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         angleVar = 10;
         
         // life of particles
-        life = 2.5f;
+        life = 4.5f;
         lifeVar = 0;
         
         // emits per frame

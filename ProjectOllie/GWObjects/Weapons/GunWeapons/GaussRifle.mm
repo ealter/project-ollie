@@ -33,7 +33,7 @@
         b2Body* bulletShape = bullet.physicsBody;
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.gameWorld addChild:bullet];
-        
+        bullet.fireAngle = atan2f(force.y, force.x);
         //Apply force
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
         

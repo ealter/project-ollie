@@ -43,7 +43,7 @@
         
         [self.gameWorld.camera addIntensity:1];
         
-        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.03 isOutwards:YES];
+        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.1 isOutwards:YES];
         
         self.emitter = [GWParticleExplosion node];
         self.emitter.position = self.position;
@@ -62,12 +62,19 @@
 {
     //Touch detected, split up the banana bunch into 3 bananas!
     b2Vec2 selfVel          = self.physicsBody->GetLinearVelocity();
-    CGPoint selfVelocity    = CGPointMake(selfVel.x, selfVel.y);
     for (int i = 0; i < 3; i++) {
+        //Make banana
         BananaSingle *single = [[BananaSingle alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
+        single.fuseTimer = 1.;
+        
         [self.gameWorld addChild:single];
-        CGPoint tempVel    = ccpAdd(selfVelocity, CGPointMake(0, 0));
-        single.physicsBody->SetLinearVelocity(b2Vec2(tempVel.x, tempVel.y));
+        
+        //Calculate new speeds and apply
+        float angle         = atan2f(selfVel.y, selfVel.x);
+        float changeX       = sinf(angle) * i / 400;
+        float changeY       = cosf(angle) * i / 400;
+        single.physicsBody->SetLinearVelocity(selfVel);
+        single.physicsBody->ApplyForceToCenter(b2Vec2(changeX, changeY));
     }
     
     

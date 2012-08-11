@@ -11,6 +11,7 @@
 #import "GWParticles.h"
 
 @implementation GaussRifleProjectile
+@synthesize fireAngle    = _fireAngle;
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
@@ -27,10 +28,12 @@
 }
 -(void)update:(ccTime)dt
 {
-    [self.gameWorld.gameTerrain clipCircle:NO WithRadius:30. x:self.position.x y:self.position.y];
+    float addX              = cosf(self.fireAngle)*15;
+    float addY              = sinf(self.fireAngle)*15;
+    [self.gameWorld.gameTerrain clipCircle:NO WithRadius:30. x:self.position.x + addX y:self.position.y + addY];
     [self.gameWorld.gameTerrain shapeChanged];
-    self.emitter.position = self.position;
-    gaussTimer += dt;
+    self.emitter.position   = self.position;
+    gaussTimer              += dt;
     if (gaussTimer >= 4.) {
         [self destroyBullet];
     }

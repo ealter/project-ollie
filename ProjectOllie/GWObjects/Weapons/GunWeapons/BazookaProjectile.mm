@@ -32,11 +32,12 @@
 -(void)update:(ccTime)dt
 {    
     bazookaTimer += dt;
+    destroyTimer += dt;
     if (bazookaTimer < 2.) {
-        self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/60, self.accY/60));
+        self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/500, self.accY/500));
     }
     self.emitter.position = self.position;
-    if (self.bulletCollided) {
+    if (self.bulletCollided || destroyTimer >= 4.) {
         [self destroyBullet];
     }
 }
@@ -47,20 +48,21 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
-        [self.gameWorld.gameTerrain clipCircle:YES WithRadius:50. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:75. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
         [self.gameWorld.camera addIntensity:1];
         
-        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.02 isOutwards:YES];
+        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.08 isOutwards:YES];
         
-        self.emitter = [GWParticleExplosion node];
-        self.emitter.position = self.position;
+        
+        CCParticleSystem* newEmitter = [GWParticleExplosion node];
+        newEmitter.position = self.position;
+        [self.gameWorld addChild:newEmitter];
     }
     
     //Clean up bullet and remove from parent
     
-    [[self gameWorld] removeChild:self.emitter cleanup:YES];
     _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
 }

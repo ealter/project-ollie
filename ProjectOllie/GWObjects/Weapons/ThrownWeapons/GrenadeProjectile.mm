@@ -41,7 +41,7 @@
         
         [self.gameWorld.camera addIntensity:1];
         
-        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.02 isOutwards:YES];
+        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.08 isOutwards:YES];
         
         self.emitter = [GWParticleExplosion node];
         self.emitter.position = self.position;

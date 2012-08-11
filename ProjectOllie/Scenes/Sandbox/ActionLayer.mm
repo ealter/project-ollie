@@ -19,6 +19,8 @@
 #import "Grenade.h"
 #import "Shotgun.h"
 #import "GaussRifle.h"
+#import "BananaGrenade.h"
+#import "Bazooka.h"
 #import "GWContactListener.h"
 #import "GWUILayer.h"
 
@@ -172,7 +174,7 @@ enum {
     [self addChild:uiLayer z:3];
     
     //weapons loading
-    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],nil];
+    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BananaGrenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Bazooka alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], nil];
     
     [_character loadWeapons:weaponArray];
 
