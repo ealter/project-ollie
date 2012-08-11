@@ -51,9 +51,9 @@
         [self.gameWorld.gameTerrain clipCircle:NO WithRadius:75. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
-        [self.gameWorld.camera addIntensity:1];
+        [self.gameWorld.camera addIntensity:0.5];
         
-        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.08 isOutwards:YES];
+        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.05 isOutwards:YES];
         
         
         CCParticleSystem* newEmitter = [GWParticleExplosion node];
@@ -63,6 +63,7 @@
     
     //Clean up bullet and remove from parent
     
+    [[self gameWorld] removeChild:self.emitter cleanup:YES];
     _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
 }

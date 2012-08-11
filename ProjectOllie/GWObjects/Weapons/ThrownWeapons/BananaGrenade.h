@@ -13,8 +13,8 @@
 #define CLUSTER_WIDTH (30./PTM_RATIO)
 #define CLUSTER_HEIGHT (30./PTM_RATIO)
 #define CLUSTER_IMAGE @"banana_grenade.png"
-#define SINGLE_WIDTH (30./PTM_RATIO)
-#define SINGLE_HEIGHT (30./PTM_RATIO)
+#define SINGLE_WIDTH (10./PTM_RATIO)
+#define SINGLE_HEIGHT (10./PTM_RATIO)
 #define SINGLE_IMAGE @"banana.png"
 
 

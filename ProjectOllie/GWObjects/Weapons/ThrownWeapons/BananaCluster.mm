@@ -31,6 +31,10 @@
     if (destroyTimer > self.fuseTimer) {
         [self destroyBullet];
     }
+    if (self.physicsBody->GetLinearVelocity().y < 0) {
+        [self splitBananas];
+        [super destroyBullet];
+    }
 }
 
 -(void)destroyBullet
@@ -41,7 +45,7 @@
         [self.gameWorld.gameTerrain clipCircle:NO WithRadius:150 x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
-        [self.gameWorld.camera addIntensity:1];
+        [self.gameWorld.camera addIntensity:.5];
         
         [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.1 isOutwards:YES];
         
@@ -58,25 +62,29 @@
     
 }
 
--(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+-(void)splitBananas
 {
-    //Touch detected, split up the banana bunch into 3 bananas!
     b2Vec2 selfVel          = self.physicsBody->GetLinearVelocity();
     for (int i = 0; i < 3; i++) {
         //Make banana
         BananaSingle *single = [[BananaSingle alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
-        single.fuseTimer = 1.;
+        single.fuseTimer = 2.;
         
         [self.gameWorld addChild:single];
         
         //Calculate new speeds and apply
         float angle         = atan2f(selfVel.y, selfVel.x);
-        float changeX       = sinf(angle) * i / 400;
-        float changeY       = cosf(angle) * i / 400;
+        float changeX       = sinf(angle) * i / 40;
+        float changeY       = cosf(angle) * i / 40;
         single.physicsBody->SetLinearVelocity(selfVel);
         single.physicsBody->ApplyForceToCenter(b2Vec2(changeX, changeY));
     }
-    
+}
+
+-(BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event
+{
+    //Touch detected, split up the banana bunch into 3 bananas!
+    [self splitBananas];    
     
     //Clean up self
     [[self gameWorld] removeChild:self.emitter cleanup:YES];
