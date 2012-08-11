@@ -21,6 +21,10 @@
     {
         _camera = camera;
         _z = z;
+        
+        // rotate around center of layer
+        self.anchorPoint = CGPointMake(.5f,.5f);
+        [self setIgnoreAnchorPointForPosition:YES];
     }
     return self;
 }

@@ -73,8 +73,8 @@ enum {
         super.z = 0;
         
         //set up screen parameters
-        self.anchorPoint = ccp(0,0);
-        [self setIgnoreAnchorPointForPosition:YES];
+        //self.anchorPoint = ccp(0,0);
+        //[self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
         self.camera = camera;
