@@ -23,7 +23,7 @@
         _z = z;
         
         // rotate around center of layer
-        self.anchorPoint = CGPointMake(0,0);
+        self.anchorPoint = CGPointMake(.5f,.5f);
         [self setIgnoreAnchorPointForPosition:YES];
     }
     return self;
@@ -44,18 +44,20 @@
     float x = (position_.x - _camera.location.x)*projectionScale+_camera.center.x;
     float y = (position_.y - _camera.location.y)*projectionScale+_camera.center.y;
     
-    x += _camera.location.x;
-    y += _camera.location.y;
-
+    if ( ignoreAnchorPointForPosition_ ) {
+        x += anchorPointInPoints_.x;
+        y += anchorPointInPoints_.y;
+    }
     
     // Make matrix
     float radians = _camera.angle;
     float c = cosf(radians);
     float s = sinf(radians);
     
-    x += c*-_camera.location.x + -s*-_camera.location.y;
-    y += s*-_camera.location.x + c*-_camera.location.y;
-    
+    if(!CGPointEqualToPoint(anchorPointInPoints_, CGPointZero)) {
+        x += c*-anchorPointInPoints_.x + -s*-anchorPointInPoints_.y;
+        y += s*-anchorPointInPoints_.x + c*-anchorPointInPoints_.y;
+    }
     
     // Rot, Translate Matrix
     float sx = scaleX_ *projectionScale;
