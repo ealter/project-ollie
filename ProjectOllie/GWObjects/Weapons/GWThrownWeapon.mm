@@ -31,8 +31,6 @@
         ccColor4F c         = ccc4f(.5f,.5f,0.f,.5f);
         drawNode.position   = ccpAdd(drawNode.position, CGPointMake(self.contentSize.width/4, self.contentSize.height/4));
         self.gameWorld      = gWorld;
-        self.flipX          = NO;
-        [self scheduleUpdate];
         [drawNode setColor:c];
         [self addChild:drawNode];
     }
@@ -84,24 +82,12 @@
     return vel;
 }
 
-- (void)update:(ccTime)dt {
-    if (thrown != NULL) {
-        self.visible = NO;
-        countDown += dt;
-        if (countDown > fuseTimer) {
-            [thrown destroyBullet];
-            thrown = NULL;
-            countDown = 0;
-            self.visible = YES;
-        }
-    }    
-}
 
 //Gesture Methods//
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
-    if (thrown == NULL && self.ammo >0) {
+    if (self.ammo >0) {
         //Clear HMVectorNode
         [drawNode clear];
         
@@ -112,14 +98,7 @@
         CGPoint stepVelocity    = ccpMult(velocity, dt);
         CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
         CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
-        
-        //flip da weapon.
-        float angle             = CC_RADIANS_TO_DEGREES(self.wepAngle);
-        if (abs(angle) > 90) {
-            self.flipY = NO;
-        }else {
-            self.flipY = YES;
-        }
+        self.flipY              = NO;
         
         //Simulate trajectory;
         for (int i = 0; i < 60 ; i++) {
@@ -134,9 +113,7 @@
 -(void)handlePanFinishedWithStart:(CGPoint) startPoint andEnd:(CGPoint)endPoint andTime:(float)time
 {
     [drawNode clear];
-    if (thrown == NULL) {
-        [self throwWeaponWithLocation:startPoint fromFinger:endPoint];
-    }
+    [self throwWeaponWithLocation:startPoint fromFinger:endPoint];
 }
 
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity

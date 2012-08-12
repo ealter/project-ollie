@@ -15,6 +15,7 @@
 @synthesize  gameWorld      = _gameWorld;
 @synthesize bulletCollided  = _bulletCollided;
 @synthesize emitter         = _emitter;
+@synthesize fuseTimer       = _fuseTimer;
 
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL)isBullet gameWorld:(ActionLayer *)gWorld
 {

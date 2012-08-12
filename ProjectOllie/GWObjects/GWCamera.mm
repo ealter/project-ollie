@@ -107,18 +107,15 @@
 
 -(void)boundXY
 {
-    _location.x = clampf(_location.x, PTM_RATIO, PTM_RATIO*(WORLD_WIDTH-1));
-    _location.y = clampf(_location.y, PTM_RATIO, PTM_RATIO*(WORLD_HEIGHT-1));
+    _location.x = clampf(_location.x, 0, PTM_RATIO*(WORLD_WIDTH));
+    _location.y = clampf(_location.y, 0, PTM_RATIO*(WORLD_HEIGHT));
 }
 
 -(void)createShakeEffect:(float)dt{
     //the shakeRate will determine the weight given to dt
-    float shakeRate = 55;
+    float shakeRate = 30;
     actionCount+=dt*shakeRate;
     
-    //modulo the total action count around 360 degrees
-    actionCount = fmod(actionCount, 360.f);
-
     _angle = self.actionIntensity * sin(actionCount);
 }
 
@@ -310,7 +307,7 @@
 
 -(void)handleShakeEffect:(float)dt{
     //shake effect
-    if(self.actionIntensity < .1f) {
+    if(self.actionIntensity < .01f) {
         self.actionIntensity = 0;
         _angle = 0;
         actionCount = 0;
@@ -319,7 +316,7 @@
         [self createShakeEffect:dt];
         
         //decrease intensity
-        self.actionIntensity = self.actionIntensity*.93f;
+        self.actionIntensity = self.actionIntensity*.944f;
     }
 }
 

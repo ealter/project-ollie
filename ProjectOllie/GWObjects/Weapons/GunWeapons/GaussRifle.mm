@@ -32,8 +32,8 @@
         GaussRifleProjectile *bullet= [[GaussRifleProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * GAUSS_WIDTH/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *GAUSS_HEIGHT/2*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
-        [self.parent addChild:bullet];
-        
+        [self.gameWorld addChild:bullet];
+        bullet.fireAngle = atan2f(force.y, force.x);
         //Apply force
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
         

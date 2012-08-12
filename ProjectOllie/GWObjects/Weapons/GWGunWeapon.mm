@@ -52,7 +52,6 @@
         
         self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
         self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
-        self.aimOverlay.flipX = YES;
         
         //Add children
         [self addChild:self.aimOverlay];

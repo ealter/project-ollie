@@ -19,8 +19,9 @@
 {
     if (self = [super initWithBulletSize:CGSizeMake(BAZOOKA_B_WIDTH, BAZOOKA_B_HEIGHT) imageName:BAZOOKA_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         self.physicsBody->SetGravityScale(0);
+        bazookaTimer = 0;
         
-        self.emitter = [GWParticleMagicMissile node];
+        self.emitter = [GWParticleSmokeTrail node];
         self.emitter.position = self.position;
         [self.gameWorld addChild:self.emitter];
     }
@@ -29,11 +30,14 @@
 }
 
 -(void)update:(ccTime)dt
-{
-    self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/60, self.accY/60));
-    
+{    
+    bazookaTimer += dt;
+    destroyTimer += dt;
+    if (bazookaTimer < 2.) {
+        self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/500, self.accY/500));
+    }
     self.emitter.position = self.position;
-    if (self.bulletCollided) {
+    if (self.bulletCollided || destroyTimer >= 4.) {
         [self destroyBullet];
     }
 }
@@ -44,15 +48,17 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
-        [self.gameWorld.gameTerrain clipCircle:YES WithRadius:50. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:75. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
-        [self.gameWorld.camera addIntensity:1];
+        [self.gameWorld.camera addIntensity:0.5];
         
-        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.02 isOutwards:YES];
+        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.05 isOutwards:YES];
         
-        self.emitter = [GWParticleExplosion node];
-        self.emitter.position = self.position;
+        
+        CCParticleSystem* newEmitter = [GWParticleExplosion node];
+        newEmitter.position = self.position;
+        [self.gameWorld addChild:newEmitter];
     }
     
     //Clean up bullet and remove from parent

@@ -28,6 +28,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = CGPointMake(0,-120);
         
@@ -303,6 +306,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         //This is where you would change the angle of the muzzle flash
         self.gravity = ccp(1000,0);
@@ -372,6 +378,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = ccp(0, -500);
         
@@ -439,6 +448,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
         
         // Gravity Mode: gravity
         self.gravity = ccp(0, 0);
@@ -508,6 +520,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = ccp(0, 0);
         
@@ -576,6 +591,9 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
         
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
         // Gravity Mode: gravity
         self.gravity = ccp(0, 0);
         
@@ -628,4 +646,74 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
     return self;
 }
 @end
+
+@implementation GWParticleSmokeTrail
+-(id) init
+{
+    return [self initWithTotalParticles:500];
+}
+
+-(id) initWithTotalParticles:(NSUInteger)p
+{
+    if( (self=[super initWithTotalParticles:p]) ) {
+        // duration
+        duration = kCCParticleDurationInfinity;
+        
+        // Gravity Mode
+        self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
+        // Gravity Mode: gravity
+        self.gravity = CGPointZero;
+        
+        // Gravity Mode:  radial
+        self.radialAccel = 0;
+        self.radialAccelVar = 0;
+        
+        //  Gravity Mode: speed of particles
+        self.speed = 0;
+        self.speedVar = 0;
+        
+        // emitter position
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
+        // angle
+        angle = 0;
+        angleVar = 10;
+        
+        // life of particles
+        life = 4.5f;
+        lifeVar = 0;
+        
+        // emits per frame
+        emissionRate = totalParticles/life;
+        
+        // color of particles
+        startColor    = ccc4f(0.1, 0.09, 0.07, 1.0);
+        startColorVar = ccc4f(0., 0., 0., 0.5);
+        endColor      = ccc4f(0.3, 0.27, 0.21, 0.01);
+        endColorVar   = kColor4fZero;
+        
+        // size, in pixels
+        startSize = 36.0f;
+        startSizeVar = 0.0f;
+        endSize = 36.f;
+        
+        //Change the GL blend function
+        [self setBlendFunc:(ccBlendFunc) { GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA }];        
+        
+        //Get the particle texture
+        self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+        
+        // additive
+        self.blendAdditive = YES;
+    }
+    
+    return self;
+}
+@end
+
 

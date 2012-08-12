@@ -75,3 +75,10 @@
 {
 }
 @end
+
+// A Smoke trail particle system
+@interface GWParticleSmokeTrail: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+

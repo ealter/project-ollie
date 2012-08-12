@@ -13,9 +13,6 @@
 #define GRENADE_HEIGHT (30./PTM_RATIO)
 #define GRENADE_IMAGE @"grenade.png"
 
-class b2World;
-@class ActionLayer;
-
 @interface Grenade : GWThrownWeapon {
     
 }

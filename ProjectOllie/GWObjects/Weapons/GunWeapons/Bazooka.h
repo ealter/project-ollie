@@ -14,7 +14,7 @@
 #define BAZOOKA_IMAGE @"bazooka.png"
 #define BAZOOKA_B_WIDTH 10.
 #define BAZOOKA_B_HEIGHT 6.
-#define BAZOOKA_B_IMAGE @"bullet.png"
+#define BAZOOKA_B_IMAGE @"bazooka_rocket.png"
 
 class b2World;
 @class ActionLayer;
