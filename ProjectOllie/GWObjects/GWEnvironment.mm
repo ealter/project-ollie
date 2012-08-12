@@ -2,35 +2,32 @@
 //  GWEnvironment.m
 //  ProjectOllie
 //
-//  Created by l. ion battery Steve Gregory on 8/9/12.
+//  Created by Steve Gregory on 8/9/12.
 //  Copyright (c) 2012 hi ku. All rights reserved.
 //
 
 #import "GWEnvironment.h"
+#import "GameConstants.h"
+#import "cocos2d.h"
 
 @implementation GWEnvironment
 
 
 @synthesize setting     = _setting;
-@synthesize actionLayer = _actionLayer;
-@synthesize backWater   = _backWater;
 @synthesize frontWater  = _frontWater;
+@synthesize actionLayer = _actionLayer;
 @synthesize terrain     = _terrain;
+@synthesize backWater   = _backWater;
+@synthesize backgroundNear = _backgroundNear;
+@synthesize backgroundFar  = _backgroundFar;
 @synthesize backdrop    = _backdrop;
 
-
-+(void) initialize
-{
-    
-}
+const ccColor4F waterColor = ccc4f(0.f, 0.1f, .9f, 1.f);
+const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
 
 -(id) init
 {
-    if (self = [super init])
-    {
-        _setting = dirt;
-        _terrain = [Terrain node];
-    }
+    self = [self initWithSetting:dirt terrain:[Terrain node]];
     return self;
 }
 
@@ -38,23 +35,84 @@
 {
     if (self = [super init])
     {
-        _setting = setting;
         _terrain = terrain;
+        
+        _frontWater = [[GWWater alloc] initWithCamera:NULL z:(-.25*PTM_RATIO)];
+        _actionLayer = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:0];
+        _backWater = [[GWWater alloc] initWithCamera:NULL z:(.25*PTM_RATIO)];
+        
+        _backgroundNear = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.4f*PTM_RATIO];
+        _backgroundFar = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.8*PTM_RATIO];
+        _backdrop = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:1.4*PTM_RATIO];
+        
+        [_actionLayer addChild:terrain];
+        
+        [self setSetting:dirt];
     }
     return self;
 }
 
 
--(id) setCamera:(GWCamera*)camera
+-(void) setCamera:(GWCamera*)camera
 {
     //Set the camera for every layer
     self.frontWater.camera = camera;
     self.backWater.camera = camera;
-    self.frontWater.camera = camera;
-    self.frontWater.camera = camera;
-    self.frontWater.camera = camera;
-    self.frontWater.camera = camera;
-    
+    self.actionLayer.camera = camera;
+    self.backdrop.camera = camera;
+    self.backgroundNear.camera = camera;
+    self.backgroundFar.camera = camera;
+}
+
+-(void) setSetting:(Setting)setting
+{
+    _setting = setting;
+    //Clear the background nodes to place the correct sprites inside
+    [_backdrop removeAllChildrenWithCleanup:YES];
+    [_backgroundFar removeAllChildrenWithCleanup:YES];
+    [_backgroundNear removeAllChildrenWithCleanup:YES];
+    switch (setting) {
+        case dirt:
+        {
+            [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"lava.png"]];
+            [_terrain setStrokeColor:ccc4f(1.0f, 0.6f, 0.4f, 1.0f)];
+            
+            [_backdrop addChild:[[CCSprite alloc] initWithFile:@"jungle_layer1-hd.png"]];
+            [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"jungle_layer2-hd.png"]];
+            [_backgroundNear addChild:[[CCSprite alloc] initWithFile:@"jungle_layer3-hd.png"]];
+            [_backWater setColor:waterColor];
+            [_frontWater setColor:waterColor];
+            break;
+        }
+        case rocks:
+        {   
+            
+            [_backWater setColor:waterColor];
+            [_frontWater setColor:waterColor];
+            break;
+        }   
+        case ice:
+        {   
+            [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"snow.png"]];
+            [_terrain setStrokeColor:ccc4f(1.0f, 1.0f, 1.0f, 1.0f)];
+            
+            [_backdrop addChild:[[CCSprite alloc] initWithFile:@"ice_layer1.png"]];
+            [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"ice_layer2.png"]];
+            [_backgroundNear addChild:[[CCSprite alloc] initWithFile:@"ice_layer3.png"]];
+            [_backWater setColor:waterColor];
+            [_frontWater setColor:waterColor];
+            break;
+        }   
+        case lava:
+        {
+            
+            [_backWater setColor:lavaColor];
+            [_frontWater setColor:lavaColor];
+            break;
+        }   
+        default:
+            assert(false);
+    }
 }
 
 

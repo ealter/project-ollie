@@ -153,6 +153,10 @@ static const float frameHeight = 32.0f;
         solidShaderProgram = [[CCShaderCache sharedShaderCache] programForKey:kCCShader_PositionColor];
         
         CHECK_GL_ERROR_DEBUG();
+        
+        
+        //Reset to client memory because other things sometimes assume this is the case
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
     }
     return self;
 }
@@ -227,6 +231,11 @@ static const float frameHeight = 32.0f;
     
     //Reset to client memory because other things sometimes assume this is the case
     glBindBuffer(GL_ARRAY_BUFFER, 0);
+}
+
+- (void) setColor:(ccColor4F)color
+{
+    topColor = color;
 }
 
 @end

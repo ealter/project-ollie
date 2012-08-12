@@ -15,4 +15,6 @@
 
 - (id) initWithCamera:(GWCamera*)camera z:(float)z;
 
+- (void) setColor:(ccColor4F)color;
+
 @end

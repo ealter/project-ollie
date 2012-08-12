@@ -10,4 +10,18 @@
 
 @implementation DrawEnvironmentScene
 
+//Create default init for drawing new land
+-(id) init
+{
+    self = [super initWithEnvironment:[GWEnvironment node]];
+    return self;
+}
+
+//For editing land
+-(id) initWithEnvironment:(GWEnvironment *)environment
+{
+    self = [super initWithEnvironment:environment];
+    return self;
+}
+
 @end

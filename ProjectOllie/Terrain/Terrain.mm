@@ -27,13 +27,33 @@
 + (NSString *)fileNameForTextureType:(TerrainTexture)textureType;
 - (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField;
 - (void)reproduceTouchInput;
+- (void)addPointEdgeToWorld:(PointEdge*)pe;
 
 @end
 
 @implementation Terrain
 
-@synthesize texture = texture_;
 @synthesize textureType = _textureType;
+
+//Terrains can only be created from scratch, deserialization, or random generation
+- (id)init
+{
+    if (self = [super init])
+    {
+        self.contentSize = [[CCDirector sharedDirector] winSize];
+        self->shapeField_ = new ShapeField(WORLD_WIDTH, WORLD_HEIGHT);
+        
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"rocks.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+        drawSprite.position = drawSprite.anchorPoint = CGPointZero;
+        
+        polyRenderer = [HMVectorNode node];
+        [polyRenderer setColor:ccc4f(1.0f,0.0f,0.0f,1.0f)];
+        
+        [self addChild:drawSprite];
+        [self addChild:polyRenderer];
+    }
+    return self;
+}
 
 - (void)initWithTextureType:(TerrainTexture)textureType shapeField:(ShapeField *)shapeField
 {
@@ -43,7 +63,6 @@
         DebugLog(@"The texture type is invalid.");
         return;
     }
-    self->texture_ = texture;
 
     drawSprite = [[MaskedSprite alloc] initWithFile:[[self class] fileNameForTextureType:textureType] size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
     drawSprite.position = drawSprite.anchorPoint = CGPointZero;
@@ -121,6 +140,16 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     }
 }
 
+- (void) setStrokeColor:(ccColor4F)color
+{
+    [polyRenderer setColor:color];
+}
+
+- (void) setTexture:(CCTexture2D *)texture
+{
+    [drawSprite setTexture:texture];
+}
+
 //Building land
 - (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y
 {
@@ -169,6 +198,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     
     //Update the box2d edge shapes
     if (world) {
+        //DESTROY the physical edge shapes
         for (std::set<void*>::iterator i = shapeField_->removed.begin(); i != shapeField_->removed.end(); i++)
         {
             b2Body* b = (b2Body*)*i;
@@ -176,36 +206,9 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
         }
         shapeField_->removed.clear();
         
+        //Add the new edges
         for (std::set<PointEdge*>::iterator i = shapeField_->added.begin(); i != shapeField_->added.end(); i++)
-        {
-            PointEdge* pe = *i;
-            PointEdge* npe = pe->next;
-            PointEdge* nnpe = npe->next;
-            PointEdge* ppe = pe->prev;
-            //Create an edge shape
-            b2EdgeShape e;
-            e.Set(b2Vec2(0, 0), b2Vec2((npe->x - pe->x)/PTM_RATIO, (npe->y - pe->y)/PTM_RATIO));
-            e.m_hasVertex0 =true;
-            e.m_hasVertex3 =true;
-            e.m_vertex0 = b2Vec2((ppe->x - pe->x)/PTM_RATIO, (ppe->y - pe->y)/PTM_RATIO);
-            e.m_vertex3 = b2Vec2((nnpe->x - pe->x)/PTM_RATIO, (nnpe->y - pe->y)/PTM_RATIO);
-            //Body def
-            b2BodyDef bd;
-            bd.type = b2_staticBody;
-            bd.position = b2Vec2(pe->x/PTM_RATIO, pe->y/PTM_RATIO);
-            bd.angle = 0;
-            bd.allowSleep = true;
-            b2Body* b = world->CreateBody(&bd);
-            b2FixtureDef fixtureDef;
-            fixtureDef.shape = &e;	
-            fixtureDef.density = 1.0f;
-            fixtureDef.friction = 0.3f;
-            fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
-            fixtureDef.filter.maskBits = MASK_TERRAIN;
-            b->CreateFixture(&fixtureDef);
-            pe->userData = b;
-            
-        }
+            [self addPointEdgeToWorld:*i];
         shapeField_->added.clear();
     }
 }
@@ -271,37 +274,39 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 {
     world = bworld;
     for (PeSet::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
-    {
-        PointEdge* pe = *i;
-        PointEdge* npe = pe->next;
-        PointEdge* nnpe = npe->next;
-        PointEdge* ppe = pe->prev;
-        //Create an edge shape
-        b2EdgeShape e;
-        e.Set(b2Vec2(0, 0), b2Vec2((npe->x - pe->x)/PTM_RATIO, (npe->y - pe->y)/PTM_RATIO));
-        e.m_hasVertex0 =true;
-        e.m_hasVertex3 =true;
-        e.m_vertex0 = b2Vec2((ppe->x - pe->x)/PTM_RATIO, (ppe->y - pe->y)/PTM_RATIO);
-        e.m_vertex3 = b2Vec2((nnpe->x - pe->x)/PTM_RATIO, (nnpe->y - pe->y)/PTM_RATIO);
-        //Body def
-        b2BodyDef bd;
-        bd.type = b2_staticBody;
-        bd.position = b2Vec2(pe->x/PTM_RATIO, pe->y/PTM_RATIO);
-        bd.angle = 0;
-        bd.allowSleep = true;
-        b2Body* b = bworld->CreateBody(&bd);
-        b2FixtureDef fixtureDef;
-        fixtureDef.shape = &e;	
-        fixtureDef.density = 1.0f;
-        fixtureDef.friction = 0.3f;
-        fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
-        fixtureDef.filter.maskBits = MASK_TERRAIN;
-        b->CreateFixture(&fixtureDef);
-        pe->userData = b;
-    }
+        [self addPointEdgeToWorld:*i];
     
     shapeField_->added.clear();
     shapeField_->removed.clear();
+}
+
+- (void)addPointEdgeToWorld:(PointEdge*)pe
+{
+    PointEdge* npe = pe->next;
+    PointEdge* nnpe = npe->next;
+    PointEdge* ppe = pe->prev;
+    //Create an edge shape
+    b2EdgeShape e;
+    e.Set(b2Vec2(0, 0), b2Vec2((npe->x - pe->x)/PTM_RATIO, (npe->y - pe->y)/PTM_RATIO));
+    e.m_hasVertex0 =true;
+    e.m_hasVertex3 =true;
+    e.m_vertex0 = b2Vec2((ppe->x - pe->x)/PTM_RATIO, (ppe->y - pe->y)/PTM_RATIO);
+    e.m_vertex3 = b2Vec2((nnpe->x - pe->x)/PTM_RATIO, (nnpe->y - pe->y)/PTM_RATIO);
+    //Body def
+    b2BodyDef bd;
+    bd.type = b2_staticBody;
+    bd.position = b2Vec2(pe->x/PTM_RATIO, pe->y/PTM_RATIO);
+    bd.angle = 0;
+    bd.allowSleep = true;
+    b2Body* b = world->CreateBody(&bd);
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &e;	
+    fixtureDef.density = 1.0f;
+    fixtureDef.friction = 0.3f;
+    fixtureDef.filter.categoryBits = CATEGORY_TERRAIN;
+    fixtureDef.filter.maskBits = MASK_TERRAIN;
+    b->CreateFixture(&fixtureDef);
+    pe->userData = b;
 }
 
 /* Random Land Generators */

@@ -22,7 +22,6 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
     HMVectorNode* pr;
 }
 
-@property (nonatomic, strong) NSString *textureFileName;
 @property (nonatomic, strong) CCRenderTexture *maskTexture;
 @property (nonatomic, strong) CCRenderTexture *renderTexture;
 @property (nonatomic) GLuint textureWidthLocation;
@@ -43,13 +42,11 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
 
 @synthesize maskTexture = _maskTexture, renderTexture = _renderTexture;
 @synthesize textureWidthLocation = _textureWidthLocation, textureHeightLocation = _textureHeightLocation, textureLocation = textureLocation_, maskLocation = maskLocation_, screenWidthLocation = screenWidthLocation_, screenHeightLocation = screenHeightLocation_;
-@synthesize textureFileName = _textureFileName;
 
 - (id)initWithFile:(NSString *)file size:(CGSize)size
 {
     self = [super initWithFile:file rect:CGRectMake(0, 0, size.width, size.height)];
     if (self) {
-        self.textureFileName = file;
         
         //set up rendering paramters
         //texture must be power of 2

@@ -2,7 +2,7 @@
 //  GWEnvironment.h
 //  ProjectOllie
 //
-//  Created by l. ion battery Steve Gregory on 8/9/12.
+//  Created by Steve Gregory on 8/9/12.
 //  Copyright (c) 2012 hi ku. All rights reserved.
 //
 
@@ -18,7 +18,7 @@ typedef enum settingTypes
     lava = 3   //Lava, dust, volcanoes
 } Setting;
 
-@interface GWEnvironment : CCLayer
+@interface GWEnvironment : CCNode
 
 /* Properties (layers are in order of greater Z from camera) */
 
@@ -38,22 +38,15 @@ typedef enum settingTypes
 
 @property (strong, nonatomic) GWPerspectiveLayer* backdrop;        // The farthest back layer at the max z we care about
 
-//Other background layers
-
-//Particle layers
+//Particle layers not included yet
 
 /* Methods */
-
-//Load all of the textures
-+(void) initialize;
 
 //Blank terrain with the default setting
 -(id) init;
 
 -(id) initWithSetting:(Setting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera;
 
--(id) setCamera:(GWCamera*)camera;
-
-
+-(void) setCamera:(GWCamera*)camera;
 
 @end

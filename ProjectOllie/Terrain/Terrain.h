@@ -32,9 +32,13 @@ typedef enum TerrainTexture {
     ShapeField          *shapeField_;
 }
 
-@property (nonatomic, strong) CCTexture2D *texture;
+- (id) init;
 
 - (id) initWithTextureType:(TerrainTexture)textureType;
+
+- (void) setStrokeColor:(ccColor4F)color;
+
+- (void) setTexture:(CCTexture2D *)texture;
 
 //Changing land
 - (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y;

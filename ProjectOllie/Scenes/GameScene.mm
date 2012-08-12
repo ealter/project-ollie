@@ -1,5 +1,5 @@
 //
-//  GameScene.m
+//  GameScene.mm
 //  ProjectOllie
 //
 //  Created by lion eater Steve Gregory on 8/9/12.

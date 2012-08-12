@@ -22,13 +22,16 @@
 {
     if (self = [super init])
     {
+        //Set environment and camera
         _environment = environment;
         _camera = [[GWCamera alloc] initWithScreenDimensions:[[CCDirector sharedDirector]winSizeInPixels]];
         [_environment setCamera:_camera];
         
-        _worldHUD = [CCLayer node];
+        //Make HUDs
+        _worldHUD = [[GWPerspectiveLayer alloc] initWithCamera:_camera z:0];
+        _screenHUD = [CCLayer node];
         
-        
+        //Add from back to front in draw order
         [self addChild:_environment];
         [self addChild:_worldHUD];
         [self addChild:_screenHUD];

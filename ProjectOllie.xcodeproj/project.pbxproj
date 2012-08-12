@@ -206,7 +206,6 @@
 		CE79029815D4990100958D04 /* nail.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029315D4990000958D04 /* nail.png */; };
 		CE79029915D4990100958D04 /* railgun.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029415D4990100958D04 /* railgun.png */; };
 		CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029515D4990100958D04 /* rocket_launcher.png */; };
-		CE79029B15D4990100958D04 /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029615D4990100958D04 /* rocket.png */; };
 		CE79029D15D4AA5300958D04 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029C15D4AA5100958D04 /* banana.png */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
@@ -2598,7 +2597,6 @@
 				CE79029815D4990100958D04 /* nail.png in Resources */,
 				CE79029915D4990100958D04 /* railgun.png in Resources */,
 				CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */,
-				CE79029B15D4990100958D04 /* rocket.png in Resources */,
 				CE79029D15D4AA5300958D04 /* banana.png in Resources */,
 				CE1FDF2915D4A7C300C2B532 /* waterSheet1.png in Resources */,
 				CE1FDF2A15D4A7C300C2B532 /* waterSheet2.png in Resources */,
