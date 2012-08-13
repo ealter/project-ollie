@@ -12,7 +12,7 @@
 
 + (NSURL *)urlForPageName:(NSString *)page
 {
-    return [[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"matchmaking"] URLByAppendingPathComponent:page];
+    return [[super urlForPageName:@"marketing"] URLByAppendingPathComponent:page];
 }
 
 @end
