@@ -40,9 +40,9 @@
         [self.gameWorld.gameTerrain clipCircle:NO WithRadius:100 x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
-        [self.gameWorld.camera addIntensity:0.5];
+        [self.gameWorld.camera addIntensity:0.1];
         
-        [self applyb2ForceInRadius:150./PTM_RATIO withStrength:.02 isOutwards:YES];
+        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.05 isOutwards:YES];
         
         self.emitter = [GWParticleExplosion node];
         self.emitter.position = self.position;

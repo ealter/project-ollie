@@ -16,8 +16,8 @@ class b2World;
 #define MAXSPEED 10. //Maximum speed of the weapon's projectile
 
 @interface GWGunWeapon : GWWeapon<GestureChild> {
-    b2World         *_world;
-    HMVectorNode    *drawNode;
+    b2World         *_world;   //Box2D world
+    HMVectorNode    *drawNode; //Draws trajectory to screen
     CGPoint         shootPoint;//Used to track where the rotation was last set to
     
 }
@@ -33,11 +33,13 @@ class b2World;
 @property (strong, nonatomic) CCSprite  *aimOverlay;
 @property (strong, nonatomic) CCSprite  *gunImage;
 
+//Huge init, called by weapons
 -(id)initWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo bulletSize:(CGSize)bulletSize bulletSpeed:(float)bulletSpeed bulletImage:(NSString *)bulletImage box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
 
 //Calculates the angle of the gun and the speed of the bullets
 -(CGPoint)calculateGunVelocityFromStart:(CGPoint) startPoint toAimPoint:(CGPoint) aimPoint;
 
+//Uses the HMKVectorNode to draw a trajectory on the screen
 -(void)simulateTrajectoryWithStart:(CGPoint)startPoint Finger:(CGPoint)currPoint;
 
 @end

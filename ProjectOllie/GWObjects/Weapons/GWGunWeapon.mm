@@ -52,6 +52,7 @@
         
         self.aimOverlay     = [CCSprite spriteWithFile:@"aimOverlay.png"];
         self.aimOverlay.position     = ccpAdd(self.aimOverlay.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+        self.aimOverlay.flipX=YES;
         
         //Add children
         [self addChild:self.aimOverlay];
@@ -137,13 +138,13 @@
         angle += 180;
         angle = angle * -1;
         self.aimOverlay.rotation= angle;
-        self.gunImage.rotation = angle;
+        self.gunImage.rotation  = angle;
         
         
         //Simulate trajectory;
-        [self simulateTrajectoryWithStart:startPoint Finger:currPoint];
+        [self simulateTrajectoryWithStart:self.position Finger:currPoint];
         
-        shootPoint = currPoint;
+        shootPoint              = currPoint;
     }
 }
 

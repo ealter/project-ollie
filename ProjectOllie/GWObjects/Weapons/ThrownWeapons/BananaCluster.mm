@@ -65,7 +65,7 @@
 -(void)splitBananas
 {
     b2Vec2 selfVel          = self.physicsBody->GetLinearVelocity();
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 5; i++) {
         //Make banana
         BananaSingle *single = [[BananaSingle alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
         single.fuseTimer = 2.;
@@ -74,8 +74,8 @@
         
         //Calculate new speeds and apply
         float angle         = atan2f(selfVel.y, selfVel.x);
-        float changeX       = sinf(angle) * i / 40;
-        float changeY       = cosf(angle) * i / 40;
+        float changeX       = cosf(angle) * i / 400;
+        float changeY       = sinf(angle) * i / 400;
         single.physicsBody->SetLinearVelocity(selfVel);
         single.physicsBody->ApplyForceToCenter(b2Vec2(changeX, changeY));
     }
