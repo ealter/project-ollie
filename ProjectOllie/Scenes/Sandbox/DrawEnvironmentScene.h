@@ -10,7 +10,7 @@
 
 @interface DrawEnvironmentScene : EnvironmentScene
 
-//Create default init for drawing new land
+//Create empty environment for drawing new land
 -(id) init;
 
 //For editing land

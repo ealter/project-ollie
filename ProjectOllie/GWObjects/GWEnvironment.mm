@@ -37,15 +37,23 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     {
         _terrain = terrain;
         
+        //Make layers
         _frontWater = [[GWWater alloc] initWithCamera:NULL z:(-.25*PTM_RATIO)];
         _actionLayer = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:0];
         _backWater = [[GWWater alloc] initWithCamera:NULL z:(.25*PTM_RATIO)];
-        
         _backgroundNear = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.4f*PTM_RATIO];
         _backgroundFar = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.8*PTM_RATIO];
         _backdrop = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:1.4*PTM_RATIO];
         
         [_actionLayer addChild:terrain];
+        
+        //Add every layer from back to front
+        [self addChild:_backdrop];
+        [self addChild:_backgroundFar];
+        [self addChild:_backgroundNear];
+        [self addChild:_backWater];
+        [self addChild:_actionLayer];
+        [self addChild:_frontWater];
         
         [self setSetting:dirt];
     }

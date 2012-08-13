@@ -2,7 +2,7 @@
 //  DrawMenu.m
 //  ProjectOllie
 //
-//  Created by Lion User on 6/11/12.
+//  Created by Lion Tucker on 6/11/12.
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 

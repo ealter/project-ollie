@@ -40,8 +40,8 @@
 {
     if (!camera_)
     {
-        printf("No camera set to transform GWPerspective Layer");
-        return transform_;
+        //printf("No camera set to transform GWPerspective Layer");
+        //return transform_;
     }
     
     //Project position to the camera point onto the screen plane
