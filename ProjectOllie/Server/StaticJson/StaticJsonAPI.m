@@ -12,7 +12,7 @@
 
 + (NSURL *)urlForPageName:(NSString *)page
 {
-    return [[[[NSURL URLWithString:DOMAIN_NAME] URLByAppendingPathComponent:@"static"] URLByAppendingPathComponent:@"json"] URLByAppendingPathComponent:page];
+    return [[[super urlForPageName:@"static"] URLByAppendingPathComponent:@"json"] URLByAppendingPathComponent:page];
 }
 
 @end
