@@ -12,6 +12,15 @@
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
+@interface GWUILayer()
+{
+    
+}
+
+-(void)setWeaponTablePosition;
+
+@end
+
 @implementation GWUILayer
 @synthesize weaponTable         = _weaponTable;
 @synthesize activeCharacter     = _activeCharacter;
@@ -43,8 +52,7 @@
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
-        CGPoint tablePos                    = self.activeCharacter.position;
-        self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
+        [self setWeaponTablePosition];
         self.weaponTable.contentOffset      = CGPointZero;
         self.weaponTable.delegate           = self;
         self.weaponTable.verticalFillOrder  = SWTableViewFillTopDown;
@@ -69,8 +77,8 @@
 
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
 {
-    [self.weaponTable.parent removeChild:self.weaponTable cleanup:YES];
-    self.weaponTable                = nil;
+    [self.weaponTable removeSelf];
+    self.weaponTable = nil;
     _activeCharacter.selectedWeapon = [_activeCharacter.weapons objectAtIndex:cell.idx];
     _activeCharacter                = nil;
 }
@@ -122,9 +130,14 @@
 }
 
 -(void)update:(float)dt{
-    CGPoint tablePos                    = self.activeCharacter.position;
-    self.weaponTable.position           = ccpAdd(tablePos, CGPointMake(0, 90));
+    
+    
+    [self setWeaponTablePosition];
 
+}
+
+-(void)setWeaponTablePosition{
+    self.weaponTable.position           = ccpAdd(self.activeCharacter.position,ccp(-40,60));
 }
 
 @end

@@ -5,6 +5,8 @@
 
 #define FPS 60
 
+#define VERSION 0.01
+
 //Width and height of the world in meters
 #define WORLD_WIDTH 10
 #define WORLD_HEIGHT 6
