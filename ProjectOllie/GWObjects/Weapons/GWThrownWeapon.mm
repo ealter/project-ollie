@@ -18,7 +18,6 @@
 {
     if (self = [super initWithFile:imageName]) {
         //Set properties
-        _imageName          = imageName;
         self.position       = ccpMult(pos, PTM_RATIO);
         self.contentSize    = CGSizeMake(size.width * PTM_RATIO, size.height * PTM_RATIO);
         self.ammo           = ammo;
@@ -44,7 +43,7 @@
 {
     if (self.ammo >0) {
         //Make a bullet which acts as the thrown item
-        thrown              = [[GWProjectile alloc] initWithBulletSize:self.contentSize imageName:_imageName startPosition:self.position b2World:_world b2Bullet:NO gameWorld:self.gameWorld];
+        thrown              = [[GWProjectile alloc] initWithBulletSize:self.contentSize imageName:self.weaponImage startPosition:self.position b2World:_world b2Bullet:NO gameWorld:self.gameWorld];
         b2Body* thrownShape = thrown.physicsBody;
         [self.parent addChild:thrown];
         
@@ -82,38 +81,44 @@
     return vel;
 }
 
+-(void)simulateTrajectoryWithStart:(CGPoint)startPoint Finger:(CGPoint)currPoint
+{
+    //Clear HMVectorNode
+    [drawNode clear];
+    
+    //Calculate values to be used for trajectory simulation
+    CGPoint beginPoint      = drawNode.position;
+    float dt                = 1/60.0f;
+    CGPoint velocity        = [self calculateVelocityFromWep:self.holder.position toFinger:currPoint];
+    CGPoint stepVelocity    = ccpMult(velocity, dt);
+    CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
+    CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
+    self.flipY              = NO;
+    
+    //Simulate trajectory;
+    for (int i = 0; i < 60 ; i++) {
+        CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
+        
+        //draw the point
+        [drawNode drawDot:drawPoint radius:6];
+    }
+}
+
 
 //Gesture Methods//
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
     if (self.ammo >0) {
-        //Clear HMVectorNode
-        [drawNode clear];
-        
-        //Calculate values to be used for trajectory simulation
-        CGPoint beginPoint      = drawNode.position;
-        float dt                = 1/60.0f;
-        CGPoint velocity        = [self calculateVelocityFromWep:self.holder.position toFinger:currPoint];
-        CGPoint stepVelocity    = ccpMult(velocity, dt);
-        CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
-        CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
-        self.flipY              = NO;
-        
-        //Simulate trajectory;
-        for (int i = 0; i < 60 ; i++) {
-            CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
-            
-            //draw the point
-            [drawNode drawDot:drawPoint radius:6];
-        }
+        //Simulate trajectory
+        [self simulateTrajectoryWithStart:self.position Finger:currPoint];
     }
 }
 
 -(void)handlePanFinishedWithStart:(CGPoint) startPoint andEnd:(CGPoint)endPoint andTime:(float)time
 {
     [drawNode clear];
-    [self throwWeaponWithLocation:startPoint fromFinger:endPoint];
+    [self throwWeaponWithLocation:self.position fromFinger:endPoint];
 }
 
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity

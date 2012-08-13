@@ -14,21 +14,33 @@ class b2World;
 @class CCParticleSystem;
 
 @interface GWProjectile : GWPhysicsSprite {
-    b2World* _world;
-    float destroyTimer;
+    b2World* _world;    //Box2D world
+    float destroyTimer; //Timer that keeps bullets from living forever
 }
 
+//Gameworld, which all things are added to
 @property (strong, nonatomic) ActionLayer *gameWorld;
+
+//BOOL used by contact listener
 @property (assign, nonatomic) BOOL bulletCollided;
+
+//Emitter used for effects
 @property (strong, nonatomic) CCParticleSystem *emitter;
+
+//Timer for thrown weapons
 @property (assign, nonatomic) float fuseTimer;
 
+
+//Big init to make the bullet, called by sub bullets
 -(id)initWithBulletSize:(CGSize)size imageName:(NSString *)imageName startPosition:(CGPoint)pos b2World:(b2World *)world b2Bullet:(BOOL) isBullet gameWorld:(ActionLayer *) gWorld;
 
+//method to remove bullet from the b2world and from the game
 -(void)destroyBullet;
 
+//Method that applies a force to b2bodies in a certain radius
 -(void)applyb2ForceInRadius:(float) maxDistance withStrength:(float)str isOutwards:(BOOL)outwards;
 
+//Method called by the contact listener
 -(void)bulletContact;
 
 
