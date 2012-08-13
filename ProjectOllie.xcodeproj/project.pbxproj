@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C51CCC0815D9A02C00E2AB9A /* Aaargh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBF915D9A02C00E2AB9A /* Aaargh.ttf */; };
+		C51CCC0915D9A02C00E2AB9A /* Tup Wanders Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFA15D9A02C00E2AB9A /* Tup Wanders Font License.txt */; };
+		C51CCC0A15D9A02C00E2AB9A /* Bitstream Vera License.txt in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFC15D9A02C00E2AB9A /* Bitstream Vera License.txt */; };
+		C51CCC0B15D9A02C00E2AB9A /* Vera-Bold-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFD15D9A02C00E2AB9A /* Vera-Bold-Italic.ttf */; };
+		C51CCC0C15D9A02C00E2AB9A /* Vera-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFE15D9A02C00E2AB9A /* Vera-Bold.ttf */; };
+		C51CCC0D15D9A02C00E2AB9A /* Vera-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFF15D9A02C00E2AB9A /* Vera-Italic.ttf */; };
+		C51CCC0E15D9A02C00E2AB9A /* Vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0015D9A02C00E2AB9A /* Vera.ttf */; };
+		C51CCC0F15D9A02C00E2AB9A /* Abattis Cantarell GPL License.txt in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0215D9A02C00E2AB9A /* Abattis Cantarell GPL License.txt */; };
+		C51CCC1015D9A02C00E2AB9A /* Cantarell-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0315D9A02C00E2AB9A /* Cantarell-Bold.ttf */; };
+		C51CCC1115D9A02C00E2AB9A /* Cantarell-BoldOblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0415D9A02C00E2AB9A /* Cantarell-BoldOblique.ttf */; };
+		C51CCC1215D9A02C00E2AB9A /* Cantarell-Oblique.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0515D9A02C00E2AB9A /* Cantarell-Oblique.ttf */; };
+		C51CCC1315D9A02C00E2AB9A /* Cantarell-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0615D9A02C00E2AB9A /* Cantarell-Regular.ttf */; };
+		C51CCC1415D9A02C00E2AB9A /* FONTLOG.txt in Resources */ = {isa = PBXBuildFile; fileRef = C51CCC0715D9A02C00E2AB9A /* FONTLOG.txt */; };
 		C52986B31578A43300656B50 /* CCControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C529868A1578A43300656B50 /* CCControl.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986B41578A43300656B50 /* CCControlButton.m in Sources */ = {isa = PBXBuildFile; fileRef = C529868C1578A43300656B50 /* CCControlButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C52986B51578A43300656B50 /* CCControlColourPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = C529868E1578A43300656B50 /* CCControlColourPicker.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -405,6 +418,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C51CCBF915D9A02C00E2AB9A /* Aaargh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aaargh.ttf; sourceTree = "<group>"; };
+		C51CCBFA15D9A02C00E2AB9A /* Tup Wanders Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tup Wanders Font License.txt"; sourceTree = "<group>"; };
+		C51CCBFC15D9A02C00E2AB9A /* Bitstream Vera License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bitstream Vera License.txt"; sourceTree = "<group>"; };
+		C51CCBFD15D9A02C00E2AB9A /* Vera-Bold-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vera-Bold-Italic.ttf"; sourceTree = "<group>"; };
+		C51CCBFE15D9A02C00E2AB9A /* Vera-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vera-Bold.ttf"; sourceTree = "<group>"; };
+		C51CCBFF15D9A02C00E2AB9A /* Vera-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Vera-Italic.ttf"; sourceTree = "<group>"; };
+		C51CCC0015D9A02C00E2AB9A /* Vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Vera.ttf; sourceTree = "<group>"; };
+		C51CCC0215D9A02C00E2AB9A /* Abattis Cantarell GPL License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Abattis Cantarell GPL License.txt"; sourceTree = "<group>"; };
+		C51CCC0315D9A02C00E2AB9A /* Cantarell-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Bold.ttf"; sourceTree = "<group>"; };
+		C51CCC0415D9A02C00E2AB9A /* Cantarell-BoldOblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-BoldOblique.ttf"; sourceTree = "<group>"; };
+		C51CCC0515D9A02C00E2AB9A /* Cantarell-Oblique.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Oblique.ttf"; sourceTree = "<group>"; };
+		C51CCC0615D9A02C00E2AB9A /* Cantarell-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Cantarell-Regular.ttf"; sourceTree = "<group>"; };
+		C51CCC0715D9A02C00E2AB9A /* FONTLOG.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FONTLOG.txt; sourceTree = "<group>"; };
 		C52986891578A43300656B50 /* CCControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCControl.h; sourceTree = "<group>"; };
 		C529868A1578A43300656B50 /* CCControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCControl.m; sourceTree = "<group>"; };
 		C529868B1578A43300656B50 /* CCControlButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCControlButton.h; sourceTree = "<group>"; };
@@ -1126,6 +1152,51 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C51CCBF715D9A02C00E2AB9A /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C51CCBF815D9A02C00E2AB9A /* Aaargh */,
+				C51CCBFB15D9A02C00E2AB9A /* Bitstream-Vera-Sans */,
+				C51CCC0115D9A02C00E2AB9A /* Cantarell */,
+			);
+			name = Fonts;
+			path = Resources/Fonts;
+			sourceTree = "<group>";
+		};
+		C51CCBF815D9A02C00E2AB9A /* Aaargh */ = {
+			isa = PBXGroup;
+			children = (
+				C51CCBF915D9A02C00E2AB9A /* Aaargh.ttf */,
+				C51CCBFA15D9A02C00E2AB9A /* Tup Wanders Font License.txt */,
+			);
+			path = Aaargh;
+			sourceTree = "<group>";
+		};
+		C51CCBFB15D9A02C00E2AB9A /* Bitstream-Vera-Sans */ = {
+			isa = PBXGroup;
+			children = (
+				C51CCBFC15D9A02C00E2AB9A /* Bitstream Vera License.txt */,
+				C51CCBFD15D9A02C00E2AB9A /* Vera-Bold-Italic.ttf */,
+				C51CCBFE15D9A02C00E2AB9A /* Vera-Bold.ttf */,
+				C51CCBFF15D9A02C00E2AB9A /* Vera-Italic.ttf */,
+				C51CCC0015D9A02C00E2AB9A /* Vera.ttf */,
+			);
+			path = "Bitstream-Vera-Sans";
+			sourceTree = "<group>";
+		};
+		C51CCC0115D9A02C00E2AB9A /* Cantarell */ = {
+			isa = PBXGroup;
+			children = (
+				C51CCC0215D9A02C00E2AB9A /* Abattis Cantarell GPL License.txt */,
+				C51CCC0315D9A02C00E2AB9A /* Cantarell-Bold.ttf */,
+				C51CCC0415D9A02C00E2AB9A /* Cantarell-BoldOblique.ttf */,
+				C51CCC0515D9A02C00E2AB9A /* Cantarell-Oblique.ttf */,
+				C51CCC0615D9A02C00E2AB9A /* Cantarell-Regular.ttf */,
+				C51CCC0715D9A02C00E2AB9A /* FONTLOG.txt */,
+			);
+			path = Cantarell;
+			sourceTree = "<group>";
+		};
 		C52986871578A43300656B50 /* CCControlExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -1831,6 +1902,7 @@
 		CE94AA6C15785F83009B35B4 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C51CCBF715D9A02C00E2AB9A /* Fonts */,
 				C57BFA1015C9F2BA00CBC091 /* Character Images */,
 				CE99465615C4F19700D46E1E /* WeaponImages */,
 				CE6B51EF15C35DA900F51BE6 /* Water */,
@@ -2625,6 +2697,19 @@
 				CE1FDF2F15D4A7C300C2B532 /* waterSheet7.png in Resources */,
 				CE1FDF3015D4A7C300C2B532 /* waterSheet8.png in Resources */,
 				CE052C8215D5D71800CEAD87 /* bazooka_rocket.png in Resources */,
+				C51CCC0815D9A02C00E2AB9A /* Aaargh.ttf in Resources */,
+				C51CCC0915D9A02C00E2AB9A /* Tup Wanders Font License.txt in Resources */,
+				C51CCC0A15D9A02C00E2AB9A /* Bitstream Vera License.txt in Resources */,
+				C51CCC0B15D9A02C00E2AB9A /* Vera-Bold-Italic.ttf in Resources */,
+				C51CCC0C15D9A02C00E2AB9A /* Vera-Bold.ttf in Resources */,
+				C51CCC0D15D9A02C00E2AB9A /* Vera-Italic.ttf in Resources */,
+				C51CCC0E15D9A02C00E2AB9A /* Vera.ttf in Resources */,
+				C51CCC0F15D9A02C00E2AB9A /* Abattis Cantarell GPL License.txt in Resources */,
+				C51CCC1015D9A02C00E2AB9A /* Cantarell-Bold.ttf in Resources */,
+				C51CCC1115D9A02C00E2AB9A /* Cantarell-BoldOblique.ttf in Resources */,
+				C51CCC1215D9A02C00E2AB9A /* Cantarell-Oblique.ttf in Resources */,
+				C51CCC1315D9A02C00E2AB9A /* Cantarell-Regular.ttf in Resources */,
+				C51CCC1415D9A02C00E2AB9A /* FONTLOG.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
