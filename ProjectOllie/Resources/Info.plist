@@ -61,5 +61,9 @@
 	<array>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+<array>
+    <string>Aaargh.ttf</string>
+</array>
 </dict>
 </plist>
