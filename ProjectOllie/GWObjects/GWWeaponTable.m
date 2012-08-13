@@ -8,7 +8,7 @@
 
 #import "GWWeaponTable.h"
 #import "MyCell.h"
-
+#define kTagWepTable 10
 
 @implementation GWWeaponTable
 
@@ -16,6 +16,7 @@
 +(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
     
     GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
+    
     /* init values */
     tv.clipsToBounds = NO;
     [tv scheduleUpdate];
@@ -29,6 +30,28 @@
     for (SWTableViewCell* cell in self->cellsUsed_) {
         
     }
+}
+
+-(void)removeSelf{
+    [self.parent removeChild:[self.parent getChildByTag:kTagWepTable] cleanup:YES];
+    [self.parent removeChild:self cleanup:YES];
+}
+
+//OVERRIDDEN NODE FUNCTIONS
+
+-(void)setParent:(CCNode *)parent{
+    parent_ = parent;
+    /* label, you pleb! */
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Weapons" fontName:@"Marker Felt" fontSize:32];
+    [self.parent addChild:label z:0 tag:kTagWepTable];
+    [label setColor:ccc3(255,255,255)];
+    label.position = self.position;
+}
+
+-(void)setPosition:(CGPoint)position{
+    [super setPosition:position];
+    if(self.parent)
+        [[self.parent getChildByTag:kTagWepTable] setPosition:ccpAdd(position, ccp(0,self.contentSize.height/2.))];
 }
 
 /** 
