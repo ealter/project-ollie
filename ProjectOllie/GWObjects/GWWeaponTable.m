@@ -28,7 +28,9 @@
 -(void)update:(ccTime) dt
 {
     for (SWTableViewCell* cell in self->cellsUsed_) {
-        
+        CCSprite* sprite = [cell.children objectAtIndex:0];
+        float distance = abs(sprite.position.x - self.position.x);
+        [sprite setOpacity:distance];
     }
 }
 
