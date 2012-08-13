@@ -210,6 +210,9 @@
 		CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D415C0E33100F51BE6 /* selectedoption.png */; };
 		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
 		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
+		CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E38A15D9AE1C00151527 /* HighestVersion.m */; };
+		CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */; };
+		CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */; };
 		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
 		CE79028315D486C300958D04 /* bazooka.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79027F15D486C200958D04 /* bazooka.png */; };
 		CE79028415D486C300958D04 /* grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028015D486C200958D04 /* grenade.png */; };
@@ -720,6 +723,12 @@
 		CE6B51D415C0E33100F51BE6 /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/Miscellaneous/selectedoption.png; sourceTree = "<group>"; };
 		CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/Miscellaneous/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
+		CE75E38915D9AE1C00151527 /* HighestVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighestVersion.h; path = ProjectOllie/Server/StaticJson/HighestVersion.h; sourceTree = "<group>"; };
+		CE75E38A15D9AE1C00151527 /* HighestVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HighestVersion.m; path = ProjectOllie/Server/StaticJson/HighestVersion.m; sourceTree = "<group>"; };
+		CE75E38E15D9AEBC00151527 /* StaticJsonAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticJsonAPI.h; path = ProjectOllie/Server/StaticJson/StaticJsonAPI.h; sourceTree = "<group>"; };
+		CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticJsonAPI.m; path = ProjectOllie/Server/StaticJson/StaticJsonAPI.m; sourceTree = "<group>"; };
+		CE75E39115D9B00500151527 /* InAppPurchaseIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InAppPurchaseIdentifiers.h; path = ProjectOllie/Server/StaticJson/InAppPurchaseIdentifiers.h; sourceTree = "<group>"; };
+		CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InAppPurchaseIdentifiers.m; path = ProjectOllie/Server/StaticJson/InAppPurchaseIdentifiers.m; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
 		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
 		CE79027F15D486C200958D04 /* bazooka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazooka.png; sourceTree = "<group>"; };
@@ -1832,6 +1841,19 @@
 			name = Water;
 			sourceTree = "<group>";
 		};
+		CE75E38D15D9AE2100151527 /* Static Json */ = {
+			isa = PBXGroup;
+			children = (
+				CE75E38915D9AE1C00151527 /* HighestVersion.h */,
+				CE75E38A15D9AE1C00151527 /* HighestVersion.m */,
+				CE75E39115D9B00500151527 /* InAppPurchaseIdentifiers.h */,
+				CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */,
+				CE75E38E15D9AEBC00151527 /* StaticJsonAPI.h */,
+				CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */,
+			);
+			name = "Static Json";
+			sourceTree = "<group>";
+		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
 			isa = PBXGroup;
 			children = (
@@ -2483,6 +2505,7 @@
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
 				CE0C324715CC97A60004E932 /* Accounts */,
 				CE0C324815CC97EC0004E932 /* Matchmaking */,
+				CE75E38D15D9AE2100151527 /* Static Json */,
 			);
 			name = Server;
 			path = ..;
@@ -2967,6 +2990,9 @@
 				CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */,
 				CE98070915D5B76600D843DC /* BananaCluster.mm in Sources */,
 				CE98070D15D5B8AD00D843DC /* BananaSingle.mm in Sources */,
+				CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */,
+				CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */,
+				CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
