@@ -108,7 +108,7 @@
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
             sprite.anchorPoint = CGPointZero;
             
-            [cell addChild:sprite];
+            [cell addChild:loadWep];
             CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
             label.position = ccp(20, 20);
             label.tag = 123;

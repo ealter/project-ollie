@@ -7,6 +7,7 @@
 //
 
 #import "GWWeaponTable.h"
+#import "GWWeapon.h"
 #import "MyCell.h"
 #define kTagWepTable 10
 #define kTableSizeMultiplier 2.4
@@ -53,7 +54,7 @@
         SWTableViewCell* cell = [self cellAtIndex:i];
         if(cell && cell.children.count > 1)
         {
-            CCSprite* sprite  = [cell.children objectAtIndex:0];
+            GWWeapon* sprite  = [cell.children objectAtIndex:0];
             CCLabelTTF* label = [cell.children objectAtIndex:1];
             
             float distance   = abs(self.contentOffset.x);
