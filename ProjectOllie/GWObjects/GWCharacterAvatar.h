@@ -31,6 +31,7 @@ typedef enum Orientation {
 
 @interface GWCharacterAvatar : CCNode <GestureChild>
 
+-(id)initWithModel:(GWCharacterModel*)model box2DWorld:(b2World*)world;
 -(id)initWithIdentifier:(NSString*)type spriteIndices:(NSArray*)indices box2DWorld:(b2World*)world;
 -(void)update:(float)dt;
 

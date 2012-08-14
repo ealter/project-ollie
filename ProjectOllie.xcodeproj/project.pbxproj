@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C518B58715DB023600E13AB8 /* ConstructionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C518B58615DB023600E13AB8 /* ConstructionModel.m */; };
 		C51CCC0815D9A02C00E2AB9A /* Aaargh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBF915D9A02C00E2AB9A /* Aaargh.ttf */; };
 		C51CCC0915D9A02C00E2AB9A /* Tup Wanders Font License.txt in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFA15D9A02C00E2AB9A /* Tup Wanders Font License.txt */; };
 		C51CCC0A15D9A02C00E2AB9A /* Bitstream Vera License.txt in Resources */ = {isa = PBXBuildFile; fileRef = C51CCBFC15D9A02C00E2AB9A /* Bitstream Vera License.txt */; };
@@ -429,6 +430,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C518B58515DB023500E13AB8 /* ConstructionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConstructionModel.h; sourceTree = "<group>"; };
+		C518B58615DB023600E13AB8 /* ConstructionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConstructionModel.m; sourceTree = "<group>"; };
 		C51CCBF915D9A02C00E2AB9A /* Aaargh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Aaargh.ttf; sourceTree = "<group>"; };
 		C51CCBFA15D9A02C00E2AB9A /* Tup Wanders Font License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Tup Wanders Font License.txt"; sourceTree = "<group>"; };
 		C51CCBFC15D9A02C00E2AB9A /* Bitstream Vera License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bitstream Vera License.txt"; sourceTree = "<group>"; };
@@ -1664,6 +1667,8 @@
 			children = (
 				CE05C35415D09F9B007F8ED3 /* GWCharacterModel.h */,
 				CE05C35515D09F9B007F8ED3 /* GWCharacterModel.m */,
+				C518B58515DB023500E13AB8 /* ConstructionModel.h */,
+				C518B58615DB023600E13AB8 /* ConstructionModel.m */,
 			);
 			name = "Character Models";
 			sourceTree = "<group>";
@@ -3052,6 +3057,7 @@
 				CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */,
 				CE2AF71615D9F5D70085E82C /* CCUIViewWrapper.m in Sources */,
 				CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */,
+				C518B58715DB023600E13AB8 /* ConstructionModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
