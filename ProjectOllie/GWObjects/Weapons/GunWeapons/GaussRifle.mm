@@ -17,6 +17,7 @@
 {
     if (self = [super initWithImage:GAUSS_IMAGE position:pos size:CGSizeMake(GAUSS_WIDTH, GAUSS_HEIGHT) ammo:ammo bulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) bulletSpeed:.2 bulletImage:GAUSS_B_IMAGE box2DWorld:world gameWorld:gWorld]){
         
+        
     }
         
     return self;
