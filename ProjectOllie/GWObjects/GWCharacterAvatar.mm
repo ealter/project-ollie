@@ -48,6 +48,15 @@
 @synthesize uiLayer        = _uiLayer;
 @synthesize weapons        = _weapons;
 
+-(id)initWithModel:(GWCharacterModel *)model box2DWorld:(b2World *)world{
+    
+    if((self = [super init]))
+    {
+        DebugLog(@"This should be overwritten by subclasses! Assert to make sure it's the correct type of model.");
+    }
+    return self;
+}
+
 -(id)initWithIdentifier:(NSString *)type spriteIndices:(NSArray *)indices box2DWorld:(b2World *)world{
     
     if((self = [super init]))
@@ -78,6 +87,7 @@
         
         /* prepare contact listener */
         [self.skeleton setOwner:self]; 
+        
     }
     
     return self;
