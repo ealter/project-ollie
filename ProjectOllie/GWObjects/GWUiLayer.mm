@@ -12,6 +12,7 @@
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
+
 @interface GWUILayer()
 {
     
@@ -49,7 +50,7 @@
         }
 
         CGSize cellSize                     = [self cellSizeForTable:self.weaponTable];
-        CGSize tableViewSize                = CGSizeMake(1.5f * cellSize.width, cellSize.height);
+        CGSize tableViewSize                = CGSizeMake(cellSize.width, cellSize.height);
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
@@ -91,7 +92,9 @@
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
 {
-    GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
+    GWWeapon *loadWep = nil;
+    if([self.activeCharacter.weapons count] > idx)
+        loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
     NSString *string = [NSString stringWithFormat:@"%d", idx];
     
@@ -99,15 +102,19 @@
     SWTableViewCell *cell = [table cellAtIndex:idx];
     if (!cell) {
         cell = [MyCell new];
-        
-		CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
-		sprite.anchorPoint = CGPointZero;
-        
-		[cell addChild:sprite];
-		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
-		label.position = ccp(20, 20);
-		label.tag = 123;
-		[cell addChild:label];
+
+        if(loadWep)
+        {
+            CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
+            sprite.anchorPoint = CGPointZero;
+            
+            [cell addChild:sprite];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
+            label.position = ccp(20, 20);
+            label.tag = 123;
+            [cell addChild:label];
+        }
+      
 	}
     
     return cell;

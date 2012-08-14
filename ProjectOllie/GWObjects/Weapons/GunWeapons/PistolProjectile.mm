@@ -18,6 +18,7 @@
 {
     if (self = [super initWithBulletSize:CGSizeMake(PISTOL_B_WIDTH, PISTOL_B_HEIGHT) imageName:PISTOL_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         self.physicsBody->SetGravityScale(0);
+        self.physicsBody->GetFixtureList()->SetDensity(3.);
     }
     
     return self;
@@ -34,6 +35,8 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:15. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain shapeChanged];
     }
     
     //Clean up bullet and remove from parent

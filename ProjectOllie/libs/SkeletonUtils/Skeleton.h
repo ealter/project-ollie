@@ -88,6 +88,9 @@ private:
     /* Keeps track of angle of entire skeleton (essentially torso angle)*/
     float angle;
     
+    /* Fast look up of bones by name */
+    std::map<string,Bone*> boneDict;
+    
 public:
     
     //constructors with box2dworld
@@ -110,7 +113,7 @@ public:
     void setRoot(Bone* bone);
     
     /* Searches for specific name. Have to use string comparisons...maybe need better data structure */
-    Bone* getBoneByName(Bone* root, string name);
+    Bone* getBoneByName(string name);
     
     /* Fetches root for traverals */
     Bone* getRoot();

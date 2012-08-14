@@ -9,6 +9,16 @@
 #import "GWWeaponTable.h"
 #import "MyCell.h"
 #define kTagWepTable 10
+#define kTableSizeMultiplier 2.4
+
+@interface GWWeaponTable()
+{
+    
+}
+-(void)setOpacity;
+-(CGRect)touchRect;
+
+@end
 
 @implementation GWWeaponTable
 
@@ -16,7 +26,6 @@
 +(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
     
     GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
-    
     /* init values */
     tv.clipsToBounds = NO;
     [tv scheduleUpdate];
@@ -27,16 +36,38 @@
 
 -(void)update:(ccTime) dt
 {
-    for (SWTableViewCell* cell in self->cellsUsed_) {
-        CCSprite* sprite = [cell.children objectAtIndex:0];
-        float distance = abs(sprite.position.x - self.position.x);
-        [sprite setOpacity:distance];
-    }
+    
+
 }
 
 -(void)removeSelf{
     [self.parent removeChild:[self.parent getChildByTag:kTagWepTable] cleanup:YES];
     [self.parent removeChild:self cleanup:YES];
+}
+
+-(void)setOpacity{
+    float numIndices = [self.dataSource numberOfCellsInTableView:self]-1;
+    float cellWidth      = [self.dataSource cellSizeForTable:self].width;
+    for (int i = 0; i < numIndices + 1; i++)
+    {
+        SWTableViewCell* cell = [self cellAtIndex:i];
+        if(cell && cell.children.count > 1)
+        {
+            CCSprite* sprite  = [cell.children objectAtIndex:0];
+            CCLabelTTF* label = [cell.children objectAtIndex:1];
+            
+            float distance   = abs(self.contentOffset.x);
+            float index      = cell.idx;
+            float indexRatio = index/numIndices;
+            
+            float spriteDist = indexRatio * numIndices * cellWidth; 
+            float opacity    = max(0,-1. * pow(abs(spriteDist - distance),1.2)  + 255);
+            
+            [sprite setOpacity:opacity];
+            [label setOpacity:opacity];
+        }
+    }
+
 }
 
 //OVERRIDDEN NODE FUNCTIONS
@@ -56,6 +87,11 @@
         [[self.parent getChildByTag:kTagWepTable] setPosition:ccpAdd(position, ccp(0,self.contentSize.height/2.))];
 }
 
+-(void)draw{
+    [self setOpacity];
+    [super draw];
+}
+
 /** 
  OVERRIDDEN TOUCH EVENTS
  **/
@@ -68,7 +104,8 @@
     CGPoint tp = [touch locationInView:[touch view]];
     tp         = [[CCDirector sharedDirector] convertToGL:tp];
     tp         = [self.parent convertToNodeSpace:tp];
-    frame = CGRectMake(self.position.x, self.position.y, viewSize_.width, viewSize_.height);
+    
+    frame = [self touchRect];
     
     //dispatcher does not know about clipping. reject touches outside visible bounds.
     if ([touches_ count] > 2 ||
@@ -107,7 +144,7 @@
             CGFloat newX, newY;
             
             touchMoved_  = YES;
-            frame        = CGRectMake(self.position.x, self.position.y, viewSize_.width, viewSize_.height);
+            frame        = [self touchRect];
             newPoint     = [touch locationInView:[touch view]];
             newPoint     = [[CCDirector sharedDirector] convertToGL: newPoint];
             newPoint     = [self.parent convertToNodeSpace:newPoint];
@@ -146,6 +183,10 @@
             [self setZoomScale:self.zoomScale*len/touchLength_];
         }
     }
+}
+
+-(CGRect)touchRect{
+    return CGRectMake(self.position.x - viewSize_.width * kTableSizeMultiplier, self.position.y - viewSize_.width*kTableSizeMultiplier,2*kTableSizeMultiplier*viewSize_.width, 2*viewSize_.height*kTableSizeMultiplier);
 }
 
 - (void) registerWithTouchDispatcher {

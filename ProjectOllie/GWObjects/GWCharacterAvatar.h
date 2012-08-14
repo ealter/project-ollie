@@ -59,6 +59,9 @@ typedef enum Orientation {
 /* The current state of the GWCharacterAvatar */
 @property (assign, nonatomic) characterState state;
 
+/* The current orientation of the character (facing left or right normal to flat earth */
+@property (assign, nonatomic) Orientation orientation;
+
 /* The currently active weapon, visible if state == arming */
 @property (strong, nonatomic) GWWeapon* selectedWeapon;
 
