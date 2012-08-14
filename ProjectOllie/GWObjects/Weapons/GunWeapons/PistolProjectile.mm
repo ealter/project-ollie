@@ -18,6 +18,7 @@
 {
     if (self = [super initWithBulletSize:CGSizeMake(PISTOL_B_WIDTH, PISTOL_B_HEIGHT) imageName:PISTOL_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         self.physicsBody->SetGravityScale(0);
+        self.physicsBody->GetFixtureList()->SetDensity(3.);
     }
     
     return self;
