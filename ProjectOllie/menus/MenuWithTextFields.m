@@ -8,6 +8,7 @@
 
 #import "MenuWithTextFields.h"
 #import "CCDirector.h"
+#import "CCUIViewWrapper.h"
 
 @implementation MenuWithTextFields
 
@@ -26,9 +27,9 @@
     [field setFont:[UIFont fontWithName:@"Arial" size:14]];
     field.backgroundColor = [UIColor whiteColor];
     field.borderStyle = UITextBorderStyleRoundedRect;
-    field.transform = CGAffineTransformMakeRotation(M_PI/2);
-    field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
-    [[CCDirector sharedDirector].view.window addSubview:field];
+    field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);
+    CCUIViewWrapper *wrapper = [CCUIViewWrapper wrapperForUIView:field];
+    [self addChild:wrapper];
     return field;
 }
 
