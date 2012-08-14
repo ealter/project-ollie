@@ -98,6 +98,9 @@ Bone* Skeleton::boneAddChild(Bone *root, Bone *child)
         world->CreateJoint(&jointDef);
         //DebugLog("The angle between these two bodies are: %4.4f", RAD2DEG(j->GetJointAngle()));
     }
+    
+    boneDict[root->name] = root;
+    
     return root;
 }
 
@@ -127,6 +130,8 @@ Bone* Skeleton::boneFreeTree(Bone *root)
     
     for (int i = 0; i < root->children.size(); i++)
         boneFreeTree(root->children[i]);
+    
+    boneDict[root->name] = NULL;
     
     delete(root);
     
@@ -176,9 +181,9 @@ void Skeleton::runAnimation(string animationName, bool flipped)
             else if (prefix == 'l')
                 name = 'r'+name.substr(1);
         }
-            
-        Bone* bone = this->getBoneByName(this->root, name);
-        Bone* alternate = this->getBoneByName(this->root, initial_name);
+        // When reversed, alternate bones    
+        Bone* bone = this->getBoneByName(name);
+        Bone* alternate = this->getBoneByName(initial_name);
         if(bone) {
             if(iter->second) {
                 // queue<KeyFrame*> newAnimation;
@@ -260,8 +265,8 @@ bool Skeleton::animating(Bone *root, float time)
         anim = false;
         
         // new position is avg left and right leg position
-        Bone* ll = getBoneByName(root, "ll_leg");
-        Bone* rl = getBoneByName(root, "rl_leg");
+        Bone* ll = getBoneByName("ll_leg");
+        Bone* rl = getBoneByName("rl_leg");
 
         if(ll && rl) {
             float xpos = ll->box2DBody->GetPosition().x + rl->box2DBody->GetPosition().x;
@@ -291,19 +296,9 @@ Bone* Skeleton::getRoot()
     return root;
 }
 
-Bone* Skeleton::getBoneByName(Bone* root, string name)
+Bone* Skeleton::getBoneByName(string name)
 {
-    
-    if(!root->name.compare(name)) {
-        return root;
-    }
-    for (int i = 0; i < root->children.size(); i++) {
-        Bone* child = this->getBoneByName(root->children.at(i),name);
-        if(child)
-            return child;
-    }
-    
-    return NULL;
+    return boneDict[name];
 }
 
 void Skeleton::setPosition(Bone* root, float x, float y)
