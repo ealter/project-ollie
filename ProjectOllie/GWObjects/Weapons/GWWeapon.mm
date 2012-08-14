@@ -17,10 +17,18 @@
 @synthesize wepAngle        = _wepAngle;
 @synthesize holder          = _holder;
 @synthesize weaponImage     = _weaponImage;
+@synthesize title           = _title;
+@synthesize description     = _description;
 
 -(void)fireWeapon:(CGPoint)target
 {
     
+}
+
+-(void)fillDescription
+{
+    self.title          = @"";
+    self.description    = @"";
 }
 
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint

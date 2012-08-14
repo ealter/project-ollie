@@ -22,6 +22,12 @@
     return self;
 }
 
+-(void)fillDescription
+{
+    self.title          = @"Shotgun";
+    self.description    = @"Basic shotgun.  Fires a cone of pellets that hurt more the closer they are!";
+}
+
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {
