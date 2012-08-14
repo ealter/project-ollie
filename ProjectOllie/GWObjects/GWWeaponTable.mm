@@ -8,6 +8,7 @@
 
 #import "GWWeaponTable.h"
 #import "GWWeapon.h"
+
 #import "MyCell.h"
 #define kTagWepTable 10
 #define kTableSizeMultiplier 2.4
@@ -193,5 +194,12 @@
 - (void) registerWithTouchDispatcher {
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
+
+@end
+
+@implementation GWWeaponTableSlot
+
+@synthesize description = _description;
+@synthesize title       = _title;
 
 @end

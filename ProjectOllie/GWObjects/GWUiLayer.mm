@@ -105,10 +105,14 @@
 
         if(loadWep)
         {
+            GWWeaponTableSlot* slot = [CCNode node];
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
             sprite.anchorPoint = CGPointZero;
+            [slot addChild:sprite];
+            slot.description = loadWep.description;
+            slot.title       = loadWep.title;
             
-            [cell addChild:loadWep];
+            [cell addChild:slot];
             CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
             label.position = ccp(20, 20);
             label.tag = 123;
