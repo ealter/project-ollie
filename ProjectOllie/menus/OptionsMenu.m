@@ -29,7 +29,6 @@
         userName.position=ccp(nameframe.origin.x - nameframe.size.width, nameframe.origin.y);
         [self addChild:userName z:1];
     }
-    
     return self;
 }
 

@@ -13,14 +13,10 @@
 #import "Authentication.h"
 
 @interface LoginScreen () <ServerAPI_delegate>
-
-@property (nonatomic, retain) Login *login;
-
 @end
 
 @implementation LoginScreen
 @synthesize nameField, pwField;
-@synthesize login = _login;
 
 -(id)init
 {
@@ -36,21 +32,14 @@
     return self;
 }
 
-- (Login *)login
-{
-    if(!_login) {
-        _login = [[Login alloc]init];
-        _login.delegate = self;
-    }
-    return _login;
-}
-
 - (void)pressedLogin:(id)sender
 {
     NSString *username = nameField.text;
     NSString *password = pwField.text;
     [self startActivityIndicator];
-    [self.login loginWithUsername:username password:password];
+    Login *login = [[Login alloc] init];
+    login.delegate = self;
+    [login loginWithUsername:username password:password];
 }
 
 - (void)pressedLoginWithFacebook:(id)sender

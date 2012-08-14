@@ -11,14 +11,10 @@
 #import "cocos2d.h"
 
 @interface NewAccountMenu () <ServerAPI_delegate>
-
-@property (nonatomic, strong) AccountCreator *accountCreator;
-
 @end
 
 @implementation NewAccountMenu
 @synthesize emailField, pwField, nameField, cfpwField;
-@synthesize accountCreator = _accountCreator;
 
 -(id)init
 {
@@ -46,15 +42,6 @@
     return self;
 }
 
-- (AccountCreator *)accountCreator
-{
-    if(!_accountCreator) {
-        _accountCreator = [[AccountCreator alloc]init];
-        _accountCreator.delegate = self;
-    }
-    return _accountCreator;
-}
-
 //TODO: make user repeat password?
 -(void)pressedMake:(id)sender
 {
@@ -62,7 +49,9 @@
     NSString *password = pwField.text;
     NSString *email    = emailField.text;
     [self startActivityIndicator];
-    [self.accountCreator createAccountWithUsername:username password:password email:email];
+    AccountCreator *accountCreator = [[AccountCreator alloc] init];
+    accountCreator.delegate = self;
+    [accountCreator createAccountWithUsername:username password:password email:email];
 }
 
 -(void)pressedCancel:(id)sender
