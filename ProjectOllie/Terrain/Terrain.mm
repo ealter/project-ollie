@@ -41,9 +41,9 @@
     if (self = [super init])
     {
         self.contentSize = [[CCDirector sharedDirector] winSize];
-        self->shapeField_ = new ShapeField(WORLD_WIDTH, WORLD_HEIGHT);
+        self->shapeField_ = new ShapeField(WORLD_WIDTH_PX, WORLD_HEIGHT_PX);
         
-        drawSprite = [[MaskedSprite alloc] initWithFile:@"rocks.png" size:CGSizeMake(self.contentSize.width, self.contentSize.height)];
+        drawSprite = [[MaskedSprite alloc] initWithFile:@"rocks.png" size:CGSizeMake(WORLD_WIDTH_PX, WORLD_HEIGHT_PX)];
         drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
         polyRenderer = [HMVectorNode node];

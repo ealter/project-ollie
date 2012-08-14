@@ -13,6 +13,7 @@
 #import "ActionLayer.h"
 #import "cocos2d.h"
 #import "CCDirector.h"
+#import "GameConstants.h"
 
 @interface DrawEnvironmentScene () <DrawMenu_delegate>
 
@@ -41,11 +42,10 @@
         drawTouchLayer.isTouchEnabled = YES;
         
         //Add the brush and setting button touch layer
-        DrawMenu *drawnode = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
-        assert([drawnode isKindOfClass:[DrawMenu class]]);
-        drawnode.delegate = self;
-        [self addChild:drawnode];
-        [[self screenHUD] addChild:drawnode];
+        DrawMenu *buttons = (DrawMenu *)[CCBReader nodeGraphFromFile:@"DrawMenu.ccbi"];
+        assert([buttons isKindOfClass:[DrawMenu class]]);
+        buttons.delegate = self;
+        [[self screenHUD] addChild:buttons];
         
     }
     return self;
@@ -83,7 +83,10 @@
 - (id) initWithEnvironmentScene:(EnvironmentScene*)des
 {
     if (self = [super init])
+    {
         envScene = des;
+        _brushradius = 30;
+    }
     return self;
 }
 
@@ -93,17 +96,17 @@
     location = [self convertToNodeSpace:location];
     float minToEdge = fabs(self.brushradius);
     if (self.brushradius < 0) minToEdge -= 1;
-    if (location.x -minToEdge<self.contentSize.width/20) {
-        location.x=self.contentSize.width/20+minToEdge;
+    if (location.x -minToEdge<WORLD_WIDTH_PX/20) {
+        location.x=WORLD_WIDTH_PX/20+minToEdge;
     }
-    if (location.x +minToEdge>self.contentSize.width*0.95) {
-        location.x=self.contentSize.width*0.95-minToEdge;
+    if (location.x +minToEdge>WORLD_WIDTH_PX*0.95) {
+        location.x=WORLD_WIDTH_PX*0.95-minToEdge;
     }
-    if (location.y -minToEdge<self.contentSize.height/20) {
-        location.y=self.contentSize.height/20+minToEdge;
+    if (location.y -minToEdge<WORLD_HEIGHT_PX/20) {
+        location.y=WORLD_HEIGHT_PX/20+minToEdge;
     }
-    if (location.y+minToEdge>self.contentSize.height*0.9) {
-        location.y=self.contentSize.height*0.9-minToEdge;
+    if (location.y+minToEdge>WORLD_WIDTH_PX*0.95) {
+        location.y=WORLD_WIDTH_PX*0.95-minToEdge;
     }
     return location;
 }
