@@ -17,11 +17,10 @@
 - (id)init
 {
     if(self = [super init]) {
-        float height = 30;
-        CGRect frame = CGRectMake(self.contentSize.height*0.8 + height/2, self.contentSize.width/2, 150, height);
+        const float height = 30;
+        CGRect frame = CGRectMake(self.contentSize.width/2, self.contentSize.height*0.8 + height/2, 150, height);
         searchField_ = [self addTextFieldWithFrame:frame];
         searchField_.placeholder = @"Username";
-        searchField_.delegate    = self;
     }
     return self;
 }

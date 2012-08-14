@@ -27,8 +27,12 @@
     [field setFont:[UIFont fontWithName:@"Arial" size:14]];
     field.backgroundColor = [UIColor whiteColor];
     field.borderStyle = UITextBorderStyleRoundedRect;
-    field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);
+    field.delegate = self;
+    //field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);
+    field.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
     CCUIViewWrapper *wrapper = [CCUIViewWrapper wrapperForUIView:field];
+    wrapper.position = ccp(frame.origin.x - frame.size.width/2, frame.origin.y + frame.size.height/2);
+    wrapper.anchorPoint = ccp(0.5, 0.5);
     [self addChild:wrapper];
     return field;
 }

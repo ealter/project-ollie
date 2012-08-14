@@ -17,10 +17,9 @@
 - (id)init
 {
     if(self = [super init]) {
-        CGRect emailframe = CGRectMake(self.contentSize.height*0.65, self.contentSize.width/2, 150, 30);
+        CGRect emailframe = CGRectMake(self.contentSize.width/2, self.contentSize.height*0.65, 150, 30);
         emailAddressField_ = [self addTextFieldWithFrame:emailframe];
         emailAddressField_.placeholder = @"Email";
-        emailAddressField_.delegate    = self;
     }
     return self;
 }
