@@ -38,11 +38,6 @@
 // returns the transform matrix according the Chipmunk Body values
 -(CGAffineTransform) nodeToParentTransform
 {
-    if (!camera_)
-    {
-        //printf("No camera set to transform GWPerspective Layer");
-        //return transform_;
-    }
     
     //Project position to the camera point onto the screen plane
     float projectionScale = _camera.z0/(_camera.location.z - _z);
