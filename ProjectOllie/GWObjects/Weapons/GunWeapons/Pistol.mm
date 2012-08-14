@@ -17,7 +17,7 @@
 
 -(id)initWithPosition:(CGPoint)pos ammo:(float)ammo box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithImage:PISTOL_IMAGE position:pos size:CGSizeMake(PISTOL_WIDTH, PISTOL_HEIGHT) ammo:ammo bulletSize:CGSizeMake(PISTOL_B_WIDTH, PISTOL_B_HEIGHT) bulletSpeed:.2 bulletImage:PISTOL_B_IMAGE box2DWorld:world gameWorld:gWorld]){
+    if (self = [super initWithImage:PISTOL_IMAGE position:pos size:CGSizeMake(PISTOL_WIDTH, PISTOL_HEIGHT) ammo:ammo bulletSize:CGSizeMake(PISTOL_B_WIDTH, PISTOL_B_HEIGHT) bulletSpeed:.4 bulletImage:PISTOL_B_IMAGE box2DWorld:world gameWorld:gWorld]){
         
     }
     

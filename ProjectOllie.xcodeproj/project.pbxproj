@@ -405,6 +405,10 @@
 		CEC7C99915903CEC00FFB4F7 /* LoginWithFacebookPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99515903CEC00FFB4F7 /* LoginWithFacebookPressed.png */; };
 		CEC7C99A15903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */; };
 		CECCD32D15D9BDDF005867FF /* GWMeleeWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CECCD32C15D9BDDF005867FF /* GWMeleeWeapon.mm */; };
+		CECCD33B15D9ED81005867FF /* katana.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33815D9ED81005867FF /* katana.png */; };
+		CECCD33C15D9ED81005867FF /* kunai.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33915D9ED81005867FF /* kunai.png */; };
+		CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33D15D9EDAA005867FF /* bo_staff.png */; };
+		CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */ = {isa = PBXBuildFile; fileRef = CECCD34015D9EEA7005867FF /* BoStaff.mm */; };
 		CEDEE34A15C8A72A00C0BB1C /* banana_grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */; };
 		CEDEE34B15C8A72A00C0BB1C /* gauss_rifle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */; };
 		CEDEE34C15C8A72A00C0BB1C /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34815C8A72A00C0BB1C /* rocket.png */; };
@@ -1121,6 +1125,11 @@
 		CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookPressed@2x.png"; sourceTree = "<group>"; };
 		CECCD32B15D9BDDF005867FF /* GWMeleeWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWMeleeWeapon.h; sourceTree = "<group>"; };
 		CECCD32C15D9BDDF005867FF /* GWMeleeWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWMeleeWeapon.mm; sourceTree = "<group>"; };
+		CECCD33815D9ED81005867FF /* katana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = katana.png; sourceTree = "<group>"; };
+		CECCD33915D9ED81005867FF /* kunai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kunai.png; sourceTree = "<group>"; };
+		CECCD33D15D9EDAA005867FF /* bo_staff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bo_staff.png; sourceTree = "<group>"; };
+		CECCD33F15D9EEA7005867FF /* BoStaff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoStaff.h; sourceTree = "<group>"; };
+		CECCD34015D9EEA7005867FF /* BoStaff.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoStaff.mm; sourceTree = "<group>"; };
 		CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana_grenade.png; sourceTree = "<group>"; };
 		CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gauss_rifle.png; sourceTree = "<group>"; };
 		CEDEE34815C8A72A00C0BB1C /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
@@ -1475,6 +1484,7 @@
 		C5F4309A15B8D2EA00174FEE /* Weapons */ = {
 			isa = PBXGroup;
 			children = (
+				CECCD33615D9E4CC005867FF /* MeleeWeapons */,
 				CE59CA4D15C4D61500B68745 /* ThrownWeapons */,
 				CE59CA4C15C4D61500B68745 /* GunWeapons */,
 				C5F4309B15B8D2EA00174FEE /* GWProjectile.h */,
@@ -2477,6 +2487,9 @@
 			isa = PBXGroup;
 			children = (
 				CEDEE35D15C8D4F000C0BB1C /* pellet.png */,
+				CECCD33815D9ED81005867FF /* katana.png */,
+				CECCD33D15D9EDAA005867FF /* bo_staff.png */,
+				CECCD33915D9ED81005867FF /* kunai.png */,
 				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
 				CE79029C15D4AA5100958D04 /* banana.png */,
@@ -2509,6 +2522,15 @@
 			);
 			name = Facebook;
 			path = Resources/Facebook;
+			sourceTree = "<group>";
+		};
+		CECCD33615D9E4CC005867FF /* MeleeWeapons */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD33F15D9EEA7005867FF /* BoStaff.h */,
+				CECCD34015D9EEA7005867FF /* BoStaff.mm */,
+			);
+			path = MeleeWeapons;
 			sourceTree = "<group>";
 		};
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
@@ -2748,6 +2770,9 @@
 				C51CCC1215D9A02C00E2AB9A /* Cantarell-Oblique.ttf in Resources */,
 				C51CCC1315D9A02C00E2AB9A /* Cantarell-Regular.ttf in Resources */,
 				C51CCC1415D9A02C00E2AB9A /* FONTLOG.txt in Resources */,
+				CECCD33B15D9ED81005867FF /* katana.png in Resources */,
+				CECCD33C15D9ED81005867FF /* kunai.png in Resources */,
+				CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3011,6 +3036,7 @@
 				CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */,
 				CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */,
 				CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */,
+				CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
