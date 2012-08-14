@@ -66,11 +66,6 @@
     DebugLog(@"I forgot my password!");
 }
 
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:nameField, pwField, nil];
-}
-
 //Called when login succeeds
 - (void)serverOperationSucceededWithData:(id)data
 {

@@ -44,12 +44,7 @@
 - (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    [[[UIAlertView alloc]initWithTitle:@"Error when changing password" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-}
-
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:oldPasswordField_, newPasswordField_, confirmPasswordField_, nil];
+    [[[UIAlertView alloc] initWithTitle:@"Error when changing password" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 - (void)pressedChangePassword:(id)sender

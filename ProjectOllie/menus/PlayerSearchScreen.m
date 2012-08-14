@@ -57,9 +57,4 @@
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObject:searchField_];
-}
-
 @end

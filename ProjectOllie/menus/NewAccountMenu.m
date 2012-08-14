@@ -65,11 +65,6 @@
     [self.accountCreator createAccountWithUsername:username password:password email:email];
 }
 
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil];
-}
-
 -(void)pressedCancel:(id)sender
 {
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];

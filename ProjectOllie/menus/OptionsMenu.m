@@ -44,11 +44,6 @@
     }
 }
 
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObject:nameField];
-}
-
 - (void)pressedChangePassword:(id)sender
 {
     [self transitionToSceneWithFile:@"PasswordChangeScreen.ccbi"];

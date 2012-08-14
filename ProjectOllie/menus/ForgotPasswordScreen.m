@@ -24,11 +24,6 @@
     return self;
 }
 
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObject:emailAddressField_];
-}
-
 - (void)pressedResetPassword:(id)sender
 {
     ResetPassword *passwordResetter = [[ResetPassword alloc] init];
