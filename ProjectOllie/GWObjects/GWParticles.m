@@ -294,14 +294,14 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
 @implementation GWParticleMuzzleFlash
 -(id) init
 {
-    return [self initWithTotalParticles:50];
+    return [self initWithTotalParticles:200];
 }
 
 -(id) initWithTotalParticles:(NSUInteger)p
 {
     if( (self=[super initWithTotalParticles:p]) ) {
         // duration
-        duration = 0.2;
+        duration = 0.02;
         
         // Gravity Mode
         self.emitterMode = kCCParticleModeGravity;
@@ -311,7 +311,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         
         // Gravity Mode: gravity
         //This is where you would change the angle of the muzzle flash
-        self.gravity = ccp(1000,0);
+        self.gravity = ccp(0,0);
         
         // Gravity Mode:  radial
         self.radialAccel = 0;
@@ -324,33 +324,33 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         // emitter position
         CGSize winSize = [[CCDirector sharedDirector] winSize];
         self.position = ccpMult(ccpFromSize(winSize), 0.5);
-        self.posVar = ccp(7, 4);
+        self.posVar = ccp(4, 4);
         
         // angle
-        angle = 90;
+        angle = 0;
         angleVar = 0;
         
         // life of particles
-        life = 0.2f;
-        lifeVar = 0.0f;
+        life = 0.0f;
+        lifeVar = 0.2f;
         
         // emits per frame
         emissionRate = totalParticles/life;
         
         // color of particles
-        startColor    = ccc4f(0.52, 0.35, 0.0, 0.35);
-        startColorVar = kColor4fZero;
-        endColor      = ccc4f(1.0,  0.0,  0.0, 0.73);
-        endColorVar   = kColor4fZero;
+        startColor    = ccc4f(1., 0.77, 0.32, 0.35);
+        startColorVar = ccc4f(1., 0., 0., 0.3);
+        endColor      = ccc4f(1.0,  0.0,  0.0, 1.);
+        endColorVar   = ccc4f(1., 0., 0., 0.);
         
         // size, in pixels
-        startSize = 20.0f;
+        startSize = 10.0f;
         startSizeVar = 0.0f;
-        endSize = 12.f;
+        endSize = 1.f;
         endSizeVar = 0.0f;
         
         //Change the GL blend function
-        [self setBlendFunc:(ccBlendFunc) { GL_ONE, GL_ONE }];        
+        [self setBlendFunc:(ccBlendFunc) { GL_DST_ALPHA, GL_ONE }];        
         
         //Get the particle texture0
         self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];

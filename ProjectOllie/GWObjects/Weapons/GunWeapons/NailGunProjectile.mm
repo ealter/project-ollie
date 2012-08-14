@@ -1,22 +1,19 @@
 //
-//  PistolProjectile.m
+//  NailGunProjectile.m
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/14/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "PistolProjectile.h"
-#import "Pistol.h"
-#import "GWParticles.h"
+#import "NailGunProjectile.h"
+#import "NailGun.h"
 
-
-@implementation PistolProjectile
-
+@implementation NailGunProjectile
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithBulletSize:CGSizeMake(PISTOL_B_WIDTH, PISTOL_B_HEIGHT) imageName:PISTOL_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
+    if (self = [super initWithBulletSize:CGSizeMake(NAILGUN_B_WIDTH, NAILGUN_B_HEIGHT) imageName:NAILGUN_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         self.physicsBody->SetGravityScale(0);
         self.physicsBody->GetFixtureList()->SetDensity(3.);
     }
@@ -53,6 +50,5 @@
 {
     self.bulletCollided = TRUE;
 }
-
 
 @end

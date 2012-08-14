@@ -20,6 +20,12 @@
     return self;
 }
 
+-(void)fillDescription
+{
+    self.title          = @"Bo Staff";
+    self.description    = @"A sturdy staff, great for whacking apes around.  Donatello would be proud.";
+}
+
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {        

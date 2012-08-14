@@ -22,6 +22,12 @@
     return self;
 }
 
+-(void)fillDescription
+{
+    self.title          = @"Grenade";
+    self.description    = @"Standard issue grenade.  Explodes after 4 seconds; make sure you're out of there by then!";
+}
+
 
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {

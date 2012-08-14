@@ -96,7 +96,6 @@
     if([self.activeCharacter.weapons count] > idx)
         loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
-    NSString *string = [NSString stringWithFormat:@"%d", idx];
     
     
     SWTableViewCell *cell = [table cellAtIndex:idx];
@@ -105,17 +104,20 @@
 
         if(loadWep)
         {
+            // Ammunition information
             GWWeaponTableSlot* slot = [CCNode node];
+            NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
+            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Aaargh" fontSize:15.0];
+            
+            // Weapon slot initialization
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
             sprite.anchorPoint = CGPointZero;
             [slot addChild:sprite];
             slot.description = loadWep.description;
             slot.title       = loadWep.title;
             
+            // Add proper children to cell
             [cell addChild:slot];
-            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
-            label.position = ccp(20, 20);
-            label.tag = 123;
             [cell addChild:label];
         }
       

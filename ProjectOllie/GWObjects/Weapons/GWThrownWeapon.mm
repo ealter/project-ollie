@@ -23,6 +23,8 @@
         self.ammo           = ammo;
         self.weaponImage    = imageName;
         
+        [self fillDescription];
+        
         fuseTimer           = fuseTime;
         countDown           = 0;
         _world              = world;

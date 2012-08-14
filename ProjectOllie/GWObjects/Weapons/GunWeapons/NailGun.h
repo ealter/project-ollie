@@ -1,8 +1,8 @@
 //
-//  Pistol.h
+//  NailGun.h
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/14/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
@@ -10,18 +10,17 @@
 #import "cocos2d.h"
 #import "GWGunWeapon.h"
 
-#define PISTOL_WIDTH (40./PTM_RATIO)
-#define PISTOL_HEIGHT (16./PTM_RATIO)
-#define PISTOL_IMAGE @"pistol.png"
-#define PISTOL_B_WIDTH 10.
-#define PISTOL_B_HEIGHT 6.
-#define PISTOL_B_IMAGE @"bullet.png"
+#define NAILGUN_WIDTH (40./PTM_RATIO)
+#define NAILGUN_HEIGHT (30./PTM_RATIO)
+#define NAILGUN_IMAGE @"nail_gun.png"
+#define NAILGUN_B_WIDTH 10.
+#define NAILGUN_B_HEIGHT 6.
+#define NAILGUN_B_IMAGE @"nail.png"
 
-@interface Pistol : GWGunWeapon {
+@interface NailGun : GWGunWeapon {
     
 }
 
 -(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
-
 
 @end
