@@ -165,6 +165,7 @@
 		CE26F7AF15D3125000088E16 /* GameScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7AE15D3125000088E16 /* GameScene.mm */; };
 		CE26F7B215D3126700088E16 /* BattleScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7B115D3126700088E16 /* BattleScene.mm */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
+		CE2AF71615D9F5D70085E82C /* CCUIViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
 		CE30B196158FBA34009EC82B /* LoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18F158FBA34009EC82B /* LoginScreen.m */; };
@@ -669,6 +670,8 @@
 		CE26F7B015D3126600088E16 /* BattleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleScene.h; sourceTree = "<group>"; };
 		CE26F7B115D3126700088E16 /* BattleScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BattleScene.mm; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = "Resources/menu-objects/ccbis/NewAccountMenu.ccbi"; sourceTree = "<group>"; };
+		CE2AF71415D9F5D70085E82C /* CCUIViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUIViewWrapper.h; sourceTree = "<group>"; };
+		CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUIViewWrapper.m; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
 		CE30B18C158FBA34009EC82B /* DrawMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawMenu.h; path = menus/DrawMenu.h; sourceTree = "<group>"; };
@@ -1753,6 +1756,16 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		CE2AF71315D9F5D70085E82C /* CCUIViewWrapper */ = {
+			isa = PBXGroup;
+			children = (
+				CE2AF71415D9F5D70085E82C /* CCUIViewWrapper.h */,
+				CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */,
+			);
+			name = CCUIViewWrapper;
+			path = libs/CCUIViewWrapper;
+			sourceTree = "<group>";
+		};
 		CE2E83F615AF76F1000372BE /* Backgrounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -1982,6 +1995,7 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				CE2AF71315D9F5D70085E82C /* CCUIViewWrapper */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
 				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
@@ -3041,6 +3055,7 @@
 				CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */,
 				CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */,
 				CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */,
+				CE2AF71615D9F5D70085E82C /* CCUIViewWrapper.m in Sources */,
 				CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */,
 				C518B58715DB023600E13AB8 /* ConstructionModel.m in Sources */,
 			);

@@ -8,12 +8,16 @@
 
 #import "MenuWithTextFields.h"
 #import "CCDirector.h"
+#import "CCUIViewWrapper.h"
 
 @implementation MenuWithTextFields
 
-- (NSArray *)textFields
+- (id)init
 {
-    return [NSArray array];
+    if(self = [super init]) {
+        textFields_ = [NSMutableArray array];
+    }
+    return self;
 }
 
 - (UITextField *)addTextFieldWithFrame:(CGRect)frame
@@ -26,9 +30,15 @@
     [field setFont:[UIFont fontWithName:@"Arial" size:14]];
     field.backgroundColor = [UIColor whiteColor];
     field.borderStyle = UITextBorderStyleRoundedRect;
-    field.transform = CGAffineTransformMakeRotation(M_PI/2);
-    field.frame = CGRectMake(field.frame.origin.x-field.frame.size.height/2, field.frame.origin.y- field.frame.size.width/2, field.frame.size.width, field.frame.size.height);   
-    [[CCDirector sharedDirector].view.window addSubview:field];
+    field.delegate = self;
+    field.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
+    
+    CCUIViewWrapper *wrapper = [CCUIViewWrapper wrapperForUIView:field];
+    wrapper.position = ccp(frame.origin.x - frame.size.width/2, frame.origin.y + frame.size.height/2);
+    wrapper.anchorPoint = ccp(0.5, 0.5);
+    
+    [self addChild:wrapper];
+    [textFields_ addObject:field];
     return field;
 }
 
@@ -50,7 +60,7 @@
 
 - (void)transitionToSceneWithFile:(NSString *)sceneName
 {
-    [self removeUIViews:[self textFields]];
+    [self removeUIViews:textFields_];
     [super transitionToSceneWithFile:sceneName];
 }
 

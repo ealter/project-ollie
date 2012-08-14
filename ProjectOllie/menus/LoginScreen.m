@@ -25,15 +25,13 @@
 -(id)init
 {
     if (self = [super init]) {
-        nameField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*4/5, self.contentSize.width/2, 150, 30)];
+        nameField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.width/2, self.contentSize.height*4/5, 150, 30)];
         nameField.placeholder = @"Username";
-        nameField.delegate    = self;
         
-        pwField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2, 150, 30)];
+        pwField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.width/2, self.contentSize.height*3/5, 150, 30)];
         pwField.clearsOnBeginEditing = YES;
         pwField.placeholder          = @"Password";
         pwField.secureTextEntry      = YES;
-        pwField.delegate             = self;
     }
     return self;
 }
@@ -66,11 +64,6 @@
 {
     [self transitionToSceneWithFile:@"ForgotPassword.ccbi"];
     DebugLog(@"I forgot my password!");
-}
-
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:nameField, pwField, nil];
 }
 
 //Called when login succeeds
