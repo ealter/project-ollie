@@ -27,11 +27,11 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
 
 -(id) init
 {
-    self = [self initWithSetting:dirt terrain:[Terrain node]];
+    self = [self initWithSetting:environment_dirt terrain:[Terrain node]];
     return self;
 }
 
--(id) initWithSetting:(Setting)setting terrain:(Terrain*)terrain
+-(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain
 {
     if (self = [super init])
     {
@@ -55,7 +55,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         [self addChild:_actionLayer];
         [self addChild:_frontWater];
         
-        [self setSetting:dirt];
+        [self setSetting:environment_dirt];
     }
     return self;
 }
@@ -72,7 +72,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     self.backgroundFar.camera = camera;
 }
 
--(void) setSetting:(Setting)setting
+-(void) setSetting:(EnvironmentSetting)setting
 {
     _setting = setting;
     //Clear the background nodes to place the correct sprites inside
@@ -80,7 +80,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     [_backgroundFar removeAllChildrenWithCleanup:YES];
     [_backgroundNear removeAllChildrenWithCleanup:YES];
     switch (setting) {
-        case dirt:
+        case environment_dirt:
         {
             [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"lava.png"]];
             [_terrain setStrokeColor:ccc4f(1.0f, 0.6f, 0.4f, 1.0f)];
@@ -92,14 +92,14 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
             [_frontWater setColor:waterColor];
             break;
         }
-        case rocks:
+        case environment_rocks:
         {   
             
             [_backWater setColor:waterColor];
             [_frontWater setColor:waterColor];
             break;
         }   
-        case ice:
+        case environment_ice:
         {   
             [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"snow.png"]];
             [_terrain setStrokeColor:ccc4f(1.0f, 1.0f, 1.0f, 1.0f)];
@@ -111,7 +111,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
             [_frontWater setColor:waterColor];
             break;
         }   
-        case lava:
+        case environment_lava:
         {
             
             [_backWater setColor:lavaColor];

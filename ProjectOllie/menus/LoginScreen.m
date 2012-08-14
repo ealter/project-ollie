@@ -13,38 +13,23 @@
 #import "Authentication.h"
 
 @interface LoginScreen () <ServerAPI_delegate>
-
-@property (nonatomic, retain) Login *login;
-
 @end
 
 @implementation LoginScreen
 @synthesize nameField, pwField;
-@synthesize login = _login;
 
 -(id)init
 {
     if (self = [super init]) {
-        nameField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*4/5, self.contentSize.width/2, 150, 30)];
+        nameField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.width/2, self.contentSize.height*4/5, 150, 30)];
         nameField.placeholder = @"Username";
-        nameField.delegate    = self;
         
-        pwField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2, 150, 30)];
+        pwField = [self addTextFieldWithFrame:CGRectMake(self.contentSize.width/2, self.contentSize.height*3/5, 150, 30)];
         pwField.clearsOnBeginEditing = YES;
         pwField.placeholder          = @"Password";
         pwField.secureTextEntry      = YES;
-        pwField.delegate             = self;
     }
     return self;
-}
-
-- (Login *)login
-{
-    if(!_login) {
-        _login = [[Login alloc]init];
-        _login.delegate = self;
-    }
-    return _login;
 }
 
 - (void)pressedLogin:(id)sender
@@ -52,7 +37,9 @@
     NSString *username = nameField.text;
     NSString *password = pwField.text;
     [self startActivityIndicator];
-    [self.login loginWithUsername:username password:password];
+    Login *login = [[Login alloc] init];
+    login.delegate = self;
+    [login loginWithUsername:username password:password];
 }
 
 - (void)pressedLoginWithFacebook:(id)sender
@@ -66,11 +53,6 @@
 {
     [self transitionToSceneWithFile:@"ForgotPassword.ccbi"];
     DebugLog(@"I forgot my password!");
-}
-
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:nameField, pwField, nil];
 }
 
 //Called when login succeeds
