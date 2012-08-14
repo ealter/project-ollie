@@ -35,9 +35,6 @@
 /* An array of length 10 that holds the indices for each body part */
 @property (strong, nonatomic) NSArray* spriteIndices;
 
-/* The current orientation of the character (facing left or right normal to flat earth */
-@property (assign, nonatomic) Orientation orientation;
-
 @end
 
 @implementation GWCharacterAvatar
