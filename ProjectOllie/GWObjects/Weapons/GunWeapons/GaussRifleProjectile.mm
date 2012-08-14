@@ -18,10 +18,13 @@
     if (self = [super initWithBulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) imageName:GAUSS_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
         gaussTimer = 0;
         self.physicsBody->SetGravityScale(0);
-        
+        self.physicsBody->GetFixtureList()->SetDensity(3.);
+
         self.emitter = [GWParticleMagicMissile node];
         self.emitter.position = self.position;
         [self.gameWorld addChild:self.emitter];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:30 x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain shapeChanged];
     }
     
     return self;
@@ -42,8 +45,6 @@
     }
 }
 
-
-//YOU SHOULD OVERRIDE THIS OR AT LEAST CALL IT FROM THE CHILD!
 -(void)destroyBullet
 {
     if(self.gameWorld != NULL)

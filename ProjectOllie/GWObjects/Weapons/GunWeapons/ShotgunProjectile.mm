@@ -25,9 +25,9 @@
 {
     if ((self = [self initWithFile:imageName])) {
         //take the world, speed, and pos
-        _world              = world;
-        self.gameWorld      = gWorld;
-        self.bulletCollided = FALSE;
+        _world                          = world;
+        self.gameWorld                  = gWorld;
+        self.bulletCollided             = FALSE;
         
         //Schedule updates
         [self scheduleUpdate];
@@ -37,20 +37,19 @@
         b2FixtureDef fixtureDef;
         
         //Set up the BodyDef
-        bd.type             = b2_dynamicBody;
-        bd.linearDamping    = .1f;
-        bd.angularDamping   = .1f;
-        //bd.bullet           = true;//isBullet;
+        bd.type                         = b2_dynamicBody;
+        bd.linearDamping                = .1f;
+        bd.angularDamping               = .1f;
         
         box.SetAsBox(size.width/2./PTM_RATIO,size.height/2./PTM_RATIO);
         
-        fixtureDef.shape    = &box;
-        fixtureDef.density  = 1.0f;
-        fixtureDef.friction = 0.0f;
-        fixtureDef.restitution = 1.0f;
-        fixtureDef.filter.categoryBits = CATEGORY_PELLETS;
-        fixtureDef.filter.maskBits = MASK_PELLETS;
-        b2Body *bulletShape = _world->CreateBody(&bd);
+        fixtureDef.shape                = &box;
+        fixtureDef.density              = 1.0f;
+        fixtureDef.friction             = 0.0f;
+        fixtureDef.restitution          = 1.0f;
+        fixtureDef.filter.categoryBits  = CATEGORY_PELLETS;
+        fixtureDef.filter.maskBits      = MASK_PELLETS;
+        b2Body *bulletShape             = _world->CreateBody(&bd);
         bulletShape->CreateFixture(&fixtureDef);
         bulletShape->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0); 
         

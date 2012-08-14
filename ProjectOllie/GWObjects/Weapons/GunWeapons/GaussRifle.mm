@@ -17,6 +17,7 @@
 {
     if (self = [super initWithImage:GAUSS_IMAGE position:pos size:CGSizeMake(GAUSS_WIDTH, GAUSS_HEIGHT) ammo:ammo bulletSize:CGSizeMake(GAUSS_B_WIDTH, GAUSS_B_HEIGHT) bulletSpeed:.2 bulletImage:GAUSS_B_IMAGE box2DWorld:world gameWorld:gWorld]){
         
+        
     }
         
     return self;
@@ -29,11 +30,15 @@
         CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
-        GaussRifleProjectile *bullet= [[GaussRifleProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * GAUSS_WIDTH/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *GAUSS_HEIGHT/2*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
+        GaussRifleProjectile *bullet= [[GaussRifleProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * GAUSS_WIDTH*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *GAUSS_WIDTH*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
         b2Body* bulletShape = bullet.physicsBody;
+        
+        
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.gameWorld addChild:bullet];
         bullet.fireAngle = atan2f(force.y, force.x);
+        
+        
         //Apply force
         bulletShape->SetLinearVelocity(b2Vec2(force.x, force.y));
         

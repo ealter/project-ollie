@@ -210,6 +210,9 @@
 		CE6B51E715C0E33100F51BE6 /* selectedoption.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D415C0E33100F51BE6 /* selectedoption.png */; };
 		CE6B51E815C0E33100F51BE6 /* silverbutton-dark.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */; };
 		CE6B51E915C0E33100F51BE6 /* silverbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = CE6B51D615C0E33100F51BE6 /* silverbutton.png */; };
+		CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E38A15D9AE1C00151527 /* HighestVersion.m */; };
+		CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */; };
+		CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */; };
 		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
 		CE79028315D486C300958D04 /* bazooka.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79027F15D486C200958D04 /* bazooka.png */; };
 		CE79028415D486C300958D04 /* grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028015D486C200958D04 /* grenade.png */; };
@@ -392,6 +395,8 @@
 		CE98070915D5B76600D843DC /* BananaCluster.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE98070815D5B76600D843DC /* BananaCluster.mm */; };
 		CE98070D15D5B8AD00D843DC /* BananaSingle.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE98070C15D5B8AC00D843DC /* BananaSingle.mm */; };
 		CE99465815C4F19700D46E1E /* aimOverlay.png in Resources */ = {isa = PBXBuildFile; fileRef = CE99465715C4F19700D46E1E /* aimOverlay.png */; };
+		CE9E274A15D9AD260075774F /* Pistol.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9E274915D9AD250075774F /* Pistol.mm */; };
+		CE9E274E15D9AD510075774F /* PistolProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9E274D15D9AD500075774F /* PistolProjectile.mm */; };
 		CEA3636D15B7C9B900148D3B /* GWGestures.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.mm */; };
 		CEAFB05C15CBA47900BA62A0 /* GWPerspectiveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
@@ -399,6 +404,11 @@
 		CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */; };
 		CEC7C99915903CEC00FFB4F7 /* LoginWithFacebookPressed.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99515903CEC00FFB4F7 /* LoginWithFacebookPressed.png */; };
 		CEC7C99A15903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */; };
+		CECCD32D15D9BDDF005867FF /* GWMeleeWeapon.mm in Sources */ = {isa = PBXBuildFile; fileRef = CECCD32C15D9BDDF005867FF /* GWMeleeWeapon.mm */; };
+		CECCD33B15D9ED81005867FF /* katana.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33815D9ED81005867FF /* katana.png */; };
+		CECCD33C15D9ED81005867FF /* kunai.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33915D9ED81005867FF /* kunai.png */; };
+		CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33D15D9EDAA005867FF /* bo_staff.png */; };
+		CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */ = {isa = PBXBuildFile; fileRef = CECCD34015D9EEA7005867FF /* BoStaff.mm */; };
 		CEDEE34A15C8A72A00C0BB1C /* banana_grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */; };
 		CEDEE34B15C8A72A00C0BB1C /* gauss_rifle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */; };
 		CEDEE34C15C8A72A00C0BB1C /* rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34815C8A72A00C0BB1C /* rocket.png */; };
@@ -720,6 +730,12 @@
 		CE6B51D415C0E33100F51BE6 /* selectedoption.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = selectedoption.png; path = Resources/Miscellaneous/selectedoption.png; sourceTree = "<group>"; };
 		CE6B51D515C0E33100F51BE6 /* silverbutton-dark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "silverbutton-dark.png"; path = "Resources/Miscellaneous/silverbutton-dark.png"; sourceTree = "<group>"; };
 		CE6B51D615C0E33100F51BE6 /* silverbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = silverbutton.png; path = Resources/Miscellaneous/silverbutton.png; sourceTree = "<group>"; };
+		CE75E38915D9AE1C00151527 /* HighestVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HighestVersion.h; path = ProjectOllie/Server/StaticJson/HighestVersion.h; sourceTree = "<group>"; };
+		CE75E38A15D9AE1C00151527 /* HighestVersion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HighestVersion.m; path = ProjectOllie/Server/StaticJson/HighestVersion.m; sourceTree = "<group>"; };
+		CE75E38E15D9AEBC00151527 /* StaticJsonAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StaticJsonAPI.h; path = ProjectOllie/Server/StaticJson/StaticJsonAPI.h; sourceTree = "<group>"; };
+		CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StaticJsonAPI.m; path = ProjectOllie/Server/StaticJson/StaticJsonAPI.m; sourceTree = "<group>"; };
+		CE75E39115D9B00500151527 /* InAppPurchaseIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InAppPurchaseIdentifiers.h; path = ProjectOllie/Server/StaticJson/InAppPurchaseIdentifiers.h; sourceTree = "<group>"; };
+		CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InAppPurchaseIdentifiers.m; path = ProjectOllie/Server/StaticJson/InAppPurchaseIdentifiers.m; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
 		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
 		CE79027F15D486C200958D04 /* bazooka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazooka.png; sourceTree = "<group>"; };
@@ -1094,6 +1110,10 @@
 		CE98070B15D5B8AC00D843DC /* BananaSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaSingle.h; sourceTree = "<group>"; };
 		CE98070C15D5B8AC00D843DC /* BananaSingle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BananaSingle.mm; sourceTree = "<group>"; };
 		CE99465715C4F19700D46E1E /* aimOverlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aimOverlay.png; sourceTree = "<group>"; };
+		CE9E274815D9AD250075774F /* Pistol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pistol.h; sourceTree = "<group>"; };
+		CE9E274915D9AD250075774F /* Pistol.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Pistol.mm; sourceTree = "<group>"; };
+		CE9E274C15D9AD500075774F /* PistolProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PistolProjectile.h; sourceTree = "<group>"; };
+		CE9E274D15D9AD500075774F /* PistolProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PistolProjectile.mm; sourceTree = "<group>"; };
 		CEA3636B15B7C9B700148D3B /* GWGestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGestures.h; sourceTree = "<group>"; };
 		CEA3636C15B7C9B800148D3B /* GWGestures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWGestures.mm; sourceTree = "<group>"; };
 		CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPerspectiveLayer.h; sourceTree = "<group>"; };
@@ -1103,6 +1123,13 @@
 		CEC7C99415903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookNormal@2x.png"; sourceTree = "<group>"; };
 		CEC7C99515903CEC00FFB4F7 /* LoginWithFacebookPressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LoginWithFacebookPressed.png; sourceTree = "<group>"; };
 		CEC7C99615903CEC00FFB4F7 /* LoginWithFacebookPressed@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LoginWithFacebookPressed@2x.png"; sourceTree = "<group>"; };
+		CECCD32B15D9BDDF005867FF /* GWMeleeWeapon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWMeleeWeapon.h; sourceTree = "<group>"; };
+		CECCD32C15D9BDDF005867FF /* GWMeleeWeapon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWMeleeWeapon.mm; sourceTree = "<group>"; };
+		CECCD33815D9ED81005867FF /* katana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = katana.png; sourceTree = "<group>"; };
+		CECCD33915D9ED81005867FF /* kunai.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kunai.png; sourceTree = "<group>"; };
+		CECCD33D15D9EDAA005867FF /* bo_staff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bo_staff.png; sourceTree = "<group>"; };
+		CECCD33F15D9EEA7005867FF /* BoStaff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoStaff.h; sourceTree = "<group>"; };
+		CECCD34015D9EEA7005867FF /* BoStaff.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoStaff.mm; sourceTree = "<group>"; };
 		CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana_grenade.png; sourceTree = "<group>"; };
 		CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gauss_rifle.png; sourceTree = "<group>"; };
 		CEDEE34815C8A72A00C0BB1C /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
@@ -1457,12 +1484,15 @@
 		C5F4309A15B8D2EA00174FEE /* Weapons */ = {
 			isa = PBXGroup;
 			children = (
+				CECCD33615D9E4CC005867FF /* MeleeWeapons */,
 				CE59CA4D15C4D61500B68745 /* ThrownWeapons */,
 				CE59CA4C15C4D61500B68745 /* GunWeapons */,
 				C5F4309B15B8D2EA00174FEE /* GWProjectile.h */,
 				C5F4309C15B8D2EA00174FEE /* GWProjectile.mm */,
 				C5F4309D15B8D2EA00174FEE /* GWGunWeapon.h */,
 				C5F4309E15B8D2EA00174FEE /* GWGunWeapon.mm */,
+				CECCD32B15D9BDDF005867FF /* GWMeleeWeapon.h */,
+				CECCD32C15D9BDDF005867FF /* GWMeleeWeapon.mm */,
 				C5F4309F15B8D2EA00174FEE /* GWSpellWeapon.h */,
 				C5F430A015B8D2EA00174FEE /* GWSpellWeapon.mm */,
 				C5F430A115B8D2EA00174FEE /* GWThrownWeapon.h */,
@@ -1769,6 +1799,10 @@
 				CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */,
 				CEDEE35215C8A8A000C0BB1C /* GaussRifleProjectile.h */,
 				CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */,
+				CE9E274815D9AD250075774F /* Pistol.h */,
+				CE9E274915D9AD250075774F /* Pistol.mm */,
+				CE9E274C15D9AD500075774F /* PistolProjectile.h */,
+				CE9E274D15D9AD500075774F /* PistolProjectile.mm */,
 				CE79028715D487E700958D04 /* Bazooka.h */,
 				CE79028815D487E700958D04 /* Bazooka.mm */,
 				CE79028A15D4880300958D04 /* BazookaProjectile.h */,
@@ -1830,6 +1864,19 @@
 				CE1FDF2815D4A7C300C2B532 /* waterSheet8.png */,
 			);
 			name = Water;
+			sourceTree = "<group>";
+		};
+		CE75E38D15D9AE2100151527 /* Static Json */ = {
+			isa = PBXGroup;
+			children = (
+				CE75E38915D9AE1C00151527 /* HighestVersion.h */,
+				CE75E38A15D9AE1C00151527 /* HighestVersion.m */,
+				CE75E39115D9B00500151527 /* InAppPurchaseIdentifiers.h */,
+				CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */,
+				CE75E38E15D9AEBC00151527 /* StaticJsonAPI.h */,
+				CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */,
+			);
+			name = "Static Json";
 			sourceTree = "<group>";
 		};
 		CE894EFC158299CE00E412E1 /* CSG */ = {
@@ -1930,11 +1977,11 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				C589042315A4FD2500E0EB70 /* SkeletonUtils */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
 				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
 				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
+				C589042315A4FD2500E0EB70 /* SkeletonUtils */,
 				CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */,
 				CE62FC991594084000BEB3BE /* CCTableSuite */,
 				CE0BD5F7158FFA3900C380CA /* Categories */,
@@ -2440,6 +2487,9 @@
 			isa = PBXGroup;
 			children = (
 				CEDEE35D15C8D4F000C0BB1C /* pellet.png */,
+				CECCD33815D9ED81005867FF /* katana.png */,
+				CECCD33D15D9EDAA005867FF /* bo_staff.png */,
+				CECCD33915D9ED81005867FF /* kunai.png */,
 				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
 				CE79029C15D4AA5100958D04 /* banana.png */,
@@ -2474,6 +2524,15 @@
 			path = Resources/Facebook;
 			sourceTree = "<group>";
 		};
+		CECCD33615D9E4CC005867FF /* MeleeWeapons */ = {
+			isa = PBXGroup;
+			children = (
+				CECCD33F15D9EEA7005867FF /* BoStaff.h */,
+				CECCD34015D9EEA7005867FF /* BoStaff.mm */,
+			);
+			path = MeleeWeapons;
+			sourceTree = "<group>";
+		};
 		CEF00102158BDCE500F7F1A8 /* Server */ = {
 			isa = PBXGroup;
 			children = (
@@ -2483,6 +2542,7 @@
 				CEFA2735158D4C0000BC9710 /* ServerAPI.m */,
 				CE0C324715CC97A60004E932 /* Accounts */,
 				CE0C324815CC97EC0004E932 /* Matchmaking */,
+				CE75E38D15D9AE2100151527 /* Static Json */,
 			);
 			name = Server;
 			path = ..;
@@ -2710,6 +2770,9 @@
 				C51CCC1215D9A02C00E2AB9A /* Cantarell-Oblique.ttf in Resources */,
 				C51CCC1315D9A02C00E2AB9A /* Cantarell-Regular.ttf in Resources */,
 				C51CCC1415D9A02C00E2AB9A /* FONTLOG.txt in Resources */,
+				CECCD33B15D9ED81005867FF /* katana.png in Resources */,
+				CECCD33C15D9ED81005867FF /* kunai.png in Resources */,
+				CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2967,6 +3030,13 @@
 				CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */,
 				CE98070915D5B76600D843DC /* BananaCluster.mm in Sources */,
 				CE98070D15D5B8AD00D843DC /* BananaSingle.mm in Sources */,
+				CE9E274A15D9AD260075774F /* Pistol.mm in Sources */,
+				CE9E274E15D9AD510075774F /* PistolProjectile.mm in Sources */,
+				CECCD32D15D9BDDF005867FF /* GWMeleeWeapon.mm in Sources */,
+				CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */,
+				CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */,
+				CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */,
+				CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

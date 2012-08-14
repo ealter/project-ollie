@@ -136,10 +136,8 @@ using namespace std;
 }
 
 -(void)setPositionInSkeleton:(Skeleton *)_skeleton{
-    Bone* root      = _skeleton->getRoot();
-    //Bone* torso     = _skeleton->getBoneByName(root, "Torso");
-    Bone* left_leg  = _skeleton->getBoneByName(root, "ll_leg");
-    Bone* right_leg = _skeleton->getBoneByName(root, "rl_leg");
+    Bone* left_leg  = _skeleton->getBoneByName("ll_leg");
+    Bone* right_leg = _skeleton->getBoneByName("rl_leg");
     //b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
     //b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     //float totalLowest    = _skeleton->lowestY(root, 100);
@@ -310,7 +308,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(Bone*)getBoneByName:(NSString*)bName{
     string name = string([bName UTF8String]);
-    return _skeleton->getBoneByName(_skeleton->getRoot(), name);
+    return _skeleton->getBoneByName(name);
 }
 
 -(void)runAnimation:(NSString*)animationName flipped:(bool)flipped{

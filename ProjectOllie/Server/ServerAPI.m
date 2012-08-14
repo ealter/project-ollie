@@ -87,7 +87,7 @@
     NSString *postData = [requestData urlEncodedString];
     request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
     
-    (void)[[NSURLConnection alloc]initWithRequest:request delegate:self];
+    (void)[[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
 
 + (NSURL *)urlForPageName:(NSString *)page

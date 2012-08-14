@@ -9,15 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "GWGunWeapon.h"
 
-#define GAUSS_WIDTH (100./PTM_RATIO)
-#define GAUSS_HEIGHT (90./PTM_RATIO)
+#define GAUSS_WIDTH (60./PTM_RATIO)
+#define GAUSS_HEIGHT (20./PTM_RATIO)
 #define GAUSS_IMAGE @"gauss_rifle.png"
 #define GAUSS_B_WIDTH 10.
 #define GAUSS_B_HEIGHT 6.
 #define GAUSS_B_IMAGE @"bullet.png"
-
-class b2World;
-@class ActionLayer;
 
 @interface GaussRifle : GWGunWeapon
 
