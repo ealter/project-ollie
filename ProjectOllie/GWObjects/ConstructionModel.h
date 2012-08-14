@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
+#import "GWCharacterModel.h"
 
 @interface ConstructionModel : GWCharacterModel {
     
