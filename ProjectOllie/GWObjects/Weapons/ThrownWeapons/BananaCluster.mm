@@ -78,6 +78,11 @@
         float changeY       = sinf(angle) * i / 400;
         single.physicsBody->SetLinearVelocity(selfVel);
         single.physicsBody->ApplyForceToCenter(b2Vec2(changeX, changeY));
+        
+        //Calculate some spin so throw looks better
+        float throwSpin = CCRANDOM_0_1();
+        throwSpin = throwSpin/20000.;
+        single.physicsBody->ApplyAngularImpulse(throwSpin);
     }
 }
 

@@ -34,6 +34,8 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:15. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain shapeChanged];
     }
     
     //Clean up bullet and remove from parent
