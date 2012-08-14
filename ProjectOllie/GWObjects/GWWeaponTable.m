@@ -28,7 +28,9 @@
 -(void)update:(ccTime) dt
 {
     for (SWTableViewCell* cell in self->cellsUsed_) {
-        
+        CCSprite* sprite = [cell.children objectAtIndex:0];
+        float distance = abs(sprite.position.x - self.position.x);
+        [sprite setOpacity:distance];
     }
 }
 
@@ -42,7 +44,7 @@
 -(void)setParent:(CCNode *)parent{
     parent_ = parent;
     /* label, you pleb! */
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Weapons" fontName:@"Marker Felt" fontSize:32];
+    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Weapons" fontName:@"Aaargh" fontSize:32];
     [self.parent addChild:label z:0 tag:kTagWepTable];
     [label setColor:ccc3(255,255,255)];
     label.position = self.position;

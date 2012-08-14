@@ -29,7 +29,7 @@
         CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
-        BazookaProjectile *bullet= [[BazookaProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * BAZOOKA_WIDTH/2*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *BAZOOKA_HEIGHT/2*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
+        BazookaProjectile *bullet= [[BazookaProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * BAZOOKA_WIDTH*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *BAZOOKA_WIDTH*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
         bullet.physicsBody->SetTransform(bullet.physicsBody->GetPosition(), self.wepAngle);
         [self.gameWorld addChild:bullet];
         

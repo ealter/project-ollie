@@ -48,7 +48,8 @@
             numCells = [[character weapons] count];
         }
 
-        CGSize tableViewSize                = CGSizeMake(numCells*100, 100);
+        CGSize cellSize                     = [self cellSizeForTable:self.weaponTable];
+        CGSize tableViewSize                = CGSizeMake(1.5f * cellSize.width, cellSize.height);
         self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
@@ -92,10 +93,10 @@
 {
     GWWeapon *loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
-    NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
+    NSString *string = [NSString stringWithFormat:@"%d", idx];
     
     
-    SWTableViewCell *cell = [table dequeueCell];
+    SWTableViewCell *cell = [table cellAtIndex:idx];
     if (!cell) {
         cell = [MyCell new];
         
@@ -107,10 +108,6 @@
 		label.position = ccp(20, 20);
 		label.tag = 123;
 		[cell addChild:label];
-	}
-	else {
-		CCLabelTTF *label = (CCLabelTTF*)[cell getChildByTag:123];
-		[label setString:string];
 	}
     
     return cell;

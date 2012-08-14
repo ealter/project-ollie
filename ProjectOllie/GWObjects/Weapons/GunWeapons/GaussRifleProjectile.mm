@@ -42,8 +42,6 @@
     }
 }
 
-
-//YOU SHOULD OVERRIDE THIS OR AT LEAST CALL IT FROM THE CHILD!
 -(void)destroyBullet
 {
     if(self.gameWorld != NULL)
