@@ -404,6 +404,7 @@
 		CEA3636D15B7C9B900148D3B /* GWGestures.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.mm */; };
 		CEAD647C15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEAD647B15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi */; };
 		CEAD647F15DB3D8200A07FBB /* TokenPurchasesScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAD647E15DB3D8200A07FBB /* TokenPurchasesScreen.m */; };
+		CEAD648115DB4A8100A07FBB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAD648015DB4A8000A07FBB /* StoreKit.framework */; };
 		CEAFB05C15CBA47900BA62A0 /* GWPerspectiveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */; };
@@ -1132,6 +1133,7 @@
 		CEAD647B15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = TokenPurchasesScreen.ccbi; path = "Resources/menu-objects/ccbis/TokenPurchasesScreen.ccbi"; sourceTree = "<group>"; };
 		CEAD647D15DB3D8200A07FBB /* TokenPurchasesScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenPurchasesScreen.h; path = menus/TokenPurchasesScreen.h; sourceTree = "<group>"; };
 		CEAD647E15DB3D8200A07FBB /* TokenPurchasesScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenPurchasesScreen.m; path = menus/TokenPurchasesScreen.m; sourceTree = "<group>"; };
+		CEAD648015DB4A8000A07FBB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPerspectiveLayer.h; sourceTree = "<group>"; };
 		CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWPerspectiveLayer.m; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = "Resources/menu-objects/ccbis/DrawMenu.ccbi"; sourceTree = "<group>"; };
@@ -1178,6 +1180,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAD648115DB4A8100A07FBB /* StoreKit.framework in Frameworks */,
 				CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */,
 				CE94AA5C15785F83009B35B4 /* OpenGLES.framework in Frameworks */,
 				CE94AA5E15785F83009B35B4 /* OpenAL.framework in Frameworks */,
@@ -1919,6 +1922,7 @@
 		CE94AA5815785F83009B35B4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEAD648015DB4A8000A07FBB /* StoreKit.framework */,
 				CE94AA5915785F83009B35B4 /* QuartzCore.framework */,
 				CE94AA5B15785F83009B35B4 /* OpenGLES.framework */,
 				CE94AA5D15785F83009B35B4 /* OpenAL.framework */,
