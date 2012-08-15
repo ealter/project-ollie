@@ -154,8 +154,8 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 - (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y
 {
     shapeField_->clipCircle(add, radius, x, y);
-    if (add) [drawSprite addCircleAt:ccp(x*PTM_RATIO,y*PTM_RATIO) radius:radius];
-    else [drawSprite removeCircleAt:ccp(x*PTM_RATIO,y*PTM_RATIO) radius:radius];
+    if (add) [drawSprite addCircleAt:ccp(x*PTM_RATIO,y*PTM_RATIO) radius:radius*PTM_RATIO];
+    else [drawSprite removeCircleAt:ccp(x*PTM_RATIO,y*PTM_RATIO) radius:radius*PTM_RATIO];
 }
 
 
