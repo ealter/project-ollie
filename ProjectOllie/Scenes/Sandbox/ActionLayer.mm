@@ -23,6 +23,7 @@
 #import "Bazooka.h"
 #import "BoStaff.h"
 #import "NailGun.h"
+#import "VortexPill.h"
 #import "Pistol.h"
 #import "GWContactListener.h"
 #import "GWUILayer.h"
@@ -177,7 +178,7 @@ enum {
     [self addChild:uiLayer z:3];
     
     //weapons loading
-    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BananaGrenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Bazooka alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Shotgun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BoStaff alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Pistol alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[NailGun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], nil];
+    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BananaGrenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Bazooka alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Shotgun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BoStaff alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Pistol alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[NailGun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[VortexPill alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], nil];
     
     [_character loadWeapons:weaponArray];
 
@@ -194,10 +195,10 @@ enum {
     [super draw];
     
     /* Box2d debug drawing */
-    /*ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
-    kmGLPopMatrix();*/
+    kmGLPopMatrix();
     
 }
 
@@ -247,15 +248,6 @@ enum {
     //of the simulation, however, we are using a variable time step here.
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
-   
-    GWPhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
-    if(lastChild != nil)
-    {
-        if(![lastChild physicsBody]->IsAwake() && self.camera.target != nil)
-        {   
-            // pffft wat
-        }
-    }
     
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
@@ -270,7 +262,6 @@ enum {
      */
     
 	[self.camera update:dt];
-    [_character update:dt];
 
 }
 

@@ -88,6 +88,8 @@
         /* prepare contact listener */
         [self.skeleton setOwner:self]; 
         
+        [self scheduleUpdate];
+        
     }
     
     return self;
@@ -347,6 +349,7 @@
         selectedWeapon.holder = self;
         [[self getChildByTag:kTagParentNode]addChild:selectedWeapon z:zPivot];
         self.state = kStateArming;
+        [self setOrientation:self.orientation];
     }
 }
 
@@ -393,6 +396,9 @@
         }
     }else {
         [self.uiLayer buildWeaponTableFrom:self];
+        ActionLayer* al = (ActionLayer*)self.parent;
+        [al.camera followNode:self];
+        
     }
 }
 

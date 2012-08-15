@@ -14,3 +14,12 @@
 -(void)removeSelf;
 
 @end
+
+@interface GWWeaponTableSlot : CCNode{
+    
+}
+
+@property (strong, nonatomic) NSString* description;
+@property (strong, nonatomic) NSString* title;
+
+@end

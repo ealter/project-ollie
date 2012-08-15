@@ -7,11 +7,18 @@
 //
 
 #import "GWWeaponTable.h"
+#import "GWWeapon.h"
+
 #import "MyCell.h"
-#define kTagWepTable 10
-#define kTableSizeMultiplier 2.4
+#define kTableSizeMultiplier 1.5
 
 @interface GWWeaponTable()
+{
+    
+}
+@property (strong, nonatomic) CCLabelTTF* weaponDescription;
+@property (strong, nonatomic) CCLabelTTF* weaponTitle;
+@property (strong, nonatomic) CCLabelTTF* menuTitle;
 
 -(void)setOpacity;
 -(CGRect)touchRect;
@@ -19,6 +26,9 @@
 @end
 
 @implementation GWWeaponTable
+@synthesize weaponTitle       = weaponTitle_;
+@synthesize weaponDescription = weaponDescription_;
+@synthesize menuTitle         = menuTitle_;
 
 
 +(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
@@ -26,6 +36,21 @@
     GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
     /* init values */
     tv.clipsToBounds = NO;
+    NSString* t      = @"";
+    NSString* d      = @"";
+    
+    /* Make Labels */
+    ccColor3B labelColor    = ccc3(255,255,255);
+    tv.weaponTitle          = [CCLabelTTF labelWithString:t fontName:@"Aaargh" fontSize:20];
+    tv.weaponTitle.color    = labelColor;
+    
+    tv.weaponDescription          = [CCLabelTTF labelWithString:d dimensions:CGSizeMake(200,600) hAlignment: kCCTextAlignmentLeft fontName:@"Aaargh" fontSize:15];
+    tv.weaponDescription.color    = labelColor;
+    
+    tv.menuTitle          = [CCLabelTTF labelWithString:@"Weapons" fontName:@"Aaargh" fontSize:32];
+    tv.menuTitle.color    = labelColor;
+    
+    /* Register with update dispatcher */
     [tv scheduleUpdate];
     
     return tv;
@@ -39,20 +64,29 @@
 }
 
 -(void)removeSelf{
-    [self.parent removeChild:[self.parent getChildByTag:kTagWepTable] cleanup:YES];
+    
+    /* Remove labels */
+    [self.parent removeChild:self.menuTitle cleanup:YES];
+    [self.parent removeChild:self.weaponDescription cleanup:YES];
+    [self.parent removeChild:self.weaponTitle cleanup:YES];
+    
+    /* Remove self */
     [self.parent removeChild:self cleanup:YES];
 }
 
 -(void)setOpacity{
     float numIndices = [self.dataSource numberOfCellsInTableView:self]-1;
-    float cellWidth      = [self.dataSource cellSizeForTable:self].width;
+    float cellWidth  = [self.dataSource cellSizeForTable:self].width;
+    GWWeaponTableSlot* select = nil;
     for (int i = 0; i < numIndices + 1; i++)
     {
         SWTableViewCell* cell = [self cellAtIndex:i];
         if(cell && cell.children.count > 1)
         {
-            CCSprite* sprite  = [cell.children objectAtIndex:0];
-            CCLabelTTF* label = [cell.children objectAtIndex:1];
+            
+            GWWeaponTableSlot* slot  = [cell.children objectAtIndex:0];
+            CCSprite* sprite         = [slot.children objectAtIndex:0];
+            CCLabelTTF* label        = [cell.children objectAtIndex:1];
             
             float distance   = abs(self.contentOffset.x);
             float index      = cell.idx;
@@ -63,7 +97,14 @@
             
             [sprite setOpacity:opacity];
             [label setOpacity:opacity];
+            if(select == nil || ((CCSprite*)[select.children objectAtIndex:0]).opacity < opacity)
+                select = slot;
         }
+    }
+    if(select)
+    {
+        [self.weaponTitle setString:select.title];
+        [self.weaponDescription setString:select.description];
     }
 
 }
@@ -72,17 +113,29 @@
 
 -(void)setParent:(CCNode *)parent{
     parent_ = parent;
-    /* label, you pleb! */
-    CCLabelTTF *label = [CCLabelTTF labelWithString:@"Weapons" fontName:@"Aaargh" fontSize:32];
-    [self.parent addChild:label z:0 tag:kTagWepTable];
-    [label setColor:ccc3(255,255,255)];
-    label.position = self.position;
+    
+    /* Menu Title */
+    [self.parent addChild:self.menuTitle];
+    
+    /* Weapon Title */
+    [self.parent addChild:self.weaponTitle];
+    
+    /* Weapon Description */
+    [self.parent addChild:self.weaponDescription];
+    
+    //set proper positions
+    [self setPosition:self.position];
+
 }
 
 -(void)setPosition:(CGPoint)position{
     [super setPosition:position];
     if(self.parent)
-        [[self.parent getChildByTag:kTagWepTable] setPosition:ccpAdd(position, ccp(0,self.contentSize.height/2.))];
+    {
+        self.menuTitle.position = ccpAdd(position, ccp(0,self.contentSize.height/2.));
+        self.weaponTitle.position = ccpAdd(self.position, ccp(self.contentSize.width/4.,self.contentSize.height/4.));
+        self.weaponDescription.position = ccpAdd(self.position, ccp(self.contentSize.width/4.,-3 * self.contentSize.height)); 
+    }
 }
 
 -(void)draw{
@@ -190,5 +243,12 @@
 - (void) registerWithTouchDispatcher {
     [[[CCDirector sharedDirector] touchDispatcher] addTargetedDelegate:self priority:0 swallowsTouches:YES];
 }
+
+@end
+
+@implementation GWWeaponTableSlot
+
+@synthesize description = _description;
+@synthesize title       = _title;
 
 @end

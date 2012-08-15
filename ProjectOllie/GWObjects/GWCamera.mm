@@ -75,7 +75,8 @@
     //starts following a new node
     //and signals an end of change once the new node is followed
     self.target = focused;
-    //_track = true;
+    self.track  = focused;
+    
 }
 
 -(void)panBy:(CGPoint)diff{
@@ -179,7 +180,7 @@
 
         CGPoint diff = ccpSub(touchLocation,prevLocation);
         
-        self.target = nil;
+        self.track = NO;
         [self panBy:diff];
     }
 }
@@ -232,7 +233,7 @@
     CGPoint averageCurrentPosition = ccpMult(ccpAdd(touchLocation1,touchLocation2),.5f);
     CGPoint averageLastPosition    = ccpMult(ccpAdd(prevLocation1,prevLocation2),.5f);
     
-    self.target = nil;
+    self.track = NO;
     [self panBy:ccpSub(averageCurrentPosition,averageLastPosition)];
 }
 
@@ -260,6 +261,7 @@
    
     [self zoomBy:difScale withAverageCurrentPosition:averageCurrentPosition];
 }
+
 
 /*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA FUCK YEA AMERICA*/
 
@@ -323,7 +325,7 @@
 -(void)stepTracking{
     
     // If we are in automatic tracking mode, automatically move camera based on tracked objects
-    if(_track)
+    if(self.track)
     {
         //The location the camera really wants to be deep down inside of its heart
         ccVertex3F targetLocation;

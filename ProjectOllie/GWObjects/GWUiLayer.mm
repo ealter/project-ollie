@@ -96,15 +96,20 @@
 
         if(loadWep)
         {
+            // Ammunition information
+            GWWeaponTableSlot* slot = [GWWeaponTableSlot node];
             NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
-
+            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Aaargh" fontSize:15.0];
+            
+            // Weapon slot initialization
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
             sprite.anchorPoint = CGPointZero;
+            [slot addChild:sprite];
+            slot.description = loadWep.description;
+            slot.title       = loadWep.title;
             
-            [cell addChild:sprite];
-            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
-            label.position = ccp(0,0);
-            label.tag = 123;
+            // Add proper children to cell
+            [cell addChild:slot];
             [cell addChild:label];
         }
       

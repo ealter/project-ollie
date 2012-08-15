@@ -1,25 +1,25 @@
 //
-//  BazookaProjectile.m
+//  RPGProjectile.m
 //  ProjectOllie
 //
-//  Created by Lion User on 8/9/12.
+//  Created by Lion User on 8/14/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BazookaProjectile.h"
-#import "Bazooka.h"
+#import "RPGProjectile.h"
+#import "RPG.h"
 #import "GWParticles.h"
 #import "GameConstants.h"
 
-@implementation BazookaProjectile
+@implementation RPGProjectile
 @synthesize accX        = _accX;
 @synthesize accY        = _accY;
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld
 {
-    if (self = [super initWithBulletSize:CGSizeMake(BAZOOKA_B_WIDTH, BAZOOKA_B_HEIGHT) imageName:BAZOOKA_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
-        self.physicsBody->SetGravityScale(0);
-        bazookaTimer = 0;
+    if (self = [super initWithBulletSize:CGSizeMake(RPG_B_WIDTH, RPG_B_HEIGHT) imageName:RPG_B_IMAGE startPosition:pos b2World:world b2Bullet:YES gameWorld:gWorld]) {
+        self.physicsBody->SetGravityScale(0.2);
+        rpgTimer = 0;
         
         self.emitter = [GWParticleSmokeTrail node];
         self.emitter.position = self.position;
@@ -31,10 +31,10 @@
 
 -(void)update:(ccTime)dt
 {    
-    bazookaTimer += dt;
+    rpgTimer += dt;
     destroyTimer += dt;
-    if (bazookaTimer < 2.) {
-        self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/500, self.accY/500));
+    if (rpgTimer < 1.5) {
+        self.physicsBody->ApplyForceToCenter(b2Vec2(self.accX/350, self.accY/350));
     }
     self.emitter.position = self.position;
     if (self.bulletCollided || destroyTimer >= 4.) {
@@ -48,7 +48,7 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world
-        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:120. x:self.position.x y:self.position.y];
+        [self.gameWorld.gameTerrain clipCircle:NO WithRadius:75. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
         [self.gameWorld.camera addIntensity:0.5];
