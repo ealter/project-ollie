@@ -41,12 +41,12 @@
     if (self = [super init])
     {
         self.contentSize = [[CCDirector sharedDirector] winSize];
-        self->shapeField_ = new ShapeField(WORLD_WIDTH_PX, WORLD_HEIGHT_PX);
+        self->shapeField_ = new ShapeField(WORLD_WIDTH, WORLD_HEIGHT);
         
         drawSprite = [[MaskedSprite alloc] initWithFile:@"rocks.png" size:CGSizeMake(WORLD_WIDTH_PX, WORLD_HEIGHT_PX)];
         drawSprite.position = drawSprite.anchorPoint = CGPointZero;
         
-        polyRenderer = [HMVectorNode node];
+        polyRenderer = [HMVectorNode node]; 
         [polyRenderer setColor:ccc4f(1.0f,0.0f,0.0f,1.0f)];
         
         [self addChild:drawSprite];
@@ -153,9 +153,9 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 //Building land
 - (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField_->clipCircle(add, radius, x, y);
+    shapeField_->clipCircle(add, radius, x/PTM_RATIO, y/PTM_RATIO);/*
     if (add) [drawSprite addCircleAt:ccp(x,y) radius:radius];
-    else [drawSprite removeCircleAt:ccp(x,y) radius:radius];
+    else [drawSprite removeCircleAt:ccp(x,y) radius:radius];*/
 }
 
 
@@ -176,13 +176,15 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
                     ccpSub(p2, unitvector),
                     ccpSub(p1, unitvector)};
     
-    float x[] = {p[3].x, p[2].x, p[1].x, p[0].x};
-    float y[] = {p[3].y, p[2].y, p[1].y, p[0].y};
+    //Find x and y coords in meters, clip in shapefield
+    float x[] = {p[3].x/PTM_RATIO, p[2].x/PTM_RATIO, p[1].x/PTM_RATIO, p[0].x/PTM_RATIO};
+    float y[] = {p[3].y/PTM_RATIO, p[2].y/PTM_RATIO, p[1].y/PTM_RATIO, p[0].y/PTM_RATIO};
     shapeField_->clipConvexQuadBridge(add, x, y);
+    /*
     if (add)
         [drawSprite addPolygon:p numPoints:4];
     else
-        [drawSprite removePolygon:p numPoints:4];
+        [drawSprite removePolygon:p numPoints:4];*/
 }
 
 - (void)shapeChanged
@@ -193,7 +195,7 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
     for (std::set<PointEdge*>::iterator i = shapeField_->peSet.begin(); i != shapeField_->peSet.end(); i++)
     {
         PointEdge* pe = *i;
-        [polyRenderer drawSegmentFrom:ccp(pe->x, pe->y) to:ccp(pe->next->x, pe->next->y) radius:.01f*PTM_RATIO];
+        [polyRenderer drawSegmentFrom:ccp(pe->x*PTM_RATIO, pe->y*PTM_RATIO) to:ccp(pe->next->x*PTM_RATIO, pe->next->y*PTM_RATIO) radius:.03f*PTM_RATIO];
     }
     
     //Update the box2d edge shapes

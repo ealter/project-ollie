@@ -937,8 +937,7 @@ bool ShapeField::isOutside(float px, float py)
                     float tmpYdistance = pe->y + (px - pe->x) * m - py;
                     if (tmpYdistance > height-py || tmpYdistance < -py)
                     {
-                        printq("Strange tmp y distance... %f\n", tmpYdistance);
-                        assert(false);
+                        printf("Strange tmp y distance... %f\n", tmpYdistance);
                     }
                     if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance > 0)
                     {
@@ -955,8 +954,7 @@ bool ShapeField::isOutside(float px, float py)
                     float tmpYdistance = pe->y + (px - pe->x) * m - py;
                     if (tmpYdistance > height-py || tmpYdistance < -py)
                     {
-                        printq("Strange tmp y distance... %f\n", tmpYdistance);
-                        assert(false);
+                        printf("Strange tmp y distance... %f\n", tmpYdistance);
                     }
                     if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance > 0)
                     {
