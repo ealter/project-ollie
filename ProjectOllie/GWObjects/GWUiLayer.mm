@@ -12,11 +12,7 @@
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
-
 @interface GWUILayer()
-{
-    
-}
 
 -(void)setWeaponTablePosition;
 
@@ -30,8 +26,6 @@
 -(id) init
 {
 	if(self = [super init]) {
-        numCells                            = 0;
-        self.weaponTable                    = NULL;
         [self scheduleUpdate];
     }
 	return self;
@@ -40,7 +34,6 @@
 -(void)buildWeaponTableFrom:(GWCharacterAvatar *)character
 {
     if (!self.weaponTable) {
-        
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
             numCells                = 0;
@@ -97,7 +90,6 @@
         loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
     
-    
     SWTableViewCell *cell = [table cellAtIndex:idx];
     if (!cell) {
         cell = [MyCell new];
@@ -143,15 +135,14 @@
     }
 }
 
--(void)update:(float)dt{
-    
-    
+-(void)update:(float)dt
+{
     [self setWeaponTablePosition];
-
 }
 
--(void)setWeaponTablePosition{
-    self.weaponTable.position           = ccpAdd(self.activeCharacter.position,ccp(-40,60));
+-(void)setWeaponTablePosition
+{
+    self.weaponTable.position = ccpAdd(self.activeCharacter.position,ccp(-40,60));
 }
 
 @end
