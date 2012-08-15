@@ -96,7 +96,6 @@
     if([self.activeCharacter.weapons count] > idx)
         loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
-    NSString *string = [NSString stringWithFormat:@"%d", idx];
     
     
     SWTableViewCell *cell = [table cellAtIndex:idx];
@@ -105,12 +104,14 @@
 
         if(loadWep)
         {
+            NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
+
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
             sprite.anchorPoint = CGPointZero;
             
             [cell addChild:sprite];
             CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
-            label.position = ccp(20, 20);
+            label.position = ccp(0,0);
             label.tag = 123;
             [cell addChild:label];
         }

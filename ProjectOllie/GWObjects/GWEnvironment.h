@@ -10,19 +10,19 @@
 #import "Terrain.h"
 #import "GWWater.h"
 
-typedef enum settingTypes
+typedef enum EnvironmentSetting
 {
-    dirt = 0,   //Dirt, leaves, jungle
-    rocks = 1,  //Rocks, rain, jungle
-    ice = 2,    //Ice, snow, mountains
-    lava = 3   //Lava, dust, volcanoes
-} Setting;
+    environment_dirt = 0,   //Dirt, leaves, jungle
+    environment_rocks,      //Rocks, rain, jungle
+    environment_ice,        //Ice, snow, mountains
+    environment_lava        //Lava, dust, volcanoes
+} EnvironmentSetting;
 
 @interface GWEnvironment : CCNode
 
 /* Properties (layers are in order of greater Z from camera) */
 
-@property (nonatomic) Setting setting;
+@property (nonatomic) EnvironmentSetting setting;
 
 @property (strong, nonatomic) GWWater* frontWater;      // Water that is in front of everything else
 
@@ -45,7 +45,7 @@ typedef enum settingTypes
 //Blank terrain with the default setting
 -(id) init;
 
--(id) initWithSetting:(Setting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera;
+-(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera;
 
 -(void) setCamera:(GWCamera*)camera;
 

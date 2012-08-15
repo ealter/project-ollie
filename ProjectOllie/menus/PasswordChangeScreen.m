@@ -18,23 +18,20 @@
 {
     if(self = [super init]) {
         const CGSize textfieldSize = CGSizeMake(150, 30);
-        CGRect frame = CGRectMake(self.contentSize.height*4/5, self.contentSize.width/2, textfieldSize.width, textfieldSize.height);
+        CGRect frame = CGRectMake(self.contentSize.width/2, self.contentSize.height*4/5, textfieldSize.width, textfieldSize.height);
         oldPasswordField_ = [self addTextFieldWithFrame:frame];
         oldPasswordField_.placeholder = @"Current Password";
         oldPasswordField_.secureTextEntry = YES;
-        oldPasswordField_.delegate = self;
         
-        frame = CGRectMake(self.contentSize.height*3/5, self.contentSize.width/2, textfieldSize.width, textfieldSize.height);
+        frame = CGRectMake(self.contentSize.width/2, self.contentSize.height*3/5, textfieldSize.width, textfieldSize.height);
         newPasswordField_ = [self addTextFieldWithFrame:frame];
         newPasswordField_.placeholder = @"New Password";
         newPasswordField_.secureTextEntry = YES;
-        newPasswordField_.delegate = self;
         
-        frame = CGRectMake(self.contentSize.height*2/5, self.contentSize.width/2, textfieldSize.width, textfieldSize.height);
+        frame = CGRectMake(self.contentSize.width/2, self.contentSize.height*2/5, textfieldSize.width, textfieldSize.height);
         confirmPasswordField_ = [self addTextFieldWithFrame:frame];
         confirmPasswordField_.placeholder = @"Confirm Password";
         confirmPasswordField_.secureTextEntry = YES;
-        confirmPasswordField_.delegate = self;
     }
     return self;
 }
@@ -47,12 +44,7 @@
 - (void)serverOperationFailedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
-    [[[UIAlertView alloc]initWithTitle:@"Error when changing password" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-}
-
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:oldPasswordField_, newPasswordField_, confirmPasswordField_, nil];
+    [[[UIAlertView alloc] initWithTitle:@"Error when changing password" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }
 
 - (void)pressedChangePassword:(id)sender

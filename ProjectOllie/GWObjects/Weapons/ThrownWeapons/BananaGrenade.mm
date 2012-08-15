@@ -23,6 +23,12 @@
     return self;
 }
 
+-(void)fillDescription
+{
+    self.title          = @"Banana Grenade";
+    self.description    = @"A bunch of bananas.  Splits into five bananas at the top of its arc.  Warning: Do not eat explosive bananas.";
+}
+
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {
     if (self.ammo >0) {

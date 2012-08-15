@@ -25,6 +25,12 @@
 //Gun's image
 @property (assign, nonatomic) NSString* weaponImage;
 
+//Gun's title
+@property (assign, nonatomic) NSString* title;
+
+//Gun's description
+@property (assign, nonatomic) NSString* description;
+
 //weapon availability
 @property (assign, nonatomic, getter = isUnlocked) BOOL unlocked;
 
@@ -37,6 +43,9 @@
 
 //Empty method for firing weapon, should be overwritten
 -(void)fireWeapon:(CGPoint) target;
+
+//Empty method for filling title and description of weapon, should be overwritten
+-(void)fillDescription;
 
 //Empty method for throwing weapon, should be overwritten
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint;

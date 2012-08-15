@@ -13,6 +13,7 @@
 
 @implementation GWMeleeWeapon
 @synthesize weaponLength    = _weaponLength;
+@synthesize meleeImage      = _meleeImage;
 
 - (id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo wepLength:(float)length box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
@@ -25,6 +26,11 @@
         _world              = world;
         self.gameWorld      = gWorld;
         self.weaponImage    = imageName;
+        self.meleeImage     = [CCSprite spriteWithFile:imageName];
+        self.meleeImage.position= ccpAdd(self.meleeImage.position, CGPointMake(self.contentSize.width/2, self.contentSize.height/2));
+        self.meleeImage.rotation = 0;
+        
+        [self fillDescription];
         
         //Make the drawnode and set the color
         drawNode            = [HMVectorNode node];
@@ -34,6 +40,7 @@
         
         //Add children
         [self addChild:drawNode];    
+        [self addChild:self.meleeImage];
     }
     return self;
 }
@@ -58,8 +65,10 @@
 -(BOOL)calculateMeleeDirectionFromStart:(CGPoint) startPoint toAimPoint:(CGPoint) aimPoint
 {
     BOOL isRight    = NO;
+    self.wepAngle   = M_PI;
     if (startPoint.x < aimPoint.x) {
         isRight     = YES;
+        self.wepAngle = 0;
     }
     swingRight      = isRight;
     return isRight;
@@ -69,27 +78,32 @@
 {
     //Clear HMVectorNode
     [drawNode clear];
-    BOOL isRight = [self calculateMeleeDirectionFromStart:self.position toAimPoint:currPoint];
+    BOOL isRight = [self calculateMeleeDirectionFromStart:self.holder.position toAimPoint:currPoint];
     //Melee simulation    
-    int numPoints = 20;
+    int numPoints = 7;
     for (int i = 0; i < numPoints ; i++) {
-        CGPoint drawPoint;
-        float angle     = (120/numPoints) * i + 30;
-        drawPoint.x     = cosf(angle) * self.weaponLength;
-        drawPoint.y     = sinf(angle) * self.weaponLength;
+        float angle     = ((120./numPoints) * i) - 45;
+        angle           = CC_DEGREES_TO_RADIANS(angle);
+        CGPoint drawPoint = CGPointMake(drawNode.position.x + cosf(angle) * self.weaponLength * PTM_RATIO, drawNode.position.y + sinf(angle) * self.weaponLength * PTM_RATIO);
+        
+        CGPoint pointA  = ccp(drawPoint.x + cosf(angle + M_PI/2)*3., drawPoint.y + sinf(angle + M_PI/2)*3.);
+        CGPoint pointB  = ccpSub(drawPoint, pointA);
+        pointB          = ccpAdd(pointB, drawPoint);
         
         if (!isRight) {
-            drawPoint.x = drawPoint.x * -1;
+            pointA.x    = pointA.x * -1;
+            pointB.x    = pointB.x * -1;
         }
         
+        
         //draw the point
-        [drawNode drawDot:drawPoint radius:6];
+        [drawNode drawSegmentFrom:pointA to:pointB radius:3];
     }
 }
 
 -(void)applyb2ForceInRadius:(float)maxDistance withStrength:(float)str isOutwards:(BOOL)outwards aimedRight:(BOOL)right
 {
-    b2Vec2 b2ForcePosition = b2Vec2(self.position.x/PTM_RATIO, self.position.y/PTM_RATIO);
+    b2Vec2 b2ForcePosition = b2Vec2(drawNode.position.x/PTM_RATIO, drawNode.position.y/PTM_RATIO);
     
     for (b2Body* b = _world->GetBodyList(); b; b = b->GetNext())
 	{

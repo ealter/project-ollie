@@ -11,53 +11,35 @@
 #import "cocos2d.h"
 
 @interface NewAccountMenu () <ServerAPI_delegate>
-
-@property (nonatomic, strong) AccountCreator *accountCreator;
-
 @end
 
 @implementation NewAccountMenu
 @synthesize emailField, pwField, nameField, cfpwField;
-@synthesize accountCreator = _accountCreator;
 
 -(id)init
 {
     if(self=[super init]) {
-        CGRect nameframe = CGRectMake(self.contentSize.height*0.8, self.contentSize.width/2, 150, 30);
+        CGRect nameframe = CGRectMake(self.contentSize.width/2, self.contentSize.height*0.8, 150, 30);
         nameField = [self addTextFieldWithFrame:nameframe];
         nameField.placeholder = @"Username";
-        nameField.delegate    = self;
         
-        CGRect pwframe = CGRectMake(self.contentSize.height*0.5, self.contentSize.width/2, 150, 30);
+        CGRect pwframe = CGRectMake(self.contentSize.width/2, self.contentSize.height*0.5, 150, 30);
         pwField = [self addTextFieldWithFrame:pwframe];
         pwField.clearsOnBeginEditing = YES;
         pwField.placeholder          = @"Password";
         pwField.secureTextEntry      = YES;
-        pwField.delegate             = self;
         
-        CGRect cfpwframe = CGRectMake(self.contentSize.height*0.35, self.contentSize.width/2, 150, 30);
+        CGRect cfpwframe = CGRectMake(self.contentSize.width/2, self.contentSize.height*0.35, 150, 30);
         cfpwField = [self addTextFieldWithFrame:cfpwframe];
         cfpwField.clearsOnBeginEditing = YES;
         cfpwField.placeholder          = @"Confirm Password";
         cfpwField.secureTextEntry      = YES;
-        cfpwField.delegate             = self;
         
-        CGRect emailframe = CGRectMake(self.contentSize.height*0.65, self.contentSize.width/2, 150, 30);
+        CGRect emailframe = CGRectMake(self.contentSize.width/2, self.contentSize.height*0.65, 150, 30);
         emailField = [self addTextFieldWithFrame:emailframe];
         emailField.placeholder = @"Email";
-        emailField.delegate    = self;
     }
-    
     return self;
-}
-
-- (AccountCreator *)accountCreator
-{
-    if(!_accountCreator) {
-        _accountCreator = [[AccountCreator alloc]init];
-        _accountCreator.delegate = self;
-    }
-    return _accountCreator;
 }
 
 //TODO: make user repeat password?
@@ -67,12 +49,9 @@
     NSString *password = pwField.text;
     NSString *email    = emailField.text;
     [self startActivityIndicator];
-    [self.accountCreator createAccountWithUsername:username password:password email:email];
-}
-
-- (NSArray *)textFields
-{
-    return [NSArray arrayWithObjects:nameField, cfpwField, pwField, emailField, nil];
+    AccountCreator *accountCreator = [[AccountCreator alloc] init];
+    accountCreator.delegate = self;
+    [accountCreator createAccountWithUsername:username password:password email:email];
 }
 
 -(void)pressedCancel:(id)sender

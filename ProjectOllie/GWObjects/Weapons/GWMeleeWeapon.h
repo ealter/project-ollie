@@ -23,6 +23,9 @@
 //Length of the weapon. Assign in inheriting weapons for accurate swing simulation
 @property (assign, nonatomic) float weaponLength; 
 
+//Weapon image.  Easy rotation ensues
+@property (strong, nonatomic) CCSprite *meleeImage;
+
 //Huge init, called by individual weapons
 -(id)initWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo wepLength:(float) length box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld;
 

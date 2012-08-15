@@ -36,9 +36,6 @@
         //Particle stuffs
         CCParticleSystem *emitter = [GWParticleMagicMissile node];
         [self addChild:emitter];
-        
-        
-        
     }
 	return self;
 }
