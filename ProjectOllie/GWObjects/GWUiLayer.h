@@ -8,10 +8,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "GWWeaponTable.h"
 
 @class GWCharacterAvatar;
+@class CCParticleSystem;
 
 @interface GWUILayer : CCLayer <SWTableViewDataSource, SWTableViewDelegate> {
     NSUInteger numCells;
@@ -24,8 +24,6 @@
 
 @property (strong, nonatomic) CCParticleSystem* emitter; //Particle emitter
 
-
 -(void)buildWeaponTableFrom:(GWCharacterAvatar *)character;   // BUIld a weapon table from a character
-
 
 @end

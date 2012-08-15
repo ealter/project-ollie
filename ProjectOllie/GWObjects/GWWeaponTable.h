@@ -7,13 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "SWTableView.h"
 
-@interface GWWeaponTable : SWTableView {
+@interface GWWeaponTable : SWTableView
+
+-(void)removeSelf;
+
+@end
+
+@interface GWWeaponTableSlot : CCNode{
     
 }
 
--(void)removeSelf;
+@property (strong, nonatomic) NSString* description;
+@property (strong, nonatomic) NSString* title;
 
 @end

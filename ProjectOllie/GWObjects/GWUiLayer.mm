@@ -12,11 +12,7 @@
 #import "GWWeapon.h"
 #import "GWParticles.h"
 
-
 @interface GWUILayer()
-{
-    
-}
 
 -(void)setWeaponTablePosition;
 
@@ -30,8 +26,6 @@
 -(id) init
 {
 	if(self = [super init]) {
-        numCells                            = 0;
-        self.weaponTable                    = NULL;
         [self scheduleUpdate];
     }
 	return self;
@@ -40,7 +34,6 @@
 -(void)buildWeaponTableFrom:(GWCharacterAvatar *)character
 {
     if (!self.weaponTable) {
-        
         if (self.activeCharacter != character) {
             self.activeCharacter    = character;
             numCells                = 0;
@@ -97,22 +90,26 @@
         loadWep = [[self.activeCharacter weapons]objectAtIndex:idx];
 
     
-    
     SWTableViewCell *cell = [table cellAtIndex:idx];
     if (!cell) {
         cell = [MyCell new];
 
         if(loadWep)
         {
+            // Ammunition information
+            GWWeaponTableSlot* slot = [GWWeaponTableSlot node];
             NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
-
+            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Aaargh" fontSize:15.0];
+            
+            // Weapon slot initialization
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];
             sprite.anchorPoint = CGPointZero;
+            [slot addChild:sprite];
+            slot.description = loadWep.description;
+            slot.title       = loadWep.title;
             
-            [cell addChild:sprite];
-            CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:15.0];
-            label.position = ccp(0,0);
-            label.tag = 123;
+            // Add proper children to cell
+            [cell addChild:slot];
             [cell addChild:label];
         }
       
@@ -138,15 +135,14 @@
     }
 }
 
--(void)update:(float)dt{
-    
-    
+-(void)update:(float)dt
+{
     [self setWeaponTablePosition];
-
 }
 
--(void)setWeaponTablePosition{
-    self.weaponTable.position           = ccpAdd(self.activeCharacter.position,ccp(-40,60));
+-(void)setWeaponTablePosition
+{
+    self.weaponTable.position = ccpAdd(self.activeCharacter.position,ccp(-40,60));
 }
 
 @end
