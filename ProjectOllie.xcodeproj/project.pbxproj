@@ -168,6 +168,14 @@
 		CE2AF71615D9F5D70085E82C /* CCUIViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */; };
 		CE2F8C1215DB093600D3B19A /* NailGun.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C1115DB093500D3B19A /* NailGun.mm */; };
 		CE2F8C1515DB095F00D3B19A /* NailGunProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C1415DB095E00D3B19A /* NailGunProjectile.mm */; };
+		CE2F8C1C15DB1CE700D3B19A /* RPG.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C1B15DB1CE600D3B19A /* RPG.mm */; };
+		CE2F8C2015DB1D1200D3B19A /* RPGProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C1F15DB1D1100D3B19A /* RPGProjectile.mm */; };
+		CE2F8C2515DB249F00D3B19A /* vpill_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2F8C2115DB249B00D3B19A /* vpill_1.png */; };
+		CE2F8C2615DB249F00D3B19A /* vpill_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2F8C2215DB249B00D3B19A /* vpill_2.png */; };
+		CE2F8C2715DB249F00D3B19A /* vpill_3.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2F8C2315DB249D00D3B19A /* vpill_3.png */; };
+		CE2F8C2815DB249F00D3B19A /* vpill_4.png in Resources */ = {isa = PBXBuildFile; fileRef = CE2F8C2415DB249E00D3B19A /* vpill_4.png */; };
+		CE2F8C2B15DB250500D3B19A /* VortexPill.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C2A15DB250500D3B19A /* VortexPill.mm */; };
+		CE2F8C2E15DB251600D3B19A /* VortexPillProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C2D15DB251600D3B19A /* VortexPillProjectile.mm */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
 		CE30B196158FBA34009EC82B /* LoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18F158FBA34009EC82B /* LoginScreen.m */; };
@@ -217,7 +225,7 @@
 		CE75E38B15D9AE1C00151527 /* HighestVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E38A15D9AE1C00151527 /* HighestVersion.m */; };
 		CE75E39015D9AEBC00151527 /* StaticJsonAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E38F15D9AEBC00151527 /* StaticJsonAPI.m */; };
 		CE75E39315D9B00500151527 /* InAppPurchaseIdentifiers.m in Sources */ = {isa = PBXBuildFile; fileRef = CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */; };
-		CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.m */; };
+		CE79027D15D4681300958D04 /* GWWeaponTable.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE79027C15D4681300958D04 /* GWWeaponTable.mm */; };
 		CE79028315D486C300958D04 /* bazooka.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79027F15D486C200958D04 /* bazooka.png */; };
 		CE79028415D486C300958D04 /* grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028015D486C200958D04 /* grenade.png */; };
 		CE79028515D486C300958D04 /* pistol.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79028115D486C200958D04 /* pistol.png */; };
@@ -677,6 +685,18 @@
 		CE2F8C1115DB093500D3B19A /* NailGun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NailGun.mm; sourceTree = "<group>"; };
 		CE2F8C1315DB095E00D3B19A /* NailGunProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NailGunProjectile.h; sourceTree = "<group>"; };
 		CE2F8C1415DB095E00D3B19A /* NailGunProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NailGunProjectile.mm; sourceTree = "<group>"; };
+		CE2F8C1A15DB1CE600D3B19A /* RPG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPG.h; sourceTree = "<group>"; };
+		CE2F8C1B15DB1CE600D3B19A /* RPG.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RPG.mm; sourceTree = "<group>"; };
+		CE2F8C1E15DB1D1000D3B19A /* RPGProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGProjectile.h; sourceTree = "<group>"; };
+		CE2F8C1F15DB1D1100D3B19A /* RPGProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RPGProjectile.mm; sourceTree = "<group>"; };
+		CE2F8C2115DB249B00D3B19A /* vpill_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vpill_1.png; sourceTree = "<group>"; };
+		CE2F8C2215DB249B00D3B19A /* vpill_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vpill_2.png; sourceTree = "<group>"; };
+		CE2F8C2315DB249D00D3B19A /* vpill_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vpill_3.png; sourceTree = "<group>"; };
+		CE2F8C2415DB249E00D3B19A /* vpill_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = vpill_4.png; sourceTree = "<group>"; };
+		CE2F8C2915DB250500D3B19A /* VortexPill.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VortexPill.h; sourceTree = "<group>"; };
+		CE2F8C2A15DB250500D3B19A /* VortexPill.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VortexPill.mm; sourceTree = "<group>"; };
+		CE2F8C2C15DB251600D3B19A /* VortexPillProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VortexPillProjectile.h; sourceTree = "<group>"; };
+		CE2F8C2D15DB251600D3B19A /* VortexPillProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = VortexPillProjectile.mm; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
 		CE30B18C158FBA34009EC82B /* DrawMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawMenu.h; path = menus/DrawMenu.h; sourceTree = "<group>"; };
@@ -748,7 +768,7 @@
 		CE75E39115D9B00500151527 /* InAppPurchaseIdentifiers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InAppPurchaseIdentifiers.h; path = ProjectOllie/Server/StaticJson/InAppPurchaseIdentifiers.h; sourceTree = "<group>"; };
 		CE75E39215D9B00500151527 /* InAppPurchaseIdentifiers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InAppPurchaseIdentifiers.m; path = ProjectOllie/Server/StaticJson/InAppPurchaseIdentifiers.m; sourceTree = "<group>"; };
 		CE79027B15D4681300958D04 /* GWWeaponTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWWeaponTable.h; sourceTree = "<group>"; };
-		CE79027C15D4681300958D04 /* GWWeaponTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWWeaponTable.m; sourceTree = "<group>"; };
+		CE79027C15D4681300958D04 /* GWWeaponTable.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWWeaponTable.mm; sourceTree = "<group>"; };
 		CE79027F15D486C200958D04 /* bazooka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazooka.png; sourceTree = "<group>"; };
 		CE79028015D486C200958D04 /* grenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grenade.png; sourceTree = "<group>"; };
 		CE79028115D486C200958D04 /* pistol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pistol.png; sourceTree = "<group>"; };
@@ -1462,7 +1482,7 @@
 				C587E2D615D3114400528573 /* GWUILayer.h */,
 				C587E2D715D3114400528573 /* GWUILayer.mm */,
 				CE79027B15D4681300958D04 /* GWWeaponTable.h */,
-				CE79027C15D4681300958D04 /* GWWeaponTable.m */,
+				CE79027C15D4681300958D04 /* GWWeaponTable.mm */,
 				CEA3636B15B7C9B700148D3B /* GWGestures.h */,
 				CEA3636C15B7C9B800148D3B /* GWGestures.mm */,
 				C5F4309015B8D2EA00174FEE /* GWCamera.h */,
@@ -1811,6 +1831,10 @@
 				CE79028815D487E700958D04 /* Bazooka.mm */,
 				CE79028A15D4880300958D04 /* BazookaProjectile.h */,
 				CE79028B15D4880300958D04 /* BazookaProjectile.mm */,
+				CE2F8C1A15DB1CE600D3B19A /* RPG.h */,
+				CE2F8C1B15DB1CE600D3B19A /* RPG.mm */,
+				CE2F8C1E15DB1D1000D3B19A /* RPGProjectile.h */,
+				CE2F8C1F15DB1D1100D3B19A /* RPGProjectile.mm */,
 				CEDEE35A15C8D30600C0BB1C /* Shotgun.h */,
 				CEDEE35B15C8D30600C0BB1C /* Shotgun.mm */,
 				CEDEE35715C8D2F900C0BB1C /* ShotgunProjectile.h */,
@@ -1826,6 +1850,10 @@
 				CE59CA4F15C4D65200B68745 /* Grenade.mm */,
 				CE59CA5115C4D69400B68745 /* GrenadeProjectile.h */,
 				CE59CA5215C4D69400B68745 /* GrenadeProjectile.mm */,
+				CE2F8C2915DB250500D3B19A /* VortexPill.h */,
+				CE2F8C2A15DB250500D3B19A /* VortexPill.mm */,
+				CE2F8C2C15DB251600D3B19A /* VortexPillProjectile.h */,
+				CE2F8C2D15DB251600D3B19A /* VortexPillProjectile.mm */,
 				CE3598D915D4F402000AA61C /* BananaGrenade.h */,
 				CE3598DA15D4F402000AA61C /* BananaGrenade.mm */,
 				CE98070715D5B76600D843DC /* BananaCluster.h */,
@@ -2506,6 +2534,10 @@
 				CE79029615D4990100958D04 /* rocket.png */,
 				CE79027F15D486C200958D04 /* bazooka.png */,
 				CE79028015D486C200958D04 /* grenade.png */,
+				CE2F8C2115DB249B00D3B19A /* vpill_1.png */,
+				CE2F8C2215DB249B00D3B19A /* vpill_2.png */,
+				CE2F8C2315DB249D00D3B19A /* vpill_3.png */,
+				CE2F8C2415DB249E00D3B19A /* vpill_4.png */,
 				CE052C8115D5D71800CEAD87 /* bazooka_rocket.png */,
 				CE79028115D486C200958D04 /* pistol.png */,
 				CE79028215D486C300958D04 /* taser.png */,
@@ -2814,6 +2846,10 @@
 				CECCD33B15D9ED81005867FF /* katana.png in Resources */,
 				CECCD33C15D9ED81005867FF /* kunai.png in Resources */,
 				CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */,
+				CE2F8C2515DB249F00D3B19A /* vpill_1.png in Resources */,
+				CE2F8C2615DB249F00D3B19A /* vpill_2.png in Resources */,
+				CE2F8C2715DB249F00D3B19A /* vpill_3.png in Resources */,
+				CE2F8C2815DB249F00D3B19A /* vpill_4.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3065,7 +3101,7 @@
 				CE26F7B215D3126700088E16 /* BattleScene.mm in Sources */,
 				C587E2D815D3123900528573 /* GWUILayer.mm in Sources */,
 				C587E2DC15D3352B00528573 /* ConstructionAvatar.mm in Sources */,
-				CE79027D15D4681300958D04 /* GWWeaponTable.m in Sources */,
+				CE79027D15D4681300958D04 /* GWWeaponTable.mm in Sources */,
 				CE79028915D487E700958D04 /* Bazooka.mm in Sources */,
 				CE79028C15D4880300958D04 /* BazookaProjectile.mm in Sources */,
 				CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */,
@@ -3082,6 +3118,10 @@
 				CE2F8C1215DB093600D3B19A /* NailGun.mm in Sources */,
 				CE2F8C1515DB095F00D3B19A /* NailGunProjectile.mm in Sources */,
 				C518B58715DB023600E13AB8 /* ConstructionModel.m in Sources */,
+				CE2F8C1C15DB1CE700D3B19A /* RPG.mm in Sources */,
+				CE2F8C2015DB1D1200D3B19A /* RPGProjectile.mm in Sources */,
+				CE2F8C2B15DB250500D3B19A /* VortexPill.mm in Sources */,
+				CE2F8C2E15DB251600D3B19A /* VortexPillProjectile.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
