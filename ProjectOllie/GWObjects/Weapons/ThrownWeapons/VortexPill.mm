@@ -33,9 +33,9 @@
         [self scheduleUpdate];
         
         //add children
-        [self addChild:self.pill3];
-        [self addChild:self.pill1];
-        [self addChild:self.pill2];
+        [self addChild:self.pill1 z:3];
+        [self addChild:self.pill2 z:1];
+        [self addChild:self.pill3 z:2];
     }
     
     return self;
@@ -50,10 +50,9 @@
 -(void)update:(ccTime)dt
 {
     spin                += dt;
-    self.pill1.rotation += spin*90;
-    self.pill2.rotation += spin*180;
-    self.pill3.rotation += spin*120;
-    DebugLog(@"Spin is: %f", spin);
+    self.pill1.rotation = spin*90;
+    self.pill2.rotation = spin*180;
+    self.pill3.rotation = spin*120;
     
     if (spin > 4) {
         spin = 0;

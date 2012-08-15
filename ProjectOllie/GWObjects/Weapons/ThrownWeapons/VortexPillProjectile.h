@@ -11,7 +11,7 @@
 #import "GWProjectile.h"
 
 @interface VortexPillProjectile : GWProjectile {
-    int spin;
+    float spin;
     BOOL vortex;
     BOOL hasClipped;
     CGPoint stayHere;
