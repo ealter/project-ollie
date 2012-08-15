@@ -402,6 +402,8 @@
 		CE9E274A15D9AD260075774F /* Pistol.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9E274915D9AD250075774F /* Pistol.mm */; };
 		CE9E274E15D9AD510075774F /* PistolProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE9E274D15D9AD500075774F /* PistolProjectile.mm */; };
 		CEA3636D15B7C9B900148D3B /* GWGestures.mm in Sources */ = {isa = PBXBuildFile; fileRef = CEA3636C15B7C9B800148D3B /* GWGestures.mm */; };
+		CEAD647C15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEAD647B15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi */; };
+		CEAD647F15DB3D8200A07FBB /* TokenPurchasesScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAD647E15DB3D8200A07FBB /* TokenPurchasesScreen.m */; };
 		CEAFB05C15CBA47900BA62A0 /* GWPerspectiveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */; };
 		CEC762F71586AECB0043AD8F /* DrawMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */; };
 		CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */ = {isa = PBXBuildFile; fileRef = CEC7C99315903CEC00FFB4F7 /* LoginWithFacebookNormal.png */; };
@@ -1127,6 +1129,9 @@
 		CE9E274D15D9AD500075774F /* PistolProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PistolProjectile.mm; sourceTree = "<group>"; };
 		CEA3636B15B7C9B700148D3B /* GWGestures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWGestures.h; sourceTree = "<group>"; };
 		CEA3636C15B7C9B800148D3B /* GWGestures.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GWGestures.mm; sourceTree = "<group>"; };
+		CEAD647B15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = TokenPurchasesScreen.ccbi; path = "Resources/menu-objects/ccbis/TokenPurchasesScreen.ccbi"; sourceTree = "<group>"; };
+		CEAD647D15DB3D8200A07FBB /* TokenPurchasesScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TokenPurchasesScreen.h; path = menus/TokenPurchasesScreen.h; sourceTree = "<group>"; };
+		CEAD647E15DB3D8200A07FBB /* TokenPurchasesScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TokenPurchasesScreen.m; path = menus/TokenPurchasesScreen.m; sourceTree = "<group>"; };
 		CEAFB05A15CBA47800BA62A0 /* GWPerspectiveLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GWPerspectiveLayer.h; sourceTree = "<group>"; };
 		CEAFB05B15CBA47800BA62A0 /* GWPerspectiveLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GWPerspectiveLayer.m; sourceTree = "<group>"; };
 		CEC762F61586AECB0043AD8F /* DrawMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = DrawMenu.ccbi; path = "Resources/menu-objects/ccbis/DrawMenu.ccbi"; sourceTree = "<group>"; };
@@ -1602,6 +1607,7 @@
 		C5FBA728159A8B6F00C1C624 /* CCBIs */ = {
 			isa = PBXGroup;
 			children = (
+				CEAD647B15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi */,
 				CE0C324215CC88780004E932 /* PlayerSearchScreen.ccbi */,
 				CE4545FF15CB42F100AA5437 /* ForgotPassword.ccbi */,
 				CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */,
@@ -2550,6 +2556,8 @@
 				CE30B191158FBA34009EC82B /* MainMenu.mm */,
 				CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */,
 				CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */,
+				CEAD647D15DB3D8200A07FBB /* TokenPurchasesScreen.h */,
+				CEAD647E15DB3D8200A07FBB /* TokenPurchasesScreen.m */,
 			);
 			name = "Without text fields";
 			sourceTree = "<group>";
@@ -2814,6 +2822,7 @@
 				CECCD33B15D9ED81005867FF /* katana.png in Resources */,
 				CECCD33C15D9ED81005867FF /* kunai.png in Resources */,
 				CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */,
+				CEAD647C15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3082,6 +3091,7 @@
 				CE2F8C1215DB093600D3B19A /* NailGun.mm in Sources */,
 				CE2F8C1515DB095F00D3B19A /* NailGunProjectile.mm in Sources */,
 				C518B58715DB023600E13AB8 /* ConstructionModel.m in Sources */,
+				CEAD647F15DB3D8200A07FBB /* TokenPurchasesScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
