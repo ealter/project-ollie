@@ -47,13 +47,13 @@
     if (destroyTimer >= self.fuseTimer) {
         vortex = YES;
     }
-    spin                += 1;
-    self.pill1.rotation += spin;
-    self.pill2.rotation += spin*2;
-    self.pill3.rotation += spin*3;
+    spin                += dt;
+    self.pill1.rotation = spin*90;
+    self.pill2.rotation = spin*180;
+    self.pill3.rotation = spin*120;
     
-    if (spin > 360) {
-        spin -= 360;
+    if (spin > 4) {
+        spin =0;
     }
     
     if (vortex) {
