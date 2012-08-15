@@ -56,7 +56,7 @@
     DebugLog(@"Spin is: %f", spin);
     
     if (spin > 4) {
-        spin =0;
+        spin = 0;
     }
     
 }
