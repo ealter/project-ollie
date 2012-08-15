@@ -36,6 +36,31 @@
         [self addChild:self.pill1];
         [self addChild:self.pill2];
         [self addChild:self.pill3];
+        
+        //set as sphere
+        world->DestroyBody(self.physicsBody);
+        b2BodyDef bd;
+        b2CircleShape circle;
+        b2FixtureDef fixtureDef;
+        bd.type             = b2_dynamicBody;
+        bd.linearDamping    = .1f;
+        bd.angularDamping   = .1f;
+        bd.bullet           = YES;//isBullet;
+        circle.m_radius = self.contentSize.width/2./PTM_RATIO; 
+        fixtureDef.shape    = &circle;
+        fixtureDef.density  = 1.0f;
+        fixtureDef.friction = 0.4f;
+        fixtureDef.restitution = 0.1f;
+        fixtureDef.filter.categoryBits = CATEGORY_PROJECTILES;
+        fixtureDef.filter.maskBits = MASK_PROJECTILES;
+        b2Body *bulletShape = _world->CreateBody(&bd);
+        bulletShape->CreateFixture(&fixtureDef);
+        bulletShape->SetTransform(b2Vec2(pos.x/PTM_RATIO,pos.y/PTM_RATIO), 0); 
+        
+        self.physicsBody = bulletShape;
+        self.physicsBody->SetUserData((__bridge void*)self);
+        bulletShape->SetTransform(b2Vec2(self.position.x/PTM_RATIO,self.position.y/PTM_RATIO), 0);   
+
     }
     
     return self;

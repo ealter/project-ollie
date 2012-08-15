@@ -55,7 +55,7 @@
     self.pill3.rotation = spin*120;
     
     if (spin > 4) {
-        spin =0;
+        spin = 0;
     }
     
 }
