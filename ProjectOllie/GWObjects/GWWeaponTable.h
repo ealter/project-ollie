@@ -7,12 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "cocos2d.h"
 #import "SWTableView.h"
 
-@interface GWWeaponTable : SWTableView {
-    
-}
+@interface GWWeaponTable : SWTableView
 
 -(void)removeSelf;
 
