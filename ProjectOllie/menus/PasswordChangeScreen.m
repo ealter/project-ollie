@@ -36,12 +36,12 @@
     return self;
 }
 
-- (void)serverOperationSucceededWithData:(id)data
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data
 {
     [self pressedBack:self];
 }
 
-- (void)serverOperationFailedWithError:(NSString *)error
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
     [[[UIAlertView alloc] initWithTitle:@"Error when changing password" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];

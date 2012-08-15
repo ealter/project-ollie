@@ -31,13 +31,13 @@
 - (void)broadcastServerOperationSucceededWithData:(id)data
 {
     if([self.delegate respondsToSelector:@selector(serverOperationSucceededWithData:)])
-        [self.delegate serverOperationSucceededWithData:data];
+        [self.delegate serverOperation:self failedWithError:data];
 }
 
 - (void)broadcastServerOperationFailedWithError:(NSString *)error
 {
     if([self.delegate respondsToSelector:@selector(serverOperationFailedWithError:)])
-        [self.delegate serverOperationFailedWithError:error];
+        [self.delegate serverOperation:self failedWithError:error];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

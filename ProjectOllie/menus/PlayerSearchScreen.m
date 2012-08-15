@@ -37,11 +37,11 @@
     [search searchForPlayerWithUsername:searchField_.text];
 }
 
-- (void)serverOperationSucceededWithData:(NSArray *)data
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(NSArray *)data
 {
     if(![data isKindOfClass:[NSArray class]]) {
         DebugLog(@"The data I received is not an NSArray!");
-        [self serverOperationFailedWithError:nil];
+        [self serverOperation:operation failedWithError:nil];
         return;
     }
     //TODO: show the usernames in some sort of table
@@ -50,7 +50,7 @@
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
-- (void)serverOperationFailedWithError:(NSString *)error
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
     [[[UIAlertView alloc]initWithTitle:@"Error when searching for player" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];

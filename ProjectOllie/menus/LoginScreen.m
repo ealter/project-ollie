@@ -56,17 +56,17 @@
 }
 
 //Called when login succeeds
-- (void)serverOperationSucceededWithData:(id)data
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
 //Called when login fails
-- (void)serverOperationFailedWithError:(NSString *)error
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
     [[[UIAlertView alloc]initWithTitle:@"Error logging in" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
-    [self serverOperationSucceededWithData:nil]; //TODO: Make the person log in again
+    [self serverOperation:operation succeededWithData:nil]; //TODO: Make the person log in again
 }
 
 -(void)pressedMakeNew:(id)sender
