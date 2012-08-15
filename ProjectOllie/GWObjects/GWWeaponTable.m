@@ -12,9 +12,7 @@
 #define kTableSizeMultiplier 2.4
 
 @interface GWWeaponTable()
-{
-    
-}
+
 -(void)setOpacity;
 -(CGRect)touchRect;
 
