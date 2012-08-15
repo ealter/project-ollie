@@ -105,7 +105,7 @@
         if(loadWep)
         {
             // Ammunition information
-            GWWeaponTableSlot* slot = [CCNode node];
+            GWWeaponTableSlot* slot = [GWWeaponTableSlot node];
             NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
             CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Aaargh" fontSize:15.0];
             

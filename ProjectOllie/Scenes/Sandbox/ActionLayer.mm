@@ -247,15 +247,6 @@ enum {
     //of the simulation, however, we are using a variable time step here.
     //You need to make an informed choice, the following URL is useful
     //http://gafferongames.com/game-physics/fix-your-timestep/
-   
-    GWPhysicsSprite* lastChild = [[self getChildByTag:kTagParentNode].children lastObject];
-    if(lastChild != nil)
-    {
-        if(![lastChild physicsBody]->IsAwake() && self.camera.target != nil)
-        {   
-            // pffft wat
-        }
-    }
     
     int32 velocityIterations = 8;
     int32 positionIterations = 1;
@@ -270,7 +261,6 @@ enum {
      */
     
 	[self.camera update:dt];
-    [_character update:dt];
 
 }
 
