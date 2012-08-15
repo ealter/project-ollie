@@ -85,7 +85,7 @@
     if (self = [super init])
     {
         envScene = des;
-        _brushradius = 30;
+        _brushradius = smallradius;
     }
     return self;
 }
@@ -115,6 +115,9 @@
 {
     for(UITouch *touch in touches) {
         CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
+        //Convert points to meters because terrain is in meters
+        location.x /= PTM_RATIO;
+        location.y /= PTM_RATIO;
         [envScene.environment.terrain clipCircle:_brushradius>0 WithRadius:fabs(_brushradius) x:location.x y:location.y];
     }
     
@@ -126,6 +129,12 @@
     for(UITouch *touch in touches) {
         CGPoint location      = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         CGPoint previousPoint = [self transformTouchLocationFromTouchView:[touch previousLocationInView:touch.view]];
+        
+        //Convert points to meters because terrain is in meters
+        location.x /= PTM_RATIO;
+        location.y /= PTM_RATIO;
+        previousPoint.x /= PTM_RATIO;
+        previousPoint.y /= PTM_RATIO;
         
         //Add circle
         [envScene.environment.terrain clipCircle:_brushradius>0 WithRadius:fabs(_brushradius) x:location.x y:location.y];

@@ -153,9 +153,9 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
 //Building land
 - (void) clipCircle:(bool)add WithRadius:(float)radius x:(float)x y:(float)y
 {
-    shapeField_->clipCircle(add, radius, x/PTM_RATIO, y/PTM_RATIO);/*
-    if (add) [drawSprite addCircleAt:ccp(x,y) radius:radius];
-    else [drawSprite removeCircleAt:ccp(x,y) radius:radius];*/
+    shapeField_->clipCircle(add, radius, x, y);
+    if (add) [drawSprite addCircleAt:ccp(x*PTM_RATIO,y*PTM_RATIO) radius:radius];
+    else [drawSprite removeCircleAt:ccp(x*PTM_RATIO,y*PTM_RATIO) radius:radius];
 }
 
 
@@ -177,14 +177,19 @@ static NSString *kShapefieldKey  = @"Shapefield Data";
                     ccpSub(p1, unitvector)};
     
     //Find x and y coords in meters, clip in shapefield
-    float x[] = {p[3].x/PTM_RATIO, p[2].x/PTM_RATIO, p[1].x/PTM_RATIO, p[0].x/PTM_RATIO};
-    float y[] = {p[3].y/PTM_RATIO, p[2].y/PTM_RATIO, p[1].y/PTM_RATIO, p[0].y/PTM_RATIO};
+    float x[] = {p[3].x, p[2].x, p[1].x, p[0].x};
+    float y[] = {p[3].y, p[2].y, p[1].y, p[0].y};
     shapeField_->clipConvexQuadBridge(add, x, y);
-    /*
+    
+    p[0] = ccpMult(p[0], PTM_RATIO);
+    p[1] = ccpMult(p[1], PTM_RATIO);
+    p[2] = ccpMult(p[2], PTM_RATIO);
+    p[3] = ccpMult(p[3], PTM_RATIO);
+    
     if (add)
         [drawSprite addPolygon:p numPoints:4];
     else
-        [drawSprite removePolygon:p numPoints:4];*/
+        [drawSprite removePolygon:p numPoints:4];
 }
 
 - (void)shapeChanged
