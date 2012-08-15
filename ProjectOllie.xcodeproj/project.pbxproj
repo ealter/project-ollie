@@ -165,9 +165,9 @@
 		CE26F7AF15D3125000088E16 /* GameScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7AE15D3125000088E16 /* GameScene.mm */; };
 		CE26F7B215D3126700088E16 /* BattleScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE26F7B115D3126700088E16 /* BattleScene.mm */; };
 		CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */; };
+		CE2AF71615D9F5D70085E82C /* CCUIViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */; };
 		CE2F8C1215DB093600D3B19A /* NailGun.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C1115DB093500D3B19A /* NailGun.mm */; };
 		CE2F8C1515DB095F00D3B19A /* NailGunProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE2F8C1415DB095E00D3B19A /* NailGunProjectile.mm */; };
-		CE2AF71615D9F5D70085E82C /* CCUIViewWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */; };
 		CE30B194158FBA34009EC82B /* ActionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18B158FBA34009EC82B /* ActionMenu.m */; };
 		CE30B195158FBA34009EC82B /* DrawMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18D158FBA34009EC82B /* DrawMenu.m */; };
 		CE30B196158FBA34009EC82B /* LoginScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B18F158FBA34009EC82B /* LoginScreen.m */; };
@@ -671,12 +671,12 @@
 		CE26F7B015D3126600088E16 /* BattleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleScene.h; sourceTree = "<group>"; };
 		CE26F7B115D3126700088E16 /* BattleScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BattleScene.mm; sourceTree = "<group>"; };
 		CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewAccountMenu.ccbi; path = "Resources/menu-objects/ccbis/NewAccountMenu.ccbi"; sourceTree = "<group>"; };
+		CE2AF71415D9F5D70085E82C /* CCUIViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUIViewWrapper.h; sourceTree = "<group>"; };
+		CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUIViewWrapper.m; sourceTree = "<group>"; };
 		CE2F8C1015DB093500D3B19A /* NailGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NailGun.h; sourceTree = "<group>"; };
 		CE2F8C1115DB093500D3B19A /* NailGun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NailGun.mm; sourceTree = "<group>"; };
 		CE2F8C1315DB095E00D3B19A /* NailGunProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NailGunProjectile.h; sourceTree = "<group>"; };
 		CE2F8C1415DB095E00D3B19A /* NailGunProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NailGunProjectile.mm; sourceTree = "<group>"; };
-		CE2AF71415D9F5D70085E82C /* CCUIViewWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCUIViewWrapper.h; sourceTree = "<group>"; };
-		CE2AF71515D9F5D70085E82C /* CCUIViewWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCUIViewWrapper.m; sourceTree = "<group>"; };
 		CE30B18A158FBA34009EC82B /* ActionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ActionMenu.h; path = menus/ActionMenu.h; sourceTree = "<group>"; };
 		CE30B18B158FBA34009EC82B /* ActionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ActionMenu.m; path = menus/ActionMenu.m; sourceTree = "<group>"; };
 		CE30B18C158FBA34009EC82B /* DrawMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DrawMenu.h; path = menus/DrawMenu.h; sourceTree = "<group>"; };
@@ -1782,34 +1782,12 @@
 		CE30B189158FBA12009EC82B /* Menus */ = {
 			isa = PBXGroup;
 			children = (
-				C5F430B015B8D6C200174FEE /* CharacterScreen.h */,
-				C5F430B115B8D6C200174FEE /* CharacterScreen.m */,
-				CE19DF5615CB443700CC392D /* ForgotPasswordScreen.h */,
-				CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */,
+				CEAD647A15DB33BA00A07FBB /* Without text fields */,
+				CEAD647815DB338300A07FBB /* With text fields */,
 				C5F430B215B8D6C200174FEE /* MyCell.h */,
 				C5F430B315B8D6C200174FEE /* MyCell.m */,
-				CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */,
-				CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */,
 				CE01827F15951774003CE804 /* Menu.h */,
 				CE01828015951774003CE804 /* Menu.m */,
-				CE30B18A158FBA34009EC82B /* ActionMenu.h */,
-				CE30B18B158FBA34009EC82B /* ActionMenu.m */,
-				CE30B18C158FBA34009EC82B /* DrawMenu.h */,
-				CE30B18D158FBA34009EC82B /* DrawMenu.m */,
-				CE30B18E158FBA34009EC82B /* LoginScreen.h */,
-				CE30B18F158FBA34009EC82B /* LoginScreen.m */,
-				CE30B190158FBA34009EC82B /* MainMenu.h */,
-				CE30B191158FBA34009EC82B /* MainMenu.mm */,
-				CE30B192158FBA34009EC82B /* NewAccountMenu.h */,
-				CE30B193158FBA34009EC82B /* NewAccountMenu.m */,
-				CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */,
-				CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */,
-				CE30B1A3158FC3F0009EC82B /* OptionsMenu.h */,
-				CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */,
-				CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */,
-				CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */,
-				CE0C323E15CC86C00004E932 /* PlayerSearchScreen.h */,
-				CE0C323F15CC86C00004E932 /* PlayerSearchScreen.m */,
 			);
 			name = Menus;
 			sourceTree = "<group>";
@@ -2536,6 +2514,44 @@
 			);
 			name = WeaponImages;
 			path = Resources/WeaponImages;
+			sourceTree = "<group>";
+		};
+		CEAD647815DB338300A07FBB /* With text fields */ = {
+			isa = PBXGroup;
+			children = (
+				CE19DF5615CB443700CC392D /* ForgotPasswordScreen.h */,
+				CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */,
+				CE30B18E158FBA34009EC82B /* LoginScreen.h */,
+				CE30B18F158FBA34009EC82B /* LoginScreen.m */,
+				CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */,
+				CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */,
+				CE30B192158FBA34009EC82B /* NewAccountMenu.h */,
+				CE30B193158FBA34009EC82B /* NewAccountMenu.m */,
+				CE30B1A3158FC3F0009EC82B /* OptionsMenu.h */,
+				CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */,
+				CE2544E515A6725A00A087F6 /* PasswordChangeScreen.h */,
+				CE2544E615A6725B00A087F6 /* PasswordChangeScreen.m */,
+				CE0C323E15CC86C00004E932 /* PlayerSearchScreen.h */,
+				CE0C323F15CC86C00004E932 /* PlayerSearchScreen.m */,
+			);
+			name = "With text fields";
+			sourceTree = "<group>";
+		};
+		CEAD647A15DB33BA00A07FBB /* Without text fields */ = {
+			isa = PBXGroup;
+			children = (
+				CE30B18A158FBA34009EC82B /* ActionMenu.h */,
+				CE30B18B158FBA34009EC82B /* ActionMenu.m */,
+				C5F430B015B8D6C200174FEE /* CharacterScreen.h */,
+				C5F430B115B8D6C200174FEE /* CharacterScreen.m */,
+				CE30B18C158FBA34009EC82B /* DrawMenu.h */,
+				CE30B18D158FBA34009EC82B /* DrawMenu.m */,
+				CE30B190158FBA34009EC82B /* MainMenu.h */,
+				CE30B191158FBA34009EC82B /* MainMenu.mm */,
+				CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */,
+				CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */,
+			);
+			name = "Without text fields";
 			sourceTree = "<group>";
 		};
 		CEC7C99215903CEC00FFB4F7 /* Facebook */ = {
