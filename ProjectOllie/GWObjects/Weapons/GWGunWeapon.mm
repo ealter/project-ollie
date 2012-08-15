@@ -38,6 +38,7 @@
         _world              = world;
         self.gameWorld      = gWorld;
         self.weaponImage    = imageName;
+        [self fillDescription];
         
         //Make the drawnode and set the color
         drawNode            = [HMVectorNode node];
@@ -113,6 +114,7 @@
     CGPoint stepVelocity    = ccpMult(velocity, dt);
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
+    stepGravity             = ccpMult(stepGravity, 0.);
     CGPoint beginPoint      = drawNode.position;
     
     for (int i = 0; i < 20 ; i++) {
@@ -127,6 +129,7 @@
 
 -(void)handlePanWithStart:(CGPoint) startPoint andCurrent:(CGPoint) currPoint andTime:(float) time
 {
+    self.aimOverlay.visible = YES;
     if (self.ammo >0) {
         //Rotate gun overlay
         float angle             = CC_RADIANS_TO_DEGREES(self.wepAngle);
@@ -156,6 +159,7 @@
 -(void)handleTap:(CGPoint) tapPoint
 {
     if (shootPoint.x != 0 && shootPoint.y != 0) {
+        self.aimOverlay.visible = NO;
         [self fireWeapon:shootPoint];
     }
 }

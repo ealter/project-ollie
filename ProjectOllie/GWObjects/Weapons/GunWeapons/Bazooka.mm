@@ -22,6 +22,12 @@
     return self;
 }
 
+-(void)fillDescription
+{
+    self.title          = @"Bazooka";
+    self.description    = @"Fires a self-propelling rocket through the air.  Explodes on impact!";
+}
+
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {

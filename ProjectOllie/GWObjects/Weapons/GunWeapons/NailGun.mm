@@ -1,23 +1,23 @@
 //
-//  Pistol.m
+//  NailGun.m
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/14/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Pistol.h"
+#import "NailGun.h"
 #import "HMVectorNode.h"
-#import "PistolProjectile.h"
+#import "NailGunProjectile.h"
 #import "GameConstants.h"
 #import "GWParticles.h"
 
-@implementation Pistol
 
+@implementation NailGun
 
 -(id)initWithPosition:(CGPoint)pos ammo:(float)ammo box2DWorld:(b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithImage:PISTOL_IMAGE position:pos size:CGSizeMake(PISTOL_WIDTH, PISTOL_HEIGHT) ammo:ammo bulletSize:CGSizeMake(PISTOL_B_WIDTH, PISTOL_B_HEIGHT) bulletSpeed:.7 bulletImage:PISTOL_B_IMAGE box2DWorld:world gameWorld:gWorld]){
+    if (self = [super initWithImage:NAILGUN_IMAGE position:pos size:CGSizeMake(NAILGUN_WIDTH, NAILGUN_HEIGHT) ammo:ammo bulletSize:CGSizeMake(NAILGUN_B_WIDTH, NAILGUN_B_HEIGHT) bulletSpeed:.7 bulletImage:NAILGUN_B_IMAGE box2DWorld:world gameWorld:gWorld]){
         
     }
     
@@ -26,8 +26,8 @@
 
 -(void)fillDescription
 {
-    self.title          = @"Pistol";
-    self.description    = @"A basic pistol. Load 'em up!";
+    self.title          = @"Nail Gun";
+    self.description    = @"Shoots nails.  Go happy gilmore on those apes!";
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint
@@ -37,7 +37,7 @@
         CGPoint force       = [self calculateGunVelocityFromStart:self.holder.position toAimPoint:aimPoint];
         
         //Make bullet
-        PistolProjectile *bullet= [[PistolProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * PISTOL_WIDTH*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *PISTOL_WIDTH*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
+        NailGunProjectile *bullet= [[NailGunProjectile alloc] initWithStartPosition:CGPointMake(self.position.x + (cosf(self.wepAngle) * NAILGUN_WIDTH*PTM_RATIO), self.position.y + (sinf(self.wepAngle) *NAILGUN_WIDTH*PTM_RATIO)) b2World:_world gameWorld:self.gameWorld];
         //Muzzle flash code
         bullet.emitter          = [GWParticleMuzzleFlash node];
         bullet.emitter.position = bullet.position;
