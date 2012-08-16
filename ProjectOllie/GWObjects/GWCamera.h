@@ -22,7 +22,7 @@
 
 @property (assign, nonatomic) bool track;               // When true, the camera automatically moves to see everything it's tracking
 
-@property (strong, nonatomic) CCNode* target;           // The thing we're currently tracking... if we are
+@property (strong, nonatomic) NSMutableArray* targets;  // The things we're currently tracking... if we are
 
 @property (assign, nonatomic) float actionIntensity;    // The level of intensity the camera is experiencing
 

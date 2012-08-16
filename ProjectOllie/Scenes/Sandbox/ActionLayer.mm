@@ -170,7 +170,7 @@ enum {
     groundBodyDef.position.Set(0, 0); // bottom-left corner
     
     _character = [[ConstructionAvatar alloc]initWithSpriteIndices:[NSArray array] box2DWorld:world];
-    [self addChild:_character];
+    [self addChild:_character z: 1];
     
     //ui layer
     GWUILayer *uiLayer = [[GWUILayer alloc] init];
@@ -195,10 +195,10 @@ enum {
     [super draw];
     
     /* Box2d debug drawing */
-    ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
+    /*ccGLEnableVertexAttribs( kCCVertexAttribFlag_Position );
     kmGLPushMatrix();
     world->DrawDebugData();	
-    kmGLPopMatrix();
+    kmGLPopMatrix();*/
     
 }
 
@@ -323,7 +323,7 @@ enum {
 -(void)setTerrain:(Terrain*)t
 {    
     //Add as a child so it draws
-    [self addChild:t];
+    [self addChild:t z:-1];
     
     if (t != NULL) {
         self.gameTerrain = t;
