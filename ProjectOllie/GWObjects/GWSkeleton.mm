@@ -331,12 +331,14 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 -(void)runFrame:(int)frameNum ofAnimation:(NSString *)animName flipped:(bool)flipped{
     string name = [animName UTF8String];
     [self clearAnimation];
-    _skeleton->deleteAnimation("aim_position");
+    _skeleton->deleteAnimation("frame_position");
     [self createFrameAnimation:name forBone:_skeleton->getRoot() atFrame:frameNum];
-    _skeleton->runAnimation("aim_position", flipped);
+    _skeleton->runAnimation("frame_position", flipped);
 }
 
 -(void)clearAnimation{
+    DebugLog(@"The animation is being cleared! \n");
+    timeElapsed = 0;
     _skeleton->clearAnimationQueue(_skeleton->getRoot());
 }
 
@@ -596,7 +598,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         angle_frame->y     = target_frame->y;
         angle_frame->angle = target_frame->angle;
         angle_frame->time  = 0;
-        _skeleton->addAnimationFrame("aim_position", root->name, angle_frame);
+        _skeleton->addAnimationFrame("frame_position", root->name, angle_frame);
         
         //For every bone!
         for(int i = 0; i < root->children.size(); i++)
