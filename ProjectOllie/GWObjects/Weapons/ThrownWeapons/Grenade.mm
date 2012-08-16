@@ -26,6 +26,7 @@
 {
     self.title          = @"Grenade";
     self.description    = @"Standard issue grenade.  Explodes after 4 seconds; make sure you're out of there by then!";
+    self.type   = kTypeThrown;
 }
 
 

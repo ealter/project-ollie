@@ -26,6 +26,7 @@
 {
     self.title          = @"Shotgun";
     self.description    = @"Basic shotgun.  Fires a cone of pellets that hurt more the closer they are!";
+    self.type   = kType2HGun;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint

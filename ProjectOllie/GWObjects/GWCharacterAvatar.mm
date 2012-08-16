@@ -80,7 +80,7 @@
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"moonwalk",@"aimgun2", @"throwaim",@"throwhigh",@"throwmed" nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"moonwalk",@"aimgun2", @"throwaim",@"throwhigh",@"throwmed", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
