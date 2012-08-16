@@ -45,6 +45,7 @@
 {
     self.title          = @"Vortex Pill";
     self.description    = @"Swirls with dark energies.  Implodes after 4 seconds, tearing through land and sucking in nearby apes.";
+    self.type   = kTypeThrown;
 }
 
 -(void)update:(ccTime)dt

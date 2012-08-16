@@ -24,6 +24,7 @@
 {
     self.title          = @"Bo Staff";
     self.description    = @"A sturdy staff, great for whacking apes around.  Donatello would be proud.";
+    self.type           = kType2HMelee;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint
