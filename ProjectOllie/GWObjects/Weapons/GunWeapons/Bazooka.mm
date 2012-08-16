@@ -26,6 +26,7 @@
 {
     self.title          = @"Bazooka";
     self.description    = @"Fires a self-propelling rocket through the air.  Explodes on impact!";
+    self.type   = kType2HGun;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint
