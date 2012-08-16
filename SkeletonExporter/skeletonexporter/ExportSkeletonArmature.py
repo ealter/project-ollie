@@ -44,12 +44,14 @@ def write(filename):
     taily = bone.tail.z
     angle = math.atan2(taily-heady, tailx-headx)
     width = bone["bone_width"]
+    z     = bone["z"]
     children = list(map(getBoneInfo, bone.children))
     return {'head': {'x': headx, 'y': heady},
             'tail': {'x': tailx, 'y': taily},
             'angle': angle,
             'length': bone.length,
             'width': width,
+            'z': z,
             'children': children,
             'name': bone.name}
 
