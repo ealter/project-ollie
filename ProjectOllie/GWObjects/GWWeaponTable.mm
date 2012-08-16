@@ -8,9 +8,9 @@
 
 #import "GWWeaponTable.h"
 #import "GWWeapon.h"
-
+#import "CCSprite.h"
 #import "MyCell.h"
-#define kTableSizeMultiplier 1.5
+#define kTableSizeMultiplier 1.2
 
 @interface GWWeaponTable()
 {
@@ -19,6 +19,7 @@
 @property (strong, nonatomic) CCLabelTTF* weaponDescription;
 @property (strong, nonatomic) CCLabelTTF* weaponTitle;
 @property (strong, nonatomic) CCLabelTTF* menuTitle;
+@property (strong, nonatomic) CCSprite* menuBackground;
 
 -(void)setOpacity;
 -(CGRect)touchRect;
@@ -29,9 +30,10 @@
 @synthesize weaponTitle       = weaponTitle_;
 @synthesize weaponDescription = weaponDescription_;
 @synthesize menuTitle         = menuTitle_;
+@synthesize menuBackground    = menuBackground_;
 
 
-+(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size{
++(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size characterName:(NSString*)name{
     
     GWWeaponTable* tv  = [self viewWithDataSource:dataSource size:size container:nil];
     /* init values */
@@ -39,8 +41,12 @@
     NSString* t      = @"";
     NSString* d      = @"";
     
+    /* Make background */
+    tv.menuBackground             = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@%@",name, @"_menu.png"]];
+    tv.menuBackground.scale       = .26f;
+    
     /* Make Labels */
-    ccColor3B labelColor    = ccc3(255,255,255);
+    ccColor3B labelColor    = ccc3(0,0,0);
     tv.weaponTitle          = [CCLabelTTF labelWithString:t fontName:@"Aaargh" fontSize:20];
     tv.weaponTitle.color    = labelColor;
     
@@ -66,9 +72,11 @@
 -(void)removeSelf{
     
     /* Remove labels */
+    
     [self.parent removeChild:self.menuTitle cleanup:YES];
     [self.parent removeChild:self.weaponDescription cleanup:YES];
     [self.parent removeChild:self.weaponTitle cleanup:YES];
+    [self.parent.parent removeChild:self.menuBackground cleanup:YES];
     
     /* Remove self */
     [self.parent removeChild:self cleanup:YES];
@@ -104,6 +112,8 @@
     if(select)
     {
         [self.weaponTitle setString:select.title];
+        //CGPoint pos = [self.weaponTitle convertToWorldSpace:self.weaponTitle.position];
+        //printf("The weapon title's actual position is: (%f,%f)\n",pos.x,pos.y);
         [self.weaponDescription setString:select.description];
     }
 
@@ -113,6 +123,9 @@
 
 -(void)setParent:(CCNode *)parent{
     parent_ = parent;
+    
+    /* Menu Background */
+    [self.parent.parent addChild:self.menuBackground z:0];
     
     /* Menu Title */
     [self.parent addChild:self.menuTitle];
@@ -132,9 +145,10 @@
     [super setPosition:position];
     if(self.parent)
     {
-        self.menuTitle.position = ccpAdd(position, ccp(0,self.contentSize.height/2.));
-        self.weaponTitle.position = ccpAdd(self.position, ccp(self.contentSize.width/4.,self.contentSize.height/4.));
-        self.weaponDescription.position = ccpAdd(self.position, ccp(self.contentSize.width/4.,-3 * self.contentSize.height)); 
+        self.menuBackground.position = ccpAdd(self.position,ccp(self.contentSize.width/8.,0));
+        self.menuTitle.position = ccpAdd(self.position, ccp(0,self.contentSize.height/2.));
+        self.weaponTitle.position = ccpAdd(self.position, ccp(self.contentSize.width/4.5,self.contentSize.height/2.3));
+        self.weaponDescription.position = ccpAdd(self.position, ccp(self.contentSize.width/4.5,-2.7 * self.contentSize.height)); 
     }
 }
 

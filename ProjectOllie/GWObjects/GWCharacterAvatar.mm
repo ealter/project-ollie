@@ -29,9 +29,6 @@
 
 //private properties endemic to a character
 
-/* The string identifier that makes this character unique to the other classes */
-@property (strong, nonatomic) NSString* type;
-
 /* An array of length 10 that holds the indices for each body part */
 @property (strong, nonatomic) NSArray* spriteIndices;
 

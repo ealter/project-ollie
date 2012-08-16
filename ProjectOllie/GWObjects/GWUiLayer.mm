@@ -44,7 +44,7 @@
 
         CGSize cellSize                     = [self cellSizeForTable:self.weaponTable];
         CGSize tableViewSize                = CGSizeMake(cellSize.width, cellSize.height);
-        self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize];
+        self.weaponTable                    = [GWWeaponTable viewWithDataSource:self size:tableViewSize characterName:self.activeCharacter.type];
         self.weaponTable.direction          = SWScrollViewDirectionHorizontal;
         self.weaponTable.anchorPoint        = CGPointZero;
         [self setWeaponTablePosition];
