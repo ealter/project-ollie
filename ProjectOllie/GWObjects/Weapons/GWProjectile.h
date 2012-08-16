@@ -27,7 +27,7 @@ class b2World;
 //Emitter used for effects
 @property (strong, nonatomic) CCParticleSystem *emitter;
 
-//Timer for thrown weapons
+//Timer for thrown weapons, can also be used for bullets
 @property (assign, nonatomic) float fuseTimer;
 
 
