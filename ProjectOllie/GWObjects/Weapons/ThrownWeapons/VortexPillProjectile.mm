@@ -33,6 +33,7 @@
         self.pill3.position = ccp(VPILL_WIDTH*PTM_RATIO/2, VPILL_HEIGHT*PTM_RATIO/2);
         
         self.emitter    = [GWParticleSpookyPurple node];
+        self.emitter.position = ccp(VPILL_WIDTH*PTM_RATIO/2, VPILL_HEIGHT*PTM_RATIO/2);
         
         //add children
         [self addChild:self.pill1];
@@ -83,7 +84,7 @@
     if (spin > 4) {
         spin =0;
     }
-    self.emitter.position = self.position;
+    self.emitter.position = ccp(VPILL_WIDTH*PTM_RATIO/2, VPILL_HEIGHT*PTM_RATIO/2);
     
     if (vortex) {
         if (!hasClipped) {
@@ -93,9 +94,9 @@
             [self.gameWorld.gameTerrain shapeChanged];
             hasClipped  = YES;
         }
-        [self applyb2ForceInRadius:250./PTM_RATIO withStrength:.08 isOutwards:NO];
+        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.03 isOutwards:NO];
         self.physicsBody->SetTransform(b2Vec2(stayHere.x/PTM_RATIO, stayHere.y/PTM_RATIO), 0);
-        if (destroyTimer >= self.fuseTimer + .5) {
+        if (destroyTimer >= self.fuseTimer + 2.) {
             [self destroyBullet];
         }
     }
@@ -109,7 +110,6 @@
         //do stuff to the world        
         [self.gameWorld.camera addIntensity:0.5];
         
-        [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.08 isOutwards:YES];
         self.physicsBody->SetTransform(b2Vec2(stayHere.x, stayHere.y), 0);
         
         [self.emitter stopSystem];
