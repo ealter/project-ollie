@@ -48,6 +48,7 @@
     InAppPurchaseIdentifiers *identifiers = [[InAppPurchaseIdentifiers alloc] init];
     identifiers.delegate = self;
     [identifiers getIdentifiers];
+    [self startActivityIndicator];
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
@@ -55,6 +56,7 @@
     DebugLog(@"We gots da products: %@", response.products);
     self.products = [response products];
     [purchasesTable_ reloadData];
+    [self stopActivityIndicator];
 }
 
 - (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data
