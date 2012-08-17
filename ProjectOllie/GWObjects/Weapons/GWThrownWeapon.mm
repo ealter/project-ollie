@@ -58,7 +58,7 @@
 {
     if (self.animStarted) {
         self.animTimer += dt;
-        if (self.animTimer > 0.8) {
+        if (self.animTimer > 0.6) {
             [self throwWeaponWithLocation:self.position fromFinger:self.releasePoint];
         }
     }
