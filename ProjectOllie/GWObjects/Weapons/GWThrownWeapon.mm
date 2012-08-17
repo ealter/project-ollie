@@ -13,6 +13,9 @@
 
 @implementation GWThrownWeapon
 @synthesize thrownImage     = _thrownImage;
+@synthesize animTimer       = _animTimer;
+@synthesize animStarted     = _animStarted;
+@synthesize releasePoint    = _releasePoint;
 
 -(id)initWithImage:(NSString *)imageName position:(CGPoint)pos size:(CGSize)size ammo:(float) ammo box2DWorld:(b2World *)world fuseTime:(float)fuseTime gameWorld:(ActionLayer *)gWorld
 {
@@ -25,10 +28,13 @@
         fuseTimer           = fuseTime;
         countDown           = 0;
         _world              = world;
-        self.gameWorld      = gWorld;        
+        self.gameWorld      = gWorld;    
+        self.animStarted    = NO;
+        self.animTimer      = 0;
         
         //Fill weapon descriptions
         [self fillDescription];
+        //[self scheduleUpdate];
 
         //Set the drawnode color and location for trajectory simulation
         drawNode            = [HMVectorNode node];
@@ -48,11 +54,20 @@
     return self;
 }
 
+-(void)update:(ccTime)dt
+{
+    if (self.animStarted) {
+        self.animTimer += dt;
+        if (self.animTimer > THROW_TIMER) {
+            [self throwWeaponWithLocation:self.position fromFinger:self.releasePoint];
+        }
+    }
+}
 
 //Override this to throw a custom bullet!
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {
-    if (self.ammo >0) {
+    if (self.ammo >0) { 
         //Make a bullet which acts as the thrown item
         thrown              = [[GWProjectile alloc] initWithBulletSize:self.contentSize imageName:self.weaponImage startPosition:self.position b2World:_world b2Bullet:NO gameWorld:self.gameWorld];
         b2Body* thrownShape = thrown.physicsBody;
@@ -108,17 +123,6 @@
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
     self.flipY              = NO;
     
-    //Change the weapon's angle
-    float angle             = CC_RADIANS_TO_DEGREES(self.wepAngle);
-    if (abs(angle) > 90) {
-        self.thrownImage.flipY = NO;
-    }else {
-        self.thrownImage.flipY = YES;
-    }
-    angle += 180;
-    angle = angle * -1;
-    self.thrownImage.rotation= angle;
-    
     //Simulate trajectory;
     for (int i = 0; i < 60 ; i++) {
         CGPoint drawPoint   = ccpAdd(ccpAdd(beginPoint, ccpMult(stepVelocity, i*PTM_RATIO)), ccpMult(stepGravity, 0.5f * (i+i*i)*PTM_RATIO));
@@ -128,6 +132,18 @@
     }
 }
 
+-(void)onEnter
+{
+    [self scheduleUpdate];
+    self.animStarted = NO;
+    [super onEnter];
+}
+
+-(void)onExit
+{
+    [self unscheduleUpdate];
+    [super onExit];
+}
 
 //Gesture Methods//
 
@@ -142,7 +158,9 @@
 -(void)handlePanFinishedWithStart:(CGPoint) startPoint andEnd:(CGPoint)endPoint andTime:(float)time
 {
     [drawNode clear];
-    [self throwWeaponWithLocation:self.position fromFinger:endPoint];
+    self.animStarted = TRUE;
+    self.animTimer      = 0;
+    self.releasePoint = endPoint;
 }
 
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity

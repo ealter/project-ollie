@@ -249,6 +249,7 @@
 		CE79029915D4990100958D04 /* railgun.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029415D4990100958D04 /* railgun.png */; };
 		CE79029A15D4990100958D04 /* rocket_launcher.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029515D4990100958D04 /* rocket_launcher.png */; };
 		CE79029D15D4AA5300958D04 /* banana.png in Resources */ = {isa = PBXBuildFile; fileRef = CE79029C15D4AA5100958D04 /* banana.png */; };
+		CE7E1F5115DEF94100F485CF /* knife.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7E1F5015DEF94100F485CF /* knife.png */; };
 		CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE8429F6157BD0EA0038C653 /* Terrain.mm */; };
 		CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CE894F001582B30B00E412E1 /* ShapeField.cpp */; };
 		CE94AA5A15785F83009B35B4 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE94AA5915785F83009B35B4 /* QuartzCore.framework */; };
@@ -817,6 +818,7 @@
 		CE79029515D4990100958D04 /* rocket_launcher.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket_launcher.png; sourceTree = "<group>"; };
 		CE79029615D4990100958D04 /* rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rocket.png; sourceTree = "<group>"; };
 		CE79029C15D4AA5100958D04 /* banana.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana.png; sourceTree = "<group>"; };
+		CE7E1F5015DEF94100F485CF /* knife.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = knife.png; sourceTree = "<group>"; };
 		CE8429F5157BD0E50038C653 /* Terrain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Terrain.h; path = ../Terrain/Terrain.h; sourceTree = "<group>"; };
 		CE8429F6157BD0EA0038C653 /* Terrain.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = Terrain.mm; path = ../Terrain/Terrain.mm; sourceTree = "<group>"; };
 		CE894EFE15829C5A00E412E1 /* ShapeField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ShapeField.h; path = libs/CSG/ShapeField.h; sourceTree = "<group>"; };
@@ -2076,11 +2078,11 @@
 		CE94AA8415785F84009B35B4 /* libs */ = {
 			isa = PBXGroup;
 			children = (
-				CE2AF71315D9F5D70085E82C /* CCUIViewWrapper */,
 				CE94AB9615785F87009B35B4 /* LICENSE_cocos2d.txt */,
 				CE94ABA515785F87009B35B4 /* LICENSE_CocosDenshion.txt */,
 				CE94ABD715785F87009B35B4 /* LICENSE_Kazmath.txt */,
 				CE94AC6A15785F89009B35B4 /* LICENSE_Box2D.txt */,
+				CE2AF71315D9F5D70085E82C /* CCUIViewWrapper */,
 				C589042315A4FD2500E0EB70 /* SkeletonUtils */,
 				CEFBC9C3159EA1ED001C1FD1 /* CCTexture2DMutable */,
 				CE62FC991594084000BEB3BE /* CCTableSuite */,
@@ -2589,6 +2591,7 @@
 				CEDEE35D15C8D4F000C0BB1C /* pellet.png */,
 				CECCD33815D9ED81005867FF /* katana.png */,
 				CECCD33D15D9EDAA005867FF /* bo_staff.png */,
+				CE7E1F5015DEF94100F485CF /* knife.png */,
 				CECCD33915D9ED81005867FF /* kunai.png */,
 				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
@@ -2926,6 +2929,7 @@
 				C518B5A715DC96E700E13AB8 /* construction_throwmed.anim in Resources */,
 				C518B5AA15DC9F6A00E13AB8 /* construction_aim1hgun.anim in Resources */,
 				C518B5AB15DC9F6A00E13AB8 /* construction_aim2hgun.anim in Resources */,
+				CE7E1F5115DEF94100F485CF /* knife.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

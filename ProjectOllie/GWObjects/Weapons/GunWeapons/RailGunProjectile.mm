@@ -49,8 +49,9 @@
 
         
         [self.emitter stopSystem];
-        self.emitter    = [GWParticleExplosion node];
-        [self.emitter resetSystem];
+        CCParticleSystem *newParticle = [GWParticleExplosion node];
+        newParticle.position = self.position;
+        [self.gameWorld addChild:newParticle];
         
     }
     [super destroyBullet];    
