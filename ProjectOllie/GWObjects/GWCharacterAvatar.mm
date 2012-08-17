@@ -557,10 +557,9 @@
 {
     if (self.state == kStateArming) {
         
-        self.state = kStateIdle;
-        
         if(self.selectedWeapon.type == kTypeThrown)
         {
+            self.state = kStateIdle;
             [self.skeleton clearAnimation];
             [self.skeleton runAnimation:@"throwhigh" flipped:self.orientation];
         }

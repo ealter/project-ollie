@@ -17,7 +17,7 @@
 #define BTM_RATIO .12* PTM_RATIO
 #define MIN_ANGLE -M_PI/5.0
 #define MAX_ANGLE M_PI/5.0
-#define INTERACTOR_FLAT_RADIUS .0004*PTM_RATIO;
+#define INTERACTOR_FLAT_RADIUS .0007*PTM_RATIO;
 
 using namespace std;
 
@@ -45,7 +45,7 @@ using namespace std;
         
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
-        box_radius        = .2 * wheel_radius;
+        box_radius        = wheel_radius;
         interactor_radius = box_radius;
         
         [self createPhysicsBodiesAt:ccp(200,200)];
@@ -167,7 +167,7 @@ using namespace std;
     fixtureDefWheel.shape = &wheelShape;
 
     b2PolygonShape  boxShape;
-    boxShape.SetAsBox(box_radius*2.5f,box_radius);
+    boxShape.SetAsBox(box_radius,box_radius);
     fixtureDefBox.shape = &boxShape;
     
     //The box data
@@ -337,7 +337,6 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(void)clearAnimation{
-    DebugLog(@"The animation is being cleared! \n");
     timeElapsed = 0;
     _skeleton->clearAnimationQueue(_skeleton->getRoot());
 }
