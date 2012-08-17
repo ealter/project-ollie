@@ -27,11 +27,7 @@
         self.pill2.position = ccp(VPILL_WIDTH*PTM_RATIO/2, VPILL_HEIGHT*PTM_RATIO/2);
         self.pill3       = [CCSprite spriteWithFile:VPILL_IMAGE_4];
         self.pill3.position = ccp(VPILL_WIDTH*PTM_RATIO/2, VPILL_HEIGHT*PTM_RATIO/2);
-        
-        
-        
-        [self scheduleUpdate];
-        
+    
         //add children
         [self addChild:self.pill1 z:3];
         [self addChild:self.pill2 z:1];
@@ -45,6 +41,7 @@
 {
     self.title          = @"Vortex Pill";
     self.description    = @"Swirls with dark energies.  Implodes after 4 seconds, tearing through land and sucking in nearby apes.";
+    self.type   = kTypeThrown;
 }
 
 -(void)update:(ccTime)dt
@@ -58,7 +55,13 @@
         spin = 0;
     }
     
-}
+    //super update stuff
+    if (self.animStarted) {
+        self.animTimer += dt;
+        if (self.animTimer > 0.8) {
+            [self throwWeaponWithLocation:self.position fromFinger:self.releasePoint];
+        }
+    }}
 
 -(void)throwWeaponWithLocation:(CGPoint)startPoint fromFinger:(CGPoint)endPoint
 {

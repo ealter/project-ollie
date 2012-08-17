@@ -63,7 +63,7 @@
     isPanning = NO;
     
     for (CCNode<GestureChild> *child in self.children) {
-        if (ccpDistance(touchDown, child.position) < 50) {
+        if (ccpDistance(touchDown, child.position) < 80) {
             self.touchTarget = child;
             return YES;
         }

@@ -11,6 +11,7 @@
 
 @interface GWWeaponTable : SWTableView
 
++(id)viewWithDataSource:(id<SWTableViewDataSource>)dataSource size:(CGSize)size characterName:(NSString*)name;
 -(void)removeSelf;
 
 @end

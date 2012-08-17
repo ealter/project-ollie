@@ -55,15 +55,14 @@
         
         [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.05 isOutwards:YES];
         
-        
-        CCParticleSystem* newEmitter = [GWParticleExplosion node];
-        newEmitter.position = self.position;
-        [self.gameWorld addChild:newEmitter];
+        [self.emitter stopSystem];
+        CCParticleSystem *newParticle = [GWParticleExplosion node];
+        newParticle.position = self.position;
+        [self.gameWorld addChild:newParticle];
     }
     
     //Clean up bullet and remove from parent
     
-    [[self gameWorld] removeChild:self.emitter cleanup:YES];
     _world->DestroyBody(self.physicsBody);
     [[self parent] removeChild:self cleanup:YES];    
 }

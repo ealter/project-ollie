@@ -26,11 +26,13 @@
 @interface GWCharacterAvatar()
 
 -(void)generateSprites:(Bone*)root;
+-(void)armTwoHandedGun;
+-(void)armOneHandedGun;
+-(void)armThrowWeapon;
+-(void)armOneHandedMelee;
+-(void)armTwoHandedMelee;
 
 //private properties endemic to a character
-
-/* The string identifier that makes this character unique to the other classes */
-@property (strong, nonatomic) NSString* type;
 
 /* An array of length 10 that holds the indices for each body part */
 @property (strong, nonatomic) NSArray* spriteIndices;
@@ -78,7 +80,7 @@
         //if the above worked...
         if(self.skeleton) {
             /* Load animations */
-            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"moonwalk",@"aim", nil];            
+            NSArray* animationNames = [NSArray arrayWithObjects:@"idle1",@"idle2",@"idle3",@"walk",@"moonwalk",@"aim2hgun", @"aim1hgun", @"throwaim",@"throwhigh",@"throwmed", nil];            
             [self.skeleton loadAnimations:animationNames];
             
         } else {
@@ -202,46 +204,23 @@
                 [self.skeleton runAnimation:@"walk" flipped:self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
                 [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
-            
-        
             [self.skeleton tieSkeletonToInteractor];
             return;
         case kStateArming:
-            /* Place gun on correct bone in body */
+            // if holding a weapon
             if(self.selectedWeapon)
             {
-                Bone* targetBone;
-                if(self.orientation == kOrientationLeft)
-                    targetBone = [self.skeleton getBoneByName:@"ll_arm"];
-                else
-                    targetBone = [self.skeleton getBoneByName:@"rl_arm"];
-            
-                CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
-                [self.selectedWeapon setPosition:position];
-                /* Finished correct placement */
+                if (self.selectedWeapon.type == kType1HGun)
+                    [self armOneHandedGun];
+                else if (self.selectedWeapon.type == kType2HGun)
+                    [self armTwoHandedGun];
+                else if (self.selectedWeapon.type == kType1HMelee)
+                    [self armTwoHandedGun];
+                else if (self.selectedWeapon.type == kType2HMelee)
+                    [self armTwoHandedGun];
+                else if (self.selectedWeapon.type == kTypeThrown)
+                    [self armThrowWeapon];
                 
-                /* Convert the angle to frames*/
-                float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
-                while(angle > M_PI*2)
-                {
-                    angle -= M_PI*2;
-                }
-                while(angle < 0)
-                {
-                    angle += M_PI*2;
-                }
-                if(angle < M_PI && self.orientation != kOrientationRight)
-                    self.orientation  = kOrientationRight;
-                else if(angle > M_PI && self.orientation != kOrientationLeft)
-                    self.orientation = kOrientationLeft;
-                
-                if(angle > M_PI)
-                    angle = M_PI*2 - angle;
-                
-                angle = RAD2DEG(angle);
-                /* Finished converting angle to frames */
-                
-                [self.skeleton runFrame:(int)angle ofAnimation:@"aim" flipped:self.orientation];
             }
             return;
         case kStateManeuvering:
@@ -333,7 +312,197 @@
     }
 }
 
-//override methods
+
+/***********************
+ *** Weapon Handling ***
+ ***********************/
+
+
+-(void)armOneHandedGun{
+    
+    /* Place bones correctly */
+    Bone* targetBone;
+    if(self.orientation == kOrientationLeft)
+        targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+    else
+        targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+    
+    CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+    [self.selectedWeapon setPosition:position];
+    /* Finished correct placement */
+    
+    /* Convert the angle to frames*/
+    float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
+    while(angle > M_PI*2)
+    {
+        angle -= M_PI*2;
+    }
+    while(angle < 0)
+    {
+        angle += M_PI*2;
+    }
+    if(angle < M_PI && self.orientation != kOrientationRight)
+        self.orientation  = kOrientationRight;
+    else if(angle > M_PI && self.orientation != kOrientationLeft)
+        self.orientation = kOrientationLeft;
+    
+    if(angle > M_PI)
+        angle = M_PI*2 - angle;
+    
+    angle = RAD2DEG(angle);
+    /* Finished converting angle to frames */
+    
+    [self.skeleton runFrame:(int)angle ofAnimation:@"aim1hgun" flipped:self.orientation];
+}
+
+-(void)armTwoHandedGun{
+    
+    Bone* targetBone;
+    if(self.orientation == kOrientationLeft)
+        targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+    else
+        targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+    
+    CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+    [self.selectedWeapon setPosition:position];
+    /* Finished correct placement */
+    
+    /* Convert the angle to frames*/
+    float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
+    while(angle > M_PI*2)
+    {
+        angle -= M_PI*2;
+    }
+    while(angle < 0)
+    {
+        angle += M_PI*2;
+    }
+    if(angle < M_PI && self.orientation != kOrientationRight)
+        self.orientation  = kOrientationRight;
+    else if(angle > M_PI && self.orientation != kOrientationLeft)
+        self.orientation = kOrientationLeft;
+    
+    if(angle > M_PI)
+        angle = M_PI*2 - angle;
+    
+    angle = RAD2DEG(angle);
+    /* Finished converting angle to frames */
+    
+    [self.skeleton runFrame:(int)angle ofAnimation:@"aim2hgun" flipped:self.orientation];
+}
+
+-(void)armOneHandedMelee{
+    /* Place bones correctly */
+    Bone* targetBone;
+    if(self.orientation == kOrientationLeft)
+        targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+    else
+        targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+    
+    CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+    [self.selectedWeapon setPosition:position];
+    /* Finished correct placement */
+    
+    /* Convert the angle to frames*/
+    float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
+    while(angle > M_PI*2)
+    {
+        angle -= M_PI*2;
+    }
+    while(angle < 0)
+    {
+        angle += M_PI*2;
+    }
+    if(angle < M_PI && self.orientation != kOrientationRight)
+        self.orientation  = kOrientationRight;
+    else if(angle > M_PI && self.orientation != kOrientationLeft)
+        self.orientation = kOrientationLeft;
+    
+    if(angle > M_PI)
+        angle = M_PI*2 - angle;
+    
+    angle = RAD2DEG(angle);
+    /* Finished converting angle to frames */
+    
+    [self.skeleton runFrame:(int)angle ofAnimation:@"aim1hmelee" flipped:self.orientation];
+}
+
+-(void)armTwoHandedMelee{
+    /* Place bones correctly */
+    Bone* targetBone;
+    if(self.orientation == kOrientationLeft)
+        targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+    else
+        targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+    
+    CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+    [self.selectedWeapon setPosition:position];
+    /* Finished correct placement */
+    
+    /* Convert the angle to frames*/
+    float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
+    while(angle > M_PI*2)
+    {
+        angle -= M_PI*2;
+    }
+    while(angle < 0)
+    {
+        angle += M_PI*2;
+    }
+    if(angle < M_PI && self.orientation != kOrientationRight)
+        self.orientation  = kOrientationRight;
+    else if(angle > M_PI && self.orientation != kOrientationLeft)
+        self.orientation = kOrientationLeft;
+    
+    if(angle > M_PI)
+        angle = M_PI*2 - angle;
+    
+    angle = RAD2DEG(angle);
+    /* Finished converting angle to frames */
+    
+    [self.skeleton runFrame:(int)angle ofAnimation:@"aim2hmelee" flipped:self.orientation];
+}
+
+-(void)armThrowWeapon{
+    /* Place bones correctly */
+    Bone* targetBone;
+    if(self.orientation == kOrientationLeft)
+        targetBone = [self.skeleton getBoneByName:@"rl_arm"];
+    else
+        targetBone = [self.skeleton getBoneByName:@"ll_arm"];
+    
+    CGPoint position = ccpMult(ccp(targetBone->box2DBody->GetPosition().x,targetBone->box2DBody->GetPosition().y),PTM_RATIO);
+    [self.selectedWeapon setPosition:position];
+    /* Finished correct placement */
+    
+    /* Convert the angle to frames*/
+    float angle = (self.selectedWeapon.wepAngle - [self.skeleton getAngle]) + M_PI_2;
+    while(angle > M_PI*2)
+    {
+        angle -= M_PI*2;
+    }
+    while(angle < 0)
+    {
+        angle += M_PI*2;
+    }
+    if(angle < M_PI && self.orientation != kOrientationRight)
+        self.orientation  = kOrientationRight;
+    else if(angle > M_PI && self.orientation != kOrientationLeft)
+        self.orientation = kOrientationLeft;
+    
+    if(angle > M_PI)
+        angle = M_PI*2 - angle;
+    
+    angle = RAD2DEG(angle);
+    /* Finished converting angle to frames */
+    
+    [self.skeleton runFrame:(int)angle ofAnimation:@"throwaim" flipped:self.orientation];
+}
+
+/***********************
+ *** Parent Override ***
+ ***********************/
+
 -(CGPoint)position{
     
     //gets the interactor's x and the torso's y. Weird huh?
@@ -353,7 +522,10 @@
     }
 }
 
-//Gesture Methods
+/************************
+ *** Gesture Handling ***
+ ************************/
+
 -(void)handleSwipeRightWithAngle:(float) angle andLength:(float) length andVelocity:(float) velocity
 {
     
@@ -384,7 +556,16 @@
 -(void)handlePanFinishedWithStart:(CGPoint) startPoint andEnd:(CGPoint) endPoint andTime:(float) time
 {
     if (self.state == kStateArming) {
+        
+        if(self.selectedWeapon.type == kTypeThrown)
+        {
+            self.state = kStateIdle;
+            [self.skeleton clearAnimation];
+            [self.skeleton runAnimation:@"throwhigh" flipped:self.orientation];
+        }
+        
         [((GWWeapon <GestureChild>*) self.selectedWeapon) handlePanFinishedWithStart:startPoint andEnd:endPoint andTime:time];
+        
     }
 }
 

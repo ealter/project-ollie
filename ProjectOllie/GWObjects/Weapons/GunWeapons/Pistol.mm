@@ -28,6 +28,7 @@
 {
     self.title          = @"Pistol";
     self.description    = @"A basic pistol. Load 'em up!";
+    self.type   = kType1HGun;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint

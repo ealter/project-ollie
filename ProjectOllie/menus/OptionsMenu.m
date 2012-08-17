@@ -53,12 +53,12 @@
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
-- (void)serverOperationSucceededWithData:(id)data
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data
 {
     [self pressedBack:self];
 }
 
-- (void)serverOperationFailedWithError:(NSString *)error
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error
 {
     [[[UIAlertView alloc]initWithTitle:@"Error when changing username" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
 }

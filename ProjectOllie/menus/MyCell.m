@@ -9,9 +9,4 @@
 #import "MyCell.h"
 
 @implementation MyCell
-
-+(CGSize)cellSize {
-    return CGSizeMake(300, 100);
-}
-
 @end

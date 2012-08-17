@@ -25,8 +25,9 @@
 
 -(void)fillDescription
 {
-    self.title = @"Gauss Rifle";
+    self.title  = @"Gauss Rifle";
     self.description = @"The gauss rifle fires bullets that travel through terrain, directly towards your target.  Strike at the enemy from any angle with this drilling weapon.";
+    self.type   = kType2HGun;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint

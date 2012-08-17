@@ -13,6 +13,8 @@
 #import "GWProjectile.h"
 #import "HMVectorNode.h"
 
+#define MAXTHROWNSPEED 160. //Max speed of the weapon's projectile
+
 class b2World;
 
 @interface GWThrownWeapon : GWWeapon <GestureChild>{
@@ -22,6 +24,14 @@ class b2World;
     float fuseTimer;        //Time to explode the thrown item
     float countDown;        //Timer that counts down to explosion
 }
+
+//CCSprite used for easy rotation
+@property (strong, nonatomic) CCSprite *thrownImage;
+
+//Timer and BOOL used to allow throwing animation to finish.  CGpoint to store touch
+@property (assign, nonatomic) float animTimer;
+@property (assign, nonatomic) BOOL animStarted;
+@property (assign, nonatomic) CGPoint releasePoint;
 
 //Big init called by inheriting classes
 -(id)initWithImage:(NSString *)imageName position:(CGPoint) pos size:(CGSize)size ammo:(float) ammo box2DWorld: (b2World *)world fuseTime:(float) fuseTime gameWorld:(ActionLayer *) gWorld;

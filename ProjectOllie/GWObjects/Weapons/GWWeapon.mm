@@ -19,6 +19,7 @@
 @synthesize weaponImage     = _weaponImage;
 @synthesize title           = _title;
 @synthesize description     = _description;
+@synthesize type            = _type;
 
 -(void)fireWeapon:(CGPoint)target
 {

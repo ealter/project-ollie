@@ -25,10 +25,12 @@
  #endif /* SERVER_IS_DEV */
 #endif /* DOMAIN_NAME */
 
+@class ServerAPI;
+
 @protocol ServerAPI_delegate <NSObject>
 
-- (void)serverOperationSucceededWithData:(id)data;
-- (void)serverOperationFailedWithError:(NSString *)error;
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data;
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error;
 
 @end
 
@@ -46,6 +48,7 @@
 - (void)broadcastServerOperationFailedWithError:(NSString *)error;
 - (void)serverReturnedResult:(NSDictionary *)result; //Called only if the server did not return an error. Subclasses must override this
 - (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url;
+- (void)makeGetRequestWithUrl:(NSURL *)url;
 
 + (NSURL *)urlForPageName:(NSString *)page;
 

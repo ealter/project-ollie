@@ -59,12 +59,12 @@
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
 }
 
-- (void)serverOperationSucceededWithData:(id)data
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data
 {
     [self transitionToSceneWithFile:@"MainMenu.ccbi"];
 }
 
-- (void)serverOperationFailedWithError:(NSString *)error
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error
 {
     if(!error) error = @"unknown error";
     [[[UIAlertView alloc]initWithTitle:@"Error creating account" message:error delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];

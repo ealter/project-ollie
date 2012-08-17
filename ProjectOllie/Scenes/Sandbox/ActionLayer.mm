@@ -25,6 +25,9 @@
 #import "NailGun.h"
 #import "VortexPill.h"
 #import "Pistol.h"
+#import "RPG.h"
+#import "Kunai.h"
+#import "RailGun.h"
 #import "GWContactListener.h"
 #import "GWUILayer.h"
 
@@ -170,7 +173,7 @@ enum {
     groundBodyDef.position.Set(0, 0); // bottom-left corner
     
     _character = [[ConstructionAvatar alloc]initWithSpriteIndices:[NSArray array] box2DWorld:world];
-    [self addChild:_character];
+    [self addChild:_character z: 1];
     
     //ui layer
     GWUILayer *uiLayer = [[GWUILayer alloc] init];
@@ -178,7 +181,7 @@ enum {
     [self addChild:uiLayer z:3];
     
     //weapons loading
-    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BananaGrenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Bazooka alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Shotgun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BoStaff alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Pistol alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[NailGun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[VortexPill alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], nil];
+    NSArray* weaponArray = [NSArray arrayWithObjects:[[GaussRifle alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],[[Grenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BananaGrenade alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Bazooka alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Shotgun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[BoStaff alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[Pistol alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[NailGun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], [[VortexPill alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[RPG alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[Kunai alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self],  [[RailGun alloc] initWithPosition:CGPointMake(1, 1) ammo:99 box2DWorld:world gameWorld:self], nil];
     
     [_character loadWeapons:weaponArray];
 
@@ -323,7 +326,7 @@ enum {
 -(void)setTerrain:(Terrain*)t
 {    
     //Add as a child so it draws
-    [self addChild:t];
+    [self addChild:t z:-1];
     
     if (t != NULL) {
         self.gameTerrain = t;

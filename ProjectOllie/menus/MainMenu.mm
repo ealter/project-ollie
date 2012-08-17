@@ -75,6 +75,11 @@
     [self transitionToSceneWithFile:@"CharacterScreen.ccbi"];
 }
 
+- (void)pressedStore:(id)sender
+{
+    [self transitionToSceneWithFile:@"TokenPurchasesScreen.ccbi"];
+}
+
 -(void)pressedLogout:(id)sender
 {
     [[[Logout alloc]init] logout];

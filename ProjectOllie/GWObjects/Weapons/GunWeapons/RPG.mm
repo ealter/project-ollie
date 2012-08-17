@@ -27,6 +27,7 @@
 {
     self.title          = @"RPG";
     self.description    = @"Fires a self-propelling grenade.  Explodes on impact!";
+    self.type   = kType2HGun;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint
