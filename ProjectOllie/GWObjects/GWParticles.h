@@ -82,3 +82,9 @@
 }
 @end
 
+// A Spooky purple particle system
+@interface GWParticleSpookyPurple: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+

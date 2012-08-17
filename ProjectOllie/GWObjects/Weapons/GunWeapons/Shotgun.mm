@@ -15,7 +15,7 @@
 
 -(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *) gWorld
 {
-    if (self = [super initWithImage:SHOTGUN_IMAGE position:pos size:CGSizeMake(SHOTGUN_WIDTH, SHOTGUN_HEIGHT) ammo:ammo bulletSize:CGSizeMake(SHOTGUN_B_WIDTH, SHOTGUN_B_HEIGHT) bulletSpeed:.6 bulletImage:SHOTGUN_B_IMAGE box2DWorld:world gameWorld:gWorld]) {
+    if (self = [super initWithImage:SHOTGUN_IMAGE position:pos size:CGSizeMake(SHOTGUN_WIDTH, SHOTGUN_HEIGHT) ammo:ammo bulletSize:CGSizeMake(SHOTGUN_B_WIDTH, SHOTGUN_B_HEIGHT) bulletSpeed:.3 bulletImage:SHOTGUN_B_IMAGE box2DWorld:world gameWorld:gWorld]) {
         
     }
     

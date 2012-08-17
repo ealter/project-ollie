@@ -32,10 +32,13 @@
         self.pill3       = [CCSprite spriteWithFile:VPILL_IMAGE_4];
         self.pill3.position = ccp(VPILL_WIDTH*PTM_RATIO/2, VPILL_HEIGHT*PTM_RATIO/2);
         
+        self.emitter    = [GWParticleSpookyPurple node];
+        
         //add children
         [self addChild:self.pill1];
         [self addChild:self.pill2];
         [self addChild:self.pill3];
+        [self addChild:self.emitter];
         
         //set as sphere
         world->DestroyBody(self.physicsBody);
@@ -80,6 +83,7 @@
     if (spin > 4) {
         spin =0;
     }
+    self.emitter.position = self.position;
     
     if (vortex) {
         if (!hasClipped) {
@@ -107,9 +111,8 @@
         
         [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.08 isOutwards:YES];
         self.physicsBody->SetTransform(b2Vec2(stayHere.x, stayHere.y), 0);
-        self.emitter = [GWParticleExplosion node];
-        self.emitter.position = self.position;
-        [self.gameWorld addChild:self.emitter];
+        
+        [self.emitter stopSystem];
     }
     
     [super destroyBullet];
