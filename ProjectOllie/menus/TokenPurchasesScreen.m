@@ -11,12 +11,14 @@
 #import "cocos2d.h"
 #import "InAppPurchaseIdentifiers.h"
 #import "StoreTableCell.h"
+#import "NumberOfTokens.h"
 
 @interface TokenPurchasesScreen () <ServerAPI_delegate, SKProductsRequestDelegate>
 
 @property (nonatomic, strong) NSArray *products; //An array of SKProduct objects
 
 - (void)getProductIdentifiers;
+- (void)getNumberOfTokens;
 
 @end
 
@@ -26,6 +28,11 @@
 - (id)init
 {
     if(self = [super init]) {
+        if(![SKPaymentQueue canMakePayments]) {
+            [[[UIAlertView alloc] initWithTitle:@"You cannot use the store" message:@"Your iTunes account does not allow you to make purchases in the game" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+            [self transitionToSceneWithFile:@"MainMenu.ccbi"];
+            return nil;
+        }
         CGSize tableViewSize = CGSizeMake(self.contentSize.width, self.contentSize.height * .75);
         purchasesTable_ = [SWTableView viewWithDataSource:self size:tableViewSize];
         
@@ -38,6 +45,12 @@
         
         [self addChild:purchasesTable_ z:20];
         [self getProductIdentifiers];
+        
+        tokensLabel_ = [CCLabelTTF labelWithString:@"" fontName:@"MarkerFelt-Wide" fontSize:14];
+		tokensLabel_.position = ccp(self.contentSize.width * .925, self.contentSize.height * .975);
+        tokensLabel_.anchorPoint = ccp(1,1);
+		[self addChild:tokensLabel_ z:250];
+        [self getNumberOfTokens];
     }
     return self;
 }
@@ -48,6 +61,13 @@
     identifiers.delegate = self;
     [identifiers getIdentifiers];
     [self startActivityIndicator];
+}
+
+- (void)getNumberOfTokens
+{
+    NumberOfTokens *tokens = [[NumberOfTokens alloc] init];
+    tokens.delegate = self;
+    [tokens getNumberofTokens];
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
@@ -73,6 +93,9 @@
             productRequest.delegate = self;
             [productRequest start];
         }
+    } else if([operation isKindOfClass:[NumberOfTokens class]]) {
+        int numberOfTokens = [(NSDecimalNumber *)data intValue];
+        tokensLabel_.string = [NSString stringWithFormat:@"%d", numberOfTokens];
     } else {
         DebugLog(@"We got an unknown class! %@", [operation class]);
     }
@@ -86,7 +109,7 @@
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
 {
-    return CGSizeMake(self.contentSize.width - 5, 20);
+    return CGSizeMake(self.contentSize.width - 50, 35);
 }
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
