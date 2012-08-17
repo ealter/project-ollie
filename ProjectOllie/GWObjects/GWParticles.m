@@ -770,7 +770,7 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
         endColorVar   = kColor4fZero;
         
         // size, in pixels
-        startSize = 64.0f;
+        startSize = 25.0f;
         startSizeVar = 5.0f;
         endSize = 0.f;
         

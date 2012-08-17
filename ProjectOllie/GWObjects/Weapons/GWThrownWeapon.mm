@@ -10,7 +10,6 @@
 #import "GameConstants.h"
 #import "ccTypes.h"
 
-#define THROW_TIMER .4f
 
 @implementation GWThrownWeapon
 @synthesize thrownImage     = _thrownImage;
