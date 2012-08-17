@@ -122,6 +122,7 @@
 		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
+		CE04E58B15DDA8D8009A009C /* StoreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04E58A15DDA8D8009A009C /* StoreTableCell.m */; };
 		CE052C8215D5D71800CEAD87 /* bazooka_rocket.png in Resources */ = {isa = PBXBuildFile; fileRef = CE052C8115D5D71800CEAD87 /* bazooka_rocket.png */; };
 		CE055E4C15B8DB3100053373 /* CharacterScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B115B8D6C200174FEE /* CharacterScreen.m */; };
 		CE055E4E15B8DBA400053373 /* MyCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F430B315B8D6C200174FEE /* MyCell.m */; };
@@ -604,6 +605,8 @@
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
+		CE04E58915DDA8D8009A009C /* StoreTableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoreTableCell.h; path = menus/StoreTableCell.h; sourceTree = "<group>"; };
+		CE04E58A15DDA8D8009A009C /* StoreTableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoreTableCell.m; path = menus/StoreTableCell.m; sourceTree = "<group>"; };
 		CE052C8115D5D71800CEAD87 /* bazooka_rocket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bazooka_rocket.png; sourceTree = "<group>"; };
 		CE05C35415D09F9B007F8ED3 /* GWCharacterModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWCharacterModel.h; path = CharacterModels/GWCharacterModel.h; sourceTree = "<group>"; };
 		CE05C35515D09F9B007F8ED3 /* GWCharacterModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GWCharacterModel.m; path = CharacterModels/GWCharacterModel.m; sourceTree = "<group>"; };
@@ -1815,6 +1818,8 @@
 				CEAD647815DB338300A07FBB /* With text fields */,
 				C5F430B215B8D6C200174FEE /* MyCell.h */,
 				C5F430B315B8D6C200174FEE /* MyCell.m */,
+				CE04E58915DDA8D8009A009C /* StoreTableCell.h */,
+				CE04E58A15DDA8D8009A009C /* StoreTableCell.m */,
 				CE01827F15951774003CE804 /* Menu.h */,
 				CE01828015951774003CE804 /* Menu.m */,
 			);
@@ -3136,6 +3141,7 @@
 				CE2F8C2015DB1D1200D3B19A /* RPGProjectile.mm in Sources */,
 				CE2F8C2B15DB250500D3B19A /* VortexPill.mm in Sources */,
 				CE2F8C2E15DB251600D3B19A /* VortexPillProjectile.mm in Sources */,
+				CE04E58B15DDA8D8009A009C /* StoreTableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

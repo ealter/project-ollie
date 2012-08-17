@@ -48,6 +48,7 @@
 - (void)broadcastServerOperationFailedWithError:(NSString *)error;
 - (void)serverReturnedResult:(NSDictionary *)result; //Called only if the server did not return an error. Subclasses must override this
 - (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url;
+- (void)makeGetRequestWithUrl:(NSURL *)url;
 
 + (NSURL *)urlForPageName:(NSString *)page;
 
