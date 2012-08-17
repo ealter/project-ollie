@@ -25,6 +25,7 @@ using namespace std;
 {
     b2Body* box;
     b2Body* wheel;
+    b2Body* comp;
     b2World* _world;
     float box_radius;
     float wheel_radius;
@@ -155,6 +156,7 @@ using namespace std;
     b2BodyDef bd;
     b2FixtureDef fixtureDefWheel;
     b2FixtureDef fixtureDefBox;
+    b2FixtureDef fixtureDefWheelComp;
     
     /* Body definition */
     bd.type = b2_dynamicBody;
@@ -169,6 +171,10 @@ using namespace std;
     b2PolygonShape  boxShape;
     boxShape.SetAsBox(box_radius*2.5f,box_radius);
     fixtureDefBox.shape = &boxShape;
+
+    b2PolygonShape wheelComp;
+    wheelComp.SetAsBox(wheel_radius, wheel_radius*1.5f);
+    fixtureDefWheelComp.shape = &wheelComp;
     
     //The box data
     fixtureDefBox.density = 5.f;
@@ -184,11 +190,29 @@ using namespace std;
     fixtureDefWheel.filter.categoryBits = CATEGORY_INTERACTOR;
     fixtureDefWheel.filter.maskBits = MASK_INTERACTOR;
     
+    //comp data
+    fixtureDefWheelComp.density = .11f;
+    fixtureDefWheelComp.friction = 0.f;
+    fixtureDefWheelComp.restitution = .1f;
+    fixtureDefWheelComp.filter.categoryBits = CATEGORY_INTERACTOR;
+    fixtureDefWheelComp.filter.maskBits = MASK_INTERACTOR;
+    
     bd.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO);
     wheel = _world->CreateBody(&bd);
     box   = _world->CreateBody(&bd);
+    bd.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO + .15);
+    bd.fixedRotation = YES;
+    comp  = _world->CreateBody(&bd);
     
     wheel->CreateFixture(&fixtureDefWheel);
+    comp->CreateFixture(&fixtureDefWheelComp);
+    b2RevoluteJointDef jointDef;
+    
+    jointDef.enableLimit = false;
+    jointDef.Initialize(comp, wheel, wheel->GetPosition());
+    _world->CreateJoint(&jointDef);
+
+    
     box->CreateFixture(&fixtureDefBox);
     
 }
@@ -302,6 +326,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         restingCounter   = 0;
         restingUpdates   = 0;
         rollingAvgSpeed  = 0;
+
     }
     return self;
 }
@@ -400,8 +425,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return destinationAngle;
 }
 
--(void)tieSkeletonToInteractor{
-    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+-(void)tieSkeletonToInteractor:(float)dt{
+    //_skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+    _skeleton->adjustPosition(_skeleton->getRoot(),absoluteLocation.x,absoluteLocation.y, dt);
 }
 
 -(void)setActive:(bool)active{
@@ -451,7 +477,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
-    [self tieSkeletonToInteractor];
+    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
 }
 
 /* recursively assembles the bone tree imported from blender*/

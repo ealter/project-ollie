@@ -10,6 +10,7 @@
 #import "GameConstants.h"
 #import "ccTypes.h"
 
+#define THROW_TIMER .4f
 
 @implementation GWThrownWeapon
 @synthesize thrownImage     = _thrownImage;
@@ -58,7 +59,7 @@
 {
     if (self.animStarted) {
         self.animTimer += dt;
-        if (self.animTimer > 0.6) {
+        if (self.animTimer > THROW_TIMER) {
             [self throwWeaponWithLocation:self.position fromFinger:self.releasePoint];
         }
     }
