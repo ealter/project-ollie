@@ -33,7 +33,7 @@
     }
     self.changedUsername = newUsername;
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:currentUsername, newUsername, self.auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", @"newUsername", SERVER_AUTH_TOKEN_KEY, nil]];
-    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changeUserName"]];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changeUserName"] includeAuthentication:NO];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

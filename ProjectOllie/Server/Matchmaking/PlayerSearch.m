@@ -17,7 +17,7 @@
         return;
     }
     NSDictionary *requestData = [NSDictionary dictionaryWithObject:username forKey:@"query"];
-    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"searchUsername"]];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"searchUsername"] includeAuthentication:NO];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

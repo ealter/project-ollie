@@ -13,14 +13,7 @@
 
 - (void)getNumberofTokens
 {
-    if(!self.auth.username) {
-        [self broadcastServerOperationFailedWithError:@"Unknown username"];
-    } else if(!self.auth.authToken) {
-        [self broadcastServerOperationFailedWithError:@"Missing authorization token. Please try logging in again"];
-    } else {
-        NSDictionary *requestData = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.auth.username, self.auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", SERVER_AUTH_TOKEN_KEY, nil]];
-        [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"numberOfTokens"]];
-    }
+    [self makeServerRequestWithData:nil url:[[self class] urlForPageName:@"numberOfTokens"] includeAuthentication:YES];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

@@ -82,8 +82,21 @@
         [NSException raise:NSInternalInconsistencyException format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
-- (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url
+- (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url includeAuthentication:(BOOL)addAuth
 {
+    if(addAuth) {
+        if(!self.auth.username) {
+            [self broadcastServerOperationFailedWithError:@"Unknown username"];
+            return;
+        }
+        if(!self.auth.authToken) {
+            [self broadcastServerOperationFailedWithError:@"Missing authorization token. Please try logging in again"];
+            return;
+        }
+        NSMutableDictionary *authData = [NSMutableDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.auth.username, self.auth.authToken, nil] forKeys:[NSArray arrayWithObjects:@"username", SERVER_AUTH_TOKEN_KEY, nil]];
+        [authData addEntriesFromDictionary:requestData];
+        requestData = authData;
+    }
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     NSString *postData = [requestData urlEncodedString];

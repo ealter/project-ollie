@@ -17,18 +17,11 @@
         [self broadcastServerOperationFailedWithError:@"Missing new password"];
         return;
     }
-    if(!self.auth.username) {
-        [self broadcastServerOperationFailedWithError:@"Unknown username"];
-        return;
-    }
-    if(!self.auth.authToken) {
-        [self broadcastServerOperationFailedWithError:@"Missing authorization token. Please try logging in again"];
-        return;
-    }
-    NSMutableDictionary *requestData = [[NSMutableDictionary alloc]initWithObjects:[NSArray arrayWithObjects:self.auth.username, self.auth.authToken, newPassword, nil] forKeys:[NSArray arrayWithObjects:@"username", SERVER_AUTH_TOKEN_KEY, @"newPassword", nil]];
+    //NSMutableDictionary *requestData = [[NSMutableDictionary alloc]initWithObjects:[NSArray arrayWithObjects:self.auth.username, self.auth.authToken, newPassword, nil] forKeys:[NSArray arrayWithObjects:@"username", SERVER_AUTH_TOKEN_KEY, @"newPassword", nil]];
+    NSMutableDictionary *requestData = [NSMutableDictionary dictionaryWithObject:newPassword forKey:@"newPassword"];
     if(oldPassword)
         [requestData setObject:oldPassword forKey:@"oldPassword"];
-    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changePassword"]];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"changePassword"] includeAuthentication:YES];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result
