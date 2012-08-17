@@ -12,12 +12,12 @@
 
 - (void)getIdentifiers
 {
-    [self makeServerRequestWithData:nil url:[[self class] urlForPageName:@"purchases.json"]];
+    [self makeGetRequestWithUrl:[[self class] urlForPageName:@"purchases.json"]];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result
 {
-    [self broadcastServerOperationFailedWithError:[result objectForKey:@"purchases"]];
+    [self broadcastServerOperationSucceededWithData:[result objectForKey:@"tokens"]];
 }
 
 @end

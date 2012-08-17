@@ -49,12 +49,12 @@
     [login loginWithUsername:self.username password:self.password];
 }
 
-- (void)serverOperationSucceededWithData:(id)data
+- (void)serverOperation:(ServerAPI *)operation succeededWithData:(id)data
 {
     [self broadcastServerOperationSucceededWithData:nil];
 }
 
-- (void)serverOperationFailedWithError:(NSString *)error
+- (void)serverOperation:(ServerAPI *)operation failedWithError:(NSString *)error
 {
     [self broadcastServerOperationFailedWithError:[@"Account creation was successful, but login failed. The error was " stringByAppendingString:error]];
 }

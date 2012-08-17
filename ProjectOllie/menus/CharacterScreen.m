@@ -14,6 +14,10 @@
 #import "GWParticles.h"
 #import "GWWater.h"
 
+enum {
+    kCellTag = 123
+};
+
 @implementation CharacterScreen
 @synthesize weaponScrollView;
 
@@ -62,11 +66,11 @@
 		[cell addChild:sprite];
 		CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Helvetica" fontSize:20.0];
 		label.position = ccp(20, 20);
-		label.tag = 123;
+		label.tag = kCellTag;
 		[cell addChild:label];
 	}
 	else {
-		CCLabelTTF *label = (CCLabelTTF*)[cell getChildByTag:123];
+		CCLabelTTF *label = (CCLabelTTF*)[cell getChildByTag:kCellTag];
 		[label setString:string];
 	}
     

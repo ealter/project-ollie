@@ -15,10 +15,12 @@
 #import "GameScene.h"
 
 @implementation GameScene
+@synthesize world = _world;
+@synthesize m_debugDraw = _m_debugDraw;
 
--(id)initWithEnvironment
+- (id)initWithEnvironment:(GWEnvironment *)environment
 {
-    
+    return self; //TODO
 }
 
 @end
