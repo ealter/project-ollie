@@ -14,6 +14,7 @@
 #import "cocos2d.h"
 #import "CCDirector.h"
 #import "GameConstants.h"
+#import "HMVectorNode.h"
 
 @interface DrawEnvironmentScene () <DrawMenu_delegate>
 
@@ -78,46 +79,71 @@
     EnvironmentScene* envScene;
 }
 
+//Margins for drawing
+const float kMarginX = .2f;
+const float kMarginY = .2f;
+
 @synthesize brushradius = _brushradius;
 
 - (id) initWithEnvironmentScene:(EnvironmentScene*)des
 {
     if (self = [super init])
     {
+        //Know the environment for touch callbacks
         envScene = des;
+        
+        //Radius of the selected brush in meters
         _brushradius = smallradius;
+        
+        //Create dotted line for drawing border
+        HMVectorNode* border = [HMVectorNode node];
+        CGPoint a = ccpMult(ccp(kMarginX, kMarginY), PTM_RATIO);
+        CGPoint b = ccpMult(ccp(kMarginX, WORLD_HEIGHT - kMarginY), PTM_RATIO);
+        CGPoint c = ccpMult(ccp(WORLD_WIDTH - kMarginX, WORLD_HEIGHT - kMarginY), PTM_RATIO);
+        CGPoint d = ccpMult(ccp(WORLD_WIDTH - kMarginX, kMarginY), PTM_RATIO);
+        [border drawDottedSegmentFrom:a to:b radius:5.f divisions:WORLD_HEIGHT*2];
+        [border drawDottedSegmentFrom:b to:c radius:5.f divisions:WORLD_WIDTH*2];
+        [border drawDottedSegmentFrom:c to:d radius:5.f divisions:WORLD_HEIGHT*2];
+        [border drawDottedSegmentFrom:d to:a radius:5.f divisions:WORLD_WIDTH*2];
+        [border setColor:ccc4f(1, 1, 1, 0.5f)];
+        [self addChild:border];
     }
     return self;
 }
 
+//Convert touch point to meters and bound in world
 - (CGPoint)transformTouchLocationFromTouchView:(CGPoint)location
 {
     location = [[CCDirector sharedDirector] convertToGL: location];
     location = [self convertToNodeSpace:location];
+    //Convert points to meters because terrain is in meters
+    location.x /= PTM_RATIO;
+    location.y /= PTM_RATIO;
+    
+    //Bound by margins
     float minToEdge = fabs(self.brushradius);
-    if (self.brushradius < 0) minToEdge -= 1;
-    if (location.x -minToEdge<WORLD_WIDTH_PX/20) {
-        location.x=WORLD_WIDTH_PX/20+minToEdge;
-    }
-    if (location.x +minToEdge>WORLD_WIDTH_PX*0.95) {
-        location.x=WORLD_WIDTH_PX*0.95-minToEdge;
-    }
-    if (location.y -minToEdge<WORLD_HEIGHT_PX/20) {
-        location.y=WORLD_HEIGHT_PX/20+minToEdge;
-    }
-    if (location.y+minToEdge>WORLD_WIDTH_PX*0.95) {
-        location.y=WORLD_WIDTH_PX*0.95-minToEdge;
-    }
+    if (self.brushradius < 0) minToEdge -= 0.1f;
+    
+    if (location.x < kMarginX + minToEdge) 
+        location.x = kMarginX + minToEdge;
+    
+    if (location.x > WORLD_WIDTH - kMarginX - minToEdge) 
+        location.x = WORLD_WIDTH - kMarginX - minToEdge;
+    
+    if (location.y < kMarginY + minToEdge)
+        location.y = kMarginY + minToEdge;
+    
+    if (location.y > WORLD_HEIGHT - kMarginY - minToEdge) 
+        location.y = WORLD_HEIGHT - kMarginY - minToEdge;
+    
     return location;
 }
 
 -(void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch *touch in touches) {
+        //Get touch locations in world meters
         CGPoint location = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
-        //Convert points to meters because terrain is in meters
-        location.x /= PTM_RATIO;
-        location.y /= PTM_RATIO;
         [envScene.environment.terrain clipCircle:_brushradius>0 WithRadius:fabs(_brushradius) x:location.x y:location.y];
     }
     
@@ -127,14 +153,9 @@
 -(void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     for(UITouch *touch in touches) {
+        //Get touch locations in world meters
         CGPoint location      = [self transformTouchLocationFromTouchView:[touch locationInView:touch.view]];
         CGPoint previousPoint = [self transformTouchLocationFromTouchView:[touch previousLocationInView:touch.view]];
-        
-        //Convert points to meters because terrain is in meters
-        location.x /= PTM_RATIO;
-        location.y /= PTM_RATIO;
-        previousPoint.x /= PTM_RATIO;
-        previousPoint.y /= PTM_RATIO;
         
         //Add circle
         [envScene.environment.terrain clipCircle:_brushradius>0 WithRadius:fabs(_brushradius) x:location.x y:location.y];
