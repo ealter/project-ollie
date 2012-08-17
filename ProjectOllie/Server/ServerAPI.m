@@ -30,14 +30,14 @@
 
 - (void)broadcastServerOperationSucceededWithData:(id)data
 {
-    if([self.delegate respondsToSelector:@selector(serverOperationSucceededWithData:)])
-        [self.delegate serverOperationSucceededWithData:data];
+    if([self.delegate respondsToSelector:@selector(serverOperation:succeededWithData:)])
+        [self.delegate serverOperation:self succeededWithData:data];
 }
 
 - (void)broadcastServerOperationFailedWithError:(NSString *)error
 {
-    if([self.delegate respondsToSelector:@selector(serverOperationFailedWithError:)])
-        [self.delegate serverOperationFailedWithError:error];
+    if([self.delegate respondsToSelector:@selector(serverOperation:failedWithError:)])
+        [self.delegate serverOperation:self failedWithError:error];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -58,6 +58,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if(!data_) {
+        DebugLog(@"The connection didn't receive any data");
         [self broadcastServerOperationFailedWithError:nil];
         return;
     }
@@ -77,7 +78,8 @@
 
 - (void)serverReturnedResult:(NSDictionary *)result
 {
-    [NSException raise:NSInternalInconsistencyException format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+    if([self isMemberOfClass:[ServerAPI class]])
+        [NSException raise:NSInternalInconsistencyException format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
 - (void)makeServerRequestWithData:(NSDictionary *)requestData url:(NSURL *)url
@@ -86,6 +88,14 @@
     request.HTTPMethod = @"POST";
     NSString *postData = [requestData urlEncodedString];
     request.HTTPBody = [postData dataUsingEncoding:NSUTF8StringEncoding];
+    
+    (void)[[NSURLConnection alloc] initWithRequest:request delegate:self];
+}
+
+- (void)makeGetRequestWithUrl:(NSURL *)url
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
     
     (void)[[NSURLConnection alloc] initWithRequest:request delegate:self];
 }

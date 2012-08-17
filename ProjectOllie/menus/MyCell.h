@@ -9,5 +9,4 @@
 #import "SWTableViewCell.h"
 
 @interface MyCell : SWTableViewCell
-
 @end

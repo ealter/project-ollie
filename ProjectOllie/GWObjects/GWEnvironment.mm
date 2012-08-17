@@ -60,6 +60,12 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     return self;
 }
 
+-(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera
+{
+    //TODO
+    DebugLog(@"This has not yet been implemented");
+    return [self initWithSetting:setting terrain:terrain];
+}
 
 -(void) setCamera:(GWCamera*)camera
 {
