@@ -110,7 +110,7 @@ typedef enum InteractorState{
 -(void)setInteractorPositionInRagdoll;
 
 /* Sets the skeleton's position relative to interactor's */
--(void)tieSkeletonToInteractor;
+-(void)tieSkeletonToInteractor:(float)dt;
 
 /* Sets the skeleton to active or inactive */
 -(void)setActive:(bool)active;

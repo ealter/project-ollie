@@ -164,7 +164,6 @@ void Skeleton::deleteAnimation(string animationName)
 
 void Skeleton::runAnimation(string animationName, bool flipped)
 {
-    setActive(root, true);
     map<string, Animation*>::iterator iter;
     for (iter = animations[animationName].begin(); iter != animations[animationName].end(); iter++) {
         
@@ -304,7 +303,7 @@ Bone* Skeleton::getBoneByName(string name)
 void Skeleton::setPosition(Bone* root, float x, float y)
 {
     absolutePosition = b2Vec2(x/PTM_RATIO,y/PTM_RATIO);
-    adjustTreePosition(this->root);
+    setTreePosition(this->root);
 }
 
 void Skeleton::setLinearVelocity(Bone *root, b2Vec2 velocity)
@@ -314,12 +313,64 @@ void Skeleton::setLinearVelocity(Bone *root, b2Vec2 velocity)
         setLinearVelocity(root->children.at(i),velocity);
 }
 
-void Skeleton::adjustTreePosition(Bone* root)
+void Skeleton::setTreePosition(Bone *root)
 {
     root->box2DBody->SetTransform(b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition, root->a);
     for(int i = 0; i < root->children.size(); i++)
-        adjustTreePosition(root->children.at(i));
+        setTreePosition(root->children.at(i));
 }
+
+void Skeleton::adjustPosition(Bone *root, float x, float y, float dt)
+{
+    absolutePosition = b2Vec2(x/PTM_RATIO,y/PTM_RATIO);
+    //adjustTreePosition(root, dt);
+    setTreePosition(root);
+}
+
+void Skeleton::adjustTreePosition(Bone* root, float dt)
+{
+    float maxSpeed = .2; //max achievable speed
+    float control  = .3;  //1 means one frame, 0 means neva
+    
+    b2Vec2 targetPosition = b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition;
+    float targetAngle     = root->a;
+    b2Vec2 diffPosition   = targetPosition - root->box2DBody->GetPosition();
+    float diffAngle       = targetAngle - root->box2DBody->GetAngle();
+    float positionDist    = diffPosition.Length();
+    if (positionDist > 0)
+    {
+        // compute displacement direction
+        b2Vec2 direction = b2Vec2(diffPosition.x/positionDist,diffPosition.y/positionDist);
+        float angleDirection = diffAngle/abs(diffAngle);
+        
+        // get the current bone velocity because we will apply a force to compensate this.
+        b2Vec2 currentVelocity = root->box2DBody->GetLinearVelocity();
+        float currentAngularVel = root->box2DBody->GetAngularVelocity();
+        
+        // the bone ideal velocity is the direction to the target multiplied by the max speed
+        b2Vec2 desireVelocity = b2Vec2(direction.x*maxSpeed,direction.y*maxSpeed);
+        float desireAngularVel = angleDirection * maxSpeed / 2.;
+        
+        // compensate the current bone velocity by the desired velocity, based on the control factor
+        b2Vec2 finalVelocity = control * (desireVelocity - currentVelocity);
+        float finalAngleVel  = control * (desireAngularVel - currentAngularVel);
+        
+        // transform our velocity into an impulse (get rid of the time and mass factor)
+        float forceMultiplier = (root->box2DBody->GetMass() / dt);
+        b2Vec2 finalForce     = b2Vec2(finalVelocity.x * forceMultiplier, finalVelocity.y * forceMultiplier);
+        float finalTorque     = forceMultiplier * finalAngleVel;  
+        
+        // finaly apply the force
+        root->box2DBody->ApplyForce(finalForce, b2Vec2_zero);
+        //root->box2DBody->ApplyTorque(finalTorque);
+    }
+    
+
+    for(int i = 0; i < root->children.size(); i++)
+        adjustTreePosition(root->children.at(i),dt);
+}
+
+
 
 void Skeleton::setAngle(float a){
     this->angle = a;

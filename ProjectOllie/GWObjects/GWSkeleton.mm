@@ -302,6 +302,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         restingCounter   = 0;
         restingUpdates   = 0;
         rollingAvgSpeed  = 0;
+
     }
     return self;
 }
@@ -400,8 +401,9 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     return destinationAngle;
 }
 
--(void)tieSkeletonToInteractor{
-    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+-(void)tieSkeletonToInteractor:(float)dt{
+    //_skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
+    _skeleton->adjustPosition(_skeleton->getRoot(),absoluteLocation.x,absoluteLocation.y, dt);
 }
 
 -(void)setActive:(bool)active{
@@ -451,7 +453,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
     }
     
     [self assembleSkeleton:skeletonArray parentBone:nil];
-    [self tieSkeletonToInteractor];
+    _skeleton->setPosition(_skeleton->getRoot(), absoluteLocation.x, absoluteLocation.y);
 }
 
 /* recursively assembles the bone tree imported from blender*/
