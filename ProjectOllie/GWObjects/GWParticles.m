@@ -716,4 +716,74 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
 }
 @end
 
+@implementation GWParticleSpookyPurple
+-(id) init
+{
+    return [self initWithTotalParticles:250];
+}
 
+-(id) initWithTotalParticles:(NSUInteger)p
+{
+    if( (self=[super initWithTotalParticles:p]) ) {
+        // duration
+        duration = kCCParticleDurationInfinity;
+        
+        // Gravity Mode
+        self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
+        // Gravity Mode: gravity
+        self.gravity = CGPointZero;
+        
+        // Gravity Mode:  radial
+        self.radialAccel = 0;
+        self.radialAccelVar = 0;
+        
+        //Tangential stuff
+        self.tangentialAccelVar = 150;
+        
+        //  Gravity Mode: speed of particles
+        self.speed = 0;
+        self.speedVar = 20;
+        
+        // emitter position
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
+        // angle
+        angle = 90;
+        angleVar = 10;
+        
+        // life of particles
+        life = 2.f;
+        lifeVar = 0;
+        
+        // emits per frame
+        emissionRate = totalParticles/life;
+        
+        // color of particles
+        startColor    = ccc4f(0.8, 0.14, 0.67, 1.0);
+        startColorVar = ccc4f(0., 0., 0., 0.);
+        endColor      = ccc4f(0., 0., 0., 1.);
+        endColorVar   = kColor4fZero;
+        
+        // size, in pixels
+        startSize = 64.0f;
+        startSizeVar = 5.0f;
+        endSize = 0.f;
+        
+        //Change the GL blend function
+        [self setBlendFunc:(ccBlendFunc) { GL_ZERO, GL_ZERO }];        
+        
+        //Get the particle texture
+        self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+        
+        // additive
+        self.blendAdditive = YES;
+    }
+    
+    return self;
+}
+@end
