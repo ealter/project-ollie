@@ -26,14 +26,22 @@
 
 - (id)init
 {
+    return [self initWithContentSize:self.contentSize];
+}
+
+- (id)initWithContentSize:(CGSize)contentSize
+{
     if(self = [super init]) {
-        CCSprite *sprite = [CCSprite spriteWithFile:@"Icon-72.png"]; //TODO: make this a bananananana
+        self.contentSize = contentSize;
+        
+        CCSprite *sprite = [CCSprite spriteWithFile:@"banana.png"];
 		sprite.anchorPoint = CGPointZero;
+        sprite.position = CGPointZero;
 		[self addChild:sprite];
         
 		priceLabel_ = [CCLabelTTF labelWithString:self.formattedPrice fontName:@"Helvetica" fontSize:20.0];
-        priceLabel_.string = @"6969";
-		priceLabel_.position = ccp(20, 20);
+		priceLabel_.position = ccp(self.contentSize.width, self.contentSize.height/2);
+        priceLabel_.anchorPoint = ccp(1,1);
 		[self addChild:priceLabel_];
     }
     return self;
@@ -56,7 +64,9 @@
 
 - (void)refreshView
 {
-    priceLabel_.string = [self formattedPrice];
+    priceLabel_.string       = [self formattedPrice];
+    titleLabel_.string       = self.product.localizedTitle;
+    descriptionLabel_.string = self.product.localizedDescription;
 }
 
 @end

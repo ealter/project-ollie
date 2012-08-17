@@ -26,8 +26,7 @@
 - (id)init
 {
     if(self = [super init]) {
-        CGSize winSize = [CCDirector sharedDirector].winSize;
-        CGSize tableViewSize = CGSizeMake(winSize.width, winSize.height - 100);
+        CGSize tableViewSize = CGSizeMake(self.contentSize.width, self.contentSize.height * .75);
         purchasesTable_ = [SWTableView viewWithDataSource:self size:tableViewSize];
         
         purchasesTable_.direction         = SWScrollViewDirectionVertical;
@@ -53,7 +52,6 @@
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
-    DebugLog(@"We gots da products: %@", response.products);
     self.products = [response products];
     [purchasesTable_ reloadData];
     [self stopActivityIndicator];
@@ -88,14 +86,14 @@
 
 -(CGSize)cellSizeForTable:(SWTableView *)table
 {
-    return CGSizeMake(table.contentSize.width, 100);
+    return CGSizeMake(self.contentSize.width - 5, 20);
 }
 
 -(SWTableViewCell *)table:(SWTableView *)table cellAtIndex:(NSUInteger)idx
 {
     StoreTableCell *cell = (StoreTableCell *)[table dequeueCell];
     if (!cell) {
-        cell = [StoreTableCell new];
+        cell = [[StoreTableCell alloc] initWithContentSize:[self cellSizeForTable:table]];
 	}
     assert([cell isKindOfClass:[StoreTableCell class]]);
     cell.product = [self.products objectAtIndex:idx];
