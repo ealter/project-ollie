@@ -51,9 +51,9 @@ static CCTexture2D *texture[kSheets];
 static const float frameWidth = 512.0f;
 static const float frameHeight = 32.0f;
 
--(id)initWithCamera:(GWCamera*)camera z:(float)z
+-(id)initWithCamera:(GWCamera*)gwCamera z:(float)z
 {
-    if (self = [super initWithCamera:camera z:z]) {
+    if (self = [super initWithCamera:gwCamera z:z]) {
         
         topColor.r = 0.1f;
         topColor.g = 0.2f;

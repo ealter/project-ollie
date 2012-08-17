@@ -13,6 +13,6 @@
 
 @interface SpriteParallax : GWPerspectiveLayer
 
--(id)initWithFile:(NSString *)filename camera:(GWCamera*)camera;
+-(id)initWithFile:(NSString *)filename camera:(GWCamera*)gwCamera;
 
 @end

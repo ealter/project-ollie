@@ -13,6 +13,7 @@
 //  version of this game.
 
 #import "EnvironmentScene.h"
+#import "CCLayer.h"
 #import "Box2D.h"
 
 class GLESDebugDraw;
@@ -23,7 +24,7 @@ class GLESDebugDraw;
 
 @property (nonatomic) b2World* world;                   // Realistically simulates fun
 
-@property (nonatomic) GLESDebugDraw *m_debugDraw;		// For debugging box2d
+@property (nonatomic) GLESDebugDraw *m_debugDraw;		// For seeing what box2d is thinking
 
 //Array of characters in this game
 
@@ -36,3 +37,16 @@ class GLESDebugDraw;
 -(id) initWithEnvironment:(GWEnvironment *)environment;
 
 @end
+
+
+//Gets touch input in the world and moves the camera
+@interface panTouchLayer : CCLayer
+
+@property GameScene gameScene;
+
+- (id) initWithGameScene:(GameScene*)gameScene;
+
+
+
+@end
+

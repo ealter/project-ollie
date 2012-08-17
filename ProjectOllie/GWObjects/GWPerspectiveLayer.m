@@ -11,15 +11,15 @@
 
 @implementation GWPerspectiveLayer
 
-@synthesize camera = _camera;
+@synthesize gwCamera = _gwCamera;
 @synthesize z = _z;
 
 
-- (id) initWithCamera:(GWCamera*)camera z:(float)z
+- (id) initWithCamera:(GWCamera*)gwCamera z:(float)z
 {
     if (self = [super init])
     {
-        _camera = camera;
+        _gwCamera = gwCamera;
         _z = z;
         
         // rotate around center of layer
@@ -40,10 +40,10 @@
 {
     
     //Project position to the camera point onto the screen plane
-    float projectionScale = _camera.z0/(_camera.location.z - _z);
+    float projectionScale = _gwCamera.z0/(_gwCamera.location.z - _z);
     //printf("\n_z: %f, scale %f\n", _z, projectionScale);
-    float x = (position_.x - _camera.location.x)*projectionScale+_camera.center.x;
-    float y = (position_.y - _camera.location.y)*projectionScale+_camera.center.y;
+    float x = (position_.x - _gwCamera.location.x)*projectionScale+_gwCamera.center.x;
+    float y = (position_.y - _gwCamera.location.y)*projectionScale+_gwCamera.center.y;
     
     if ( ignoreAnchorPointForPosition_ ) {
         x += anchorPointInPoints_.x;
@@ -51,7 +51,7 @@
     }
     
     // Make matrix
-    float radians = _camera.angle;
+    float radians = _gwCamera.angle;
     float c = cosf(radians);
     float s = sinf(radians);
     

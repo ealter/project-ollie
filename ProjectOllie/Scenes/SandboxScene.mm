@@ -38,7 +38,7 @@
         CCNode* actionNode = [CCNode node];
         
         /* Set up parallax */
-        [self initBackgroundsWithBasename:@"ice" actionNode:actionNode camera:self.actionLayer.camera];
+        [self initBackgroundsWithBasename:@"ice" actionNode:actionNode camera:self.actionLayer.gwCamera];
         
         GWWater* waterFront = [[GWWater alloc] initWithCamera:camera z:(-.25*PTM_RATIO)];
         GWWater* waterBack = [[GWWater alloc] initWithCamera:camera z:(.25*PTM_RATIO)];
@@ -57,7 +57,7 @@
     return self;
 }
 
-- (void)initBackgroundsWithBasename:(NSString *)baseImageName actionNode:(CCNode *)actionNode camera:(GWCamera *)camera
+- (void)initBackgroundsWithBasename:(NSString *)baseImageName actionNode:(CCNode *)actionNode camera:(GWCamera *)gwCamera
 {
     const int numBackgroundLayers = 4;
     float parallaxRatios[] = {0.2, 0.4, 0.6, 0.8};
@@ -67,7 +67,7 @@
         NSString *backgroundNameWithoutExtension = [NSString stringWithFormat:@"%@_layer%d", baseImageName, i+1, nil];
         if (!([[NSBundle mainBundle] pathForResource:backgroundNameWithoutExtension ofType:fileExtension])) continue;
         NSString *backgroundName = [backgroundNameWithoutExtension stringByAppendingPathExtension:fileExtension];
-        SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName camera:camera];
+        SpriteParallax *blayer = [[SpriteParallax alloc] initWithFile:backgroundName camera:gwCamera];
         blayer.z = PTM_RATIO/parallaxRatios[i];
         blayer.anchorPoint = CGPointZero;
         blayer.position = CGPointZero;

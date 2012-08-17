@@ -51,7 +51,7 @@
         [self.gameWorld.gameTerrain clipCircle:NO WithRadius:120. x:self.position.x y:self.position.y];
         [self.gameWorld.gameTerrain shapeChanged];
         
-        [self.gameWorld.camera addIntensity:0.5];
+        [self.gameWorld.gwCamera addIntensity:0.5];
         
         [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.05 isOutwards:YES];
         

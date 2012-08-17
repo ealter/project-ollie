@@ -17,9 +17,9 @@
 
 @interface GWPerspectiveLayer : CCLayer
 
-@property GWCamera *camera;
+@property GWCamera *gwCamera;
 @property float z;
 
-- (id) initWithCamera:(GWCamera*)camera z:(float)z;
+- (id) initWithCamera:(GWCamera*)gwCamera z:(float)z;
 
 @end

@@ -20,7 +20,11 @@
 
 - (id)initWithEnvironment:(GWEnvironment *)environment
 {
-    return self; //TODO
+    self = [super initWithEnvironment:environment];
+    return self;
 }
 
 @end
+
+
+

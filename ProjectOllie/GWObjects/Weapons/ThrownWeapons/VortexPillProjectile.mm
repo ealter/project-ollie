@@ -107,7 +107,7 @@
     if(self.gameWorld != NULL)
     {
         //do stuff to the world        
-        [self.gameWorld.camera addIntensity:0.5];
+        [self.gameWorld.gwCamera addIntensity:0.5];
         
         [self applyb2ForceInRadius:300./PTM_RATIO withStrength:.08 isOutwards:YES];
         self.physicsBody->SetTransform(b2Vec2(stayHere.x, stayHere.y), 0);

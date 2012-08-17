@@ -10,6 +10,7 @@
 #import "CCBReader.h"
 #import "DrawMenu.h"
 #import "SandboxScene.h"
+#import "GameScene.h"
 #import "ActionLayer.h"
 #import "cocos2d.h"
 #import "CCDirector.h"
@@ -64,10 +65,8 @@
 
 - (void)DrawMenu_doneDrawing
 {
-    SandboxScene *scene = [SandboxScene node];
-    
     [self removeChild:self.environment cleanup:YES];
-    [scene.actionLayer setTerrain:self.environment.terrain];
+    GameScene *scene = [[GameScene alloc] initWithEnvironment:self.environment];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccBLACK]];
 }
 

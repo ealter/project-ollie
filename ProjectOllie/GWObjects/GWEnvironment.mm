@@ -60,22 +60,22 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     return self;
 }
 
--(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera
+-(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)gwCamera
 {
     //TODO
     DebugLog(@"This has not yet been implemented");
     return [self initWithSetting:setting terrain:terrain];
 }
 
--(void) setCamera:(GWCamera*)camera
+-(void) setCamera:(GWCamera*)gwCamera
 {
-    //Set the camera for every layer
-    self.frontWater.camera = camera;
-    self.backWater.camera = camera;
-    self.actionLayer.camera = camera;
-    self.backdrop.camera = camera;
-    self.backgroundNear.camera = camera;
-    self.backgroundFar.camera = camera;
+    //Set the gwCamera for every layer
+    self.frontWater.gwCamera = gwCamera;
+    self.backWater.gwCamera = gwCamera;
+    self.actionLayer.gwCamera = gwCamera;
+    self.backdrop.gwCamera = gwCamera;
+    self.backgroundNear.gwCamera = gwCamera;
+    self.backgroundFar.gwCamera = gwCamera;
 }
 
 -(void) setSetting:(EnvironmentSetting)setting
@@ -89,7 +89,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         case environment_dirt:
         {
             [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"lava.png"]];
-            [_terrain setStrokeColor:ccc4f(1.0f, 0.6f, 0.4f, 1.0f)];
+            [_terrain setStrokeColor:ccc4f(0.6f, 0.3f, 0.2f, 1.0f)];
             
             [_backdrop addChild:[[CCSprite alloc] initWithFile:@"jungle_layer1-hd.png"]];
             [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"jungle_layer2-hd.png"]];
