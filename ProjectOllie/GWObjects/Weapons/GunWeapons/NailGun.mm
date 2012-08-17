@@ -28,6 +28,7 @@
 {
     self.title          = @"Nail Gun";
     self.description    = @"Shoots nails.  Go happy gilmore on those apes!";
+    self.type   = kType1HGun;
 }
 
 -(void)fireWeapon:(CGPoint)aimPoint

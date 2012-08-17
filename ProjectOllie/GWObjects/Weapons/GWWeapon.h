@@ -11,6 +11,14 @@
 #import "ActionLayer.h"
 #import "GWCharacterAvatar.h"
 
+typedef enum wepType {
+    kType2HGun = 0, // 2 Handed Gun
+    kType1HGun,     // 1 Handed Gun
+    kTypeThrown,    // Thrown Weapon
+    kType2HMelee,   // 2 Handed Melee
+    kType1HMelee    // 1 Handed Melee
+} wepType;
+
 @interface GWWeapon : CCSprite
 
 //Weapon damage
@@ -30,6 +38,9 @@
 
 //Gun's description
 @property (assign, nonatomic) NSString* description;
+
+//Gun's type
+@property (assign, nonatomic) wepType type;
 
 //weapon availability
 @property (assign, nonatomic, getter = isUnlocked) BOOL unlocked;

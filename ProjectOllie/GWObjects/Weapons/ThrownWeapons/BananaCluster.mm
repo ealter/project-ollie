@@ -81,7 +81,7 @@
         
         //Calculate some spin so throw looks better
         float throwSpin = CCRANDOM_0_1();
-        throwSpin = throwSpin/10000.;
+        throwSpin = throwSpin/15000.;
         single.physicsBody->ApplyAngularImpulse(throwSpin);
     }
 }

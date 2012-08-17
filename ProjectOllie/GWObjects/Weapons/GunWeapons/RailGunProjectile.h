@@ -1,19 +1,17 @@
 //
-//  GaussRifleProjectile.h
+//  RailGunProjectile.h
 //  ProjectOllie
 //
-//  Created by Lion User on 7/31/12.
+//  Created by Lion User on 8/16/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "GWProjectile.h"
 
-@interface GaussRifleProjectile : GWProjectile {
-    float gaussTimer;
+@interface RailGunProjectile : GWProjectile {
+    
 }
-
-@property (assign, nonatomic) float fireAngle;
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld;
 

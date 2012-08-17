@@ -39,7 +39,7 @@
 @synthesize z0              = _z0;
 @synthesize zOut            = _zOut;
 @synthesize track           = _track;
-@synthesize target          = _target;
+@synthesize targets         = _targets;
 @synthesize actionIntensity = _actionIntensity;
 @synthesize center          = _center;
 @synthesize angle           = _angle;
@@ -60,7 +60,7 @@
         self.zOut            = _z0/scaleOut;
         _location.z          = self.zOut;
         self.track           = NO;
-        self.target          = nil;
+        self.targets         = [NSMutableArray array];
         self.actionIntensity = 0.f;
         _center.x            = sd.width/2;
         _center.y            = sd.height/2;
@@ -74,7 +74,7 @@
     //creates a sequence of events that signals change
     //starts following a new node
     //and signals an end of change once the new node is followed
-    self.target = focused;
+    [self.targets addObject:focused];
     self.track  = focused;
     
 }
@@ -331,7 +331,7 @@
         ccVertex3F targetLocation;
         
         // Nothing being tracked, revert to default camera location
-        if (self.target == nil)
+        if ([self.targets count] == 0)
         {
             targetLocation.x = WORLD_WIDTH_PX /2;
             targetLocation.y = WORLD_HEIGHT_PX /2;
@@ -341,12 +341,13 @@
         //Something is being tracked, center it
         else
         {
-            targetLocation.x = _target.position.x;
-            targetLocation.y = _target.position.y;
+            CCNode* target   = [self.targets objectAtIndex:0];
+            targetLocation.x = target.position.x;
+            targetLocation.y = target.position.y;
             targetLocation.z = _z0;
         }
         
-        //Lerpy derpy 4% of the distance towards the target
+        //Lerpy derpy 40% of the distance towards the target
         _location.x += 0.4f*(targetLocation.x - _location.x);
         _location.y += 0.4f*(targetLocation.y - _location.y);
         _location.z += 0.4f*(targetLocation.z - _location.z);

@@ -69,4 +69,7 @@ typedef enum Orientation {
 /* The UI layer that contains the character*/
 @property (strong, nonatomic) GWUILayer* uiLayer;
 
+/* The string identifier that makes this character unique to the other classes */
+@property (strong, nonatomic) NSString* type;
+
 @end
