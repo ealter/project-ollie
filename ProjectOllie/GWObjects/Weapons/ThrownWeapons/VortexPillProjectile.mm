@@ -85,6 +85,7 @@
         if (!hasClipped) {
             stayHere    = self.position;
             [self.gameWorld.gameTerrain clipCircle:NO WithRadius:250 x:self.position.x y:self.position.y];
+            
             [self.gameWorld.gameTerrain shapeChanged];
             hasClipped  = YES;
         }

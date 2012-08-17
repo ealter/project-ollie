@@ -191,6 +191,10 @@
 		CE30B1A8158FD030009EC82B /* NewGameOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */; };
 		CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */; };
 		CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3598DA15D4F402000AA61C /* BananaGrenade.mm */; };
+		CE3996E715DD9E1D00D2FD0D /* Kunai.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3996E615DD9E1D00D2FD0D /* Kunai.mm */; };
+		CE3996EB15DD9E3800D2FD0D /* KunaiProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3996EA15DD9E3800D2FD0D /* KunaiProjectile.mm */; };
+		CE3996EE15DDB29700D2FD0D /* RailGun.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3996ED15DDB29700D2FD0D /* RailGun.mm */; };
+		CE3996F115DDB2B800D2FD0D /* RailGunProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3996F015DDB2B700D2FD0D /* RailGunProjectile.mm */; };
 		CE3F33CC158BBE4700106A18 /* ActionMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */; };
 		CE3F33CD158BBE4700106A18 /* MainMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */; };
 		CE4545FD15CB3ACD00AA5437 /* leaf.png in Resources */ = {isa = PBXBuildFile; fileRef = CE4545FC15CB3ACD00AA5437 /* leaf.png */; };
@@ -725,6 +729,14 @@
 		CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewGameOverlay.ccbi; path = "Resources/menu-objects/ccbis/NewGameOverlay.ccbi"; sourceTree = "<group>"; };
 		CE3598D915D4F402000AA61C /* BananaGrenade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaGrenade.h; sourceTree = "<group>"; };
 		CE3598DA15D4F402000AA61C /* BananaGrenade.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BananaGrenade.mm; sourceTree = "<group>"; };
+		CE3996E515DD9E1D00D2FD0D /* Kunai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kunai.h; sourceTree = "<group>"; };
+		CE3996E615DD9E1D00D2FD0D /* Kunai.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Kunai.mm; sourceTree = "<group>"; };
+		CE3996E915DD9E3800D2FD0D /* KunaiProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KunaiProjectile.h; sourceTree = "<group>"; };
+		CE3996EA15DD9E3800D2FD0D /* KunaiProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = KunaiProjectile.mm; sourceTree = "<group>"; };
+		CE3996EC15DDB29700D2FD0D /* RailGun.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RailGun.h; sourceTree = "<group>"; };
+		CE3996ED15DDB29700D2FD0D /* RailGun.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RailGun.mm; sourceTree = "<group>"; };
+		CE3996EF15DDB2B700D2FD0D /* RailGunProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RailGunProjectile.h; sourceTree = "<group>"; };
+		CE3996F015DDB2B700D2FD0D /* RailGunProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = RailGunProjectile.mm; sourceTree = "<group>"; };
 		CE3F33CA158BBE4700106A18 /* ActionMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = ActionMenu.ccbi; path = "Resources/menu-objects/ccbis/ActionMenu.ccbi"; sourceTree = "<group>"; };
 		CE3F33CB158BBE4700106A18 /* MainMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = MainMenu.ccbi; path = "Resources/menu-objects/ccbis/MainMenu.ccbi"; sourceTree = "<group>"; };
 		CE4545FC15CB3ACD00AA5437 /* leaf.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leaf.png; sourceTree = "<group>"; };
@@ -1834,6 +1846,10 @@
 				CEDEE35015C8A87B00C0BB1C /* GaussRifle.mm */,
 				CEDEE35215C8A8A000C0BB1C /* GaussRifleProjectile.h */,
 				CEDEE35315C8A8A000C0BB1C /* GaussRifleProjectile.mm */,
+				CE3996EC15DDB29700D2FD0D /* RailGun.h */,
+				CE3996ED15DDB29700D2FD0D /* RailGun.mm */,
+				CE3996EF15DDB2B700D2FD0D /* RailGunProjectile.h */,
+				CE3996F015DDB2B700D2FD0D /* RailGunProjectile.mm */,
 				CE9E274815D9AD250075774F /* Pistol.h */,
 				CE9E274915D9AD250075774F /* Pistol.mm */,
 				CE9E274C15D9AD500075774F /* PistolProjectile.h */,
@@ -1875,6 +1891,10 @@
 				CE98070815D5B76600D843DC /* BananaCluster.mm */,
 				CE98070B15D5B8AC00D843DC /* BananaSingle.h */,
 				CE98070C15D5B8AC00D843DC /* BananaSingle.mm */,
+				CE3996E515DD9E1D00D2FD0D /* Kunai.h */,
+				CE3996E615DD9E1D00D2FD0D /* Kunai.mm */,
+				CE3996E915DD9E3800D2FD0D /* KunaiProjectile.h */,
+				CE3996EA15DD9E3800D2FD0D /* KunaiProjectile.mm */,
 			);
 			path = ThrownWeapons;
 			sourceTree = "<group>";
@@ -3142,6 +3162,10 @@
 				CE2F8C2015DB1D1200D3B19A /* RPGProjectile.mm in Sources */,
 				CE2F8C2B15DB250500D3B19A /* VortexPill.mm in Sources */,
 				CE2F8C2E15DB251600D3B19A /* VortexPillProjectile.mm in Sources */,
+				CE3996E715DD9E1D00D2FD0D /* Kunai.mm in Sources */,
+				CE3996EB15DD9E3800D2FD0D /* KunaiProjectile.mm in Sources */,
+				CE3996EE15DDB29700D2FD0D /* RailGun.mm in Sources */,
+				CE3996F115DDB2B800D2FD0D /* RailGunProjectile.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
