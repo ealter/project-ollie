@@ -991,8 +991,8 @@ PeSet ShapeField::pointsNear(float minX, float minY, float maxX, float maxY)
 //    nearPEs.insert(peSet.begin(), peSet.end());
     
     //Check bounds
-    if (minCellX >= gridWidth || minCellY >= gridHeight || maxX < 0 || maxY < 0 )
-        return nearPEs;
+    //if (minCellX >= gridWidth || minCellY >= gridHeight || maxX < 0 || maxY < 0 )
+    //    return nearPEs;
     
     //Clamp
     if (minX < 0) minCellX = 0;

@@ -16,6 +16,7 @@
 #include "GameConstants.h"
 #include "GWContactListener.h"
 #include "GWWeapon.h"
+#include "GWThrownWeapon.h"
 #include "GWUILayer.h"
 
 #define MAX_SPEED .01f
@@ -176,7 +177,7 @@
             self.state = kStateRagdoll;
         }
         else
-            [self.skeleton tieSkeletonToInteractor];
+            [self.skeleton tieSkeletonToInteractor:dt];
     }
     else if([self.skeleton resting:dt])
         self.state = kStateIdle;
@@ -204,7 +205,6 @@
                 [self.skeleton runAnimation:@"walk" flipped:self.orientation];
             if(ccpLengthSQ([self.skeleton getVelocity]) < .1)
                 [self.skeleton applyLinearImpulse:ccp(IMPULSE_MAG*(1 - 2.*self.orientation),0)];
-            [self.skeleton tieSkeletonToInteractor];
             return;
         case kStateArming:
             // if holding a weapon
@@ -263,6 +263,7 @@
 
 -(void)setState:(characterState)state{
     //after switching from old state
+
     
     // from ragdoll to idle
     if(_state == kStateRagdoll && state == kStateIdle)
@@ -292,6 +293,7 @@
     }
     else if (state == kStateArming)
     {
+        [self.skeleton clearAnimation];
         self.skeleton.interactor.state = kInteractorStateInactive;
     }
     
@@ -496,7 +498,9 @@
     angle = RAD2DEG(angle);
     /* Finished converting angle to frames */
     
-    [self.skeleton runFrame:(int)angle ofAnimation:@"throwaim" flipped:self.orientation];
+    GWThrownWeapon* weapon = self.selectedWeapon;
+    if(!weapon.animStarted)
+        [self.skeleton runFrame:(int)angle ofAnimation:@"throwaim" flipped:self.orientation];
 }
 
 /***********************
@@ -559,7 +563,6 @@
         
         if(self.selectedWeapon.type == kTypeThrown)
         {
-            self.state = kStateIdle;
             [self.skeleton clearAnimation];
             [self.skeleton runAnimation:@"throwhigh" flipped:self.orientation];
         }

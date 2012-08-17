@@ -13,6 +13,7 @@
 #import "GWProjectile.h"
 #import "HMVectorNode.h"
 
+#define THROW_TIMER .4f
 #define MAXTHROWNSPEED 160. //Max speed of the weapon's projectile
 
 class b2World;

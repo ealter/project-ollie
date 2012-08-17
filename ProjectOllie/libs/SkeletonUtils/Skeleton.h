@@ -83,7 +83,10 @@ private:
     b2Vec2 absolutePosition;
     
     /* helper to adjust position all the way through the skeleton */
-    void adjustTreePosition(Bone* root);
+    void adjustTreePosition(Bone* root, float dt);
+    
+    /* set position absolutely instead of suggesting */
+    void setTreePosition(Bone* root);
     
     /* Keeps track of angle of entire skeleton (essentially torso angle)*/
     float angle;
@@ -129,6 +132,9 @@ public:
     
     /* sets absolute position. Arguments are pixels */
     void setPosition(Bone* root, float x, float y);
+    
+    /* Adjust position w/o setting transform */
+    void adjustPosition(Bone* root, float x, float y, float dt);
     
     /* sets absolute angle. Argument in radians. For use in animation */
     void setAngle(float a);
