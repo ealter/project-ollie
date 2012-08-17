@@ -27,7 +27,7 @@
 {
     if(self = [super init]) {
         CGSize winSize = [CCDirector sharedDirector].winSize;
-        CGSize tableViewSize = CGSizeMake(winSize.width, 100);
+        CGSize tableViewSize = CGSizeMake(winSize.width, winSize.height - 100);
         purchasesTable_ = [SWTableView viewWithDataSource:self size:tableViewSize];
         
         purchasesTable_.direction         = SWScrollViewDirectionVertical;
@@ -37,7 +37,7 @@
         purchasesTable_.delegate          = self;
         purchasesTable_.verticalFillOrder = SWTableViewFillTopDown;
         
-        [self addChild:purchasesTable_];
+        [self addChild:purchasesTable_ z:20];
         [self getProductIdentifiers];
     }
     return self;

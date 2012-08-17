@@ -27,11 +27,12 @@
 - (id)init
 {
     if(self = [super init]) {
-        CCSprite *sprite = [CCSprite spriteWithFile:@"banana.png"];
+        CCSprite *sprite = [CCSprite spriteWithFile:@"Icon-72.png"]; //TODO: make this a bananananana
 		sprite.anchorPoint = CGPointZero;
 		[self addChild:sprite];
         
 		priceLabel_ = [CCLabelTTF labelWithString:self.formattedPrice fontName:@"Helvetica" fontSize:20.0];
+        priceLabel_.string = @"6969";
 		priceLabel_.position = ccp(20, 20);
 		[self addChild:priceLabel_];
     }
