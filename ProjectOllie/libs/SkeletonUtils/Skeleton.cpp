@@ -329,8 +329,8 @@ void Skeleton::adjustPosition(Bone *root, float x, float y, float dt)
 
 void Skeleton::adjustTreePosition(Bone* root, float dt)
 {
-    float maxSpeed = .2; //max achievable speed
-    float control  = .3;  //1 means one frame, 0 means neva
+    float maxSpeed = .002; //max achievable speed
+    float control  = .1;  //1 means one frame, 0 means neva
     
     b2Vec2 targetPosition = b2Vec2(root->x/PTM_RATIO,root->y/PTM_RATIO) + absolutePosition;
     float targetAngle     = root->a;
@@ -356,13 +356,13 @@ void Skeleton::adjustTreePosition(Bone* root, float dt)
         float finalAngleVel  = control * (desireAngularVel - currentAngularVel);
         
         // transform our velocity into an impulse (get rid of the time and mass factor)
-        float forceMultiplier = (root->box2DBody->GetMass() / dt);
+        float forceMultiplier = 0;//(root->box2DBody->GetMass() / dt);
         b2Vec2 finalForce     = b2Vec2(finalVelocity.x * forceMultiplier, finalVelocity.y * forceMultiplier);
         float finalTorque     = forceMultiplier * finalAngleVel;  
         
         // finaly apply the force
-        root->box2DBody->ApplyForce(finalForce, b2Vec2_zero);
-        //root->box2DBody->ApplyTorque(finalTorque);
+        root->box2DBody->ApplyForce(finalForce, root->box2DBody->GetLocalCenter());
+        root->box2DBody->ApplyTorque(0);
     }
     
 
