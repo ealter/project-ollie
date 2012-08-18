@@ -152,6 +152,9 @@
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
 		CE13AA4F15DF06B600A8C9BF /* ServerTokensAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA4E15DF06B600A8C9BF /* ServerTokensAPI.m */; };
 		CE13AA5415DF071300A8C9BF /* NumberOfTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA5315DF071300A8C9BF /* NumberOfTokens.m */; };
+		CE13AA5B15DF213F00A8C9BF /* MyStoreObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA5A15DF213E00A8C9BF /* MyStoreObserver.m */; };
+		CE13AA5F15DF249A00A8C9BF /* ValidateTokenPurchase.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA5E15DF249A00A8C9BF /* ValidateTokenPurchase.m */; };
+		CE13AA6215DF28DD00A8C9BF /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA6115DF28DD00A8C9BF /* NSData+Base64.m */; };
 		CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */; };
 		CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */; };
 		CE1FDF2915D4A7C300C2B532 /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2115D4A7C300C2B532 /* waterSheet1.png */; };
@@ -675,6 +678,12 @@
 		CE13AA4E15DF06B600A8C9BF /* ServerTokensAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerTokensAPI.m; path = ProjectOllie/Server/Tokens/ServerTokensAPI.m; sourceTree = "<group>"; };
 		CE13AA5215DF071300A8C9BF /* NumberOfTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberOfTokens.h; path = ProjectOllie/Server/Tokens/NumberOfTokens.h; sourceTree = "<group>"; };
 		CE13AA5315DF071300A8C9BF /* NumberOfTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NumberOfTokens.m; path = ProjectOllie/Server/Tokens/NumberOfTokens.m; sourceTree = "<group>"; };
+		CE13AA5915DF213D00A8C9BF /* MyStoreObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MyStoreObserver.h; path = ProjectOllie/Server/MyStoreObserver.h; sourceTree = "<group>"; };
+		CE13AA5A15DF213E00A8C9BF /* MyStoreObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MyStoreObserver.m; path = ProjectOllie/Server/MyStoreObserver.m; sourceTree = "<group>"; };
+		CE13AA5D15DF249A00A8C9BF /* ValidateTokenPurchase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ValidateTokenPurchase.h; path = ProjectOllie/Server/Tokens/ValidateTokenPurchase.h; sourceTree = "<group>"; };
+		CE13AA5E15DF249A00A8C9BF /* ValidateTokenPurchase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ValidateTokenPurchase.m; path = ProjectOllie/Server/Tokens/ValidateTokenPurchase.m; sourceTree = "<group>"; };
+		CE13AA6015DF28DD00A8C9BF /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "ProjectOllie/libs/categories/NSData+Base64.h"; sourceTree = "<group>"; };
+		CE13AA6115DF28DD00A8C9BF /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "ProjectOllie/libs/categories/NSData+Base64.m"; sourceTree = "<group>"; };
 		CE19DF5615CB443700CC392D /* ForgotPasswordScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordScreen.h; path = menus/ForgotPasswordScreen.h; sourceTree = "<group>"; };
 		CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordScreen.m; path = menus/ForgotPasswordScreen.m; sourceTree = "<group>"; };
 		CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWithTextFields.h; path = menus/MenuWithTextFields.h; sourceTree = "<group>"; };
@@ -1747,6 +1756,8 @@
 		CE0BD5F7158FFA3900C380CA /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				CE13AA6015DF28DD00A8C9BF /* NSData+Base64.h */,
+				CE13AA6115DF28DD00A8C9BF /* NSData+Base64.m */,
 				CEF00103158BF2E800F7F1A8 /* NSDictionary+URLEncoding.h */,
 				CEF00104158BF2E800F7F1A8 /* NSDictionary+URLEncoding.m */,
 				CEF00106158BF42000F7F1A8 /* NSString+URLEncoding.h */,
@@ -1822,6 +1833,8 @@
 				CE13AA4E15DF06B600A8C9BF /* ServerTokensAPI.m */,
 				CE13AA5215DF071300A8C9BF /* NumberOfTokens.h */,
 				CE13AA5315DF071300A8C9BF /* NumberOfTokens.m */,
+				CE13AA5D15DF249A00A8C9BF /* ValidateTokenPurchase.h */,
+				CE13AA5E15DF249A00A8C9BF /* ValidateTokenPurchase.m */,
 			);
 			name = Tokens;
 			sourceTree = "<group>";
@@ -2690,6 +2703,8 @@
 				CE0C324815CC97EC0004E932 /* Matchmaking */,
 				CE75E38D15D9AE2100151527 /* Static Json */,
 				CE13AA5115DF06BB00A8C9BF /* Tokens */,
+				CE13AA5915DF213D00A8C9BF /* MyStoreObserver.h */,
+				CE13AA5A15DF213E00A8C9BF /* MyStoreObserver.m */,
 			);
 			name = Server;
 			path = ..;
@@ -3210,6 +3225,9 @@
 				CE3996F115DDB2B800D2FD0D /* RailGunProjectile.mm in Sources */,
 				CE13AA4F15DF06B600A8C9BF /* ServerTokensAPI.m in Sources */,
 				CE13AA5415DF071300A8C9BF /* NumberOfTokens.m in Sources */,
+				CE13AA5B15DF213F00A8C9BF /* MyStoreObserver.m in Sources */,
+				CE13AA5F15DF249A00A8C9BF /* ValidateTokenPurchase.m in Sources */,
+				CE13AA6215DF28DD00A8C9BF /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
