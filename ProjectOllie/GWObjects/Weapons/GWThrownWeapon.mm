@@ -59,7 +59,7 @@
     if (self.animStarted) {
         self.animTimer += dt;
         if (self.animTimer > THROW_TIMER) {
-            [self throwWeaponWithLocation:self.position fromFinger:self.releasePoint];
+            [self throwWeaponWithLocation:self.holder.position fromFinger:self.releasePoint];
         }
     }
 }
@@ -122,6 +122,13 @@
     CGPoint gravPoint       = CGPointMake(_world->GetGravity().x, _world->GetGravity().y);
     CGPoint stepGravity     = ccpMult(ccpMult(gravPoint, dt), dt);
     self.flipY              = NO;
+    
+    //Rough guess as to end of throwing animation
+    if (self.holder.orientation == kOrientationLeft) {
+        beginPoint = ccpSub(beginPoint, ccp(60,-30));
+    }else {
+        beginPoint = ccpAdd(beginPoint, ccp(60,30));
+    }
     
     //Simulate trajectory;
     for (int i = 0; i < 60 ; i++) {

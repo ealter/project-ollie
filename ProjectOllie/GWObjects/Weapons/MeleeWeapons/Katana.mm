@@ -1,19 +1,18 @@
 //
-//  BoStaff.m
+//  Katana.m
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/17/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "BoStaff.h"
+#import "Katana.h"
 #import "GameConstants.h"
 
-@implementation BoStaff
-
+@implementation Katana
 -(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithImage:BOSTAFF_IMAGE position:pos size:CGSizeMake(BOSTAFF_WIDTH, BOSTAFF_HEIGHT) ammo:ammo wepLength:BOSTAFF_HEIGHT box2DWorld:world gameWorld:gWorld]) {
+    if (self = [super initWithImage:KATANA_IMAGE position:pos size:CGSizeMake(KATANA_WIDTH, KATANA_HEIGHT) ammo:ammo wepLength:KATANA_HEIGHT box2DWorld:world gameWorld:gWorld]) {
         
     }
     
@@ -22,8 +21,8 @@
 
 -(void)fillDescription
 {
-    self.title          = @"Bo Staff";
-    self.description    = @"A sturdy staff, great for whacking apes around.  Donatello would be proud.";
+    self.title          = @"Katana";
+    self.description    = @"Incredibly lethal sword.  Does great damage with small knockback.";
     self.type           = kType2HMelee;
 }
 
@@ -37,5 +36,5 @@
         //Out of ammo!
     }
 }
-                
+
 @end

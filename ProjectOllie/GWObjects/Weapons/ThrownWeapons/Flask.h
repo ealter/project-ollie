@@ -1,19 +1,20 @@
 //
-//  BoStaff.h
+//  Flask.h
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/17/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "GWMeleeWeapon.h"
+#import "GWThrownWeapon.h"
 
-#define BOSTAFF_WIDTH (11./PTM_RATIO)
-#define BOSTAFF_HEIGHT (60./PTM_RATIO)
-#define BOSTAFF_IMAGE @"bo_staff.png"
+#define FLASK_WIDTH (20./PTM_RATIO)
+#define FLASK_HEIGHT (25./PTM_RATIO)
+#define FLASK_IMAGE @"flask.png"
+#define NUM_CHEMICALS 12.
 
-@interface BoStaff : GWMeleeWeapon {
+@interface Flask : GWThrownWeapon {
     
 }
 

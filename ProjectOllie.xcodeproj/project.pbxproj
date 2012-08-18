@@ -134,6 +134,8 @@
 		CE05C35615D09F9B007F8ED3 /* GWCharacterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE05C35515D09F9B007F8ED3 /* GWCharacterModel.m */; };
 		CE07D21B158EFBE400CDF8F3 /* NSString+whitespace_check.m in Sources */ = {isa = PBXBuildFile; fileRef = CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */; };
 		CE081666159BE73900064E04 /* IOS_Versions.m in Sources */ = {isa = PBXBuildFile; fileRef = CE081665159BE73600064E04 /* IOS_Versions.m */; };
+		CE09A3D515DF0C2300E92C57 /* Knife.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE09A3D415DF0C2300E92C57 /* Knife.mm */; };
+		CE09A3D915DF0EC800E92C57 /* Katana.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE09A3D815DF0EC800E92C57 /* Katana.mm */; };
 		CE0A522A15A78E090036F103 /* WaterShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE0A522715A78DE10036F103 /* WaterShader.frag */; };
 		CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CE0BD5FB159016E600C380CA /* FBDialog.bundle */; };
 		CE0BD609159016E600C380CA /* libfacebook_ios_sdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0BD601159016E600C380CA /* libfacebook_ios_sdk.a */; };
@@ -435,6 +437,10 @@
 		CECCD33C15D9ED81005867FF /* kunai.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33915D9ED81005867FF /* kunai.png */; };
 		CECCD33E15D9EDAA005867FF /* bo_staff.png in Resources */ = {isa = PBXBuildFile; fileRef = CECCD33D15D9EDAA005867FF /* bo_staff.png */; };
 		CECCD34115D9EEA7005867FF /* BoStaff.mm in Sources */ = {isa = PBXBuildFile; fileRef = CECCD34015D9EEA7005867FF /* BoStaff.mm */; };
+		CED5050A15DF140C00DF5D69 /* flask.png in Resources */ = {isa = PBXBuildFile; fileRef = CED5050915DF140C00DF5D69 /* flask.png */; };
+		CED5050D15DF145600DF5D69 /* Flask.mm in Sources */ = {isa = PBXBuildFile; fileRef = CED5050C15DF145600DF5D69 /* Flask.mm */; };
+		CED5051015DF146400DF5D69 /* FlaskProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CED5050F15DF146400DF5D69 /* FlaskProjectile.mm */; };
+		CED5051315DF15F100DF5D69 /* FlaskChemical.mm in Sources */ = {isa = PBXBuildFile; fileRef = CED5051215DF15F000DF5D69 /* FlaskChemical.mm */; };
 		CEDEE34A15C8A72A00C0BB1C /* banana_grenade.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */; };
 		CEDEE34B15C8A72A00C0BB1C /* gauss_rifle.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */; };
 		CEDEE34D15C8A72A00C0BB1C /* shotgun.png in Resources */ = {isa = PBXBuildFile; fileRef = CEDEE34915C8A72A00C0BB1C /* shotgun.png */; };
@@ -629,6 +635,10 @@
 		CE07D21A158EFBE400CDF8F3 /* NSString+whitespace_check.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+whitespace_check.m"; path = "ProjectOllie/libs/categories/NSString+whitespace_check.m"; sourceTree = "<group>"; };
 		CE081664159BE73400064E04 /* IOS_Versions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IOS_Versions.h; path = Utils/IOS_Versions.h; sourceTree = "<group>"; };
 		CE081665159BE73600064E04 /* IOS_Versions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IOS_Versions.m; path = Utils/IOS_Versions.m; sourceTree = "<group>"; };
+		CE09A3D315DF0C2300E92C57 /* Knife.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Knife.h; sourceTree = "<group>"; };
+		CE09A3D415DF0C2300E92C57 /* Knife.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Knife.mm; sourceTree = "<group>"; };
+		CE09A3D715DF0EC800E92C57 /* Katana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Katana.h; sourceTree = "<group>"; };
+		CE09A3D815DF0EC800E92C57 /* Katana.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Katana.mm; sourceTree = "<group>"; };
 		CE0A522715A78DE10036F103 /* WaterShader.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = WaterShader.frag; path = Shaders/WaterShader.frag; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
 		CE0BD5F9159016E600C380CA /* Facebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Facebook.h; sourceTree = "<group>"; };
 		CE0BD5FA159016E600C380CA /* FBConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBConnect.h; sourceTree = "<group>"; };
@@ -1195,6 +1205,13 @@
 		CECCD33D15D9EDAA005867FF /* bo_staff.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bo_staff.png; sourceTree = "<group>"; };
 		CECCD33F15D9EEA7005867FF /* BoStaff.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoStaff.h; sourceTree = "<group>"; };
 		CECCD34015D9EEA7005867FF /* BoStaff.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BoStaff.mm; sourceTree = "<group>"; };
+		CED5050915DF140C00DF5D69 /* flask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = flask.png; sourceTree = "<group>"; };
+		CED5050B15DF145600DF5D69 /* Flask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flask.h; sourceTree = "<group>"; };
+		CED5050C15DF145600DF5D69 /* Flask.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Flask.mm; sourceTree = "<group>"; };
+		CED5050E15DF146400DF5D69 /* FlaskProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlaskProjectile.h; sourceTree = "<group>"; };
+		CED5050F15DF146400DF5D69 /* FlaskProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FlaskProjectile.mm; sourceTree = "<group>"; };
+		CED5051115DF15F000DF5D69 /* FlaskChemical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlaskChemical.h; sourceTree = "<group>"; };
+		CED5051215DF15F000DF5D69 /* FlaskChemical.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FlaskChemical.mm; sourceTree = "<group>"; };
 		CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banana_grenade.png; sourceTree = "<group>"; };
 		CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gauss_rifle.png; sourceTree = "<group>"; };
 		CEDEE34915C8A72A00C0BB1C /* shotgun.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shotgun.png; sourceTree = "<group>"; };
@@ -1901,6 +1918,12 @@
 				CE2F8C2A15DB250500D3B19A /* VortexPill.mm */,
 				CE2F8C2C15DB251600D3B19A /* VortexPillProjectile.h */,
 				CE2F8C2D15DB251600D3B19A /* VortexPillProjectile.mm */,
+				CED5050B15DF145600DF5D69 /* Flask.h */,
+				CED5050C15DF145600DF5D69 /* Flask.mm */,
+				CED5050E15DF146400DF5D69 /* FlaskProjectile.h */,
+				CED5050F15DF146400DF5D69 /* FlaskProjectile.mm */,
+				CED5051115DF15F000DF5D69 /* FlaskChemical.h */,
+				CED5051215DF15F000DF5D69 /* FlaskChemical.mm */,
 				CE3598D915D4F402000AA61C /* BananaGrenade.h */,
 				CE3598DA15D4F402000AA61C /* BananaGrenade.mm */,
 				CE98070715D5B76600D843DC /* BananaCluster.h */,
@@ -2577,6 +2600,7 @@
 				CE7E1F5015DEF94100F485CF /* knife.png */,
 				CECCD33915D9ED81005867FF /* kunai.png */,
 				CEDEE35515C8BDB600C0BB1C /* bullet.png */,
+				CED5050915DF140C00DF5D69 /* flask.png */,
 				CEDEE34615C8A72A00C0BB1C /* banana_grenade.png */,
 				CE79029C15D4AA5100958D04 /* banana.png */,
 				CEDEE34715C8A72A00C0BB1C /* gauss_rifle.png */,
@@ -2658,6 +2682,10 @@
 			children = (
 				CECCD33F15D9EEA7005867FF /* BoStaff.h */,
 				CECCD34015D9EEA7005867FF /* BoStaff.mm */,
+				CE09A3D315DF0C2300E92C57 /* Knife.h */,
+				CE09A3D415DF0C2300E92C57 /* Knife.mm */,
+				CE09A3D715DF0EC800E92C57 /* Katana.h */,
+				CE09A3D815DF0EC800E92C57 /* Katana.mm */,
 			);
 			path = MeleeWeapons;
 			sourceTree = "<group>";
@@ -2912,6 +2940,7 @@
 				C518B5AA15DC9F6A00E13AB8 /* construction_aim1hgun.anim in Resources */,
 				C518B5AB15DC9F6A00E13AB8 /* construction_aim2hgun.anim in Resources */,
 				CE7E1F5115DEF94100F485CF /* knife.png in Resources */,
+				CED5050A15DF140C00DF5D69 /* flask.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3190,6 +3219,11 @@
 				CE3996EB15DD9E3800D2FD0D /* KunaiProjectile.mm in Sources */,
 				CE3996EE15DDB29700D2FD0D /* RailGun.mm in Sources */,
 				CE3996F115DDB2B800D2FD0D /* RailGunProjectile.mm in Sources */,
+				CE09A3D515DF0C2300E92C57 /* Knife.mm in Sources */,
+				CE09A3D915DF0EC800E92C57 /* Katana.mm in Sources */,
+				CED5050D15DF145600DF5D69 /* Flask.mm in Sources */,
+				CED5051015DF146400DF5D69 /* FlaskProjectile.mm in Sources */,
+				CED5051315DF15F100DF5D69 /* FlaskChemical.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
