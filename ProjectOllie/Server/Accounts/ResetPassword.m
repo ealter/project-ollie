@@ -17,7 +17,7 @@
         return;
     }
     NSDictionary *requestData = [NSDictionary dictionaryWithObject:email forKey:@"email"];
-    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"sendRecoveryEmail"]];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"sendRecoveryEmail"] includeAuthentication:NO];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

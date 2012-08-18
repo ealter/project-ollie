@@ -9,8 +9,11 @@
 #import "Menu.h"
 #import "SWTableView.h"
 
+@class CCLabelTTF;
+
 @interface TokenPurchasesScreen : Menu <SWTableViewDataSource, SWTableViewDelegate> {
     SWTableView *purchasesTable_;
+    CCLabelTTF *tokensLabel_;
 }
 
 @end

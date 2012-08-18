@@ -20,7 +20,7 @@
     self.auth.authToken = nil;
     self.auth.username = username;
     NSDictionary *requestData = [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:username, password, nil] forKeys:[NSArray arrayWithObjects:@"username", @"password", nil]];
-    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"login"]];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"login"] includeAuthentication:NO];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result
