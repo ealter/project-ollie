@@ -55,13 +55,8 @@ static NSString *kAppId               = @"395624167150736";
 
 - (void)sendFacebookLoginDetailsToServer
 {
-    NSMutableDictionary *requestData = [[NSMutableDictionary alloc]initWithCapacity:3];
-    [requestData setObject:self.facebook.accessToken forKey:@"facebookAccessToken"];
-    if(self.auth.authToken) {
-        [requestData setObject:self.auth.authToken forKey:SERVER_AUTH_TOKEN_KEY];
-        [requestData setObject:self.auth.username forKey:@"username"];
-    }
-    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"facebookLogin"]];
+    NSDictionary *requestData = [NSDictionary dictionaryWithObject:self.facebook.accessToken forKey:@"facebookAccessToken"];
+    [self makeServerRequestWithData:requestData url:[[self class] urlForPageName:@"facebookLogin"] includeAuthentication:!!self.auth.authToken];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

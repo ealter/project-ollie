@@ -14,4 +14,6 @@
 
 @property (nonatomic, strong) SKProduct *product;
 
+- (id)initWithContentSize:(CGSize)contentSize;
+
 @end

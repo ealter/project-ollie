@@ -152,6 +152,8 @@
 		CE0C326515CC98940004E932 /* PlayerSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C326215CC98940004E932 /* PlayerSearch.m */; };
 		CE0C326615CC98940004E932 /* ServerMatchmakingAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */; };
 		CE123C5215883E91003AD813 /* TerrainShader.frag in Resources */ = {isa = PBXBuildFile; fileRef = CE123C4F15883687003AD813 /* TerrainShader.frag */; };
+		CE13AA4F15DF06B600A8C9BF /* ServerTokensAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA4E15DF06B600A8C9BF /* ServerTokensAPI.m */; };
+		CE13AA5415DF071300A8C9BF /* NumberOfTokens.m in Sources */ = {isa = PBXBuildFile; fileRef = CE13AA5315DF071300A8C9BF /* NumberOfTokens.m */; };
 		CE19DF5815CB443700CC392D /* ForgotPasswordScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */; };
 		CE19DF5C15CB464A00CC392D /* MenuWithTextFields.m in Sources */ = {isa = PBXBuildFile; fileRef = CE19DF5B15CB464A00CC392D /* MenuWithTextFields.m */; };
 		CE1FDF2915D4A7C300C2B532 /* waterSheet1.png in Resources */ = {isa = PBXBuildFile; fileRef = CE1FDF2115D4A7C300C2B532 /* waterSheet1.png */; };
@@ -679,6 +681,10 @@
 		CE0C326315CC98940004E932 /* ServerMatchmakingAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerMatchmakingAPI.h; path = ProjectOllie/Server/Matchmaking/ServerMatchmakingAPI.h; sourceTree = "<group>"; };
 		CE0C326415CC98940004E932 /* ServerMatchmakingAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerMatchmakingAPI.m; path = ProjectOllie/Server/Matchmaking/ServerMatchmakingAPI.m; sourceTree = "<group>"; };
 		CE123C4F15883687003AD813 /* TerrainShader.frag */ = {isa = PBXFileReference; explicitFileType = sourcecode.glsl; fileEncoding = 4; name = TerrainShader.frag; path = Shaders/TerrainShader.frag; sourceTree = "<group>"; };
+		CE13AA4D15DF06B600A8C9BF /* ServerTokensAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServerTokensAPI.h; path = ProjectOllie/Server/Tokens/ServerTokensAPI.h; sourceTree = "<group>"; };
+		CE13AA4E15DF06B600A8C9BF /* ServerTokensAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServerTokensAPI.m; path = ProjectOllie/Server/Tokens/ServerTokensAPI.m; sourceTree = "<group>"; };
+		CE13AA5215DF071300A8C9BF /* NumberOfTokens.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NumberOfTokens.h; path = ProjectOllie/Server/Tokens/NumberOfTokens.h; sourceTree = "<group>"; };
+		CE13AA5315DF071300A8C9BF /* NumberOfTokens.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NumberOfTokens.m; path = ProjectOllie/Server/Tokens/NumberOfTokens.m; sourceTree = "<group>"; };
 		CE19DF5615CB443700CC392D /* ForgotPasswordScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ForgotPasswordScreen.h; path = menus/ForgotPasswordScreen.h; sourceTree = "<group>"; };
 		CE19DF5715CB443700CC392D /* ForgotPasswordScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ForgotPasswordScreen.m; path = menus/ForgotPasswordScreen.m; sourceTree = "<group>"; };
 		CE19DF5A15CB464900CC392D /* MenuWithTextFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWithTextFields.h; path = menus/MenuWithTextFields.h; sourceTree = "<group>"; };
@@ -1826,6 +1832,17 @@
 			name = Matchmaking;
 			sourceTree = "<group>";
 		};
+		CE13AA5115DF06BB00A8C9BF /* Tokens */ = {
+			isa = PBXGroup;
+			children = (
+				CE13AA4D15DF06B600A8C9BF /* ServerTokensAPI.h */,
+				CE13AA4E15DF06B600A8C9BF /* ServerTokensAPI.m */,
+				CE13AA5215DF071300A8C9BF /* NumberOfTokens.h */,
+				CE13AA5315DF071300A8C9BF /* NumberOfTokens.m */,
+			);
+			name = Tokens;
+			sourceTree = "<group>";
+		};
 		CE26B7D915BE46E0001100A1 /* Moves */ = {
 			isa = PBXGroup;
 			children = (
@@ -2700,6 +2717,7 @@
 				CE0C324715CC97A60004E932 /* Accounts */,
 				CE0C324815CC97EC0004E932 /* Matchmaking */,
 				CE75E38D15D9AE2100151527 /* Static Json */,
+				CE13AA5115DF06BB00A8C9BF /* Tokens */,
 			);
 			name = Server;
 			path = ..;
@@ -3224,6 +3242,8 @@
 				CED5050D15DF145600DF5D69 /* Flask.mm in Sources */,
 				CED5051015DF146400DF5D69 /* FlaskProjectile.mm in Sources */,
 				CED5051315DF15F100DF5D69 /* FlaskChemical.mm in Sources */,
+				CE13AA4F15DF06B600A8C9BF /* ServerTokensAPI.m in Sources */,
+				CE13AA5415DF071300A8C9BF /* NumberOfTokens.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

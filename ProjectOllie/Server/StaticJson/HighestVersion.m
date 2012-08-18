@@ -12,7 +12,7 @@
 
 - (void)getHighestVersion
 {
-    [self makeServerRequestWithData:nil url:[[self class] urlForPageName:@"version.json"]];
+    [self makeServerRequestWithData:nil url:[[self class] urlForPageName:@"version.json"] includeAuthentication:NO];
 }
 
 - (void)serverReturnedResult:(NSDictionary *)result

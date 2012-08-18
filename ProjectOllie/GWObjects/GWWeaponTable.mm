@@ -43,7 +43,7 @@
     
     /* Make background */
     tv.menuBackground             = [CCSprite spriteWithFile:[NSString stringWithFormat:@"%@%@",name, @"_menu.png"]];
-    tv.menuBackground.scale       = .26f;
+    tv.menuBackground.scale       = .29f;
     
     /* Make Labels */
     ccColor3B labelColor    = ccc3(0,0,0);
@@ -145,10 +145,10 @@
     [super setPosition:position];
     if(self.parent)
     {
-        self.menuBackground.position = ccpAdd(self.position,ccp(self.contentSize.width/8.,0));
+        self.menuBackground.position = ccpAdd(self.position,ccp(self.contentSize.width/9,0));
         self.menuTitle.position = ccpAdd(self.position, ccp(0,self.contentSize.height/2.));
-        self.weaponTitle.position = ccpAdd(self.position, ccp(self.contentSize.width/4.5,self.contentSize.height/2.3));
-        self.weaponDescription.position = ccpAdd(self.position, ccp(self.contentSize.width/4.5,-2.7 * self.contentSize.height)); 
+        self.weaponTitle.position = ccpAdd(self.position, ccp(self.contentSize.width/5.,self.contentSize.height/2.3));
+        self.weaponDescription.position = ccpAdd(self.position, ccp(self.contentSize.width/5.,-2.7 * self.contentSize.height)); 
     }
 }
 

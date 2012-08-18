@@ -27,6 +27,7 @@ using namespace std;
     b2Body* wheel;
     b2Body* comp;
     b2World* _world;
+    Skeleton* _skeleton;
     float box_radius;
     float wheel_radius;
     float interactor_radius;
@@ -41,29 +42,31 @@ using namespace std;
 @synthesize state           = _state;
 @synthesize interactingBody = _interactingBody;
 
--(id)initAsBoxAt:(CGPoint)location inWorld:(b2World *)world{
+-(id)initAsBoxAt:(CGPoint)location inWorld:(b2World *)world withSkeleton:(Skeleton*)skeleton{
     if((self = [super init])){
         
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
         box_radius        = .2 * wheel_radius;
         interactor_radius = box_radius;
+        _skeleton         = skeleton;
         
-        [self createPhysicsBodiesAt:ccp(200,200)];
+        [self createPhysicsBodiesAt:location];
         self.state = kInteractorStateInactive;
     }
     return self;
 }
 
--(id)initAsCircleAt:(CGPoint)location inWorld:(b2World *)world{
+-(id)initAsCircleAt:(CGPoint)location inWorld:(b2World *)world withSkeleton:(Skeleton*)skeleton{
     if((self = [super init])){
 
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
         box_radius        = .2 * wheel_radius;
         interactor_radius = wheel_radius;
+        _skeleton         = skeleton;
         
-        [self createPhysicsBodiesAt:ccp(200,200)];
+        [self createPhysicsBodiesAt:location];
         self.state = kInteractorStateActive;
     }
     return self;
@@ -136,7 +139,7 @@ using namespace std;
     self.interactingBody->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), self.interactingBody->GetPosition());
 }
 
--(void)setPositionInSkeleton:(Skeleton *)_skeleton{
+-(void)setPositionInSkeleton{
     Bone* left_leg  = _skeleton->getBoneByName("ll_leg");
     Bone* right_leg = _skeleton->getBoneByName("rl_leg");
     //b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
@@ -148,6 +151,7 @@ using namespace std;
     averageLeg.x /= 2.;
     averageLeg.y /= 2.;
     self.interactingBody->SetTransform(averageLeg, self.interactingBody->GetAngle());
+    comp->SetTransform(self.interactingBody->GetPosition(), 0);
 }
 
 -(void)createPhysicsBodiesAt:(CGPoint)position{
@@ -173,7 +177,7 @@ using namespace std;
     fixtureDefBox.shape = &boxShape;
 
     b2PolygonShape wheelComp;
-    wheelComp.SetAsBox(wheel_radius, wheel_radius*1.5f);
+    wheelComp.SetAsBox(wheel_radius*1.2f, wheel_radius*1.5f);
     fixtureDefWheelComp.shape = &wheelComp;
     
     //The box data
@@ -212,7 +216,6 @@ using namespace std;
     jointDef.Initialize(comp, wheel, wheel->GetPosition());
     _world->CreateJoint(&jointDef);
 
-    
     box->CreateFixture(&fixtureDefBox);
     
 }
@@ -222,6 +225,12 @@ using namespace std;
     {
         box->SetTransform(wheel->GetPosition()-b2Vec2(0,wheel_radius-box_radius), [self calculateNormalAngle]);
         box->SetLinearVelocity(wheel->GetLinearVelocity());
+        
+        //adjust bounding box
+        Bone* torso = _skeleton->getBoneByName("Torso");
+        comp->SetFixedRotation(NO);
+        comp->SetTransform(comp->GetPosition(), torso->box2DBody->GetAngle() + M_PI_2);
+        comp->SetFixedRotation(YES);
     }
     else if (self.state == kInteractorStateInactive)
     {
@@ -320,7 +329,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
         destinationAngle = 0;
         [self buildSkeleton];
         self.animating   = false;
-        self.interactor  = [[Interactor alloc]initAsBoxAt:absoluteLocation inWorld:world];
+        self.interactor  = [[Interactor alloc]initAsBoxAt:absoluteLocation inWorld:world withSkeleton:_skeleton];
         
         // check resting state
         restingCounter   = 0;
@@ -666,7 +675,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 }
 
 -(void)setInteractorPositionInRagdoll{
-    [self.interactor setPositionInSkeleton:_skeleton];
+    [self.interactor setPositionInSkeleton];
 }
 
 -(void)setOwner:(id)owner{
