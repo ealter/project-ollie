@@ -40,8 +40,8 @@ typedef enum InteractorState{
 @property (assign, nonatomic)   InteractorState state;
 @property (readonly, nonatomic) b2Body* interactingBody;
 
--(id)initAsBoxAt:(CGPoint)location inWorld:(b2World*)world;
--(id)initAsCircleAt:(CGPoint)location inWorld:(b2World*)world;
+-(id)initAsBoxAt:(CGPoint)location inWorld:(b2World*)world withSkeleton:(Skeleton*)skeleton;
+-(id)initAsCircleAt:(CGPoint)location inWorld:(b2World*)world withSkeleton:(Skeleton*)skeleton;
 -(CGPoint)getLinearVelocity;
 -(void)setLinearVelocity:(CGPoint)lv;
 -(float)getAngularVelocity;
@@ -50,7 +50,7 @@ typedef enum InteractorState{
 -(void)setPosition:(CGPoint)position;
 -(CGPoint)getAbsolutePosition;
 -(void)applyLinearImpulse:(CGPoint)impulse;
--(void)setPositionInSkeleton:(Skeleton*)_skeleton;
+-(void)setPositionInSkeleton;
 -(void)update;
 -(float)getRadius;
 -(float)calculateNormalAngle;

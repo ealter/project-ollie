@@ -172,7 +172,7 @@
     if(self.state != kStateRagdoll)
     {
         
-        if(ccpLengthSQ(self.skeleton.getVelocity) > 5)
+        if(ccpLengthSQ(self.skeleton.getVelocity) > .5f)
         {
             self.state = kStateRagdoll;
         }
