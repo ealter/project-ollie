@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ccTypes.h"
+#import "CCLayer.h"
 
 @class CCNode;
+@class PanTouchLayer;
 
 @interface GWCamera : NSObject
 
@@ -48,13 +50,18 @@
 /* Updates camera values */
 -(void)update:(float)dt;
 
-/* Handles touches beginning */
--(void)touchesBegan:(NSSet *)touches;
-
-/* Handles touches moving */
--(void)touchesMoved:(NSSet *)touches;
-
-/* Handles touches beginning */
--(void)touchesEnded:(NSSet *)touches;
+-(PanTouchLayer*)createPanTouchLayer;
 
 @end
+
+
+
+/* Public helper class for panning and zooming the camera */
+@interface PanTouchLayer : CCLayer
+
+@property (strong, nonatomic) GWCamera* gwCamera;
+
+- (id) initWithCamera:(GWCamera*)gwCamera;
+
+@end
+

@@ -271,7 +271,7 @@ enum {
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.gwCamera touchesBegan:[event allTouches]];
+    //[self.gwCamera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
     CGPoint tl = [touch locationInView:[touch view]];
     if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
@@ -282,7 +282,7 @@ enum {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.gwCamera touchesEnded:touches];
+    //[self.gwCamera touchesEnded:touches];
     [_character stopWalking];
     //Add a new body/atlas sprite at the touched location
     CGPoint location;
@@ -308,7 +308,7 @@ enum {
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-   [self.gwCamera touchesMoved:[event allTouches]];
+   //[self.gwCamera touchesMoved:[event allTouches]];
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches

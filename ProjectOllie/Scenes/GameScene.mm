@@ -20,11 +20,38 @@
 
 - (id)initWithEnvironment:(GWEnvironment *)environment
 {
-    self = [super initWithEnvironment:environment];
+    if (self = [super initWithEnvironment:environment])
+    {
+        
+        
+        [self.worldHUD addChild:[self.gwCamera createPanTouchLayer]];
+        
+        
+        [self scheduleUpdate];
+    }
     return self;
 }
 
+- (void)update:(ccTime)dt
+{
+    //We are using a fixed timestep
+    dt = 1.0f/60.0f;
+    
+    int32 velocityIterations = 8;
+    int32 positionIterations = 1;
+//    self.world->Step(dt, velocityIterations, positionIterations);
+    
+    [self.gwCamera update:dt];
+}
+
+
 @end
+
+
+
+
+
+
 
 
 

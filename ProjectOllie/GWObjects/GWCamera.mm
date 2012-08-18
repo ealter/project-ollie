@@ -22,7 +22,6 @@
 -(void)handleTwoFingerMotion:(NSSet*)touches;
 -(void)twoFingerPan:(NSSet*)touches;
 -(void)twoFingerZoom:(NSSet*)touches;
--(void)checkBounds;
 -(void)stepTracking;
 -(void)handleShakeEffect:(float)dt;
 -(void)boundXY;
@@ -132,35 +131,8 @@
 -(void)update:(float)dt{
     //updates camera qualities
     [self stepTracking];
-    [self checkBounds];
+    [self boundXY];
     [self handleShakeEffect:dt];
-}
-
--(void)touchesBegan:(NSSet *)touches{/*
-    if([touches count] == 2) {
-        UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
-        UITouch *touch2 = [[touches allObjects] objectAtIndex:1];
-        
-        CGPoint touchLocation1 = [touch1 locationInView: [touch1 view]];
-        touchLocation1 = [[CCDirector sharedDirector] convertToGL: touchLocation1];
-        touchLocation1 = [self->subject_ convertToNodeSpace:touchLocation1];
-        
-        CGPoint touchLocation2 = [touch2 locationInView: [touch2 view]];
-        touchLocation2 = [[CCDirector sharedDirector] convertToGL: touchLocation2];
-        touchLocation2 = [self->subject_ convertToNodeSpace:touchLocation2];
-    }*/
-}
-
--(void)touchesMoved:(NSSet *)touches{
-    if([touches count] == 1)
-        [self handleOneFingerMotion:touches];
-    else if([touches count] == 2)
-        [self handleTwoFingerMotion:touches];
-
-}
-
--(void)touchesEnded:(NSSet *)touches{
-
 }
 
 /* PRIVATE GESTURE RECOGNITION */
@@ -265,48 +237,6 @@
 
 /*PRIVATE HELPER FUNCTIONS FOR UPDATING CAMERA FUCK YEA AMERICA*/
 
--(void)checkBounds{/*
-    //elastic borders
-    float elasticity = .25f;
-    //left border
-    if(worldPos.x > 0)
-    {
-        float offset = -worldPos.x;
-
-        newPos = ccp(offset * elasticity,0); 
-        [self panBy:newPos];
-
-    }
-    //right border
-    else if(worldPos.x-subject_.contentSize.width < -subject_.contentSize.width*subject_.scale)
-    {
-        float offset = -(worldPos.x-subject_.contentSize.width) - subject_.contentSize.width*subject_.scale;
-
-        newPos = ccp(offset * elasticity,0);
-        [self panBy:newPos];
-
-    }
-    //bottom border
-    if(worldPos.y > 0)
-    {
-        float offset = -worldPos.y;
-
-        newPos = ccp(0,offset * elasticity);
-        [self panBy:newPos];
-
-    }
-    //top border
-    else if(worldPos.y-subject_.contentSize.height < -subject_.contentSize.height*subject_.scale)
-    {
-        float offset = -(worldPos.y-subject_.contentSize.height) - subject_.contentSize.height*subject_.scale;
-
-        newPos = ccp(0,offset * elasticity);
-        [self panBy:newPos];
-
-    }
-*/
-}
-
 -(void)handleShakeEffect:(float)dt{
     //shake effect
     if(self.actionIntensity < .01f) {
@@ -355,5 +285,34 @@
     
 }
 
+- (PanTouchLayer*) createPanTouchLayer
+{
+    return [[PanTouchLayer alloc] initWithCamera:self];
+}
+
+@end
+
+
+@implementation PanTouchLayer
+
+@synthesize gwCamera = _gwCamera;
+
+- (id) initWithCamera:(GWCamera*)gwCamera
+{
+    if (self = [super init])
+    {
+        [super setIsTouchEnabled:YES];
+        self.gwCamera = gwCamera;
+    }
+    return self;
+}
+
+- (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if([touches count] == 1)
+        [self.gwCamera handleOneFingerMotion:touches];
+    else if([touches count] == 2)
+        [self.gwCamera handleTwoFingerMotion:touches];
+}
 
 @end

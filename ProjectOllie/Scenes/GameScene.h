@@ -39,14 +39,3 @@ class GLESDebugDraw;
 @end
 
 
-//Gets touch input in the world and moves the camera
-@interface panTouchLayer : CCLayer
-
-@property GameScene gameScene;
-
-- (id) initWithGameScene:(GameScene*)gameScene;
-
-
-
-@end
-
