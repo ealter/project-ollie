@@ -24,7 +24,7 @@ class GLESDebugDraw;
 
 @property (nonatomic) b2World* world;                   // Realistically simulates fun
 
-@property (nonatomic) GLESDebugDraw *m_debugDraw;		// For seeing what box2d is thinking
+@property (nonatomic) GLESDebugDraw* m_debugDraw;		// For seeing what box2d is thinking
 
 //Array of characters in this game
 
