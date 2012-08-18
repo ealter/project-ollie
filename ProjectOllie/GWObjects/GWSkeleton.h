@@ -38,7 +38,6 @@ typedef enum InteractorState{
 }
 
 @property (assign, nonatomic)   InteractorState state;
-@property (readonly, nonatomic) b2Body* interactingBody;
 
 -(id)initAsBoxAt:(CGPoint)location inWorld:(b2World*)world withSkeleton:(Skeleton*)skeleton;
 -(id)initAsCircleAt:(CGPoint)location inWorld:(b2World*)world withSkeleton:(Skeleton*)skeleton;
@@ -54,7 +53,6 @@ typedef enum InteractorState{
 -(void)update;
 -(float)getRadius;
 -(float)calculateNormalAngle;
--(b2Body*)getBox;
 -(b2Body*)getWheel;
 
 @end
