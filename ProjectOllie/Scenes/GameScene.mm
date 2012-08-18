@@ -23,8 +23,10 @@
     if (self = [super initWithEnvironment:environment])
     {
         
-        
+        //Add a panning touch layer in the world hud
         [self.worldHUD addChild:[self.gwCamera createPanTouchLayer]];
+        
+        //Add the terrain to the physics world
         
         
         [self scheduleUpdate];

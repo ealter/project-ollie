@@ -180,7 +180,7 @@
         //moves from motion
         [self twoFingerPan:touches];
         
-        //pans from motion
+        //zooms from motion
         [self twoFingerZoom:touches];
     }
     
@@ -309,10 +309,11 @@
 
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if([touches count] == 1)
-        [self.gwCamera handleOneFingerMotion:touches];
-    else if([touches count] == 2)
-        [self.gwCamera handleTwoFingerMotion:touches];
+    NSSet* allTouches = [event allTouches];
+    if([allTouches count] == 1)
+        [self.gwCamera handleOneFingerMotion:allTouches];
+    else if([allTouches count] == 2)
+        [self.gwCamera handleTwoFingerMotion:allTouches];
 }
 
 @end
