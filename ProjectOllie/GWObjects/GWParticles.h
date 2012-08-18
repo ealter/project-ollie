@@ -88,3 +88,9 @@
 }
 @end
 
+// A green chemical particle system
+@interface GWParticleChemical: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+

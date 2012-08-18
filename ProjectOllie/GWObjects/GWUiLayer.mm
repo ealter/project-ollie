@@ -100,6 +100,7 @@
             GWWeaponTableSlot* slot = [GWWeaponTableSlot node];
             NSString *string = [NSString stringWithFormat:@"%d", loadWep.ammo];
             CCLabelTTF *label = [CCLabelTTF labelWithString:string fontName:@"Aaargh" fontSize:15.0];
+            label.color      = ccc3(0., 0., 0.);
             
             // Weapon slot initialization
             CCSprite *sprite = [CCSprite spriteWithFile:loadWep.weaponImage];

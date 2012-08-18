@@ -1,20 +1,20 @@
 //
-//  Grenade.m
+//  Flask.m
 //  ProjectOllie
 //
-//  Created by Lion User on 7/28/12.
-//  Copyright 2012 hi ku llc. All rights reserved.
+//  Created by Lion User on 8/17/12.
+//  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "Grenade.h"
+#import "Flask.h"
 #import "GameConstants.h"
-#import "GrenadeProjectile.h"
+#import "FlaskProjectile.h"
 
-@implementation Grenade
+@implementation Flask
 
 -(id)initWithPosition:(CGPoint) pos ammo:(float) ammo box2DWorld: (b2World *)world gameWorld:(ActionLayer *)gWorld
 {
-    if (self = [super initWithImage:GRENADE_IMAGE position:pos size:CGSizeMake(GRENADE_WIDTH, GRENADE_HEIGHT) ammo:ammo box2DWorld:world fuseTime:4 gameWorld:gWorld]) {
+    if (self = [super initWithImage:FLASK_IMAGE position:pos size:CGSizeMake(FLASK_WIDTH, FLASK_HEIGHT) ammo:ammo box2DWorld:world fuseTime:4 gameWorld:gWorld]) {
         
     }
     
@@ -23,8 +23,8 @@
 
 -(void)fillDescription
 {
-    self.title          = @"Grenade";
-    self.description    = @"Standard issue grenade.  Explodes after 4 seconds; make sure you're out of there by then!";
+    self.title          = @"Chemical Flask";
+    self.description    = @"Potent brew of chemicals.  Breaks on impact with the ground, spreading corrosive chemicals.";
     self.type   = kTypeThrown;
 }
 
@@ -33,7 +33,7 @@
 {
     if (self.ammo >0) {
         //Make a bullet which acts as the thrown item
-        thrown              = [[GrenadeProjectile alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
+        thrown              = [[FlaskProjectile alloc] initWithStartPosition:self.position b2World:_world gameWorld:self.gameWorld];
         b2Body* thrownShape = thrown.physicsBody;
         [self.gameWorld addChild:thrown];
         thrown.fuseTimer    = fuseTimer;
@@ -55,6 +55,5 @@
         //no more ammo!
     }
 }
-
 
 @end

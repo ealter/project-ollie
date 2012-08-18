@@ -6,6 +6,7 @@
 //  Copyright hi ku llc 2012. All rights reserved.
 //
 
+#import <StoreKit/StoreKit.h>
 #import "cocos2d.h"
 #import "AppDelegate.h"
 #import "ActionLayer.h"
@@ -16,6 +17,7 @@
 #import "GameConstants.h"
 #import "SandboxScene.h"
 #import "DrawEnvironmentScene.h"
+#import "MyStoreObserver.h"
 
 @implementation AppController
 
@@ -104,6 +106,10 @@
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.
 	//[director_ pushScene: [ActionLayer scene]]; 
 	[[CCDirector sharedDirector] pushScene:scene];
+    
+    //Add the store observer
+    MyStoreObserver *observer = [[MyStoreObserver alloc] init];
+    [[SKPaymentQueue defaultQueue] addTransactionObserver:observer];
     
 	return YES;
 }
