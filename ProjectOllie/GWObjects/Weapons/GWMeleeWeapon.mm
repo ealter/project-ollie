@@ -49,11 +49,7 @@
 -(void)fireWeapon:(CGPoint)aimPoint
 {
     if (self.ammo >0) {        
-        if (swingRight) {
-            [self applyb2ForceInRadius:self.weaponLength/PTM_RATIO withStrength:0.1 isOutwards:YES aimedRight:YES];
-        }else {
-            [self applyb2ForceInRadius:self.weaponLength/PTM_RATIO withStrength:0.1 isOutwards:YES aimedRight:NO];
-        }
+        [self applyb2ForceInRadius:self.weaponLength/PTM_RATIO withStrength:0.1 isOutwards:YES aimedRight:swingRight];
         //Clear drawNode, decrement ammo
         [drawNode clear];
         self.ammo--;
@@ -93,6 +89,12 @@
         if (!isRight) {
             pointA.x    = pointA.x * -1;
             pointB.x    = pointB.x * -1;
+        }
+        
+        if (self.holder.orientation == kOrientationLeft) {
+            self.meleeImage.rotation = 20.;
+        }else {
+            self.meleeImage.rotation = -20.;
         }
         
         

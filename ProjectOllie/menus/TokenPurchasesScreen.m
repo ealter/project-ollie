@@ -120,6 +120,7 @@
 	}
     assert([cell isKindOfClass:[StoreTableCell class]]);
     cell.product = [self.products objectAtIndex:idx];
+    cell.idx = idx;
     
     return cell;
 }
@@ -132,7 +133,9 @@
 -(void)table:(SWTableView *)table cellTouched:(SWTableViewCell *)cell
 {
     DebugLog(@"You touched my cell!");
-    //TODO: go buy the item
+    SKProduct *selectedProduct = [self.products objectAtIndex:cell.idx];
+    SKPayment *payment = [SKPayment paymentWithProduct:selectedProduct];
+    [[SKPaymentQueue defaultQueue] addPayment:payment];
 }
 
 - (void)pressedBack:(id)sender

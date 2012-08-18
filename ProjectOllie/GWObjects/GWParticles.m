@@ -787,3 +787,75 @@ const static ccColor4F kColor4fZero = {0,0,0,0};
     return self;
 }
 @end
+
+@implementation GWParticleChemical
+-(id) init
+{
+    return [self initWithTotalParticles:250];
+}
+
+-(id) initWithTotalParticles:(NSUInteger)p
+{
+    if( (self=[super initWithTotalParticles:p]) ) {
+        // duration
+        duration = kCCParticleDurationInfinity;
+        
+        // Gravity Mode
+        self.emitterMode = kCCParticleModeGravity;
+        
+        // Position Type
+        self.positionType = kCCPositionTypeRelative;
+        
+        // Gravity Mode: gravity
+        self.gravity = CGPointZero;
+        
+        // Gravity Mode:  radial
+        self.radialAccel = 0;
+        self.radialAccelVar = 0;
+        
+        //Tangential stuff
+        self.tangentialAccelVar = 0;
+        
+        //  Gravity Mode: speed of particles
+        self.speed = 10;
+        self.speedVar = 0;
+        
+        // emitter position
+        CGSize winSize = [[CCDirector sharedDirector] winSize];
+        self.position = ccpMult(ccpFromSize(winSize), 0.5);
+        self.posVar = CGPointZero;
+        // angle
+        angle = 0;
+        angleVar = 360;
+        
+        // life of particles
+        life = 1.f;
+        lifeVar = 0;
+        
+        // emits per frame
+        emissionRate = totalParticles/life;
+        
+        // color of particles
+        startColor    = ccc4f(0., 0.44, 0.0, 1.0);
+        startColorVar = ccc4f(0.2, 0.25, 0.2, 0.3);
+        endColor      = ccc4f(0., 0., 0., 1.);
+        endColorVar   = ccc4f(0., 0.5, 0., 1.);
+        
+        // size, in pixels
+        startSize = 4.0f;
+        startSizeVar = 0.0f;
+        endSize = 15.f;
+        
+        //Change the GL blend function
+        [self setBlendFunc:(ccBlendFunc) { GL_ONE_MINUS_SRC_ALPHA, GL_ZERO }];        
+        
+        //Get the particle texture
+        self.texture = [[CCTextureCache sharedTextureCache] addImage: @"fire.png"];
+        
+        // additive
+        self.blendAdditive = YES;
+    }
+    
+    return self;
+}
+@end

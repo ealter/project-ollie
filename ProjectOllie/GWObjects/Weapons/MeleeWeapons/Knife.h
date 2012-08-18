@@ -1,19 +1,19 @@
 //
-//  BoStaff.h
+//  Knife.h
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/17/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "GWMeleeWeapon.h"
 
-#define BOSTAFF_WIDTH (11./PTM_RATIO)
-#define BOSTAFF_HEIGHT (60./PTM_RATIO)
-#define BOSTAFF_IMAGE @"bo_staff.png"
+#define KNIFE_WIDTH (11./PTM_RATIO)
+#define KNIFE_HEIGHT (30./PTM_RATIO)
+#define KNIFE_IMAGE @"knife.png"
 
-@interface BoStaff : GWMeleeWeapon {
+@interface Knife : GWMeleeWeapon {
     
 }
 

@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GWThrownWeapon.h"
 
-#define GRENADE_WIDTH (30./PTM_RATIO)
-#define GRENADE_HEIGHT (30./PTM_RATIO)
+#define GRENADE_WIDTH (25./PTM_RATIO)
+#define GRENADE_HEIGHT (25./PTM_RATIO)
 #define GRENADE_IMAGE @"grenade.png"
 
 @interface Grenade : GWThrownWeapon {

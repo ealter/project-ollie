@@ -1,19 +1,19 @@
 //
-//  BoStaff.h
+//  Katana.h
 //  ProjectOllie
 //
-//  Created by Lion User on 8/13/12.
+//  Created by Lion User on 8/17/12.
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "GWMeleeWeapon.h"
 
-#define BOSTAFF_WIDTH (11./PTM_RATIO)
-#define BOSTAFF_HEIGHT (60./PTM_RATIO)
-#define BOSTAFF_IMAGE @"bo_staff.png"
+#define KATANA_WIDTH (11./PTM_RATIO)
+#define KATANA_HEIGHT (60./PTM_RATIO)
+#define KATANA_IMAGE @"katana.png"
 
-@interface BoStaff : GWMeleeWeapon {
+@interface Katana : GWMeleeWeapon {
     
 }
 
