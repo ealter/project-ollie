@@ -23,14 +23,11 @@ using namespace std;
 
 @interface Interactor()
 {
-    b2Body* box;
     b2Body* wheel;
     b2Body* comp;
     b2World* _world;
     Skeleton* _skeleton;
-    float box_radius;
     float wheel_radius;
-    float interactor_radius;
 }
 
 -(void)createPhysicsBodiesAt:(CGPoint)position;
@@ -40,15 +37,12 @@ using namespace std;
 @implementation Interactor
 
 @synthesize state           = _state;
-@synthesize interactingBody = _interactingBody;
 
 -(id)initAsBoxAt:(CGPoint)location inWorld:(b2World *)world withSkeleton:(Skeleton*)skeleton{
     if((self = [super init])){
         
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
-        box_radius        = .2 * wheel_radius;
-        interactor_radius = box_radius;
         _skeleton         = skeleton;
         
         [self createPhysicsBodiesAt:location];
@@ -62,8 +56,6 @@ using namespace std;
 
         _world            = world;
         wheel_radius      = INTERACTOR_FLAT_RADIUS;
-        box_radius        = .2 * wheel_radius;
-        interactor_radius = wheel_radius;
         _skeleton         = skeleton;
         
         [self createPhysicsBodiesAt:location];
@@ -73,70 +65,48 @@ using namespace std;
 }
 
 -(float)getRadius{
-    return interactor_radius;
+    return wheel_radius;
 }
 
 -(CGPoint)getLinearVelocity{
-    b2Vec2 vel = self.interactingBody->GetLinearVelocity();
+    b2Vec2 vel = wheel->GetLinearVelocity();
     return ccp(vel.x,vel.y);
 }
 
 -(void)setLinearVelocity:(CGPoint)lv{
-    self.interactingBody->SetLinearVelocity(b2Vec2(lv.x,lv.y));
+    wheel->SetLinearVelocity(b2Vec2(lv.x,lv.y));
 }
 
 -(float)getAngularVelocity{
-    return self.interactingBody->GetAngularVelocity();
+    return wheel->GetAngularVelocity();
 }
 
 -(void)setAngularVelocity:(float)av{
-    self.interactingBody->SetAngularVelocity(av);
+    wheel->SetAngularVelocity(av);
 }
 
 -(CGPoint)getAbsolutePosition{
     
     CGPoint positionInPixels = ccpMult([self getPosition],PTM_RATIO);
     return ccp(positionInPixels.x,positionInPixels.y - [self getRadius]*PTM_RATIO);
+                  
 }
 
 -(CGPoint)getPosition{
-    b2Vec2 position = self.interactingBody->GetPosition();
+    b2Vec2 position = wheel->GetPosition();
     return ccp(position.x,position.y);
 }
 
 -(void)setPosition:(CGPoint)position{
-    self.interactingBody->SetTransform(b2Vec2(position.x,position.y), self.interactingBody->GetAngle());
-}
-
--(b2Body*)getBox{
-    return box;
+    wheel->SetTransform(b2Vec2(position.x,position.y), wheel->GetAngle());
 }
 
 -(b2Body*)getWheel{
     return wheel;
 }
 
--(void)setState:(InteractorState)state{
-    _state = state;
-    if(state == kInteractorStateActive)
-    {
-        _interactingBody  = wheel;
-        interactor_radius = wheel_radius;
-    }
-    else if (state == kInteractorStateInactive)
-    {
-        _interactingBody  = box;
-        interactor_radius = box_radius;
-    }
-    else if (state == kInteractorStateRagdoll)
-    {
-        _interactingBody  = wheel;
-        interactor_radius = wheel_radius;
-    }
-}
-
 -(void)applyLinearImpulse:(CGPoint)impulse{
-    self.interactingBody->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), self.interactingBody->GetPosition());
+    wheel->ApplyLinearImpulse(b2Vec2(impulse.x,impulse.y), wheel->GetPosition());
 }
 
 -(void)setPositionInSkeleton{
@@ -145,13 +115,13 @@ using namespace std;
     //b2Vec2 highest_left  = _skeleton->highestContact(left_leg, b2Vec2(-100,-100)); 
     //b2Vec2 highest_right = _skeleton->highestContact(right_leg,b2Vec2(-100,-100));
     //float totalLowest    = _skeleton->lowestY(root, 100);
-    //float lowestY        = max(totalLowest+radius,self.interactingBody->GetPosition().y);
+    //float lowestY        = max(totalLowest+radius,wheel->GetPosition().y);
     [self setAngularVelocity:0];
     b2Vec2 averageLeg    = left_leg->box2DBody->GetPosition() + right_leg->box2DBody->GetPosition();
     averageLeg.x /= 2.;
     averageLeg.y /= 2.;
-    self.interactingBody->SetTransform(averageLeg, self.interactingBody->GetAngle());
-    comp->SetTransform(self.interactingBody->GetPosition(), 0);
+    wheel->SetTransform(averageLeg, wheel->GetAngle());
+    comp->SetTransform(wheel->GetPosition(), 0);
 }
 
 -(void)createPhysicsBodiesAt:(CGPoint)position{
@@ -172,20 +142,9 @@ using namespace std;
     wheelShape.m_radius = wheel_radius;
     fixtureDefWheel.shape = &wheelShape;
 
-    b2PolygonShape  boxShape;
-    boxShape.SetAsBox(box_radius*2.5f,box_radius);
-    fixtureDefBox.shape = &boxShape;
-
     b2PolygonShape wheelComp;
     wheelComp.SetAsBox(wheel_radius*1.2f, wheel_radius*1.5f);
     fixtureDefWheelComp.shape = &wheelComp;
-    
-    //The box data
-    fixtureDefBox.density = 5.f;
-    fixtureDefBox.friction = 10.f;
-    fixtureDefBox.restitution = 0.1f;
-    fixtureDefBox.filter.categoryBits = CATEGORY_INTERACTOR;
-    fixtureDefBox.filter.maskBits = MASK_INTERACTOR;
     
     //The wheel data
     fixtureDefWheel.density = 1.f;
@@ -203,7 +162,6 @@ using namespace std;
     
     bd.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO);
     wheel = _world->CreateBody(&bd);
-    box   = _world->CreateBody(&bd);
     bd.position.Set(position.x/PTM_RATIO, position.y/PTM_RATIO + .15);
     bd.fixedRotation = YES;
     comp  = _world->CreateBody(&bd);
@@ -215,16 +173,25 @@ using namespace std;
     jointDef.enableLimit = false;
     jointDef.Initialize(comp, wheel, wheel->GetPosition());
     _world->CreateJoint(&jointDef);
-
-    box->CreateFixture(&fixtureDefBox);
     
+}
+
+-(void)setState:(InteractorState)state{
+    if(state == kInteractorStateActive)
+    {
+        wheel->SetFixedRotation(NO);
+    }
+    else {
+        wheel->SetFixedRotation(YES);
+    }
+    _state = state;
 }
 
 -(void)update{
     if(self.state == kInteractorStateActive)
     {
-        box->SetTransform(wheel->GetPosition()-b2Vec2(0,wheel_radius-box_radius), [self calculateNormalAngle]);
-        box->SetLinearVelocity(wheel->GetLinearVelocity());
+        wheel->SetActive(YES);
+        comp->SetActive(YES);
         
         //adjust bounding box
         Bone* torso = _skeleton->getBoneByName("Torso");
@@ -234,21 +201,28 @@ using namespace std;
     }
     else if (self.state == kInteractorStateInactive)
     {
-        box->SetAwake(YES);
-        wheel->SetTransform(box->GetPosition(), wheel->GetAngle());
-        wheel->SetLinearVelocity(box->GetLinearVelocity());
+
+        wheel->SetActive(YES);
+        comp->SetActive(YES);
+        
+        //adjust bounding box
+        wheel->SetAngularVelocity(0);
+        Bone* torso = _skeleton->getBoneByName("Torso");
+        comp->SetFixedRotation(NO);
+        comp->SetTransform(comp->GetPosition(), torso->box2DBody->GetAngle() + M_PI_2);
+        comp->SetFixedRotation(YES);
     }
     else if(self.state == kInteractorStateRagdoll)
     {
+        wheel->SetActive(NO);
+        comp->SetActive(NO);
         wheel->SetAngularVelocity(0);
-        box->SetTransform(wheel->GetPosition()-b2Vec2(0,wheel_radius-box_radius), [self calculateNormalAngle]);
-        box->SetLinearVelocity(wheel->GetLinearVelocity());
     }
 }
 
 -(float)calculateNormalAngle{
     
-    for (b2ContactEdge* ce = self.interactingBody->GetContactList(); ce; ce = ce->next)
+    for (b2ContactEdge* ce = wheel->GetContactList(); ce; ce = ce->next)
     {
         b2Contact* c = ce->contact;
         b2WorldManifold manifold;
@@ -643,7 +617,7 @@ static inline CGPoint dictionaryToCGPoint(NSDictionary *dict) {
 
 -(bool)calculateNormalAngle{
 
-    for (b2ContactEdge* ce = self.interactor.interactingBody->GetContactList(); ce; ce = ce->next)
+    for (b2ContactEdge* ce = [self.interactor getWheel]->GetContactList(); ce; ce = ce->next)
     {
         b2Contact* c = ce->contact;
         b2WorldManifold manifold;
