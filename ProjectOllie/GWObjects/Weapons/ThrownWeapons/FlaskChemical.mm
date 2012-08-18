@@ -10,7 +10,7 @@
 #import "GameConstants.h"
 #import "GWParticles.h"
 
-#define CHEMICAL_WIDTH 15.
+#define CHEMICAL_WIDTH 5.
 #define CHEMICAL_HEIGHT 2.
 #define CHEMICAL_IMAGE @"fire.png"
 
@@ -22,6 +22,7 @@
         destroyTimer = 0;
         self.fuseTimer = 5.;
         tic = 0;
+        meltHere = 0.;
         
         self.emitter = [GWParticleChemical node];
         [self.gameWorld addChild:self.emitter];
@@ -60,6 +61,9 @@
 -(void)update:(ccTime)dt
 {
     self.emitter.position = self.position;
+    if (meltHere != 0.) {
+        self.position = CGPointMake(meltHere, self.position.y);
+    }
     tic++;
     destroyTimer += dt;
     if (tic % 5 == 0) {
@@ -83,7 +87,7 @@
 
 -(void)bulletContact
 {
-    
+    meltHere = self.position.x;
 }
 
 @end

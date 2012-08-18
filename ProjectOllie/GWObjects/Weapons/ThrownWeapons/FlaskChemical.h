@@ -11,6 +11,7 @@
 
 @interface FlaskChemical : GWProjectile {
     int tic;
+    float meltHere;
 }
 
 -(id)initWithStartPosition:(CGPoint)pos b2World:(b2World *)world gameWorld:(ActionLayer *) gWorld;
