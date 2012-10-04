@@ -262,19 +262,6 @@ bool Skeleton::animating(Bone *root, float time)
     else {
         // stop animating
         anim = false;
-        
-        // new position is avg left and right leg position
-        Bone* ll = getBoneByName("ll_leg");
-        Bone* rl = getBoneByName("rl_leg");
-
-        if(ll && rl) {
-            float xpos = ll->box2DBody->GetPosition().x + rl->box2DBody->GetPosition().x;
-            xpos      /= 2;
-            float ypos = ll->box2DBody->GetPosition().y + rl->box2DBody->GetPosition().y;
-            ypos      /= 2;
-            
-            absolutePosition = b2Vec2(xpos,ypos);
-        }
     }
     
     /* Call on other bones */
@@ -362,7 +349,7 @@ void Skeleton::adjustTreePosition(Bone* root, float dt)
         
         // finaly apply the force
         root->box2DBody->ApplyForce(finalForce, root->box2DBody->GetLocalCenter());
-        root->box2DBody->ApplyTorque(0);
+        root->box2DBody->ApplyTorque(finalTorque);
     }
     
 
