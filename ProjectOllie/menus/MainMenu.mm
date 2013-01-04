@@ -14,6 +14,16 @@
 #import "Authentication.h"
 #import "cocos2d.h"
 
+#define NG_X self.contentSize.width*0.27
+#define NG_Y self.contentSize.height*0.22
+#define STORE_X self.contentSize.width*0.73
+#define STORE_Y self.contentSize.height*0.22
+#define TEAM_X self.contentSize.width*0.73
+#define TEAM_Y self.contentSize.height*0.5
+#define SBOX_X self.contentSize.width*0.27
+#define SBOX_Y self.contentSize.height*0.5
+
+
 @interface MainMenu ()
 
 - (void)receivedNotification:(NSNotification *)notification;
@@ -21,6 +31,7 @@
 @end
 
 @implementation MainMenu
+@synthesize emitter = _emitter;
 
 -(id)init
 {
@@ -30,6 +41,7 @@
         userName.position=ccp(self.contentSize.width*0.5, self.contentSize.height);
         [self addChild:userName z:1];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification:) name:(NSString *)kUsernameChangedBroadcast object:nil];
+        self.emitter = Nil;
     }
     
     return self;
@@ -44,8 +56,18 @@
 
 -(void)pressedMakeSquares: (id)sender
 {
+    //Make NSInvocation to jump to finish button press
+    SEL selector = @selector(finishButtonAndGoTo:orCCBuilder:);
+    NSMethodSignature* sig = [[self class] instanceMethodSignatureForSelector:selector];
+    NSInvocation* inv      = [NSInvocation invocationWithMethodSignature:sig];
+    [inv setSelector:selector];
     SandboxScene *scene = [SandboxScene node];
-    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
+    NSString* str = Nil;
+    [inv setTarget:self];
+    [inv setArgument:&scene atIndex:2];
+    [inv setArgument:&str atIndex:3];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1 invocation:inv repeats:NO];
 }
 
 -(void)pressedDraw:(id)sender
@@ -56,7 +78,8 @@
 
 -(void)pressedOptions:(id)sender
 {
-    [self transitionToSceneWithFile:@"OptionsMenu.ccbi"];
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(finishButtonAndGoTo:Nil orCCBuilder:@"OptionsMenu.ccbi") userInfo:Nil repeats:NO];
 }
 
 -(void)pressedNewGame:(id)sender
@@ -84,6 +107,16 @@
 {
     [[[Logout alloc]init] logout];
     [self transitionToSceneWithFile:@"LoginScreen.ccbi"];
+}
+
+-(void)finishButtonAndGoTo:(CCScene *)nextScene orCCBuilder:(NSString *)ccbiFile
+{
+    if ([nextScene isEqual:Nil]) {
+        [self transitionToSceneWithFile:ccbiFile];
+    }else {
+        [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:nextScene withColor:ccc3(0, 0, 0)]];
+
+    }
 }
 
 - (void)dealloc

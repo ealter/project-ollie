@@ -158,7 +158,7 @@ enum {
     world->SetContactListener(_contactListener);
 
     m_debugDraw = new GLESDebugDraw( PTM_RATIO );
-    world->SetDebugDraw(m_debugDraw);
+    //world->SetDebugDraw(m_debugDraw);
 
     uint32 flags = 0;
     flags += b2Draw::e_shapeBit;

@@ -94,3 +94,9 @@
 }
 @end
 
+// Menu Selection Particle
+@interface GWParticleMenuLeaf: ARCH_OPTIMAL_PARTICLE_SYSTEM
+{
+}
+@end
+
