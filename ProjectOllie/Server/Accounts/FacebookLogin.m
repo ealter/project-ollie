@@ -34,6 +34,7 @@ static NSString *kAppId               = @"395624167150736";
             _facebook.accessToken = [defaults objectForKey:kFBAccessTokenKey];
             _facebook.expirationDate = [defaults objectForKey:kFBExpirationDateKey];
         }
+    
     }
     return _facebook;
 }

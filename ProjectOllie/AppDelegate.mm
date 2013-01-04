@@ -70,7 +70,7 @@
 	self.navController.navigationBarHidden = YES;
 	
 	// set the Navigation Controller as the root view controller
-	//	[window_ setRootViewController:rootViewController_];
+		[window_ setRootViewController:navController_];
 	[self.window addSubview:navController_.view];
     
 	// make main window visible
@@ -117,9 +117,10 @@
 // Supported orientations: Landscape. Customize it for your own needs
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    //return interfaceOrientation == UIInterfaceOrientationLandscapeRight;
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+  return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
+
+
 
 // getting a call, pause the game
 -(void) applicationWillResignActive:(UIApplication *)application

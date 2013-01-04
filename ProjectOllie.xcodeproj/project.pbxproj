@@ -3332,12 +3332,13 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
 				);
 				LLVM_LTO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
@@ -3372,12 +3373,13 @@
 				GCC_WARN_STRICT_SELECTOR_MATCH = NO;
 				HEADER_SEARCH_PATHS = "\"ProjectOllie/libs/kazmath/include\"";
 				INFOPLIST_FILE = ProjectOllie/Resources/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/ProjectOllie/libs/facebook-ios-sdk\"",
 				);
 				LLVM_LTO = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-ObjC",
