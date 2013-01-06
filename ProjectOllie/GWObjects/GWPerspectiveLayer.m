@@ -8,19 +8,25 @@
 
 #import "GWPerspectiveLayer.h"
 #import "GWCamera.h"
+#import "CCDirector.h"
 
 @implementation GWPerspectiveLayer
 
 @synthesize camera = _camera;
 @synthesize z = _z;
+@synthesize bufferedDrawing = _bufferedDrawing;
 
 
 - (id) initWithCamera:(GWCamera*)camera z:(float)z
 {
     if (self = [super init])
     {
-        _camera = camera;
-        _z = z;
+        CGSize s = [[CCDirector sharedDirector] winSizeInPixels];
+        self.camera          = camera;
+        self.z               = z;
+        self.bufferedDrawing = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
+        
+
         
         // rotate around center of layer
         self.anchorPoint = CGPointMake(.5f,.5f);
@@ -35,7 +41,7 @@
     return YES;
 }
 
-// returns the transform matrix according the Chipmunk Body values
+// Overrides node transform, uses camera
 -(CGAffineTransform) nodeToParentTransform
 {
     if (!camera_)
@@ -73,6 +79,31 @@
                                        x,  y );
     
     return transform_;
+}
+
+
+- (void) collectShadow:(CCRenderTexture *)shadowMap
+{
+    CCLOG(@"The bufferedrawing is %p",self.bufferedDrawing);
+    //Render to the buffer, (do what visit would typically do)
+    [self.bufferedDrawing beginWithClear:0 g:0 b:0 a:0];
+    [super visit];
+    [shadowMap visit];
+    [_bufferedDrawing end];
+    
+    //Add shadow of this layer to the map
+    [shadowMap begin];
+    [self.bufferedDrawing visit];
+    [shadowMap end];
+}
+
+- (void) visit
+{
+    
+ //   CCLOG(@"The buffered drawing is %p",self.bufferedDrawing);
+    //Draw the buffered rendering
+    [self.bufferedDrawing visit];
+    
 }
 
 @end

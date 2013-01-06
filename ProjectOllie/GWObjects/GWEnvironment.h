@@ -9,6 +9,7 @@
 #import "CCLayer.h"
 #import "Terrain.h"
 #import "GWWater.h"
+#import "CCRenderTexture.h"
 
 typedef enum EnvironmentSetting
 {
@@ -38,6 +39,8 @@ typedef enum EnvironmentSetting
 
 @property (strong, nonatomic) GWPerspectiveLayer* backdrop;        // The farthest back layer at the max z we care about
 
+@property (strong, nonatomic) CCRenderTexture* shadowMap;
+
 //Particle layers not included yet
 
 /* Methods */
@@ -48,5 +51,7 @@ typedef enum EnvironmentSetting
 -(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera;
 
 -(void) setCamera:(GWCamera*)camera;
+
+-(void) visit;
 
 @end

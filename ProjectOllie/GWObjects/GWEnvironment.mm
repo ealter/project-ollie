@@ -21,6 +21,7 @@
 @synthesize backgroundNear = _backgroundNear;
 @synthesize backgroundFar  = _backgroundFar;
 @synthesize backdrop    = _backdrop;
+@synthesize shadowMap   = _shadowMap;
 
 const ccColor4F waterColor = ccc4f(0.f, 0.1f, .9f, 1.f);
 const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
@@ -44,6 +45,8 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         _backgroundNear = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.4f*PTM_RATIO];
         _backgroundFar = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.8*PTM_RATIO];
         _backdrop = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:1.4*PTM_RATIO];
+        CGSize s = [[CCDirector sharedDirector] winSizeInPixels];
+        _shadowMap = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_A8];
         
         [_actionLayer addChild:terrain];
         
@@ -129,5 +132,22 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     }
 }
 
+
+-(void) visit
+{
+    [self sortAllChildren];
+    
+    ccArray *arrayData = children_->data;
+    NSUInteger i = 0;
+    
+    for( ; i < arrayData->num; i++ ) {
+        CCNode *child = arrayData->arr[i];
+        if ([child isKindOfClass:[GWPerspectiveLayer class]])
+            [(GWPerspectiveLayer*)child collectShadow:_shadowMap];
+        CCLOG(@"THE LOOP IS EFFECTIVE");
+    }
+    
+    [super visit];
+}
 
 @end
