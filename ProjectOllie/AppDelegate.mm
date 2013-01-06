@@ -16,7 +16,7 @@
 #import "Facebook.h"
 #import "GameConstants.h"
 #import "SandboxScene.h"
-#import "DrawEnvironment.h"
+#import "DrawEnvironmentScene.h"
 #import "MyStoreObserver.h"
 
 @implementation AppController
@@ -100,7 +100,7 @@
         scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
     else
         scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];*/
-    scene = [DrawEnvironment scene];
+    scene = [DrawEnvironmentScene node];
     
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.

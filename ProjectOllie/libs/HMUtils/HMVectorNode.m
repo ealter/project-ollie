@@ -218,6 +218,17 @@ typedef struct Triangle {Vertex a, b, c;} Triangle;
 	_bufferCount += vertex_count;
 }
 
+-(void)drawDottedSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius divisions:(int)div
+{
+    for (int i = 0; i < div; i++)
+    {
+        //Draw half the segment as a dash
+        float ta = (i + .0f)/div;
+        float tb = (i + .5f)/div;
+        [self drawSegmentFrom:ccp(a.x + (b.x-a.x)*ta, a.y + (b.y-a.y)*ta) to:ccp(a.x + (b.x-a.x)*tb, a.y + (b.y-a.y)*tb) radius:radius];
+    }
+}
+
 -(void)drawPolyWithVerts:(cpVect *)verts count:(NSUInteger)count width:(cpFloat)width;
 {
 	struct ExtrudeVerts {cpVect offset, n;};

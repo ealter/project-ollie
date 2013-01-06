@@ -7,6 +7,7 @@
 //
 
 #import "DrawEnvironment.h"
+#import "GameConstants.h"
 #import "AppDelegate.h"
 #import "GWPhysicsSprite.h"
 #import "CCBReader.h"

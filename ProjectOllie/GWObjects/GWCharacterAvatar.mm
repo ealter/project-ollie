@@ -581,7 +581,7 @@
     }else {
         [self.uiLayer buildWeaponTableFrom:self];
         ActionLayer* al = (ActionLayer*)self.parent;
-        [al.camera followNode:self];
+        [al.gwCamera followNode:self];
         
     }
 }

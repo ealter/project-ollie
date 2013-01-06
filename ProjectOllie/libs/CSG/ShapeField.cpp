@@ -635,7 +635,7 @@ void ShapeField::clipConvexQuadBridge(bool add, float* x, float* y)
     shapefieldInput.push_back(input);
     printTouchInput();
 #endif
-
+    
     //Make sure the points are counterclockwise
     assert(ccw(x[0], y[0], x[1], y[1], x[2], y[2]) > FLT_EPSILON);
     assert(ccw(x[1], y[1], x[2], y[2], x[3], y[3]) > FLT_EPSILON);
@@ -937,8 +937,7 @@ bool ShapeField::isOutside(float px, float py)
                     float tmpYdistance = pe->y + (px - pe->x) * m - py;
                     if (tmpYdistance > height-py || tmpYdistance < -py)
                     {
-                        printq("Strange tmp y distance... %f\n", tmpYdistance);
-                        assert(false);
+                        printf("Strange tmp y distance... %f\n", tmpYdistance);
                     }
                     if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance > 0)
                     {
@@ -955,8 +954,7 @@ bool ShapeField::isOutside(float px, float py)
                     float tmpYdistance = pe->y + (px - pe->x) * m - py;
                     if (tmpYdistance > height-py || tmpYdistance < -py)
                     {
-                        printq("Strange tmp y distance... %f\n", tmpYdistance);
-                        assert(false);
+                        printf("Strange tmp y distance... %f\n", tmpYdistance);
                     }
                     if ((yDistance < 0 || tmpYdistance < yDistance) && tmpYdistance > 0)
                     {
