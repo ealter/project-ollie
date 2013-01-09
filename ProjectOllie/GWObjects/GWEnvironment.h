@@ -52,6 +52,6 @@ typedef enum EnvironmentSetting
 
 -(void) setCamera:(GWCamera*)camera;
 
--(void) visit;
+//-(void) visit;
 
 @end

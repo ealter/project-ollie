@@ -28,7 +28,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
 
 -(id) init
 {
-    self = [self initWithSetting:environment_dirt terrain:[Terrain node]];
+    self = [self initWithSetting:environment_ice terrain:[Terrain node]];
     return self;
 }
 
@@ -46,7 +46,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         _backgroundFar = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.8*PTM_RATIO];
         _backdrop = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:1.4*PTM_RATIO];
         CGSize s = [[CCDirector sharedDirector] winSizeInPixels];
-        _shadowMap = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_A8];
+        _shadowMap = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         [_actionLayer addChild:terrain];
         
@@ -58,7 +58,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         [self addChild:_actionLayer];
         [self addChild:_frontWater];
         
-        [self setSetting:environment_dirt];
+        [self setSetting:environment_ice];
     }
     return self;
 }
@@ -113,13 +113,16 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
             [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"snow.png"]];
             [_terrain setStrokeColor:ccc4f(1.0f, 1.0f, 1.0f, 1.0f)];
             
-            [_backdrop addChild:[[CCSprite alloc] initWithFile:@"ice_layer1.png"]];
+            CCSprite *backdropSprite = [[CCSprite alloc] initWithFile:@"ice_layer1.png"];
+            [backdropSprite setScale:9];
+            [_backdrop addChild:backdropSprite];
+            [backdropSprite setPosition:ccp(backdropSprite.texture.contentSize.width*2,backdropSprite.texture.contentSize.height*2)];
             [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"ice_layer2.png"]];
             [_backgroundNear addChild:[[CCSprite alloc] initWithFile:@"ice_layer3.png"]];
             [_backWater setColor:waterColor];
             [_frontWater setColor:waterColor];
             break;
-        }   
+        }
         case environment_lava:
         {
             
@@ -132,7 +135,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     }
 }
 
-
+/*
 -(void) visit
 {
     [self sortAllChildren];
@@ -144,10 +147,9 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         CCNode *child = arrayData->arr[i];
         if ([child isKindOfClass:[GWPerspectiveLayer class]])
             [(GWPerspectiveLayer*)child collectShadow:_shadowMap];
-        CCLOG(@"THE LOOP IS EFFECTIVE");
     }
     
     [super visit];
-}
+}*/
 
 @end

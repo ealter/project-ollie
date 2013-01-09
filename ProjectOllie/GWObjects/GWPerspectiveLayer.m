@@ -22,7 +22,7 @@
     if (self = [super init])
     {
         CGSize s = [[CCDirector sharedDirector] winSizeInPixels];
-        self.gwCamera          = gwCamera;
+        self.gwCamera        = gwCamera;
         self.z               = z;
         self.bufferedDrawing = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA8888];
         
@@ -76,7 +76,7 @@
 
 
 - (void) collectShadow:(CCRenderTexture *)shadowMap
-{
+{/*
     //CCLOG(@"The bufferedrawing is %p",self.bufferedDrawing);
     //Render to the buffer, (do what visit would typically do)
     [self.bufferedDrawing beginWithClear:0 g:0 b:0 a:0];
@@ -87,9 +87,9 @@
     //Add shadow of this layer to the map
     [shadowMap begin];
     [self.bufferedDrawing visit];
-    [shadowMap end];
+    [shadowMap end];*/
 }
-
+/*
 - (void) visit
 {
     
@@ -97,6 +97,6 @@
     //Draw the buffered rendering
     [self.bufferedDrawing visit];
     
-}
+}*/
 
 @end

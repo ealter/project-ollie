@@ -26,6 +26,6 @@
 
 - (void) collectShadow:(CCRenderTexture*)shadowMap;
 
-- (void) visit;
+//- (void) visit;
 
 @end
