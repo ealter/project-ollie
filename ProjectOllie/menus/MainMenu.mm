@@ -78,8 +78,7 @@
 
 -(void)pressedOptions:(id)sender
 {
-    
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(finishButtonAndGoTo:Nil orCCBuilder:@"OptionsMenu.ccbi") userInfo:Nil repeats:NO];
+    [self transitionToSceneWithFile:@"OptionsMenu.ccbi"];
 }
 
 -(void)pressedNewGame:(id)sender
