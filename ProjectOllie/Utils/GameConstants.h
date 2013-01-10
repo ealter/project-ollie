@@ -38,4 +38,9 @@
 #define RAD2DEG(a) (((a) * 180.0) / M_PI)
 #define DEG2RAD(a) (((a) / 180.0) * M_PI)
 
+//Land drawing brush sizes (meters)
+#define smallradius 0.2f
+#define mediumradius 0.5f
+#define largeradius 1.0f
+
 #endif

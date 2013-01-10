@@ -553,6 +553,7 @@
 		C5B4C58C159023AC000FD99F /* HMVectorNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMVectorNode.h; sourceTree = "<group>"; };
 		C5B4C58D159023AC000FD99F /* HMVectorNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMVectorNode.m; sourceTree = "<group>"; };
 		C5B4C58E159023AC000FD99F /* HMVectorNode.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = HMVectorNode.vsh; sourceTree = "<group>"; };
+		C5E8394E1698D52500E8F526 /* GWShadowMappable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GWShadowMappable.h; sourceTree = "<group>"; };
 		C5ECA6BF15BFA8CF0021D285 /* character_idle1.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle1.anim; sourceTree = "<group>"; };
 		C5ECA6C015BFA8CF0021D285 /* character_idle2.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_idle2.anim; sourceTree = "<group>"; };
 		C5F4307815B8CF9A00174FEE /* jungle_layer1-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jungle_layer1-hd.png"; sourceTree = "<group>"; };
@@ -1575,6 +1576,7 @@
 				CEFAF06F1586B72D00F6DDF9 /* MaskedSprite.mm */,
 				CE8429F5157BD0E50038C653 /* Terrain.h */,
 				CE8429F6157BD0EA0038C653 /* Terrain.mm */,
+				C5E8394E1698D52500E8F526 /* GWShadowMappable.h */,
 				C587E2D915D334FB00528573 /* Character Avatars */,
 				CE05C35715D0A467007F8ED3 /* Character Models */,
 				CE26B7D915BE46E0001100A1 /* Moves */,

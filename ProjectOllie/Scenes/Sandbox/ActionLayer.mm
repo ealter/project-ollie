@@ -73,7 +73,7 @@ enum {
     return scene;
 }
 
--(id) initWithCamera:(GWCamera*)camera
+-(id) initWithCamera:(GWCamera*)gwCamera
 {
     if( (self=[super init])) {
         
@@ -85,7 +85,7 @@ enum {
         //[self setIgnoreAnchorPointForPosition:YES];
         
         //keep track of camera motion
-        self.camera = camera;
+        self.gwCamera = gwCamera;
 
         // enable events
         self.isTouchEnabled = YES;
@@ -243,7 +243,7 @@ enum {
     [sprite setPhysicsBody:body];
     [parent addChild:sprite];
    
-    //[self.camera followNode:sprite];
+    //[self.gwCamera followNode:sprite];
 }
 
 -(void) update: (ccTime) dt
@@ -265,14 +265,14 @@ enum {
      * User-made objects that also require updates
      */
     
-	[self.camera update:dt];
+	[self.gwCamera update:dt];
 
 }
 
 
 - (void)ccTouchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.camera touchesBegan:[event allTouches]];
+    //[self.gwCamera touchesBegan:[event allTouches]];
     UITouch *touch = [touches anyObject];
     CGPoint tl = [touch locationInView:[touch view]];
     if(tl.x > [[CCDirector sharedDirector]winSizeInPixels].width/2)
@@ -283,7 +283,7 @@ enum {
 
 - (void)ccTouchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    [self.camera touchesEnded:touches];
+    //[self.gwCamera touchesEnded:touches];
     [_character stopWalking];
     //Add a new body/atlas sprite at the touched location
     CGPoint location;
@@ -301,7 +301,7 @@ enum {
         if(CGRectContainsPoint(bounds, location))
         {
             [self addNewSpriteAtPosition: location];
-            //[self.camera addIntensity:10.f]; 
+            //[self.gwCamera addIntensity:10.f]; 
         }
     
 }
@@ -309,7 +309,7 @@ enum {
 - (void)ccTouchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-   [self.camera touchesMoved:[event allTouches]];
+   //[self.gwCamera touchesMoved:[event allTouches]];
 }
 
 -(void)handleOneFingerMotion:(NSSet *)touches

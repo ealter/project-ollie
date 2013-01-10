@@ -9,6 +9,7 @@
 #import "DrawMenu.h"
 #import "DrawEnvironment.h"
 #import "cocos2d.h"
+#import "GameConstants.h"
 #define HEIGHT_MULTIPLIER 0.84
 
 @interface DrawMenu ()

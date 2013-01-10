@@ -16,7 +16,7 @@
 #import "Facebook.h"
 #import "GameConstants.h"
 #import "SandboxScene.h"
-#import "DrawEnvironment.h"
+#import "DrawEnvironmentScene.h"
 #import "MyStoreObserver.h"
 
 @implementation AppController
@@ -31,8 +31,8 @@
 	
 	// Create an CCGLView with a RGB565 color buffer, and a depth buffer of 0-bits
 	CCGLView *glView = [CCGLView viewWithFrame:[window_ bounds]
-								   pixelFormat:kEAGLColorFormatRGB565	//kEAGLColorFormatRGBA8
-								   depthFormat:0	//GL_DEPTH_COMPONENT24_OES
+								   pixelFormat:kEAGLColorFormatRGB565   //kEAGLColorFormatRGBA8888
+								   depthFormat:0                        //GL_DEPTH_COMPONENT24_OES
 							preserveBackbuffer:NO
 									sharegroup:nil
 								 multiSampling:NO
@@ -100,7 +100,7 @@
         scene = [CCBReader sceneWithNodeGraphFromFile:@"MainMenu.ccbi"];
     else
         scene = [CCBReader sceneWithNodeGraphFromFile:@"LoginScreen.ccbi"];*/
-    scene = [DrawEnvironment scene];
+    scene = [DrawEnvironmentScene node];
     
     
 	// and add the scene to the stack. The director will run it when it automatically when the view is displayed.

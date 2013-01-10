@@ -19,7 +19,7 @@
 
 @property (strong, nonatomic) GWEnvironment* environment;   //All of the environment layers and data, contains the action layer
 
-@property (strong, nonatomic) GWCamera* camera;             //Camera used to transform environment layers and world HUD
+@property (strong, nonatomic) GWCamera* gwCamera;           //Camera used to transform environment layers and world HUD
 
 @property (strong, nonatomic) CCLayer* worldHUD;            //Heads up layer transformed with the action layer but above the environment
 
@@ -31,3 +31,6 @@
 -(id)initWithEnvironment:(GWEnvironment*) environment;
 
 @end
+
+
+

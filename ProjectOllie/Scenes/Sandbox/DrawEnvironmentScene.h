@@ -17,3 +17,14 @@
 -(id) initWithEnvironment:(GWEnvironment *)environment;
 
 @end
+
+
+/* Touch layer helper class */
+@interface DrawTouchLayer : CCLayer
+
+@property (nonatomic) float brushradius;
+
+- (id) initWithEnvironmentScene:(EnvironmentScene*)des;
+
+@end
+

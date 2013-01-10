@@ -12,12 +12,12 @@
 
 @implementation SpriteParallax
 
--(id)initWithFile:(NSString *)filename camera:(GWCamera*)camera
+-(id)initWithFile:(NSString *)filename camera:(GWCamera*)gwCamera
 {
     [CCTexture2D setDefaultAlphaPixelFormat:kCCTexture2DPixelFormat_RGB5A1];
     if((self = [super init]))// rect:CGRectMake(MIN_VIEWABLE_X, MIN_VIEWABLE_Y, MAX_WIDTH_PX, MAX_HEIGHT_PX)]))
     {
-        super.camera = camera;
+        super.gwCamera = gwCamera;
         CCSprite *bkg = [[CCSprite alloc] initWithFile:filename];
         [self addChild:bkg];
      //   [self setTextureCoords:CGRectMake(0, 0, texture_.pixelsWide, texture_.pixelsHigh)];

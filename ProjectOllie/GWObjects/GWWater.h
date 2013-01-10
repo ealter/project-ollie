@@ -13,7 +13,7 @@
 
 @interface GWWater : GWPerspectiveLayer
 
-- (id) initWithCamera:(GWCamera*)camera z:(float)z;
+- (id) initWithCamera:(GWCamera*)gwCamera z:(float)z;
 
 - (void) setColor:(ccColor4F)color;
 

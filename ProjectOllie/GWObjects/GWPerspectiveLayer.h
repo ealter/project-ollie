@@ -12,14 +12,20 @@
 //
 
 #import "CCLayer.h"
+#import "CCRenderTexture.h"
 
 @class GWCamera;
 
 @interface GWPerspectiveLayer : CCLayer
 
-@property GWCamera *camera;
+@property GWCamera *gwCamera;
 @property float z;
+@property CCRenderTexture* bufferedDrawing;
 
-- (id) initWithCamera:(GWCamera*)camera z:(float)z;
+- (id) initWithCamera:(GWCamera*)gwCamera z:(float)z;
+
+- (void) collectShadow:(CCRenderTexture*)shadowMap;
+
+//- (void) visit;
 
 @end

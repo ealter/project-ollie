@@ -35,6 +35,7 @@ typedef ccColor4F Color;
 
 -(void)drawDot:(cpVect)pos radius:(cpFloat)radius;
 -(void)drawSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius;
+-(void)drawDottedSegmentFrom:(cpVect)a to:(cpVect)b radius:(cpFloat)radius divisions:(int)div;
 -(void)drawPolyWithVerts:(cpVect *)verts count:(NSUInteger)count width:(cpFloat)width;
 -(void)setColor:(Color)c;
 

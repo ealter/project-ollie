@@ -14,7 +14,7 @@
 @implementation EnvironmentScene
 
 @synthesize environment = _environment;
-@synthesize camera = _camera;
+@synthesize gwCamera = _gwCamera;
 @synthesize worldHUD = _worldHUD;
 @synthesize screenHUD = _screenHUD;
 
@@ -24,11 +24,11 @@
     {
         //Set environment and camera
         _environment = environment;
-        _camera = [[GWCamera alloc] initWithScreenDimensions:[[CCDirector sharedDirector]winSizeInPixels]];
-        [_environment setCamera:_camera];
+        _gwCamera = [[GWCamera alloc] initWithScreenDimensions:[[CCDirector sharedDirector]winSizeInPixels]];
+        [_environment setCamera:_gwCamera];
         
         //Make HUDs
-        _worldHUD = [[GWPerspectiveLayer alloc] initWithCamera:_camera z:0];
+        _worldHUD = [[GWPerspectiveLayer alloc] initWithCamera:_gwCamera z:0];
         _screenHUD = [CCLayer node];
         
         //Add from back to front in draw order

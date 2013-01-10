@@ -16,7 +16,7 @@ static const ccColor4F kInitialColor = {0,0,0,1};
 static const ccColor4F kCoveredColor = {1,0,0,1};
 
 static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A1;
-#define SCALE_RATIO 1.0
+#define SCALE_RATIO .35
 
 @interface MaskedSprite (){
     HMVectorNode* pr;
@@ -124,7 +124,9 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
          
          //On the center because scaled by 2 will fill the screen.
          */
-        [self.renderTexture setPosition:ccp(size.width/2,size.height/2)];
+        [self.renderTexture setPosition:ccp(size.width/2 / SCALE_RATIO,size.height/2 / SCALE_RATIO)];
+        [self.renderTexture setScale:1/SCALE_RATIO];
+
     }
     return self;
 }
@@ -181,6 +183,7 @@ static const CCTexture2DPixelFormat kPixelFormat = kCCTexture2DPixelFormat_RGB5A
 - (void)draw
 {    
     [self.renderTexture visit];
+    CCLOG(@"The scale is: %f",self.renderTexture.sprite.texture.contentSize.width);
 }
 
 - (void)addCircleAt:(CGPoint)center radius:(float)radius

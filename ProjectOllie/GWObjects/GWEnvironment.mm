@@ -21,13 +21,14 @@
 @synthesize backgroundNear = _backgroundNear;
 @synthesize backgroundFar  = _backgroundFar;
 @synthesize backdrop    = _backdrop;
+@synthesize shadowMap   = _shadowMap;
 
 const ccColor4F waterColor = ccc4f(0.f, 0.1f, .9f, 1.f);
 const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
 
 -(id) init
 {
-    self = [self initWithSetting:environment_dirt terrain:[Terrain node]];
+    self = [self initWithSetting:environment_ice terrain:[Terrain node]];
     return self;
 }
 
@@ -44,6 +45,8 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         _backgroundNear = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.4f*PTM_RATIO];
         _backgroundFar = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:.8*PTM_RATIO];
         _backdrop = [[GWPerspectiveLayer alloc] initWithCamera:NULL z:1.4*PTM_RATIO];
+        CGSize s = [[CCDirector sharedDirector] winSizeInPixels];
+        _shadowMap = [CCRenderTexture renderTextureWithWidth:s.width height:s.height pixelFormat:kCCTexture2DPixelFormat_RGBA4444];
         
         [_actionLayer addChild:terrain];
         
@@ -55,27 +58,27 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         [self addChild:_actionLayer];
         [self addChild:_frontWater];
         
-        [self setSetting:environment_dirt];
+        [self setSetting:environment_ice];
     }
     return self;
 }
 
--(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)camera
+-(id) initWithSetting:(EnvironmentSetting)setting terrain:(Terrain*)terrain camera:(GWCamera*)gwCamera
 {
     //TODO
     DebugLog(@"This has not yet been implemented");
     return [self initWithSetting:setting terrain:terrain];
 }
 
--(void) setCamera:(GWCamera*)camera
+-(void) setCamera:(GWCamera*)gwCamera
 {
-    //Set the camera for every layer
-    self.frontWater.camera = camera;
-    self.backWater.camera = camera;
-    self.actionLayer.camera = camera;
-    self.backdrop.camera = camera;
-    self.backgroundNear.camera = camera;
-    self.backgroundFar.camera = camera;
+    //Set the gwCamera for every layer
+    self.frontWater.gwCamera = gwCamera;
+    self.backWater.gwCamera = gwCamera;
+    self.actionLayer.gwCamera = gwCamera;
+    self.backdrop.gwCamera = gwCamera;
+    self.backgroundNear.gwCamera = gwCamera;
+    self.backgroundFar.gwCamera = gwCamera;
 }
 
 -(void) setSetting:(EnvironmentSetting)setting
@@ -89,7 +92,7 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
         case environment_dirt:
         {
             [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"lava.png"]];
-            [_terrain setStrokeColor:ccc4f(1.0f, 0.6f, 0.4f, 1.0f)];
+            [_terrain setStrokeColor:ccc4f(0.6f, 0.3f, 0.2f, 1.0f)];
             
             [_backdrop addChild:[[CCSprite alloc] initWithFile:@"jungle_layer1-hd.png"]];
             [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"jungle_layer2-hd.png"]];
@@ -110,13 +113,16 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
             [_terrain setTexture:[[CCTextureCache sharedTextureCache] addImage:@"snow.png"]];
             [_terrain setStrokeColor:ccc4f(1.0f, 1.0f, 1.0f, 1.0f)];
             
-            [_backdrop addChild:[[CCSprite alloc] initWithFile:@"ice_layer1.png"]];
+            CCSprite *backdropSprite = [[CCSprite alloc] initWithFile:@"ice_layer1.png"];
+            [backdropSprite setScale:9];
+            [_backdrop addChild:backdropSprite];
+            [backdropSprite setPosition:ccp(backdropSprite.texture.contentSize.width*2,backdropSprite.texture.contentSize.height*2)];
             [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"ice_layer2.png"]];
             [_backgroundNear addChild:[[CCSprite alloc] initWithFile:@"ice_layer3.png"]];
             [_backWater setColor:waterColor];
             [_frontWater setColor:waterColor];
             break;
-        }   
+        }
         case environment_lava:
         {
             
@@ -129,5 +135,21 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
     }
 }
 
+/*
+-(void) visit
+{
+    [self sortAllChildren];
+    
+    ccArray *arrayData = children_->data;
+    NSUInteger i = 0;
+    
+    for( ; i < arrayData->num; i++ ) {
+        CCNode *child = arrayData->arr[i];
+        if ([child isKindOfClass:[GWPerspectiveLayer class]])
+            [(GWPerspectiveLayer*)child collectShadow:_shadowMap];
+    }
+    
+    [super visit];
+}*/
 
 @end
