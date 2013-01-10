@@ -15,7 +15,7 @@
 	<key>onlyPublishCCBs</key>
 	<true/>
 	<key>publishDirectory</key>
-	<string>../Resources/menu-objects/ccbis</string>
+	<string>.</string>
 	<key>publishToZipFile</key>
 	<false/>
 	<key>resourcePaths</key>
