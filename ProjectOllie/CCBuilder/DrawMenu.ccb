@@ -6,10 +6,12 @@
 	<false/>
 	<key>currentResolution</key>
 	<integer>0</integer>
+	<key>currentSequenceId</key>
+	<integer>0</integer>
 	<key>fileType</key>
 	<string>CocosBuilder</string>
 	<key>fileVersion</key>
-	<integer>3</integer>
+	<integer>4</integer>
 	<key>guides</key>
 	<array/>
 	<key>nodeGraph</key>
@@ -25,6 +27,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -41,18 +45,6 @@
 							<real>31.200000762939453</real>
 							<real>85</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>44</real>
-							<real>43</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -81,35 +73,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -133,14 +101,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>title|1</string>
 						<key>type</key>
 						<string>String</string>
@@ -245,7 +205,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -256,7 +216,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -275,6 +235,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -291,18 +253,6 @@
 							<real>41.599998474121094</real>
 							<real>85</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>44</real>
-							<real>43</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -331,35 +281,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -383,14 +309,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>title|1</string>
 						<key>type</key>
 						<string>String</string>
@@ -495,7 +413,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -506,7 +424,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -525,6 +443,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -541,18 +461,6 @@
 							<real>52</real>
 							<real>85</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>44</real>
-							<real>43</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -581,35 +489,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -633,14 +517,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>title|1</string>
 						<key>type</key>
 						<string>String</string>
@@ -745,7 +621,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -756,7 +632,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -775,6 +651,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -791,18 +669,6 @@
 							<real>62.400001525878906</real>
 							<real>85</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>44</real>
-							<real>43</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -831,35 +697,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -883,14 +725,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>title|1</string>
 						<key>type</key>
 						<string>String</string>
@@ -995,7 +829,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -1006,7 +840,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -1025,6 +859,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -1041,18 +877,6 @@
 							<real>75</real>
 							<real>85</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>44</real>
-							<real>43</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1081,35 +905,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1133,14 +933,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>title|1</string>
 						<key>type</key>
 						<string>String</string>
@@ -1245,7 +1037,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -1256,7 +1048,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -1275,6 +1067,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -1291,18 +1085,6 @@
 							<real>86.25</real>
 							<real>85</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>44</real>
-							<real>43</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1331,35 +1113,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1383,14 +1141,6 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>title|1</string>
 						<key>type</key>
 						<string>String</string>
@@ -1495,7 +1245,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -1506,7 +1256,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -1525,6 +1275,8 @@
 				<array/>
 				<key>customClass</key>
 				<string></string>
+				<key>displayName</key>
+				<string>CCControlButton</string>
 				<key>memberVarAssignmentName</key>
 				<string></string>
 				<key>memberVarAssignmentType</key>
@@ -1541,18 +1293,6 @@
 							<real>0.0</real>
 							<real>98.75</real>
 							<integer>4</integer>
-						</array>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>contentSize</string>
-						<key>type</key>
-						<string>Size</string>
-						<key>value</key>
-						<array>
-							<real>48</real>
-							<real>48</real>
-							<integer>0</integer>
 						</array>
 					</dict>
 					<dict>
@@ -1581,35 +1321,11 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>rotation</string>
-						<key>type</key>
-						<string>Degrees</string>
-						<key>value</key>
-						<real>0.0</real>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>tag</string>
-						<key>type</key>
-						<string>Integer</string>
-						<key>value</key>
-						<integer>-1</integer>
-					</dict>
-					<dict>
-						<key>name</key>
 						<string>ignoreAnchorPointForPosition</string>
 						<key>type</key>
 						<string>Check</string>
 						<key>value</key>
 						<false/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>visible</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<true/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1630,14 +1346,6 @@
 						<string>Check</string>
 						<key>value</key>
 						<true/>
-					</dict>
-					<dict>
-						<key>name</key>
-						<string>selected</string>
-						<key>type</key>
-						<string>Check</string>
-						<key>value</key>
-						<false/>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -1745,7 +1453,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>backgroundSpriteFrame|4</string>
+						<string>backgroundSpriteFrame|3</string>
 						<key>type</key>
 						<string>SpriteFrame</string>
 						<key>value</key>
@@ -1756,7 +1464,7 @@
 					</dict>
 					<dict>
 						<key>name</key>
-						<string>titleColor|4</string>
+						<string>titleColor|3</string>
 						<key>type</key>
 						<string>Color3</string>
 						<key>value</key>
@@ -1767,9 +1475,13 @@
 						</array>
 					</dict>
 				</array>
+				<key>selected</key>
+				<true/>
 			</dict>
 		</array>
 		<key>customClass</key>
+		<string>DrawMenu</string>
+		<key>displayName</key>
 		<string>DrawMenu</string>
 		<key>memberVarAssignmentName</key>
 		<string></string>
@@ -1777,18 +1489,6 @@
 		<integer>0</integer>
 		<key>properties</key>
 		<array>
-			<dict>
-				<key>name</key>
-				<string>position</string>
-				<key>type</key>
-				<string>Position</string>
-				<key>value</key>
-				<array>
-					<real>0.0</real>
-					<real>0.0</real>
-					<integer>0</integer>
-				</array>
-			</dict>
 			<dict>
 				<key>name</key>
 				<string>contentSize</string>
@@ -1827,31 +1527,7 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>rotation</string>
-				<key>type</key>
-				<string>Degrees</string>
-				<key>value</key>
-				<real>0.0</real>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>tag</string>
-				<key>type</key>
-				<string>Integer</string>
-				<key>value</key>
-				<integer>-1</integer>
-			</dict>
-			<dict>
-				<key>name</key>
 				<string>ignoreAnchorPointForPosition</string>
-				<key>type</key>
-				<string>Check</string>
-				<key>value</key>
-				<true/>
-			</dict>
-			<dict>
-				<key>name</key>
-				<string>visible</string>
 				<key>type</key>
 				<string>Check</string>
 				<key>value</key>
@@ -1879,13 +1555,13 @@
 			</dict>
 			<dict>
 				<key>name</key>
-				<string>isMouseEnabled</string>
+				<string>mouseEnabled</string>
 				<key>platform</key>
 				<string>Mac</string>
 				<key>type</key>
 				<string>Check</string>
 				<key>value</key>
-				<false/>
+				<true/>
 			</dict>
 			<dict>
 				<key>name</key>
@@ -1932,5 +1608,30 @@
 			<integer>1024</integer>
 		</dict>
 	</array>
+	<key>sequences</key>
+	<array>
+		<dict>
+			<key>autoPlay</key>
+			<true/>
+			<key>chainedSequenceId</key>
+			<integer>-1</integer>
+			<key>length</key>
+			<real>10</real>
+			<key>name</key>
+			<string>Default Timeline</string>
+			<key>offset</key>
+			<real>0.0</real>
+			<key>position</key>
+			<real>0.0</real>
+			<key>resolution</key>
+			<real>30</real>
+			<key>scale</key>
+			<real>128</real>
+			<key>sequenceId</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>stageBorder</key>
+	<integer>0</integer>
 </dict>
 </plist>

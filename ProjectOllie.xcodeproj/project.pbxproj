@@ -124,7 +124,6 @@
 		C5F430FD15B9008700174FEE /* character_woopwoop.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5F430FC15B9008700174FEE /* character_woopwoop.anim */; };
 		C5F4310015B9054300174FEE /* character_sprinting.anim in Resources */ = {isa = PBXBuildFile; fileRef = C5F430FF15B9054300174FEE /* character_sprinting.anim */; };
 		C5F4310B15BE224D00174FEE /* GWCharacterAvatar.mm in Sources */ = {isa = PBXBuildFile; fileRef = C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */; };
-		C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C5FE5FEE15796E7A008F4298 /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE01828115951774003CE804 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE01828015951774003CE804 /* Menu.m */; };
 		CE02DC5F15AE4E2800F16FAF /* CCControlSwitchMask.fsh in Resources */ = {isa = PBXBuildFile; fileRef = C52986981578A43300656B50 /* CCControlSwitchMask.fsh */; };
 		CE04E58B15DDA8D8009A009C /* StoreTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE04E58A15DDA8D8009A009C /* StoreTableCell.m */; };
@@ -213,6 +212,12 @@
 		CE59CA5015C4D65200B68745 /* Grenade.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE59CA4F15C4D65200B68745 /* Grenade.mm */; };
 		CE59CA5315C4D69400B68745 /* GrenadeProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE59CA5215C4D69400B68745 /* GrenadeProjectile.mm */; };
 		CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE5C59341597CA2800C121B4 /* RippleEffect.fsh */; };
+		CE6150A416A061B600EDE19E /* CCBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509916A061B600EDE19E /* CCBAnimationManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE6150A516A061B600EDE19E /* CCBKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509B16A061B600EDE19E /* CCBKeyframe.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE6150A616A061B600EDE19E /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509D16A061B600EDE19E /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE6150A716A061B600EDE19E /* CCBsequence.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509F16A061B600EDE19E /* CCBsequence.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE6150A816A061B600EDE19E /* CCBSequenceProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6150A116A061B600EDE19E /* CCBSequenceProperty.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		CE6150A916A061B600EDE19E /* CCNode+CCBRelativePositioning.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6150A316A061B600EDE19E /* CCNode+CCBRelativePositioning.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FC811593F06400BEB3BE /* CharacterScreen.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */; };
 		CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE62FC9D1594085800BEB3BE /* SWScrollView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -627,8 +632,6 @@
 		C5F430FF15B9054300174FEE /* character_sprinting.anim */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = character_sprinting.anim; sourceTree = "<group>"; };
 		C5F4310915BE224B00174FEE /* GWCharacterAvatar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GWCharacterAvatar.h; path = ../GWCharacterAvatar.h; sourceTree = "<group>"; };
 		C5F4310A15BE224C00174FEE /* GWCharacterAvatar.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = GWCharacterAvatar.mm; path = ../GWCharacterAvatar.mm; sourceTree = "<group>"; };
-		C5FE5FED15796E6F008F4298 /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
-		C5FE5FEE15796E7A008F4298 /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
 		CE01827F15951774003CE804 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = menus/Menu.h; sourceTree = "<group>"; };
 		CE01828015951774003CE804 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = menus/Menu.m; sourceTree = "<group>"; };
 		CE029086159E6AD000CEF219 /* GameConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GameConstants.h; path = Utils/GameConstants.h; sourceTree = "<group>"; };
@@ -784,6 +787,18 @@
 		CE59CA5115C4D69400B68745 /* GrenadeProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrenadeProjectile.h; sourceTree = "<group>"; };
 		CE59CA5215C4D69400B68745 /* GrenadeProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GrenadeProjectile.mm; sourceTree = "<group>"; };
 		CE5C59341597CA2800C121B4 /* RippleEffect.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = RippleEffect.fsh; path = Shaders/RippleEffect.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CE61509816A061B600EDE19E /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
+		CE61509916A061B600EDE19E /* CCBAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBAnimationManager.m; sourceTree = "<group>"; };
+		CE61509A16A061B600EDE19E /* CCBKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBKeyframe.h; sourceTree = "<group>"; };
+		CE61509B16A061B600EDE19E /* CCBKeyframe.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBKeyframe.m; sourceTree = "<group>"; };
+		CE61509C16A061B600EDE19E /* CCBReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBReader.h; sourceTree = "<group>"; };
+		CE61509D16A061B600EDE19E /* CCBReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBReader.m; sourceTree = "<group>"; };
+		CE61509E16A061B600EDE19E /* CCBSequence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBSequence.h; sourceTree = "<group>"; };
+		CE61509F16A061B600EDE19E /* CCBsequence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBsequence.m; sourceTree = "<group>"; };
+		CE6150A016A061B600EDE19E /* CCBSequenceProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBSequenceProperty.h; sourceTree = "<group>"; };
+		CE6150A116A061B600EDE19E /* CCBSequenceProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBSequenceProperty.m; sourceTree = "<group>"; };
+		CE6150A216A061B600EDE19E /* CCNode+CCBRelativePositioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CCNode+CCBRelativePositioning.h"; sourceTree = "<group>"; };
+		CE6150A316A061B600EDE19E /* CCNode+CCBRelativePositioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CCNode+CCBRelativePositioning.m"; sourceTree = "<group>"; };
 		CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = CharacterScreen.ccbi; path = "Resources/menu-objects/ccbis/CharacterScreen.ccbi"; sourceTree = "<group>"; };
 		CE62FC9A1594085800BEB3BE /* SWMultiColumnTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWMultiColumnTableView.h; path = libs/CCTableSuite/SWMultiColumnTableView.h; sourceTree = "<group>"; };
 		CE62FC9B1594085800BEB3BE /* SWMultiColumnTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWMultiColumnTableView.m; path = libs/CCTableSuite/SWMultiColumnTableView.m; sourceTree = "<group>"; };
@@ -1970,6 +1985,26 @@
 			path = ThrownWeapons;
 			sourceTree = "<group>";
 		};
+		CE61509716A061B600EDE19E /* CCBReader */ = {
+			isa = PBXGroup;
+			children = (
+				CE61509816A061B600EDE19E /* CCBAnimationManager.h */,
+				CE61509916A061B600EDE19E /* CCBAnimationManager.m */,
+				CE61509A16A061B600EDE19E /* CCBKeyframe.h */,
+				CE61509B16A061B600EDE19E /* CCBKeyframe.m */,
+				CE61509C16A061B600EDE19E /* CCBReader.h */,
+				CE61509D16A061B600EDE19E /* CCBReader.m */,
+				CE61509E16A061B600EDE19E /* CCBSequence.h */,
+				CE61509F16A061B600EDE19E /* CCBsequence.m */,
+				CE6150A016A061B600EDE19E /* CCBSequenceProperty.h */,
+				CE6150A116A061B600EDE19E /* CCBSequenceProperty.m */,
+				CE6150A216A061B600EDE19E /* CCNode+CCBRelativePositioning.h */,
+				CE6150A316A061B600EDE19E /* CCNode+CCBRelativePositioning.m */,
+			);
+			name = CCBReader;
+			path = ProjectOllie/CCBReader;
+			sourceTree = "<group>";
+		};
 		CE62FC991594084000BEB3BE /* CCTableSuite */ = {
 			isa = PBXGroup;
 			children = (
@@ -2032,6 +2067,7 @@
 			children = (
 				CE94AA6B15785F83009B35B4 /* ProjectOllie */,
 				CE94AA5815785F83009B35B4 /* Frameworks */,
+				CE61509716A061B600EDE19E /* CCBReader */,
 				CE94AA5615785F83009B35B4 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -2064,8 +2100,6 @@
 		CE94AA6B15785F83009B35B4 /* ProjectOllie */ = {
 			isa = PBXGroup;
 			children = (
-				C5FE5FED15796E6F008F4298 /* CCBReader.h */,
-				C5FE5FEE15796E7A008F4298 /* CCBReader.m */,
 				CE94AC6F15785F89009B35B4 /* AppDelegate.h */,
 				CE94AC7015785F89009B35B4 /* AppDelegate.mm */,
 				CE94AC7515785F89009B35B4 /* GLES-Render.h */,
@@ -3148,7 +3182,6 @@
 				C52986C31578A43300656B50 /* unzip.c in Sources */,
 				C52986C41578A43300656B50 /* zip.c in Sources */,
 				C52986C51578A43300656B50 /* SSZipArchive.m in Sources */,
-				C5FE5FEF15796E7B008F4298 /* CCBReader.m in Sources */,
 				CE53DF6F157ACBA90078FD73 /* DrawEnvironment.mm in Sources */,
 				CE8429F7157BD0EC0038C653 /* Terrain.mm in Sources */,
 				CE894F011582B30B00E412E1 /* ShapeField.cpp in Sources */,
@@ -3264,6 +3297,12 @@
 				CE13AA5B15DF213F00A8C9BF /* MyStoreObserver.m in Sources */,
 				CE13AA5F15DF249A00A8C9BF /* ValidateTokenPurchase.m in Sources */,
 				CE13AA6215DF28DD00A8C9BF /* NSData+Base64.m in Sources */,
+				CE6150A416A061B600EDE19E /* CCBAnimationManager.m in Sources */,
+				CE6150A516A061B600EDE19E /* CCBKeyframe.m in Sources */,
+				CE6150A616A061B600EDE19E /* CCBReader.m in Sources */,
+				CE6150A716A061B600EDE19E /* CCBsequence.m in Sources */,
+				CE6150A816A061B600EDE19E /* CCBSequenceProperty.m in Sources */,
+				CE6150A916A061B600EDE19E /* CCNode+CCBRelativePositioning.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,7 +8,7 @@
 
 #import "MainMenu.h"
 #import "CCBReader.h"
-#import "DrawEnvironment.h"
+#import "DrawEnvironmentScene.h"
 #import "SandboxScene.h"
 #import "Logout.h"
 #import "Authentication.h"
@@ -72,7 +72,7 @@
 
 -(void)pressedDraw:(id)sender
 {
-    CCScene* scene = [DrawEnvironment scene];
+    CCScene* scene = [DrawEnvironmentScene node];
     [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 

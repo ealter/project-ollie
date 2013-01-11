@@ -23,11 +23,11 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "CCNode.h"
-#import "CCFileUtils.h"
+#import "cocos2d.h"
 
-@class CCScene;
-#define kCCBVersion 2
+@class CCBAnimationManager;
+
+#define kCCBVersion 3
 
 enum {
     kCCBPropTypePosition = 0,
@@ -82,26 +82,25 @@ enum {
 
 enum
 {
-    kCCBPositionTypeRelativeBottomLeft,
-    kCCBPositionTypeRelativeTopLeft,
-    kCCBPositionTypeRelativeTopRight,
-    kCCBPositionTypeRelativeBottomRight,
-    kCCBPositionTypePercent
-};
-
-enum
-{
-    kCCBSizeTypeAbsolute,
-    kCCBSizeTypePercent,
-    kCCBSizeTypeRelativeContainer,
-    kCCBSizeTypeHorizontalPercent,
-    kCCBSzieTypeVerticalPercent
-};
-
-enum
-{
-    kCCBScaleTypeAbsolute,
-    kCCBScaleTypeMultiplyResolution
+    kCCBKeyframeEasingInstant,
+    
+    kCCBKeyframeEasingLinear,
+    
+    kCCBKeyframeEasingCubicIn,
+    kCCBKeyframeEasingCubicOut,
+    kCCBKeyframeEasingCubicInOut,
+    
+    kCCBKeyframeEasingElasticIn,
+    kCCBKeyframeEasingElasticOut,
+    kCCBKeyframeEasingElasticInOut,
+    
+    kCCBKeyframeEasingBounceIn,
+    kCCBKeyframeEasingBounceOut,
+    kCCBKeyframeEasingBounceInOut,
+    
+    kCCBKeyframeEasingBackIn,
+    kCCBKeyframeEasingBackOut,
+    kCCBKeyframeEasingBackInOut,
 };
 
 @interface CCBReader : NSObject
@@ -114,31 +113,33 @@ enum
     NSMutableArray* stringCache;
     NSMutableSet* loadedSpriteSheets;
     
-    CCNode* rootNode;
     id owner;
-    CGSize rootContainerSize;
-    int resolutionScale;
+    
+    CCBAnimationManager* actionManager;
+    NSMutableDictionary* actionManagers;
+    NSMutableSet* animatedProps;
 }
+
+@property (nonatomic,retain) CCBAnimationManager* actionManager;
+
++ (NSString*) ccbDirectoryPath;
 
 + (CCNode*) nodeGraphFromFile:(NSString*) file;
 + (CCNode*) nodeGraphFromFile:(NSString*) file owner:(id)owner;
 + (CCNode*) nodeGraphFromFile:(NSString*) file owner:(id)owner parentSize:(CGSize)parentSize;
 
++ (CCNode*) nodeGraphFromData:(NSData*) data owner:(id)owner parentSize:(CGSize)parentSize;
+
 + (CCScene*) sceneWithNodeGraphFromFile:(NSString*) file;
 + (CCScene*) sceneWithNodeGraphFromFile:(NSString *)file owner:(id)owner;
 + (CCScene*) sceneWithNodeGraphFromFile:(NSString *)file owner:(id)owner parentSize:(CGSize)parentSize;
+
++ (void) setResolutionScale:(float)scale;
 
 #ifdef CCB_ENABLE_UNZIP
 + (BOOL) unzipResources:(NSString*)resPath;
 #endif
 
-@end
-
-@interface CCBFile : CCNode
-{
-    CCNode* ccbFile;
-}
-@property (nonatomic,retain) CCNode* ccbFile;
 @end
 
 @interface CCBFileUtils : CCFileUtils
