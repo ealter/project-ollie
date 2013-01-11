@@ -117,8 +117,17 @@ const ccColor4F lavaColor = ccc4f(0.f, 0.1f, .9f, 1.f);
             [backdropSprite setScale:9];
             [_backdrop addChild:backdropSprite];
             [backdropSprite setPosition:ccp(backdropSprite.texture.contentSize.width*2,backdropSprite.texture.contentSize.height*2)];
-            [_backgroundFar addChild:[[CCSprite alloc] initWithFile:@"ice_layer2.png"]];
-            [_backgroundNear addChild:[[CCSprite alloc] initWithFile:@"ice_layer3.png"]];
+            
+            CCSprite *backgroundFSprite = [[CCSprite alloc] initWithFile:@"ice_layer2.png"];
+            [backgroundFSprite setScale:9];
+            [_backgroundFar addChild:backgroundFSprite];
+            [backgroundFSprite setPosition:ccp(backgroundFSprite.texture.contentSize.width*2,backgroundFSprite.texture.contentSize.height*2)];
+            
+            CCSprite *backgroundNSprite = [[CCSprite alloc] initWithFile:@"ice_layer3.png"];
+            [backgroundNSprite setScale:9];
+            [_backgroundNear addChild:backgroundNSprite];
+            [backgroundNSprite setPosition:ccp(backgroundNSprite.texture.contentSize.width*2,backgroundNSprite.texture.contentSize.height*2)];
+            
             [_backWater setColor:waterColor];
             [_frontWater setColor:waterColor];
             break;
