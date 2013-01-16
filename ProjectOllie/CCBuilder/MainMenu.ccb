@@ -133,6 +133,14 @@
 					</dict>
 					<dict>
 						<key>name</key>
+						<string>startOpacity</string>
+						<key>type</key>
+						<string>Byte</string>
+						<key>value</key>
+						<integer>254</integer>
+					</dict>
+					<dict>
+						<key>name</key>
 						<string>endColor</string>
 						<key>type</key>
 						<string>Color3</string>
@@ -142,6 +150,14 @@
 							<integer>132</integer>
 							<integer>0</integer>
 						</array>
+					</dict>
+					<dict>
+						<key>name</key>
+						<string>endOpacity</string>
+						<key>type</key>
+						<string>Byte</string>
+						<key>value</key>
+						<integer>254</integer>
 					</dict>
 					<dict>
 						<key>name</key>
@@ -155,8 +171,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>

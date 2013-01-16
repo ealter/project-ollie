@@ -12,6 +12,7 @@
 #import "SandboxScene.h"
 #import "Logout.h"
 #import "Authentication.h"
+#import "GWParticles.h"
 #import "cocos2d.h"
 
 #define NG_X self.contentSize.width*0.27
@@ -42,6 +43,11 @@
         [self addChild:userName z:1];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedNotification:) name:(NSString *)kUsernameChangedBroadcast object:nil];
         self.emitter = Nil;
+        CCLayerGradient *gradientLayer = [CCLayerGradient layerWithColor:ccc4(0, 150, 0, 255) fadingTo:ccc4(0, 200, 0, 255) alongVector:ccp(0, -1)];
+        [gradientLayer setBlendFunc:(ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_ALPHA }];
+        gradientLayer.contentSize = self.contentSize;
+        gradientLayer.position  = CGPointMake(0, 0);
+        [self addChild:gradientLayer z:-1];
     }
     
     return self;
@@ -56,18 +62,12 @@
 
 -(void)pressedMakeSquares: (id)sender
 {
-    //Make NSInvocation to jump to finish button press
-    SEL selector = @selector(finishButtonAndGoTo:orCCBuilder:);
-    NSMethodSignature* sig = [[self class] instanceMethodSignatureForSelector:selector];
-    NSInvocation* inv      = [NSInvocation invocationWithMethodSignature:sig];
-    [inv setSelector:selector];
-    SandboxScene *scene = [SandboxScene node];
-    NSString* str = Nil;
-    [inv setTarget:self];
-    [inv setArgument:&scene atIndex:2];
-    [inv setArgument:&str atIndex:3];
+    self.emitter = [GWParticleMenuLeaf node];
+    self.emitter.position = CGPointMake(SBOX_X, SBOX_Y);
+    [self addChild:self.emitter];
     
-    [NSTimer scheduledTimerWithTimeInterval:0.1 invocation:inv repeats:NO];
+    CCScene* scene = [SandboxScene node];
+    [[CCDirector sharedDirector] replaceScene:[CCTransitionFade transitionWithDuration:0.5f scene:scene withColor:ccc3(0, 0, 0)]];
 }
 
 -(void)pressedDraw:(id)sender
