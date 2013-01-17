@@ -82,14 +82,8 @@
 }
 
 -(void)pressedNewGame:(id)sender
-{
-    CCLayerColor* colorLayer = [CCLayerColor layerWithColor:ccc4(0, 0, 0, 255)];
-    [colorLayer setOpacity:190];
-    [self addChild:colorLayer z:1];
-    
-    CCNode* newnode = [CCBReader nodeGraphFromFile:@"NewGameOverlay.ccbi"];
-    [self addChild:newnode];
-    [self reorderChild:newnode z:2];
+{    
+    [self transitionToSceneWithFile:@"NewGameMenu.ccbi"];
 }
 
 -(void)pressedCharacters:(id)sender

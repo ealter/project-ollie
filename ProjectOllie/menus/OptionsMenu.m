@@ -28,6 +28,12 @@
         userName.anchorPoint = ccp(0.5,0.5);
         userName.position=ccp(nameframe.origin.x - nameframe.size.width, nameframe.origin.y);
         [self addChild:userName z:1];
+        //Add colored Background manually
+        CCLayerGradient *gradientLayer = [CCLayerGradient layerWithColor:ccc4(0, 150, 0, 255) fadingTo:ccc4(0, 200, 0, 255) alongVector:ccp(0, -1)];
+        [gradientLayer setBlendFunc:(ccBlendFunc) { GL_ONE, GL_ONE_MINUS_SRC_ALPHA }];
+        gradientLayer.contentSize = self.contentSize;
+        gradientLayer.position  = CGPointMake(0, 0);
+        [self addChild:gradientLayer z:-1];
     }
     return self;
 }

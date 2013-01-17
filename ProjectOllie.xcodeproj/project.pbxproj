@@ -195,8 +195,7 @@
 		CE30B198158FBA34009EC82B /* NewAccountMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B193158FBA34009EC82B /* NewAccountMenu.m */; };
 		CE30B1A2158FC37F009EC82B /* OptionsMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */; };
 		CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */; };
-		CE30B1A8158FD030009EC82B /* NewGameOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */; };
-		CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */; };
+		CE30B1A8158FD030009EC82B /* NewGameMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B1A7158FD02F009EC82B /* NewGameMenu.m */; };
 		CE3598DB15D4F402000AA61C /* BananaGrenade.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3598DA15D4F402000AA61C /* BananaGrenade.mm */; };
 		CE3996E715DD9E1D00D2FD0D /* Kunai.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3996E615DD9E1D00D2FD0D /* Kunai.mm */; };
 		CE3996EB15DD9E3800D2FD0D /* KunaiProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE3996EA15DD9E3800D2FD0D /* KunaiProjectile.mm */; };
@@ -760,9 +759,8 @@
 		CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = OptionsMenu.ccbi; path = "Resources/menu-objects/ccbis/OptionsMenu.ccbi"; sourceTree = "<group>"; };
 		CE30B1A3158FC3F0009EC82B /* OptionsMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionsMenu.h; path = menus/OptionsMenu.h; sourceTree = "<group>"; };
 		CE30B1A4158FC3F0009EC82B /* OptionsMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionsMenu.m; path = menus/OptionsMenu.m; sourceTree = "<group>"; };
-		CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewGameOverlay.h; path = menus/NewGameOverlay.h; sourceTree = "<group>"; };
-		CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewGameOverlay.m; path = menus/NewGameOverlay.m; sourceTree = "<group>"; };
-		CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewGameOverlay.ccbi; path = "Resources/menu-objects/ccbis/NewGameOverlay.ccbi"; sourceTree = "<group>"; };
+		CE30B1A6158FD02F009EC82B /* NewGameMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewGameMenu.h; path = menus/NewGameMenu.h; sourceTree = "<group>"; };
+		CE30B1A7158FD02F009EC82B /* NewGameMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewGameMenu.m; path = menus/NewGameMenu.m; sourceTree = "<group>"; };
 		CE3598D915D4F402000AA61C /* BananaGrenade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BananaGrenade.h; sourceTree = "<group>"; };
 		CE3598DA15D4F402000AA61C /* BananaGrenade.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BananaGrenade.mm; sourceTree = "<group>"; };
 		CE3996E515DD9E1D00D2FD0D /* Kunai.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Kunai.h; sourceTree = "<group>"; };
@@ -1716,7 +1714,6 @@
 				CE4545FF15CB42F100AA5437 /* ForgotPassword.ccbi */,
 				CE62FC801593F06400BEB3BE /* CharacterScreen.ccbi */,
 				CE2544E215A671FB00A087F6 /* PasswordChangeScreen.ccbi */,
-				CE30B1A9158FD0C0009EC82B /* NewGameOverlay.ccbi */,
 				CE30B1A1158FC37F009EC82B /* OptionsMenu.ccbi */,
 				CE29916E158BF46100F33ACD /* NewAccountMenu.ccbi */,
 				CE4B487E158BC40000040C1C /* LoginScreen.ccbi */,
@@ -2723,8 +2720,8 @@
 				CE30B18D158FBA34009EC82B /* DrawMenu.m */,
 				CE30B190158FBA34009EC82B /* MainMenu.h */,
 				CE30B191158FBA34009EC82B /* MainMenu.mm */,
-				CE30B1A6158FD02F009EC82B /* NewGameOverlay.h */,
-				CE30B1A7158FD02F009EC82B /* NewGameOverlay.m */,
+				CE30B1A6158FD02F009EC82B /* NewGameMenu.h */,
+				CE30B1A7158FD02F009EC82B /* NewGameMenu.m */,
 				CEAD647D15DB3D8200A07FBB /* TokenPurchasesScreen.h */,
 				CEAD647E15DB3D8200A07FBB /* TokenPurchasesScreen.m */,
 			);
@@ -2871,7 +2868,6 @@
 				CE4B487F158BC40000040C1C /* LoginScreen.ccbi in Resources */,
 				CE29916F158BF46100F33ACD /* NewAccountMenu.ccbi in Resources */,
 				CE30B1A2158FC37F009EC82B /* OptionsMenu.ccbi in Resources */,
-				CE30B1AA158FD0C0009EC82B /* NewGameOverlay.ccbi in Resources */,
 				CE0BD608159016E600C380CA /* FBDialog.bundle in Resources */,
 				CEC7C99715903CEC00FFB4F7 /* LoginWithFacebookNormal.png in Resources */,
 				CEC7C99815903CEC00FFB4F7 /* LoginWithFacebookNormal@2x.png in Resources */,
@@ -3197,7 +3193,7 @@
 				CE30B197158FBA34009EC82B /* MainMenu.mm in Sources */,
 				CE30B198158FBA34009EC82B /* NewAccountMenu.m in Sources */,
 				CE30B1A5158FC3F0009EC82B /* OptionsMenu.m in Sources */,
-				CE30B1A8158FD030009EC82B /* NewGameOverlay.m in Sources */,
+				CE30B1A8158FD030009EC82B /* NewGameMenu.m in Sources */,
 				C5B4C590159023AC000FD99F /* HMVectorNode.m in Sources */,
 				CE62FCA61594085800BEB3BE /* SWMultiColumnTableView.m in Sources */,
 				CE62FCA71594085800BEB3BE /* SWScrollView.m in Sources */,

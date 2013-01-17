@@ -6,7 +6,7 @@
 //  Copyright 2012 hi ku llc. All rights reserved.
 //
 
-#import "NewGameOverlay.h"
+#import "NewGameMenu.h"
 
 @implementation NewGameOverlay
 
