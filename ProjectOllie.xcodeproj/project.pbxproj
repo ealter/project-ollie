@@ -211,6 +211,7 @@
 		CE59CA5015C4D65200B68745 /* Grenade.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE59CA4F15C4D65200B68745 /* Grenade.mm */; };
 		CE59CA5315C4D69400B68745 /* GrenadeProjectile.mm in Sources */ = {isa = PBXBuildFile; fileRef = CE59CA5215C4D69400B68745 /* GrenadeProjectile.mm */; };
 		CE5C59361597CA5400C121B4 /* RippleEffect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = CE5C59341597CA2800C121B4 /* RippleEffect.fsh */; };
+		CE5D7AB216B1B8AC00EFC81E /* NewGameMenu.ccbi in Resources */ = {isa = PBXBuildFile; fileRef = CE5D7AB116B1B8AB00EFC81E /* NewGameMenu.ccbi */; };
 		CE6150A416A061B600EDE19E /* CCBAnimationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509916A061B600EDE19E /* CCBAnimationManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE6150A516A061B600EDE19E /* CCBKeyframe.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509B16A061B600EDE19E /* CCBKeyframe.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		CE6150A616A061B600EDE19E /* CCBReader.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61509D16A061B600EDE19E /* CCBReader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -785,6 +786,7 @@
 		CE59CA5115C4D69400B68745 /* GrenadeProjectile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GrenadeProjectile.h; sourceTree = "<group>"; };
 		CE59CA5215C4D69400B68745 /* GrenadeProjectile.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GrenadeProjectile.mm; sourceTree = "<group>"; };
 		CE5C59341597CA2800C121B4 /* RippleEffect.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = RippleEffect.fsh; path = Shaders/RippleEffect.fsh; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.glsl; };
+		CE5D7AB116B1B8AB00EFC81E /* NewGameMenu.ccbi */ = {isa = PBXFileReference; lastKnownFileType = file; name = NewGameMenu.ccbi; path = "Resources/menu-objects/ccbis/NewGameMenu.ccbi"; sourceTree = "<group>"; };
 		CE61509816A061B600EDE19E /* CCBAnimationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBAnimationManager.h; sourceTree = "<group>"; };
 		CE61509916A061B600EDE19E /* CCBAnimationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CCBAnimationManager.m; sourceTree = "<group>"; };
 		CE61509A16A061B600EDE19E /* CCBKeyframe.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCBKeyframe.h; sourceTree = "<group>"; };
@@ -1709,6 +1711,7 @@
 		C5FBA728159A8B6F00C1C624 /* CCBIs */ = {
 			isa = PBXGroup;
 			children = (
+				CE5D7AB116B1B8AB00EFC81E /* NewGameMenu.ccbi */,
 				CEAD647B15DB3C2500A07FBB /* TokenPurchasesScreen.ccbi */,
 				CE0C324215CC88780004E932 /* PlayerSearchScreen.ccbi */,
 				CE4545FF15CB42F100AA5437 /* ForgotPassword.ccbi */,
@@ -3006,6 +3009,7 @@
 				C518B5AB15DC9F6A00E13AB8 /* construction_aim2hgun.anim in Resources */,
 				CE7E1F5115DEF94100F485CF /* knife.png in Resources */,
 				CED5050A15DF140C00DF5D69 /* flask.png in Resources */,
+				CE5D7AB216B1B8AC00EFC81E /* NewGameMenu.ccbi in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

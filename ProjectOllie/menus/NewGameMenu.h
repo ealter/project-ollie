@@ -8,6 +8,6 @@
 
 #import "Menu.h"
 
-@interface NewGameOverlay : Menu
+@interface NewGameMenu : Menu
 
 @end

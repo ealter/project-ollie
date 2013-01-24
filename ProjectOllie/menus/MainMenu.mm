@@ -83,16 +83,28 @@
 
 -(void)pressedNewGame:(id)sender
 {    
+    self.emitter = [GWParticleMenuLeaf node];
+    self.emitter.position = CGPointMake(NG_X, NG_Y);
+    [self addChild:self.emitter];
+    
     [self transitionToSceneWithFile:@"NewGameMenu.ccbi"];
 }
 
 -(void)pressedCharacters:(id)sender
 {
+    self.emitter = [GWParticleMenuLeaf node];
+    self.emitter.position = CGPointMake(TEAM_X, TEAM_Y);
+    [self addChild:self.emitter];
+    
     [self transitionToSceneWithFile:@"CharacterScreen.ccbi"];
 }
 
 - (void)pressedStore:(id)sender
 {
+    self.emitter = [GWParticleMenuLeaf node];
+    self.emitter.position = CGPointMake(STORE_X, STORE_Y);
+    [self addChild:self.emitter];
+    
     [self transitionToSceneWithFile:@"TokenPurchasesScreen.ccbi"];
 }
 

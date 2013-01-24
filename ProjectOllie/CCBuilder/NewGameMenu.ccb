@@ -1388,7 +1388,7 @@
 						<key>value</key>
 						<array>
 							<real>100</real>
-							<real>35</real>
+							<real>45</real>
 							<integer>0</integer>
 						</array>
 					</dict>
@@ -1470,8 +1470,6 @@
 						</array>
 					</dict>
 				</array>
-				<key>selected</key>
-				<true/>
 			</dict>
 			<dict>
 				<key>baseClass</key>
